@@ -9,9 +9,11 @@
 
 \makenoidxglossaries
 
+\newglossaryentry{bsp}{name=Beispiel, description=Beispieleintrag}
+
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
-\subtitle{Version 0.1.0}
+\subtitle{Version 0.1.1}
 \author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
 \date{\today}
 
@@ -25,7 +27,7 @@
 
 \section{Produktübersicht}
 
-
+\gls{bsp}
 
 \section{Zielbestimmung}
 
@@ -72,7 +74,7 @@ Die Anwendung ist als Schnittstelle zwischen PhyPiDAQ und dem Nutzer zu verstehe
 \item Funktionen
 \begin{itemize}
 
-\item Die Anwendung erhält Daten durch den RaspberryPi mit PhyPiDAQ oder aus einer Datei und kann diese dann transformieren und darstellen.
+\item Die Anwendung erhält Daten durch den Raspberry Pi mit PhyPiDAQ oder aus einer Datei und kann diese dann transformieren und darstellen.
 \item Die Anwendung enthält vorgefertigte Standardelemente, wie z.B. to do
 \item Die Anwendung enthält vorgefertigte Standardkonfigurationen.
 
@@ -187,7 +189,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \item[F90] Der Benutzer kann durch den Sensoren hinzufügen-Button weitere Sensoren hinzufügen.
 \item[F100] Der Benutzer kann durch den Transformationen hinzufügen-Button weitere Transformationen hinzufügen.
-\item[F110] Die in Transformationen in F100 sollen in eigenen Python-Skipten geschrieben werden.
+\item[F110] Die in Transformationen in F100 sollen in eigenen Python-Skripten geschrieben werden.
 \end{itemize}
 
 \subsubsection{Konfigurationsfeld}
@@ -323,26 +325,33 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \item[NF010] Performance beim Auslesen von Daten abhängig von PhyPiDAQ.
 \item[NF020] Verarbeitung ausgelesener Daten innerhalb von 10 ms.
+\item[NF030] Bis zu drei Sensoren können zeitgleich verwendet werden.
+\item[NF040] Bis zu (X) Transformationen können hintereinander verbunden werden.
+\item[NF050] Bis zu (X) Senken können zeitgleich verwendet werden.
 
 \end{itemize}
 
-\subsection{Qualitätsanforderungen}
+\subsection{Benutzbarkeit}
 
 \begin{itemize}
 
-\item[NF030] Die Benutzeroberfläche ist für Siebtklässler verständlich.
+\item[NF060] Die Benutzeroberfläche ist für Siebtklässler verständlich.
+\item[NF070] Ungespeicherte Daten werden nicht ohne Warnung verworfen.
 \item[NF080] Programmfehler werden dem Benutzer gegenüber klar kommuniziert.
+\item[NF090] Schriftgröße von Text kann verändert werden.
+\item[NF100] Farbschema von farbigen UI-Elementen ist veränderbar.
 
 \end{itemize}
+
+\subsection{Zuverlässigkeit}
 
 \subsection{Sonstige}
 
 \begin{itemize}
 
+
 \item[NF110] Die Software ist vollständig quelloffen und frei.\footnote{Definition: \url{https://www.gnu.org/philosophy/free-sw.de.html}}
-\item[NF120] Die Datenschutzgrundverordnung wird nicht verletzt.
-\item[NF130] Schriftgröße von Text kann verändert werden.
-\item[NF140] Farbschema von farbigen UI-Elementen ist veränderbar.
+\item[NF120] Die Datenschutz-Grundverordnung wird nicht verletzt.
 
 \end{itemize}
 
@@ -604,6 +613,10 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 	Abschlussprüfung & Linus Ruhnke & KW 37/38 \\
 	\hline
 \end{tabular}
+
+\subsection{Entwurfsphase}
+
+\subsection{Implementierungsphase}
 
 \section{Ergänzungen}
 
