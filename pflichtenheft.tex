@@ -1,11 +1,11 @@
 \documentclass[parskip=full]{scrartcl}
 
-\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}			% Umlaute, Sonderzeichen
 \usepackage[ngerman]{babel}			% deutsche Sprache
-\usepackage[tocfullflat]{tocstyle}		% Inhaltsverzeichnis
+\usepackage[tocfullflat]{tocstyle}			% Inhaltsverzeichnis
 \usepackage{enumitem}				% Listen
-\usepackage{graphicx}				% Grafiken
-\usepackage{hyperref}				% Hyperlinks
+\usepackage{graphicx}					% Grafiken
+\usepackage{hyperref}					% Hyperlinks
 \usepackage[nonumberlist]{glossaries}		% Glossar
 
 \makenoidxglossaries
@@ -28,7 +28,7 @@
 
 \section{Produktübersicht}
 
-\gls{bsp}
+
 
 \section{Zielbestimmung}
 
@@ -169,26 +169,26 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 \subsection{GUI}
 
 \begin{itemize}
-\item[F10] Die Benutzer erreichen nach Öffnung der Anwendung direkt die GUI.
-\item[F20] Der Benutzer öffnet durch den Einstellungen-Button die Einstellungen.
-\item[F30] Der Benutzer kann durch den Datei-Button die Dateiverwaltung öffnen.
-\item[F40] Der Benutzer kann durch den Hilfe-Button das Hilfe Fenster öffnen.
+\item[F010] Die Benutzer erreichen nach Öffnung der Anwendung direkt die GUI.
+\item[F020] Der Benutzer öffnet durch den Einstellungen-Button die Einstellungen.
+\item[F030] Der Benutzer kann durch den Datei-Button die Dateiverwaltung öffnen.
+\item[F040] Der Benutzer kann durch den Hilfe-Button das Hilfe Fenster öffnen.
 \end{itemize}
 
 \subsubsection{Menüfeld}
 
 \begin{itemize}
-\item[F50] Der Benutzer öffnet durch den Sensoren-Button die Auswahl an Sensoren.
-\item[F60] Der Benutzer öffnet durch den Verbindungen-Button die Auswahl an Verbindungen.
-\item[F70] Der Benutzer öffnet durch den Darstellungen-Button die Auswahl an Darstellungen.
-\item[F80] Der Benutzer erhält durch verschiedene Farben der Konfigurationsbausteine eine visuelle Repräsentationen ihrer Komplexität.
+\item[F050] Der Benutzer öffnet durch den Sensoren-Button die Auswahl an Sensoren.
+\item[F060] Der Benutzer öffnet durch den Verbindungen-Button die Auswahl an Verbindungen.
+\item[F070] Der Benutzer öffnet durch den Darstellungen-Button die Auswahl an Darstellungen.
+\item[F080] Der Benutzer erhält durch verschiedene Farben der Konfigurationsbausteine eine visuelle Repräsentationen ihrer Komplexität.
 \end{itemize}
 
 \subsubsection{Optional: Zusätzliche Funktionen im Menüfeld}
 
 \begin{itemize}
 
-\item[F90] Der Benutzer kann durch den Sensoren hinzufügen-Button weitere Sensoren hinzufügen.
+\item[F090] Der Benutzer kann durch den Sensoren hinzufügen-Button weitere Sensoren hinzufügen.
 \item[F100] Der Benutzer kann durch den Transformationen hinzufügen-Button weitere Transformationen hinzufügen.
 \item[F110] Die in Transformationen in F100 sollen in eigenen Python-Skripten geschrieben werden.
 \end{itemize}
@@ -324,11 +324,12 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \begin{itemize}
 
-\item[NF010] Performance beim Auslesen von Daten abhängig von PhyPiDAQ.
+\item[NF010] Auslesen von Sensordaten innerhalb von (5?) ms. //TODO PhyPiDAQ Abhängigkeit
+\item[NF015] Alle (5?) ms können neue Daten angefordert werden.
 \item[NF020] Verarbeitung ausgelesener Daten innerhalb von 10 ms.
 \item[NF030] Bis zu drei Sensoren können zeitgleich verwendet werden.
-\item[NF040] Bis zu (X) Transformationen können hintereinander verbunden werden.
-\item[NF050] Bis zu (X) Senken können zeitgleich verwendet werden.
+\item[NF040] Bis zu (6?) Transformationen können hintereinander verbunden werden.
+\item[NF050] Bis zu (3?) Senken können zeitgleich verwendet werden.
 
 \end{itemize}
 
@@ -346,13 +347,20 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \subsection{Zuverlässigkeit}
 
+\begin{itemize}
+
+\item[NF110] Die Anwendung reagiert konsistent auf Eingaben.
+\item[NF120] Unerwartete und fehlerhafte Eingaben führen nicht zum Systemabsturz.
+\item[NF130] Verbindungsverlust von Sensoren führt dies nicht zum Systemabsturz.
+
+\end{itemize}
+
 \subsection{Sonstige}
 
 \begin{itemize}
 
-
-\item[NF110] Die Software ist vollständig quelloffen und frei.\footnote{Definition: \url{https://www.gnu.org/philosophy/free-sw.de.html}}
-\item[NF120] Die Datenschutz-Grundverordnung wird nicht verletzt.
+\item[NF210] Die Software ist vollständig quelloffen und frei.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
+\item[NF220] Die Datenschutz-Grundverordnung wird nicht verletzt.
 
 \end{itemize}
 
