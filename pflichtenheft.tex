@@ -29,6 +29,19 @@
 	name=PhyPiDAQ,
 	description={Siehe Abschnitt 4.3 ,,PhyPiDAQ``} }
 
+\newglossaryentry{Science Labs}{
+	name=Science Labs,
+	description={Ein Science Lab ist ein Arbeitsplatz, welcher Schülern ermöglicht wissenschaftliche Forschungen unter kontrollierten Bedingungen durchzuführen.} }
+
+\newglossaryentry{Open-Source Projekt}{
+	name=Open Source Projekt,
+	description={Ein Open Source Projekt ist ein Projekt, wessen Quelltext und Dokumentationen von dritten angesehen, geändert und genutzt werden kann.} }
+
+\newglossaryentry{OSL 2}{
+	name=OSL 2,
+	description={OSL 2 ist der Name eines Open-Source-Lehrsoftware-Labor, in welchem Studierende sich mit der Entwicklung von Open-Source-Software vertraut machen können.} }
+
+
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
 \subtitle{Version 0.1.1}
@@ -163,13 +176,21 @@ Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verst
 
 \section{Produkteinsatz}
 
-\begin{itemize}
+\subsection{Anwendungsbereiche}
 
-\item Anwendungsbereich: Die Software wird durch Schulen in Deutschland auf schuleigener Hardware eingesetzt.
-\item Zielgruppe: Lehrer und Schüler ab der 7. Klasse.
-\item Betriebsbedingungen: TODO
+Die Anwendung ist für die Verwendung in Schulklassen ab der 7. bis zu 10. Klasse für Schüler und Lehrer im Physikunterricht konzipiert. Ebenfalls soll die Anwendung in Physikprojekten, sowie \gls{Science Labs} verwendet werden können. 
+Als \gls{Open-Source Projekt} Im Rahmen des \gls{OSL 2} steht die Anwendung jedoch jedem Interessierten zur Verwendung und Weiterentwicklung zur Verfügung.
 
-\end{itemize}
+
+\subsection{Zielgruppe}
+
+Die Zielgruppen sind hauptsächlich Schülerinnen und Schüler im Physikunterricht, welche die Anwendung verwenden, um erste eigene Messungen durchzuführen. Das Ziel ist es den Schülern erste Einblicke in Messtechniken und Zusammenhänge zwischen Ursache und Wirkung zu zeigen. 
+Die Anwendung soll ebenfalls nicht nur von physikbegeisterten Schülern verwendet werden können, sondern auch für Schüler ohne ein großes Vorwissen in der Physik und Messtechniken eine interessante Plattform zu bieten, welche einfach zu verwenden ist.
+
+\subsection{Betriebsbedingungen}
+
+Die Anwendung läuft auf gewöhnlichen Schulcomputern, welche über eine USB-Schnittstelle mit einem RasPi verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden die an das RasPi angeschlossenen Messsensoren adressiert, welche die Messdaten wiederum über das RasPi an die am Computer gelaufende Anwendung schicken. 
+
 
 \section{Produktumgebung}
 
@@ -189,31 +210,33 @@ Die an den Raspberry Pi angeschlossenen Messsensoren müssen richtig und sinnvol
 
 Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache python3 geschrieben ist bietet einfache und einheitliche Schnittstellen zur Verwendung der Messsensoren.
 
+
 \section{Funktionale Anforderungen}
+
 
 \subsection{GUI}
 
 \begin{itemize}
-\item[F010] Die Benutzer erreichen nach Öffnung der Anwendung direkt die GUI.
-\item[F020] Der Benutzer öffnet durch den Einstellungen-Button die Einstellungen.
-\item[F030] Der Benutzer kann durch den Datei-Button die Dateiverwaltung öffnen.
-\item[F040] Der Benutzer kann durch den Hilfe-Button das Hilfe Fenster öffnen.
+\item[F10] Die Benutzer erreichen nach Öffnung der Anwendung direkt die GUI.
+\item[F20] Der Benutzer öffnet durch den Optionen-Knopf die Einstellungen.
+\item[F30] Der Benutzer kann durch den Datei-Knopf die Dateiverwaltung öffnen.
+\item[F40] Der Benutzer kann durch den Hilfe-Knopf das Hilfe Fenster öffnen.
 \end{itemize}
 
 \subsubsection{Menüfeld}
 
 \begin{itemize}
-\item[F050] Der Benutzer öffnet durch den Sensoren-Button die Auswahl an Sensoren.
-\item[F060] Der Benutzer öffnet durch den Verbindungen-Button die Auswahl an Verbindungen.
-\item[F070] Der Benutzer öffnet durch den Darstellungen-Button die Auswahl an Darstellungen.
-\item[F080] Der Benutzer erhält durch verschiedene Farben der Konfigurationsbausteine eine visuelle Repräsentationen ihrer Komplexität.
+\item[F50] Der Benutzer öffnet durch den Sensoren-Knopf die Auswahl an Sensoren.
+\item[F60] Der Benutzer öffnet durch den Verbindungen-Knopf die Auswahl an Verbindungen.
+\item[F70] Der Benutzer öffnet durch den Darstellungen-Knopf die Auswahl an Darstellungen.
+\item[F80] Der Benutzer erhält durch verschiedene Farben der Konfigurationsbausteine eine visuelle Repräsentationen ihrer Komplexität.
 \end{itemize}
 
 \subsubsection{Optional: Zusätzliche Funktionen im Menüfeld}
 
 \begin{itemize}
 
-\item[F090] Der Benutzer kann durch den Sensoren hinzufügen-Button weitere Sensoren hinzufügen.
+\item[F90] Der Benutzer kann durch den Sensoren hinzufügen-Knopf weitere Sensoren hinzufügen.
 \item[F100] Der Benutzer kann durch den Transformationen hinzufügen-Button weitere Transformationen hinzufügen.
 \item[F110] Die in Transformationen in F100 sollen in eigenen Python-Skripten geschrieben werden.
 \end{itemize}
@@ -222,8 +245,9 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 \item[F120] Durch Drag und Drop kann der Benutzer Konfigurationsbausteine im Konfigurationsfeld platzieren.
-\item[F130] Durch Betätigen des Messung starten-Button startet der Nutzer eine Messung.
+\item[F130] Durch Betätigen des Messung starten-Knopf startet der Nutzer eine Messung.
 \end{itemize}
+
 
 \subsubsection{Darstellungsfenster}
 
@@ -231,6 +255,8 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 \item[F140] Das Darstellungsfenster ist bei der Initialisierung der Anwendung leer.
 \item[F150] Durch die Benutzerkonfiguration im Konfigurationsfeld wird durch F90 automatisch die Darstellungsart im Darstellungsfenster geöffnet.
 \end{itemize}
+
+
 
 \subsection{Konfigurationserstellung}
 
@@ -240,15 +266,25 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 \item[F170] Durch F160 geladene Konfigurationen und Messdaten werden automatisch nach Format überprüft.
 \item[F180] Aus F50 kann der Benutzer Sensoren durch Drag und Drop in das Konfigurationsfeld ziehen.
 \item[F190] Die Anwendung sollte automatisch überprüfen, ob der ausgewählte Sensor richtig angeschlossen ist.
-\item[F200] Die Anwendung gibt durch F190 automatisch eine visuelle Rückmeldung über die Farbe des Sensors.
+\item[F200] Die Anwendung gibt durch F190 automatisch eine visuelle Rückmeldung über die Farbe des Sensors und einer Pop-Up Benachrichtigung.
 \item[F210] Aus F60 kann der Benutzer eine oder mehrere Verbindungen durch Drag und Drop in das Konfigurationsfeld ziehen.
 \item[F220] Die ausgewählten Verknüpfungen kann der Benutzer mit einem ausgewählten Sensor verknüpfen.
 \item[F230] Die Anwendung sollte automatisch überprüfen, ob die Verbindungen eine geeignete Kombination mit dem Sensor darstellt.
 \item[F240] Aus F70 kann der Benutzer eine Darstellungsart per Drag und Drop in das Konfigurationsfeld zu ziehen.
 \item[F250] Die Ausgewählte Darstellung kann der Benutzer mit einer Verbindung verknüpfen.
 \item[F260] Die Anwendung sollte automatisch überprüfen, ob die gewählte Darstellungsart eine sinnvolle Repräsentation der Messdaten darstellt.
-\item[F270] Über F30 kann der Benutzer seine eigene Konfiguration über einen Konfiguration speichern- Knopf speichern.
+\item[F270] Über F30 kann der Benutzer seine eigene Konfiguration über einen Konfiguration speichern-Knopf speichern.
 \item[F280] Bausteine die ein Benutzer nicht mehr in dem Konfigurationsfeld haben möchte können durch Drag und Drop in die Menüleiste wieder versteckt werden.
+
+\end{itemize}
+
+\subsubsection{Optional: Weiterentwicklung der Konfigurationserstellung}
+
+\begin{itemize}
+
+\item[F290] Die Anwendung besitzt einen Check-Knopf, welcher die Benutzerkonfiguriation auf Vollständigkeit und Richtigkeit
+kontrolliert
+\item[F300] Durch F290 wird durch visuelle Darstellung der Konfigurations dargestellt, ob sie verwendet werden kann.
 
 \end{itemize}
 
@@ -256,36 +292,41 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F290] Die Anwendung sollte dem Benutzer erlauben den Wertebereich und die Dauer der Messung festzulegen.
-\item[F300] Der Nutzer kann durch F90 die Messung nach der Benutzerkonfiguration starten.
-\item[F310] Durch F300 wird automatisch mit der visuellen Darstellung der Messdaten begonnen.
-\item[F320] Der Nutzer kann durch den Messung Messung löschen-Button eine durchgeführte Messung pausieren und die visuelle Darstellung auf den Ausgangszustand bringen.
-\item[F330] Durch F320 wird nicht die Benutzerkonfiguration gelöscht.
-\item[F340] Durch F320 muss der Benutzer erst die Messung starten um weiter zu messen.
-\item[F350] Der Benutzer kann durch den Messung pausieren-Button die Messung pausieren.
-\item[F360] Der Benutzer kann durch den Messung-fortsetzen-Button die Messung fortsetzen.
-\item[F370] Der Benutzer kann eine Messung durch F310 nur fortsetzen, wenn sie zuvor durch F300 pausiert wurde.
-\item[F380] Der Benutzer kann durch den Messdaten speichern-Button die gemessenen Daten speichern.
-\item[F390] Der Benutzer kann durch den Graph speichern-Button den durch die Messung erzeugten Graphen speichern.
-\item[F400] Bei F370 und F380 öffnet sich automatisch das Verzeichnis und der Nutzer muss einen eigenen Dateinamen eingeben und speichern. 
+\item[F310] Der Nutzer kann in den Optionen, die Messlänge und die Wertebereiche festlegen.
+\item[F320] Der Nutzer kann durch F130 die Messung nach der Benutzerkonfiguration starten.
+\item[F330] Durch F320 wird automatisch mit der visuellen Darstellung der Messdaten begonnen.
+\item[F340] Der Nutzer kann durch den Messung Messung löschen-Knopf eine durchgeführte Messung pausieren und die visuelle Darstellung auf den Ausgangszustand bringen.
+\item[F350] Durch F340 wird nicht die Benutzerkonfiguration gelöscht.
+\item[F360] Durch F340 muss der Benutzer erst die Messung starten um weiter zu messen.
+\item[F370] Der Benutzer kann durch den Messung pausieren-Knopf die Messung pausieren.
+\item[F380] Der Benutzer kann durch den Messung-fortsetzen-Knopf die Messung fortsetzen.
+\item[F390] Der Benutzer kann eine Messung durch F380 nur fortsetzen, wenn sie zuvor durch F370 pausiert wurde.
+\item[F400] Der Benutzer kann durch den Messdaten speichern-Knopf die gemessenen Daten speichern.
+\item[F410] Der Benutzer kann durch den Graph speichern-Knopf den durch die Messung erzeugten Graphen speichern.
+\item[F420] Bei F400 und F410 öffnet sich automatisch das Verzeichnis und der Nutzer muss einen eigenen Dateinamen eingeben und speichern. 
+
+
 
 \end{itemize}
 
 \subsection{Fehlermeldungen}
 
 \begin{itemize}
-\item[F410] Durch F130 geladene Konfigurationen und Messdaten werden automatisch nach Format überprüft und eine aussagekräftige Fehlermeldung zurückgegeben.
-\item[F420] Durch F190 und F220 wird bei einer ungültigen Kombination von zwei Konfigurationsbausteinen eine aussagekräftige Fehlermeldung zurückgegeben
-\item[F430] Die Anwendung sollte dem Benutzer automatisch durch Pop-Up Benachrichtigung darauf hinweisen, dass bei Betätigen des Messung löschen-Button oder bei Schließen der Anwendung die Messdaten ohne vorheriges Betätigen des Messdaten speichern-Button verloren gehen.
+\item[F430] Durch F170 geladene Konfigurationen und Messdaten werden automatisch nach Format überprüft und eine aussagekräftige Fehlermeldung zurückgegeben.
+\item[F440] Durch F240 und F270 wird bei einer ungültigen Kombination von zwei Konfigurationsbausteinen eine aussagekräftige Fehlermeldung zurückgegeben
+\item[F450] Die Anwendung sollte dem Benutzer automatisch durch Pop-Up Benachrichtigung darauf hinweisen, dass bei Betätigen des Messung löschen-Button oder bei Schließen der Anwendung die Messdaten ohne vorheriges Betätigen des Messdaten speichern-Button verloren gehen.
+\item[F460] Die Anwendung sollte dem Benutzer eine aussagekräftige Fehlermeldung zurückgeben, falls es zu einem Datenabbruch der Messdaten kommt.
 
 \end{itemize}
+
+
 
 \subsection{Bedienungshilfen}
 
 \begin{itemize}
 
-\item[F440] Bei enthaltenen Konfigurationsbausteine sollen einen Information-Button besitzen, über welche der Benutzer Informationen und Hilfestellung bereitgestellt bekommt.
-\item[F450] Über den Hilfe-Button erhält der Nutzer eine kurze Beschreibung zur Funktionalität der Anwendung.
+\item[F470] Bei enthaltenen Konfigurationsbausteine sollen einen Information-Knopf besitzen, über welche der Benutzer Informationen und Hilfestellung bereitgestellt bekommt.
+\item[F480] Über den Hilfe-Knopf erhält der Nutzer eine kurze Beschreibung zur Funktionalität der Anwendung.
 
 \end{itemize}
 
@@ -293,7 +334,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F450] Die Anwendung ist in deutscher Sprache.
+\item[F490] Die Anwendung ist in deutscher Sprache.
 
 \end{itemize}
 
@@ -301,8 +342,8 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F460] Die Anwendung stellt dem Benutzer weitere Sprachpakete für die GUI zur Verfügung.
-\item[F470] Durch F20 ist die Sprache für den Nutzer änderbar.
+\item[F500] Die Anwendung stellt dem Benutzer weitere Sprachpakete für die GUI zur Verfügung.
+\item[F510] Durch F20 ist die Sprache für den Nutzer änderbar.
 
 \end{itemize}
 
@@ -310,7 +351,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F480] Die in der Anwendung enthaltenen Farben sollten mit Rücksicht auf Benutzer mit Rot-Grün Schwäche oder Farbenblindheit ein barrierefreies Verwendung der Anwendung ermöglichen.
+\item[F520] Die in der Anwendung enthaltenen Farben sollten mit Rücksicht auf Benutzer mit Rot-Grün Schwäche oder Farbenblindheit ein barrierefreies Verwendung der Anwendung ermöglichen.
 
 \end{itemize}
 
@@ -318,17 +359,11 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F490] Durch F20 sollte der Benutzer die in der Anwendung verwendeten Farben ändern können.
-\item[F500] Durch F20 sollte der Benutzer die in der Anwendung verwenden Buchstabengröße verändern können.
+\item[F530] Durch F20 sollte der Benutzer die in der Anwendung verwendeten Farben ändern können.
+\item[F540] Durch F20 sollte der Benutzer die in der Anwendung verwenden Buchstabengröße verändern können.
 
 \end{itemize}
 
-\subsection{Schnittstelle}
-
-\begin{itemize}
-\item just a test
-
-\end{itemize}
 
 \section{Produktdaten}
 
