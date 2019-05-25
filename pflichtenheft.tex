@@ -382,237 +382,182 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \begin{itemize} 
 
-\item[T010] to do Benutzung des Startbildschirms
+\item[T010] Erstmaliges Starten und Anpassen der Anwendung 
 \begin{itemize}
 
-\item []\textbf{Stand} 
-\item []\textbf{Aktion} 
-\item []\textbf{Reaktion} 
+\item []\textbf{Testziel} Teste das Verhalten der Anwendung beim ersten Aufruf und das Ausführen der Demo. Die Demo nutzt Daten aus einer Datei und benötigt keinen angeschlossenen RaspberryPi.
+
+\item []\textbf{Vorbedingung} Die Anwendung ist installiert. Zu Sehen ist das offene Fenster des Desktops mit der Verknüpfung zur Anwendung.
+\item [1.]\textbf{Aktion} Der Benutzer startet die Anwendung über die Verknüpfung.
+\item []\textbf{Reaktion} Die Anwendung wird gestartet. Das Hauptfenster öffnet sich. Das Start-Infofenster öffnet sich.
+\item [2.]\textbf{Aktion} Der Benutzer setzt den Haken bei "`dieses Fenster zukünftig nicht mehr anzeigen"'Knopf und drückt dann auf den "`Schließen"'Knopf des Start-Infofenster.
+\item []\textbf{Reaktion} Das Start-Infofenster schließt sich. Die Start-Einstellung wird gespeichert. 
+\item [3.]\textbf{Aktion} Der Benutzer drückt auf den "`Hilfe"'-Knopf in der Systemleiste.
+\item []\textbf{Reaktion} Das Fenster zur Hilfe öffnet sich.
+\item [4.]\textbf{Aktion} Der Benutzer drückt auf den "`Schließen"'-Knopf des Hilfefensters.
+\item []\textbf{Reaktion} Das Fenster zur Hilft schließt sich.
+\item [5.]\textbf{Aktion} Der Benutzer drückt auf den "`Laden"'-Knopf in der Systemleiste.
+\item []\textbf{Reaktion} Das Fenster zum Laden einer Konfiguration öffnet sich. Dabei wird der voreingestellte default-Pfad geöffnet. 
+\item [6.]\textbf{Aktion} Der Benutzer wählt die Demo-Datei in dem default-Pfad aus und drückt dann auf den "`Laden"'-Knopf. 
+\item []\textbf{Reaktion} Die Anwendung lädt die Demo-Datei. Die geladene Demo-Konfiguration wird auf der Konfigurationsfläche angezeigt.
+\item [7.]\textbf{Aktion} Der Lehrer drückt auf den "`Erstellen"'-Knopf.
+\item []\textbf{Reaktion} Die Anwendung prüft, ob eine gültige Konfiguration vorliegt. Es liegt eine gültige Konfiguration vor. Die Anwendung zeigt den Konfigurationsstatus "`OK"' an.
+\item [8.]\textbf{Aktion} Der Lehrer drückt auf den "`Starten"'-Knopf.
+\item []\textbf{Reaktion} Die Anwendung verarbeitet die Daten der "`Sensoren"' und stellt die Ergebnisse dar.
+\item [9.]\textbf{Aktion} Der Benutzer drückt auf den "`Stoppen"'-Knopf.
+\item []\textbf{Reaktion} Die Ausführung der Messung wird angehalten. Die Darstellungen zeigen ihren Datensatz zum Zeitpunkt des Stoppens weiter an.
+\item [10.]\textbf{Aktion} Der Benutzer drückt auf den auf das "`X"'-Symbol zum Schließen der Anwendung.
+\item []\textbf{Reaktion} Es öffnet sich ein Fenster und weist den Benutzer darauf hin, dass nicht gespeicherte Daten und Veränderungen verloren gehen.
+\item [11.]\textbf{Aktion} Der Benutzer drückt auf den "`Beenden"'-Knopf.
+\item []\textbf{Reaktion} Die Anwendung schließt sich.
+
+\item []\textbf{Nachbedingung} Die Anwendung ist beendet. Es ist kein Fenster ist mehr geöffnet. Es wird der Desktop angezeigt.
+\item []\textbf{Ergebnis} to do
+
+\item []\textbf{Abgedeckte Funktionale Anforderungen: to do}
 
 \end{itemize}
 
 
-\item[T020] drag and drop Sensor
+
+\item[T020] Lehrer erstellt eine eigene Konfiguration für den Unterricht
 \begin{itemize}
 
-\item []\textbf{Stand} Offenes Fenster der Hauptanwendung.
-\item []\textbf{Aktion} Der Benutzer öffnet das gewünschte Tab und zieht einen Sensor in die Konstruktionsfläche in die Mitte und lässt es dort los.
-\item []\textbf{Reaktion} Das Icon des Sensors bleibt als Kopie auf der Konstruktionsfläche erhalten.
+\item []\textbf{Testziel} Teste eine typische Verwendung der Software anhand des gegebenen Szenarios. Dabei wird das Erstellen, Verändern und Speichern einer Konfiguration getestet.
+
+\item []\textbf{Vorbedingung} Die Anwendung ist gestartet und es liegt keine Konfiguration vor. Die Anwendung hat Zugriff auf einen laufenden RaspberryPi mit PhiPiDAQ. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
+
+\item [1.]\textbf{Aktion} Der Lehrer zieht Sensor S1 in die Konfigurationsfläche. 
+\item []\textbf{Reaktion} Die Anwendung prüft, ob Sensor S1 angeschlossen ist. Danach wird das Icon von Sensor S1 an der gewählten Stelle erstellt. Dabei werden Defaultwerte eingestellt.
+\item [2.]\textbf{Aktion} Der Lehrer ruft die Optionen des Sensors auf(Rechtsklick Icon, dann Optionen).
+\item []\textbf{Reaktion} Die Anwendung ruft das Fenster für die Optionen von Sensor S1 auf.
+\item [3.]\textbf{Aktion} Der Lehrer setzt Werte im gültigen Bereich ein und drückt auf den "`Speichern"'-Knopf.
+\item []\textbf{Reaktion} Die Einstellungen werden gespeichert und das Optionsfenster wird geschlossen.
+\item [4.]\textbf{Aktion} Der Lehrer zieht die Transformation T in die Konfigurationsfläche.
+\item []\textbf{Reaktion} Das Icon der Transformation T wird in der Konfigurationsfläche erstellt. Die Werte werden auf default eingestellt.
+\item [5.]\textbf{Aktion} Der Lehrer ruft die Optionen von Transformation T auf.
+\item []\textbf{Reaktion} Das Optionsfenster von Transformation T öffnet sich.
+\item [6.]\textbf{Aktion} Der Lehrer stellt die Werte der Transformation im gültigen Bereich ein und drückt auf den "`Speichern"'-Knopf.
+\item []\textbf{Reaktion} Die Werte werden gespeichert und das Optionsfenster wird geschlossen.
+\item [7.]\textbf{Aktion}  Der Lehrer drückt auf den "`Optionen"'-Knopf der Konfiguration.
+\item []\textbf{Reaktion} Das Optionsfenster für die Konfiguration öffnet sich.
+\item [8.]\textbf{Aktion} Der Lehrer gibt verändert die Defaultwerte der Konfiguration und drückt auf den "`Speichern"'-Knopf.
+\item []\textbf{Reaktion} Die Werte werden gespeichert und das Optionsfenster schließt sich.
+\item [9.]\textbf{Aktion} Der Lehrer drückt auf den "`Konfiguration Speichern"'-Knopf
+\item []\textbf{Reaktion} Die Anwendung öffnet das Fenster zum speichern einer Konfiguration.
+\item [10.]\textbf{Aktion} Der Lehrer wählt einen gültigen Pfad, gibt einen gültigen Namen ein und drückt danach auf den "`Speichern"'-Knopf.
+\item []\textbf{Reaktion} Die Anwendung erstellt eine Konfiguration-Datei mit entsprechendem Namen am entsprechenden Ort. Das Fenster zum Speichern einer Konfiguration wird geschlossen.
+
+
+\item []\textbf{Nachbedingung} Die Anwendung ist geöffnet. In der Konfigurationsfläche ist Sensor S1 und Transformation T zu sehen. 
+\item []\textbf{Ergebnis} Diese Konfiguration ist als Datei an dem gewählten Ort gespeichert.
+
+\item []\textbf{Abgedeckte Funktionale Anforderungen: to do}
 
 \end{itemize}
 
-\item[T025] to do Überprüfung T020
+\item[T030] Schüler der siebten Klasse bearbeitet eine Aufgabe
 \begin{itemize}
 
-\item[]\textbf {Stand} 
-\item[]\textbf{Aktion} 
-\item[]\textbf{Reaktion} 
+\item []\textbf{Testziel} Es soll getestet werden wie ein Schüler der siebten Klasse mit der Anwendung umgeht, während er eine Aufgabe des Lehrer bearbeitet. Dabei ist schon die Konfiguration aus T020 geladen. Diese enthält Sensor S1 und Transformation T.
+
+\item []\textbf{Vorbedingung} Die Anwendung ist gestartet und es liegt eine vom Lehrer erstellte Konfiguration vor. Die Konfiguration enthält Sensor S1 und Transformation A. Die Anwendung hat Zugriff auf einen laufenden RaspberryPi mit PhiPiDAQ. Die Sensoren S1 und S2 sind ordnungsgemäß angeschlossen.
+\item [1.]\textbf{Aktion} Der Schüler drückt auf das "`?"'-Icon neben Sensor S1.
+\item []\textbf{Reaktion} Es öffnet sich ein Infofenster zum Sensor S1.
+\item [2.]\textbf{Aktion} Der Schüler drückt auf das "`?"'-Icon neben Transformation A.
+
+\item []\textbf{Reaktion} to do: schließt sich Infofenster zu Sensor S1 automatisch oder bleibt es offen bis Schüler es schließt ?
+
+\item [3.]\textbf{Aktion} Der Schüler drückt auf den "`Start"'-Knopf.
+\item []\textbf{Reaktion} Ein Fenster öffnet sich und teilt dem Schüler mit, dass eine Konfiguration zunächst erstellt werden muss.
+\item [4.]\textbf{Aktion} Der Schüler drückt auf den "`OK"'-Knopf.
+\item []\textbf{Reaktion} Das Infofenster zum starten ohne erstellen wird geschlossen.
+\item [5.]\textbf{Aktion} Der Schüler drückt auf den "`Erstellen"'-Knopf.
+\item []\textbf{Reaktion} Die Anwendung prüft, ob die vorliegende Konfiguration gültig ist. Sie ist ungültig. Es wird ein Fenster geöffnet mit der Meldung, dass keine gültige Konfiguration vorliegt. Es verlinkt zum Hilfemenü.
+\item [6.]\textbf{Aktion} Der Schüler drückt auf die Verlinkung zum Hilfsmenü.
+\item []\textbf{Reaktion} Das Fenster zum Hilfsmenü öffnet sich. (TO DO wird Fehlermeldung geschlossen?)
+\item [7.]\textbf{Aktion} Der Schüler drückt auf den "`X"'-Knopf des Hilfsmenüfensters. 
+\item []\textbf{Reaktion} Das Hilfsmenüfenster wird geschlossen.
+\item [8.]\textbf{Aktion} Der Schüler zieht die Darstellung D in die Konfigurationsfläche.
+\item []\textbf{Reaktion} Ein Icon der Darstellung D wird erstellt. Es werden Defaultwerte geladen.
+\item [9.]\textbf{Aktion} Der Schüler drückt auf das "`?"'-Icon der Darstellung.
+\item []\textbf{Reaktion} Das Infofenster zu Darstellung D öffnet sich.
+\item [10.]\textbf{Aktion} Der Schüler schließt das Infofenster.
+\item []\textbf{Reaktion} Das Infofenster zu Darstellung D wird geschlossen.
+\item [11.]\textbf{Aktion} Der Schüler drückt auf den Kanal von Darstellung D und danach auf den linken Kanal von Transformation T.
+\item []\textbf{Reaktion} Eine Verbindung zwischen den beiden Kanälen wird erstellt.
+\item [12.]\textbf{Aktion} Der Schüler drückt auf den oberen rechten Kanal von Transformation T und danach auf den Kanal von Sensor S1.
+\item []\textbf{Reaktion} Eine Verbindung zwischen den beiden Kanälen wird erstellt.
+\item [13.]\textbf{Aktion} Der Schüler zieht Sensor S2 in die Konfigurationsfläche.
+\item []\textbf{Reaktion} Das Icon zu Sensor S2 wird erstellt.
+\item [14.]\textbf{Aktion} Der Schüler ruft die Optionen von Sensor S2 auf.
+\item []\textbf{Reaktion} Das Optionsfenster von Sensor S2 wird geöffnet.
+\item [15.]\textbf{Aktion} Der Schüler gibt die vom Lehrer vorgegebenen Werte ein und drückt auf den "`Speichern"'-Knopf.
+\item []\textbf{Reaktion} Die Werte werden gespeichert und das Optionsfenster von Sensor S2 wird geschlossen.
+\item [16.]\textbf{Aktion} Der Schüler drückt auf den Kanal von S2 und danach auf den letzten offenen Kanal von Transformation T.
+\item []\textbf{Reaktion} Eine Verbindung zwischen Sensors S2 und Transformation T wird erstellt.
+\item [17.]\textbf{Aktion} Der Schüler drückt auf den "`Erstellen"'-Knopf.
+\item []\textbf{Reaktion} Die Anwendung prüft, ob eine gültige Konfiguration vorliegt. Es liege eine gültige vor. Die Anwendung zeigt den Konfigurationsstatus "`OK"' an. Dabei wird durch die Voreinstellung der Lehrers aus T020 Aktion 8 und 9 der Messzeitraum auf 10 Sekunden gesetzt.
+\item [18.]\textbf{Aktion} Der Schüler drückt auf "`Starten"'.
+\item []\textbf{Reaktion} Die Anwendung holt für 10 Sekunden Daten aus den beiden Sensoren, transformiert diese und stellt sie in Darstellung D dar. Nach der Messung stoppt die Anwendung automatisch. Die Darstellung D bleibt erhalten.
+\item [19.]\textbf{Aktion} Der Schüler drückt auf den Knopf "`Speichern"' bei der Darstellung.
+\item []\textbf{Reaktion} Ein Fenster zum Speichern des Graphen öffnet sich.
+\item [20.]\textbf{Aktion} Der Schüler wählt einen Pfad und gibt einen Namen ein und drückt dann auf den "`Speichern"'-Knopf.
+\item []\textbf{Reaktion} Der Graph wird am entsprechenden Ort gespeichert und das Fenster zum Speichern wird geschlossen.
+\item [21.]\textbf{Aktion} Der Schüler drückt auf den Knopf "`Messwerte speichern"'.
+\item []\textbf{Reaktion} Ein Fenster öffnet sich zum Speichern der Messwerte.
+\item [22.]\textbf{Aktion} Der Schüler wählt die Darstellungsform "`Tabelle"', den Pfad, den Namen und drückt auf den "`Speichern"'-Knopf.
+\item []\textbf{Reaktion} Die Messwerte werden als Tabelle mit entsprechendem Namen am entsprechenden Ort gespeichert. Das Fenster zum Speichern schließt sich.
+\item [23.]\textbf{Aktion} Der Schüler drückt auf den "`Speichern"'-Knopf der Konfiguration. 
+\item []\textbf{Reaktion} Die Anwendung öffnet das Fenster zum Speichern einer Konfiguration.
+\item [24.]\textbf{Aktion} Der Schüler wählt dort Name und Pfad aus und drückt auf den "`Speichern"'-Knopf.
+\item []\textbf{Reaktion} Die Konfiguration wird entsprechend gespeichert. Das Fenster zum Speichern einer Konfiguration wird geschlossen.
+
+\item []\textbf{Nachbedingung} Die Anwendung ist geöffnet. Nur das Hauptfenster ist offen. In der Konfigurationsfläche ist die vollständige Konfiguration zu sehen. Die Messung wurde abgeschlossen und die Darstellungen sind zu sehen.
+\item []\textbf{Ergebnis} Die Konfiguration, die Messwerte sowie der Graph der Messwerte sind als Dateien gespeichert.
+
+\item []\textbf{Abgedeckte Funktionale Anforderungen: TO DO}
 
 \end{itemize}
 
-\item[T030] drag and drop Transformation und Überprüfung
+\item[T040] Umgang mit destruktivem Benutzer
 \begin{itemize}
 
-\item []\textbf{Stand} Offenes Fenster der Hauptanwendung.
-\item []\textbf{Aktion} Der Benutzer öffnet das Tab der Transformationen und zieht eine Transformation in die Konstruktionsfläche in die Mitte und lässt sie dort los.
-\item []\textbf{Reaktion} Das Icon der Transformation bleibt als Kopie auf der Konstruktionsfläche erhalten. 
+\item []\textbf{Testziel} Teste den Umgang mit einem Benutzer, der versucht alle Grenzen der Anwendung und alle Fehlermeldungen zu finden.
 
-\end{itemize} 
+\item []\textbf{Vorbedingung} Geöffnete Anwendung ohne angeschlossenem RaspberryPi und damit mit keinem gültigen Sensor.
+\item [1.]\textbf{Aktion} Der Benutzer zieht Sensor S3 in die Konfigurationsfläche hinein.
+\item []\textbf{Reaktion} Die Anwendung prüft ob der Sensor S3 angeschlossen ist. Er ist es nicht. Die Anwendung erstellt kein Icon, sondern öffnet eine Fehlermeldung, dass Sensor S3 nicht gefunden wurde.
+\item [2.]\textbf{Aktion} Der Benutzer schließt die Meldung. Danach öffnet er über die Systemleiste das Menü um eine Datei als Sensor zu Initialisieren.
+\item []\textbf{Reaktion} Die Fehlermeldung wird geschlossen. Das Menü zum Initialisieren einer Datei als Sensor wird geöffnet.
+\item [3.]\textbf{Aktion} Der Benutzer wählt eine Datei mit ungültigem Format aus und drückt auf den "`Öffnen"'Knopf.
+\item []\textbf{Reaktion} Die Anwendung prüft ob die Datei ein gültiges Format hat. Sie hat es nicht. Die Anwendung zeigt eine Fehlermeldung an, dass die gewählte Datei ein ungültiges Format hat.
+\item [4.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung und wählt eine gültige Datei.
+\item []\textbf{Reaktion} Die Anwendung prüft das Format, erkennt es als gültig und erstellt den Sensor S91. Das Fenster zum laden einer Datei wird geschlossen.
+\item [5.]\textbf{Aktion} Der Benutzer lädt eine weitere gültige Datei als Sensor S92.
+\item []\textbf{Reaktion} Die Anwendung öffnet das Ladefenster, prüft das Format der gewählten Datei, erkennt sie als gültig an und erstellt Sensor S92. Dann wird das Fenster zum Laden einer Datei geschlossen. 
+\item [6.]\textbf{Aktion} Der Benutzer zieht erst Sensor S91 und dann Sensor S92 in die Konfigurationsfläche.
+\item []\textbf{Reaktion} Die Anwendung prüft, ob Sensor S91 und S92 angeschlossen sind. Das sind sie, da sie aus gültigen Dateien stammen. Dann erstellt die Anwendung die entsprechenden Icons an den entsprechenden Stellen.
+\item [7.]\textbf{Aktion} Der Benutzer drückt auf den Kanal von S91 und danach auf den Kanal von S92.
+\item []\textbf{Reaktion} Die Anwendung erkennt, dass beide Kanäle von Sensoren stammen. Sie erstellt keine Verbindung und zeigt die Fehlermeldung an, dass zwischen zwei Sensoren keine Verbindung erstellt werden kann.
+\item [.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung und zieht Transformation T1 in die Konfigurationsfläche. Dabei hat T1 zwei Eingangskanäle und einen Ausgangskanal.
+\item []\textbf{Reaktion} Die Anwendung schließt die Fehlermeldung. Danach erstellt sie das Icon von T1 an der entsprechenden Stelle mit Defaultwerten.
+\item [8.]\textbf{Aktion} Der Benutzer klickt auf den oberen Eingangskanal und danach auf den unteren Eingangskanal.
+\item []\textbf{Reaktion} Die Anwendung erkennt, dass zwei Eingangskanäle verbunden werden sollen. Sie verbindet sie nicht, sondern zeigt die Fehlermeldung an, dass zwei Eingangskanäle einer Transformation nicht direkt verbunden werden können.
+\item [9.]\textbf{Aktion} TO DO weitere Fehlerfälle
+\item []\textbf{Reaktion}
+\item [.]\textbf{Aktion} 
+\item []\textbf{Reaktion}
+\item [.]\textbf{Aktion} 
+\item []\textbf{Reaktion}
 
-\item[T035] to do Überprüfung T030 automatisch
+\item []\textbf{Nachbedingung} TO DO
+\item []\textbf{Ergebnis} TO DO
 
-\item[T040] drag and drop einer Darstellung und deren Überprüfung
-\begin{itemize}
-
-\item []\textbf{Stand} Offenes Fenster der Hauptanwendung.
-\item []\textbf{Aktion} Der Benutzer öffnet das Tab der Darstellung und zieht eine Darstellung in die Konstruktionsfläche in die Mitte und lässt sie dort los.
-\item []\textbf{Reaktion} Das Icon der Darstellung bleibt als Kopie auf der Konstruktionsfläche erhalten. 
+\item []\textbf{Abgedeckte Funktionale Anforderungen:} TO DO
 
 \end{itemize}
 
-\item[T045] to do Überprüfung T040 automatisch
-
-\item[T050] Einstellen von Messbereich und Dauer einer Messung
-\begin{itemize}
-
-\item[1.]\textbf {Stand} Offenes Fenster der Hauptanwendung.
-\item[]\textbf{Aktion} Der Benutzer drückt auf den "`Anpassen"' Knopf.
-\item[]\textbf{Reaktion} Das Fenster zum Anpassen der Messung öffnet sich.
-
-\item[2.]\textbf {Stand} Offenes Fenster zum Anpassen der Messung.
-\item[]\textbf{Aktion} Der Benutzer veränderet die Einstellungen und drückt dann auf den "`OK"' Knopf.
-\item[]\textbf{Reaktion} Die Einstellungen werden übernommen. Das Fenster zum Anpassen der Messung schließt sich.
-
-\end{itemize}
-
-\item[T060] Aufrufen von Informationen
-\begin{itemize}
-\item[]\textbf {Stand} Offenes Fenster der Anwendung.
-\item[]\textbf{Aktion} Der Benutzer drückt auf einen "`I"' Knopf.
-\item[]\textbf{Reaktion} Ein Informationsfenster mit den zugehörigen Informationen öffnet sich.
-\end{itemize}
-
-\item[T070] Lade Datei als Quelle und Überprüfung
-\begin{itemize}
-
-\item[1.]\textbf {Stand} Offenes Fenster der Hauptanwendung.
-\item[]\textbf{Aktion} Der Benutzer drückt auf den "`lade von Datei"' Knopf.
-\item[]\textbf{Reaktion} Ein Fenster zum Auswählen eines Pfades öffnet sich.
-
-\item[2.]\textbf {Stand} Offenes Fenster Auswählen eines Pfades.
-\item[]\textbf{Aktion} Der Benutzer wählt einen Pfad zu einer gültigen Datei als Quelle aus. Danach drückt er auf den "`Laden"' Knopf.
-\item[]\textbf{Reaktion} Die Daten werden als Sensor Icon zu den verfügbaren Sensoren hinzugefügt.
-
-\end{itemize}
-
-\item[T090] Laden einer Messung
-\begin{itemize}
-
-\item[1.]\textbf {Stand} Offenes Fenster der Hauptanwendung.
-\item[]\textbf{Aktion} Der Benutzer drückt auf den "`Laden"' Knopf.
-\item[]\textbf{Reaktion} Das Fenster zum Laden eines Versuchs öffnet sich.
-
-\item[2.]\textbf {Stand} Offenes Fenster zum Laden.
-\item[]\textbf{Aktion} Der Benutzer gibt den Speicherort einer gültigen Versuchsdatei an. Dann drückt der Benutzer auf den "`Laden"' Knopf.
-\item[]\textbf{Reaktion} Der Versuch wird geladen. Das Fenster zum laden schließt sich. In der Konstruktionsfläche wird der Versuch dargestellt.
-
-\end{itemize}
-
-\item[T100] Starten einer Messung
-\begin{itemize}
-\item[]\textbf {Stand} Offenes Fenster der Hauptanwendung mit einem gültigen Aufbau in der Konstruktionsfläche.
-\item[]\textbf{Aktion} Der Benutzer drückt auf den "`Start"' Knopf.
-\item[]\textbf{Reaktion} Das Konstruktionsfenster wird vor Veränderung geschützt. Die Anzeigefläche rechts stellt die gewünschten Darstellungen dar. Falls ein Sensor nur endlich viele Werte eingeben soll, pausiert sich das Programm automatisch danach.
-\end{itemize}
-
-\item[T110] to do
-\begin{itemize}
-
-\item[]\textbf {Stand} 
-\item[]\textbf{Aktion} 
-\item[]\textbf{Reaktion} 
-
-\end{itemize}
-
-\item[T115] Zurücksetzen einer Messung
-\begin{itemize}
-
-\item[]\textbf {Stand} Offenes Fenster der Hauptanwendung mit einer gültigen Messung die pausiert ist.
-\item[]\textbf{Aktion} Der Benutzer drückt auf den "`starte neu"' Knopf.
-\item[]\textbf{Reaktion} Die Messdaten werden verworfen. Die Darstellungen werden zurückgesetzt. Die Dauer der Messung wird zurückgesetzt.
-
-\end{itemize}
-
-\item[T120] Pausieren der Messung
-\begin{itemize}
-
-\item[]\textbf {Stand} Offenes Fenster der Hauptanwendung mit einer laufenden Messung.
-\item[]\textbf{Aktion} Der Benutzer drückt auf den "`Pause"' Knopf.
-\item[]\textbf{Reaktion} Die Messung stoppt. Die Darstellungen bleiben in ihrem jetzigen Zustand.
-
-\end{itemize}
-
-\item[T130] Speichern von Messdaten
-\begin{itemize}
-
-\item[1.]\textbf {Stand} Offenes Fenster der Hauptanwendung mit einem pausiertem Versuch, der schon gelaufen ist.
-\item[]\textbf{Aktion} Der Benutzer drückt auf den "`speichere Daten"' Knopf.
-\item[]\textbf{Reaktion} Ein Fenster zum Auswählen eines Speicherorts öffnet sich.
-
-\item[2.]\textbf {Stand} Offenes Fenster zum Auswählen eines Speicherorts.
-\item[]\textbf{Aktion} Der Benutzer wählt einen Speicherort aus und drückt auf den "`speichern"' Knopf.
-\item[]\textbf{Reaktion} Eine Datei wird am Speicherort erstellt. Die Datei enthält die Messdaten. Das Fenster zum Auswählen eines Speicherorts schließt sich.
-
-\end{itemize}
-
-\item[T140] Wiederaufnahme einer Messung
-\begin{itemize}
-
-\item[]\textbf {Stand} Offenes Fenster der Hauptanwendung mit einem pausiertem Versuch der schon gelaufen ist.
-\item[]\textbf{Aktion} Der Benutzer drückt auf den "`wiederaufnehmen"' Knopf.
-\item[]\textbf{Reaktion} Die Anwendung fährt an der Stelle fort, an der die Anwendung pausiert wurde.
-
-\end{itemize}
-
-\item[T150] Speichern einer Konfiguration
-\begin{itemize}
-
-\item[1.]\textbf {Stand} Offenes Fenster der Hauptanwendung und der Versuch läuft nicht.
-\item[]\textbf{Aktion} Der Benutzer drückt auf den "`Speichern"' Knopf.
-\item[]\textbf{Reaktion} Das Fenster zum Speichern eines Versuchs öffnet sich.
-
-\item[2.]\textbf {Stand} Offenes Fenster zum Speichern.
-\item[]\textbf{Aktion} Der Benutzer ändert optional den Pfad des Speicherorts. Dann drückt der Benutzer auf den "`Speichern"' Knopf.
-\item[]\textbf{Reaktion} Der Versuch wird am Zielort als Datei gespeichert. Das Fenster zum speichern schließt sich.
-
-\end{itemize}
-
-\item[T160] Verwerfe aktuelle Konfiguration und erstelle neue Konfiguration
-\begin{itemize}
-
-\item[1.]\textbf {Stand} Offenes Fenster einer Messung.
-\item[]\textbf{Aktion} Der Benutzer drückt auf den "`neue Messung"' Knopf.
-\item[]\textbf{Reaktion} Ein Fenster öffnet sich mit der Frage, ob man die aktuelle Konfiguration verwerfen will.
-
-\item[2.]\textbf {Stand} Offenes Fenster mit der Frage, ob man die Konfiguration verwerfen will.
-\item[]\textbf{Aktion} Der Benutzer drückt auf den "`Bestätigen"' Knopf.
-\item[]\textbf{Reaktion} Das Fenster schließt sich. Die aktuelle Konfiguration wird verworfen.
-
-\end{itemize}
-
-\item[Txxx] Sensor hinzufügen 
-\begin{itemize}
-
-\item[1.]\textbf{ Stand} Offenes Fenster der Hauptanwendung .
-\item[]\textbf{Aktion} Der Benutzer drückt auf den Knopf "`füge Sensor hinzu"'.
-\item[]\textbf{Reaktion} Das Untermenü zur Auswahl des Sensors öffnet sich.
-
-
-\item[2.]\textbf{ Stand} Offenes Fenster zur Auswahl des Sensors.
-\item[]\textbf {Aktion} Der Benutzer drückt auf den Button "`Abbrechen"'.
-\item[]\textbf{Reaktion} Das Untermenü zur Auswahl des Sensors schließt sich.
-
-\item[3.]\textbf{ Stand} Offenes Fenster zur Auswahl des Sensors.
-\item[]\textbf{Aktion} Der Benutzer wählt aus der Liste einen Sensor aus und drückt auf den "`Weiter"' Knopf.
-\item[]\textbf{Reaktion} Falls der Sensor angeschlossen ist, öffnet wechselt die Anwendung zum Fenster um diesen zu konfigurieren. 
-
-\item[4.]\textbf{Stand} Offenes Fenster zur Konfiguration des Sensors.
-\item[]\textbf{Aktion} Der Benutzer drückt auf den "`Zurück"' Knopf.
-\item[]\textbf{Reaktion} Die Anwendung wechselt zu dem Fenster Auswahl des Sensors zurück.
-
-\item[5.]\textbf{ Stand} Offenes Fenster zur Konfiguration des Sensors.
-\item[]\textbf{Aktion} Der Benutzer verändert optional die voreingestellten Werte in dem jeweiligen gültigen Wertebereich. Der Benutzer drückt auf den "`Fertig"' Knopf.
-\item[]\textbf{Reaktion} Das Untermenü zur Konfiguration schließt sich. Im Fenster der Hauptanwendung wird der konfigurierte Sensor in die Liste der verwendbaren Sensoren hinzugefügt.
-\end{itemize}
-
-\item[Txxx] Konstruktion eines Versuchs
-\begin{itemize}
-
-\item [1.]\textbf{Stand} Offenes Fenster der Hauptanwendung mit beliebigem offenen Tab links oben.
-\item []\textbf{Aktion} Der Benutzer drückt auf den gewünschten geschlossenen Tab.
-\item []\textbf{Reaktion} Der aktuelle Tab wechselt zu dem gewünschten Tab.
-
-\item [2.]\textbf{Stand} Offenes Fenster der Hauptanwendung.
-\item []\textbf{Aktion} Der Benutzer öffnet das gewünschte Tab und zieht ein Element in die Konstruktionsfläche in die Mitte und lässt es dort los.
-\item []\textbf{Reaktion} Das Icon des Elements bleibt als Kopie auf der Konstruktionsfläche erhalten.
-
-\item[3.]\textbf{ Stand} Offenes Fenster der Hauptanwendung mit mindestens zwei Elementen in der Konstruktionsfläche und mindestens zwei offenen Kanälen.
-\item[]\textbf{Aktion} Der Benutzer drückt auf einen offen Kanal und danach auf einen anderen offenen Kanal.
-\item[]\textbf{Reaktion} Eine Verbindung zwischen den zwei Kanälen wird erstellt.
-
-\item[4.]\textbf{ Stand} Offenes Fenster der Hauptanwendung mit mindestens einem Elementen in der Konstruktionsfläche.
-\item[]\textbf{Aktion} Der Benutzer wählt das Element aus und drückt die "`Entf"' Taste der Tastatur oder auf den "`Löschen"'Knopf.
-\item[]\textbf{Reaktion} Das ausgewählte Element verschwindet aus der Konstruktionsfläche. Alle Verbindungen des Elements werden auch gelöscht.
-
-\item[5.]\textbf{ Stand} Offenes Fenster der Hauptanwendung mit mindestens einer Verbindung in der Konstruktionsfläche.
-\item[]\textbf{Aktion} Der Benutzer drückt auf ein Verbindungsende und danach auf der andere.
-\item[]\textbf{Reaktion} Die Verbindung wird gelöscht.
-
-\item[6.]\textbf{ Stand} Offenes Fenster der Hauptanwendung mit mindestens einer Verbindung und einem offenen Kanal in der Konstruktionsfläche.
-\item[]\textbf{Aktion} Der Benutzer drückt auf ein Verbindungsende und danach auf einen offenen Kanal.
-\item[]\textbf{Reaktion} Die Verbindung wird zu dem gewählten Kanal umgestellt.
-
-\end{itemize}
 
 \end{itemize}
 
