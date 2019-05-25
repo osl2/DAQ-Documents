@@ -13,6 +13,7 @@
 \widowpenalty10000
 \displaywidowpenalty=10000
 
+\setcounter{tocdepth}{2}				% keine subsubsections im TOC
 \makenoidxglossaries
 
 \newglossaryentry{bsp}{name=Beispiel, description=Beispieleintrag}
@@ -619,15 +620,15 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \section{Benutzungsoberfläche}
 
-\subsection{Ziel der Benutzeroberfl"ache}
+\subsection{Ziel der Benutzeroberfläche}
 
 Das Ziel der Benutzeroberfläche ist es dem Anwender eine intuitive Benutzung des Programmes zu ermöglichen. Da das Programm im Schulbetrieb eingesetzt werden soll ist eine gute Verständlichkeit wichtig. So soll auch eine lange Einarbeitungszeit für den Anwender vermieden werden. Dabei soll keine Funktionalität verloren gehen.
 
 \subsection{Generell}
 
-Um die Ziele zu erfüllen wird das Programm über eine Grafische Benutzeroberfl"ache (kurz "GUI") bedient. Der Anwender soll in der Lage sein bereits vorhandene Computer und Mobile-Device Kenntnisse zu nutzen.
+Um die Ziele zu erfüllen wird das Programm über eine Grafische Benutzeroberfläche (kurz "GUI") bedient. Der Anwender soll in der Lage sein bereits vorhandene Computer und Mobile-Device Kenntnisse zu nutzen.
 
-\subsection{Eingabege"ate}
+\subsection{Eingabegeäte}
 
 Die GUI ist überwiegend für die Bedienung durch die Maus ausgelegt. Dabei werden überwiegend folgende Aktionen verwendet:
 
@@ -636,33 +637,33 @@ Die GUI ist überwiegend für die Bedienung durch die Maus ausgelegt. Dabei werd
 	\item Drag-And-Drop \newline Das Verschieben von Elementen durch das festhalten und anschließende loslassen der linken Maustaste.
 \end{itemize}
 
-Eine Tastatur wird ben"otigt um weitergehende Einstellungen, wie etwa das anpassen einer Option, zu ermöglichen.
+Eine Tastatur wird benötigt um weitergehende Einstellungen, wie etwa das anpassen einer Option, zu ermöglichen.
 
 
 
-\subsection{"Uberblick}
+\subsection{Überblick}
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width = 12cm]{Grafik/GUI-mit-Segmenten.jpg}
-		\caption{Der Grundlegende Aufbau der Hauptbenutzeroberfl"ache}
+		\caption{Der Grundlegende Aufbau der Hauptbenutzeroberfläche}
 		\label{GUI_Grundlage}
 	\end{center}
 \end{figure}
 
-Abbildung 1 zeigt den Aufbau der Grafischen Benutzeroberfl"ache. Dabei geben die Zahlen in den roten K"astchen, rechts von dem Hauptfenster, die logische Unterteilung an.
+Abbildung 1 zeigt den Aufbau der Grafischen Benutzeroberfläche. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Hauptfenster, die logische Unterteilung an.
 
-Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erkl"art werden.
+Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt werden.
 
 \subsection{Die einzelnen Teile}
 
-\subsubsection{Systemmen"uleiste}
+\subsubsection{Systemmenüleiste}
 
 \begin{tabular}[t]{p{1cm} p{10cm}}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/PhyPiDAQ.jpg} & Der Name des Programmes wird hier angezeigt. Rechts daneben steht, sofern vorhanden, der Name der Datei, die gerade ge"offnet ist.\newline\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Maximieren.jpg} & Das ''Maximieren''-Symbol vergrößert das Programmfenster auf die maximale Größe. Die Größe ist von der Benutzungsumgebung abh"angig.\newline\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Minimieren.jpg} & Das ''Minimieren''-Symbol blendet das Programmfenster aus. Es ist weiterhin ge"offnet und wieder aufrufbar. \\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Schliessen.jpg} & Das ''Schliessen''-Symbol beendet die Anwendung. Vor dem Beenden findet eine Abfrage statt, ob der Anwender eventuell vorgenommene "Anderungen speichern m"ochte.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/PhyPiDAQ.jpg} & Der Name des Programmes wird hier angezeigt. Rechts daneben steht, sofern vorhanden, der Name der Datei, die gerade geöffnet ist.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Maximieren.jpg} & Das ''Maximieren''-Symbol vergrößert das Programmfenster auf die maximale Größe. Die Größe ist von der Benutzungsumgebung abhängig.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Minimieren.jpg} & Das ''Minimieren''-Symbol blendet das Programmfenster aus. Es ist weiterhin geöffnet und wieder aufrufbar. \\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Schliessen.jpg} & Das ''Schliessen''-Symbol beendet die Anwendung. Vor dem Beenden findet eine Abfrage statt, ob der Anwender eventuell vorgenommene Änderungen speichern möchte.\newline\\
 \end{tabular}
 
 \subsubsection{Auswahl}
@@ -672,13 +673,13 @@ Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erkl"art wer
 	\begin{itemize} 
 		\item Das anlegen einer neuen Datei
 		\item Das Speichern der aktuellen Datei
-		\item Das "Offnen einer bereits erstellten Datei
+		\item Das Öffnen einer bereits erstellten Datei
 	\end{itemize}\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Bearbeiten.jpg} & Unter dem Reiter ''Bearbeiten'' finden sich Optionen, die das Ändern von Inhalten der aktuell ge"offneten Datei erm"oglichen. Die wichtigsten sind:
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Bearbeiten.jpg} & Unter dem Reiter ''Bearbeiten'' finden sich Optionen, die das Ändern von Inhalten der aktuell geöffneten Datei ermöglichen. Die wichtigsten sind:
 	\begin{itemize} 
 		\item Das Kopieren eines ausgewählten Objektes
 		\item Das Einfügen eines gespeicherten Objektes
-		\item Das Anpassen eines ausgewälten Elements. Diese Einstellungsm"oglichkeiten sind von dem Objekt abhängig.
+		\item Das Anpassen eines ausgewälten Elements. Diese Einstellungsmöglichkeiten sind von dem Objekt abhängig.
 	\end{itemize}\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensor.jpg} & ToDO\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindung.jpg} & ToDO\\
@@ -690,7 +691,7 @@ Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erkl"art wer
 \subsubsection{Hauptfeld}
 
 \begin{tabular}[t]{p{1cm} p{10cm}}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Information.jpg} & Das ''Informations''-Symbol zeigt nach einem Click weiterführende Informationen zu dem Element an, zu dem es geh"ort. So würde beispielsweise bei Verknüpfung die Funktion angezeigt werde, die sie realisiert.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Information.jpg} & Das ''Informations''-Symbol zeigt nach einem Click weiterführende Informationen zu dem Element an, zu dem es gehört. So würde beispielsweise bei Verknüpfung die Funktion angezeigt werde, die sie realisiert.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensorelement.jpg} & ToDO\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Sensor.jpg} & ToDO\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Sensor.jpg} & ToDO\\
@@ -701,7 +702,7 @@ Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erkl"art wer
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungspfeil.jpg} & ToDO\\
 \end{tabular}
 
-\subsection{Erweiterungsm"oglichkeiten}
+\subsection{Erweiterungsmöglichkeiten}
 
 \section{Spezielle Anforderungen an die Entwicklungsumgebung}
 
