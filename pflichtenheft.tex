@@ -13,7 +13,7 @@
 \widowpenalty10000
 \displaywidowpenalty=10000
 
-\setcounter{tocdepth}{2}				% keine subsubsections im Inhaltsverzeichnis
+%\setcounter{tocdepth}{2}				% keine subsubsections im Inhaltsverzeichnis
 \makenoidxglossaries
 
 \newglossaryentry{bsp}{
@@ -44,7 +44,7 @@
 
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
-\subtitle{Version 0.1.1}
+\subtitle{Version 0.2.0}
 \author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
 \date{\today}
 
@@ -54,8 +54,8 @@
 \maketitle
 
 \newpage
-
 \tableofcontents 					% generate pdf twice to update
+\newpage
 
 \section{Produktübersicht}
 
@@ -217,26 +217,26 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 \subsection{GUI}
 
 \begin{itemize}
-\item[F10] Die Benutzer erreichen nach Öffnung der Anwendung direkt die GUI.
-\item[F20] Der Benutzer öffnet durch den Optionen-Knopf die Einstellungen.
-\item[F30] Der Benutzer kann durch den Datei-Knopf die Dateiverwaltung öffnen.
-\item[F40] Der Benutzer kann durch den Hilfe-Knopf das Hilfe Fenster öffnen.
+\item[F010] Die Benutzer erreichen nach Öffnung der Anwendung direkt die GUI.
+\item[F020] Der Benutzer öffnet durch den Optionen-Knopf die Einstellungen.
+\item[F030] Der Benutzer kann durch den Datei-Knopf die Dateiverwaltung öffnen.
+\item[F040] Der Benutzer kann durch den Hilfe-Knopf das Hilfe Fenster öffnen.
 \end{itemize}
 
 \subsubsection{Menüfeld}
 
 \begin{itemize}
-\item[F50] Der Benutzer öffnet durch den Sensoren-Knopf die Auswahl an Sensoren.
-\item[F60] Der Benutzer öffnet durch den Verbindungen-Knopf die Auswahl an Verbindungen.
-\item[F70] Der Benutzer öffnet durch den Darstellungen-Knopf die Auswahl an Darstellungen.
-\item[F80] Der Benutzer erhält durch verschiedene Farben der Konfigurationsbausteine eine visuelle Repräsentationen ihrer Komplexität.
+\item[F050] Der Benutzer öffnet durch den Sensoren-Knopf die Auswahl an Sensoren.
+\item[F060] Der Benutzer öffnet durch den Verbindungen-Knopf die Auswahl an Verbindungen.
+\item[F070] Der Benutzer öffnet durch den Darstellungen-Knopf die Auswahl an Darstellungen.
+\item[F080] Der Benutzer erhält durch verschiedene Farben der Konfigurationsbausteine eine visuelle Repräsentationen ihrer Komplexität.
 \end{itemize}
 
 \subsubsection{Optional: Zusätzliche Funktionen im Menüfeld}
 
 \begin{itemize}
 
-\item[F90] Der Benutzer kann durch den Sensoren hinzufügen-Knopf weitere Sensoren hinzufügen.
+\item[F090] Der Benutzer kann durch den Sensoren hinzufügen-Knopf weitere Sensoren hinzufügen.
 \item[F100] Der Benutzer kann durch den Transformationen hinzufügen-Button weitere Transformationen hinzufügen.
 \item[F110] Die in Transformationen in F100 sollen in eigenen Python-Skripten geschrieben werden.
 \end{itemize}
@@ -253,7 +253,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 \item[F140] Das Darstellungsfenster ist bei der Initialisierung der Anwendung leer.
-\item[F150] Durch die Benutzerkonfiguration im Konfigurationsfeld wird durch F90 automatisch die Darstellungsart im Darstellungsfenster geöffnet.
+\item[F150] Durch die Benutzerkonfiguration im Konfigurationsfeld wird durch F090 automatisch die Darstellungsart im Darstellungsfenster geöffnet.
 \end{itemize}
 
 
@@ -262,18 +262,18 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F160] Über F30 kann der Benutzer gespeicherte Standartkonfigurationen öffnen oder alte Messwerte verwenden.
+\item[F160] Über F030 kann der Benutzer gespeicherte Standartkonfigurationen öffnen oder alte Messwerte verwenden.
 \item[F170] Durch F160 geladene Konfigurationen und Messdaten werden automatisch nach Format überprüft.
-\item[F180] Aus F50 kann der Benutzer Sensoren durch Drag und Drop in das Konfigurationsfeld ziehen.
+\item[F180] Aus F050 kann der Benutzer Sensoren durch Drag und Drop in das Konfigurationsfeld ziehen.
 \item[F190] Die Anwendung sollte automatisch überprüfen, ob der ausgewählte Sensor richtig angeschlossen ist.
 \item[F200] Die Anwendung gibt durch F190 automatisch eine visuelle Rückmeldung über die Farbe des Sensors und einer Pop-Up Benachrichtigung.
-\item[F210] Aus F60 kann der Benutzer eine oder mehrere Verbindungen durch Drag und Drop in das Konfigurationsfeld ziehen.
+\item[F210] Aus F060 kann der Benutzer eine oder mehrere Verbindungen durch Drag und Drop in das Konfigurationsfeld ziehen.
 \item[F220] Die ausgewählten Verknüpfungen kann der Benutzer mit einem ausgewählten Sensor verknüpfen.
 \item[F230] Die Anwendung sollte automatisch überprüfen, ob die Verbindungen eine geeignete Kombination mit dem Sensor darstellt.
-\item[F240] Aus F70 kann der Benutzer eine Darstellungsart per Drag und Drop in das Konfigurationsfeld zu ziehen.
+\item[F240] Aus F070 kann der Benutzer eine Darstellungsart per Drag und Drop in das Konfigurationsfeld zu ziehen.
 \item[F250] Die Ausgewählte Darstellung kann der Benutzer mit einer Verbindung verknüpfen.
 \item[F260] Die Anwendung sollte automatisch überprüfen, ob die gewählte Darstellungsart eine sinnvolle Repräsentation der Messdaten darstellt.
-\item[F270] Über F30 kann der Benutzer seine eigene Konfiguration über einen Konfiguration speichern-Knopf speichern.
+\item[F270] Über F030 kann der Benutzer seine eigene Konfiguration über einen Konfiguration speichern-Knopf speichern.
 \item[F280] Bausteine die ein Benutzer nicht mehr in dem Konfigurationsfeld haben möchte können durch Drag und Drop in die Menüleiste wieder versteckt werden.
 
 \end{itemize}
@@ -343,7 +343,7 @@ kontrolliert
 \begin{itemize}
 
 \item[F500] Die Anwendung stellt dem Benutzer weitere Sprachpakete für die GUI zur Verfügung.
-\item[F510] Durch F20 ist die Sprache für den Nutzer änderbar.
+\item[F510] Durch F020 ist die Sprache für den Nutzer änderbar.
 
 \end{itemize}
 
@@ -359,8 +359,8 @@ kontrolliert
 
 \begin{itemize}
 
-\item[F530] Durch F20 sollte der Benutzer die in der Anwendung verwendeten Farben ändern können.
-\item[F540] Durch F20 sollte der Benutzer die in der Anwendung verwenden Buchstabengröße verändern können.
+\item[F530] Durch F020 sollte der Benutzer die in der Anwendung verwendeten Farben ändern können.
+\item[F540] Durch F020 sollte der Benutzer die in der Anwendung verwenden Buchstabengröße verändern können.
 
 \end{itemize}
 
@@ -384,7 +384,7 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \begin{itemize}
 
-\item[NF010] Auslesen von Sensordaten innerhalb von (5?) ms. //TODO PhyPiDAQ Abhängigkeit
+\item[NF010] Auslesen von Sensordaten innerhalb von (?) ms. //TODO PhyPiDAQ Abhängigkeit
 \item[NF015] Alle (5?) ms können neue Daten angefordert werden.
 \item[NF020] Verarbeitung ausgelesener Daten innerhalb von 10 ms.
 \item[NF030] Bis zu drei Sensoren können zeitgleich verwendet werden.
@@ -397,11 +397,11 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \begin{itemize}
 
-\item[NF060] Die Benutzeroberfläche ist für Siebtklässler verständlich.
-\item[NF070] Ungespeicherte Daten werden nicht ohne Warnung verworfen.
-\item[NF080] Programmfehler werden dem Benutzer gegenüber klar kommuniziert.
-\item[NF090] Schriftgröße von Text kann verändert werden.
-\item[NF100] Farbschema von farbigen UI-Elementen ist veränderbar.
+\item[NF110] Die Benutzeroberfläche ist für Siebtklässler verständlich.
+\item[NF120] Ungespeicherte Daten werden nicht ohne Warnung verworfen.
+\item[NF130] Programmfehler werden dem Benutzer gegenüber klar kommuniziert.
+\item[NF140] Schriftgröße von Text kann verändert werden.
+\item[NF150] Farbschema von farbigen UI-Elementen ist veränderbar.
 
 \end{itemize}
 
@@ -409,9 +409,10 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \begin{itemize}
 
-\item[NF110] Die Anwendung reagiert konsistent auf Eingaben.
-\item[NF120] Unerwartete und fehlerhafte Eingaben führen nicht zum Systemabsturz.
-\item[NF130] Verbindungsverlust von Sensoren führt nicht zum Systemabsturz.
+\item[NF210] Die Anwendung reagiert konsistent auf Eingaben.
+\item[NF220] Korrekte Bedienung und Eingaben führen nicht zu unerwarteten Effekten.
+\item[NF230] Unerwartete und fehlerhafte Eingaben führen nicht zum Systemabsturz.
+\item[NF240] Verbindungsverlust von Sensoren führt nicht zum Systemabsturz.
 
 \end{itemize}
 
@@ -419,8 +420,8 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \begin{itemize}
 
-\item[NF210] Die Software ist vollständig quelloffen und frei.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
-\item[NF220] Die Datenschutz-Grundverordnung wird nicht verletzt.
+\item[NF310] Die Software ist vollständig quelloffen und frei.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
+\item[NF320] Die Datenschutz-Grundverordnung wird nicht verletzt.
 
 \end{itemize}
 
@@ -699,16 +700,18 @@ Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt wer
 
 \section{Zeit- und Ressourcenplanung}
 
-\begin{tabular}{| l | l | l |}
+\subsection{Projektphasen}
+
+\begin{tabular}{| l | l | l | r |}
 	\hline
-	\textbf{Phase} & \textbf{Verantwortlicher} & \textbf{Zeitraum} \\ \hline
-	Pflichtenheft & Jan Küblbeck & KW 20–22 \\
-	Entwurf & Leon Huck & KW 23–26 \\
-	Implementierung & Stefan Geretschläger & KW 27–29, 31 \\
-	Klausurenphase & — & KW 30, 32 \\
-	Qualitätssicherung & David Gawron & KW 33–35 \\
-	Abnahme & — & KW 36 \\
-	Abschlussprüfung & Linus Ruhnke & KW 37/38 \\
+	\textbf{Phase} & \textbf{Verantwortlicher} & \textbf{Zeitraum} & \textbf{Kolloquium} \\ \hline
+	Pflichtenheft & Jan Küblbeck & KW 20–22 & 04.06.2019 \\
+	Entwurf & Leon Huck & KW 23–26 & 02.07.2019 \\
+	Implementierung & Stefan Geretschläger & KW 27–29, 31 & (?) \\
+	Klausurenphase & — & KW 30, 32 & — \\
+	Qualitätssicherung & David Gawron & KW 33–35 & 03.09.2019 \\
+	Abnahme & — & KW 36 & — \\
+	Abschlussprüfung & Linus Ruhnke & KW 37/38 & (?) \\
 	\hline
 \end{tabular}
 
