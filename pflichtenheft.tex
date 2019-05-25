@@ -8,6 +8,11 @@
 \usepackage{hyperref}					% Hyperlinks
 \usepackage[nonumberlist]{glossaries}		% Glossar
 
+% Hurenkinder und Schusterjungen verhindern
+\clubpenalty10000
+\widowpenalty10000
+\displaywidowpenalty=10000
+
 \makenoidxglossaries
 
 \newglossaryentry{bsp}{name=Beispiel, description=Beispieleintrag}
@@ -17,6 +22,7 @@
 \subtitle{Version 0.1.1}
 \author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
 \date{\today}
+
 
 \begin{document}
 
@@ -32,18 +38,25 @@
 
 \section{Zielbestimmung}
 
-Die Anwendung soll es Lehrern ermöglichen, Schülern ab der siebten Klasse Grundkenntnisse der digitalen Messwerterfassung in einer für Schüler interessante und motivierenden Weise näher zu bringen. Dabei werden technische Details, wie Konfigurationsdateien, vor dem Schüler verborgen. Damit wird der Schüler nicht überfordert, sondern soll ermutigt werden, selbstständig mit der Software umzugehen. Dabei wird ihm die Grundkenntnisse von Ursache und Wirkung durch spaßige Messungen demonstriert.
-\newline 
-Es wird eine graphische Oberfläche angeboten, die es dem Schüler ermöglicht allein per Drag and Drop eine Messanordnung zu erstellen. Die Details die dahinter stecken sind vor dem Schüler verborgen. Die Anwendung motiviert den Schüler dazu mit Sensoren, Transformationen und Darstellungen zu spielen und Dinge auszuprobieren. Dabei wird ihm durch eine intuitive Status- und Fehleranzeige gezeigt, ob seine Konstruktion funktioniert. Wenn nein, dann zeigt sie ihm an, wo das Problem liegt und warum es nicht funktioniert. Eine lästige Fehlersuche bleibt dem Schüler dann erspart.
-\newline
- Außerdem liefert die Anwendung dem Schüler zu den vorhandenen Bausteinen und zu der Anwendung allgemein die nötigen Informationen die er für die Nutzung braucht. Dabei wird auf ein ausführliches Tutorial am Anfang verzichtet. Die Anwendung liefert die Informationen häppchenweise durch Informationsanzeigen an den jeweilig relevanten Stellen. Damit findet der Schüler die Hilfe die er sucht an der Stelle an der er sie braucht. 
-\newline
-Die Anwendung ermöglicht es dem Lehrer vor dem Unterricht eine Reihe von Messversuchen teilweise oder ganz zu konfigurieren und zu speichern. Dabei kann er genau bestimmen was er den Schülern zeigen will. Diese Konfigurationen kann er dann schnell und einfach im Unterricht zum Einsatz bringen.
-\newline  
-Weiter ermöglicht es die Anwendung, dass Schüler aus höheren Klassen mit mehr Details der digitalen Messwerterfassung zusammen gebracht werden. Diese nutzen keine oder nur eine kleine vorgefertigte Konfiguration. Sie können dann auch selbst einen Sensor konfigurieren. Trotz des höheren Detailgrads bleibt die Anwendung übersichtlich und strukturiert. Damit bleiben auch komplexere Messversuche für den Schüler motivierend.
-\newline
+Die Anwendung soll es Lehrern ermöglichen, Schülern ab der siebten Klasse Grundkenntnisse der digitalen Messwerterfassung in einer für Schüler interessante und motivierenden Weise näher zu bringen. 
+Dabei werden aus didaktischer Sicht überflüssige technische Details wie z. B. die zum Auslesen der Sensoren notwendigen Protokolle vor dem Schüler verborgen.
+Der Schüler wird so nicht überfordert, sondern soll ermutigt werden, selbstständig mit der Software umzugehen. 
+Dabei kann er im spielerischen Umgang mit Versuchsaufbauten Prinzipien der digitalen Messtechnik wie z. B. Kaskadierung und natürlich auch das Grundprinzip von Ursache und Wirkung erfahren.
 
-Die Anwendung ist als Schnittstelle zwischen PhyPiDAQ und dem Nutzer zu verstehen. Sie ermöglicht dem Nutzer über eine übersichtliche, strukturierte und intuitive GUI sowie über eine einfache Bedienung die Nutzung eines Raspberry Pi mit PhyPiDAQ. Dadurch soll dem Schüler digitale Messwerterfassung, Physik und auch Informatik in einer motivierenden Weise näher gebracht werden. Womöglich kann die Anwendung den Schüler auch für diese Themen begeistern.  
+Es wird eine graphische Oberfläche angeboten, die es dem Schüler ermöglicht, allein per Drag and Drop eine Messanordnung zu erstellen. 
+Überflüssige Details, die dahinter stecken, bleiben vor dem Schüler verborgen.
+Die Anwendung motiviert den Schüler dazu, mit Sensoren, Transformationen und Darstellungen zu spielen und Dinge auszuprobieren. 
+Dabei wird ihm durch eine intuitive Status- und Fehleranzeige gezeigt, ob seine Konstruktion funktioniert. 
+Wenn nicht, dann zeigt sie ihm an, wo das Problem liegt und warum es nicht funktioniert. 
+Eine lästige Fehlersuche soll dem Schüler weitestgehend erspart bleiben. 
+
+Außerdem liefert die Anwendung dem Schüler zu den vorhandenen Bausteinen und zu der Anwendung allgemein die nötigen Informationen, die er für die Nutzung braucht. Dabei wird auf ein ausführliches Tutorial am Anfang verzichtet. Die Anwendung liefert die Informationen häppchenweise durch Informationsanzeigen an den jeweilig relevanten Stellen. Damit findet der Schüler die Hilfe, die er sucht, an der Stelle, an der er sie braucht.
+
+Die Anwendung ermöglicht es dem Lehrer vor dem Unterricht, eine Reihe von Messversuchen teilweise oder ganz zu konfigurieren und zu speichern. Dabei kann er genau bestimmen, was er den Schülern zeigen will. Diese Konfigurationen kann er dann schnell und einfach im Unterricht zum Einsatz bringen. 
+
+Weiter ermöglicht es die Anwendung, dass Schüler aus höheren Klassen mit mehr Details der digitalen Messwerterfassung zusammen gebracht werden. Diese nutzen keine oder nur eine abstrakt bzw. lückenhaft vorgefertigte Konfiguration. Sie können dann auch selbst einen Baustein modifizieren oder erstellen. Trotz des höheren Detailgrads bleibt die Anwendung übersichtlich und strukturiert. Damit bleiben auch komplexere Messversuche für den Schüler motivierend. 
+
+Die Anwendung ist als Bindeglied zwischen PhyPiDAQ und dem Nutzer zu verstehen. Sie ermöglicht dem Nutzer, über eine übersichtliche, strukturierte und intuitive GUI sowie über eine einfache Bedienung die Nutzung eines Raspberry Pi mit PhyPiDAQ. Dadurch soll dem Schüler digitale Messwerterfassung, Physik und auch Informatik in einer motivierenden Weise näher gebracht werden. Womöglich kann die Anwendung den Schüler auch für diese Themen begeistern.  
 
 \subsection{Musskriterien}
 
@@ -649,7 +662,7 @@ Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erkl"art wer
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/PhyPiDAQ.jpg} & Der Name des Programmes wird hier angezeigt. Rechts daneben steht, sofern vorhanden, der Name der Datei, die gerade ge"offnet ist.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Maximieren.jpg} & Das ''Maximieren''-Symbol vergrößert das Programmfenster auf die maximale Größe. Die Größe ist von der Benutzungsumgebung abh"angig.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Minimieren.jpg} & Das ''Minimieren''-Symbol blendet das Programmfenster aus. Es ist weiterhin ge"offnet und wieder aufrufbar. \\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Schließen.jpg} & Das ''Schliessen''-Symbol beendet die Anwendung. Vor dem Beenden findet eine Abfrage statt, ob der Anwender eventuell vorgenommene "Anderungen speichern m"ochte.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Schliessen.jpg} & Das ''Schliessen''-Symbol beendet die Anwendung. Vor dem Beenden findet eine Abfrage statt, ob der Anwender eventuell vorgenommene "Anderungen speichern m"ochte.\newline\\
 \end{tabular}
 
 \subsubsection{Auswahl}
