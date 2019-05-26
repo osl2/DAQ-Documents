@@ -49,6 +49,8 @@
 
 \newglossaryentry{konfigdata}{name=Konfigurationsdatei, description={Bezeichnet eine Datei, die es PhyPiDAQ erlaubt einen Sensor anzusprechen. Sie beinhaltet Python Code, der die Datenentgegennahme von dem Sensor verwaltet. Für jeden Sensor gibt es eine eigene Konfigurationsdatei. Konfigurationsdateien können angepasst werden um das Messverhalten anzupassen}}
 
+\newglossaryentry{sensor}{name=Sensor,plural={Sensoren}, description=Erfasst unter anderem physikalische Größen. Damit stellt ein Sensor den Grundbaustein für die Messtechnik da}
+
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
 \subtitle{Version 0.2.2}
@@ -64,11 +66,15 @@
 \tableofcontents 					% generate pdf twice to update
 \newpage
 
-\section{Produktübersicht}
+\section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
+
+Die Anwendung soll es Lehrern ermöglichen Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{1-ziel}).
+Demzufolge kommt die Anwendung in Schulen zum Einsatz. Die Zielgruppe sind Schüler in der 7. Klasse aufwärts.
+Die Anwendung läuft auf einem Computer und erhält Messwerte von \glspl{sensor}. Die Daten werden durch \gls{PhyPiDAQ} verfügbar gemacht.
+Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel 5 bzw. 7 aufgelistet.
 
 
-
-\section{Zielbestimmung}
+\section{Zielbestimmung}\label{1-ziel}
 
 Die Anwendung soll es Lehrern ermöglichen, Schülern ab der siebten Klasse Grundkenntnisse der digitalen Messwerterfassung in einer für Schüler interessante und motivierenden Weise näher zu bringen. 
 Dabei werden aus didaktischer Sicht überflüssige technische Details wie z. B. die zum Auslesen der Sensoren notwendigen Protokolle vor dem Schüler verborgen.
@@ -718,7 +724,7 @@ Eine Tastatur wird benötigt um weitergehende Einstellungen, wie etwa das anpass
 	\end{center}
 \end{figure}
 
-Abbildung 1 zeigt den Aufbau der Grafischen Benutzeroberfläche. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Programmfenster, die logische Unterteilung an.
+Abbildung \ref{GUI_Grundlage} zeigt den Aufbau der Grafischen Benutzeroberfläche. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Programmfenster, die logische Unterteilung an.
 
 Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt werden.
 
