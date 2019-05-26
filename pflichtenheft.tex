@@ -68,13 +68,13 @@
 
 \section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
 
-Die Anwendung soll es Lehrern ermöglichen Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{1-ziel}).
-Demzufolge kommt die Anwendung in Schulen zum Einsatz. Die Zielgruppe sind Schüler in der 7. Klasse aufwärts.
-Die Anwendung läuft auf einem Computer und erhält Messwerte von \glspl{sensor}. Die Daten werden durch \gls{PhyPiDAQ} verfügbar gemacht.
-Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel 5 bzw. 7 aufgelistet.
+Die Anwendung soll es Lehrern ermöglichen Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}).
+Demzufolge kommt die Anwendung in Schulen zum Einsatz. Die Zielgruppe sind Schüler in der 7. Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
+Die Anwendung läuft auf einem Computer und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). Die Daten werden durch \gls{PhyPiDAQ} verfügbar gemacht (siehe Kapitel \ref{systemmodell}).
+Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel \ref{funktionale} bzw. \ref{nichtfunktionale} aufgelistet.
+Bedient werden soll die Anwendung über eine graphische Benutzeroberfläche mit Maus und Tastatur (siehe Kapitel \ref{gui}).
 
-
-\section{Zielbestimmung}\label{1-ziel}
+\section{Zielbestimmung}\label{zielbestimmung}
 
 Die Anwendung soll es Lehrern ermöglichen, Schülern ab der siebten Klasse Grundkenntnisse der digitalen Messwerterfassung in einer für Schüler interessante und motivierenden Weise näher zu bringen. 
 Dabei werden aus didaktischer Sicht überflüssige technische Details wie z. B. die zum Auslesen der Sensoren notwendigen Protokolle vor dem Schüler verborgen.
@@ -204,7 +204,7 @@ Im Folgenden werden Musskriterien, Sollkriterien und Wunschkriterien des projekt
 
  \end{itemize}
 
-\section{Produkteinsatz}
+\section{Produkteinsatz}\label{produkteinsatz}
 
 \subsection{Anwendungsbereiche}
 
@@ -222,7 +222,7 @@ Die Anwendung soll ebenfalls nicht nur von physikbegeisterten Schülern verwende
 Die Anwendung läuft auf gewöhnlichen Schulcomputern, welche über eine USB-Schnittstelle mit einem RasPi verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden die an das RasPi angeschlossenen Messsensoren adressiert, welche die Messdaten wiederum über das RasPi an die am Computer gelaufende Anwendung schicken. 
 
 
-\section{Produktumgebung}
+\section{Produktumgebung}\label{produktumgebung}
 
 Die Anwendung läuft auf einem Computer, die Messdaten werden über Messsensoren an einem \gls{RasPi} erfasst.
 
@@ -241,7 +241,7 @@ Die an den Raspberry Pi angeschlossenen Messsensoren müssen richtig und sinnvol
 Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache python3 geschrieben ist bietet einfache und einheitliche Schnittstellen zur Verwendung der Messsensoren.
 
 
-\section{Funktionale Anforderungen}
+\section{Funktionale Anforderungen}\label{funktionale}
 
 
 \subsection{GUI}
@@ -395,7 +395,7 @@ kontrolliert
 \end{itemize}
 
 
-\section{Produktdaten}
+\section{Produktdaten}\label{produktdaten}
 
 Zu speichern sind ausschließlich:
 
@@ -408,7 +408,7 @@ Zu speichern sind ausschließlich:
 
 Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
-\section{Nichtfunktionale Anforderungen}
+\section{Nichtfunktionale Anforderungen}\label{nichtfunktionale}
 
 \subsection{Produktleistungen}
 
@@ -458,7 +458,7 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \end{itemize}
 
-\section{Globale Testfälle und Testszenarien}
+\section{Globale Testfälle und Testszenarien}\label{testfall}
 
 \begin{itemize} 
 
@@ -655,7 +655,7 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \end{itemize}
 
-\section{Systemmodelle}
+\section{Systemmodelle}\label{systemmodell}
 
 Das projektierte Gesamtsystem wird aller Voraussicht nach drei Systemprozesse benötigen, die wie in Abbildung \ref{DeploymentDiagram} dargestellt, miteinander Daten austauschen.
 
@@ -691,7 +691,7 @@ Abbildung \ref{DeploymentDiagram} stellt die Verteilung der Systemkomponenten au
 	\end{center}
 \end{figure}
 
-\section{Benutzungsoberfläche}
+\section{Benutzungsoberfläche}\label{gui}
 
 \subsection{Ziel der Benutzeroberfläche}
 
@@ -777,9 +777,9 @@ Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt wer
 
 \subsection{Erweiterungsmöglichkeiten}
 
-\section{Spezielle Anforderungen an die Entwicklungsumgebung}
+\section{Spezielle Anforderungen an die Entwicklungsumgebung}\label{entwicklungsumgebung}
 
-\section{Zeit- und Ressourcenplanung}
+\section{Zeit- und Ressourcenplanung}\label{zeit}
 
 \subsection{Projektphasen}
 
@@ -800,9 +800,9 @@ Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt wer
 
 \subsection{Implementierungsphase}
 
-\section{Ergänzungen}
+\section{Ergänzungen}\label{erweiterung}
 
-\section{Glossar}
+\section{Glossar}\label{glossar}
 
 \renewcommand*{\glossarysection}[2][]{}	% prevents double glossary section heading
 \printnoidxglossaries				% generate pdf twice when adding new entries
