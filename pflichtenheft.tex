@@ -44,7 +44,7 @@
 
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
-\subtitle{Version 0.2.1}
+\subtitle{Version 0.2.2}
 \author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
 \date{\today}
 
@@ -447,8 +447,8 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 \item [4.]\textbf{Aktion} Der Benutzer drückt auf den "`Schließen"'-Knopf des Hilfefensters.
 \item []\textbf{Reaktion} Das Fenster zur Hilft schließt sich.
 \item [5.]\textbf{Aktion} Der Benutzer drückt auf den "`Laden"'-Knopf in der Systemleiste.
-\item []\textbf{Reaktion} Das Fenster zum Laden einer Konfiguration öffnet sich. Dabei wird der voreingestellte default-Pfad geöffnet. 
-\item [6.]\textbf{Aktion} Der Benutzer wählt die Demo-Datei in dem default-Pfad aus und drückt dann auf den "`Laden"'-Knopf. 
+\item []\textbf{Reaktion} Das Fenster zum Laden einer Konfiguration öffnet sich. Dabei wird der voreingestellte Defaultpfad geöffnet. 
+\item [6.]\textbf{Aktion} Der Benutzer wählt die Demo-Datei in dem Defaultpfad aus und drückt dann auf den "`Laden"'-Knopf. 
 \item []\textbf{Reaktion} Die Anwendung lädt die Demo-Datei. Die geladene Demo-Konfiguration wird auf der Konfigurationsfläche angezeigt.
 \item [7.]\textbf{Aktion} Der Lehrer drückt auf den "`Erstellen"'-Knopf.
 \item []\textbf{Reaktion} Die Anwendung prüft, ob eine gültige Konfiguration vorliegt. Es liegt eine gültige Konfiguration vor. Die Anwendung zeigt den Konfigurationsstatus "`OK"' an.
@@ -475,7 +475,7 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \item []\textbf{Testziel} Teste eine typische Verwendung der Software anhand des gegebenen Szenarios. Dabei wird das Erstellen, Verändern und Speichern einer Konfiguration getestet.
 
-\item []\textbf{Vorbedingung} Die Anwendung ist gestartet und es liegt keine Konfiguration vor. Die Anwendung hat Zugriff auf einen laufenden RaspberryPi mit PhiPiDAQ. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
+\item []\textbf{Vorbedingung} Die Anwendung ist gestartet und es liegt keine Konfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
 
 \item [1.]\textbf{Aktion} Der Lehrer zieht Sensor S1 in die Konfigurationsfläche. 
 \item []\textbf{Reaktion} Die Anwendung prüft, ob Sensor S1 angeschlossen ist. Danach wird das Icon von Sensor S1 an der gewählten Stelle erstellt. Dabei werden Defaultwerte eingestellt.
@@ -511,7 +511,7 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \item []\textbf{Testziel} Es soll getestet werden wie ein Schüler der siebten Klasse mit der Anwendung umgeht, während er eine Aufgabe des Lehrer bearbeitet. Dabei ist schon die Konfiguration aus T020 geladen. Diese enthält Sensor S1 und Transformation T.
 
-\item []\textbf{Vorbedingung} Die Anwendung ist gestartet und es liegt eine vom Lehrer erstellte Konfiguration vor. Die Konfiguration enthält Sensor S1 und Transformation A. Die Anwendung hat Zugriff auf einen laufenden Raspberry Pi mit PhyPiDAQ. Die Sensoren S1 und S2 sind ordnungsgemäß angeschlossen.
+\item []\textbf{Vorbedingung} Die Anwendung ist gestartet und es liegt eine vom Lehrer erstellte Konfiguration vor. Die Konfiguration enthält Sensor S1 und Transformation A. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} Pi mit \gls{PhyPiDAQ}. Die Sensoren S1 und S2 sind ordnungsgemäß angeschlossen.
 \item [1.]\textbf{Aktion} Der Schüler drückt auf das "`?"'-Icon neben Sensor S1.
 \item []\textbf{Reaktion} Es öffnet sich ein Infofenster zum Sensor S1.
 \item [2.]\textbf{Aktion} Der Schüler drückt auf das "`?"'-Icon neben Transformation A.
@@ -575,7 +575,7 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \item []\textbf{Testziel} Teste den Umgang mit einem Benutzer, der versucht alle Grenzen der Anwendung und alle Fehlermeldungen zu finden.
 
-\item []\textbf{Vorbedingung} Geöffnete Anwendung ohne angeschlossenem RaspberryPi und damit mit keinem gültigen Sensor.
+\item []\textbf{Vorbedingung} Geöffnete Anwendung ohne angeschlossenem \gls{RasPi} und damit mit keinem gültigen Sensor.
 \item [1.]\textbf{Aktion} Der Benutzer zieht Sensor S3 in die Konfigurationsfläche hinein.
 \item []\textbf{Reaktion} Die Anwendung prüft ob der Sensor S3 angeschlossen ist. Er ist es nicht. Die Anwendung erstellt kein Icon, sondern öffnet eine Fehlermeldung, dass Sensor S3 nicht gefunden wurde.
 \item [2.]\textbf{Aktion} Der Benutzer schließt die Meldung. Danach öffnet er über die Systemleiste das Menü um eine Datei als Sensor zu Initialisieren.
@@ -590,13 +590,27 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 \item []\textbf{Reaktion} Die Anwendung prüft, ob Sensor S91 und S92 angeschlossen sind. Das sind sie, da sie aus gültigen Dateien stammen. Dann erstellt die Anwendung die entsprechenden Icons an den entsprechenden Stellen.
 \item [7.]\textbf{Aktion} Der Benutzer drückt auf den Kanal von S91 und danach auf den Kanal von S92.
 \item []\textbf{Reaktion} Die Anwendung erkennt, dass beide Kanäle von Sensoren stammen. Sie erstellt keine Verbindung und zeigt die Fehlermeldung an, dass zwischen zwei Sensoren keine Verbindung erstellt werden kann.
-\item [.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung und zieht Transformation T1 in die Konfigurationsfläche. Dabei hat T1 zwei Eingangskanäle und einen Ausgangskanal.
+\item [8.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung und zieht Transformation T1 in die Konfigurationsfläche. Dabei hat T1 zwei Eingangskanäle und einen Ausgangskanal.
 \item []\textbf{Reaktion} Die Anwendung schließt die Fehlermeldung. Danach erstellt sie das Icon von T1 an der entsprechenden Stelle mit Defaultwerten.
-\item [8.]\textbf{Aktion} Der Benutzer klickt auf den oberen Eingangskanal und danach auf den unteren Eingangskanal.
+\item [9.]\textbf{Aktion} Der Benutzer klickt auf den oberen Eingangskanal und danach auf den unteren Eingangskanal.
 \item []\textbf{Reaktion} Die Anwendung erkennt, dass zwei Eingangskanäle verbunden werden sollen. Sie verbindet sie nicht, sondern zeigt die Fehlermeldung an, dass zwei Eingangskanäle einer Transformation nicht direkt verbunden werden können.
-\item [9.]\textbf{Aktion} TO DO weitere Fehlerfälle
-\item []\textbf{Reaktion}
+\item [10.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung. Danach klick er auf den oberen Eingangskanal von T1 und danach auf den Ausgangskanal von T1.
+\item []\textbf{Reaktion} Das Fenster der Fehlermeldung schließt sich. Die Anwendung erkennt, dass die Verbindung ungültig ist und gibt eine Fehlermeldung aus.
+\item [11.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung. Danach zieht er Transformation T2, Darstellung D1 und Darstellung D2 in die Konstruktionsfläche.
+\item []\textbf{Reaktion} Das Fenster der Fehlermeldung wird geschlossen. Die Icons von T2, D1 und D2 werden an den entsprechenden Stellen erstellt.
+\item [12.]\textbf{Aktion} Der Benutzer klickt auf den Eingangskanal von D1 und danach auf den Eingangskanal von D2. 
+\item []\textbf{Reaktion} Die Anwendung erkennt, dass die Verbindung ungültig ist und gibt die passende Fehlermeldung aus.
+\item [13.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung. Danach schließt er zwei Sensoren S1 und S2 ordnungsgemäß an. Weiter zieht er erst S1 und dann S2 in die Konfigurationsfläche. 
+\item []\textbf{Reaktion} Das Fenster der Fehlermeldung wird geschlossen. Die Anwendung erkennt, dass S1 angeschlossen ist und erstellt das entsprechende Icon. Weiter erkennt sie, dass der Sensor S2 zwar angeschlossen ist, aber die maximale Anzahl an Sensoren in der Konfigurationsfläche überschreitet. Die Anwendung erstellt dann kein Icon von S2 und gibt eine passende Fehlermeldung aus.
+\item [14.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung und zieht Darstellung D3 und D4 in die Konfigurationsfläche.
+\item []\textbf{Reaktion} Die Fehlermeldung wird geschlossen. Die Anwendung erstellt ein Icon für D3 und erkennt, dass mit D4 die maximale Anzahl an Sensoren überschritten wird. Also gibt sie eine entsprechende Fehlermeldung aus.
+\item [15.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung. Danach verbindet er alle offenen Kanäle ordnungsgemäß und drückt auf den "`Erstellen"'-Knopf.
+\item []\textbf{Reaktion} Das Fenster der Fehlermeldung wird geschlossen. Die Anwendung erstellt alle gültigen Verbindungen. Weiter prüft sie beim Erstellen die Konfiguration und erkennt dessen Korrektheit. 
+\item [16.]\textbf{Aktion} Der Benutzer drückt auf den "`Starten"'-Knopf und wartet 5 Sekunden. Danach löst er die Verbindung von S1.
+\item []\textbf{Reaktion} Die Anwendung führt die Messung durch. Nach dem Kappen von S1 stürzt die Anwendung nicht ab. Allerdings stoppt sie die Messung und gibt eine entsprechende Fehlermeldung aus. 
 \item [.]\textbf{Aktion} 
+\item []\textbf{Reaktion} to do: weitere Testfälle
+\item [.]\textbf{Aktion} maximale Anzahl Transformationen?
 \item []\textbf{Reaktion}
 \item [.]\textbf{Aktion} 
 \item []\textbf{Reaktion}
