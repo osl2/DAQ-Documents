@@ -41,6 +41,15 @@
 	name=OSL 2,
 	description={OSL 2 ist der Name eines Open-Source-Lehrsoftware-Labor, in welchem Studierende sich mit der Entwicklung von Open-Source-Software vertraut machen können.} }
 
+\newglossaryentry{dragdrop}{name=Drag-and-Drop, description=Methode um mit graphischen Benutzeroberflächen zu interagieren. Dabei wird ein Objekt erst mit der Maus festgehalt und an einen anderen Ort gezogen. Durch das lösen der Maustaste wird das Objekt platziert}
+
+\newglossaryentry{click}{name=Click, description=Der linke Maustasten Click}
+
+\newglossaryentry{transformation}{name=Transformation, description=Berechnung von neuen Daten aus einem Datenstrom. Die Transformation können durch mathematische Funktionen realisiert werden. Je nach Transformation werden unterschiedlich viele Datenströme als Eingabe erwartet}
+
+\newglossaryentry{konfigdata}{name=Konfigurationsdatei, description={Bezeichnet eine Datei, die es PhyPiDAQ erlaubt einen Sensor anzusprechen. Sie beinhaltet Python Code, der die Datenentgegennahme von dem Sensor verwaltet. Für jeden Sensor gibt es eine eigene Konfigurationsdatei. Konfigurationsdateien können angepasst werden um das Messverhalten anzupassen}}
+
+\newglossaryentry{sensor}{name=Sensor,plural={Sensoren}, description=Erfasst unter anderem physikalische Größen. Damit stellt ein Sensor den Grundbaustein für die Messtechnik da}
 
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
@@ -57,11 +66,15 @@
 \tableofcontents 					% generate pdf twice to update
 \newpage
 
-\section{Produktübersicht}
+\section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
 
+Die Anwendung soll es Lehrern ermöglichen Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}).
+Demzufolge kommt die Anwendung in Schulen zum Einsatz. Die Zielgruppe sind Schüler in der 7. Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
+Die Anwendung läuft auf einem Computer und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). Die Daten werden durch \gls{PhyPiDAQ} verfügbar gemacht (siehe Kapitel \ref{systemmodell}).
+Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel \ref{funktionale} bzw. \ref{nichtfunktionale} aufgelistet.
+Bedient werden soll die Anwendung über eine graphische Benutzeroberfläche mit Maus und Tastatur (siehe Kapitel \ref{gui}).
 
-
-\section{Zielbestimmung}
+\section{Zielbestimmung}\label{zielbestimmung}
 
 Die Anwendung soll es Lehrern ermöglichen, Schülern ab der siebten Klasse Grundkenntnisse der digitalen Messwerterfassung in einer für Schüler interessante und motivierenden Weise näher zu bringen. 
 Dabei werden aus didaktischer Sicht überflüssige technische Details wie z. B. die zum Auslesen der Sensoren notwendigen Protokolle vor dem Schüler verborgen.
@@ -191,7 +204,7 @@ Im Folgenden werden Musskriterien, Sollkriterien und Wunschkriterien des projekt
 
  \end{itemize}
 
-\section{Produkteinsatz}
+\section{Produkteinsatz}\label{produkteinsatz}
 
 \subsection{Anwendungsbereiche}
 
@@ -209,7 +222,7 @@ Die Anwendung soll ebenfalls nicht nur von physikbegeisterten Schülern verwende
 Die Anwendung läuft auf gewöhnlichen Schulcomputern, welche über eine USB-Schnittstelle mit einem RasPi verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden die an das RasPi angeschlossenen Messsensoren adressiert, welche die Messdaten wiederum über das RasPi an die am Computer gelaufende Anwendung schicken. 
 
 
-\section{Produktumgebung}
+\section{Produktumgebung}\label{produktumgebung}
 
 Die Anwendung läuft auf einem Computer, die Messdaten werden über Messsensoren an einem \gls{RasPi} erfasst.
 
@@ -228,7 +241,7 @@ Die an den Raspberry Pi angeschlossenen Messsensoren müssen richtig und sinnvol
 Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache python3 geschrieben ist bietet einfache und einheitliche Schnittstellen zur Verwendung der Messsensoren.
 
 
-\section{Funktionale Anforderungen}
+\section{Funktionale Anforderungen}\label{funktionale}
 
 
 \subsection{GUI}
@@ -382,7 +395,7 @@ kontrolliert
 \end{itemize}
 
 
-\section{Produktdaten}
+\section{Produktdaten}\label{produktdaten}
 
 Zu speichern sind ausschließlich:
 
@@ -395,7 +408,7 @@ Zu speichern sind ausschließlich:
 
 Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
-\section{Nichtfunktionale Anforderungen}
+\section{Nichtfunktionale Anforderungen}\label{nichtfunktionale}
 
 \subsection{Produktleistungen}
 
@@ -446,7 +459,7 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \end{itemize}
 
-\section{Globale Testfälle und Testszenarien}
+\section{Globale Testfälle und Testszenarien}\label{testfall}
 
 \begin{itemize} 
 
@@ -643,7 +656,7 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \end{itemize}
 
-\section{Systemmodelle}
+\section{Systemmodelle}\label{systemmodell}
 
 Das projektierte Gesamtsystem wird aller Voraussicht nach drei Systemprozesse benötigen, die wie in Abbildung \ref{DeploymentDiagram} dargestellt, miteinander Daten austauschen.
 
@@ -679,7 +692,7 @@ Abbildung \ref{DeploymentDiagram} stellt die Verteilung der Systemkomponenten au
 	\end{center}
 \end{figure}
 
-\section{Benutzungsoberfläche}
+\section{Benutzungsoberfläche}\label{gui}
 
 \subsection{Ziel der Benutzeroberfläche}
 
@@ -694,8 +707,8 @@ Um die Ziele zu erfüllen wird das Programm über eine Grafische Benutzeroberfl�
 Die GUI ist überwiegend für die Bedienung durch die Maus ausgelegt. Dabei werden überwiegend folgende Aktionen verwendet:
 
 \begin{itemize} 
-	\item Click \newline Der linke Mausclick.
-	\item Drag-And-Drop \newline Das Verschieben von Elementen durch das festhalten und anschließende loslassen der linken Maustaste.
+	\item \gls{click}
+	\item \gls{dragdrop}
 \end{itemize}
 
 Eine Tastatur wird benötigt um weitergehende Einstellungen, wie etwa das anpassen einer Option, zu ermöglichen.
@@ -706,13 +719,13 @@ Eine Tastatur wird benötigt um weitergehende Einstellungen, wie etwa das anpass
 
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[width = 12cm]{Grafik/GUI-mit-Segmenten.jpg}
+		\includegraphics[width = 12cm]{Grafik/GUI-mit-Segmenten.png}
 		\caption{Der Grundlegende Aufbau der Hauptbenutzeroberfläche}
 		\label{GUI_Grundlage}
 	\end{center}
 \end{figure}
 
-Abbildung \ref{GUI_Grundlage} zeigt den Aufbau der Grafischen Benutzeroberfläche. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Hauptfenster, die logische Unterteilung an.
+Abbildung \ref{GUI_Grundlage} zeigt den Aufbau der Grafischen Benutzeroberfläche. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Programmfenster, die logische Unterteilung an.
 
 Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt werden.
 
@@ -721,53 +734,53 @@ Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt wer
 \subsubsection{Systemmenüleiste}
 
 \begin{tabular}[t]{p{1cm} p{10cm}}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/PhyPiDAQ.jpg} & Der Name des Programmes wird hier angezeigt. Rechts daneben steht, sofern vorhanden, der Name der Datei, die gerade geöffnet ist.\newline\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Maximieren.jpg} & Das ''Maximieren''-Symbol vergrößert das Programmfenster auf die maximale Größe. Die Größe ist von der Benutzungsumgebung abhängig.\newline\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Minimieren.jpg} & Das ''Minimieren''-Symbol blendet das Programmfenster aus. Es ist weiterhin geöffnet und wieder aufrufbar. \\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Schliessen.jpg} & Das ''Schließen''-Symbol beendet die Anwendung. Vor dem Beenden findet eine Abfrage statt, ob der Anwender eventuell vorgenommene Änderungen speichern möchte.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/PhyPiDAQ.png} & Der Name des Programmes wird hier angezeigt. Rechts daneben steht, sofern vorhanden, der Name der Datei, die gerade geöffnet ist.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Maximieren.png} & Das ''Maximieren''-Symbol vergrößert das Programmfenster auf die maximale Größe. Die Größe ist von der Benutzungsumgebung abhängig.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Minimieren.png} & Das ''Minimieren''-Symbol blendet das Programmfenster aus. Es ist weiterhin geöffnet und wieder aufrufbar. \\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Schliessen.png} & Das ''Schliessen''-Symbol beendet die Anwendung. Vor dem Beenden findet eine Abfrage statt, ob der Anwender eventuell vorgenommene Änderungen speichern möchte.\newline\\
 \end{tabular}
 
 \subsubsection{Auswahl}
 
 \begin{tabular}[t]{p{1cm} p{10cm}}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Datei.jpg} & Unter dem Reiter ''Datei'' finden sich Optionen, die sich auf Dateien beziehen. Die wichtigsten sind: 
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Datei.png} & Unter dem Reiter ''Datei'' finden sich Optionen, die sich auf Dateien beziehen. Die wichtigsten sind: 
 	\begin{itemize} 
 		\item Das anlegen einer neuen Datei
 		\item Das Speichern der aktuellen Datei
 		\item Das Öffnen einer bereits erstellten Datei
 	\end{itemize}\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Bearbeiten.jpg} & Unter dem Reiter ''Bearbeiten'' finden sich Optionen, die das Ändern von Inhalten der aktuell geöffneten Datei ermöglichen. Die wichtigsten sind:
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Bearbeiten.png} & Unter dem Reiter ''Bearbeiten'' finden sich Optionen, die das Ändern von Inhalten der aktuell geöffneten Datei ermöglichen. Die wichtigsten sind:
 	\begin{itemize} 
 		\item Das Kopieren eines ausgewählten Objektes
 		\item Das Einfügen eines gespeicherten Objektes
 		\item Das Anpassen eines ausgewälten Elements. Diese Einstellungsmöglichkeiten sind von dem Objekt abhängig.
 	\end{itemize}\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensor.jpg} & ToDO\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindung.jpg} & ToDO\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Darstellung.jpg} & ToDO\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Optionen.jpg} & ToDO\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Hilfe.jpg} & ToDO\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensor.png} & ToDo\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindung.png} & ToDo\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Darstellung.png} & ToDO\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Optionen.png} & ToDO\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Hilfe.png} & ToDO\newline\\
 \end{tabular}
 
-\subsubsection{Hauptfeld}
+\subsubsection{Konfigurationsfeld}
 
 \begin{tabular}[t]{p{1cm} p{10cm}}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Information.jpg} & Das ''Informations''-Symbol zeigt nach einem Click weiterführende Informationen zu dem Element an, zu dem es gehört. So würde beispielsweise bei Verknüpfung die Funktion angezeigt werde, die sie realisiert.\newline\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensorelement.jpg} & ToDO\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Sensor.jpg} & ToDO\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Sensor.jpg} & ToDO\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.jpg} & ToDO\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Verbindung.jpg} & ToDO\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Verbindung.jpg} & ToDO\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Kanal.jpg} & ToDO\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungspfeil.jpg} & ToDO\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Information.png} & Das ''Informations''-Symbol zeigt nach einem Click weiterführende Informationen zu dem Element an, zu dem es gehört. So würde beispielsweise bei einer Transformation die Funktion angezeigt werde, die sie realisiert.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensorelement.png} & Repräsentation eines Sensors, der in PhyPiDAQ erkannt werden kann. Vorraussetzung hierfür ist die Existenz einer \gls{konfigdata}.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Sensor.png} & ToDO\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Sensor.png} & ToDO\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.png} & Repräsentation einer \gls{transformation}. Abhängig von der Anzahl an Eingängen der Transformation besitzt die GUI dementsprechend viele Eingänge. Jedem Eingang können durch Einfügen von einer Verbindung Daten übergegen werden.\newline \\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Verbindung.png} & ToDO\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Transformation.png} & ToDO\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Kanal.png} & ToDO\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungspfeil.png} & ToDO\\
 \end{tabular}
 
 \subsection{Erweiterungsmöglichkeiten}
 
-\section{Spezielle Anforderungen an die Entwicklungsumgebung}
+\section{Spezielle Anforderungen an die Entwicklungsumgebung}\label{entwicklungsumgebung}
 
-\section{Zeit- und Ressourcenplanung}
+\section{Zeit- und Ressourcenplanung}\label{zeit}
 
 \subsection{Projektphasen}
 
@@ -788,9 +801,9 @@ Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt wer
 
 \subsection{Implementierungsphase}
 
-\section{Ergänzungen}
+\section{Ergänzungen}\label{erweiterung}
 
-\section{Glossar}
+\section{Glossar}\label{glossar}
 
 \renewcommand*{\glossarysection}[2][]{}	% prevents double glossary section heading
 \printnoidxglossaries				% generate pdf twice when adding new entries
