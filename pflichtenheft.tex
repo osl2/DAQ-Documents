@@ -83,6 +83,23 @@ Weiter ermöglicht es die Anwendung, dass Schüler aus höheren Klassen mit mehr
 
 Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verstehen. Sie ermöglicht dem Nutzer, über eine übersichtliche, strukturierte und intuitive GUI sowie über eine einfache Bedienung die Nutzung eines \gls{RasPi} mit \gls{PhyPiDAQ}. Dadurch soll dem Schüler digitale Messwerterfassung, Physik und auch Informatik in einer motivierenden Weise näher gebracht werden. Womöglich kann die Anwendung den Schüler auch für diese Themen begeistern.  
 
+Im Folgenden werden Musskriterien, Sollkriterien und Wunschkriterien des projektierten Softwareprodukts definiert:
+
+\begin{itemize}
+	\item Musskriterien haben höchste Priorität. 
+	Dass ein Musskriterium in den nachfolgenden Projektphasen nicht umgesetzt wird, ist nur dann zulässig, falls unerwartet unausweichliche Probleme bei der Umsetzung auftreten. 
+	In diesem Fall ist es erforderlich, dass diese Probleme sehr genau dokumentiert werden.
+	
+	\item Sollkriterien haben eine mittlere Priorität. 
+	Falls ein Sollkriterium umgesetzt werden kann, dann muss es auch realisiert werden. 
+	Falls ein Sollkriterium in den nachfolgenden Projektphasen nicht umgesetzt werden kann, so muss dies dokumentiert und begründet werden. 
+	
+	\item Wunschkriterien haben eine niedrige Priorität. 
+	Je nach Resourcenlage können sie nach Bearbeitung aller Muss- und Kannkriterien umgesetzt werden. 
+	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden. 
+\end{itemize}
+
+
 \subsection{Musskriterien}
 
 \begin{itemize}
@@ -576,7 +593,7 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 \item []\textbf{Testziel} Teste den Umgang mit einem Benutzer, der versucht alle Grenzen der Anwendung und alle Fehlermeldungen zu finden.
 
 \item []\textbf{Vorbedingung} Geöffnete Anwendung ohne angeschlossenem RaspberryPi und damit mit keinem gültigen Sensor.
-\item [1.]\textbf{Aktion} Der Benutzer zieht Sensor S3 in die Konfigurationsfläche hinein.
+\item [1.]\textbf{Aktion} Der Benutzernur vorbeugend zieht Sensor S3 in die Konfigurationsfläche hinein.
 \item []\textbf{Reaktion} Die Anwendung prüft ob der Sensor S3 angeschlossen ist. Er ist es nicht. Die Anwendung erstellt kein Icon, sondern öffnet eine Fehlermeldung, dass Sensor S3 nicht gefunden wurde.
 \item [2.]\textbf{Aktion} Der Benutzer schließt die Meldung. Danach öffnet er über die Systemleiste das Menü um eine Datei als Sensor zu Initialisieren.
 \item []\textbf{Reaktion} Die Fehlermeldung wird geschlossen. Das Menü zum Initialisieren einer Datei als Sensor wird geöffnet.
@@ -613,6 +630,40 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \section{Systemmodelle}
 
+Das projektierte Gesamtsystem wird aller Voraussicht nach drei Systemprozesse benötigen, die wie in Abbildung \ref{DeploymentDiagram} dargestellt, miteinander Daten austauschen.
+
+Einer dieser drei Systemprozesse hostet die Java-Virtual-Machine, auf der die zu erstellende Hauptkomponente läuft. Diese enthält die grafische Benutzungsoberfläche, die im Wesentlichen die Erstellung der Werte verarbeitenden Messkonfiguration ermöglicht, und die auch deren Betrieb darstellen kann. 
+
+Zum Ansteuern und Auslesen der Sensoren auf dem Rasperry Pi wird das auf Python basierende Framework PhyPiDAQ bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die Java-Virtual-Machine ausgeführt werden kann, wird für diesen ein zweiter Systemprozess benötigt.
+
+Um Resourcenknappheit auf dem Rasperry Pi aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend ebenso auf dem Rasperry Pi ausgeführt werden müssen. 
+
+Falls denn nun die Hauptkomponente tatsächlich auf einem anderen Rechner ausgeführt werden sollte, so muss sie mit dem Python-Interpreter hardware- bzw. plattformübergreifend Daten austauschen können. Bisher stellt PhyPiDAQ hierfür jedoch keine Funktionalität zur Verfügung.
+
+Zur Realisierung der hardwareübergreifenden Kommunikation sind die folgenden zwei Lösungsvarianten denkbar: 
+
+\begin{itemize}
+
+
+	\item PhyPiDAQ wird um eine Kommunikationsschnittstelle erweitert, beispielsweise zur Kommunikation über eine Netzwerkschnittstelle wie z. B. WLAN oder zur Kommunikation über eine Peripherieschnittstelle wie z. b. USB.
+	
+	\item In einem dritten Systemprozess, der auf dem selben Rechner wie PhyPiDAQ läuft, stellt eine Utility-Softwarekomponente einen entsprechenden Kommunikationsdienst bereit. In diesem Fall sollte keine Notwendigkeit bestehen, dass PhyPiDAQ wesentlich erweitert werden muss, und der Datenaustausch mit PhyPiDAQ sollte auf möglichst einfache Art und Weise, beispielsweise per Standardeingabe und Standardausösungsvariante dar, und benennt die notwendige Utility-Komponente mit "Mgabe, erfolgen können. 
+
+\end{itemize}
+
+Da bei letzterer Variante die Utility-Softwarekompomente zusätzlich auch noch eine Überwachungsfunktion bezüglich PhyPiDAQ übernehmen und dieses im Falle von Abstürzen und Nicht-Responsivität erneut ausführen kann, ist letztere Lösungsvariante die bevorzugte Lösungsvariante zur Realisierung der optionalen hardwareübergreifenden Kommunikation. 
+
+Abbildung \ref{DeploymentDiagram} stellt die Verteilung der Systemkomponenten auf zwei Rechnern mittels der gewählten zweiten Lösungsvariante dar, und benennt die notwendige Utility-Komponente mit "Measurement-Server". 
+ 
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafik/DeploymentDiagram.png}
+		\caption{UML-Deployment-Diagramm}
+		\label{DeploymentDiagram}
+	\end{center}
+\end{figure}
+
 \section{Benutzungsoberfläche}
 
 \subsection{Ziel der Benutzeroberfläche}
@@ -646,7 +697,7 @@ Eine Tastatur wird benötigt um weitergehende Einstellungen, wie etwa das anpass
 	\end{center}
 \end{figure}
 
-Abbildung 1 zeigt den Aufbau der Grafischen Benutzeroberfläche. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Hauptfenster, die logische Unterteilung an.
+Abbildung \ref{GUI_Grundlage} zeigt den Aufbau der Grafischen Benutzeroberfläche. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Hauptfenster, die logische Unterteilung an.
 
 Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt werden.
 
@@ -730,4 +781,4 @@ Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt wer
 \printnoidxglossaries				% generate pdf twice when adding new entries
 
 
-\end{document}
+\end{document}\grid
