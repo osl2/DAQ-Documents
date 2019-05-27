@@ -14,16 +14,16 @@
 \displaywidowpenalty=10000
 
 %\setcounter{tocdepth}{2}				% keine subsubsections im Inhaltsverzeichnis
-\makenoidxglossaries
+\makenoidxglossaries     
 
 \newglossaryentry{bsp}{
 	name=Beispiel,
 	plural=Beispiele,
-	description=Beispieleintrag }
+	description={Beispieleintrag} }
 
 \newglossaryentry{RasPi}{
 	name=Raspberry Pi,
-	description={Der Raspberry Pi ist ein Einplatinencomputer. In diesem Projekt dient der Raspberry Pi als Hardwareplattform, um unterschiedliche Sensoren zu verbinden und ihre Daten auszulesen.} }
+	description={Der Raspberry Pi ist ein Einplatinencomputer. In diesem Projekt dient der Raspberry Pi als Hardwareplattform, um unterschiedliche Sensoren zu verbinden und ihre Daten auszulesen} }
 
 \newglossaryentry{PhyPiDAQ}{
 	name=PhyPiDAQ,
@@ -31,25 +31,27 @@
 
 \newglossaryentry{Science Labs}{
 	name=Science Labs,
-	description={Ein Science Lab ist ein Arbeitsplatz, welcher Schülern ermöglicht wissenschaftliche Forschungen unter kontrollierten Bedingungen durchzuführen.} }
+	description={Ein Science Lab ist ein Arbeitsplatz, welcher Schülern ermöglicht wissenschaftliche Forschungen unter kontrollierten Bedingungen durchzuführen} }
 
 \newglossaryentry{Open-Source Projekt}{
 	name=Open Source Projekt,
-	description={Ein Open Source Projekt ist ein Projekt, wessen Quelltext und Dokumentationen von dritten angesehen, geändert und genutzt werden kann.} }
+	description={Ein Open Source Projekt ist ein Projekt, wessen Quelltext und Dokumentationen von dritten angesehen, geändert und genutzt werden kann} }
 
 \newglossaryentry{OSL 2}{
 	name=OSL 2,
-	description={OSL 2 ist der Name eines Open-Source-Lehrsoftware-Labor, in welchem Studierende sich mit der Entwicklung von Open-Source-Software vertraut machen können.} }
+	description={Name eines Open-Source-Lehrsoftware-Labor, in welchem Studierende sich mit der Entwicklung von Open-Source-Software vertraut machen können}}
 
-\newglossaryentry{dragdrop}{name=Drag-and-Drop, description=Methode um mit graphischen Benutzeroberflächen zu interagieren. Dabei wird ein Objekt erst mit der Maus festgehalt und an einen anderen Ort gezogen. Durch das lösen der Maustaste wird das Objekt platziert}
+\newglossaryentry{dragdrop}{name=Drag-and-Drop, description=Methode um mit graphischen Benutzeroberflächen zu interagieren. Dabei wird ein Objekt erst mit der Maus festgehalt und an einen anderen Ort gezogen. Durch das Lösen der Maustaste wird das Objekt platziert}
 
-\newglossaryentry{click}{name=Click, description=Der linke Maustasten Click}
+\newglossaryentry{click}{name=Klick, description=Betätigen der linken Maustaste}
 
-\newglossaryentry{transformation}{name=Transformation, description=Berechnung von neuen Daten aus einem Datenstrom. Die Transformation können durch mathematische Funktionen realisiert werden. Je nach Transformation werden unterschiedlich viele Datenströme als Eingabe erwartet}
+\newglossaryentry{transformation}{name=Transformation, description=Erzeugen eines Datenstroms unter Verwendung von einem oder mehreren bereits vorhandenen Datenströmen. Eine Transformation kann durch mathematische Funktionen realisiert werden}
 
-\newglossaryentry{konfigdata}{name=Konfigurationsdatei, description={Bezeichnet eine Datei, die es PhyPiDAQ erlaubt einen Sensor anzusprechen. Sie beinhaltet Python Code, der die Datenentgegennahme von dem Sensor verwaltet. Für jeden Sensor gibt es eine eigene Konfigurationsdatei. Konfigurationsdateien können angepasst werden um das Messverhalten anzupassen}}
+\newglossaryentry{konfigdata}{name=PhyPiDAQ-Konfigurationsdatei, description={Bezeichnet eine Datei, die es PhyPiDAQ erlaubt, einen Sensor anzusprechen und Messdaten von ihm entgegenzunehmen. Für jeden Sensor gibt es eine eigene Konfigurationsdatei. Konfigurationsdateien können das Messverhalten anpassen, beispielsweise die Anzahl der Messungen pro Zeiteinheit}}
 
-\newglossaryentry{sensor}{name=Sensor,plural={Sensoren}, description=Erfasst unter anderem physikalische Größen. Damit stellt ein Sensor den Grundbaustein für die Messtechnik da}
+\newglossaryentry{sensor}{name=Sensor,plural={Sensoren}, description=Ein Sensor erfasst Messwerte physikalischer Größen. In einer Messkonfiguration stellen sie die Eingangspunkte dar}
+
+\newglossaryentry{JVM}{name={JVM},description={Eine Java Virtual Machine ist eine Plattform für die Ausführung von Java-Software, die von der Firma Oracle für alle gängigen Betriebssystem bereitgestellt wird}}
 
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
@@ -68,11 +70,13 @@
 
 \section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
 
-Die Anwendung soll es Lehrern ermöglichen Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}).
-Demzufolge kommt die Anwendung in Schulen zum Einsatz. Die Zielgruppe sind Schüler in der 7. Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
-Die Anwendung läuft auf einem Computer und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). Die Daten werden durch \gls{PhyPiDAQ} verfügbar gemacht (siehe Kapitel \ref{systemmodell}).
+Die im Rahmen des \gls{OSL 2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}).
+Demzufolge kommt die Anwendung in Schulen zum Einsatz. 
+Die Zielgruppe sind Schüler in der 7. Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
+Die Anwendung läuft in einer JVM und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). 
+Die hardwarenahe Ansteuerung der Sensoren soll durch das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} erfolgen. (siehe Kapitel \ref{systemmodell}).
 Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel \ref{funktionale} bzw. \ref{nichtfunktionale} aufgelistet.
-Bedient werden soll die Anwendung über eine graphische Benutzeroberfläche mit Maus und Tastatur (siehe Kapitel \ref{gui}).
+Die Anwendung soll über eine graphische Benutzungsoberfläche mit Maus und Tastatur bereitstellen. (siehe Kapitel \ref{gui}).
 
 \section{Zielbestimmung}\label{zielbestimmung}
 
@@ -675,7 +679,7 @@ Zur Realisierung der hardwareübergreifenden Kommunikation sind die folgenden zw
 
 	\item PhyPiDAQ wird um eine Kommunikationsschnittstelle erweitert, beispielsweise zur Kommunikation über eine Netzwerkschnittstelle wie z. B. WLAN oder zur Kommunikation über eine Peripherieschnittstelle wie z. b. USB.
 	
-	\item In einem dritten Systemprozess, der auf dem selben Rechner wie PhyPiDAQ läuft, stellt eine Utility-Softwarekomponente einen entsprechenden Kommunikationsdienst bereit. In diesem Fall sollte keine Notwendigkeit bestehen, dass PhyPiDAQ wesentlich erweitert werden muss, und der Datenaustausch mit PhyPiDAQ sollte auf möglichst einfache Art und Weise, beispielsweise per Standardeingabe und Standardausösungsvariante erfolgen können.
+%	\item In einem dritten Systemprozess, der auf dem selben Rechner wie PhyPiDAQ läuft, stellt eine Utility-Softwarekomponente einen entsprechenden Kommunikationsdienst bereit. In diesem Fall sollte keine Notwendigkeit bestehen, dass PhyPiDAQ wesentlich erweitert werden muss, und der Datenaustausch mit PhyPiDAQ sollte auf möglichst einfache Art und Weise, beispielsweise per Standardeingabe und Standardausösungsvariante erfolgen können.
 
 \end{itemize}
 
