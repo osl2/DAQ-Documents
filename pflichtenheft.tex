@@ -19,15 +19,18 @@
 \newglossaryentry{bsp}{
 	name=Beispiel,
 	plural=Beispiele,
-	description={Beispieleintrag} }
+	description=Beispieleintrag
+	}
 
 \newglossaryentry{RasPi}{
 	name=Raspberry Pi,
-	description={Der Raspberry Pi ist ein Einplatinencomputer. In diesem Projekt dient der Raspberry Pi als Hardwareplattform, um unterschiedliche Sensoren zu verbinden und ihre Daten auszulesen} }
+	description={Der Raspberry Pi ist ein Einplatinencomputer. In diesem Projekt dient der Raspberry Pi als Hardwareplattform, um unterschiedliche Sensoren zu verbinden und ihre Daten auszulesen.}
+	}
 
 \newglossaryentry{PhyPiDAQ}{
 	name=PhyPiDAQ,
-	description={Siehe Abschnitt 4.3 ,,PhyPiDAQ``} }
+	description={Siehe Abschnitt 4.3 ,,PhyPiDAQ``}
+	}
 
 \newglossaryentry{Science Labs}{
 	name=Science Labs,
@@ -39,19 +42,41 @@
 
 \newglossaryentry{OSL 2}{
 	name=OSL 2,
-	description={Name eines Open-Source-Lehrsoftware-Labor, in welchem Studierende sich mit der Entwicklung von Open-Source-Software vertraut machen können}}
+	description={OSL 2 ist der Name eines Open-Source-Lehrsoftware-Labor, in welchem Studierende sich mit der Entwicklung von Open-Source-Software vertraut machen können.}
+	}
 
-\newglossaryentry{dragdrop}{name=Drag-and-Drop, description=Methode um mit graphischen Benutzeroberflächen zu interagieren. Dabei wird ein Objekt erst mit der Maus festgehalt und an einen anderen Ort gezogen. Durch das Lösen der Maustaste wird das Objekt platziert}
+\newglossaryentry{dragdrop}{
+	name=Drag-and-Drop,
+	description=Methode um mit graphischen Benutzeroberflächen zu interagieren. Dabei wird ein Objekt erst mit der Maus festgehalt und an einen anderen Ort gezogen. Durch das lösen der Maustaste wird das Objekt platziert
+	}
 
-\newglossaryentry{click}{name=Klick, description=Betätigen der linken Maustaste}
+\newglossaryentry{click}{
+	name=Click,
+	description=Der linke Maustasten Click
+	}
 
-\newglossaryentry{transformation}{name=Transformation, description=Erzeugen eines Datenstroms unter Verwendung von einem oder mehreren bereits vorhandenen Datenströmen. Eine Transformation kann durch mathematische Funktionen realisiert werden}
+\newglossaryentry{transformation}{
+	name=Transformation,
+	plural={Transformationen},
+	description=Berechnung von neuen Daten aus einem Datenstrom. Die Transformation können durch mathematische Funktionen realisiert werden. Je nach Transformation werden unterschiedlich viele Datenströme als Eingabe erwartet
+	}
 
-\newglossaryentry{konfigdata}{name=PhyPiDAQ-Konfigurationsdatei, description={Bezeichnet eine Datei, die es PhyPiDAQ erlaubt, einen Sensor anzusprechen und Messdaten von ihm entgegenzunehmen. Für jeden Sensor gibt es eine eigene Konfigurationsdatei. Konfigurationsdateien können das Messverhalten anpassen, beispielsweise die Anzahl der Messungen pro Zeiteinheit}}
+\newglossaryentry{konfigdata}{
+	name=Konfigurationsdatei,
+	description={Bezeichnet eine Datei, die es PhyPiDAQ erlaubt einen Sensor anzusprechen. Sie beinhaltet Python Code, der die Datenentgegennahme von dem Sensor verwaltet. Für jeden Sensor gibt es eine eigene Konfigurationsdatei. Konfigurationsdateien können angepasst werden um das Messverhalten anzupassen}
+	}
 
-\newglossaryentry{sensor}{name=Sensor,plural={Sensoren}, description=Ein Sensor erfasst Messwerte physikalischer Größen. In einer Messkonfiguration stellen sie die Eingangspunkte dar}
+\newglossaryentry{sensor}{
+	name=Sensor,
+	plural={Sensoren},
+	description=Erfasst unter anderem physikalische Größen. Damit stellt ein Sensor den Grundbaustein für die Messtechnik da
+	}
 
-\newglossaryentry{JVM}{name={JVM},description={Eine Java Virtual Machine ist eine Plattform für die Ausführung von Java-Software, die von der Firma Oracle für alle gängigen Betriebssystem bereitgestellt wird}}
+\newglossaryentry{darstellung}{
+	name=Darstellung,
+	plural={Darstellungen},
+	description=Zeigt eingehende Daten graphisch an
+}
 
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
@@ -759,11 +784,15 @@ Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt wer
 		\item Das Einfügen eines gespeicherten Objektes
 		\item Das Anpassen eines ausgewälten Elements. Diese Einstellungsmöglichkeiten sind von dem Objekt abhängig.
 	\end{itemize}\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensor.png} & ToDo\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindung.png} & ToDo\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Darstellung.png} & ToDO\newline\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Optionen.png} & ToDO\newline\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Hilfe.png} & ToDO\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensor.png} & Zeigt eine Liste von \glspl{sensor} an. Die \glspl{sensor} können anschließend per \gls{dragdrop} in das Konfigurationsfeld gezogen werden. Die angezeigte Liste ist unabhängig von den angeschlossenen Sensoren\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindung.png} & Zeigt eine Liste von \glspl{transformation} an. Die \glspl{transformation} können anschließend per \gls{dragdrop} in das Konfigurationsfeld gezogen werden. Die Liste kann unter Optionen erweitert werden.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Darstellung.png} & Zeigt eine Liste von \glspl{darstellung} an. Die \glspl{darstellung} können anschließend per \gls{dragdrop} in das Konfigurationsfeld gezogen werden. Die Liste kann unter Optionen erweitert werden.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Optionen.png} & Zeigt eine Liste von Optionen an. Beispiele hierfür sind
+	\begin{itemize} 
+		\item Das Ändern von angezeigten Farben
+		\item Das Erweitern der Transformations- und Darstellungsliste
+	\end{itemize}\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Hilfe.png} & Zeigt eine allgemeine Hilfe an. In der Hilfe werden die Funktionen von Anwendungsfunktionen erklärt.\newline\\
 \end{tabular}
 
 \subsubsection{Konfigurationsfeld}
