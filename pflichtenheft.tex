@@ -13,6 +13,9 @@
 \widowpenalty10000
 \displaywidowpenalty=10000
 
+\DeclareRobustCommand{\glossfirstformat}[1]{\textit{#1}}
+\renewcommand*{\glsdisplayfirst}[4]{\glossfirstformat{#1#4}}
+
 %\setcounter{tocdepth}{2}				% keine subsubsections im Inhaltsverzeichnis
 \makenoidxglossaries     
 
