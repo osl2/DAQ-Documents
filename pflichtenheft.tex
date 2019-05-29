@@ -27,7 +27,7 @@
 
 \newglossaryentry{RasPi}{
 	name=Raspberry Pi,
-	description={Der Raspberry Pi ist ein Einplatinencomputer. In diesem Projekt dient der Raspberry Pi als Hardwareplattform, um unterschiedliche Sensoren zu verbinden und ihre Daten auszulesen.}
+	description={Der Raspberry Pi ist ein Einplatinencomputer. In diesem Projekt dient der Raspberry Pi als Hardwareplattform, um unterschiedliche Sensoren zu verbinden und ihre Daten auszulesen}
 	}
 
 \newglossaryentry{PhyPiDAQ}{
@@ -37,63 +37,75 @@
 
 \newglossaryentry{Science Labs}{
 	name=Science Labs,
-	description={Ein Science Lab ist ein Arbeitsplatz, welcher Schülern ermöglicht wissenschaftliche Forschungen unter kontrollierten Bedingungen durchzuführen} }
+	description={Ein Science Lab ist ein Arbeitsplatz, welcher Schülern ermöglicht wissenschaftliche Forschungen unter kontrollierten Bedingungen durchzuführen} 
+	}
 
 \newglossaryentry{Open-Source Projekt}{
 	name=Open Source Projekt,
-	description={Ein Open Source Projekt ist ein Projekt, wessen Quelltext und Dokumentationen von dritten angesehen, geändert und genutzt werden kann} }
+	description={Ein Open Source Projekt ist ein Projekt, dessen Quelltext und Dokumentationen von dritten angesehen, geändert und genutzt werden kann} 
+	}
 
 \newglossaryentry{OSL 2}{
 	name=OSL 2,
-	description={OSL 2 ist der Name eines Open-Source-Lehrsoftware-Labor, in welchem Studierende sich mit der Entwicklung von Open-Source-Software vertraut machen können.}
+	description={Name eines Open-Source-Lehrsoftware-Labor, in welchem Studierende sich mit der Entwicklung von Open-Source-Software vertraut machen können}
 	}
 
 \newglossaryentry{dragdrop}{
 	name=Drag-and-Drop,
-	description=Methode um mit graphischen Benutzeroberflächen zu interagieren. Dabei wird ein Objekt erst mit der Maus festgehalt und an einen anderen Ort gezogen. Durch das lösen der Maustaste wird das Objekt platziert
+	description={Methode, um mit graphischen Benutzeroberflächen zu interagieren. Dabei wird ein Objekt erst mit der Maus festgehalten und an einen anderen Ort gezogen. Durch das Lösen der Maustaste wird das Objekt platziert}
 	}
 
 \newglossaryentry{click}{
 	name=Click,
-	description=Der linke Maustasten Click
+	description={Betätigen der linken Maustaste}
 	}
 
 \newglossaryentry{transformation}{
 	name=Transformation,
 	plural={Transformationen},
-	description=Berechnung von neuen Daten aus einem Datenstrom. Die Transformation können durch mathematische Funktionen realisiert werden. Je nach Transformation werden unterschiedlich viele Datenströme als Eingabe erwartet
+	description={Erzeugen eines Datenstroms unter Verwendung von einem oder mehreren bereits vorhandenen Datenströmen. Eine Transformation kann durch mathematische Funktion realisiert werden}
 	}
 
 \newglossaryentry{konfigdata}{
 	name=Konfigurationsdatei,
-	description={Bezeichnet eine Datei, die es PhyPiDAQ erlaubt einen Sensor anzusprechen. Sie beinhaltet Python Code, der die Datenentgegennahme von dem Sensor verwaltet. Für jeden Sensor gibt es eine eigene Konfigurationsdatei. Konfigurationsdateien können angepasst werden um das Messverhalten anzupassen}
+	description={Bezeichnet eine Datei, die es PhyPiDAQ erlaubt, einen Sensor anzusprechen und Messdaten von ihm entgegenzunehmen. Für jeden Sensor gibt es eine eigene Konfigurationsdatei. Konfigurationsdateien können das Messverhalten anpassen, beispielsweise die Anzahl der Messungen pro Zeiteinheit}
 	}
 
 \newglossaryentry{sensor}{
 	name=Sensor,
 	plural={Sensoren},
-	description=Erfasst unter anderem physikalische Größen. Damit stellt ein Sensor den Grundbaustein für die Messtechnik da
+	description={Ein Sensor erfasst Messwerte physikalischer Größen. In einer Messkonfiguration stellen sie die Eingangspunkte dar}
 	}
 
 \newglossaryentry{darstellung}{
 	name=Darstellung,
 	plural={Darstellungen},
-	description=Zeigt eingehende Daten graphisch an
+	description={Gibt Daten aus eigehendem Datenstrom graphisch wieder}
 }
 
 \newglossaryentry{python3}{
 	name=Python 3,
-	description={Python ist eine universelle Programmiersprache. Sie ist die offizielle Programmiersprache des Raspberry Pi und wurde deswegen zur Programmierung von PhyPiDAQ verwendet.},
+	description={Python ist eine universelle Programmiersprache. Sie ist die offizielle Programmiersprache des Raspberry Pi und wurde deswegen zur Programmierung von PhyPiDAQ verwendet}
 }
 
 \newglossaryentry{GUI}{
 	name=GUI,
-	description={Grafische Benutzeroberflache (engl. Graphical User Interface).},
+	description={Grafische Benutzeroberflache (engl. Graphical User Interface)},
 }
 
 \newglossaryentry{Benutzerkonfiguration}{
-	name =Benutzerkonfiguration,
-	description ={Vom Benutzer definierte Kombination aus Sensoren, Transformationen und Darstellungsart.},
+	name =Messkonfiguration,
+	description ={Vom Benutzer definierte Kombination aus Sensoren, Transformationen und Darstellungsarten},
+}
+
+\newglossaryentry{JVM}{
+	name={JVM},
+	description={Eine Java Virtual Machine ist eine Plattform für die Ausführung von Java-Software, die von der Firma Oracle für alle gängigen Betriebssystem bereitgestellt wird}
+	}
+
+\newglossaryentry{DSGVO}{
+	name=DSGVO,
+	description ={Datenschutz-Grundverordnung, Verordnung der Europäischen Union vom 25. Mai 2018}
 }
 
 \subject{Pflichtenheft}
@@ -151,7 +163,7 @@ Im Folgenden werden Musskriterien, Sollkriterien und Wunschkriterien des projekt
 	In diesem Fall ist es erforderlich, dass diese Probleme sehr genau dokumentiert werden.
 	
 	\item Sollkriterien haben eine mittlere Priorität. 
-	Falls ein Sollkriterium umgesetzt werden kann, dann muss es auch realisiert werden. 
+	Falls ein Sollkriterium umgesetzt werden kann, dann muss es nach Möglichkeit auch realisiert werden. 
 	Falls ein Sollkriterium in den nachfolgenden Projektphasen nicht umgesetzt werden kann, so muss dies dokumentiert und begründet werden. 
 	
 	\item Wunschkriterien haben eine niedrige Priorität. 
@@ -170,7 +182,7 @@ Im Folgenden werden Musskriterien, Sollkriterien und Wunschkriterien des projekt
 \item Der Benutzer kann Ergebnisse aus einer Messung speichern und laden.
 \item Der Benutzer kann gleichzeitig Daten aus einer Messung darstellen und diese Daten auch weiter verwenden.
 \item Der Benutzer kann eine Messkonfiguration speichern und laden.
-\item Der Benutzer kann die Anwendung nutzen, ohne persönliche Daten preiszugeben.
+
 
 \end{itemize}
 
@@ -247,7 +259,8 @@ Im Folgenden werden Musskriterien, Sollkriterien und Wunschkriterien des projekt
 \begin{itemize}
 
 \item Unterschiedliche Benutzerkonten sind nicht zu implementieren
-\item Personenbezogene Daten werden nicht gespeichert
+
+\item Die zu erstellende Anwendung sieht keinerlei Erfassung oder Speicherung personenbezogener Nutzerdaten vor. Der Einsatz der Software erfordert dementsprechend keine Einverständniserklärung der Nutzer gemäß europäischer \gls{DSGVO}.
 
  \end{itemize}
 
