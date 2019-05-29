@@ -13,6 +13,9 @@
 \widowpenalty10000
 \displaywidowpenalty=10000
 
+\DeclareRobustCommand{\glossfirstformat}[1]{\textit{#1}}
+\renewcommand*{\glsdisplayfirst}[4]{\glossfirstformat{#1#4}}
+
 %\setcounter{tocdepth}{2}				% keine subsubsections im Inhaltsverzeichnis
 \makenoidxglossaries     
 
@@ -76,6 +79,21 @@
 	name=Darstellung,
 	plural={Darstellungen},
 	description=Zeigt eingehende Daten graphisch an
+}
+
+\newglossaryentry{python3}{
+	name=Python 3,
+	description={Python ist eine universelle Programmiersprache. Sie ist die offizielle Programmiersprache des Raspberry Pi und wurde deswegen zur Programmierung von PhyPiDAQ verwendet.},
+}
+
+\newglossaryentry{GUI}{
+	name=GUI,
+	description={Grafische Benutzeroberflache (engl. Graphical User Interface).},
+}
+
+\newglossaryentry{Benutzerkonfiguration}{
+	name =Benutzerkonfiguration,
+	description ={Vom Benutzer definierte Kombination aus Sensoren, Transformationen und Darstellungsart.},
 }
 
 \subject{Pflichtenheft}
@@ -248,12 +266,12 @@ Die Anwendung soll ebenfalls nicht nur von physikbegeisterten Schülern verwende
 
 \subsection{Betriebsbedingungen}
 
-Die Anwendung läuft auf gewöhnlichen Schulcomputern, welche über eine USB-Schnittstelle mit einem RasPi verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden die an das RasPi angeschlossenen Messsensoren adressiert, welche die Messdaten wiederum über das RasPi an die am Computer gelaufende Anwendung schicken. 
+Die Anwendung läuft auf gewöhnlichen Schulcomputern, welche über eine USB-Schnittstelle mit einem \gls{RasPi} verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden die an das \gls{RasPi} angeschlossenen Messsensoren adressiert, welche die Messdaten wiederum über das \gls{RasPi} an die am Computer laufende Anwendung schicken. 
 
 
 \section{Produktumgebung}\label{produktumgebung}
 
-Die Anwendung läuft auf einem Computer, die Messdaten werden über Messsensoren an einem \gls{RasPi} erfasst.
+Die Anwendung läuft auf einem Computer, die Messdaten werden über Sensoren an einem \gls{RasPi} erfasst.
 
 \subsection{Software}
 
@@ -261,13 +279,15 @@ Die Anwendung läuft auf Computern mit den Betriebssystemen Linux ab Kernel 7 un
 
 \subsection{Hardware}
 
-Die Anwendung läuft auf gewöhnlichen Computern.
-Auf dem per USB-Schnittstelle verbundenen \gls{RasPi} muss PhyPiDAQ installiert und verwendungsfähig sein.
-Die an den Raspberry Pi angeschlossenen Messsensoren müssen richtig und sinnvoll angeschlossen sein.
+Die Anwendung läuft auf gewöhnlichen Computern, welche für den generellen Einsatz in der Schule gedacht sind.
+Die enthaltenen Komponenten sollten beispielsweise ein aktueller 4-Kern-Prozessor, 8 GB RAM,
+mindestens 256 GB Speicherplatz sein. Schnittstellen für USB, LAN und WLAN sind ebenfalls erforderlich. 
+Auf dem per USB-Schnittstelle verbundenen \gls{RasPi} muss \gls{PhyPiDAQ} installiert und verwendungsfähig sein.
+Die an den \gls{RasPi} angeschlossenen Messsensoren müssen richtig und sinnvoll angeschlossen sein.
 
 \subsection{PhyPiDAQ}
 
-Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache python3 geschrieben ist bietet einfache und einheitliche Schnittstellen zur Verwendung der Messsensoren.
+Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache \gls{python3} geschrieben ist bietet einfache und einheitliche Schnittstellen zur Verwendung der Messsensoren.
 
 
 \section{Funktionale Anforderungen}\label{funktionale}
@@ -276,7 +296,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 \subsection{GUI}
 
 \begin{itemize}
-\item[F010] Die Benutzer erreichen nach Öffnung der Anwendung direkt die GUI.
+\item[F010] Die Benutzer erreichen nach Öffnung der Anwendung direkt die \gls{GUI}.
 \item[F020] Der Benutzer öffnet durch den Optionen-Knopf die Einstellungen.
 \item[F030] Der Benutzer kann durch den Datei-Knopf die Dateiverwaltung öffnen.
 \item[F040] Der Benutzer kann durch den Hilfe-Knopf das Hilfe Fenster öffnen.
@@ -303,7 +323,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 \subsubsection{Konfigurationsfeld}
 
 \begin{itemize}
-\item[F120] Durch Drag und Drop kann der Benutzer Konfigurationsbausteine im Konfigurationsfeld platzieren.
+\item[F120] Durch \gls{dragdrop} kann der Benutzer Konfigurationsbausteine im Konfigurationsfeld platzieren.
 \item[F130] Durch Betätigen des Messung starten-Knopf startet der Nutzer eine Messung.
 \end{itemize}
 
@@ -323,17 +343,17 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \item[F160] Über F030 kann der Benutzer gespeicherte Standartkonfigurationen öffnen oder alte Messwerte verwenden.
 \item[F170] Durch F160 geladene Konfigurationen und Messdaten werden automatisch nach Format überprüft.
-\item[F180] Aus F050 kann der Benutzer Sensoren durch Drag und Drop in das Konfigurationsfeld ziehen.
+\item[F180] Aus F050 kann der Benutzer Sensoren durch \gls{dragdrop} in das Konfigurationsfeld ziehen.
 \item[F190] Die Anwendung sollte automatisch überprüfen, ob der ausgewählte Sensor richtig angeschlossen ist.
 \item[F200] Die Anwendung gibt durch F190 automatisch eine visuelle Rückmeldung über die Farbe des Sensors und einer Pop-Up Benachrichtigung.
-\item[F210] Aus F060 kann der Benutzer eine oder mehrere Verbindungen durch Drag und Drop in das Konfigurationsfeld ziehen.
-\item[F220] Die ausgewählten Verknüpfungen kann der Benutzer mit einem ausgewählten Sensor verknüpfen.
-\item[F230] Die Anwendung sollte automatisch überprüfen, ob die Verbindungen eine geeignete Kombination mit dem Sensor darstellt.
-\item[F240] Aus F070 kann der Benutzer eine Darstellungsart per Drag und Drop in das Konfigurationsfeld zu ziehen.
-\item[F250] Die Ausgewählte Darstellung kann der Benutzer mit einer Verbindung verknüpfen.
+\item[F210] Aus F060 kann der Benutzer eine oder mehrere Transformationen durch \gls{dragdrop} in das Konfigurationsfeld ziehen.
+\item[F220] Die ausgewählten Transformationen kann der Benutzer mit einem ausgewählten Sensor verknüpfen.
+\item[F230] Die Anwendung sollte automatisch überprüfen, ob die Transformationen eine geeignete Kombination mit dem Sensor darstellt.
+\item[F240] Aus F070 kann der Benutzer eine Darstellungsart per \gls{dragdrop} in das Konfigurationsfeld zu ziehen.
+\item[F250] Die Ausgewählte Darstellung kann der Benutzer mit einer Transformation verknüpfen.
 \item[F260] Die Anwendung sollte automatisch überprüfen, ob die gewählte Darstellungsart eine sinnvolle Repräsentation der Messdaten darstellt.
 \item[F270] Über F030 kann der Benutzer seine eigene Konfiguration über einen Konfiguration speichern-Knopf speichern.
-\item[F280] Bausteine die ein Benutzer nicht mehr in dem Konfigurationsfeld haben möchte können durch Drag und Drop in die Menüleiste wieder versteckt werden.
+\item[F280] Bausteine die ein Benutzer nicht mehr in dem Konfigurationsfeld haben möchte können durch \gls{dragdrop} in die Menüleiste wieder versteckt werden.
 
 \end{itemize}
 
@@ -341,9 +361,9 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F290] Die Anwendung besitzt einen Check-Knopf, welcher die Benutzerkonfiguriation auf Vollständigkeit und Richtigkeit
+\item[F290] Die Anwendung besitzt einen Check-Knopf, welcher die \gls{Benutzerkonfiguration} auf Vollständigkeit und Richtigkeit
 kontrolliert
-\item[F300] Durch F290 wird durch visuelle Darstellung der Konfigurations dargestellt, ob sie verwendet werden kann.
+\item[F300] Durch F290 wird durch visuelle Darstellung der Konfiguration dargestellt, ob sie verwendet werden kann.
 
 \end{itemize}
 
@@ -422,7 +442,6 @@ kontrolliert
 \item[F540] Durch F020 sollte der Benutzer die in der Anwendung verwenden Buchstabengröße verändern können.
 
 \end{itemize}
-
 
 \section{Produktdaten}\label{produktdaten}
 
