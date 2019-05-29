@@ -68,7 +68,7 @@
 
 \newglossaryentry{konfigdata}{
 	name=Konfigurationsdatei,
-	description={Bezeichnet eine Datei, die es PhyPiDAQ erlaubt, einen Sensor anzusprechen und Messdaten von ihm entgegenzunehmen. Für jeden Sensor gibt es eine eigene Konfigurationsdatei. Konfigurationsdateien können das Messverhalten anpassen, beispielsweise die Anzahl der Messungen pro Zeiteinheit}
+	description={Können das Messverhalten anpassen, beispielsweise die Anzahl der Messungen pro Zeiteinheit. Für jeden Sensor gibt es eine eigene Konfigurationsdatei.}
 	}
 
 \newglossaryentry{sensor}{
@@ -95,7 +95,7 @@
 
 \newglossaryentry{Benutzerkonfiguration}{
 	name =Messkonfiguration,
-	description ={Vom Benutzer definierte Kombination aus Sensoren, Transformationen und Darstellungsarten},
+	description ={Gerichteter zyklenfreier Graph mit Knoten vom Typ Sensor, Transformation oder Darstellung. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellugen keine Ausgangskanten haben dürfen.},
 }
 
 \newglossaryentry{JVM}{
@@ -181,7 +181,7 @@ Im Folgenden werden Musskriterien, Sollkriterien und Wunschkriterien des projekt
 
 \item Der Benutzer kann Ergebnisse aus einer Messung speichern und laden.
 \item Der Benutzer kann gleichzeitig Daten aus einer Messung darstellen und diese Daten auch weiter verwenden.
-\item Der Benutzer kann eine Messkonfiguration speichern und laden.
+\item Der Benutzer kann eine \gls{Benutzerkonfiguration} speichern und laden. Gespeicherte Daten beinhalten die grafische Anordnung der Konfigurationsbausteine. 
 
 
 \end{itemize}
@@ -191,11 +191,12 @@ Im Folgenden werden Musskriterien, Sollkriterien und Wunschkriterien des projekt
 \item Benutzbarkeit der GUI
 \begin{itemize}
 
-\item Die Anwendung reagiert auf Veränderungen so schnell, dass das Prinzip von Ursache und Wirkung intuitiv erfahren werden kann.
-\item Der Benutzer kann Komponenten einer Messkonfiguration per Drag and Drop hinzufügen.
-\item Der Benutzer kann Komponenten intuitiv mit einander verbinden.
-\item Die Anwendung lässt sich mit dem Wissen eines Schülers aus der siebten Klasse bedienen.
-\item Die Anwendung lässt sich auch mit einer rot-grün-Schwäche komplett nutzen.
+\item Die Anwendung reagiert auf jede Benutzereingabe innerhalb von zwei Sekunde. 
+Benötigt die Anwendung zur Reaktion auf eine Benutzereingabe länger als zwei Sekunden, so präsentiert sie dem Benutzer fortlaufend mindestens ein Mal pro Sekunde ein möglichst aussagekräftiges Zwischenergebnis, mindestens in Form eines Fortschrittsbalkens. 
+Nach Ablauf eines einstellbaren Timeouts präsentiert die Anwendung eine möglichst aussagekräftige Fehlermeldung. Benötigt die Bearbeitung einer Benutzereingabe länger als 2 Sekunden, so hat der Benutzer die Möglichkeit, den Bearbeitungsvorgang abzubrechen. 
+\item Beim Entwurf einer Messkonfiguration soll der Benutzer die von ihm beabsichtigten Aktionen per Drag and Drop anstoßen können. Dies betrifft beispielsweise das Hinzufügen eines Konfigurationsbausteins oder das Erstellen einer Kante vom Ausgangs eines Bausteins mit dem Ausgang Baustein eines anderen Bausteins.
+\item Die grafische Benutzungsschnittstelle sollte möglichst barrierefrei sein. Beispielsweise sollte sie variable Darstellungsgrößen anbieten. Die Semantik sollte auch für Benutzer mit Farberkennungsschwächen ohne Probleme zu erkennen sein.
+\item Die Anwendung sollte sich ungefähr mit dem Wissen eines Schülers aus der siebten Klasse bedienen lassen.
 
 \end{itemize}
 
@@ -221,9 +222,8 @@ Im Folgenden werden Musskriterien, Sollkriterien und Wunschkriterien des projekt
 \item Sonstiges
 \begin{itemize}
 
-\item Die Anwendung kommuniziert mit den Nutzer auf deutsch.
+\item Die Benutzungsoberfläche bietet als Sprache mindestens Deutsch an und muss leicht um weitere Sprachen ergänzt werden können. Sobald die Anwendung mehr als eine Sprache anbietet, kann der Benutzer die GUI von einer Sprache auf eine andere umstellen.
 \item Die Anwendung soll auf die Unterstützung neuer Sensoren erweiterbar sein.
-\item Die Anwendung hält die Datenschutzrichtlinie "`to do"' ein.
 \item Die Anwendung hält die Schulrichtlinie "`to do"' ein.
 
 \end{itemize}
@@ -345,7 +345,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 \item[F140] Das Darstellungsfenster ist bei der Initialisierung der Anwendung leer.
-\item[F150] Durch die Benutzerkonfiguration im Konfigurationsfeld wird durch F090 automatisch die Darstellungsart im Darstellungsfenster geöffnet.
+\item[F150] Durch die gls{Benutzerkonfiguration} im Konfigurationsfeld wird durch F090 automatisch die Darstellungsart im Darstellungsfenster geöffnet.
 \end{itemize}
 
 
@@ -385,10 +385,10 @@ kontrolliert
 \begin{itemize}
 
 \item[F310] Der Nutzer kann in den Optionen, die Messlänge und die Wertebereiche festlegen.
-\item[F320] Der Nutzer kann durch F130 die Messung nach der Benutzerkonfiguration starten.
+\item[F320] Der Nutzer kann durch F130 die Messung nach der gls{Benutzerkonfiguration} starten.
 \item[F330] Durch F320 wird automatisch mit der visuellen Darstellung der Messdaten begonnen.
 \item[F340] Der Nutzer kann durch den Messung Messung löschen-Knopf eine durchgeführte Messung pausieren und die visuelle Darstellung auf den Ausgangszustand bringen.
-\item[F350] Durch F340 wird nicht die Benutzerkonfiguration gelöscht.
+\item[F350] Durch F340 wird nicht die gls{Benutzerkonfiguration} gelöscht.
 \item[F360] Durch F340 muss der Benutzer erst die Messung starten um weiter zu messen.
 \item[F370] Der Benutzer kann durch den Messung pausieren-Knopf die Messung pausieren.
 \item[F380] Der Benutzer kann durch den Messung-fortsetzen-Knopf die Messung fortsetzen.
