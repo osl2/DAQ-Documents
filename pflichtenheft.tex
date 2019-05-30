@@ -530,6 +530,12 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 \end{itemize}
 
 \section{Globale Testfälle und Testszenarien}\label{testfall}
+\subsection{Einführung}
+
+In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur Handhabung von Fehlern dargestellt. Zum besseren Verständnis werden noch einmal einige verwendete Begriffe und der generelle Ablauf einer Nutzung erläutert. Die Anwendung bezeichnet die gesamte in diesem Projekt erstellte Software. Sie benutzt Konfigurationen um einen Versuchsaufbau zu modellieren. Eine Konfiguration besteht aus Bausteinen(Sensor, Transformation, Darstellung / Senke) und deren Verbindungen untereinander. Die Bausteine können selbst wieder eingestellt werden. Die Konfigurationen werden in der Konfigurationsfläche erstellt. Außerdem können sie geladen und gespeichert werden. Eine (Mess-)Konfiguration muss vor der eigentlichen Benutzung "`erstellt"' werden. Beim Erstellen überprüft die Anwendung, ob eine gültige Konfiguration vorliegt. Ist die Konfiguration erstellt, kann sie als Messung gestartet werden. Um die resultierenden Daten und Graphen zu speichern, muss die Messung gestoppt werden.
+
+\subsection{Testfälle zur Nutzung der Anwendung}
+
 \begin{itemize} 
 
 \item[T010]Starten der Anwendung und Hilfe
@@ -612,9 +618,15 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 \item []\textbf{Ergebnis:} Der Benutzer die Messung einer gültigen Konfiguration starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
 \item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F F320 Starte Messung, F330 stelle Ergebnisse dar, F400 speichere Messdaten, F410 speichere Messgraph
 
+
+\end{itemize}
 \end{itemize}
 
-\item[T060] Laden einer ungültigen Datei als Konfiguration
+\subsection{Testfälle zur Handhabung von Fehlern}
+
+\begin{itemize} 
+
+\item[T200] Laden einer ungültigen Datei als Konfiguration
 \begin{itemize}
 
 \item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Laden von ungültigen Konfigurationsdateien.
@@ -630,7 +642,7 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \end{itemize}
 
-\item[T070] Erstellen einer ungültigen Messkonfiguration
+\item[T210] Erstellen einer ungültigen Messkonfiguration
 \begin{itemize}
 
 \item []\textbf{Testziel:} 
@@ -646,7 +658,7 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \end{itemize}
 
-\item[T080] Entfernen eines Sensors bei laufender Messung
+\item[T220] Entfernen eines Sensors bei laufender Messung
 \begin{itemize}
 
 \item []\textbf{Testziel:} Teste das Verhalten der Anwendung, wenn ein Sensor ausfällt und dessen Datenstrom abbricht.
