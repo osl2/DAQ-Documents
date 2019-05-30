@@ -32,6 +32,7 @@
 
 \newglossaryentry{RasPi}{
 	name=Raspberry Pi,
+	plural=Raspberry Pis,
 	description={Der Raspberry Pi ist ein Einplatinencomputer. In diesem Projekt dient der Raspberry Pi als Hardwareplattform, um unterschiedliche Sensoren zu verbinden und ihre Daten auszulesen}
 	}
 
@@ -73,6 +74,7 @@
 
 \newglossaryentry{konfigdata}{
 	name=Konfigurationsdatei,
+	plural=Konfigurationsdateien,
 	description={Können das Messverhalten anpassen, beispielsweise die Anzahl der Messungen pro Zeiteinheit. Für jeden Sensor gibt es eine eigene Konfigurationsdatei}
 	}
 
@@ -81,6 +83,11 @@
 	plural={Sensoren},
 	description={Ein Sensor erfasst Messwerte physikalischer Größen. In einer Messkonfiguration stellen sie die Eingangspunkte dar}
 	}
+
+\newglossaryentry{messdaten}{
+	name=Messdaten,
+	description={Daten, welche die Anwendung von einem Sensor (über PhyPiDAQ-Schnittstelle) oder direkt aus einer Datei erhält}
+}
 
 \newglossaryentry{darstellung}{
 	name=Darstellung,
@@ -196,32 +203,27 @@ Im Folgenden werden \gls{Musskriterien}, \gls{Sollkriterien} und \gls{Wunschkrit
 \item Datenhandhabung
 \begin{itemize}
 
-\item Der Benutzer kann Ergebnisse aus einer Messung speichern und laden.
-\item Der Benutzer kann gleichzeitig Daten aus einer Messung darstellen und diese Daten auch weiter verwenden.
+\item Der Benutzer kann Ergebnisse aus einer Messung (\gls{messdaten}) speichern und laden.
+\item \gls{messdaten} können parallel unterschiedlich transformiert und dargestellt werden (Verzweigung).
 \item Der Benutzer kann eine \gls{Benutzerkonfiguration} speichern und laden. Gespeicherte Daten beinhalten die grafische Anordnung der Konfigurationsbausteine. 
 
 
 \end{itemize}
 
-
-
 \item Benutzbarkeit der GUI
 \begin{itemize}
 
-\item Die Anwendung reagiert auf jede Benutzereingabe innerhalb von zwei Sekunde. 
-Benötigt die Anwendung zur Reaktion auf eine Benutzereingabe länger als zwei Sekunden, so präsentiert sie dem Benutzer fortlaufend mindestens ein Mal pro Sekunde ein möglichst aussagekräftiges Zwischenergebnis, mindestens in Form eines Fortschrittsbalkens. 
-Nach Ablauf eines einstellbaren Timeouts präsentiert die Anwendung eine möglichst aussagekräftige Fehlermeldung. Benötigt die Bearbeitung einer Benutzereingabe länger als 2 Sekunden, so hat der Benutzer die Möglichkeit, den Bearbeitungsvorgang abzubrechen. 
+\item Die Anwendung muss sich mit dem Wissen eines Schülers in der siebten Klasse bedienen lassen.
 \item Beim Entwurf einer Messkonfiguration soll der Benutzer die von ihm beabsichtigten Aktionen per Drag and Drop anstoßen können. Dies betrifft beispielsweise das Hinzufügen eines Konfigurationsbausteins oder das Erstellen einer Kante vom Ausgangs eines Bausteins mit dem Ausgang Baustein eines anderen Bausteins.
 \item Die grafische Benutzungsschnittstelle sollte möglichst barrierefrei sein. Beispielsweise sollte sie variable Darstellungsgrößen anbieten. Die Semantik sollte auch für Benutzer mit Farberkennungsschwächen ohne Probleme zu erkennen sein.
-\item Die Anwendung sollte sich ungefähr mit dem Wissen eines Schülers aus der siebten Klasse bedienen lassen.
 
 \end{itemize}
 
 \item Funktionen
 \begin{itemize}
 
-\item Die Anwendung erhält Daten durch den Raspberry Pi mit PhyPiDAQ oder aus einer Datei und kann diese dann transformieren und darstellen.
-\item Die Anwendung enthält vorgefertigte Standardelemente, wie z.B. to do
+\item Die Anwendung erhält \gls{messdaten} durch den Raspberry Pi mit PhyPiDAQ oder aus einer Datei und kann diese dann transformieren und darstellen.
+\item Die Anwendung enthält vorgefertigte Standardtransformationen.
 \item Die Anwendung enthält vorgefertigte Standardkonfigurationen.
 
 \end{itemize}
@@ -229,9 +231,8 @@ Nach Ablauf eines einstellbaren Timeouts präsentiert die Anwendung eine möglic
 \item Information und Rückmeldung
 \begin{itemize}
 
-\item Ist ein verwendeter Sensor nicht angeschlossen oder fehlerhaft, meldet die Anwendung dies über eine Pop-Up-Nachricht.
-\item Die Anwendung enthält Erklärungen und Informationen zu den einzelnen Komponenten, d.h. zu den Sensoren, Transformationen und Darstellungen.
-\item Die Anwendung enthält Erklärungen und Informationen zu den GUI-Bereiche, d.h. zu dem Auswahlbereich der Komponenten, zu dem Messversuchsbereich und zu dem Anzeigebereich.
+\item Ist ein verwendeter Sensor nicht angeschlossen oder fehlerhaft, meldet die Anwendung dies dem Benutzer.
+\item Die Anwendung enthält Erklärungen und Informationen zu den GUI-Bereichen, d.h. zu dem Auswahlbereich der Komponenten, zu dem Messversuchsbereich und zu dem Anzeigebereich.
 \item Falls nicht alle Kanäle verbunden sind, meldet die Anwendung dies dem Benutzer mit einer Fehlermeldung, falls dieser versucht die Messung zu starten. 
 
 \end{itemize}
@@ -241,7 +242,6 @@ Nach Ablauf eines einstellbaren Timeouts präsentiert die Anwendung eine möglic
 
 \item Die Benutzungsoberfläche bietet als Sprache mindestens Deutsch an und muss leicht um weitere Sprachen ergänzt werden können. Sobald die Anwendung mehr als eine Sprache anbietet, kann der Benutzer die GUI von einer Sprache auf eine andere umstellen.
 \item Die Anwendung soll auf die Unterstützung neuer Sensoren erweiterbar sein.
-\item Die Anwendung hält die Schulrichtlinie "`to do"' ein.
 
 \end{itemize}
 
@@ -251,12 +251,12 @@ Nach Ablauf eines einstellbaren Timeouts präsentiert die Anwendung eine möglic
 
 \begin{itemize}
 
+\item Die Anwendung enthält Erklärungen und Informationen zu den einzelnen Komponenten, d.h. zu den Sensoren, Transformationen und Darstellungen.
 \item Die Anwendung soll auf die Erstellung eigener Transformationen erweiterbar sein.
 \item Die Anwendung soll auf andere Sprachen erweiterbar sein.
-\item Die Anwendung soll allein auf dem \gls{RasPi} laufen können.
+\item Die Anwendung soll allein auf dem \gls{RasPi}, mit lediglich Peripheriegeräten als zusätzlicher Hardware, laufen können.
 \item Farbkodierung der GUI-Elemente
-\item Einfache Erweiterbarkeit
-\subitem Einheitliches Interface für Sensoren
+\item Die Anwendung soll einfach erweiterbar sein.
 
 
  \end{itemize}
@@ -266,7 +266,7 @@ Nach Ablauf eines einstellbaren Timeouts präsentiert die Anwendung eine möglic
 \begin{itemize}
 
 \item Übertragung der Messdaten über Netzwerkschnittstelle
-\item Spiele, „nachmachen“ von vorgegebenen Messergebnissen
+\item Spiele, ,,nachmachen`` von vorgegebenen Messergebnissen
 \item Ausführliche Beschreibung der physikalische Hintergründe
 
  \end{itemize}
@@ -477,12 +477,11 @@ Zu speichern sind ausschließlich:
 
 \begin{itemize}
 
-\item Konfigurationsdaten
-\item Physikalische Messdaten
+\item[D010] \gls{Benutzerkonfiguration}(en)
+\item[D020] Messdaten
+\item[D030] Sensorkonfigurationsdaten
 
 \end{itemize}
-
-Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \section{Nichtfunktionale Anforderungen}\label{nichtfunktionale}
 
@@ -492,10 +491,11 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \item[NF010] Auslesen von Sensordaten innerhalb von (?) ms. //TODO PhyPiDAQ Abhängigkeit
 \item[NF015] Alle (5?) ms können neue Daten angefordert werden.
-\item[NF020] Verarbeitung ausgelesener Daten innerhalb von 10 ms.
+\item[NF020] Verarbeitung von Daten benötigt maximal 10 ms pro Transformation und Senke.
 \item[NF030] Bis zu drei Sensoren können zeitgleich verwendet werden.
-\item[NF040] Bis zu (6?) Transformationen können hintereinander verbunden werden.
-\item[NF050] Bis zu (3?) Senken können zeitgleich verwendet werden.
+\item[NF040] Mehrere Transformationen können hintereinander eingestellt werden.
+\item[NF050] Mehrere Senken können zeitgleich verwendet werden.
+\item[NF060] Die Anwendung reagiert auf Benutzereingaben innerhalb von zwei Sekunden; mindestens mit einem Zwischenergebnis, Ladebalken oder ähnlichem.
 
 \end{itemize}
 
@@ -503,10 +503,10 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \begin{itemize}
 
-\item[NF110] Die Benutzeroberfläche ist für Siebtklässler verständlich.
-\item[NF115] Nicht intuitiv verständliche Funktionen werden dem Benutzer erklärt.
+\item[NF110] Die Benutzeroberfläche ist ergonomisch gestaltet, orientiert an ISO 9241.
+\item[NF115] Nichttriviale Funktionen werden dem Benutzer erklärt.
 \item[NF120] Ungespeicherte Daten werden nicht ohne Warnung verworfen.
-\item[NF130] Programmfehler werden dem Benutzer gegenüber klar kommuniziert.
+\item[NF130] Programmfehler werden dem Benutzer gegenüber klar durch Fehlermeldungen präsentiert.
 \item[NF140] Schriftgröße von Text kann verändert werden.
 \item[NF150] Farbschema von farbigen \gls{UI}-Elementen ist veränderbar.
 \item[NF160] Die Sprache der Benutzeroberfläche kann verändert werden.
@@ -517,11 +517,11 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \begin{itemize}
 
-\item[NF210] Die Anwendung reagiert konsistent auf Eingaben.
-\item[NF220] Korrekte Bedienung und Eingaben führen exakt zu den erwarteten Effekten.
-\item[NF230] Unerwartete und fehlerhafte Eingaben führen nicht zum Systemabsturz.
-\item[NF240] Verbindungsverlust von Sensoren führt nicht zum Systemabsturz.
-\item[NF250] Unerwartete Sensordaten (z.B. außerhalb eines eingestellten Wertebereichs) führen nicht zum Systemabsturz.
+\item[NF210] Konsistenz: Bei gleichen Vorbedingungen führen identische Eingaben auch zum gleichen Ergebnis.
+\item[NF220] Korrektheit: Bei korrekten Eingaben werden die erwarteten funktionalen Anforderungen erfüllt.
+\item[NF230] Unerwartete und fehlerhafte Eingaben führen nicht zum Absturz der Anwendung.
+\item[NF240] Verbindungsverlust von \glspl{sensor} führt nicht zum Absturz der Anwendung.
+\item[NF250] Unerwartete \gls{messdaten} (z.B. außerhalb eines eingestellten Wertebereichs) führen nicht zum Absturz der Anwendung.
 
 \end{itemize}
 
@@ -530,8 +530,9 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 \begin{itemize}
 
 \item[NF310] Die Software ist vollständig quelloffen und frei.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
-\item[NF320] Die Software ist einfach erweiterbar durch Außenstehende.
-\item[NF400] Die Datenschutz-Grundverordnung wird nicht verletzt.
+\item[NF320] Die Software ist erweiterbar und anpassbar an veränderte Umstände, auch durch Außenstehende.
+\item[NF330] Die \gls{DSGVO} wird nicht verletzt; d.h. personenbezogene Daten werden ausschließlich dann verarbeitet, wenn sie vom Benutzer freiwillig eingespeist werden.
+\item[NF340] Daten werden ausschließlich lokal gespeichert.
 
 \end{itemize}
 
@@ -832,6 +833,9 @@ Eine Erweiterungsmöglichkeit wäre das Einfügen eines Startbildschirmes vor de
 
 \section{Spezielle Anforderungen an die Entwicklungsumgebung}\label{entwicklungsumgebung}
 
+Für die Umsetzung des Projekts ist Zugang zu funktionierender Hardware (kontret: mindestens ein \gls{RasPi}, möglichst mehrere \glspl{sensor}, Peripheriegeräte) notwendig, um die Funktionalität des Produkts sicherzustellen.\newline
+Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen werden.
+
 \section{Zeit- und Ressourcenplanung}\label{zeit}
 
 \subsection{Projektphasen}
@@ -841,17 +845,19 @@ Eine Erweiterungsmöglichkeit wäre das Einfügen eines Startbildschirmes vor de
 	\textbf{Phase} & \textbf{Verantwortlicher} & \textbf{Zeitraum} & \textbf{Kolloquium} \\ \hline
 	Pflichtenheft & Jan Küblbeck & KW 20–22 & 04.06.2019 \\
 	Entwurf & Leon Huck & KW 23–26 & 02.07.2019 \\
-	Implementierung & Stefan Geretschläger & KW 27–29, 31 & (?) \\
+	Implementierung & Stefan Geretschläger & KW 27–29, 31 & (tbd) \\
 	Klausurenphase & — & KW 30, 32 & — \\
 	Qualitätssicherung & David Gawron & KW 33–35 & 03.09.2019 \\
 	Abnahme & — & KW 36 & — \\
-	Abschlussprüfung & Linus Ruhnke & KW 37/38 & (?) \\
+	Abschlussprüfung & Linus Ruhnke & KW 37/38 & (tbd) \\
 	\hline
 \end{tabular}
 
-\subsection{Entwurfsphase}
+\subsection{Risikomanagement}
 
-\subsection{Implementierungsphase}
+In jeder Phase treten unterschiedliche Risiken auf.
+
+Das Ausfallen eines Teammitglieds durch Krankheit oder andere Gründe ist ein bedeutendes Risiko. In diesem Fall muss die zusätzliche Arbeit gerecht auf die anderen Teilnehmer verteilt werden. Eventuell können dadurch einzelne Kriterien und Anforderungen nicht mehr zufriedenstellend erfüllt werden.
 
 \section{Ergänzungen}\label{erweiterung}
 
