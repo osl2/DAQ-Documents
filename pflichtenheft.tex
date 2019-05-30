@@ -729,20 +729,12 @@ Das Ziel der Benutzeroberfläche ist es dem Anwender eine intuitive Benutzung de
 
 \subsection{Generell}
 
-Um die Ziele zu erfüllen wird das Programm über eine Grafische Benutzeroberfläche (kurz "GUI") bedient. Der Anwender soll in der Lage sein bereits vorhandene Computer und Mobile-Device Kenntnisse zu nutzen.
+Um die Ziele zu erfüllen wird das Programm über eine \gls{GrafBenOber}) (kurz "GUI") bedient. Der Anwender soll in der Lage sein bereits vorhandene Computer und Mobilgerät Kenntnisse zu nutzen.
 
 \subsection{Eingabegeäte}
 
-Die GUI ist überwiegend für die Bedienung durch die Maus ausgelegt. Dabei werden überwiegend folgende Aktionen verwendet:
-
-\begin{itemize} 
-	\item \gls{click}
-	\item \gls{dragdrop}
-\end{itemize}
-
-Eine Tastatur wird benötigt um weitergehende Einstellungen, wie etwa das anpassen einer Option, zu ermöglichen.
-
-
+Die \gls{GrafBenOber} soll Maus und Tastatureingaben unterstützen. Außerdem soll eine \gls{dragdrop} Eingabe möglich sein.
+Die Verwendung anderer Eingabegeräte ist nicht vorgesehen.
 
 \subsection{Überblick}
 
@@ -754,15 +746,24 @@ Eine Tastatur wird benötigt um weitergehende Einstellungen, wie etwa das anpass
 	\end{center}
 \end{figure}
 
-Abbildung \ref{GUI_Grundlage} zeigt den Aufbau der Grafischen Benutzeroberfläche. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Programmfenster, die logische Unterteilung an.
+Abbildung \ref{GUI_Grundlage} zeigt den Aufbau einer möglichen \gls{GrafBenOber}. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Programmfenster, die logische Unterteilung an.
 
-Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt werden.
+Das Design der Einzelnen Elemente kann sich im Verlauf der Anwendungsentwicklung ändern. Die Grundlegenden Bausteine der \gls{GrafBenOber} werden sich in ihrer Aufgabe nicht ändern. Zu ihnen gehören:
+
+\begin{itemize}
+	\item \glspl{sensor}
+	\item \glspl{transformation}
+	\item \glspl{darstellung}
+\end{itemize}
+
+Die zu dem jeweiligen logischen Teil gehörenden Elemente sollen im folgenden erklärt werden.
 
 \subsection{Die einzelnen Teile}
 
 \subsubsection{Systemmenüleiste}
+In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte \gls{GrafBenOber} haben.
 
-\begin{tabular}[t]{p{1cm} p{10cm}}
+\begin{tabular}[t]{p{1cm} p{10cm}} %Alle Systemmenübausteine in einer Tabelle
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/PhyPiDAQ.png} & Der Name des Programmes wird hier angezeigt. Rechts daneben steht, sofern vorhanden, der Name der Datei, die gerade geöffnet ist.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Maximieren.png} & Das ''Maximieren''-Symbol vergrößert das Programmfenster auf die maximale Größe. Die Größe ist von der Benutzungsumgebung abhängig.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Minimieren.png} & Das ''Minimieren''-Symbol blendet das Programmfenster aus. Es ist weiterhin geöffnet und wieder aufrufbar. \\
@@ -771,29 +772,31 @@ Die zu dem jeweiligen Teil gehörenden Elemente sollen im folgenden erklärt wer
 
 \subsubsection{Auswahl}
 
-\begin{tabular}[t]{p{1cm} p{10cm}}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Datei.png} & Unter dem Reiter ''Datei'' finden sich Optionen, die sich auf Dateien beziehen. Die wichtigsten sind: 
+\begin{tabular}[t]{p{1cm} p{10cm}} %Alle Auswahlelemente in einer Tabelle
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Datei.png} & Der Benutzer hat die Möglichkeit Dateien zu bearbeiten. Die wichtigsten Funktionen sind:
 	\begin{itemize} 
 		\item Das anlegen einer neuen Datei
 		\item Das Speichern der aktuellen Datei
 		\item Das Öffnen einer bereits erstellten Datei
 	\end{itemize}\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Bearbeiten.png} & Unter dem Reiter ''Bearbeiten'' finden sich Optionen, die das Ändern von Inhalten der aktuell geöffneten Datei ermöglichen. Die wichtigsten sind:
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Bearbeiten.png} & Der Benutzer hat die Möglichkeit den Inhalt der aktuell geöffneten Datei zu bearbeiten. Die wichtigsten Funktionen sind:
 	\begin{itemize} 
 		\item Das Kopieren eines ausgewählten Objektes
 		\item Das Einfügen eines gespeicherten Objektes
 		\item Das Anpassen eines ausgewälten Elements. Diese Einstellungsmöglichkeiten sind von dem Objekt abhängig.
 	\end{itemize}\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensor.png} & Zeigt eine Liste von \glspl{sensor} an. Die \glspl{sensor} können anschließend per \gls{dragdrop} in das Konfigurationsfeld gezogen werden. Die angezeigte Liste ist unabhängig von den angeschlossenen Sensoren\newline\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindung.png} & Zeigt eine Liste von \glspl{transformation} an. Die \glspl{transformation} können anschließend per \gls{dragdrop} in das Konfigurationsfeld gezogen werden. Die Liste kann unter Optionen erweitert werden.\newline\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Darstellung.png} & Zeigt eine Liste von \glspl{darstellung} an. Die \glspl{darstellung} können anschließend per \gls{dragdrop} in das Konfigurationsfeld gezogen werden. Die Liste kann unter Optionen erweitert werden.\newline\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Optionen.png} & Zeigt eine Liste von Optionen an. Beispiele hierfür sind
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensor.png} & Der Benutzer kann sich eine Auswahl von \glspl{sensor} anzeigen lassen. Die \glspl{sensor} können anschließend in das Konfigurationsfeld eingefügt werden. Die angezeigte Auswahl ist unabhängig von den angeschlossenen Sensoren\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindung.png} & Der Benutzer kann sich eine Auswahl von \glspl{transformation} anzeigen lassen. Die \glspl{transformation} können anschließend per \gls{dragdrop} in das Konfigurationsfeld gezogen werden. Die Auswahl kann unter Optionen erweitert werden.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Darstellung.png} & Der Benutzer kann sich eine Auswahl von \glspl{darstellung} anzeigen lassen. Die \glspl{darstellung} können anschließend in das Konfigurationsfeld eingefügt werden. Die Auswahl kann erweitert werden.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Optionen.png} & Der Benutzer kann sich eine Auswahl an Optionen anzeigen lassen. Beispiele hierfür sind
 	\begin{itemize} 
 		\item Das Ändern von angezeigten Farben
-		\item Das Erweitern der Transformations- und Darstellungsliste
+		\item Das Erweitern der Transformations- und Darstellungsauswahl
 	\end{itemize}\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Hilfe.png} & Zeigt eine allgemeine Hilfe an. In der Hilfe werden die Funktionen von Anwendungsfunktionen erklärt.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Hilfe.png} & Der Benutzer kann sich eine allgemeine Hilfe anzeigen lassen. In der Hilfe werden die Funktionen der Anwendung erklärt.\newline\\
 \end{tabular}
+
+Im Laufe der Entwicklung kann es sich als sinnvoll herrausstellen weitere Optionen einzufügen bzw. bestehende Optionen zusammenzufügen.
 
 \subsubsection{Konfigurationsfeld}
 
