@@ -521,201 +521,123 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 \end{itemize}
 
 \section{Globale Testfälle und Testszenarien}\label{testfall}
-
 \begin{itemize} 
 
-\item[T010] Erstmaliges Starten und Anpassen der Anwendung 
+\item[T010]Starten der Anwendung und Hilfe
 \begin{itemize}
 
-\item []\textbf{Testziel} Teste das Verhalten der Anwendung beim ersten Aufruf und das Ausführen der Demo. Die Demo nutzt Daten aus einer Datei und benötigt keinen angeschlossenen \gls{RasPi}.
+\item []\textbf{Testziel:} Teste das Verhalten der Anwendung aus der Sicht eines Benutzers, der diese zum ersten Mal verwendet.
 
-\item []\textbf{Vorbedingung} Die Anwendung ist installiert. Zu Sehen ist das offene Fenster des Desktops mit der Verknüpfung zur Anwendung.
-\item [1.]\textbf{Aktion} Der Benutzer startet die Anwendung über die Verknüpfung.
-\item []\textbf{Reaktion} Die Anwendung wird gestartet. Das Hauptfenster öffnet sich. Das Start-Infofenster öffnet sich.
-\item [2.]\textbf{Aktion} Der Benutzer setzt den Haken bei "`dieses Fenster zukünftig nicht mehr anzeigen"'Knopf und drückt dann auf den "`Schließen"'Knopf des Start-Infofenster.
-\item []\textbf{Reaktion} Das Start-Infofenster schließt sich. Die Start-Einstellung wird gespeichert. 
-\item [3.]\textbf{Aktion} Der Benutzer drückt auf den "`Hilfe"'-Knopf in der Systemleiste.
-\item []\textbf{Reaktion} Das Fenster zur Hilfe öffnet sich.
-\item [4.]\textbf{Aktion} Der Benutzer drückt auf den "`Schließen"'-Knopf des Hilfefensters.
-\item []\textbf{Reaktion} Das Fenster zur Hilft schließt sich.
-\item [5.]\textbf{Aktion} Der Benutzer drückt auf den "`Laden"'-Knopf in der Systemleiste.
-\item []\textbf{Reaktion} Das Fenster zum Laden einer Konfiguration öffnet sich. Dabei wird der voreingestellte Defaultpfad geöffnet. 
-\item [6.]\textbf{Aktion} Der Benutzer wählt die Demo-Datei in dem Defaultpfad aus und drückt dann auf den "`Laden"'-Knopf. 
-\item []\textbf{Reaktion} Die Anwendung lädt die Demo-Datei. Die geladene Demo-Konfiguration wird auf der Konfigurationsfläche angezeigt.
-\item [7.]\textbf{Aktion} Der Lehrer drückt auf den "`Erstellen"'-Knopf.
-\item []\textbf{Reaktion} Die Anwendung prüft, ob eine gültige Konfiguration vorliegt. Es liegt eine gültige Konfiguration vor. Die Anwendung zeigt den Konfigurationsstatus "`OK"' an.
-\item [8.]\textbf{Aktion} Der Lehrer drückt auf den "`Starten"'-Knopf.
-\item []\textbf{Reaktion} Die Anwendung verarbeitet die Daten der "`Sensoren"' und stellt die Ergebnisse dar.
-\item [9.]\textbf{Aktion} Der Benutzer drückt auf den "`Stoppen"'-Knopf.
-\item []\textbf{Reaktion} Die Ausführung der Messung wird angehalten. Die Darstellungen zeigen ihren Datensatz zum Zeitpunkt des Stoppens weiter an.
-\item [10.]\textbf{Aktion} Der Benutzer drückt auf den auf das "`X"'-Symbol zum Schließen der Anwendung.
-\item []\textbf{Reaktion} Es öffnet sich ein Fenster und weist den Benutzer darauf hin, dass nicht gespeicherte Daten und Veränderungen verloren gehen.
-\item [11.]\textbf{Aktion} Der Benutzer drückt auf den "`Beenden"'-Knopf.
-\item []\textbf{Reaktion} Die Anwendung schließt sich.
+\item []\textbf{Vorbedingung:} Die Anwendung ist installiert. Zu sehen ist der Desktop des Benutzers mit einer Verknüpfung zur Anwendung.
+\item []\textbf{Aktion:} Der Benutzer öffnet die Anwendung über die Verknüpfung. Danach informiert er sich über die Anwendung über die Hilfe in der Systemleiste. Danach schließt er die Anwendung
+\item []\textbf{Reaktion:} Die Anwendung öffnet sich. Zu sehen ist das Hauptfenster mit leerer Konfigurationsfläche und leeren Darstellungen. Nach dem Öffnen der Hilfe, sieht der Benutzer die nötigen Informationen zur Bedienung der Anwendung. 
+\item []\textbf{Nachbedingung:} Nach dem öffnen der Anwendung, überprüft diese, ob ein \gls{RasPi} angeschlossen ist. Jeder dargestellte Text ist auf deutsch.
 
-\item []\textbf{Nachbedingung} Die Anwendung ist beendet. Es ist kein Fenster ist mehr geöffnet. Es wird der Desktop angezeigt.
-\item []\textbf{Ergebnis} to do
-
-\item []\textbf{Abgedeckte Funktionale Anforderungen: to do}
+\item []\textbf{Ergebnis:} Der Benutzer kann die Anwendung starten. Die Bedienung der Anwendung ist komplett in deutsch möglich.
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden: F010 erreiche GUI nach Start, F140 leere Darstellung nach Anwendungsstart, F480 Hilfe zu Anwendung, F490} 
 
 \end{itemize}
 
 
-
-\item[T020] Lehrer erstellt eine eigene Konfiguration für den Unterricht
+\item[T020] Starten der Demo 
 \begin{itemize}
 
-\item []\textbf{Testziel} Teste eine typische Verwendung der Software anhand des gegebenen Szenarios. Dabei wird das Erstellen, Verändern und Speichern einer Konfiguration getestet.
+\item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Ausführen der Demo. Die Demo nutzt Daten aus einer Datei und benötigt keinen angeschlossenen \gls{RasPi}.
 
-\item []\textbf{Vorbedingung} Die Anwendung ist gestartet und es liegt keine Konfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet worden. Zu sehen ist das offene Hauptfenster mit leerer Konfigurationsfläche.
+\item []\textbf{Aktionen:} Der Benutzer öffnet die Konfigurationsdatei der Demo mit Hilfe der Ladefunktion der Systemleiste. Sobald die Konfiguration geladen ist, erstellt der Benutzer den Messversuch und startet ihn danach laufen.
+\item []\textbf{Reaktionen:} Nach dem Laden ist die Konfiguration in der Konfigurationsfläche sichtbar. Nach dem Starten der Messung sieht der Benutzer wie die Daten im Graph dargestellt werden.
+\item []\textbf{Nachbedingung:} Die Anwendung ist offen. Eine gültige Konfiguration ist in der Konfigurationsfläche geladen. Die Messung läuft ohne Fehler und die Ergebnisse werden richtig dargestellt.
 
-\item [1.]\textbf{Aktion} Der Lehrer zieht Sensor S1 in die Konfigurationsfläche. 
-\item []\textbf{Reaktion} Die Anwendung prüft, ob Sensor S1 angeschlossen ist. Danach wird das Icon von Sensor S1 an der gewählten Stelle erstellt. Dabei werden Defaultwerte eingestellt.
-\item [2.]\textbf{Aktion} Der Lehrer ruft die Optionen des Sensors auf(Rechtsklick Icon, dann Optionen).
-\item []\textbf{Reaktion} Die Anwendung ruft das Fenster für die Optionen von Sensor S1 auf.
-\item [3.]\textbf{Aktion} Der Lehrer setzt Werte im gültigen Bereich ein und drückt auf den "`Speichern"'-Knopf.
-\item []\textbf{Reaktion} Die Einstellungen werden gespeichert und das Optionsfenster wird geschlossen.
-\item [4.]\textbf{Aktion} Der Lehrer zieht die Transformation T in die Konfigurationsfläche.
-\item []\textbf{Reaktion} Das Icon der Transformation T wird in der Konfigurationsfläche erstellt. Die Werte werden auf default eingestellt.
-\item [5.]\textbf{Aktion} Der Lehrer ruft die Optionen von Transformation T auf.
-\item []\textbf{Reaktion} Das Optionsfenster von Transformation T öffnet sich.
-\item [6.]\textbf{Aktion} Der Lehrer stellt die Werte der Transformation im gültigen Bereich ein und drückt auf den "`Speichern"'-Knopf.
-\item []\textbf{Reaktion} Die Werte werden gespeichert und das Optionsfenster wird geschlossen.
-\item [7.]\textbf{Aktion}  Der Lehrer drückt auf den "`Optionen"'-Knopf der Konfiguration.
-\item []\textbf{Reaktion} Das Optionsfenster für die Konfiguration öffnet sich.
-\item [8.]\textbf{Aktion} Der Lehrer gibt verändert die Defaultwerte der Konfiguration und drückt auf den "`Speichern"'-Knopf.
-\item []\textbf{Reaktion} Die Werte werden gespeichert und das Optionsfenster schließt sich.
-\item [9.]\textbf{Aktion} Der Lehrer drückt auf den "`Konfiguration Speichern"'-Knopf
-\item []\textbf{Reaktion} Die Anwendung öffnet das Fenster zum speichern einer Konfiguration.
-\item [10.]\textbf{Aktion} Der Lehrer wählt einen gültigen Pfad, gibt einen gültigen Namen ein und drückt danach auf den "`Speichern"'-Knopf.
-\item []\textbf{Reaktion} Die Anwendung erstellt eine Konfiguration-Datei mit entsprechendem Namen am entsprechenden Ort. Das Fenster zum Speichern einer Konfiguration wird geschlossen.
-
-
-\item []\textbf{Nachbedingung} Die Anwendung ist geöffnet. In der Konfigurationsfläche ist Sensor S1 und Transformation T zu sehen. 
-\item []\textbf{Ergebnis} Diese Konfiguration ist als Datei an dem gewählten Ort gespeichert.
-
-\item []\textbf{Abgedeckte Funktionale Anforderungen: to do}
+\item []\textbf{Ergebnis:} Die Anwendung kann eine Konfiguration, die nur Daten aus einer Datei benötigt, problemlos ohne angeschlossenem \gls{RasPi} durchführen. 
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F130 Starten einer Messung, F160 Laden einer Konfiguration
 
 \end{itemize}
 
-\item[T030] Schüler der siebten Klasse bearbeitet eine Aufgabe
+
+
+\item[T030] Lehrer erstellt und speichert eine Konfiguration
 \begin{itemize}
 
-\item []\textbf{Testziel} Es soll getestet werden wie ein Schüler der siebten Klasse mit der Anwendung umgeht, während er eine Aufgabe des Lehrer bearbeitet. Dabei ist schon die Konfiguration aus T020 geladen. Diese enthält Sensor S1 und Transformation T.
+\item []\textbf{Testziel:} Teste eine typische Verwendung der Software anhand des gegebenen Szenarios. Dabei wird das Erstellen, Verändern und Speichern einer Konfiguration getestet.
 
-\item []\textbf{Vorbedingung} Die Anwendung ist gestartet und es liegt eine vom Lehrer erstellte Konfiguration vor. Die Konfiguration enthält Sensor S1 und Transformation A. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} Pi mit \gls{PhyPiDAQ}. Die Sensoren S1 und S2 sind ordnungsgemäß angeschlossen.
-\item [1.]\textbf{Aktion} Der Schüler drückt auf das "`?"'-Icon neben Sensor S1.
-\item []\textbf{Reaktion} Es öffnet sich ein Infofenster zum Sensor S1.
-\item [2.]\textbf{Aktion} Der Schüler drückt auf das "`?"'-Icon neben Transformation A.
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Konfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
+\item []\textbf{Aktionen:} Der Lehrer zieht zwei angeschlossene Sensoren und eine Transformation in die Konstruktionsfläche. Danach ändert er einige Einstellungen an der Konfiguration. Das Ergebnis speichert er über die Systemleiste als Konfigurationsdatei.
+\item []\textbf{Reaktion:} Nach jedem hinzufügen eines Sensors oder einer Transformation, wird an der entsprechenden Stelle das jeweilige Icon sichtbar. Nach dem Speichern der Konfiguration sieht der Lehrer die erstellte Datei.
+\item []\textbf{Nachbedingung:} Die Anwendung prüft beim Hinzufügen eines Sensor-Icons, ob der Sensor angeschlossen ist. Die Anwendung speichert die angepassten Einstellungen, sofern sie gültig sind. Die Konfigurationsdatei wird erstellt, unabhängig ob sie gültig ist.
 
-\item []\textbf{Reaktion} to do: schließt sich Infofenster zu Sensor S1 automatisch oder bleibt es offen bis Schüler es schließt ?
-
-\item [3.]\textbf{Aktion} Der Schüler drückt auf den "`Start"'-Knopf.
-\item []\textbf{Reaktion} Ein Fenster öffnet sich und teilt dem Schüler mit, dass eine Konfiguration zunächst erstellt werden muss.
-\item [4.]\textbf{Aktion} Der Schüler drückt auf den "`OK"'-Knopf.
-\item []\textbf{Reaktion} Das Infofenster zum starten ohne erstellen wird geschlossen.
-\item [5.]\textbf{Aktion} Der Schüler drückt auf den "`Erstellen"'-Knopf.
-\item []\textbf{Reaktion} Die Anwendung prüft, ob die vorliegende Konfiguration gültig ist. Sie ist ungültig. Es wird ein Fenster geöffnet mit der Meldung, dass keine gültige Konfiguration vorliegt. Es verlinkt zum Hilfemenü.
-\item [6.]\textbf{Aktion} Der Schüler drückt auf die Verlinkung zum Hilfsmenü.
-\item []\textbf{Reaktion} Das Fenster zum Hilfsmenü öffnet sich. (TO DO wird Fehlermeldung geschlossen?)
-\item [7.]\textbf{Aktion} Der Schüler drückt auf den "`X"'-Knopf des Hilfsmenüfensters. 
-\item []\textbf{Reaktion} Das Hilfsmenüfenster wird geschlossen.
-\item [8.]\textbf{Aktion} Der Schüler zieht die Darstellung D in die Konfigurationsfläche.
-\item []\textbf{Reaktion} Ein Icon der Darstellung D wird erstellt. Es werden Defaultwerte geladen.
-\item [9.]\textbf{Aktion} Der Schüler drückt auf das "`?"'-Icon der Darstellung.
-\item []\textbf{Reaktion} Das Infofenster zu Darstellung D öffnet sich.
-\item [10.]\textbf{Aktion} Der Schüler schließt das Infofenster.
-\item []\textbf{Reaktion} Das Infofenster zu Darstellung D wird geschlossen.
-\item [11.]\textbf{Aktion} Der Schüler drückt auf den Kanal von Darstellung D und danach auf den linken Kanal von Transformation T.
-\item []\textbf{Reaktion} Eine Verbindung zwischen den beiden Kanälen wird erstellt.
-\item [12.]\textbf{Aktion} Der Schüler drückt auf den oberen rechten Kanal von Transformation T und danach auf den Kanal von Sensor S1.
-\item []\textbf{Reaktion} Eine Verbindung zwischen den beiden Kanälen wird erstellt.
-\item [13.]\textbf{Aktion} Der Schüler zieht Sensor S2 in die Konfigurationsfläche.
-\item []\textbf{Reaktion} Das Icon zu Sensor S2 wird erstellt.
-\item [14.]\textbf{Aktion} Der Schüler ruft die Optionen von Sensor S2 auf.
-\item []\textbf{Reaktion} Das Optionsfenster von Sensor S2 wird geöffnet.
-\item [15.]\textbf{Aktion} Der Schüler gibt die vom Lehrer vorgegebenen Werte ein und drückt auf den "`Speichern"'-Knopf.
-\item []\textbf{Reaktion} Die Werte werden gespeichert und das Optionsfenster von Sensor S2 wird geschlossen.
-\item [16.]\textbf{Aktion} Der Schüler drückt auf den Kanal von S2 und danach auf den letzten offenen Kanal von Transformation T.
-\item []\textbf{Reaktion} Eine Verbindung zwischen Sensors S2 und Transformation T wird erstellt.
-\item [17.]\textbf{Aktion} Der Schüler drückt auf den "`Erstellen"'-Knopf.
-\item []\textbf{Reaktion} Die Anwendung prüft, ob eine gültige Konfiguration vorliegt. Es liege eine gültige vor. Die Anwendung zeigt den Konfigurationsstatus "`OK"' an. Dabei wird durch die Voreinstellung der Lehrers aus T020 Aktion 8 und 9 der Messzeitraum auf 10 Sekunden gesetzt.
-\item [18.]\textbf{Aktion} Der Schüler drückt auf "`Starten"'.
-\item []\textbf{Reaktion} Die Anwendung holt für 10 Sekunden Daten aus den beiden Sensoren, transformiert diese und stellt sie in Darstellung D dar. Nach der Messung stoppt die Anwendung automatisch. Die Darstellung D bleibt erhalten.
-\item [19.]\textbf{Aktion} Der Schüler drückt auf den Knopf "`Speichern"' bei der Darstellung.
-\item []\textbf{Reaktion} Ein Fenster zum Speichern des Graphen öffnet sich.
-\item [20.]\textbf{Aktion} Der Schüler wählt einen Pfad und gibt einen Namen ein und drückt dann auf den "`Speichern"'-Knopf.
-\item []\textbf{Reaktion} Der Graph wird am entsprechenden Ort gespeichert und das Fenster zum Speichern wird geschlossen.
-\item [21.]\textbf{Aktion} Der Schüler drückt auf den Knopf "`Messwerte speichern"'.
-\item []\textbf{Reaktion} Ein Fenster öffnet sich zum Speichern der Messwerte.
-\item [22.]\textbf{Aktion} Der Schüler wählt die Darstellungsform "`Tabelle"', den Pfad, den Namen und drückt auf den "`Speichern"'-Knopf.
-\item []\textbf{Reaktion} Die Messwerte werden als Tabelle mit entsprechendem Namen am entsprechenden Ort gespeichert. Das Fenster zum Speichern schließt sich.
-\item [23.]\textbf{Aktion} Der Schüler drückt auf den "`Speichern"'-Knopf der Konfiguration. 
-\item []\textbf{Reaktion} Die Anwendung öffnet das Fenster zum Speichern einer Konfiguration.
-\item [24.]\textbf{Aktion} Der Schüler wählt dort Name und Pfad aus und drückt auf den "`Speichern"'-Knopf.
-\item []\textbf{Reaktion} Die Konfiguration wird entsprechend gespeichert. Das Fenster zum Speichern einer Konfiguration wird geschlossen.
-
-\item []\textbf{Nachbedingung} Die Anwendung ist geöffnet. Nur das Hauptfenster ist offen. In der Konfigurationsfläche ist die vollständige Konfiguration zu sehen. Die Messung wurde abgeschlossen und die Darstellungen sind zu sehen.
-\item []\textbf{Ergebnis} Die Konfiguration, die Messwerte sowie der Graph der Messwerte sind als Dateien gespeichert.
-
-\item []\textbf{Abgedeckte Funktionale Anforderungen: TO DO}
+\item []\textbf{Ergebnis:} Die Anwendung kann eine Konfiguration als Datei speichern und prüfen, ob ein Sensor angeschlossen ist.
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F180 füge Sensor hinzu, F190 prüfe ob Sensor angeschlossen, F210 füge Transformation hinzu, F270 speichere Konfiguration, F310 Einstellungen Konfiguration 
 
 \end{itemize}
 
-\item[T040] Umgang mit destruktivem Benutzer
+\item[T040] Schüler bearbeitet Aufgabe
 \begin{itemize}
 
-\item []\textbf{Testziel} Teste den Umgang mit einem Benutzer, der versucht alle Grenzen der Anwendung und alle Fehlermeldungen zu finden.
+\item []\textbf{Testziel:} Teste die Anwendung aus Sicht eines Schülers, der eine Aufgabe bearbeiten soll.
 
-\item []\textbf{Vorbedingung} Geöffnete Anwendung ohne angeschlossenem \gls{RasPi} und damit mit keinem gültigen Sensor.
-\item [1.]\textbf{Aktion} Der Benutzer zieht Sensor S3 in die Konfigurationsfläche hinein.
-\item []\textbf{Reaktion} Die Anwendung prüft ob der Sensor S3 angeschlossen ist. Er ist es nicht. Die Anwendung erstellt kein Icon, sondern öffnet eine Fehlermeldung, dass Sensor S3 nicht gefunden wurde.
-\item [2.]\textbf{Aktion} Der Benutzer schließt die Meldung. Danach öffnet er über die Systemleiste das Menü um eine Datei als Sensor zu Initialisieren.
-\item []\textbf{Reaktion} Die Fehlermeldung wird geschlossen. Das Menü zum Initialisieren einer Datei als Sensor wird geöffnet.
-\item [3.]\textbf{Aktion} Der Benutzer wählt eine Datei mit ungültigem Format aus und drückt auf den "`Öffnen"'Knopf.
-\item []\textbf{Reaktion} Die Anwendung prüft ob die Datei ein gültiges Format hat. Sie hat es nicht. Die Anwendung zeigt eine Fehlermeldung an, dass die gewählte Datei ein ungültiges Format hat.
-\item [4.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung und wählt eine gültige Datei.
-\item []\textbf{Reaktion} Die Anwendung prüft das Format, erkennt es als gültig und erstellt den Sensor S91. Das Fenster zum laden einer Datei wird geschlossen.
-\item [5.]\textbf{Aktion} Der Benutzer lädt eine weitere gültige Datei als Sensor S92.
-\item []\textbf{Reaktion} Die Anwendung öffnet das Ladefenster, prüft das Format der gewählten Datei, erkennt sie als gültig an und erstellt Sensor S92. Dann wird das Fenster zum Laden einer Datei geschlossen. 
-\item [6.]\textbf{Aktion} Der Benutzer zieht erst Sensor S91 und dann Sensor S92 in die Konfigurationsfläche.
-\item []\textbf{Reaktion} Die Anwendung prüft, ob Sensor S91 und S92 angeschlossen sind. Das sind sie, da sie aus gültigen Dateien stammen. Dann erstellt die Anwendung die entsprechenden Icons an den entsprechenden Stellen.
-\item [7.]\textbf{Aktion} Der Benutzer drückt auf den Kanal von S91 und danach auf den Kanal von S92.
-\item []\textbf{Reaktion} Die Anwendung erkennt, dass beide Kanäle von Sensoren stammen. Sie erstellt keine Verbindung und zeigt die Fehlermeldung an, dass zwischen zwei Sensoren keine Verbindung erstellt werden kann.
-\item [8.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung und zieht Transformation T1 in die Konfigurationsfläche. Dabei hat T1 zwei Eingangskanäle und einen Ausgangskanal.
-\item []\textbf{Reaktion} Die Anwendung schließt die Fehlermeldung. Danach erstellt sie das Icon von T1 an der entsprechenden Stelle mit Defaultwerten.
-\item [9.]\textbf{Aktion} Der Benutzer klickt auf den oberen Eingangskanal und danach auf den unteren Eingangskanal.
-\item []\textbf{Reaktion} Die Anwendung erkennt, dass zwei Eingangskanäle verbunden werden sollen. Sie verbindet sie nicht, sondern zeigt die Fehlermeldung an, dass zwei Eingangskanäle einer Transformation nicht direkt verbunden werden können.
-\item [10.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung. Danach klick er auf den oberen Eingangskanal von T1 und danach auf den Ausgangskanal von T1.
-\item []\textbf{Reaktion} Das Fenster der Fehlermeldung schließt sich. Die Anwendung erkennt, dass die Verbindung ungültig ist und gibt eine Fehlermeldung aus.
-\item [11.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung. Danach zieht er Transformation T2, Darstellung D1 und Darstellung D2 in die Konstruktionsfläche.
-\item []\textbf{Reaktion} Das Fenster der Fehlermeldung wird geschlossen. Die Icons von T2, D1 und D2 werden an den entsprechenden Stellen erstellt.
-\item [12.]\textbf{Aktion} Der Benutzer klickt auf den Eingangskanal von D1 und danach auf den Eingangskanal von D2. 
-\item []\textbf{Reaktion} Die Anwendung erkennt, dass die Verbindung ungültig ist und gibt die passende Fehlermeldung aus.
-\item [13.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung. Danach schließt er zwei Sensoren S1 und S2 ordnungsgemäß an. Weiter zieht er erst S1 und dann S2 in die Konfigurationsfläche. 
-\item []\textbf{Reaktion} Das Fenster der Fehlermeldung wird geschlossen. Die Anwendung erkennt, dass S1 angeschlossen ist und erstellt das entsprechende Icon. Weiter erkennt sie, dass der Sensor S2 zwar angeschlossen ist, aber die maximale Anzahl an Sensoren in der Konfigurationsfläche überschreitet. Die Anwendung erstellt dann kein Icon von S2 und gibt eine passende Fehlermeldung aus.
-\item [14.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung und zieht Darstellung D3 und D4 in die Konfigurationsfläche.
-\item []\textbf{Reaktion} Die Fehlermeldung wird geschlossen. Die Anwendung erstellt ein Icon für D3 und erkennt, dass mit D4 die maximale Anzahl an Sensoren überschritten wird. Also gibt sie eine entsprechende Fehlermeldung aus.
-\item [15.]\textbf{Aktion} Der Benutzer schließt die Fehlermeldung. Danach verbindet er alle offenen Kanäle ordnungsgemäß und drückt auf den "`Erstellen"'-Knopf.
-\item []\textbf{Reaktion} Das Fenster der Fehlermeldung wird geschlossen. Die Anwendung erstellt alle gültigen Verbindungen. Weiter prüft sie beim Erstellen die Konfiguration und erkennt dessen Korrektheit. 
-\item [16.]\textbf{Aktion} Der Benutzer drückt auf den "`Starten"'-Knopf und wartet 5 Sekunden. Danach löst er die Verbindung von S1.
-\item []\textbf{Reaktion} Die Anwendung führt die Messung durch. Nach dem Kappen von S1 stürzt die Anwendung nicht ab. Allerdings stoppt sie die Messung und gibt eine entsprechende Fehlermeldung aus. 
-\item [.]\textbf{Aktion} 
-\item []\textbf{Reaktion} to do: weitere Testfälle
-\item [.]\textbf{Aktion} maximale Anzahl Transformationen?
-\item []\textbf{Reaktion}
-\item [.]\textbf{Aktion} 
-\item []\textbf{Reaktion}
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Konfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
 
-\item []\textbf{Nachbedingung} TO DO
-\item []\textbf{Ergebnis} TO DO
+\item []\textbf{Aktionen:} Der Schüler lädt über die Systemleiste die Konfiguration der Aufgabe. Danach informiert er sich über die Sensoren, Transformationen und Darstellungen über die Hilfestellungen neben den Icons. Als Nächstens vollendet er die Konfiguration. Dann wird sie erstellt und gestartet. Während der Messung beeinflusst der Schüler die Daten durch einen Sensor. Am Ende der Messung speichert der Schüler den resultierenden Graphen und die Werte als Dateien ab.
+\item []\textbf{Reaktionen:} Nach dem Laden sieht der Schüler die Konfiguration in der Konfigurationsfläche. Wenn der Schüler die Hilfe-Icons aufruft, bekommt er die wesentlichen Informationen die er zur Verwendung der Anwendung braucht. Weiter sieht er, wie sich die graphische Darstellung der Konfiguration durch seine Aktionen verändert. Nach dem Starten, sieht er, wie die Daten als Graphen dargestellt und diese durch seine Aktionen verändert werden. Die Ergebnisse der Messung sieht er als erstellte Dateien.
+\item []\textbf{Nachbedingung:} Die Anwendung prüft beim Laden der Konfiguration, ob die Sensoren angeschlossen sind. Weiter prüft sie, ob die Konfiguration beim Erstellen gültig ist. Während die Messung läuft, werden die Daten verarbeitet und dargestellt unabhängig davon, ob der Schüler sie durch den Sensor beeinflusst. Die Ergebnisse sind verfügbar, sobald die Messung angehalten wurde.
 
-\item []\textbf{Abgedeckte Funktionale Anforderungen:} TO DO
+
+\item []\textbf{Ergebnis:} Der Benutzer kann Konfigurationen laden, diese verändern und starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F240 füge Darstellung, F320 Starte Messung, F330 stelle Ergebnisse dar, F400 speichere Messdaten, F410 speichere Messgraph, F470 Hilfe Bausteine
+
+\end{itemize}
+
+\item[T050] Laden einer ungültigen Datei als Konfiguration
+\begin{itemize}
+
+\item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Laden von ungültigen Konfigurationensdateien.
+
+\item []\textbf{Vorbedingung:} Geöffnete Anwendung.
+\item []\textbf{Aktionen:} Der Benutzer öffnet den Dialog zum Laden einer Datei über die Systemleiste und wählt eine Datei mit ungültigem Format zum Laden aus.
+\item []\textbf{Reaktionen:} Eine Fehlermeldung wird ausgegeben.
+\item []\textbf{Nachbedingung:} Die Anwendung überprüft, ob die Datei ein gültiges Format hat und verhindert das Laden von ungültigen Formaten. 
+
+
+\item []\textbf{Ergebnis:} Die Anwendung kann beim Laden von Konfigurationen zwischen gültigen und ungültigen Dateiformaten unterscheiden und entsprechend reagieren.
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden: F430 überprüfe Format bei Laden} 
+
+\end{itemize}
+
+\item[T060] Erstellen einer ungültigen Messkonfiguration
+\begin{itemize}
+
+\item []\textbf{Testziel:} 
+
+\item []\textbf{Vorbedingung:} Das Hauptfenster der Anwendung ist geöffnet. Die verwendeten Sensoren sind angeschlossen.
+
+\item []\textbf{Aktionen:} Der Benutzer erstellt eine Konfiguration aus zwei Sensoren, einer Transformation und einer Darstellung. Allerdings verbindet er die Darstellung nicht mit dem Rest der Konstruktion und erstellt die Messkonfiguration.
+\item []\textbf{Reaktionen:} Eine Fehlermeldung wird ausgegeben. Die Anwendung bleibt offen.
+\item []\textbf{Nachbedingung:} Die Anwendung überprüft beim Erstellen der Messkonfiguration, ob diese gültig ist.
+
+\item []\textbf{Ergebnis:} Die Anwendung kann beim Erstellen zwischen gültigen und ungültigen Konfigurationen unterscheiden und entsprechend reagieren.
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden: TO DO} 
+
+\end{itemize}
+
+\item[T070] Entfernen eines Sensors bei laufender Messung
+\begin{itemize}
+
+\item []\textbf{Testziel:} Teste das Verhalten der Anwendung, wenn ein Sensor ausfällt und keine Daten mehr sendet.
+
+\item []\textbf{Vorbedingung:} Die Anwendung ist geöffnet. Alle verwendeten Sensoren sind angeschlossen und betriebsbereit. Eine Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung wurde erstellt.
+\item []\textbf{Aktionen:} Der Benutzer startet die Messung. Aus einem unbekannten Grund wird die Verbindung zu einem Sensor getrennt.
+\item []\textbf{Reaktionen:} Die Messung stoppt. Eine Fehlermeldung wird ausgegeben.
+\item []\textbf{Nachbedingung:} \gls{PhyPiDAQ} verliert die Verbindung zu einem Sensor und sendet keine Daten mehr an die Anwendung. Die Anwendung stürzt nicht ab, sondern gibt eine Fehlermeldung aus.
+
+\item []\textbf{Ergebnis:} Die Anwendung kann mit dem ungewollten Verlust eines Datenstroms umgehen ohne einen Absturz.
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden: F460 Melde Abbruch des Datenstrom} 
 
 \end{itemize}
 
 
 \end{itemize}
+
 
 \section{Systemmodelle}\label{systemmodell}
 
