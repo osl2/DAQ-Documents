@@ -108,6 +108,29 @@
 	description ={Datenschutz-Grundverordnung, Verordnung der Europäischen Union vom 25. Mai 2018}
 }
 
+\newglossaryentry{Musskriterien}{
+	name=Musskriterien,
+	description ={Werden zusammen mit Soll- und Wunschkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung höchste Priorität. 
+	Dass ein Musskriterium in den nachfolgenden Projektphasen nicht umgesetzt wird, ist nur dann zulässig, falls unerwartet unausweichliche Probleme bei der Umsetzung auftreten. 
+	In diesem Fall ist es erforderlich, dass diese Probleme sehr genau dokumentiert werden.}
+}
+
+\newglossaryentry{Sollkriterien}{
+	name=Sollkriterien,
+	description ={Werden zusammen mit Muss- und Wunschkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung mittlere Priorität. 
+	Falls ein Sollkriterium umgesetzt werden kann, dann muss es nach Möglichkeit auch realisiert werden. 
+	Falls ein Sollkriterium in den nachfolgenden Projektphasen nicht umgesetzt werden kann, so muss dies dokumentiert und begründet werden. }
+}
+
+\newglossaryentry{Wunschkriterien}{
+	name=Wunschkriterien,
+	description ={Werden zusammen mit Muss- und Sollkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung niedrige Priorität. 
+	Je nach Resourcenlage können sie nach Bearbeitung aller Muss- und Kannkriterien umgesetzt werden. 
+	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden.  }
+}
+
+
+
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
 \subtitle{Version 0.2.2}
@@ -155,21 +178,7 @@ Weiter ermöglicht es die Anwendung, dass Schüler aus höheren Klassen mit mehr
 
 Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verstehen. Sie ermöglicht dem Nutzer, über eine übersichtliche, strukturierte und intuitive GUI sowie über eine einfache Bedienung die Nutzung eines \gls{RasPi} mit \gls{PhyPiDAQ}. Dadurch soll dem Schüler digitale Messwerterfassung, Physik und auch Informatik in einer motivierenden Weise näher gebracht werden. Womöglich kann die Anwendung den Schüler auch für diese Themen begeistern.  
 
-Im Folgenden werden Musskriterien, Sollkriterien und Wunschkriterien des projektierten Softwareprodukts definiert:
-
-\begin{itemize}
-	\item Musskriterien haben höchste Priorität. 
-	Dass ein Musskriterium in den nachfolgenden Projektphasen nicht umgesetzt wird, ist nur dann zulässig, falls unerwartet unausweichliche Probleme bei der Umsetzung auftreten. 
-	In diesem Fall ist es erforderlich, dass diese Probleme sehr genau dokumentiert werden.
-	
-	\item Sollkriterien haben eine mittlere Priorität. 
-	Falls ein Sollkriterium umgesetzt werden kann, dann muss es nach Möglichkeit auch realisiert werden. 
-	Falls ein Sollkriterium in den nachfolgenden Projektphasen nicht umgesetzt werden kann, so muss dies dokumentiert und begründet werden. 
-	
-	\item Wunschkriterien haben eine niedrige Priorität. 
-	Je nach Resourcenlage können sie nach Bearbeitung aller Muss- und Kannkriterien umgesetzt werden. 
-	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden. 
-\end{itemize}
+Im Folgenden werden \gls{Musskriterien}, \gls{Sollkriterien} und \gls{Wunschkriterien} zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittler und niedriger Priorität betrieben. 
 
 
 \subsection{Musskriterien}
