@@ -73,7 +73,7 @@
 
 \newglossaryentry{konfigdata}{
 	name=Konfigurationsdatei,
-	description={Können das Messverhalten anpassen, beispielsweise die Anzahl der Messungen pro Zeiteinheit. Für jeden Sensor gibt es eine eigene Konfigurationsdatei.}
+	description={Können das Messverhalten anpassen, beispielsweise die Anzahl der Messungen pro Zeiteinheit. Für jeden Sensor gibt es eine eigene Konfigurationsdatei}
 	}
 
 \newglossaryentry{sensor}{
@@ -85,7 +85,7 @@
 \newglossaryentry{darstellung}{
 	name=Darstellung,
 	plural={Darstellungen},
-	description={Gibt Daten aus eigehendem Datenstrom graphisch wieder}
+	description={Gibt Daten aus eingehendem Datenstrom graphisch wieder}
 }
 
 \newglossaryentry{python3}{
@@ -95,12 +95,12 @@
 
 \newglossaryentry{GUI}{
 	name=GUI,
-	description={Grafische Benutzeroberflache (engl. Graphical User Interface)},
+	description={Grafische Benutzeroberfläche (engl. Graphical User Interface)},
 }
 
 \newglossaryentry{Benutzerkonfiguration}{
 	name =Messkonfiguration,
-	description ={Gerichteter zyklenfreier Graph mit Knoten vom Typ Sensor, Transformation oder Darstellung. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellugen keine Ausgangskanten haben dürfen.},
+	description ={Gerichteter zyklenfreier Graph mit Knoten vom Typ Sensor, Transformation oder Darstellung. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellungen keine Ausgangskanten haben dürfen},
 }
 
 \newglossaryentry{JVM}{
@@ -542,6 +542,12 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \subsection{Testfälle zur Nutzung der Anwendung}
 
+\subsection{Einführung}
+
+In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur Handhabung von Fehlern dargestellt. Zum besseren Verständnis werden noch einmal einige verwendete Begriffe und der generelle Ablauf einer Nutzung erläutert. Die Anwendung bezeichnet die gesamte in diesem Projekt erstellte Software. Sie benutzt \gls{Benutzerkonfiguration}en um einen Versuchsaufbau zu modellieren. Eine Messkonfiguration besteht aus Bausteinen(\gls{sensor}, \gls{transformation}, \gls{darstellung}) und deren Verbindungen untereinander. Die Bausteine können selbst wieder  durch eine \gls{konfigdata} eingestellt werden. Die Messkonfigurationen werden in der Konfigurationsfläche erstellt. Außerdem können sie geladen und gespeichert werden. Eine Messkonfiguration muss vor der eigentlichen Benutzung "`erstellt"' werden. Beim Erstellen überprüft die Anwendung, ob eine gültige Messkonfiguration vorliegt. Ist die Messkonfiguration erstellt, kann sie als Messung gestartet werden. Um die resultierenden Daten und Graphen zu speichern, muss die Messung gestoppt werden.
+
+\subsection{Testfälle zur Nutzung der Anwendung}
+
 \begin{itemize} 
 
 \item[T010]Starten der Anwendung und Hilfe
@@ -566,29 +572,29 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Ausführen der Demo. Die Demo nutzt Daten aus einer Datei und benötigt keinen angeschlossenen \gls{RasPi}.
 
 \item []\textbf{Vorbedingung:} Die Anwendung ist gestartet worden. Zu Sehen ist das offene Hauptfenster mit leerer Konfigurationsfläche.
-\item []\textbf{Aktionen:} Der Benutzer öffnet die Konfigurationsdatei der Demo mit Hilfe der Ladefunktion der Systemleiste. Sobald die Konfiguration geladen ist, erstellt der Benutzer den Messversuch und startet ihn danach.
-\item []\textbf{Reaktionen:} Nach dem Laden ist die Konfiguration in der Konfigurationsfläche sichtbar. Nach dem Starten der Messung sieht der Benutzer wie die Daten im Graph dargestellt werden.
-\item []\textbf{Nachbedingung:} Die Anwendung ist offen. Eine gültige Konfiguration ist in der Konfigurationsfläche geladen. Die Messung läuft ohne Fehler und die Ergebnisse werden richtig dargestellt.
+\item []\textbf{Aktionen:} Der Benutzer öffnet die Messkonfigurationsdatei der Demo mit Hilfe der Ladefunktion der Systemleiste. Sobald die Messkonfiguration geladen ist, erstellt der Benutzer den Messversuch und startet ihn danach.
+\item []\textbf{Reaktionen:} Nach dem Laden ist die Messkonfiguration in der Konfigurationsfläche sichtbar. Nach dem Starten der Messung sieht der Benutzer wie die Daten im Graph dargestellt werden.
+\item []\textbf{Nachbedingung:} Die Anwendung ist offen. Eine gültige Messkonfiguration ist in der Konfigurationsfläche geladen. Die Messung läuft ohne Fehler und die Ergebnisse werden richtig dargestellt.
 
-\item []\textbf{Ergebnis:} Die Anwendung kann eine Konfiguration, die nur Daten aus einer Datei benötigt, problemlos ohne angeschlossenem \gls{RasPi} durchführen. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F130 Starten einer Messung, F160 Laden einer Konfiguration
+\item []\textbf{Ergebnis:} Die Anwendung kann eine Messkonfiguration, die nur Daten aus einer Datei benötigt, problemlos ohne angeschlossenem \gls{RasPi} durchführen. 
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F130 Starten einer Messung, F160 Laden einer Messkonfiguration
 
 \end{itemize}
 
 
 
-\item[T030] Lehrer erstellt und speichert eine Konfiguration
+\item[T030] Lehrer erstellt und speichert eine Messkonfiguration
 \begin{itemize}
 
-\item []\textbf{Testziel:} Teste eine typische Verwendung der Software anhand des gegebenen Szenarios. Dabei wird das Erstellen, Verändern und Speichern einer Konfiguration getestet.
+\item []\textbf{Testziel:} Teste eine typische Verwendung der Software anhand des gegebenen Szenarios. Dabei wird das Erstellen, Verändern und Speichern einer Messkonfiguration getestet.
 
-\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Konfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
-\item []\textbf{Aktionen:} Der Lehrer zieht zwei angeschlossene Sensoren und eine Transformation in die Konfigurationsfläche. Danach ändert er einige Einstellungen an der Konfiguration. Das Ergebnis speichert er über die Systemleiste als Konfigurationsdatei.
-\item []\textbf{Reaktion:} Nach jedem hinzufügen eines Sensors oder einer Transformation, wird an der entsprechenden Stelle das jeweilige Icon sichtbar. Nach dem Speichern der Konfiguration sieht der Lehrer die erstellte Datei.
-\item []\textbf{Nachbedingung:} Die Anwendung prüft beim Hinzufügen eines Sensor-Icons, ob der Sensor angeschlossen ist. Die Anwendung speichert die angepassten Einstellungen, sofern sie gültig sind. Die Konfigurationsdatei wird erstellt, unabhängig ob die Konfiguration vollständig oder gültig ist.
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Messkonfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
+\item []\textbf{Aktionen:} Der Lehrer zieht zwei angeschlossene Sensoren und eine Transformation in die Konfigurationsfläche. Danach ändert er einige Einstellungen an der Messkonfiguration. Das Ergebnis speichert er über die Systemleiste als Messkonfigurationsdatei.
+\item []\textbf{Reaktion:} Nach jedem Hinzufügen eines Sensors oder einer Transformation, wird an der entsprechenden Stelle das jeweilige Icon sichtbar. Nach dem Speichern der Messkonfiguration sieht der Lehrer die erstellte Datei.
+\item []\textbf{Nachbedingung:} Die Anwendung prüft beim Hinzufügen eines Sensor-Icons, ob der Sensor angeschlossen ist. Die Anwendung speichert die angepassten Einstellungen, sofern sie gültig sind. Die Messkonfigurationsdatei wird erstellt, unabhängig ob die Messkonfiguration vollständig oder gültig ist.
 
-\item []\textbf{Ergebnis:} Die Anwendung kann eine Konfiguration als Datei speichern und prüfen, ob ein Sensor angeschlossen ist.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F180 füge Sensor hinzu, F190 prüfe ob Sensor angeschlossen, F210 füge Transformation hinzu, F270 speichere Konfiguration, F310 Einstellungen Konfiguration 
+\item []\textbf{Ergebnis:} Die Anwendung kann eine Messkonfiguration als Datei speichern und prüfen, ob ein Sensor angeschlossen ist.
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F180 füge Sensor hinzu, F190 prüfe ob Sensor angeschlossen, F210 füge Transformation hinzu, F270 speichere Messkonfiguration, F310 Einstellungen Messkonfiguration 
 
 \end{itemize}
 
@@ -597,15 +603,15 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Testziel:} Teste die Anwendung aus Sicht eines Schülers, der eine Aufgabe bearbeiten soll.
 
-\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Konfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Messkonfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
 
-\item []\textbf{Aktionen:} Der Schüler lädt über die Systemleiste die Konfiguration der Aufgabe. Danach informiert er sich über die Sensoren, Transformationen und Darstellungen über die Hilfestellungen neben den Icons. Als Nächstens vollendet er die Konfiguration. Dann wird sie erstellt. 
-\item []\textbf{Reaktionen:} Nach dem Laden sieht der Schüler die Konfiguration in der Konfigurationsfläche. Wenn der Schüler die Hilfe-Icons aufruft, bekommt er die wesentlichen Informationen die er zur Verwendung der Anwendung braucht. Weiter sieht er, wie sich die graphische Darstellung der Konfiguration durch seine Aktionen verändert. 
-\item []\textbf{Nachbedingung:} Die Anwendung prüft beim Laden der Konfiguration, ob die Sensoren angeschlossen sind. Weiter prüft sie, ob die Konfiguration beim Erstellen gültig ist. 
+\item []\textbf{Aktionen:} Der Schüler lädt über die Systemleiste die Messkonfiguration der Aufgabe. Danach informiert er sich über die Sensoren, Transformationen und Darstellungen über die Hilfestellungen neben den Icons. Als Nächstens vollendet er die Messkonfiguration. Dann wird sie erstellt. 
+\item []\textbf{Reaktionen:} Nach dem Laden sieht der Schüler die Messkonfiguration in der Konfigurationsfläche. Wenn der Schüler die Hilfe-Icons aufruft, bekommt er die wesentlichen Informationen die er zur Verwendung der Anwendung braucht. Weiter sieht er, wie sich die graphische Darstellung der Messkonfiguration durch seine Aktionen verändert. 
+\item []\textbf{Nachbedingung:} Die Anwendung prüft beim Laden der Messkonfiguration, ob die Sensoren angeschlossen sind. Weiter prüft sie, ob die Messkonfiguration beim Erstellen gültig ist. 
 
 
-\item []\textbf{Ergebnis:} Der Benutzer kann Konfigurationen laden, diese verändern und durch das Erstellen auf Gültigkeit prüfen. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F240 füge Darstellung, F470 Hilfe Bausteine, TODO Erstellen Konfiguration
+\item []\textbf{Ergebnis:} Der Benutzer kann Messkonfigurationen laden, diese verändern und durch das Erstellen auf Gültigkeit prüfen. 
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F240 füge Darstellung, F470 Hilfe Bausteine, TODO Erstellen Messkonfiguration
 
 \end{itemize}
 
@@ -614,14 +620,14 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Testziel:} Teste die Anwendung aus Sicht eines Schülers, der Messung starten und deren Ergebnisse speichern soll.
 
-\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es ist die in T040 erstelle Konfiguration geladen und erstellt worden.
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es ist die in T040 erstelle Messkonfiguration geladen und erstellt worden.
 
 \item []\textbf{Aktionen:} Der Schüler startet die Messung. Während der Messung beeinflusst er die Daten durch einen Sensor. Am Ende der Messung speichert der Schüler den resultierenden Graphen und die Werte als Dateien ab.
 \item []\textbf{Reaktionen:} Nach dem Starten, sieht er, wie die Daten als Graphen dargestellt und diese durch seine Aktionen verändert werden. Die Ergebnisse der Messung sieht er nach dem Speichern als erstellte Dateien.
 \item []\textbf{Nachbedingung:} Während die Messung läuft, werden die Daten verarbeitet und dargestellt unabhängig davon, ob der Schüler sie durch den Sensor beeinflusst. Die Ergebnisse sind zum Speichern verfügbar, sobald die Messung angehalten wurde.
 
 
-\item []\textbf{Ergebnis:} Der Benutzer die Messung einer gültigen Konfiguration starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
+\item []\textbf{Ergebnis:} Der Benutzer die Messung einer gültigen Messkonfiguration starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
 \item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F F320 Starte Messung, F330 stelle Ergebnisse dar, F400 speichere Messdaten, F410 speichere Messgraph
 
 
@@ -632,10 +638,10 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \begin{itemize} 
 
-\item[T200] Laden einer ungültigen Datei als Konfiguration
+\item[T200] Laden einer ungültigen Datei als Messkonfiguration
 \begin{itemize}
 
-\item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Laden von ungültigen Konfigurationsdateien.
+\item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Laden von ungültigen Messkonfigurationsdateien.
 
 \item []\textbf{Vorbedingung:} Geöffnete Anwendung.
 \item []\textbf{Aktionen:} Der Benutzer öffnet den Dialog zum Laden einer Datei über die Systemleiste und wählt eine Datei mit ungültigem Format zum Laden aus.
@@ -643,7 +649,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Die Anwendung überprüft, ob die Datei ein gültiges Format hat und verhindert das Laden von ungültigen Formaten. 
 
 
-\item []\textbf{Ergebnis:} Die Anwendung kann beim Laden von Konfigurationen zwischen gültigen und ungültigen Dateiformaten unterscheiden und entsprechend reagieren.
+\item []\textbf{Ergebnis:} Die Anwendung kann beim Laden von Messkonfigurationen zwischen gültigen und ungültigen Dateiformaten unterscheiden und entsprechend reagieren.
 \item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F430 überprüfe Format bei Laden
 
 \end{itemize}
@@ -655,11 +661,11 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Vorbedingung:} Das Hauptfenster der Anwendung ist geöffnet. Die verwendeten Sensoren sind angeschlossen.
 
-\item []\textbf{Aktionen:} Der Benutzer konstruiert eine Konfiguration aus zwei Sensoren, einer Transformation und einer Darstellung. Allerdings verbindet er die Darstellung nicht mit dem Rest der Konstruktion und erstellt die Messkonfiguration.
+\item []\textbf{Aktionen:} Der Benutzer konstruiert eine Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung. Allerdings verbindet er die Darstellung nicht mit dem Rest der Konstruktion und erstellt die Messrkonfiguration.
 \item []\textbf{Reaktionen:} Eine Fehlermeldung wird ausgegeben. Die Anwendung bleibt offen.
 \item []\textbf{Nachbedingung:} Die Anwendung überprüft beim Erstellen der Messkonfiguration, ob diese gültig ist.
 
-\item []\textbf{Ergebnis:} Die Anwendung kann beim Erstellen zwischen gültigen und ungültigen Konfigurationen unterscheiden und entsprechend reagieren
+\item []\textbf{Ergebnis:} Die Anwendung kann beim Erstellen zwischen gültigen und ungültigen Messkonfigurationen unterscheiden und entsprechend reagieren.
 \item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} TO DO
 
 \end{itemize}
@@ -669,7 +675,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Testziel:} Teste das Verhalten der Anwendung, wenn ein Sensor ausfällt und dessen Datenstrom abbricht.
 
-\item []\textbf{Vorbedingung:} Die Anwendung ist geöffnet. Alle verwendeten Sensoren sind angeschlossen und betriebsbereit. Eine Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung wurde geladen und erstellt.
+\item []\textbf{Vorbedingung:} Die Anwendung ist geöffnet. Alle verwendeten Sensoren sind angeschlossen und betriebsbereit. Eine Benutzerkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung wurde geladen und erstellt.
 \item []\textbf{Aktionen:} Der Benutzer startet die Messung. Aus einem unbekannten Grund wird die Verbindung zu einem Sensor getrennt.
 \item []\textbf{Reaktionen:} Die Messung stoppt. Eine Fehlermeldung wird ausgegeben.
 \item []\textbf{Nachbedingung:} \gls{PhyPiDAQ} verliert die Verbindung zu einem Sensor und sendet keine Daten mehr an die Anwendung. Die Anwendung stürzt nicht ab, sondern gibt eine Fehlermeldung aus.
