@@ -129,7 +129,10 @@
 	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden.  }
 }
 
-
+\newglossaryentry{GrafBenOber}{
+	name=Grafische Benutzeroberfläche,
+	description = {Eine Oberfläche, die eine Anwendung durch grafische Symbole bedienbar macht}
+}
 
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
@@ -150,11 +153,11 @@
 
 Die im Rahmen des \gls{OSL 2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}).
 Demzufolge kommt die Anwendung in Schulen zum Einsatz. 
-Die Zielgruppe sind Schüler in der 7. Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
+Die Zielgruppe sind Schüler in der siebten Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
 Die Anwendung läuft in einer JVM und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). 
 Die hardwarenahe Ansteuerung der Sensoren soll durch das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} erfolgen. (siehe Kapitel \ref{systemmodell}).
 Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel \ref{funktionale} bzw. \ref{nichtfunktionale} aufgelistet.
-Die Anwendung soll über eine graphische Benutzungsoberfläche mit Maus und Tastatur bereitstellen. (siehe Kapitel \ref{gui}).
+Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient werden. (siehe Kapitel \ref{gui}).
 
 \section{Zielbestimmung}\label{zielbestimmung}
 
