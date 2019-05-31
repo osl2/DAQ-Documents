@@ -7,6 +7,7 @@
 \usepackage{graphicx}					% Grafiken
 \usepackage{hyperref}					% Hyperlinks
 \usepackage[nonumberlist]{glossaries}		% Glossar
+\usepackage{amsmath}
 
 % Hurenkinder und Schusterjungen verhindern
 \clubpenalty10000
@@ -15,6 +16,13 @@
 
 \DeclareRobustCommand{\glossfirstformat}[1]{\textit{#1}}	% der erste Verweis im Dokument auf ...
 \renewcommand*{\glsdisplayfirst}[4]{\glossfirstformat{#1#4}}	% ... einen Glossarbegriff wird kursiv markiert
+
+% Kriterien sollen nicht kursiv erscheinen
+\makeatletter
+\renewcommand{\@begintheorem}[2]{\trivlist
+	\item[\hskip \labelsep{\bfseries #1\ #2}]}
+\makeatother
+
 
 %\setcounter{tocdepth}{2}				% keine subsubsections im Inhaltsverzeichnis
 \makenoidxglossaries
@@ -89,11 +97,6 @@
 	description={Python ist eine universelle Programmiersprache. Sie ist die offizielle Programmiersprache des Raspberry Pi und wurde deswegen zur Programmierung von PhyPiDAQ verwendet}
 }
 
-\newglossaryentry{Benutzerkonfiguration}{
-	name =Messkonfiguration,
-	description ={Gerichteter zyklenfreier Graph mit Knoten vom Typ Sensor, Transformation oder Darstellung. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellungen keine Ausgangskanten haben dürfen}
-}
-
 \newglossaryentry{JVM}{
 	name={Java Virtual Machine},
 	description={Die Java Virtual Machine (JVM) ist eine Plattform für die Ausführung von Java-Software, die von der Firma Oracle für alle gängigen Betriebssysteme bereitgestellt wird}
@@ -145,6 +148,28 @@
 	description={engl. Graphical User Interface; siehe: Grafische Benutzeroberfläche},
 }
 
+\newglossaryentry{Konfigurationsbaustein}{
+	name=Konfigurationsbaustein,
+	plural=Konfigurationsbausteine,
+	description ={Teil einer Messkonfiguration, der eine Teilaufgabe bestimmten Typs erfüllen kann. Es gibt Sensorbausteine, Konfigurationsbausteine und Darstellungsbausteine. Liegt am Ausgang eines Bausteins ein Wert an, so kann dieser an den Eingang eines  nachgelagerten Bausteins weitergeleitet werden.}
+}
+
+\newglossaryentry{Benutzerkonfiguration}{
+	name =Messkonfiguration,
+	description ={Gerichteter zyklenfreier Graph mit Knoten vom Typ Sensor, Transformation oder Darstellung. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellungen keine Ausgangskanten haben dürfen}
+}
+
+\newglossaryentry{Bausteinprototyp}{
+	name=Bausteinprototyp,
+	description={Baustein, von dem eine Kopie angelegt wird, wenn der Benutzer ein neues Baustein-Exemplar einem Entwurf hinzufügen möchte.}
+}
+
+\newglossaryentry{Messlauf}{
+	name=Messlauf,
+	plural=Messläufe,
+	description={Zeitabschnitt, in dem zu definierten Zeitpunkten an allen Bausteinen eines Entwurfs sukzessive die Werte an allen Ausgängen und Eingängen bestimmt werden.}
+}
+
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
 \subtitle{Version 0.2.2}
@@ -173,15 +198,31 @@ Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient 
 \section{Zielbestimmung}\label{zielbestimmung}
 
 Die Anwendung soll es Lehrern ermöglichen, Schülern ab der siebten Klasse Grundkenntnisse der digitalen Messwerterfassung in einer für Schüler interessante und motivierenden Weise näher zu bringen. 
-Dabei werden aus didaktischer Sicht überflüssige technische Details wie z. B. die zum Auslesen der Sensoren notwendigen Protokolle vor dem Schüler verborgen.
+
+In einem nicht etwas komplexeren Versuchsaufbau sind die wesentlichen Schritte einer messtechnischen Verarbeitung die Folgenden: 
+
+\begin{enumerate}
+	\item Abtastung der physikalischen Größen
+	
+	\item Transformation der Messwerte durch mathematische Funktionen oder programmtechnisch definierte Verarbeitung
+	
+	\item die Darstellung der transformierten Werte in einer zur Beantwortung der Fragestellung geeigneten Form.
+	
+\end{enumerate}
+
+Das projektierte Softwareprodukt soll die Schüler dabei unterstützen, die gängigen Schritte einer messtechnischen Verarbeitung zu definieren und zueinander in Beziehung zu setzen. Hierzu soll das Produkt \glspl{Konfigurationsbaustein} unterschiedlichen Typs anbieten, aus denen ein Schüler dann eine Messkonfiguration entwerfen kann. Die Konfigurationsbausteine sollen anpassbar sein, nicht nur um die Software für möglichst viele physikalische Fragestellungen einsetzen zu können sondern auch um den Bedürfnissen unterschiedlicher Altersstufen gerecht zu werden. 
+
+Natürlich soll dann auch der Betrieb der Messkonfiguration gesteuert werden können und das Produkt sollte eventuell auch Einblicke in Abläufe während des Betriebs unterstützen, beispielsweise zur Analyse unerwünschten Verhaltens.
+
+Aus didaktischer Sicht überflüssige technische Details wie z. B. die zum Auslesen der Sensoren notwendigen Protokolle sollen vor dem Schüler in jedem Fall verborgen bleiben.
 Der Schüler wird so nicht überfordert, sondern soll ermutigt werden, selbstständig mit der Software umzugehen. 
 Dabei kann er im spielerischen Umgang mit Versuchsaufbauten Prinzipien der digitalen Messtechnik wie z. B. Kaskadierung und natürlich auch das Grundprinzip von Ursache und Wirkung erfahren.
 
-Es wird eine graphische Oberfläche angeboten, die es dem Schüler ermöglicht, allein per Drag and Drop eine Messanordnung zu erstellen. 
+Es wird eine graphische Oberfläche angeboten, die es dem Schüler ermöglicht, allein per Drag and Drop eine Messanordnung zu entwerfen. 
 Überflüssige Details, die dahinter stecken, bleiben vor dem Schüler verborgen.
 Die Anwendung motiviert den Schüler dazu, mit Sensoren, Transformationen und Darstellungen zu spielen und Dinge auszuprobieren. 
-Dabei wird ihm durch eine intuitive Status- und Fehleranzeige gezeigt, ob seine Konstruktion funktioniert. 
-Wenn nicht, dann zeigt sie ihm an, wo das Problem liegt und warum es nicht funktioniert. 
+Dabei wird ihm durch eine intuitive Status- und Fehleranzeige gezeigt, ob sein Entwurf funktioniert. 
+Wenn nicht, dann hilft sie ihm das Problem einzugrenzen und gibt Hinweise zur Problembehebung. 
 Eine lästige Fehlersuche soll dem Schüler weitestgehend erspart bleiben. 
 
 Außerdem liefert die Anwendung dem Schüler zu den vorhandenen Bausteinen und zu der Anwendung allgemein die nötigen Informationen, die er für die Nutzung braucht. Dabei wird auf ein ausführliches Tutorial am Anfang verzichtet. Die Anwendung liefert die Informationen häppchenweise durch Informationsanzeigen an den jeweilig relevanten Stellen. Damit findet der Schüler die Hilfe, die er sucht, an der Stelle, an der er sie braucht.
@@ -192,93 +233,261 @@ Weiter ermöglicht es die Anwendung, dass Schüler aus höheren Klassen mit mehr
 
 Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verstehen. Sie ermöglicht dem Nutzer, über eine übersichtliche, strukturierte und intuitive GUI sowie über eine einfache Bedienung die Nutzung eines \gls{RasPi} mit \gls{PhyPiDAQ}. Dadurch soll dem Schüler digitale Messwerterfassung, Physik und auch Informatik in einer motivierenden Weise näher gebracht werden. Womöglich kann die Anwendung den Schüler auch für diese Themen begeistern.  
 
-Im Folgenden werden \gls{Musskriterien}, \gls{Sollkriterien} und \gls{Wunschkriterien} zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittler und niedriger Priorität betrieben. 
+Im Folgenden werden \gls{Musskriterien}, \gls{Sollkriterien} und \gls{Wunschkriterien} zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittler und niedriger Priorität betrieben. Musskriterien werden mit MK, Sollkriterien werden mit SK, Wunschkriterien werden mit WK abgekürzt.
 
+\newtheorem{MussKrit}{MK}
+\newtheorem{SollKrit}{SK}
+\newtheorem{WunschKrit}{WK}
 
-\subsection{Musskriterien}
+Für die Beschreibung der Kriterien ist es hilfreich, ein paar grundsätzliche Überlegungen vorzunehmen, wie Bausteine geartet sein müssen, um eine (Teil-)Aufgabe erfüllen zu können. Denn es macht Sinn, gänzlich unterschiedliche Teilaufgaben dann auch von Bausteinen unterschiedlichen Typs erledigen zu lassen bzw. im Umkehrschluss ähnliche Teilaufgaben jeweils einen bestimmten Bausteintyp vorzusehen.
 
 \begin{itemize}
-
-\item Datenhandhabung
-\begin{itemize}
-
-\item Der Benutzer kann Ergebnisse aus einer Messung (\gls{messdaten}) speichern und laden.
-\item \gls{messdaten} können parallel unterschiedlich transformiert und dargestellt werden (Verzweigung).
-\item Der Benutzer kann eine \gls{Benutzerkonfiguration} speichern und laden. Gespeicherte Daten beinhalten die grafische Anordnung der Konfigurationsbausteine. 
-
-
+	
+	\item Bausteine vom Typ Sensor haben nur Ausgänge. Ein solcher (logischer) Sensorbaustein muss alle Informationen referenzieren können, die zum Ansprechen eines Messgeräts bzw. physikalischen Sensors benötigt werden. Da ein Messgerät Ausgänge bzw. Messkanäle haben kann, kann ein Sensorbaustein mehrere Ausgänge haben. Eingänge besitzt ein Sensorbaustein nicht. 
+	
+	\item Bausteine vom Typ Transformation haben einen oder mehrere Eingänge sowie einen oder mehrere Ausgänge. Für jeden Ausgang kann  ein Transformationsbaustein eine Vorschrift zur Berechnung eines Ausgangswertes aus einem Satz von Eingangswerten beinhalten. Eine Berechnungsvorschrift soll durch eine mathematische Funktionen oder durch eine programmtechnisch definierte Verarbeitung definiert werden können.
+	
+	\item Bausteine vom Typ Darstellung haben einen oder mehrere Eingänge. Ein Darstellungsbaustein soll definieren können, wie ein Satz von Eingangswerten die Erstellung bzw. Aktualisierung einer Darstellung beeinflusst. Ausgänge besitzt ein Darstellungsbaustein nicht.
+	
 \end{itemize}
 
-\item Benutzbarkeit der GUI
+
+
+\subsection{Verwaltung von Bausteinprotoypen}
+
+Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wird einem \gls{Bausteinprototyp}en eine Kopie angelegt.
+
 \begin{itemize}
+	
+	\item 
+	\begin{MussKrit} 
+		Anzeigen von Prototyp-Eigenschaften. 
+	\end{MussKrit}
+	
+	\item Erstellen von Prototypen aller Bausteintypen. Dies kann auf zweierlei Art und Weise geschen: 
+	
+	\begin{itemize}
+	
+		\item 
+		\begin{MussKrit} 
+			durch Anpassung bereits vorhandener (evtl. auch generischer) Bausteintypen
+		\end{MussKrit}
+		
+		\item 
+		\begin{SollKrit} 
+			durch Erweiterung um neue Softwarekomponenten, die definierte programmtechnische Schnittstellen nutzen
+		\end{SollKrit}
 
-\item Die Anwendung muss sich mit dem Wissen eines Schülers in der siebten Klasse bedienen lassen.
-\item Beim Entwurf einer Messkonfiguration soll der Benutzer die von ihm beabsichtigten Aktionen per Drag and Drop anstoßen können. Dies betrifft beispielsweise das Hinzufügen eines Konfigurationsbausteins oder das Erstellen einer Kante vom Ausgangs eines Bausteins mit dem Ausgang Baustein eines anderen Bausteins.
-\item Die \gls{GrafBenOber} sollte möglichst barrierefrei sein. Beispielsweise sollte sie variable Darstellungsgrößen anbieten. Die Semantik sollte auch für Benutzer mit Farberkennungsschwächen ohne Probleme zu erkennen sein.
-
+	\end{itemize}
+	
+	\item 
+	\begin{MussKrit}
+		Verändern von Eigenschaften benutzererstellter Bausteinprototypen.
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit}
+		Löschen eines benutzererstellten Bausteinprototyps.
+	\end{MussKrit}
+	
+	
 \end{itemize}
 
-\item Funktionen
+\subsection{Entwurf bzw. Bearbeitung Messkonfiguration}
+
 \begin{itemize}
-
-\item Die Anwendung erhält \gls{messdaten} durch den Raspberry Pi mit PhyPiDAQ oder aus einer Datei und kann diese dann transformieren und darstellen.
-\item Die Anwendung enthält vorgefertigte Standardtransformationen.
-\item Die Anwendung enthält vorgefertigte Standardkonfigurationen.
-
+	
+	\item 
+	\begin{MussKrit} 			
+		Hinzufügen eines Bausteins zur Messkonfiguration, d. h. Auswahl eines Prototypen und Platzieren des Bausteinexemplars auf der Entwurfsfläche
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit} 		
+		Bearbeiten der Baustein-Eigenschaften oder Verändern der Position des Bausteins auf der Entwurfsfläche 	
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit} 			
+		Löschen eines Bausteins aus der Konfiguration
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit} 			
+		Erstellen einer Weiterleitungsregel bzw. eines "Drahtes" vom Ausgang eines Bausteins zum Eingang eines anderen Bausteins. 
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit} 			
+		Löschen einer Weiterleitungsregel bzw. eines "Drahtes"
+	\end{MussKrit}
+	
+	\item 
+	\begin{SollKrit} 			
+		Anbieten einer Undo- und einer Redo-Funktion
+	\end{SollKrit}
+			
+	\item 
+	\begin{WunschKrit} 
+		Hinzufügen, Darstellen, Bearbeiten und Löschen ergänzender Text- und evtl. auch Bildinformation, beispielsweise zur ausführlichen Beschreibung der physikalische Hintergründe oder für Memos, To-dos, etc
+	\end{WunschKrit}.
+	
 \end{itemize}
 
-\item Information und Rückmeldung
+\subsection{Verwaltung von Bausteinprototypen und Entwürfen}
+
 \begin{itemize}
-
-\item Ist ein verwendeter Sensor nicht angeschlossen oder fehlerhaft, meldet die Anwendung dies dem Benutzer.
-\item Die Anwendung enthält Erklärungen und Informationen zu den GUI-Bereichen, d.h. zu dem Auswahlbereich der Komponenten, zu dem Messversuchsbereich und zu dem Anzeigebereich.
-\item Falls nicht alle Kanäle verbunden sind, meldet die Anwendung dies dem Benutzer mit einer Fehlermeldung, falls dieser versucht die Messung zu starten. 
-
+		
+	\item 
+	\begin{MussKrit} 			
+		Eine Messkonfiguration, einschließlich der grafischen Anordnung der Bausteine, lässt sich in einer Datei speichern.
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit} 			
+		Eine zuvor gespeicherte Messkonfiguration lässt sich zum weiteren Gebrauch durch Laden aus der entsprechenden Datei wiederherstellen. 
+	\end{MussKrit}
+	
+	\item 
+	\begin{SollKrit} 
+		Vom Benutzer erstellte Bausteinprototypen lassen sich auswählen und in einer Datei speichern.			
+	\end{SollKrit}
+	
+	\item 
+	\begin{SollKrit} 			
+		Zuvor gespeicherte Bausteinprototypen lasen sich zum weiteren Gebrauch durch Laden aus der entsprechenden Datei wiederherstellen. 
+	\end{SollKrit}
+	
 \end{itemize}
 
-\item Sonstiges
+\subsection {Vorgefertigte Teile}
+
 \begin{itemize}
-
-\item Die Benutzungsoberfläche bietet als Sprache mindestens Deutsch an und muss leicht um weitere Sprachen ergänzt werden können. Sobald die Anwendung mehr als eine Sprache anbietet, kann der Benutzer die GUI von einer Sprache auf eine andere umstellen.
-\item Die Anwendung soll auf die Unterstützung neuer Sensoren erweiterbar sein.
-
+	
+	\item Die Anwendung enthält eine Reihe von vorgefertigten Bausteinprototypen: 
+	\begin{itemize}
+		
+		\item 
+		\begin{MussKrit} 		
+			Sensorbausteine generischer Natur, beispielsweise für einen Analog/Digital-Wandler, sowie bereits spezialisierte Sensorbausteine, beispielsweise für Licht, Temperatur oder Lage,	
+		\end{MussKrit} 
+		
+		\item 
+		\begin{MussKrit} 		
+			Transformationsbausteine generischer Natur, beispielsweise für lineare Abbildungen oder für bedingte Ausgaben, sowie speziellere Transformationsbausteine, beispielsweise ein Baustein zur Datenstromduplizierung oder ein Multiplexer als beispielhafte Spezialisierung eines "bedingten" Bausteins. 
+				
+		\end{MussKrit}
+		
+		\item 
+		\begin{MussKrit} 	
+			für die meisten Zwecke gut anpassbare Darstellungsbausteine, beispielsweise zur Generierung von Tabellen oder Koordinatensystemen.					
+		\end{MussKrit}
+	\end{itemize}
+	
+	\item 
+	\begin{MussKrit} 
+		Die Anwendung enthält mindestens drei vorgefertigte Messkonfigurationen unterschiedliche Komplexität. Die Konfigurationen sollten möglichst ansprechend und motivierend sein. Denkbar wäre beispielsweise auch Spiele, die das Replizieren bzw. „Nachmachen“ von vorgegebenen Messergebnissen vorsehen.			
+	\end{MussKrit}
+	
 \end{itemize}
 
- \end{itemize}
 
-\subsection{Sollkriterien}
+\subsection{Messläufe}
+
+Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, zufriedenstellende \glspl{Messlauf} zu erhalten.
+
 
 \begin{itemize}
+	
+	\item 
+	\begin{MussKrit} 			
+		Der Benutzer kann einen Messlauf mit adäquater Eingabe starten, pausieren, fortführen und beenden. 
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit} 	
+		Der Benutzer kann vor Start eines Messlaufs die Zeitpunkte definieren, zu denen an den Ausgängen der Sensorbausteine die zuletzt abgetasteten Messwerte registriert und von den nachgelagerten Bausteinen gemäß ihrer Definition sukzessive weiterverarbeitet werden.		
+	\end{MussKrit}
+	
+	\item 
+	\begin{SollKrit} 
+		Während des Entwurfs bzw. der Bearbeitung einer Messkonfiguration kann der Nutzer Checks vornehmen, um überprüfen, ob die gesamte Messkonfiguration oder Teile in ihrem derzeitigen Zustand funktionieren. Bei negativem Ergebnis erhält der Benutzer möglichst aussagekräftige Hinweise. 
+ 
+	
+		\begin{itemize}
+			
+			\item Ist beispielsweise ein physikalischer Sensor nicht funktionsfähig, beispielsweise weil er nicht oder fehlerhaft angeschlossen ist, so kann der Benutzer dies frühzeitig erkennen.
+			
+			\item Sind Ein- oder Ausgänge von Bausteinen nicht verdrahtet, obwohl dies für  eine ordnungsgemäße Funktion des Bausteins erforderlich ist, so kann der Benutzer dies ebenso frühzeitig erkennen.
+			
+		\end{itemize}
+	\end{SollKrit}
+	
+	
+	\item 
+	\begin{WunschKrit} 			
+		Bausteine vom Typ Sensor sollen als Alternative zu abgetasteten Messwerten auch vorgehaltene Testdaten bereithalten können, so dass eine Messkonfiguration auch Messgeräte oder physikalische Sensoren getestet oder vorgeführt werden kann.
+	\end{WunschKrit}	
+	
+	\item 
+	\begin{WunschKrit} 			
+		Der Benutzer soll bei jedem Baustein den lokalen Datenfluss während eines Messlaufs aufzeichnen, einsehen und speichern können. Dies gilt insbesondere auch für Darstellungsbausteine, bei denen auch eine Druckfunktion bezüglich der ihnen generierten Darstellung wünschenswert wäre. 
+	\end{WunschKrit}
+	
+	
+\end{itemize}
 
-\item Die Anwendung enthält Erklärungen und Informationen zu den einzelnen Komponenten, d.h. zu den Sensoren, Transformationen und Darstellungen.
-\item Die Anwendung soll auf die Erstellung eigener Transformationen erweiterbar sein.
-\item Die Anwendung soll auf andere Sprachen erweiterbar sein.
-\item Die Anwendung soll allein auf dem \gls{RasPi}, mit lediglich Peripheriegeräten als zusätzlicher Hardware, laufen können.
-\item Farbkodierung der GUI-Elemente
-\item Die Anwendung soll einfach erweiterbar sein.
 
 
- \end{itemize}
-
-\subsection{Wunschkriterien}
-
+\subsection {Benutzbarkeit der GUI}
 \begin{itemize}
+	
+	\item 
+	\begin{WunschKrit} 		
+		Die Benutzungsoberfläche bietet als Sprache mindestens Deutsch an und muss leicht um weitere Sprachen ergänzt werden können. Sobald die Anwendung mehr als eine Sprache anbietet, kann der Benutzer die GUI von einer Sprache auf eine andere umstellen.	
+	\end{WunschKrit}
+	\item 
+	\begin{SollKrit}
+		Die Anwendung reagiert auf jede Benutzereingabe innerhalb von zwei Sekunde. 
+		Benötigt die Anwendung zur Reaktion auf eine Benutzereingabe länger als zwei Sekunden, so präsentiert sie dem Benutzer fortlaufend mindestens ein Mal pro Sekunde ein möglichst aussagekräftiges Zwischenergebnis, mindestens in Form eines Fortschrittsbalkens. 
+		Nach Ablauf eines einstellbaren Timeouts präsentiert die Anwendung eine möglichst aussagekräftige Fehlermeldung. Benötigt die Bearbeitung einer Benutzereingabe länger als 2 Sekunden, so hat der Benutzer die Möglichkeit, den Bearbeitungsvorgang abzubrechen. 
+	\end{SollKrit}
+	\item 
+	\begin{SollKrit} 
+		Beim Entwurf einer Messkonfiguration soll der Benutzer die von ihm beabsichtigten Aktionen per Drag and Drop anstoßen können. Dies betrifft beispielsweise das Hinzufügen eines Konfigurationsbausteins oder das Erstellen einer Kante vom Ausgangs eines Bausteins mit dem Ausgang Baustein eines anderen Bausteins.
+	\end{SollKrit}
+	\item 
+	\begin{WunschKrit}
+		Da nicht immer alle Eingänge oder Ausgänge Verwendung finden müssen, sollen nicht benötigte Eingänge oder Ausgänge bei einem Baustein bzw. Bausteinprotoyp ausgeblendet bzw. unsichtbar gemacht werden können. 
+	\end{WunschKrit}
+	\item 
+	\begin{SollKrit}
+		Die Anwendung hält interaktiv zugängliche Erklärungen und Informationen zu den einzelnen GUI-Elementen bereit.
+	\end{SollKrit}
+	\item 
+	\begin{WunschKrit} 
+		Die Farben der GUI-Elemente sollen für den Benutzer anpassbar sein. Bei Benutzung der vorgeschlagener Farbschemata soll die grafische Benutzungsschnittstelle möglichst barrierefrei sein, d. h. die Semantik sollte auch für Benutzer mit Farberkennungsschwächen ohne Probleme zu erkennen sein.
+	\end{WunschKrit} 
+	
+	\item 
+	\begin{WunschKrit} 
+		Zur weiteren Barrierefreiheit sollte das Produkt beispielsweise für Schüler mit Sehbehinderung variable Darstellungsgrößen anbieten.
+	\end{WunschKrit}
+	
+	
+\end{itemize}
 
-\item Übertragung der Messdaten über Netzwerkschnittstelle
-\item Spiele, ,,nachmachen`` von vorgegebenen Messergebnissen
-\item Ausführliche Beschreibung der physikalische Hintergründe
 
- \end{itemize}
 
 \subsection{Abgrenzungskriterien}
 
 \begin{itemize}
-
-\item Unterschiedliche Benutzerkonten sind nicht zu implementieren
-
-\item Die zu erstellende Anwendung sieht keinerlei Erfassung oder Speicherung personenbezogener Nutzerdaten vor. Der Einsatz der Software erfordert dementsprechend keine Einverständniserklärung der Nutzer gemäß europäischer \gls{DSGVO}.
-
- \end{itemize}
+	
+	\item Unterschiedliche Benutzerkonten bzw. personalisierte Arbeitsumgebungen  für die einzelnen Benutzer sieht das Produkt nicht vor. 
+	
+	\item Die zu erstellende Anwendung sieht keinerlei Erfassung oder Speicherung personenbezogener Nutzerdaten vor. Der Einsatz der Software erfordert dementsprechend keine Einverständniserklärung der Nutzer gemäß europäischer \gls{DSGVO}.
+	
+\end{itemize}
 
 \section{Produkteinsatz}\label{produkteinsatz}
 
