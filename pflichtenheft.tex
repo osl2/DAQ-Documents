@@ -17,72 +17,61 @@
 \renewcommand*{\glsdisplayfirst}[4]{\glossfirstformat{#1#4}}
 
 %\setcounter{tocdepth}{2}				% keine subsubsections im Inhaltsverzeichnis
-\makenoidxglossaries     
-
-\newglossaryentry{bsp}{
-	name=Beispiel,
-	plural=Beispiele,
-	description=Beispieleintrag
-	}
-
-\newglossaryentry{UI}{
-	name=UI,
-	description={engl. User Interface. Steht für die Oberfläche, die der Benutzer verwendet um die Anwendung zu bedienen}
-}
+\makenoidxglossaries
 
 \newglossaryentry{RasPi}{
 	name=Raspberry Pi,
 	plural=Raspberry Pis,
 	description={Der Raspberry Pi ist ein Einplatinencomputer. In diesem Projekt dient der Raspberry Pi als Hardwareplattform, um unterschiedliche Sensoren zu verbinden und ihre Daten auszulesen}
-	}
+}
 
 \newglossaryentry{PhyPiDAQ}{
 	name=PhyPiDAQ,
 	description={Siehe Abschnitt 4.3 ,,PhyPiDAQ``}
-	}
+}
 
 \newglossaryentry{Science Labs}{
 	name=Science Labs,
 	description={Ein Science Lab ist ein Arbeitsplatz, welcher Schülern ermöglicht wissenschaftliche Forschungen unter kontrollierten Bedingungen durchzuführen} 
-	}
+}
 
-\newglossaryentry{Open-Source Projekt}{
-	name=Open Source Projekt,
-	description={Ein Open Source Projekt ist ein Projekt, dessen Quelltext und Dokumentationen von dritten angesehen, geändert und genutzt werden kann} 
-	}
+\newglossaryentry{opensource}{
+	name=Open Source,
+	description={Software, deren Quelltext öffentlich eingesehen eingesehen werden kann, wird als ,,Open Source`` bzw. ,,quelloffen`` bezeichnet} 
+}
 
-\newglossaryentry{OSL 2}{
-	name=OSL 2,
-	description={Name eines Open-Source-Lehrsoftware-Labor, in welchem Studierende sich mit der Entwicklung von Open-Source-Software vertraut machen können}
-	}
+\newglossaryentry{osl2}{
+	name=OSL\textsuperscript{2},
+	description={Open-Source-Lehrsoftware-Labor, \url{https://formal.iti.kit.edu/projects/oslsl/?lang=de}}
+}
 
 \newglossaryentry{dragdrop}{
 	name=Drag-and-Drop,
 	description={Methode, um mit graphischen Benutzeroberflächen zu interagieren. Dabei wird ein Objekt erst mit der Maus festgehalten und an einen anderen Ort gezogen. Durch das Lösen der Maustaste wird das Objekt platziert}
-	}
+}
 
 \newglossaryentry{click}{
 	name=Click,
 	description={Betätigen der linken Maustaste}
-	}
+}
 
 \newglossaryentry{transformation}{
 	name=Transformation,
 	plural={Transformationen},
 	description={Erzeugen eines Datenstroms unter Verwendung von einem oder mehreren bereits vorhandenen Datenströmen. Eine Transformation kann durch mathematische Funktion realisiert werden}
-	}
+}
 
 \newglossaryentry{konfigdata}{
 	name=Konfigurationsdatei,
 	plural=Konfigurationsdateien,
 	description={Können das Messverhalten anpassen, beispielsweise die Anzahl der Messungen pro Zeiteinheit. Für jeden Sensor gibt es eine eigene Konfigurationsdatei}
-	}
+}
 
 \newglossaryentry{sensor}{
 	name=Sensor,
 	plural={Sensoren},
 	description={Ein Sensor erfasst Messwerte physikalischer Größen. In einer Messkonfiguration stellen sie die Eingangspunkte dar}
-	}
+}
 
 \newglossaryentry{messdaten}{
 	name=Messdaten,
@@ -100,24 +89,19 @@
 	description={Python ist eine universelle Programmiersprache. Sie ist die offizielle Programmiersprache des Raspberry Pi und wurde deswegen zur Programmierung von PhyPiDAQ verwendet}
 }
 
-\newglossaryentry{GUI}{
-	name=GUI,
-	description={Grafische Benutzeroberfläche (engl. Graphical User Interface)},
-}
-
 \newglossaryentry{Benutzerkonfiguration}{
 	name =Messkonfiguration,
-	description ={Gerichteter zyklenfreier Graph mit Knoten vom Typ Sensor, Transformation oder Darstellung. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellungen keine Ausgangskanten haben dürfen},
+	description ={Gerichteter zyklenfreier Graph mit Knoten vom Typ Sensor, Transformation oder Darstellung. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellungen keine Ausgangskanten haben dürfen}
 }
 
 \newglossaryentry{JVM}{
-	name={JVM},
-	description={Eine Java Virtual Machine ist eine Plattform für die Ausführung von Java-Software, die von der Firma Oracle für alle gängigen Betriebssystem bereitgestellt wird}
-	}
+	name={Java Virtual Machine},
+	description={Die Java Virtual Machine ist eine Plattform für die Ausführung von Java-Software, die von der Firma Oracle für alle gängigen Betriebssysteme bereitgestellt wird}
+}
 
 \newglossaryentry{DSGVO}{
-	name=DSGVO,
-	description ={Datenschutz-Grundverordnung, Verordnung der Europäischen Union vom 25. Mai 2018}
+	name=Datenschutz-Grundverordnung,
+	description ={kurz DSGVO, Verordnung der Europäischen Union vom 25. Mai 2018}
 }
 
 \newglossaryentry{Musskriterien}{
@@ -141,9 +125,24 @@
 	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden.  }
 }
 
+\newglossaryentry{BenOber}{
+	name=Benutzeroberfläche,
+	description = {Steht für die Oberfläche, die der Benutzer verwendet um die Anwendung zu bedienen}
+}
+
+\newglossaryentry{UI}{
+	name=UI,
+	description={engl. User Interface. Siehe: Benutzeroberfläche}
+}
+
 \newglossaryentry{GrafBenOber}{
 	name=Grafische Benutzeroberfläche,
 	description = {Eine Oberfläche, die eine Anwendung durch grafische Symbole bedienbar macht}
+}
+
+\newglossaryentry{GUI}{
+	name=GUI,
+	description={engl. Graphical User Interface. Siehe: Grafische Benutzeroberfläche},
 }
 
 \subject{Pflichtenheft}
@@ -163,7 +162,7 @@
 
 \section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
 
-Die im Rahmen des \gls{OSL 2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}).
+Die im Rahmen des \gls{osl2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}).
 Demzufolge kommt die Anwendung in Schulen zum Einsatz. 
 Die Zielgruppe sind Schüler in der siebten Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
 Die Anwendung läuft in einer JVM und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). 
@@ -215,7 +214,7 @@ Im Folgenden werden \gls{Musskriterien}, \gls{Sollkriterien} und \gls{Wunschkrit
 
 \item Die Anwendung muss sich mit dem Wissen eines Schülers in der siebten Klasse bedienen lassen.
 \item Beim Entwurf einer Messkonfiguration soll der Benutzer die von ihm beabsichtigten Aktionen per Drag and Drop anstoßen können. Dies betrifft beispielsweise das Hinzufügen eines Konfigurationsbausteins oder das Erstellen einer Kante vom Ausgangs eines Bausteins mit dem Ausgang Baustein eines anderen Bausteins.
-\item Die grafische Benutzungsschnittstelle sollte möglichst barrierefrei sein. Beispielsweise sollte sie variable Darstellungsgrößen anbieten. Die Semantik sollte auch für Benutzer mit Farberkennungsschwächen ohne Probleme zu erkennen sein.
+\item Die \gls{GrafBenOber} sollte möglichst barrierefrei sein. Beispielsweise sollte sie variable Darstellungsgrößen anbieten. Die Semantik sollte auch für Benutzer mit Farberkennungsschwächen ohne Probleme zu erkennen sein.
 
 \end{itemize}
 
@@ -286,7 +285,7 @@ Im Folgenden werden \gls{Musskriterien}, \gls{Sollkriterien} und \gls{Wunschkrit
 \subsection{Anwendungsbereiche}
 
 Die Anwendung ist für die Verwendung in Schulklassen ab der 7. bis zu 10. Klasse für Schüler und Lehrer im Physikunterricht konzipiert. Ebenfalls soll die Anwendung in Physikprojekten, sowie \gls{Science Labs} verwendet werden können. 
-Als \gls{Open-Source Projekt} im Rahmen des \gls{OSL 2} steht die Anwendung jedoch jedem Interessierten zur Verwendung und Weiterentwicklung zur Verfügung.
+Als \gls{opensource}-Projekt im Rahmen des \gls{osl2} steht die Anwendung jedoch jedem Interessierten zur Verwendung und Weiterentwicklung zur Verfügung.
 
 
 \subsection{Zielgruppe}
@@ -503,7 +502,7 @@ Zu speichern sind ausschließlich:
 
 \begin{itemize}
 
-\item[NF110] Die Benutzeroberfläche ist ergonomisch gestaltet, orientiert an ISO 9241.
+\item[NF110] Die \gls{BenOber} ist ergonomisch gestaltet, orientiert an ISO 9241.
 \item[NF115] Nichttriviale Funktionen werden dem Benutzer erklärt.
 \item[NF120] Ungespeicherte Daten werden nicht ohne Warnung verworfen.
 \item[NF130] Programmfehler werden dem Benutzer gegenüber klar durch Fehlermeldungen präsentiert.
@@ -529,7 +528,7 @@ Zu speichern sind ausschließlich:
 
 \begin{itemize}
 
-\item[NF310] Die Software ist vollständig quelloffen und frei.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
+\item[NF310] Die Software erfüllt die Definition von \gls{opensource}- und freier Software.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
 \item[NF320] Die Software ist erweiterbar und anpassbar an veränderte Umstände, auch durch Außenstehende.
 \item[NF330] Die \gls{DSGVO} wird nicht verletzt; d.h. personenbezogene Daten werden ausschließlich dann verarbeitet, wenn sie vom Benutzer freiwillig eingespeist werden.
 \item[NF340] Daten werden ausschließlich lokal gespeichert.
@@ -833,7 +832,7 @@ Eine Erweiterungsmöglichkeit wäre das Einfügen eines Startbildschirmes vor de
 
 \section{Spezielle Anforderungen an die Entwicklungsumgebung}\label{entwicklungsumgebung}
 
-Für die Umsetzung des Projekts ist Zugang zu funktionierender Hardware (kontret: mindestens ein \gls{RasPi}, möglichst mehrere \glspl{sensor}, Peripheriegeräte) notwendig, um die Funktionalität des Produkts sicherzustellen.\newline
+Für die Umsetzung des Projekts ist Zugang zu funktionierender Hardware (konkret: mindestens ein \gls{RasPi}, möglichst mehrere \glspl{sensor}, Peripheriegeräte) notwendig, um die Funktionalität des Produkts sicherzustellen.\newline
 Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen werden.
 
 \section{Zeit- und Ressourcenplanung}\label{zeit}
@@ -857,7 +856,7 @@ Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen we
 
 In jeder Phase treten unterschiedliche Risiken auf.
 
-Das Ausfallen eines Teammitglieds durch Krankheit oder andere Gründe ist ein bedeutendes Risiko. In diesem Fall muss die zusätzliche Arbeit gerecht auf die anderen Teilnehmer verteilt werden. Eventuell können dadurch einzelne Kriterien und Anforderungen nicht mehr zufriedenstellend erfüllt werden.
+Das Ausfallen eines Teammitglieds durch Krankheit oder anderen Gründen ist ein bedeutendes Risiko. In diesem Fall muss die zusätzliche Arbeit gerecht auf die anderen Teilnehmer verteilt werden. Eventuell können dadurch einzelne Kriterien und Anforderungen nicht mehr zufriedenstellend erfüllt werden.
 
 \section{Ergänzungen}\label{erweiterung}
 
