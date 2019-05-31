@@ -502,7 +502,7 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 \subsection{Anwendungsbereiche}
 
 Die Anwendung ist für die Verwendung in Schulklassen ab der 7. bis zu 10. Klasse für Schüler und Lehrer im Physikunterricht konzipiert. Ebenfalls soll die Anwendung in Physikprojekten, sowie \gls{Science Labs} verwendet werden können. 
-Als \gls{opensource}-Projekt im Rahmen des \gls{osl2} steht die Anwendung jedoch jedem Interessierten zur Verwendung und Weiterentwicklung zur Verfügung.
+Als \gls{opensource}Projekt im Rahmen des \gls{osl2} steht die Anwendung jedoch jedem Interessierten zur Verwendung und Weiterentwicklung zur Verfügung.
 
 
 \subsection{Zielgruppe}
@@ -510,9 +510,10 @@ Als \gls{opensource}-Projekt im Rahmen des \gls{osl2} steht die Anwendung jedoch
 Die Zielgruppen sind hauptsächlich Schülerinnen und Schüler im Physikunterricht, welche die Anwendung verwenden, um erste eigene Messungen durchzuführen. Das Ziel ist es den Schülern erste Einblicke in Messtechniken und Zusammenhänge zwischen Ursache und Wirkung zu zeigen. 
 Die Anwendung soll ebenfalls nicht nur von physikbegeisterten Schülern verwendet werden können, sondern auch für Schüler ohne ein großes Vorwissen in der Physik und Messtechniken. Diesen Schülern soll ebenfalls eine interessante und einfach zu bedienende Plattform geboten werden.
 
+
 \subsection{Betriebsbedingungen}
 
-Die Anwendung läuft auf gewöhnlichen Schulcomputern, welche über eine USB-Schnittstelle mit einem \gls{RasPi} verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden die an das \gls{RasPi} angeschlossenen Messsensoren adressiert, welche die Messdaten wiederum über das \gls{RasPi} an die am Computer laufende Anwendung schicken. 
+Die Anwendung läuft auf Computern, welche über eine USB-Schnittstelle mit einem \gls{RasPi} verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden die an das \gls{RasPi} angeschlossenen Messsensoren adressiert, welche die Messdaten wiederum über das \gls{RasPi} an die am Computer laufende Anwendung schicken. 
 
 
 \section{Produktumgebung}\label{produktumgebung}
@@ -521,20 +522,19 @@ Die Anwendung läuft auf einem Computer, die Messdaten werden über Sensoren an 
 
 \subsection{Software}
 
-Die Anwendung läuft auf Computern mit den Betriebssystemen Linux ab Kernel 4 und Microsoft Windows ab Windows 10. Die Anwendung muss auf dem Computer vollständig installiert sein. 
+Die Anwendung läuft auf Computern mit den Betriebssystemen Linux ab Kernel 4.15 und Microsoft Windows ab Windows 10. Die Anwendung muss auf dem Computer vollständig installiert sein. 
 
 \subsection{Hardware}
 
 Die Anwendung läuft auf Computern, welche für den generellen Einsatz in der Schule gedacht sind.
 Die enthaltenen Komponenten sollten beispielsweise ein aktueller 4-Kern-Prozessor, 8 GB RAM,
-mindestens 256 GB Speicherplatz sein. Schnittstellen für USB, LAN und WLAN sind ebenfalls erforderlich. 
-Auf dem per USB-Schnittstelle verbundenen \gls{RasPi} muss \gls{PhyPiDAQ} installiert und verwendungsfähig sein.
+mindestens 256 GB Speicherplatz sein. Schnittstellen für USB und Netzwerk sind ebenfalls erforderlich. 
+Auf dem per USB-Schnittstelle verbundenen \gls{RasPi} der Variante 3 Mod. B+ muss \gls{PhyPiDAQ} installiert und verwendungsfähig sein.
 Die an den \gls{RasPi} angeschlossenen Sensoren müssen richtig und sinnvoll angeschlossen sein.
 
 \subsection{PhyPiDAQ}
 
-Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache \gls{python3} geschrieben ist bietet einfache und einheitliche Schnittstellen zur Verwendung der Sensoren.
-
+Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache \gls{python3} geschrieben ist bietet einheitliche Schnittstellen zur Verwendung der Sensoren mit dem \gls{RasPi}. Die Verwendung setzt jedoch Grundkenntnisse im Umgang mit \gls{python3} und dem \gls{RasPi} voraus, weshalb es ungeeignet für den Einsatz in Schulen ist.
 
 \section{Funktionale Anforderungen}\label{funktionale}
 
@@ -543,7 +543,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 \item[F010] Die Benutzer erreichen nach Öffnung der Anwendung direkt die \gls{GUI}.
-\item[F020] Der Benutzer öffnet durch den Optionen-Knopf die Einstellungen.
+\item[F020] Der Benutzer öffnet durch den Optionen-Knopf die Einstellungen. 
 \item[F030] Der Benutzer kann durch den Datei-Knopf die Dateiverwaltung öffnen.
 \item[F040] Der Benutzer kann durch den Hilfe-Knopf das Hilfe Fenster öffnen.
 \end{itemize}
@@ -596,8 +596,8 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 \item[F220] Die ausgewählten Transformationen kann der Benutzer mit einem ausgewählten Sensor verknüpfen.
 \item[F230] Aus F070 kann der Benutzer eine Darstellungsart per \gls{dragdrop} in das Konfigurationsfeld zu ziehen.
 \item[F240] Die Ausgewählte Darstellung kann der Benutzer mit einer Transformation verknüpfen.
-\item[F250] Über F030 kann der Benutzer seine eigene Konfiguration über einen Konfiguration speichern-Knopf speichern.
-\item[F260] Bausteine die ein Benutzer nicht mehr in dem Konfigurationsfeld haben möchte können durch \gls{dragdrop} in die Menüleiste wieder versteckt werden.
+\item[F250] Über F030 kann der Benutzer seine eigene\gls{Benutzerkonfiguration} speichern.
+\item[F260] Bausteine können durch \gls{dragdrop} in die Menüleiste wieder aus dem Konfigurationsfeld entfernt werden.
 
 \end{itemize}
 
@@ -616,7 +616,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \item[F290] Der Nutzer kann in den Optionen, die Messlänge und die Wertebereiche festlegen.
 \item[F300] Der Nutzer kann durch F130 die Messung nach der \gls{Benutzerkonfiguration} starten.
-\item[F310] Bei F300 wird automatisch überprüft ob die Benutzerkonfiguration eine sinnvolle Kombination von Sensoren, Transformationen und Darstellungen ist.
+\item[F310] Bei F300 wird automatisch überprüft ob die \gls{Benutzerkonfiguration} eine sinnvolle Kombination von Sensoren, Transformationen und Darstellungen ist.
 \item[F320] Durch F300 wird automatisch mit der visuellen Darstellung der Messdaten begonnen.
 \item[F330] Der Nutzer kann durch den Messung Messung löschen-Knopf eine durchgeführte Messung pausieren und die visuelle Darstellung auf den Ausgangszustand bringen.
 \item[F340] Durch F330 wird nicht die \gls{Benutzerkonfiguration} gelöscht.
@@ -635,7 +635,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 \subsection{Fehlermeldungen}
 
 \begin{itemize}
-\item[F420] Durch F160 geladene Konfigurationen und Messdaten werden automatisch nach Format überprüft und eine aussagekräftige Fehlermeldung zurückgegeben.
+\item[F420] Durch F170 wird bei einem falschen Format eine aussagekräftige Fehlermeldung zurückgegeben.
 \item[F430] Die Anwendung sollte dem Benutzer automatisch bei Betätigen des Messung löschen-Button oder bei Schließen der Anwendung darauf hinweisen, dass die Messdaten ohne Speichern der Messdaten verloren gehen.
 \item[F440] Die Anwendung sollte dem Benutzer eine aussagekräftige Fehlermeldung zurückgeben, falls es zu einem Datenabbruch der Messdaten kommt.
 \item[F450] Durch F310 wird bei einer Benutzerkonfiguration, welche nicht verwendet werden kann eine aussagekräftige Fehlermeldung zurückgegeben.
