@@ -705,12 +705,13 @@ Zu speichern sind ausschließlich:
 
 \begin{itemize}
 
-\item[NF010] Auslesen von Sensordaten innerhalb von (?) ms. //TODO PhyPiDAQ Abhängigkeit
-\item[NF015] Alle (5?) ms können neue Daten angefordert werden.
-\item[NF020] Verarbeitung von Daten benötigt maximal 10 ms pro Transformation und Senke.
-\item[NF030] Bis zu drei Sensoren können zeitgleich verwendet werden.
-\item[NF040] Mehrere Transformationen können hintereinander eingestellt werden.
-\item[NF050] Mehrere Senken können zeitgleich verwendet werden.
+\item[NF010] Auslesen von \gls{messdaten} von einem einzelnen Sensor innerhalb von 50 ms.
+\item[NF020] Alle 20 ms können neue Messdaten angefordert werden.
+\item[NF030] Bis zu drei \glspl{sensor} können zeitgleich verwendet werden, ohne die Leistung zu beeinträchtigen.
+\item[NF040] Mehrere \glspl{transformation} können hintereinander eingestellt werden.
+\item[NF045] Verarbeitung von Daten benötigt maximal 10 ms pro Transformation.
+\item[NF050] Mehrere \glspl{darstellung} können zeitgleich verwendet werden.
+\item[NF055] Darstellung von Daten benötigt maximal 30 ms pro Darstellungsbaustein.
 \item[NF060] Die Anwendung reagiert auf Benutzereingaben innerhalb von zwei Sekunden; mindestens mit einem Zwischenergebnis, Ladebalken oder ähnlichem.
 
 \end{itemize}
@@ -910,11 +911,11 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 Das projektierte Gesamtsystem wird aller Voraussicht nach drei Systemprozesse benötigen, die wie in Abbildung \ref{DeploymentDiagram} dargestellt, miteinander Daten austauschen.
 
-Einer dieser drei Systemprozesse hostet die Java-Virtual-Machine, auf der die zu erstellende Hauptkomponente läuft. Diese enthält die grafische Benutzungsoberfläche, die im Wesentlichen die Erstellung der Werte verarbeitenden Messkonfiguration ermöglicht, und die auch deren Betrieb darstellen kann. 
+Einer dieser drei Systemprozesse hostet die \gls{JVM}, auf der die zu erstellende Hauptkomponente läuft. Diese enthält die grafische Benutzungsoberfläche, die im Wesentlichen die Erstellung der Werte verarbeitenden Messkonfiguration ermöglicht, und die auch deren Betrieb darstellen kann. 
 
-Zum Ansteuern und Auslesen der Sensoren auf dem Rasperry Pi wird das auf Python basierende Framework PhyPiDAQ bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die Java-Virtual-Machine ausgeführt werden kann, wird für diesen ein zweiter Systemprozess benötigt.
+Zum Ansteuern und Auslesen der Sensoren auf dem Rasperry Pi wird das auf Python basierende Framework PhyPiDAQ bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die \gls{JVM} ausgeführt werden kann, wird für diesen ein zweiter Systemprozess benötigt.
 
-Um Resourcenknappheit auf dem Rasperry Pi aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend ebenso auf dem Rasperry Pi ausgeführt werden müssen. 
+Um Ressourcenknappheit auf dem \gls{RasPi} aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend ebenso auf dem \gls{RasPi} ausgeführt werden müssen. 
 
 Falls denn nun die Hauptkomponente tatsächlich auf einem anderen Rechner ausgeführt werden sollte, so muss sie mit dem Python-Interpreter hardware- bzw. plattformübergreifend Daten austauschen können. Bisher stellt PhyPiDAQ hierfür jedoch keine Funktionalität zur Verfügung.
 
@@ -1004,7 +1005,7 @@ In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte 
 	\begin{itemize} 
 		\item Das Kopieren eines ausgewählten Objektes
 		\item Das Einfügen eines gespeicherten Objektes
-		\item Das Anpassen eines ausgewälten Elements. Diese Einstellungsmöglichkeiten sind von dem Objekt abhängig.
+		\item Das Anpassen eines ausgewählten Elements. Diese Einstellungsmöglichkeiten sind von dem Objekt abhängig.
 	\end{itemize}\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensor.png} & Der Benutzer kann sich eine Auswahl von \glspl{sensor} anzeigen lassen. Die \glspl{sensor} können anschließend in das Konfigurationsfeld eingefügt werden. Die angezeigte Auswahl ist unabhängig von den angeschlossenen Sensoren\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindung.png} & Der Benutzer kann sich eine Auswahl von \glspl{transformation} anzeigen lassen. Die \glspl{transformation} können anschließend per \gls{dragdrop} in das Konfigurationsfeld gezogen werden. Die Auswahl kann unter Optionen erweitert werden.\newline\\
@@ -1017,7 +1018,7 @@ In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte 
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Hilfe.png} & Der Benutzer kann sich eine allgemeine Hilfe anzeigen lassen. In der Hilfe werden die Funktionen der Anwendung erklärt.\newline\\
 \end{tabular}
 
-Im Laufe der Entwicklung kann es sich als sinnvoll herrausstellen weitere Optionen einzufügen bzw. bestehende Optionen zusammenzufügen.
+Im Laufe der Entwicklung kann es sich als sinnvoll herausstellen weitere Optionen einzufügen bzw. bestehende Optionen zusammenzufügen.
 
 \subsubsection{Konfigurationsfeld}
 
