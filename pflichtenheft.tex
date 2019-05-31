@@ -172,7 +172,7 @@
 
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
-\subtitle{Version 0.2.2}
+\subtitle{Version 0.3.0}
 \author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
 \date{\today}
 
@@ -318,12 +318,12 @@ Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wi
 	
 	\item 
 	\begin{MussKrit} 			
-		Erstellen einer Weiterleitungsregel bzw. eines "Drahtes" vom Ausgang eines Bausteins zum Eingang eines anderen Bausteins. 
+		Erstellen einer Weiterleitungsregel bzw. eines ,,Drahtes`` vom Ausgang eines Bausteins zum Eingang eines anderen Bausteins. 
 	\end{MussKrit}
 	
 	\item 
 	\begin{MussKrit} 			
-		Löschen einer Weiterleitungsregel bzw. eines "Drahtes"
+		Löschen einer Weiterleitungsregel bzw. eines ,,Drahtes``
 	\end{MussKrit}
 	
 	\item 
@@ -378,7 +378,7 @@ Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wi
 		
 		\item 
 		\begin{MussKrit} 		
-			Transformationsbausteine generischer Natur, beispielsweise für lineare Abbildungen oder für bedingte Ausgaben, sowie speziellere Transformationsbausteine, beispielsweise ein Baustein zur Datenstromduplizierung oder ein Multiplexer als beispielhafte Spezialisierung eines "bedingten" Bausteins. 
+			Transformationsbausteine generischer Natur, beispielsweise für lineare Abbildungen oder für bedingte Ausgaben, sowie speziellere Transformationsbausteine, beispielsweise ein Baustein zur Datenstromduplizierung oder ein Multiplexer als beispielhafte Spezialisierung eines ,,bedingten`` Bausteins. 
 				
 		\end{MussKrit}
 		
@@ -723,7 +723,7 @@ Zu speichern sind ausschließlich:
 \item[NF110] Die \gls{BenOber} ist ergonomisch gestaltet, orientiert an ISO 9241.
 \item[NF115] Nichttriviale Funktionen werden dem Benutzer erklärt.
 \item[NF120] Ungespeicherte Daten werden nicht ohne Warnung verworfen.
-\item[NF130] Programmfehler werden dem Benutzer gegenüber klar durch Fehlermeldungen präsentiert.
+\item[NF130] Über Programmfehler wird der Benutzer gegenüber durch aussagekräftige Fehlermeldungen informiert.
 \item[NF140] Schriftgröße von Text kann verändert werden.
 \item[NF150] Farbschema von farbigen \gls{UI}-Elementen ist veränderbar.
 \item[NF160] Die Sprache der Benutzeroberfläche kann verändert werden.
@@ -753,16 +753,33 @@ Zu speichern sind ausschließlich:
 
 \end{itemize}
 
+\subsection{Qualitätsanforderungen}
+
+Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
+
+\begin{tabular}{ | c | c | c | c | c | }
+	\hline
+	\textbf{Merkmal} & \textbf{sehr wichtig} & \textbf{wichtig} & \textbf{weniger wichtig} & \textbf{unwichtig} \\
+	\hline
+	Robustheit & X & & & \\
+	Zuverlässigkeit & & X & & \\
+	Benutzerfreundlichkeit & X & & & \\
+	Effizienz & & X & & \\
+	Portierbarkeit & & & X & \\
+	Kompatibilität & & & X & \\
+	\hline
+\end{tabular}
+
 \section{Globale Testfälle und Testszenarien}\label{testfall}
 \subsection{Einführung}
 
-In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur Handhabung von Fehlern dargestellt. Zum besseren Verständnis werden noch einmal einige verwendete Begriffe und der generelle Ablauf einer Nutzung erläutert. Die Anwendung bezeichnet die gesamte in diesem Projekt erstellte Software. Sie benutzt Konfigurationen um einen Versuchsaufbau zu modellieren. Eine Konfiguration besteht aus Bausteinen(Sensor, Transformation, Darstellung / Senke) und deren Verbindungen untereinander. Die Bausteine können selbst wieder eingestellt werden. Die Konfigurationen werden in der Konfigurationsfläche erstellt. Außerdem können sie geladen und gespeichert werden. Eine (Mess-)Konfiguration muss vor der eigentlichen Benutzung "`erstellt"' werden. Beim Erstellen überprüft die Anwendung, ob eine gültige Konfiguration vorliegt. Ist die Konfiguration erstellt, kann sie als Messung gestartet werden. Um die resultierenden Daten und Graphen zu speichern, muss die Messung gestoppt werden.
+In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur Handhabung von Fehlern dargestellt. Zum besseren Verständnis werden noch einmal einige verwendete Begriffe und der generelle Ablauf einer Nutzung erläutert. Die Anwendung bezeichnet die gesamte in diesem Projekt erstellte Software. Sie benutzt Konfigurationen um einen Versuchsaufbau zu modellieren. Eine Konfiguration besteht aus Bausteinen(Sensor, Transformation, Darstellung / Senke) und deren Verbindungen untereinander. Die Bausteine können selbst wieder eingestellt werden. Die Konfigurationen werden in der Konfigurationsfläche erstellt. Außerdem können sie geladen und gespeichert werden. Eine (Mess-)Konfiguration muss vor der eigentlichen Benutzung ,,erstellt`` werden. Beim Erstellen überprüft die Anwendung, ob eine gültige Konfiguration vorliegt. Ist die Konfiguration erstellt, kann sie als Messung gestartet werden. Um die resultierenden Daten und Graphen zu speichern, muss die Messung gestoppt werden.
 
 \subsection{Testfälle zur Nutzung der Anwendung}
 
 \subsection{Einführung}
 
-In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur Handhabung von Fehlern dargestellt. Zum besseren Verständnis werden noch einmal einige verwendete Begriffe und der generelle Ablauf einer Nutzung erläutert. Die Anwendung bezeichnet die gesamte in diesem Projekt erstellte Software. Sie benutzt \gls{Benutzerkonfiguration}en um einen Versuchsaufbau zu modellieren. Eine Messkonfiguration besteht aus Bausteinen(\gls{sensor}, \gls{transformation}, \gls{darstellung}) und deren Verbindungen untereinander. Die Bausteine können selbst wieder  durch eine \gls{konfigdata} eingestellt werden. Die Messkonfigurationen werden in der Konfigurationsfläche erstellt. Außerdem können sie geladen und gespeichert werden. Eine Messkonfiguration muss vor der eigentlichen Benutzung "`erstellt"' werden. Beim Erstellen überprüft die Anwendung, ob eine gültige Messkonfiguration vorliegt. Ist die Messkonfiguration erstellt, kann sie als Messung gestartet werden. Um die resultierenden Daten und Graphen zu speichern, muss die Messung gestoppt werden.
+In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur Handhabung von Fehlern dargestellt. Zum besseren Verständnis werden noch einmal einige verwendete Begriffe und der generelle Ablauf einer Nutzung erläutert. Die Anwendung bezeichnet die gesamte in diesem Projekt erstellte Software. Sie benutzt \gls{Benutzerkonfiguration}en um einen Versuchsaufbau zu modellieren. Eine Messkonfiguration besteht aus Bausteinen(\gls{sensor}, \gls{transformation}, \gls{darstellung}) und deren Verbindungen untereinander. Die Bausteine können selbst wieder  durch eine \gls{konfigdata} eingestellt werden. Die Messkonfigurationen werden in der Konfigurationsfläche erstellt. Außerdem können sie geladen und gespeichert werden. Eine Messkonfiguration muss vor der eigentlichen Benutzung ,,erstellt`` werden. Beim Erstellen überprüft die Anwendung, ob eine gültige Messkonfiguration vorliegt. Ist die Messkonfiguration erstellt, kann sie als Messung gestartet werden. Um die resultierenden Daten und Graphen zu speichern, muss die Messung gestoppt werden.
 
 \subsection{Testfälle zur Nutzung der Anwendung}
 
@@ -879,7 +896,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Vorbedingung:} Das Hauptfenster der Anwendung ist geöffnet. Die verwendeten Sensoren sind angeschlossen.
 
-\item []\textbf{Aktionen:} Der Benutzer konstruiert eine Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung. Allerdings verbindet er die Darstellung nicht mit dem Rest der Konstruktion und erstellt die Messrkonfiguration.
+\item []\textbf{Aktionen:} Der Benutzer konstruiert eine Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung. Allerdings verbindet er die Darstellung nicht mit dem Rest der Konstruktion und erstellt die Messkonfiguration.
 \item []\textbf{Reaktionen:} Eine Fehlermeldung wird ausgegeben. Die Anwendung bleibt offen.
 \item []\textbf{Nachbedingung:} Die Anwendung überprüft beim Erstellen der Messkonfiguration, ob diese gültig ist.
 
@@ -913,7 +930,7 @@ Das projektierte Gesamtsystem wird aller Voraussicht nach drei Systemprozesse be
 
 Einer dieser drei Systemprozesse hostet die \gls{JVM}, auf der die zu erstellende Hauptkomponente läuft. Diese enthält die grafische Benutzungsoberfläche, die im Wesentlichen die Erstellung der Werte verarbeitenden Messkonfiguration ermöglicht, und die auch deren Betrieb darstellen kann. 
 
-Zum Ansteuern und Auslesen der Sensoren auf dem Rasperry Pi wird das auf Python basierende Framework PhyPiDAQ bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die \gls{JVM} ausgeführt werden kann, wird für diesen ein zweiter Systemprozess benötigt.
+Zum Ansteuern und Auslesen der Sensoren auf dem \gls{RasPi} wird das auf Python basierende Framework \gls{PhyPiDAQ} bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die \gls{JVM} ausgeführt werden kann, wird für diesen ein zweiter Systemprozess benötigt.
 
 Um Ressourcenknappheit auf dem \gls{RasPi} aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend ebenso auf dem \gls{RasPi} ausgeführt werden müssen. 
 
@@ -932,7 +949,7 @@ Zur Realisierung der hardwareübergreifenden Kommunikation sind die folgenden zw
 
 Da bei letzterer Variante die Utility-Softwarekompomente zusätzlich auch noch eine Überwachungsfunktion bezüglich PhyPiDAQ übernehmen und dieses im Falle von Abstürzen und Nicht-Responsivität erneut ausführen kann, ist letztere Lösungsvariante die bevorzugte Lösungsvariante zur Realisierung der optionalen hardwareübergreifenden Kommunikation. 
 
-Abbildung \ref{DeploymentDiagram} stellt die Verteilung der Systemkomponenten auf zwei Rechnern mittels der gewählten zweiten Lösungsvariante dar, und benennt die notwendige Utility-Komponente mit "Measurement-Server". 
+Abbildung \ref{DeploymentDiagram} stellt die Verteilung der Systemkomponenten auf zwei Rechnern mittels der gewählten zweiten Lösungsvariante dar, und benennt die notwendige Utility-Komponente mit ,,Measurement-Server``. 
  
 
 \begin{figure}[h]
@@ -951,7 +968,7 @@ Das Ziel der Benutzeroberfläche ist es dem Anwender eine intuitive Benutzung de
 
 \subsection{Generell}
 
-Um die Ziele zu erfüllen wird das Programm über eine \gls{GrafBenOber}) (kurz "GUI") bedient. Der Anwender soll in der Lage sein bereits vorhandene Computer und Mobilgerät Kenntnisse zu nutzen.
+Um die Ziele zu erfüllen wird das Programm über eine \gls{GrafBenOber}) (kurz ,,GUI``) bedient. Der Anwender soll in der Lage sein bereits vorhandene Computer und Mobilgerät Kenntnisse zu nutzen.
 
 \subsection{Eingabegeäte}
 
@@ -989,7 +1006,7 @@ In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte 
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/PhyPiDAQ.png} & Der Name des Programmes wird hier angezeigt. Rechts daneben steht, sofern vorhanden, der Name der Datei, die gerade geöffnet ist.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Maximieren.png} & Das ''Maximieren''-Symbol vergrößert das Programmfenster auf die maximale Größe. Die Größe ist von der Benutzungsumgebung abhängig.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Minimieren.png} & Das ''Minimieren''-Symbol blendet das Programmfenster aus. Es ist weiterhin geöffnet und wieder aufrufbar. \\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Schliessen.png} & Das ''Schliessen''-Symbol beendet die Anwendung. Vor dem Beenden findet eine Abfrage statt, ob der Anwender eventuell vorgenommene Änderungen speichern möchte.\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Schliessen.png} & Das ''Schließen''-Symbol beendet die Anwendung. Vor dem Beenden findet eine Abfrage statt, ob der Anwender eventuell vorgenommene Änderungen speichern möchte.\\
 \end{tabular}
 
 \subsubsection{Auswahl}
@@ -1024,11 +1041,11 @@ Im Laufe der Entwicklung kann es sich als sinnvoll herausstellen weitere Optione
 
 \begin{tabular}[t]{p{1cm} p{10cm}}
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Information.png} & Das ''Informations''-Symbol zeigt nach einem Click weiterführende Informationen zu dem Element an, zu dem es gehört. So würde beispielsweise bei einer Transformation die Funktion angezeigt werde, die sie realisiert.\newline\\\cline{1-2}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensorelement.png} & Repräsentation eines Sensors, der in PhyPiDAQ erkannt werden kann. Vorraussetzung hierfür ist die Existenz einer \gls{konfigdata}.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensorelement.png} & Repräsentation eines Sensors, der in PhyPiDAQ erkannt werden kann. Voraussetzung hierfür ist die Existenz einer \gls{konfigdata}.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Sensor.png} & Die zu einem Sensor gehörende Eingabe. Die Eingabe wird nur angezeigt, wenn auch die Kanäle angezeigt werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Sensor.png} & Die zu einem Sensor gehörende Ausgabe. Jeder Sensor hat genau eine Ausgabe.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Kanal.png} & Der zu einem Sensor gehörende Kanal. Die Anzahl an angezeigten Kanlälen hängt von dem Sensor ab. In den Optionen kann eingestellt werden, ob die Kanäle angezeigt werden.\newline\\\cline{1-2}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.png} & Repräsentation einer \gls{transformation}. Abhängig von der Anzahl an Eingängen der Transformation besitzt die GUI dementsprechend viele Eingänge. Jedem Eingang können durch Einfügen von einer Verbindung Daten übergegen werden.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.png} & Repräsentation einer \gls{transformation}. Abhängig von der Anzahl an Eingängen der Transformation besitzt die GUI dementsprechend viele Eingänge. Jedem Eingang können durch Einfügen von einer Verbindung Daten übergeben werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Verbindung.png} & Die Eingabe einer Transformation. Die Anzahl der verfügbaren Eingaben hängt von der Transformation ab.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Transformation.png} & Die Ausgabe einer Transformation. Jede Transformation hat genau eine Ausgabe.\newline\\\cline{1-2}
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungspfeil.png} & Eine Verbindung zwischen zwei Elementen. Sie besitz eine Richtung. Daten ''fließen'' also nicht in beide Richtungen. Sie wird durch cklicken auf zwei Elemente erstellt. Dabei ist das Element welches zuerst geclickt wurde der Anfang der Verbindung.\newline\\
@@ -1053,6 +1070,8 @@ Eine Erweiterungsmöglichkeit wäre das Einfügen eines Startbildschirmes vor de
 Für die Umsetzung des Projekts ist Zugang zu funktionierender Hardware (konkret: mindestens ein \gls{RasPi}, möglichst mehrere \glspl{sensor}, Peripheriegeräte) notwendig, um die Funktionalität des Produkts sicherzustellen.\newline
 Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen werden.
 
+Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in PhyPiDAQ fehlerhaft sind können möglicherweise nicht korrekt implementiert werden. PhyPiDAQ sollte beispielsweise im Fall eines Programmfehlers eindeutige Fehlercodes produzieren, damit der Benutzer aussagekräftig über das Problem informiert werden kann.
+
 \section{Zeit- und Ressourcenplanung}\label{zeit}
 
 \subsection{Projektphasen}
@@ -1075,8 +1094,6 @@ Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen we
 In jeder Phase treten unterschiedliche Risiken auf.
 
 Das Ausfallen eines Teammitglieds durch Krankheit oder anderen Gründen ist ein bedeutendes Risiko. In diesem Fall muss die zusätzliche Arbeit gerecht auf die anderen Teilnehmer verteilt werden. Eventuell können dadurch einzelne Kriterien und Anforderungen nicht mehr zufriedenstellend erfüllt werden.
-
-\section{Ergänzungen}\label{erweiterung}
 
 \section{Glossar}\label{glossar}
 
