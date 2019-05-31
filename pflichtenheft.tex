@@ -118,14 +118,14 @@
 	name=Sollkriterien,
 	description ={Werden zusammen mit Muss- und Wunschkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung mittlere Priorität. 
 	Falls ein Sollkriterium umgesetzt werden kann, dann muss es nach Möglichkeit auch realisiert werden. 
-	Falls ein Sollkriterium in den nachfolgenden Projektphasen nicht umgesetzt werden kann, so muss dies dokumentiert und begründet werden }
+	Falls ein Sollkriterium in den nachfolgenden Projektphasen nicht umgesetzt werden kann, so muss dies dokumentiert und begründet werden}
 }
 
 \newglossaryentry{Wunschkriterien}{
 	name=Wunschkriterien,
 	description ={Werden zusammen mit Muss- und Sollkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung niedrige Priorität. 
 	Je nach Resourcenlage können sie nach Bearbeitung aller Muss- und Kannkriterien umgesetzt werden. 
-	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden  }
+	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden}
 }
 
 \newglossaryentry{BenOber}{
@@ -693,28 +693,12 @@ Zu speichern sind ausschließlich:
 \begin{itemize}
 
 \item[D010] \gls{Benutzerkonfiguration}(en)
-\item[D020] \gls{messdaten}
+\item[D020] Messdaten
 \item[D030] Sensorkonfigurationsdaten
 
 \end{itemize}
 
 \section{Nichtfunktionale Anforderungen}\label{nichtfunktionale}
-
-\subsection{Qualitätsanforderungen}
-
-Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
-
-\begin{tabular}{ | c | c | c | c | c | }
-	\hline
-	\textbf{Merkmal} & \textbf{sehr wichtig} & \textbf{wichtig} & \textbf{weniger wichtig} & \textbf{unwichtig} \\ \hline
-	Benutzbarkeit & X & & & \\
-	Robustheit & X & & & \\
-	Zuverlässigkeit & & X & & \\
-	Effizienz & & X & & \\
-	Portierbarkeit & & & X & \\
-	Kompatibilität & & & X & \\
-	\hline
-\end{tabular}
 
 \subsection{Produktleistungen}
 
@@ -745,7 +729,7 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 
 \end{itemize}
 
-\subsection{Zuverlässigkeit und Robustheit}
+\subsection{Zuverlässigkeit}
 
 \begin{itemize}
 
@@ -761,12 +745,29 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 
 \begin{itemize}
 
-\item[NF310] Die Software erfüllt die Definition von \gls{opensource}– und freier Software.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
+\item[NF310] Die Software erfüllt die Definition von \gls{opensource}- und freier Software.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
 \item[NF320] Die Software ist erweiterbar und anpassbar an veränderte Umstände, auch durch Außenstehende.
 \item[NF330] Die \gls{DSGVO} wird nicht verletzt; d.h. personenbezogene Daten werden ausschließlich dann verarbeitet, wenn sie vom Benutzer freiwillig eingespeist werden.
 \item[NF340] Daten werden ausschließlich lokal gespeichert.
 
 \end{itemize}
+
+\subsection{Qualitätsanforderungen}
+
+Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
+
+\begin{tabular}{ | c | c | c | c | c | }
+	\hline
+	\textbf{Merkmal} & \textbf{sehr wichtig} & \textbf{wichtig} & \textbf{weniger wichtig} & \textbf{unwichtig} \\
+	\hline
+	Robustheit & X & & & \\
+	Zuverlässigkeit & & X & & \\
+	Benutzerfreundlichkeit & X & & & \\
+	Effizienz & & X & & \\
+	Portierbarkeit & & & X & \\
+	Kompatibilität & & & X & \\
+	\hline
+\end{tabular}
 
 \section{Globale Testfälle und Testszenarien}\label{testfall}
 
@@ -786,7 +787,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Vorbedingung:} Die Anwendung ist installiert. Zu Sehen ist der Desktop des Benutzers mit einer Verknüpfung zur Anwendung.
 \item []\textbf{Aktion:} Der Benutzer öffnet die Anwendung über die Verknüpfung. Danach informiert er sich über die Anwendung über die Hilfe in der Systemleiste.
 \item []\textbf{Reaktion:} Die Anwendung öffnet sich. Zu Sehen ist das Hauptfenster mit leerer Konfigurationsfeld und leeren Darstellungen. Nach dem Öffnen der Hilfe, sieht der Benutzer die nötigen Informationen zur Bedienung der Anwendung. 
-\item []\textbf{Nachbedingung:} Nach dem Öffnen der Anwendung, überprüft diese, ob ein \gls{RasPi} angeschlossen ist. Jeder dargestellte Text ist auf Deutsch.
+\item []\textbf{Nachbedingung:} Nach dem öffnen der Anwendung, überprüft diese, ob ein \gls{RasPi} angeschlossen ist. Jeder dargestellte Text ist auf Deutsch.
 
 \item []\textbf{Ergebnis:} Der Benutzer kann die Anwendung starten. Die Bedienung der Anwendung ist komplett auf Deutsch möglich.
 \item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F010 erreiche GUI nach Start, F140 leere Darstellung nach Anwendungsstart, F480 Hilfe zu Anwendung, F490 Texte der Anwendung auf Deutsch
@@ -799,7 +800,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Ausführen der Demo. Die Demo nutzt Daten aus einer Datei und benötigt keinen angeschlossenen \gls{RasPi}.
 
-\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet worden. Zu Sehen ist das offene Hauptfenster mit leerem Konfigurationsfeld.
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet worden. Zu Sehen ist das offene Hauptfenster mit leerer Konfigurationsfeld.
 \item []\textbf{Aktionen:} Der Benutzer öffnet die Messkonfigurationsdatei der Demo mit Hilfe der Ladefunktion der Systemleiste. Sobald die Messkonfiguration geladen ist, erstellt der Benutzer den Messversuch und startet ihn danach.
 \item []\textbf{Reaktionen:} Nach dem Laden ist die Messkonfiguration in der Konfigurationsfeld sichtbar. Nach dem Starten der Messung sieht der Benutzer wie die Daten im Graph dargestellt werden.
 \item []\textbf{Nachbedingung:} Die Anwendung ist offen. Eine gültige Messkonfiguration ist in der Konfigurationsfeld geladen. Die Messung läuft ohne Fehler und die Ergebnisse werden richtig dargestellt.
@@ -817,9 +818,9 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Testziel:} Teste eine typische Verwendung der Software anhand des gegebenen Szenarios. Dabei wird das Erstellen, Verändern und Speichern einer Messkonfiguration getestet.
 
 \item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Messkonfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
-\item []\textbf{Aktionen:} Der Lehrer zieht zwei angeschlossene Sensoren und eine Transformation in das Konfigurationsfeld. Danach ändert er einige Einstellungen an der Messkonfiguration. Das Ergebnis speichert er über die Systemleiste als Messkonfigurationsdatei.
-\item []\textbf{Reaktion:} Nach jedem Hinzufügen eines Sensors oder einer Transformation, wird an der entsprechenden Stelle der jeweilige Baustein im Konfigurationsfeld sichtbar. Nach dem Speichern der Messkonfiguration sieht der Lehrer die erstellte Datei.
-\item []\textbf{Nachbedingung:} Die Anwendung prüft beim Hinzufügen eines Sensorbausteins, ob der Sensor angeschlossen ist. Die Anwendung speichert die angepassten Einstellungen, sofern sie gültig sind. Die Messkonfigurationsdatei wird erstellt, unabhängig ob die Messkonfiguration vollständig oder gültig ist.
+\item []\textbf{Aktionen:} Der Lehrer zieht zwei angeschlossene Sensoren und eine Transformation in die Konfigurationsfeld. Danach ändert er einige Einstellungen an der Messkonfiguration. Das Ergebnis speichert er über die Systemleiste als Messkonfigurationsdatei.
+\item []\textbf{Reaktion:} Nach jedem Hinzufügen eines Sensors oder einer Transformation, wird an der entsprechenden Stelle das jeweilige Icon sichtbar. Nach dem Speichern der Messkonfiguration sieht der Lehrer die erstellte Datei.
+\item []\textbf{Nachbedingung:} Die Anwendung prüft beim Hinzufügen eines Sensor-Icons, ob der Sensor angeschlossen ist. Die Anwendung speichert die angepassten Einstellungen, sofern sie gültig sind. Die Messkonfigurationsdatei wird erstellt, unabhängig ob die Messkonfiguration vollständig oder gültig ist.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann eine Messkonfiguration als Datei speichern und prüfen, ob ein Sensor angeschlossen ist.
 \item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F180 füge Sensor hinzu, F190 prüfe ob Sensor angeschlossen, F210 füge Transformation hinzu, F250 speichere Messkonfiguration, F290 Einstellungen Messkonfiguration 
@@ -840,7 +841,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Der Benutzer kann Messkonfigurationen laden, diese verändern und durch das Erstellen auf Gültigkeit prüfen. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F230 füge Darstellung hinzu, F470 Hilfe Bausteine
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F230 füge Darstellung, F470 Hilfe Bausteine
 
 \end{itemize}
 
@@ -856,7 +857,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Die Anwendung prüft vor dem Starten der Messung, ob die Messkonfiguration gültig ist. Während die Messung läuft, werden die Daten verarbeitet und dargestellt unabhängig davon, ob der Schüler sie durch den Sensor beeinflusst. Die Ergebnisse sind zum Speichern verfügbar, sobald die Messung angehalten wurde.
 
 
-\item []\textbf{Ergebnis:} Der Benutzer kann die Messung einer gültigen Messkonfiguration starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
+\item []\textbf{Ergebnis:} Der Benutzer die Messung einer gültigen Messkonfiguration starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
 \item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F300 Starte Messung, F320 stelle Ergebnisse dar, F400 speichere Messdaten, F410 speichere Messgraph
 
 
@@ -874,7 +875,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Vorbedingung:} Geöffnete Anwendung.
 \item []\textbf{Aktionen:} Der Benutzer öffnet den Dialog zum Laden einer Datei über die Systemleiste und wählt eine Datei mit ungültigem Format zum Laden aus.
-\item []\textbf{Reaktionen:} Eine aussagekräftige Fehlermeldung wird ausgegeben.
+\item []\textbf{Reaktionen:} Eine Fehlermeldung wird ausgegeben.
 \item []\textbf{Nachbedingung:} Die Anwendung überprüft, ob die Datei ein gültiges Format hat und verhindert das Laden von ungültigen Formaten. 
 
 
@@ -891,7 +892,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Vorbedingung:} Das Hauptfenster der Anwendung ist geöffnet. Die verwendeten Sensoren sind angeschlossen.
 
 \item []\textbf{Aktionen:} Der Benutzer konstruiert eine Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung. Allerdings verbindet er die Darstellung nicht mit dem Rest der Konstruktion und startet die Messkonfiguration.
-\item []\textbf{Reaktionen:} Die Messung wird nicht gestartet, sondern eine aussagekräftige Fehlermeldung wird ausgegeben.
+\item []\textbf{Reaktionen:} Die Messung wird nicht gestartet, sondern eine Fehlermeldung wird ausgegeben.
 \item []\textbf{Nachbedingung:} Die Anwendung überprüft vor dem Starten der Messkonfiguration, ob diese gültig ist.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann beim Starten zwischen gültigen und ungültigen Messkonfigurationen unterscheiden und entsprechend reagieren.
@@ -906,8 +907,8 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Vorbedingung:} Die Anwendung ist geöffnet. Alle verwendeten Sensoren sind angeschlossen und betriebsbereit. Eine gültige Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung wurde geladen.
 \item []\textbf{Aktionen:} Der Benutzer startet die Messung. Aus einem unbekannten Grund wird die Verbindung zu einem Sensor getrennt.
-\item []\textbf{Reaktionen:} Die Messung stoppt. Eine aussagekräftige Fehlermeldung wird ausgegeben.
-\item []\textbf{Nachbedingung:} \gls{PhyPiDAQ} verliert die Verbindung zu einem Sensor und sendet keine Daten mehr an die Anwendung. Die Anwendung stürzt nicht ab, sondern gibt eine aussagekräftige Fehlermeldung aus.
+\item []\textbf{Reaktionen:} Die Messung stoppt. Eine Fehlermeldung wird ausgegeben.
+\item []\textbf{Nachbedingung:} \gls{PhyPiDAQ} verliert die Verbindung zu einem Sensor und sendet keine Daten mehr an die Anwendung. Die Anwendung stürzt nicht ab, sondern gibt eine Fehlermeldung aus.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann mit dem ungewollten Verlust eines Datenstroms umgehen ohne abzustürzen.
 \item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F450 Melde Abbruch des Datenstrom
@@ -971,9 +972,9 @@ Die Verwendung anderer Eingabegeräte ist nicht vorgesehen.
 
 \subsection{Überblick}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 15cm]{Grafik/GUI-mit-Segmenten.png}
+		\includegraphics[width = 11cm]{Grafik/GUI-mit-Segmenten.png}
 		\caption{Der Grundlegende Aufbau der Hauptbenutzeroberfläche}
 		\label{GUI_Grundlage}
 	\end{center}
@@ -991,7 +992,7 @@ Das Design der Einzelnen Elemente kann sich im Verlauf der Anwendungsentwicklung
 
 Die zu dem jeweiligen logischen Teil gehörenden Elemente sollen im folgenden erklärt werden.
 
-\subsection{Die einzelnen Teile}
+\subsection{Element Beschreibungen}
 
 \subsubsection{Systemmenüleiste}
 In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte \gls{GrafBenOber} haben.
@@ -1005,7 +1006,7 @@ In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte 
 
 \subsubsection{Auswahl}
 
-\begin{tabular}[t]{p{1cm} p{10cm}} %Alle Auswahlelemente in einer Tabelle
+\begin{tabular}[t]{p{1cm} p{10cm}} %Auswahlelemente Teil 1
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Datei.png} & Der Benutzer hat die Möglichkeit Dateien zu bearbeiten. Die wichtigsten Funktionen sind:
 	\begin{itemize} 
 		\item Das anlegen einer neuen Datei
@@ -1019,6 +1020,9 @@ In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte 
 		\item Das Anpassen eines ausgewählten Elements. Diese Einstellungsmöglichkeiten sind von dem Objekt abhängig.
 	\end{itemize}\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensor.png} & Der Benutzer kann sich eine Auswahl von \glspl{sensor} anzeigen lassen. Die \glspl{sensor} können anschließend in das Konfigurationsfeld eingefügt werden. Die angezeigte Auswahl ist unabhängig von den angeschlossenen Sensoren\newline\\
+\end{tabular}
+
+\begin{tabular}[t]{p{1cm} p{10cm}} %Auswahlelemente Teil 2
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindung.png} & Der Benutzer kann sich eine Auswahl von \glspl{transformation} anzeigen lassen. Die \glspl{transformation} können anschließend per \gls{dragdrop} in das Konfigurationsfeld gezogen werden. Die Auswahl kann unter Optionen erweitert werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Darstellung.png} & Der Benutzer kann sich eine Auswahl von \glspl{darstellung} anzeigen lassen. Die \glspl{darstellung} können anschließend in das Konfigurationsfeld eingefügt werden. Die Auswahl kann erweitert werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Optionen.png} & Der Benutzer kann sich eine Auswahl an Optionen anzeigen lassen. Beispiele hierfür sind
@@ -1039,10 +1043,10 @@ Im Laufe der Entwicklung kann es sich als sinnvoll herausstellen weitere Optione
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Sensor.png} & Die zu einem Sensor gehörende Eingabe. Die Eingabe wird nur angezeigt, wenn auch die Kanäle angezeigt werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Sensor.png} & Die zu einem Sensor gehörende Ausgabe. Jeder Sensor hat genau eine Ausgabe.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Kanal.png} & Der zu einem Sensor gehörende Kanal. Die Anzahl an angezeigten Kanlälen hängt von dem Sensor ab. In den Optionen kann eingestellt werden, ob die Kanäle angezeigt werden.\newline\\\cline{1-2}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.png} & Repräsentation einer \gls{transformation}. Abhängig von der Anzahl an Eingängen der Transformation besitzt die GUI dementsprechend viele Eingänge. Jedem Eingang können durch Einfügen von einer Verbindung Daten übergeben werden.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.png} & Repräsentation einer \gls{transformation}. Jedem Eingang können durch Einfügen von einer Verbindung Daten übergeben werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Verbindung.png} & Die Eingabe einer Transformation. Die Anzahl der verfügbaren Eingaben hängt von der Transformation ab.\newline\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Transformation.png} & Die Ausgabe einer Transformation. Jede Transformation hat genau eine Ausgabe.\newline\\\cline{1-2}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungspfeil.png} & Eine Verbindung zwischen zwei Elementen. Sie besitz eine Richtung. Daten ''fließen'' also nicht in beide Richtungen. Sie wird durch cklicken auf zwei Elemente erstellt. Dabei ist das Element welches zuerst geclickt wurde der Anfang der Verbindung.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Transformation.png} & Die Ausgabe einer Transformation. Die Anzahl der verfügbaren Ausgaben hängt von der Transformation ab.\newline\\\cline{1-2}
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungspfeil.png} & Eine Verbindung zwischen zwei Elementen. Sie besitz eine Richtung. Daten ''fließen'' also nicht in beide Richtungen.\newline\\
 \end{tabular}
 
 \subsection{Erweiterungsmöglichkeiten}
@@ -1058,6 +1062,18 @@ Im Laufe der Entwicklung kann es sich als sinnvoll herausstellen weitere Optione
 \end{figure}
 
 Eine Erweiterungsmöglichkeit wäre das Einfügen eines Startbildschirmes vor dem Öffnen der Anwendung. Dieser ist in Abbildung \ref{startbildschirm} angedeutet.
+
+\subsubsection{Fehlermeldung}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width = 10cm]{Grafik/Fehlerfenster}
+		\caption{Ein Beispiel für ein Fehlermeldungsfenster}
+		\label{fehlerfenster}
+	\end{center}
+\end{figure}
+
+Für die Fehlermeldungen könnten eigene Fenster erscheinen. Abbildung \ref{fehlerfenster} zeigt ein mögliches Design. Für unterschiedliche Fehler könnten unterschiedliche Designs verwendet werden.
 
 \section{Spezielle Anforderungen an die Entwicklungsumgebung}\label{entwicklungsumgebung}
 
@@ -1075,7 +1091,7 @@ Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in Ph
 	\textbf{Phase} & \textbf{Verantwortlicher} & \textbf{Zeitraum} & \textbf{Kolloquium} \\ \hline
 	Pflichtenheft & Jan Küblbeck & KW 20–22 & 04.06.2019 \\
 	Entwurf & Leon Huck & KW 23–26 & 02.07.2019 \\
-	Implementierung & Stefan Geretschläger & KW 27–29, 31 & 13.08.2019 \\
+	Implementierung & Stefan Geretschläger & KW 27–29, 31 & (tbd) \\
 	Klausurenphase & — & KW 30, 32 & — \\
 	Qualitätssicherung & David Gawron & KW 33–35 & 03.09.2019 \\
 	Abnahme & — & KW 36 & — \\
@@ -1084,6 +1100,8 @@ Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in Ph
 \end{tabular}
 
 \subsection{Risikomanagement}
+
+In jeder Phase treten unterschiedliche Risiken auf.
 
 Das Ausfallen eines Teammitglieds durch Krankheit oder anderen Gründen ist ein bedeutendes Risiko. In diesem Fall muss die zusätzliche Arbeit gerecht auf die anderen Teilnehmer verteilt werden. Eventuell können dadurch einzelne Kriterien und Anforderungen nicht mehr zufriedenstellend erfüllt werden.
 
