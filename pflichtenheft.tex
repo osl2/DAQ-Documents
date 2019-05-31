@@ -214,6 +214,8 @@ Das projektierte Softwareprodukt soll die Schüler dabei unterstützen, die gän
 
 Natürlich soll dann auch der Betrieb der Messkonfiguration gesteuert werden können und das Produkt sollte eventuell auch Einblicke in Abläufe während des Betriebs unterstützen, beispielsweise zur Analyse unerwünschten Verhaltens.
 
+\subsection{Eignung für den Unterricht}
+
 Aus didaktischer Sicht überflüssige technische Details wie z. B. die zum Auslesen der Sensoren notwendigen Protokolle sollen vor dem Schüler in jedem Fall verborgen bleiben.
 Der Schüler wird so nicht überfordert, sondern soll ermutigt werden, selbstständig mit der Software umzugehen. 
 Dabei kann er im spielerischen Umgang mit Versuchsaufbauten Prinzipien der digitalen Messtechnik wie z. B. Kaskadierung und natürlich auch das Grundprinzip von Ursache und Wirkung erfahren.
@@ -232,6 +234,8 @@ Die Anwendung ermöglicht es dem Lehrer vor dem Unterricht, eine Reihe von Messv
 Weiter ermöglicht es die Anwendung, dass Schüler aus höheren Klassen mit mehr Details der digitalen Messwerterfassung zusammen gebracht werden. Diese nutzen keine oder nur eine abstrakt bzw. lückenhaft vorgefertigte Konfiguration. Sie können dann auch selbst einen Baustein modifizieren oder erstellen. Trotz des höheren Detailgrads bleibt die Anwendung übersichtlich und strukturiert. Damit bleiben auch komplexere Messversuche für den Schüler motivierend. 
 
 Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verstehen. Sie ermöglicht dem Nutzer, über eine übersichtliche, strukturierte und intuitive GUI sowie über eine einfache Bedienung die Nutzung eines \gls{RasPi} mit \gls{PhyPiDAQ}. Dadurch soll dem Schüler digitale Messwerterfassung, Physik und auch Informatik in einer motivierenden Weise näher gebracht werden. Womöglich kann die Anwendung den Schüler auch für diese Themen begeistern.  
+
+\subsection{Einige hilfreiche Begriffsdefinitionen}
 
 Im Folgenden werden \gls{Musskriterien}, \gls{Sollkriterien} und \gls{Wunschkriterien} zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittler und niedriger Priorität betrieben. Musskriterien werden mit MK, Sollkriterien werden mit SK, Wunschkriterien werden mit WK abgekürzt.
 
@@ -261,33 +265,33 @@ Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wi
 	
 	\item 
 	\begin{MussKrit} 
-		Anzeigen von Prototyp-Eigenschaften. 
+		Der Benutzer kann die Eigenschaften eines Bausteinprototyps einsehen.
 	\end{MussKrit}
 	
-	\item Erstellen von Prototypen aller Bausteintypen. Dies kann auf zweierlei Art und Weise geschen: 
+	\item Der Benutzer soll von allen Bausteintypen neue Prototypen erstellen können. Dies kann auf zweierlei Art und Weise geschen: 
 	
 	\begin{itemize}
 	
 		\item 
 		\begin{MussKrit} 
-			durch Anpassung bereits vorhandener (evtl. auch generischer) Bausteintypen
+			durch Anpassung bereits vorhandener (evtl. auch generischer) Bausteintypen,
 		\end{MussKrit}
 		
 		\item 
 		\begin{SollKrit} 
-			durch Erweiterung um neue Softwarekomponenten, die definierte programmtechnische Schnittstellen nutzen
+			durch Erweiterung um neue Softwarekomponenten, die definierte programmtechnische Schnittstellen nutzen.
 		\end{SollKrit}
 
 	\end{itemize}
 	
 	\item 
 	\begin{MussKrit}
-		Verändern von Eigenschaften benutzererstellter Bausteinprototypen.
+		Der Benutzer soll die Eigenschaften benutzererstellter Bausteinprototypen verändern können.
 	\end{MussKrit}
 	
 	\item 
 	\begin{MussKrit}
-		Löschen eines benutzererstellten Bausteinprototyps.
+		Der Benutzer soll benutzererstellte Bausteinprototypen löschen können.
 	\end{MussKrit}
 	
 	
@@ -426,12 +430,16 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 	
 	\item 
 	\begin{WunschKrit} 			
-		Bausteine vom Typ Sensor sollen als Alternative zu abgetasteten Messwerten auch vorgehaltene Testdaten bereithalten können, so dass eine Messkonfiguration auch Messgeräte oder physikalische Sensoren getestet oder vorgeführt werden kann.
+		Bausteine vom Typ Sensor sollen als Alternative zu abgetasteten Messwerten auch vorgehaltene Testdaten bereithalten können, so dass eine Messkonfiguration auch ohne Messgeräte oder physikalische Sensoren getestet oder vorgeführt werden kann.
 	\end{WunschKrit}	
 	
 	\item 
 	\begin{WunschKrit} 			
-		Der Benutzer soll bei jedem Baustein den lokalen Datenfluss während eines Messlaufs aufzeichnen, einsehen und speichern können. Dies gilt insbesondere auch für Darstellungsbausteine, bei denen auch eine Druckfunktion bezüglich der ihnen generierten Darstellung wünschenswert wäre. 
+		Der Benutzer soll bei jedem Baustein den lokalen Datenfluss während eines Messlaufs aufzeichnen, einsehen und speichern können. 
+	\end{WunschKrit}
+		
+	\begin{WunschKrit} 
+		Für einen Darstellungsbaustein wäre eine Druckfunktion für die von ihr generierte Darstellung wünschenswert. 
 	\end{WunschKrit}
 	
 	
