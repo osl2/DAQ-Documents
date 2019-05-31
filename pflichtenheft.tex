@@ -605,7 +605,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F270] Die Anwendung besitzt eine Check-Funktion, welche die \gls{Benutzerkonfiguration} auf Vollständigkeit und Richtigkeit kontrolliert
+\item[F270] Die Anwendung besitzt eine Check-Funktion, welche die \gls{Benutzerkonfiguration} auf Vollständigkeit und Korrektheit kontrolliert
 \item[F280] Durch F270 wird durch visuelle Rückmeldung dargestellt,ob die Konfiguration verwendet werden kann.
 
 \end{itemize}
@@ -619,7 +619,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 \item[F310] Bei F300 wird automatisch überprüft ob die \gls{Benutzerkonfiguration} eine sinnvolle Kombination von Sensoren, Transformationen und Darstellungen ist.
 \item[F320] Durch F300 wird automatisch mit der visuellen Darstellung der Messdaten begonnen.
 \item[F330] Der Benutzer kann eine Messung löschen.
-\item[F340] Bei F330 wird die Messung gestoppt und die visuelle Darstellung auf den Ausgangszustand bringen.
+\item[F340] Bei F330 wird die Messung gestoppt und die visuelle Darstellung auf den Ausgangszustand gebracht.
 \item[F350] Durch F330 wird nicht die \gls{Benutzerkonfiguration} gelöscht.
 \item[F360] Durch F330 muss der Benutzer erst die Messung starten um weiter zu messen.
 \item[F370] Der Benutzer kann eine Messung pausieren.
@@ -705,7 +705,7 @@ Zu speichern sind ausschließlich:
 \item[NF010] Auslesen von \gls{messdaten} von einem einzelnen Sensor innerhalb von 50 ms.
 \item[NF020] Alle 20 ms können neue Messdaten angefordert werden.
 \item[NF030] Bis zu drei \glspl{sensor} können zeitgleich verwendet werden, ohne die Leistung zu beeinträchtigen.
-\item[NF040] Mehrere \glspl{transformation} können hintereinander eingestellt werden.
+\item[NF040] Mehrere \glspl{transformation} können sukzessive voneinander abhängig sein. Zyklische Abhängigkeiten sind nicht erlaubt.
 \item[NF045] Verarbeitung von Daten benötigt maximal 10 ms pro Transformation.
 \item[NF050] Mehrere \glspl{darstellung} können zeitgleich verwendet werden.
 \item[NF055] Darstellung von Daten benötigt maximal 30 ms pro Darstellungsbaustein.
@@ -720,7 +720,7 @@ Zu speichern sind ausschließlich:
 \item[NF110] Die \gls{BenOber} ist ergonomisch gestaltet, orientiert an ISO 9241.
 \item[NF115] Nichttriviale Funktionen werden dem Benutzer erklärt.
 \item[NF120] Ungespeicherte Daten werden nicht ohne Warnung verworfen.
-\item[NF130] Über Programmfehler wird der Benutzer gegenüber durch aussagekräftige Fehlermeldungen informiert.
+\item[NF130] Über Programmfehler wird der Benutzer durch aussagekräftige Fehlermeldungen informiert.
 \item[NF140] Schriftgröße von Text kann verändert werden.
 \item[NF150] Farbschema von farbigen \gls{UI}-Elementen ist veränderbar.
 \item[NF160] Die Sprache der Benutzeroberfläche kann verändert werden.
@@ -761,6 +761,8 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 	Robustheit & X & & & \\
 	Zuverlässigkeit & & X & & \\
 	Benutzerfreundlichkeit & X & & & \\
+	Sicherheit & & & & X \\
+	Erweiterbarkeit & & X & & \\
 	Effizienz & & X & & \\
 	Portierbarkeit & & & X & \\
 	Kompatibilität & & & X & \\
