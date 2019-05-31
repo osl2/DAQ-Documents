@@ -13,8 +13,8 @@
 \widowpenalty10000
 \displaywidowpenalty=10000
 
-\DeclareRobustCommand{\glossfirstformat}[1]{\textit{#1}}
-\renewcommand*{\glsdisplayfirst}[4]{\glossfirstformat{#1#4}}
+\DeclareRobustCommand{\glossfirstformat}[1]{\textit{#1}}	% der erste Verweis im Dokument auf ...
+\renewcommand*{\glsdisplayfirst}[4]{\glossfirstformat{#1#4}}	% ... einen Glossarbegriff wird kursiv markiert
 
 %\setcounter{tocdepth}{2}				% keine subsubsections im Inhaltsverzeichnis
 \makenoidxglossaries
@@ -96,7 +96,7 @@
 
 \newglossaryentry{JVM}{
 	name={Java Virtual Machine},
-	description={Die Java Virtual Machine ist eine Plattform für die Ausführung von Java-Software, die von der Firma Oracle für alle gängigen Betriebssysteme bereitgestellt wird}
+	description={Die Java Virtual Machine (JVM) ist eine Plattform für die Ausführung von Java-Software, die von der Firma Oracle für alle gängigen Betriebssysteme bereitgestellt wird}
 }
 
 \newglossaryentry{DSGVO}{
@@ -132,7 +132,7 @@
 
 \newglossaryentry{UI}{
 	name=UI,
-	description={engl. User Interface. Siehe: Benutzeroberfläche}
+	description={engl. User Interface; siehe: Benutzeroberfläche}
 }
 
 \newglossaryentry{GrafBenOber}{
@@ -142,7 +142,7 @@
 
 \newglossaryentry{GUI}{
 	name=GUI,
-	description={engl. Graphical User Interface. Siehe: Grafische Benutzeroberfläche},
+	description={engl. Graphical User Interface; siehe: Grafische Benutzeroberfläche},
 }
 
 \subject{Pflichtenheft}
@@ -165,7 +165,7 @@
 Die im Rahmen des \gls{osl2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}).
 Demzufolge kommt die Anwendung in Schulen zum Einsatz. 
 Die Zielgruppe sind Schüler in der siebten Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
-Die Anwendung läuft in einer JVM und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). 
+Die Anwendung läuft in einer \gls{JVM} und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). 
 Die hardwarenahe Ansteuerung der Sensoren soll durch das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} erfolgen. (siehe Kapitel \ref{systemmodell}).
 Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel \ref{funktionale} bzw. \ref{nichtfunktionale} aufgelistet.
 Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient werden. (siehe Kapitel \ref{gui}).
@@ -322,7 +322,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 \section{Funktionale Anforderungen}\label{funktionale}
 
 
-\subsection{\gls{GUI}}
+\subsection{GUI} % Glossarverweise in Überschriften besser vermeiden
 
 \begin{itemize}
 \item[F010] Die Benutzer erreichen nach Öffnung der Anwendung direkt die \gls{GUI}.
