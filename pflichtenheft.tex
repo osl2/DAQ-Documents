@@ -693,12 +693,28 @@ Zu speichern sind ausschließlich:
 \begin{itemize}
 
 \item[D010] \gls{Benutzerkonfiguration}(en)
-\item[D020] Messdaten
+\item[D020] \gls{messdaten}
 \item[D030] Sensorkonfigurationsdaten
 
 \end{itemize}
 
 \section{Nichtfunktionale Anforderungen}\label{nichtfunktionale}
+
+\subsection{Qualitätsanforderungen}
+
+Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
+
+\begin{tabular}{ | c | c | c | c | c | }
+	\hline
+	\textbf{Merkmal} & \textbf{sehr wichtig} & \textbf{wichtig} & \textbf{weniger wichtig} & \textbf{unwichtig} \\ \hline
+	Benutzbarkeit & X & & & \\
+	Robustheit & X & & & \\
+	Zuverlässigkeit & & X & & \\
+	Effizienz & & X & & \\
+	Portierbarkeit & & & X & \\
+	Kompatibilität & & & X & \\
+	\hline
+\end{tabular}
 
 \subsection{Produktleistungen}
 
@@ -729,7 +745,7 @@ Zu speichern sind ausschließlich:
 
 \end{itemize}
 
-\subsection{Zuverlässigkeit}
+\subsection{Zuverlässigkeit und Robustheit}
 
 \begin{itemize}
 
@@ -745,29 +761,12 @@ Zu speichern sind ausschließlich:
 
 \begin{itemize}
 
-\item[NF310] Die Software erfüllt die Definition von \gls{opensource}- und freier Software.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
+\item[NF310] Die Software erfüllt die Definition von \gls{opensource}– und freier Software.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
 \item[NF320] Die Software ist erweiterbar und anpassbar an veränderte Umstände, auch durch Außenstehende.
 \item[NF330] Die \gls{DSGVO} wird nicht verletzt; d.h. personenbezogene Daten werden ausschließlich dann verarbeitet, wenn sie vom Benutzer freiwillig eingespeist werden.
 \item[NF340] Daten werden ausschließlich lokal gespeichert.
 
 \end{itemize}
-
-\subsection{Qualitätsanforderungen}
-
-Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
-
-\begin{tabular}{ | c | c | c | c | c | }
-	\hline
-	\textbf{Merkmal} & \textbf{sehr wichtig} & \textbf{wichtig} & \textbf{weniger wichtig} & \textbf{unwichtig} \\
-	\hline
-	Robustheit & X & & & \\
-	Zuverlässigkeit & & X & & \\
-	Benutzerfreundlichkeit & X & & & \\
-	Effizienz & & X & & \\
-	Portierbarkeit & & & X & \\
-	Kompatibilität & & & X & \\
-	\hline
-\end{tabular}
 
 \section{Globale Testfälle und Testszenarien}\label{testfall}
 
@@ -1076,7 +1075,7 @@ Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in Ph
 	\textbf{Phase} & \textbf{Verantwortlicher} & \textbf{Zeitraum} & \textbf{Kolloquium} \\ \hline
 	Pflichtenheft & Jan Küblbeck & KW 20–22 & 04.06.2019 \\
 	Entwurf & Leon Huck & KW 23–26 & 02.07.2019 \\
-	Implementierung & Stefan Geretschläger & KW 27–29, 31 & (tbd) \\
+	Implementierung & Stefan Geretschläger & KW 27–29, 31 & 13.08.2019 \\
 	Klausurenphase & — & KW 30, 32 & — \\
 	Qualitätssicherung & David Gawron & KW 33–35 & 03.09.2019 \\
 	Abnahme & — & KW 36 & — \\
@@ -1085,8 +1084,6 @@ Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in Ph
 \end{tabular}
 
 \subsection{Risikomanagement}
-
-In jeder Phase treten unterschiedliche Risiken auf.
 
 Das Ausfallen eines Teammitglieds durch Krankheit oder anderen Gründen ist ein bedeutendes Risiko. In diesem Fall muss die zusätzliche Arbeit gerecht auf die anderen Teilnehmer verteilt werden. Eventuell können dadurch einzelne Kriterien und Anforderungen nicht mehr zufriedenstellend erfüllt werden.
 
