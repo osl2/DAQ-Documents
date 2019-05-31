@@ -7,85 +7,89 @@
 \usepackage{graphicx}					% Grafiken
 \usepackage{hyperref}					% Hyperlinks
 \usepackage[nonumberlist]{glossaries}		% Glossar
+\usepackage{amsmath}
 
 % Hurenkinder und Schusterjungen verhindern
 \clubpenalty10000
 \widowpenalty10000
 \displaywidowpenalty=10000
 
-\DeclareRobustCommand{\glossfirstformat}[1]{\textit{#1}}
-\renewcommand*{\glsdisplayfirst}[4]{\glossfirstformat{#1#4}}
+\DeclareRobustCommand{\glossfirstformat}[1]{\textit{#1}}	% der erste Verweis im Dokument auf ...
+\renewcommand*{\glsdisplayfirst}[4]{\glossfirstformat{#1#4}}	% ... einen Glossarbegriff wird kursiv markiert
+
+% Kriterien sollen nicht kursiv erscheinen
+\makeatletter
+\renewcommand{\@begintheorem}[2]{\trivlist
+	\item[\hskip \labelsep{\bfseries #1\ #2}]}
+\makeatother
+
 
 %\setcounter{tocdepth}{2}				% keine subsubsections im Inhaltsverzeichnis
-\makenoidxglossaries     
-
-\newglossaryentry{bsp}{
-	name=Beispiel,
-	plural=Beispiele,
-	description=Beispieleintrag
-	}
-
-\newglossaryentry{UI}{
-	name=UI,
-	description={engl. User Interface. Steht für die Oberfläche, die der Benutzer verwendet um die Anwendung zu bedienen}
-}
+\makenoidxglossaries
 
 \newglossaryentry{RasPi}{
 	name=Raspberry Pi,
+	plural=Raspberry Pis,
 	description={Der Raspberry Pi ist ein Einplatinencomputer. In diesem Projekt dient der Raspberry Pi als Hardwareplattform, um unterschiedliche Sensoren zu verbinden und ihre Daten auszulesen}
-	}
+}
 
 \newglossaryentry{PhyPiDAQ}{
 	name=PhyPiDAQ,
 	description={Siehe Abschnitt 4.3 ,,PhyPiDAQ``}
-	}
+}
 
 \newglossaryentry{Science Labs}{
 	name=Science Labs,
 	description={Ein Science Lab ist ein Arbeitsplatz, welcher Schülern ermöglicht wissenschaftliche Forschungen unter kontrollierten Bedingungen durchzuführen} 
-	}
+}
 
-\newglossaryentry{Open-Source Projekt}{
-	name=Open Source Projekt,
-	description={Ein Open Source Projekt ist ein Projekt, dessen Quelltext und Dokumentationen von dritten angesehen, geändert und genutzt werden kann} 
-	}
+\newglossaryentry{opensource}{
+	name=Open Source,
+	description={Software, deren Quelltext öffentlich eingesehen eingesehen werden kann, wird als ,,Open Source`` bzw. ,,quelloffen`` bezeichnet} 
+}
 
-\newglossaryentry{OSL 2}{
-	name=OSL 2,
-	description={Name eines Open-Source-Lehrsoftware-Labor, in welchem Studierende sich mit der Entwicklung von Open-Source-Software vertraut machen können}
-	}
+\newglossaryentry{osl2}{
+	name=OSL\textsuperscript{2},
+	description={Open-Source-Lehrsoftware-Labor, \url{https://formal.iti.kit.edu/projects/oslsl/?lang=de}}
+}
 
 \newglossaryentry{dragdrop}{
 	name=Drag-and-Drop,
 	description={Methode, um mit graphischen Benutzeroberflächen zu interagieren. Dabei wird ein Objekt erst mit der Maus festgehalten und an einen anderen Ort gezogen. Durch das Lösen der Maustaste wird das Objekt platziert}
-	}
+}
 
 \newglossaryentry{click}{
 	name=Click,
 	description={Betätigen der linken Maustaste}
-	}
+}
 
 \newglossaryentry{transformation}{
 	name=Transformation,
 	plural={Transformationen},
 	description={Erzeugen eines Datenstroms unter Verwendung von einem oder mehreren bereits vorhandenen Datenströmen. Eine Transformation kann durch mathematische Funktion realisiert werden}
-	}
+}
 
 \newglossaryentry{konfigdata}{
 	name=Konfigurationsdatei,
-	description={Können das Messverhalten anpassen, beispielsweise die Anzahl der Messungen pro Zeiteinheit. Für jeden Sensor gibt es eine eigene Konfigurationsdatei.}
-	}
+	plural=Konfigurationsdateien,
+	description={Können das Messverhalten anpassen, beispielsweise die Anzahl der Messungen pro Zeiteinheit. Für jeden Sensor gibt es eine eigene Konfigurationsdatei}
+}
 
 \newglossaryentry{sensor}{
 	name=Sensor,
 	plural={Sensoren},
 	description={Ein Sensor erfasst Messwerte physikalischer Größen. In einer Messkonfiguration stellen sie die Eingangspunkte dar}
-	}
+}
+
+\newglossaryentry{messdaten}{
+	name=Messdaten,
+	description={Daten, welche die Anwendung von einem Sensor (über PhyPiDAQ-Schnittstelle) oder direkt aus einer Datei erhält}
+}
 
 \newglossaryentry{darstellung}{
 	name=Darstellung,
 	plural={Darstellungen},
-	description={Gibt Daten aus eigehendem Datenstrom graphisch wieder}
+	description={Gibt Daten aus eingehendem Datenstrom graphisch wieder}
 }
 
 \newglossaryentry{python3}{
@@ -93,45 +97,45 @@
 	description={Python ist eine universelle Programmiersprache. Sie ist die offizielle Programmiersprache des Raspberry Pi und wurde deswegen zur Programmierung von PhyPiDAQ verwendet}
 }
 
-\newglossaryentry{GUI}{
-	name=GUI,
-	description={Grafische Benutzeroberflache (engl. Graphical User Interface)},
-}
-
-\newglossaryentry{Benutzerkonfiguration}{
-	name =Messkonfiguration,
-	description ={Gerichteter zyklenfreier Graph mit Knoten vom Typ Sensor, Transformation oder Darstellung. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellugen keine Ausgangskanten haben dürfen.},
-}
-
 \newglossaryentry{JVM}{
-	name={JVM},
-	description={Eine Java Virtual Machine ist eine Plattform für die Ausführung von Java-Software, die von der Firma Oracle für alle gängigen Betriebssystem bereitgestellt wird}
-	}
+	name={Java Virtual Machine},
+	description={Die Java Virtual Machine (JVM) ist eine Plattform für die Ausführung von Java-Software, die von der Firma Oracle für alle gängigen Betriebssysteme bereitgestellt wird}
+}
 
 \newglossaryentry{DSGVO}{
-	name=DSGVO,
-	description ={Datenschutz-Grundverordnung, Verordnung der Europäischen Union vom 25. Mai 2018}
+	name=Datenschutz-Grundverordnung,
+	description ={kurz DSGVO, Verordnung der Europäischen Union vom 25. Mai 2018}
 }
 
 \newglossaryentry{Musskriterien}{
 	name=Musskriterien,
 	description ={Werden zusammen mit Soll- und Wunschkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung höchste Priorität. 
 	Dass ein Musskriterium in den nachfolgenden Projektphasen nicht umgesetzt wird, ist nur dann zulässig, falls unerwartet unausweichliche Probleme bei der Umsetzung auftreten. 
-	In diesem Fall ist es erforderlich, dass diese Probleme sehr genau dokumentiert werden.}
+	In diesem Fall ist es erforderlich, dass diese Probleme sehr genau dokumentiert werden}
 }
 
 \newglossaryentry{Sollkriterien}{
 	name=Sollkriterien,
 	description ={Werden zusammen mit Muss- und Wunschkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung mittlere Priorität. 
 	Falls ein Sollkriterium umgesetzt werden kann, dann muss es nach Möglichkeit auch realisiert werden. 
-	Falls ein Sollkriterium in den nachfolgenden Projektphasen nicht umgesetzt werden kann, so muss dies dokumentiert und begründet werden. }
+	Falls ein Sollkriterium in den nachfolgenden Projektphasen nicht umgesetzt werden kann, so muss dies dokumentiert und begründet werden}
 }
 
 \newglossaryentry{Wunschkriterien}{
 	name=Wunschkriterien,
 	description ={Werden zusammen mit Muss- und Sollkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung niedrige Priorität. 
 	Je nach Resourcenlage können sie nach Bearbeitung aller Muss- und Kannkriterien umgesetzt werden. 
-	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden.  }
+	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden}
+}
+
+\newglossaryentry{BenOber}{
+	name=Benutzeroberfläche,
+	description = {Steht für die Oberfläche, die der Benutzer verwendet um die Anwendung zu bedienen}
+}
+
+\newglossaryentry{UI}{
+	name=UI,
+	description={engl. User Interface; siehe: Benutzeroberfläche}
 }
 
 \newglossaryentry{GrafBenOber}{
@@ -139,9 +143,36 @@
 	description = {Eine Oberfläche, die eine Anwendung durch grafische Symbole bedienbar macht}
 }
 
+\newglossaryentry{GUI}{
+	name=GUI,
+	description={engl. Graphical User Interface; siehe: Grafische Benutzeroberfläche},
+}
+
+\newglossaryentry{Konfigurationsbaustein}{
+	name=Konfigurationsbaustein,
+	plural=Konfigurationsbausteine,
+	description ={Teil einer Messkonfiguration, der eine Teilaufgabe bestimmten Typs erfüllen kann. Es gibt Sensorbausteine, Konfigurationsbausteine und Darstellungsbausteine. Liegt am Ausgang eines Bausteins ein Wert an, so kann dieser an den Eingang eines  nachgelagerten Bausteins weitergeleitet werden}
+}
+
+\newglossaryentry{Benutzerkonfiguration}{
+	name =Messkonfiguration,
+	description ={Gerichteter zyklenfreier Graph mit Knoten vom Typ Sensor, Transformation oder Darstellung. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellungen keine Ausgangskanten haben dürfen}
+}
+
+\newglossaryentry{Bausteinprototyp}{
+	name=Bausteinprototyp,
+	description={Baustein, von dem eine Kopie angelegt wird, wenn der Benutzer ein neues Baustein-Exemplar einem Entwurf hinzufügen möchte}
+}
+
+\newglossaryentry{Messlauf}{
+	name=Messlauf,
+	plural=Messläufe,
+	description={Zeitabschnitt, in dem zu definierten Zeitpunkten an allen Bausteinen eines Entwurfs sukzessive die Werte an allen Ausgängen und Eingängen bestimmt werden}
+}
+
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
-\subtitle{Version 0.2.2}
+\subtitle{Version 0.3.0}
 \author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
 \date{\today}
 
@@ -156,10 +187,10 @@
 
 \section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
 
-Die im Rahmen des \gls{OSL 2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}).
+Die im Rahmen des \gls{osl2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}).
 Demzufolge kommt die Anwendung in Schulen zum Einsatz. 
 Die Zielgruppe sind Schüler in der siebten Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
-Die Anwendung läuft in einer JVM und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). 
+Die Anwendung läuft in einer \gls{JVM} und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). 
 Die hardwarenahe Ansteuerung der Sensoren soll durch das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} erfolgen. (siehe Kapitel \ref{systemmodell}).
 Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel \ref{funktionale} bzw. \ref{nichtfunktionale} aufgelistet.
 Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient werden. (siehe Kapitel \ref{gui}).
@@ -167,15 +198,33 @@ Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient 
 \section{Zielbestimmung}\label{zielbestimmung}
 
 Die Anwendung soll es Lehrern ermöglichen, Schülern ab der siebten Klasse Grundkenntnisse der digitalen Messwerterfassung in einer für Schüler interessante und motivierenden Weise näher zu bringen. 
-Dabei werden aus didaktischer Sicht überflüssige technische Details wie z. B. die zum Auslesen der Sensoren notwendigen Protokolle vor dem Schüler verborgen.
+
+In einem nicht etwas komplexeren Versuchsaufbau sind die wesentlichen Schritte einer messtechnischen Verarbeitung die Folgenden: 
+
+\begin{enumerate}
+	\item Abtastung der physikalischen Größen
+	
+	\item Transformation der Messwerte durch mathematische Funktionen oder programmtechnisch definierte Verarbeitung
+	
+	\item die Darstellung der transformierten Werte in einer zur Beantwortung der Fragestellung geeigneten Form.
+	
+\end{enumerate}
+
+Das projektierte Softwareprodukt soll die Schüler dabei unterstützen, die gängigen Schritte einer messtechnischen Verarbeitung zu definieren und zueinander in Beziehung zu setzen. Hierzu soll das Produkt \glspl{Konfigurationsbaustein} unterschiedlichen Typs anbieten, aus denen ein Schüler dann eine Messkonfiguration entwerfen kann. Die Konfigurationsbausteine sollen anpassbar sein, nicht nur um die Software für möglichst viele physikalische Fragestellungen einsetzen zu können sondern auch um den Bedürfnissen unterschiedlicher Altersstufen gerecht zu werden. 
+
+Natürlich soll dann auch der Betrieb der Messkonfiguration gesteuert werden können und das Produkt sollte eventuell auch Einblicke in Abläufe während des Betriebs unterstützen, beispielsweise zur Analyse unerwünschten Verhaltens.
+
+\subsection{Eignung für den Unterricht}
+
+Aus didaktischer Sicht überflüssige technische Details wie z. B. die zum Auslesen der Sensoren notwendigen Protokolle sollen vor dem Schüler in jedem Fall verborgen bleiben.
 Der Schüler wird so nicht überfordert, sondern soll ermutigt werden, selbstständig mit der Software umzugehen. 
 Dabei kann er im spielerischen Umgang mit Versuchsaufbauten Prinzipien der digitalen Messtechnik wie z. B. Kaskadierung und natürlich auch das Grundprinzip von Ursache und Wirkung erfahren.
 
-Es wird eine graphische Oberfläche angeboten, die es dem Schüler ermöglicht, allein per Drag and Drop eine Messanordnung zu erstellen. 
+Es wird eine graphische Oberfläche angeboten, die es dem Schüler ermöglicht, allein per Drag and Drop eine Messanordnung zu entwerfen. 
 Überflüssige Details, die dahinter stecken, bleiben vor dem Schüler verborgen.
 Die Anwendung motiviert den Schüler dazu, mit Sensoren, Transformationen und Darstellungen zu spielen und Dinge auszuprobieren. 
-Dabei wird ihm durch eine intuitive Status- und Fehleranzeige gezeigt, ob seine Konstruktion funktioniert. 
-Wenn nicht, dann zeigt sie ihm an, wo das Problem liegt und warum es nicht funktioniert. 
+Dabei wird ihm durch eine intuitive Status- und Fehleranzeige gezeigt, ob sein Entwurf funktioniert. 
+Wenn nicht, dann hilft sie ihm das Problem einzugrenzen und gibt Hinweise zur Problembehebung. 
 Eine lästige Fehlersuche soll dem Schüler weitestgehend erspart bleiben. 
 
 Außerdem liefert die Anwendung dem Schüler zu den vorhandenen Bausteinen und zu der Anwendung allgemein die nötigen Informationen, die er für die Nutzung braucht. Dabei wird auf ein ausführliches Tutorial am Anfang verzichtet. Die Anwendung liefert die Informationen häppchenweise durch Informationsanzeigen an den jeweilig relevanten Stellen. Damit findet der Schüler die Hilfe, die er sucht, an der Stelle, an der er sie braucht.
@@ -186,117 +235,285 @@ Weiter ermöglicht es die Anwendung, dass Schüler aus höheren Klassen mit mehr
 
 Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verstehen. Sie ermöglicht dem Nutzer, über eine übersichtliche, strukturierte und intuitive GUI sowie über eine einfache Bedienung die Nutzung eines \gls{RasPi} mit \gls{PhyPiDAQ}. Dadurch soll dem Schüler digitale Messwerterfassung, Physik und auch Informatik in einer motivierenden Weise näher gebracht werden. Womöglich kann die Anwendung den Schüler auch für diese Themen begeistern.  
 
-Im Folgenden werden \gls{Musskriterien}, \gls{Sollkriterien} und \gls{Wunschkriterien} zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittler und niedriger Priorität betrieben. 
+\subsection{Einige hilfreiche Begriffsdefinitionen}
 
+Im Folgenden werden \gls{Musskriterien}, \gls{Sollkriterien} und \gls{Wunschkriterien} zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittler und niedriger Priorität betrieben. Musskriterien werden mit MK, Sollkriterien werden mit SK, Wunschkriterien werden mit WK abgekürzt.
 
-\subsection{Musskriterien}
+\newtheorem{MussKrit}{MK}
+\newtheorem{SollKrit}{SK}
+\newtheorem{WunschKrit}{WK}
+
+Für die Beschreibung der Kriterien ist es hilfreich, ein paar grundsätzliche Überlegungen vorzunehmen, wie Bausteine geartet sein müssen, um eine (Teil-)Aufgabe erfüllen zu können. Denn es macht Sinn, gänzlich unterschiedliche Teilaufgaben dann auch von Bausteinen unterschiedlichen Typs erledigen zu lassen bzw. im Umkehrschluss ähnliche Teilaufgaben jeweils einen bestimmten Bausteintyp vorzusehen.
 
 \begin{itemize}
-
-\item Datenhandhabung
-\begin{itemize}
-
-\item Der Benutzer kann Ergebnisse aus einer Messung speichern und laden.
-\item Der Benutzer kann gleichzeitig Daten aus einer Messung darstellen und diese Daten auch weiter verwenden.
-\item Der Benutzer kann eine \gls{Benutzerkonfiguration} speichern und laden. Gespeicherte Daten beinhalten die grafische Anordnung der Konfigurationsbausteine. 
-
-
+	
+	\item Bausteine vom Typ Sensor haben nur Ausgänge. Ein solcher (logischer) Sensorbaustein muss alle Informationen referenzieren können, die zum Ansprechen eines Messgeräts bzw. physikalischen Sensors benötigt werden. Da ein Messgerät Ausgänge bzw. Messkanäle haben kann, kann ein Sensorbaustein mehrere Ausgänge haben. Eingänge besitzt ein Sensorbaustein nicht. 
+	
+	\item Bausteine vom Typ Transformation haben einen oder mehrere Eingänge sowie einen oder mehrere Ausgänge. Für jeden Ausgang kann  ein Transformationsbaustein eine Vorschrift zur Berechnung eines Ausgangswertes aus einem Satz von Eingangswerten beinhalten. Eine Berechnungsvorschrift soll durch eine mathematische Funktionen oder durch eine programmtechnisch definierte Verarbeitung definiert werden können.
+	
+	\item Bausteine vom Typ Darstellung haben einen oder mehrere Eingänge. Ein Darstellungsbaustein soll definieren können, wie ein Satz von Eingangswerten die Erstellung bzw. Aktualisierung einer Darstellung beeinflusst. Ausgänge besitzt ein Darstellungsbaustein nicht.
+	
 \end{itemize}
 
 
 
-\item Benutzbarkeit der GUI
+\subsection{Handhabung von Bausteinprotoypen}
+
+Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wird einem \gls{Bausteinprototyp}en eine Kopie angelegt.
+
 \begin{itemize}
+	
+	\item 
+	\begin{MussKrit} 
+		Der Benutzer kann die Eigenschaften eines Bausteinprototyps einsehen.
+	\end{MussKrit}
+	
+	\item Der Benutzer soll von allen Bausteintypen neue Prototypen erstellen können. Dies kann auf zweierlei Art und Weise geschen: 
+	
+	\begin{itemize}
+	
+		\item 
+		\begin{MussKrit} 
+			durch Anpassung bereits vorhandener (evtl. auch generischer) Bausteintypen,
+		\end{MussKrit}
+		
+		\item 
+		\begin{SollKrit} 
+			durch Erweiterung um neue Softwarekomponenten, die definierte programmtechnische Schnittstellen nutzen.
+		\end{SollKrit}
 
-\item Die Anwendung reagiert auf jede Benutzereingabe innerhalb von zwei Sekunde. 
-Benötigt die Anwendung zur Reaktion auf eine Benutzereingabe länger als zwei Sekunden, so präsentiert sie dem Benutzer fortlaufend mindestens ein Mal pro Sekunde ein möglichst aussagekräftiges Zwischenergebnis, mindestens in Form eines Fortschrittsbalkens. 
-Nach Ablauf eines einstellbaren Timeouts präsentiert die Anwendung eine möglichst aussagekräftige Fehlermeldung. Benötigt die Bearbeitung einer Benutzereingabe länger als 2 Sekunden, so hat der Benutzer die Möglichkeit, den Bearbeitungsvorgang abzubrechen. 
-\item Beim Entwurf einer Messkonfiguration soll der Benutzer die von ihm beabsichtigten Aktionen per Drag and Drop anstoßen können. Dies betrifft beispielsweise das Hinzufügen eines Konfigurationsbausteins oder das Erstellen einer Kante vom Ausgangs eines Bausteins mit dem Ausgang Baustein eines anderen Bausteins.
-\item Die grafische Benutzungsschnittstelle sollte möglichst barrierefrei sein. Beispielsweise sollte sie variable Darstellungsgrößen anbieten. Die Semantik sollte auch für Benutzer mit Farberkennungsschwächen ohne Probleme zu erkennen sein.
-\item Die Anwendung sollte sich ungefähr mit dem Wissen eines Schülers aus der siebten Klasse bedienen lassen.
-
+	\end{itemize}
+	
+	\item 
+	\begin{MussKrit}
+		Der Benutzer soll die Eigenschaften benutzererstellter Bausteinprototypen verändern können.
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit}
+		Der Benutzer soll benutzererstellte Bausteinprototypen löschen können.
+	\end{MussKrit}
+	
+	
 \end{itemize}
 
-\item Funktionen
+\subsection{Entwurf von Messkonfigurationen}
+
 \begin{itemize}
-
-\item Die Anwendung erhält Daten durch den Raspberry Pi mit PhyPiDAQ oder aus einer Datei und kann diese dann transformieren und darstellen.
-\item Die Anwendung enthält vorgefertigte Standardelemente, wie z.B. to do
-\item Die Anwendung enthält vorgefertigte Standardkonfigurationen.
-
+	
+	\item 
+	\begin{MussKrit} 			
+		Hinzufügen eines Bausteins zur Messkonfiguration, d. h. Auswahl eines Prototypen und Platzieren des Bausteinexemplars auf der Entwurfsfläche
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit} 		
+		Bearbeiten der Baustein-Eigenschaften oder Verändern der Position des Bausteins auf der Entwurfsfläche 	
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit} 			
+		Löschen eines Bausteins aus der Konfiguration
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit} 			
+		Erstellen einer Weiterleitungsregel bzw. eines ,,Drahtes`` vom Ausgang eines Bausteins zum Eingang eines anderen Bausteins. 
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit} 			
+		Löschen einer Weiterleitungsregel bzw. eines ,,Drahtes``
+	\end{MussKrit}
+	
+	\item 
+	\begin{SollKrit} 			
+		Anbieten einer Undo- und einer Redo-Funktion
+	\end{SollKrit}
+			
+	\item 
+	\begin{WunschKrit} 
+		Hinzufügen, Darstellen, Bearbeiten und Löschen ergänzender Text- und evtl. auch Bildinformation, beispielsweise zur ausführlichen Beschreibung der physikalische Hintergründe oder für Memos, To-dos, etc
+	\end{WunschKrit}.
+	
 \end{itemize}
 
-\item Information und Rückmeldung
+\subsection{Gewährleisten von Persistenz}
+
 \begin{itemize}
-
-\item Ist ein verwendeter Sensor nicht angeschlossen oder fehlerhaft, meldet die Anwendung dies über eine Pop-Up-Nachricht.
-\item Die Anwendung enthält Erklärungen und Informationen zu den einzelnen Komponenten, d.h. zu den Sensoren, Transformationen und Darstellungen.
-\item Die Anwendung enthält Erklärungen und Informationen zu den GUI-Bereiche, d.h. zu dem Auswahlbereich der Komponenten, zu dem Messversuchsbereich und zu dem Anzeigebereich.
-\item Falls nicht alle Kanäle verbunden sind, meldet die Anwendung dies dem Benutzer mit einer Fehlermeldung, falls dieser versucht die Messung zu starten. 
-
+		
+	\item 
+	\begin{MussKrit} 			
+		Eine Messkonfiguration, einschließlich der grafischen Anordnung der Bausteine, lässt sich in einer Datei speichern.
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit} 			
+		Eine zuvor gespeicherte Messkonfiguration lässt sich zum weiteren Gebrauch durch Laden aus der entsprechenden Datei wiederherstellen. 
+	\end{MussKrit}
+	
+	\item 
+	\begin{SollKrit} 
+		Vom Benutzer erstellte Bausteinprototypen lassen sich auswählen und in einer Datei speichern.			
+	\end{SollKrit}
+	
+	\item 
+	\begin{SollKrit} 			
+		Zuvor gespeicherte Bausteinprototypen lasen sich zum weiteren Gebrauch durch Laden aus der entsprechenden Datei wiederherstellen. 
+	\end{SollKrit}
+	
 \end{itemize}
 
-\item Sonstiges
+\subsection {Bereitstellung vorgefertigter Teile}
+
 \begin{itemize}
-
-\item Die Benutzungsoberfläche bietet als Sprache mindestens Deutsch an und muss leicht um weitere Sprachen ergänzt werden können. Sobald die Anwendung mehr als eine Sprache anbietet, kann der Benutzer die GUI von einer Sprache auf eine andere umstellen.
-\item Die Anwendung soll auf die Unterstützung neuer Sensoren erweiterbar sein.
-\item Die Anwendung hält die Schulrichtlinie "`to do"' ein.
-
+	
+	\item Die Anwendung enthält eine Reihe von vorgefertigten Bausteinprototypen: 
+	\begin{itemize}
+		
+		\item 
+		\begin{MussKrit} 		
+			Sensorbausteine generischer Natur, beispielsweise für einen Analog/Digital-Wandler, sowie bereits spezialisierte Sensorbausteine, beispielsweise für Licht, Temperatur oder Lage,	
+		\end{MussKrit} 
+		
+		\item 
+		\begin{MussKrit} 		
+			Transformationsbausteine generischer Natur, beispielsweise für lineare Abbildungen oder für bedingte Ausgaben, sowie speziellere Transformationsbausteine, beispielsweise ein Baustein zur Datenstromduplizierung oder ein Multiplexer als beispielhafte Spezialisierung eines ,,bedingten`` Bausteins. 
+				
+		\end{MussKrit}
+		
+		\item 
+		\begin{MussKrit} 	
+			für die meisten Zwecke gut anpassbare Darstellungsbausteine, beispielsweise zur Generierung von Tabellen oder Koordinatensystemen.					
+		\end{MussKrit}
+	\end{itemize}
+	
+	\item 
+	\begin{MussKrit} 
+		Die Anwendung enthält mindestens drei vorgefertigte Messkonfigurationen unterschiedliche Komplexität. Die Konfigurationen sollten möglichst ansprechend und motivierend sein. Denkbar wäre beispielsweise auch Spiele, die das Replizieren bzw. „Nachmachen“ von vorgegebenen Messergebnissen vorsehen.			
+	\end{MussKrit}
+	
 \end{itemize}
 
- \end{itemize}
 
-\subsection{Sollkriterien}
+\subsection{Handhabung von Messläufen}
+
+Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, zufriedenstellende \glspl{Messlauf} zu erhalten.
+
 
 \begin{itemize}
+	
+	\item 
+	\begin{MussKrit} 			
+		Der Benutzer kann einen Messlauf mit adäquater Eingabe starten, pausieren, fortführen und beenden. 
+	\end{MussKrit}
+	
+	\item 
+	\begin{MussKrit} 	
+		Der Benutzer kann vor Start eines Messlaufs die Zeitpunkte definieren, zu denen an den Ausgängen der Sensorbausteine die zuletzt abgetasteten Messwerte registriert und von den nachgelagerten Bausteinen gemäß ihrer Definition sukzessive weiterverarbeitet werden.		
+	\end{MussKrit}
+	
+	\item 
+	\begin{SollKrit} 
+		Während des Entwurfs bzw. der Bearbeitung einer Messkonfiguration kann der Nutzer Checks vornehmen, um überprüfen, ob die gesamte Messkonfiguration oder Teile in ihrem derzeitigen Zustand funktionieren. Bei negativem Ergebnis erhält der Benutzer möglichst aussagekräftige Hinweise. 
+ 
+	
+		\begin{itemize}
+			
+			\item Ist beispielsweise ein physikalischer Sensor nicht funktionsfähig, beispielsweise weil er nicht oder fehlerhaft angeschlossen ist, so kann der Benutzer dies frühzeitig erkennen.
+			
+			\item Sind Ein- oder Ausgänge von Bausteinen nicht verdrahtet, obwohl dies für  eine ordnungsgemäße Funktion des Bausteins erforderlich ist, so kann der Benutzer dies ebenso frühzeitig erkennen.
+			
+		\end{itemize}
+	\end{SollKrit}
+	
+	
+	\item 
+	\begin{WunschKrit} 			
+		Bausteine vom Typ Sensor sollen als Alternative zu abgetasteten Messwerten auch vorgehaltene Testdaten bereithalten können, so dass eine Messkonfiguration auch ohne Messgeräte oder physikalische Sensoren getestet oder vorgeführt werden kann.
+	\end{WunschKrit}	
+	
+	\item 
+	\begin{WunschKrit} 			
+		Der Benutzer soll bei jedem Baustein den lokalen Datenfluss während eines Messlaufs aufzeichnen, einsehen und speichern können. 
+	\end{WunschKrit}
+		
+	\begin{WunschKrit} 
+		Für einen Darstellungsbaustein wäre eine Druckfunktion für die von ihr generierte Darstellung wünschenswert. 
+	\end{WunschKrit}
+	
+	
+\end{itemize}
 
-\item Die Anwendung soll auf die Erstellung eigener Transformationen erweiterbar sein.
-\item Die Anwendung soll auf andere Sprachen erweiterbar sein.
-\item Die Anwendung soll allein auf dem \gls{RasPi} laufen können.
-\item Farbkodierung der GUI-Elemente
-\item Einfache Erweiterbarkeit
-\subitem Einheitliches Interface für Sensoren
 
 
- \end{itemize}
-
-\subsection{Wunschkriterien}
-
+\subsection {Benutzbarkeit der GUI}
 \begin{itemize}
+	
+	\item 
+	\begin{WunschKrit} 		
+		Die Benutzungsoberfläche bietet als Sprache mindestens Deutsch an und muss leicht um weitere Sprachen ergänzt werden können. Sobald die Anwendung mehr als eine Sprache anbietet, kann der Benutzer die GUI von einer Sprache auf eine andere umstellen.	
+	\end{WunschKrit}
+	\item 
+	\begin{SollKrit}
+		Die Anwendung reagiert auf jede Benutzereingabe innerhalb von zwei Sekunde. 
+		Benötigt die Anwendung zur Reaktion auf eine Benutzereingabe länger als zwei Sekunden, so präsentiert sie dem Benutzer fortlaufend mindestens ein Mal pro Sekunde ein möglichst aussagekräftiges Zwischenergebnis, mindestens in Form eines Fortschrittsbalkens. 
+		Nach Ablauf eines einstellbaren Timeouts präsentiert die Anwendung eine möglichst aussagekräftige Fehlermeldung. Benötigt die Bearbeitung einer Benutzereingabe länger als 2 Sekunden, so hat der Benutzer die Möglichkeit, den Bearbeitungsvorgang abzubrechen. 
+	\end{SollKrit}
+	\item 
+	\begin{SollKrit} 
+		Beim Entwurf einer Messkonfiguration soll der Benutzer die von ihm beabsichtigten Aktionen per Drag and Drop anstoßen können. Dies betrifft beispielsweise das Hinzufügen eines Konfigurationsbausteins oder das Erstellen einer Kante vom Ausgangs eines Bausteins mit dem Ausgang Baustein eines anderen Bausteins.
+	\end{SollKrit}
+	\item 
+	\begin{WunschKrit}
+		Da nicht immer alle Eingänge oder Ausgänge Verwendung finden müssen, sollen nicht benötigte Eingänge oder Ausgänge bei einem Baustein bzw. Bausteinprotoyp ausgeblendet bzw. unsichtbar gemacht werden können. 
+	\end{WunschKrit}
+	\item 
+	\begin{SollKrit}
+		Die Anwendung hält interaktiv zugängliche Erklärungen und Informationen zu den einzelnen GUI-Elementen bereit.
+	\end{SollKrit}
+	\item 
+	\begin{WunschKrit} 
+		Die Farben der GUI-Elemente sollen für den Benutzer anpassbar sein. Bei Benutzung der vorgeschlagener Farbschemata soll die grafische Benutzungsschnittstelle möglichst barrierefrei sein, d. h. die Semantik sollte auch für Benutzer mit Farberkennungsschwächen ohne Probleme zu erkennen sein.
+	\end{WunschKrit} 
+	
+	\item 
+	\begin{WunschKrit} 
+		Zur weiteren Barrierefreiheit sollte das Produkt beispielsweise für Schüler mit Sehbehinderung variable Darstellungsgrößen anbieten.
+	\end{WunschKrit}
+	
+	
+\end{itemize}
 
-\item Übertragung der Messdaten über Netzwerkschnittstelle
-\item Spiele, „nachmachen“ von vorgegebenen Messergebnissen
-\item Ausführliche Beschreibung der physikalische Hintergründe
 
- \end{itemize}
 
 \subsection{Abgrenzungskriterien}
 
 \begin{itemize}
-
-\item Unterschiedliche Benutzerkonten sind nicht zu implementieren
-
-\item Die zu erstellende Anwendung sieht keinerlei Erfassung oder Speicherung personenbezogener Nutzerdaten vor. Der Einsatz der Software erfordert dementsprechend keine Einverständniserklärung der Nutzer gemäß europäischer \gls{DSGVO}.
-
- \end{itemize}
+	
+	\item Unterschiedliche Benutzerkonten bzw. personalisierte Arbeitsumgebungen  für die einzelnen Benutzer sieht das Produkt nicht vor. 
+	
+	\item Die zu erstellende Anwendung sieht keinerlei Erfassung oder Speicherung personenbezogener Nutzerdaten vor. Der Einsatz der Software erfordert dementsprechend keine Einverständniserklärung der Nutzer gemäß europäischer \gls{DSGVO}.
+	
+\end{itemize}
 
 \section{Produkteinsatz}\label{produkteinsatz}
 
 \subsection{Anwendungsbereiche}
 
 Die Anwendung ist für die Verwendung in Schulklassen ab der 7. bis zu 10. Klasse für Schüler und Lehrer im Physikunterricht konzipiert. Ebenfalls soll die Anwendung in Physikprojekten, sowie \gls{Science Labs} verwendet werden können. 
-Als \gls{Open-Source Projekt} im Rahmen des \gls{OSL 2} steht die Anwendung jedoch jedem Interessierten zur Verwendung und Weiterentwicklung zur Verfügung.
+Als \gls{opensource}Projekt im Rahmen des \gls{osl2} steht die Anwendung jedoch jedem Interessierten zur Verwendung und Weiterentwicklung zur Verfügung.
 
 
 \subsection{Zielgruppe}
 
 Die Zielgruppen sind hauptsächlich Schülerinnen und Schüler im Physikunterricht, welche die Anwendung verwenden, um erste eigene Messungen durchzuführen. Das Ziel ist es den Schülern erste Einblicke in Messtechniken und Zusammenhänge zwischen Ursache und Wirkung zu zeigen. 
-Die Anwendung soll ebenfalls nicht nur von physikbegeisterten Schülern verwendet werden können, sondern auch für Schüler ohne ein großes Vorwissen in der Physik und Messtechniken eine interessante Plattform zu bieten, welche einfach zu verwenden ist.
+Die Anwendung soll ebenfalls nicht nur von physikbegeisterten Schülern verwendet werden können, sondern auch für Schüler ohne ein großes Vorwissen in der Physik und Messtechniken. Diesen Schülern soll ebenfalls eine interessante und einfach zu bedienende Plattform geboten werden.
+
 
 \subsection{Betriebsbedingungen}
 
-Die Anwendung läuft auf gewöhnlichen Schulcomputern, welche über eine USB-Schnittstelle mit einem \gls{RasPi} verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden die an das \gls{RasPi} angeschlossenen Messsensoren adressiert, welche die Messdaten wiederum über das \gls{RasPi} an die am Computer laufende Anwendung schicken. 
+Die Anwendung läuft auf Computern, welche über eine USB-Schnittstelle mit einem \gls{RasPi} verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden die an das \gls{RasPi} angeschlossenen Messsensoren adressiert, welche die Messdaten wiederum über das \gls{RasPi} an die am Computer laufende Anwendung schicken. 
 
 
 \section{Produktumgebung}\label{produktumgebung}
@@ -305,56 +522,55 @@ Die Anwendung läuft auf einem Computer, die Messdaten werden über Sensoren an 
 
 \subsection{Software}
 
-Die Anwendung läuft auf Computern mit den Betriebssystemen Linux ab Kernel 7 und Microsoft Windows ab Windows 7 oder neuer. Die Anwendung muss auf dem Computer vollständig installiert sein. 
+Die Anwendung läuft auf Computern mit den Betriebssystemen Linux ab Kernel 4.15 und Microsoft Windows ab Windows 10. Die Anwendung muss auf dem Computer vollständig installiert sein. 
 
 \subsection{Hardware}
 
-Die Anwendung läuft auf gewöhnlichen Computern, welche für den generellen Einsatz in der Schule gedacht sind.
+Die Anwendung läuft auf Computern, welche für den generellen Einsatz in der Schule gedacht sind.
 Die enthaltenen Komponenten sollten beispielsweise ein aktueller 4-Kern-Prozessor, 8 GB RAM,
-mindestens 256 GB Speicherplatz sein. Schnittstellen für USB, LAN und WLAN sind ebenfalls erforderlich. 
-Auf dem per USB-Schnittstelle verbundenen \gls{RasPi} muss \gls{PhyPiDAQ} installiert und verwendungsfähig sein.
-Die an den \gls{RasPi} angeschlossenen Messsensoren müssen richtig und sinnvoll angeschlossen sein.
+mindestens 256 GB Speicherplatz sein.\footnote{Beispielkonfiguration eines Schulcomputers nach dem Beraterkreis zur IT-Ausstattung von Schulen des Bayrischen Staatsministerium für Bildung und Kultus, Wissenschaft und Kunst, Votum 2016 unter \url{https://www.mebis.bayern.de/infoportal/konzepte/it-ausstattung/votum/}} Schnittstellen für USB und Netzwerk sind ebenfalls erforderlich. 
+Auf dem per USB-Schnittstelle verbundenen \gls{RasPi} der Variante 3 Mod. B+ muss \gls{PhyPiDAQ} installiert und verwendungsfähig sein.
+Die an den \gls{RasPi} angeschlossenen Sensoren müssen richtig und sinnvoll angeschlossen sein.
 
 \subsection{PhyPiDAQ}
 
-Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache \gls{python3} geschrieben ist bietet einfache und einheitliche Schnittstellen zur Verwendung der Messsensoren.
-
+Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache \gls{python3} geschrieben ist bietet einheitliche Schnittstellen zur Verwendung der Sensoren mit dem \gls{RasPi}. Die Verwendung setzt jedoch Grundkenntnisse im Umgang mit \gls{python3} und dem \gls{RasPi} voraus, weshalb es ungeeignet für den Einsatz in Schulen ist.
 
 \section{Funktionale Anforderungen}\label{funktionale}
 
 
-\subsection{GUI}
+\subsection{GUI} % Glossarverweise in Überschriften besser vermeiden
 
 \begin{itemize}
 \item[F010] Die Benutzer erreichen nach Öffnung der Anwendung direkt die \gls{GUI}.
-\item[F020] Der Benutzer öffnet durch den Optionen-Knopf die Einstellungen.
-\item[F030] Der Benutzer kann durch den Datei-Knopf die Dateiverwaltung öffnen.
-\item[F040] Der Benutzer kann durch den Hilfe-Knopf das Hilfe Fenster öffnen.
+\item[F020] Die Anwendung ist konfigurierbar. 
+\item[F030] Die Anwendung besitzt eine Dateiverwaltung.
+\item[F040] Die Anwendung bietet eine Hilfe-Oberfläche.
 \end{itemize}
 
 \subsubsection{Menüfeld}
 
 \begin{itemize}
-\item[F050] Der Benutzer öffnet durch den Sensoren-Knopf die Auswahl an Sensoren.
-\item[F060] Der Benutzer öffnet durch den Transformation-Knopf die Auswahl an Transformationen.
-\item[F070] Der Benutzer öffnet durch den Darstellungen-Knopf die Auswahl an Darstellungen.
-\item[F080] Der Benutzer erhält durch verschiedene Farben der Konfigurationsbausteine eine visuelle Repräsentationen ihrer Komplexität.
+\item[F050] Es gibt eine graphische Auswahl an vordefinierten Sensoren.
+\item[F060] Es gibt eine graphische Auswahl an vordefinierten Transformationen.
+\item[F070] Es gibt eine graphische Auswahl an vordefinierten Darstellungen.
+\item[F080] Der Benutzer erhält durch visuelle Repräsentationen der Konfigurationsbausteine eine Darstellung ihrer Komplexität.
 \end{itemize}
 
 \subsubsection{Optional: Zusätzliche Funktionen im Menüfeld}
 
 \begin{itemize}
 
-\item[F090] Der Benutzer kann durch den Sensoren hinzufügen-Knopf weitere Sensoren hinzufügen.
-\item[F100] Der Benutzer kann durch den Transformationen hinzufügen-Button weitere Transformationen hinzufügen.
-\item[F110] Die in Transformationen in F100 sollen in eigenen Python-Skripten geschrieben werden.
+\item[F090] Der Benutzer soll in F050 weitere Sensoren hinzufügen können.
+\item[F100] Der Benutzer soll in F060 weitere Transformationen hinzufügen können.
+\item[F110] Die in Transformationen in F100 sollen in eigenen Python-Skripten geschrieben werden können.
 \end{itemize}
 
 \subsubsection{Konfigurationsfeld}
 
 \begin{itemize}
 \item[F120] Durch \gls{dragdrop} kann der Benutzer Konfigurationsbausteine im Konfigurationsfeld platzieren.
-\item[F130] Durch Betätigen des Messung starten-Knopf startet der Nutzer eine Messung.
+\item[F130] Der Benutzer kann eine Messung starten.
 \end{itemize}
 
 
@@ -362,7 +578,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 \item[F140] Das Darstellungsfenster ist bei der Initialisierung der Anwendung leer.
-\item[F150] Durch die gls{Benutzerkonfiguration} im Konfigurationsfeld wird durch F090 automatisch die Darstellungsart im Darstellungsfenster geöffnet.
+\item[F150] Durch die \gls{Benutzerkonfiguration} im Konfigurationsfeld wird durch F130 automatisch die Darstellungsart im Darstellungsfenster geöffnet.
 \end{itemize}
 
 
@@ -371,19 +587,17 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F160] Über F030 kann der Benutzer gespeicherte Standartkonfigurationen öffnen oder alte Messwerte verwenden.
+\item[F160] Über F030 kann der Benutzer eine gespeicherte \gls{Benutzerkonfiguration} öffnen oder alte Messwerte verwenden.
 \item[F170] Durch F160 geladene Konfigurationen und Messdaten werden automatisch nach Format überprüft.
 \item[F180] Aus F050 kann der Benutzer Sensoren durch \gls{dragdrop} in das Konfigurationsfeld ziehen.
 \item[F190] Die Anwendung sollte automatisch überprüfen, ob der ausgewählte Sensor richtig angeschlossen ist.
-\item[F200] Die Anwendung gibt durch F190 automatisch eine visuelle Rückmeldung über die Farbe des Sensors und einer Pop-Up Benachrichtigung.
+\item[F200] Durch F190 wird dem Benutzer automatisch eine visuelle Rückmeldung gegeben.
 \item[F210] Aus F060 kann der Benutzer eine oder mehrere Transformationen durch \gls{dragdrop} in das Konfigurationsfeld ziehen.
 \item[F220] Die ausgewählten Transformationen kann der Benutzer mit einem ausgewählten Sensor verknüpfen.
-\item[F230] Die Anwendung sollte automatisch überprüfen, ob die Transformationen eine geeignete Kombination mit dem Sensor darstellt.
-\item[F240] Aus F070 kann der Benutzer eine Darstellungsart per \gls{dragdrop} in das Konfigurationsfeld zu ziehen.
-\item[F250] Die Ausgewählte Darstellung kann der Benutzer mit einer Transformation verknüpfen.
-\item[F260] Die Anwendung sollte automatisch überprüfen, ob die gewählte Darstellungsart eine sinnvolle Repräsentation der Messdaten darstellt.
-\item[F270] Über F030 kann der Benutzer seine eigene Konfiguration über einen Konfiguration speichern-Knopf speichern.
-\item[F280] Bausteine die ein Benutzer nicht mehr in dem Konfigurationsfeld haben möchte können durch \gls{dragdrop} in die Menüleiste wieder versteckt werden.
+\item[F230] Aus F070 kann der Benutzer eine Darstellungsart per \gls{dragdrop} in das Konfigurationsfeld zu ziehen.
+\item[F240] Die Ausgewählte Darstellung kann der Benutzer mit einer Transformation verknüpfen.
+\item[F250] Über F030 kann der Benutzer seine eigene\gls{Benutzerkonfiguration} speichern.
+\item[F260] Konfigurationsbausteine können durch \gls{dragdrop} in die Menüleiste wieder aus dem Konfigurationsfeld entfernt werden.
 
 \end{itemize}
 
@@ -391,9 +605,8 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F290] Die Anwendung besitzt einen Check-Knopf, welcher die \gls{Benutzerkonfiguration} auf Vollständigkeit und Richtigkeit
-kontrolliert
-\item[F300] Durch F290 wird durch visuelle Darstellung der Konfiguration dargestellt, ob sie verwendet werden kann.
+\item[F270] Die Anwendung besitzt einen Check-Knopf, welcher die \gls{Benutzerkonfiguration} auf Vollständigkeit und Richtigkeit kontrolliert
+\item[F280] Durch F270 wird durch visuelle Rückmeldung dargestellt,ob die Konfiguration verwendet werden kann.
 
 \end{itemize}
 
@@ -401,30 +614,30 @@ kontrolliert
 
 \begin{itemize}
 
-\item[F310] Der Nutzer kann in den Optionen, die Messlänge und die Wertebereiche festlegen.
-\item[F320] Der Nutzer kann durch F130 die Messung nach der gls{Benutzerkonfiguration} starten.
-\item[F330] Durch F320 wird automatisch mit der visuellen Darstellung der Messdaten begonnen.
-\item[F340] Der Nutzer kann durch den Messung Messung löschen-Knopf eine durchgeführte Messung pausieren und die visuelle Darstellung auf den Ausgangszustand bringen.
-\item[F350] Durch F340 wird nicht die gls{Benutzerkonfiguration} gelöscht.
-\item[F360] Durch F340 muss der Benutzer erst die Messung starten um weiter zu messen.
-\item[F370] Der Benutzer kann durch den Messung pausieren-Knopf die Messung pausieren.
-\item[F380] Der Benutzer kann durch den Messung-fortsetzen-Knopf die Messung fortsetzen.
+\item[F290] Der Nutzer kann Messlänge und die Wertebereiche einer Messung festlegen.
+\item[F300] Der Nutzer kann eine Messung nach der \gls{Benutzerkonfiguration} starten.
+\item[F310] Bei F300 wird automatisch überprüft ob die \gls{Benutzerkonfiguration} eine sinnvolle Kombination von Sensoren, Transformationen und Darstellungen ist.
+\item[F320] Durch F300 wird automatisch mit der visuellen Darstellung der Messdaten begonnen.
+\item[F330] Der Benutzer kann eine Messung löschen.
+\item[F340] Bei F330 wird die Messung gestoppt und die visuelle Darstellung auf den Ausgangszustand bringen.
+\item[F350] Durch F330 wird nicht die \gls{Benutzerkonfiguration} gelöscht.
+\item[F360] Durch F330 muss der Benutzer erst die Messung starten um weiter zu messen.
+\item[F370] Der Benutzer kann eine Messung pausieren.
+\item[F380] Der Benutzer kann eine Messung fortsetzen.
 \item[F390] Der Benutzer kann eine Messung durch F380 nur fortsetzen, wenn sie zuvor durch F370 pausiert wurde.
-\item[F400] Der Benutzer kann durch den Messdaten speichern-Knopf die gemessenen Daten speichern.
-\item[F410] Der Benutzer kann durch den Graph speichern-Knopf den durch die Messung erzeugten Graphen speichern.
+\item[F400] Der Benutzer kann die Messdaten speichern.
+\item[F410] Der Benutzer kann den durch die Messung erzeugten Graphen speichern.
 \item[F420] Bei F400 und F410 öffnet sich automatisch das Verzeichnis und der Nutzer muss einen eigenen Dateinamen eingeben und speichern. 
-
-
 
 \end{itemize}
 
 \subsection{Fehlermeldungen}
 
 \begin{itemize}
-\item[F430] Durch F170 geladene Konfigurationen und Messdaten werden automatisch nach Format überprüft und eine aussagekräftige Fehlermeldung zurückgegeben.
-\item[F440] Durch F240 und F270 wird bei einer ungültigen Kombination von zwei Konfigurationsbausteinen eine aussagekräftige Fehlermeldung zurückgegeben
-\item[F450] Die Anwendung sollte dem Benutzer automatisch durch Pop-Up Benachrichtigung darauf hinweisen, dass bei Betätigen des Messung löschen-Button oder bei Schließen der Anwendung die Messdaten ohne vorheriges Betätigen des Messdaten speichern-Button verloren gehen.
-\item[F460] Die Anwendung sollte dem Benutzer eine aussagekräftige Fehlermeldung zurückgeben, falls es zu einem Datenabbruch der Messdaten kommt.
+\item[F430] Durch F170 wird bei einem falschen Format eine aussagekräftige Fehlermeldung zurückgegeben.
+\item[F440] Die Anwendung sollte dem Benutzer automatisch beim Löschen einer Messung oder beim Schließen der Anwendung darauf hinweisen, dass die Messdaten ohne Speichern der Messdaten verloren gehen.
+\item[F450] Die Anwendung sollte dem Benutzer eine aussagekräftige Fehlermeldung zurückgeben, falls es zu einem Datenabbruch der Messdaten kommt.
+\item[F460] Durch F310 wird bei einer Benutzerkonfiguration, welche nicht verwendet werden kann eine aussagekräftige Fehlermeldung zurückgegeben.
 
 \end{itemize}
 
@@ -434,8 +647,8 @@ kontrolliert
 
 \begin{itemize}
 
-\item[F470] Bei enthaltenen Konfigurationsbausteine sollen einen Information-Knopf besitzen, über welche der Benutzer Informationen und Hilfestellung bereitgestellt bekommt.
-\item[F480] Über den Hilfe-Knopf erhält der Nutzer eine kurze Beschreibung zur Funktionalität der Anwendung.
+\item[F470] Die Konfigurationsbausteine erhalten Informationen, über welche der Benutzer Informationen und Hilfestellung bereitgestellt bekommt.
+\item[F480] Über F040 erhält der Nutzer eine kurze Beschreibung zur Funktionalität der Anwendung.
 
 \end{itemize}
 
@@ -451,7 +664,7 @@ kontrolliert
 
 \begin{itemize}
 
-\item[F500] Die Anwendung stellt dem Benutzer weitere Sprachpakete für die GUI zur Verfügung.
+\item[F500] Die Anwendung stellt dem Benutzer weitere Sprachpakete für die \gls{GUI} zur Verfügung.
 \item[F510] Durch F020 ist die Sprache für den Nutzer änderbar.
 
 \end{itemize}
@@ -479,12 +692,11 @@ Zu speichern sind ausschließlich:
 
 \begin{itemize}
 
-\item Konfigurationsdaten
-\item Physikalische Messdaten
+\item[D010] \gls{Benutzerkonfiguration}(en)
+\item[D020] Messdaten
+\item[D030] Sensorkonfigurationsdaten
 
 \end{itemize}
-
-Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \section{Nichtfunktionale Anforderungen}\label{nichtfunktionale}
 
@@ -492,12 +704,14 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \begin{itemize}
 
-\item[NF010] Auslesen von Sensordaten innerhalb von (?) ms. //TODO PhyPiDAQ Abhängigkeit
-\item[NF015] Alle (5?) ms können neue Daten angefordert werden.
-\item[NF020] Verarbeitung ausgelesener Daten innerhalb von 10 ms.
-\item[NF030] Bis zu drei Sensoren können zeitgleich verwendet werden.
-\item[NF040] Bis zu (6?) Transformationen können hintereinander verbunden werden.
-\item[NF050] Bis zu (3?) Senken können zeitgleich verwendet werden.
+\item[NF010] Auslesen von \gls{messdaten} von einem einzelnen Sensor innerhalb von 50 ms.
+\item[NF020] Alle 20 ms können neue Messdaten angefordert werden.
+\item[NF030] Bis zu drei \glspl{sensor} können zeitgleich verwendet werden, ohne die Leistung zu beeinträchtigen.
+\item[NF040] Mehrere \glspl{transformation} können hintereinander eingestellt werden.
+\item[NF045] Verarbeitung von Daten benötigt maximal 10 ms pro Transformation.
+\item[NF050] Mehrere \glspl{darstellung} können zeitgleich verwendet werden.
+\item[NF055] Darstellung von Daten benötigt maximal 30 ms pro Darstellungsbaustein.
+\item[NF060] Die Anwendung reagiert auf Benutzereingaben innerhalb von zwei Sekunden; mindestens mit einem Zwischenergebnis, Ladebalken oder ähnlichem.
 
 \end{itemize}
 
@@ -505,10 +719,10 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \begin{itemize}
 
-\item[NF110] Die Benutzeroberfläche ist für Siebtklässler verständlich.
-\item[NF115] Nicht intuitiv verständliche Funktionen werden dem Benutzer erklärt.
+\item[NF110] Die \gls{BenOber} ist ergonomisch gestaltet, orientiert an ISO 9241.
+\item[NF115] Nichttriviale Funktionen werden dem Benutzer erklärt.
 \item[NF120] Ungespeicherte Daten werden nicht ohne Warnung verworfen.
-\item[NF130] Programmfehler werden dem Benutzer gegenüber klar kommuniziert.
+\item[NF130] Über Programmfehler wird der Benutzer gegenüber durch aussagekräftige Fehlermeldungen informiert.
 \item[NF140] Schriftgröße von Text kann verändert werden.
 \item[NF150] Farbschema von farbigen \gls{UI}-Elementen ist veränderbar.
 \item[NF160] Die Sprache der Benutzeroberfläche kann verändert werden.
@@ -519,11 +733,11 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \begin{itemize}
 
-\item[NF210] Die Anwendung reagiert konsistent auf Eingaben.
-\item[NF220] Korrekte Bedienung und Eingaben führen exakt zu den erwarteten Effekten.
-\item[NF230] Unerwartete und fehlerhafte Eingaben führen nicht zum Systemabsturz.
-\item[NF240] Verbindungsverlust von Sensoren führt nicht zum Systemabsturz.
-\item[NF250] Unerwartete Sensordaten (z.B. außerhalb eines eingestellten Wertebereichs) führen nicht zum Systemabsturz.
+\item[NF210] Konsistenz: Bei gleichen Vorbedingungen führen identische Eingaben auch zum gleichen Ergebnis.
+\item[NF220] Korrektheit: Bei korrekten Eingaben werden die erwarteten funktionalen Anforderungen erfüllt.
+\item[NF230] Unerwartete und fehlerhafte Eingaben führen nicht zum Absturz der Anwendung.
+\item[NF240] Verbindungsverlust von \glspl{sensor} führt nicht zum Absturz der Anwendung.
+\item[NF250] Unerwartete \gls{messdaten} (z.B. außerhalb eines eingestellten Wertebereichs) führen nicht zum Absturz der Anwendung.
 
 \end{itemize}
 
@@ -531,16 +745,35 @@ Es sollen keine benutzer- oder personenbezogenen Daten gespeichert werden.
 
 \begin{itemize}
 
-\item[NF310] Die Software ist vollständig quelloffen und frei.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
-\item[NF320] Die Software ist einfach erweiterbar durch Außenstehende.
-\item[NF400] Die Datenschutz-Grundverordnung wird nicht verletzt.
+\item[NF310] Die Software erfüllt die Definition von \gls{opensource}- und freier Software.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
+\item[NF320] Die Software ist erweiterbar und anpassbar an veränderte Umstände, auch durch Außenstehende.
+\item[NF330] Die \gls{DSGVO} wird nicht verletzt; d.h. personenbezogene Daten werden ausschließlich dann verarbeitet, wenn sie vom Benutzer freiwillig eingespeist werden.
+\item[NF340] Daten werden ausschließlich lokal gespeichert.
 
 \end{itemize}
 
+\subsection{Qualitätsanforderungen}
+
+Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
+
+\begin{tabular}{ | c | c | c | c | c | }
+	\hline
+	\textbf{Merkmal} & \textbf{sehr wichtig} & \textbf{wichtig} & \textbf{weniger wichtig} & \textbf{unwichtig} \\
+	\hline
+	Robustheit & X & & & \\
+	Zuverlässigkeit & & X & & \\
+	Benutzerfreundlichkeit & X & & & \\
+	Effizienz & & X & & \\
+	Portierbarkeit & & & X & \\
+	Kompatibilität & & & X & \\
+	\hline
+\end{tabular}
+
 \section{Globale Testfälle und Testszenarien}\label{testfall}
+
 \subsection{Einführung}
 
-In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur Handhabung von Fehlern dargestellt. Zum besseren Verständnis werden noch einmal einige verwendete Begriffe und der generelle Ablauf einer Nutzung erläutert. Die Anwendung bezeichnet die gesamte in diesem Projekt erstellte Software. Sie benutzt Konfigurationen um einen Versuchsaufbau zu modellieren. Eine Konfiguration besteht aus Bausteinen(Sensor, Transformation, Darstellung / Senke) und deren Verbindungen untereinander. Die Bausteine können selbst wieder eingestellt werden. Die Konfigurationen werden in der Konfigurationsfläche erstellt. Außerdem können sie geladen und gespeichert werden. Eine (Mess-)Konfiguration muss vor der eigentlichen Benutzung "`erstellt"' werden. Beim Erstellen überprüft die Anwendung, ob eine gültige Konfiguration vorliegt. Ist die Konfiguration erstellt, kann sie als Messung gestartet werden. Um die resultierenden Daten und Graphen zu speichern, muss die Messung gestoppt werden.
+In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur Handhabung von Fehlern dargestellt. Zum besseren Verständnis werden noch einmal einige verwendete Begriffe und der generelle Ablauf einer Nutzung erläutert. Die Anwendung bezeichnet die gesamte in diesem Projekt erstellte Software. Sie benutzt \gls{Benutzerkonfiguration}en um einen Versuchsaufbau zu modellieren. Eine Messkonfiguration besteht aus Bausteinen(\gls{sensor}, \gls{transformation}, \gls{darstellung}) und deren Verbindungen untereinander. Die Bausteine können selbst wieder  durch eine \gls{konfigdata} eingestellt werden. Die Messkonfigurationen werden in der Konfigurationsfeld erstellt. Außerdem können sie geladen und gespeichert werden. Beim Starten überprüft die Anwendung, ob eine gültige Messkonfiguration vorliegt. Um die resultierenden Daten und Graphen zu speichern, muss die Messung gestoppt werden.
 
 \subsection{Testfälle zur Nutzung der Anwendung}
 
@@ -553,11 +786,11 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Vorbedingung:} Die Anwendung ist installiert. Zu Sehen ist der Desktop des Benutzers mit einer Verknüpfung zur Anwendung.
 \item []\textbf{Aktion:} Der Benutzer öffnet die Anwendung über die Verknüpfung. Danach informiert er sich über die Anwendung über die Hilfe in der Systemleiste.
-\item []\textbf{Reaktion:} Die Anwendung öffnet sich. Zu Sehen ist das Hauptfenster mit leerer Konfigurationsfläche und leeren Darstellungen. Nach dem Öffnen der Hilfe, sieht der Benutzer die nötigen Informationen zur Bedienung der Anwendung. 
+\item []\textbf{Reaktion:} Die Anwendung öffnet sich. Zu Sehen ist das Hauptfenster mit leerer Konfigurationsfeld und leeren Darstellungen. Nach dem Öffnen der Hilfe, sieht der Benutzer die nötigen Informationen zur Bedienung der Anwendung. 
 \item []\textbf{Nachbedingung:} Nach dem öffnen der Anwendung, überprüft diese, ob ein \gls{RasPi} angeschlossen ist. Jeder dargestellte Text ist auf Deutsch.
 
 \item []\textbf{Ergebnis:} Der Benutzer kann die Anwendung starten. Die Bedienung der Anwendung ist komplett auf Deutsch möglich.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F010 erreiche GUI nach Start, F140 leere Darstellung nach Anwendungsstart, F480 Hilfe zu Anwendung, F490
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F010 erreiche GUI nach Start, F140 leere Darstellung nach Anwendungsstart, F480 Hilfe zu Anwendung, F490 Texte der Anwendung auf Deutsch
 
 \end{itemize}
 
@@ -567,30 +800,30 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Ausführen der Demo. Die Demo nutzt Daten aus einer Datei und benötigt keinen angeschlossenen \gls{RasPi}.
 
-\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet worden. Zu Sehen ist das offene Hauptfenster mit leerer Konfigurationsfläche.
-\item []\textbf{Aktionen:} Der Benutzer öffnet die Konfigurationsdatei der Demo mit Hilfe der Ladefunktion der Systemleiste. Sobald die Konfiguration geladen ist, erstellt der Benutzer den Messversuch und startet ihn danach.
-\item []\textbf{Reaktionen:} Nach dem Laden ist die Konfiguration in der Konfigurationsfläche sichtbar. Nach dem Starten der Messung sieht der Benutzer wie die Daten im Graph dargestellt werden.
-\item []\textbf{Nachbedingung:} Die Anwendung ist offen. Eine gültige Konfiguration ist in der Konfigurationsfläche geladen. Die Messung läuft ohne Fehler und die Ergebnisse werden richtig dargestellt.
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet worden. Zu Sehen ist das offene Hauptfenster mit leerer Konfigurationsfeld.
+\item []\textbf{Aktionen:} Der Benutzer öffnet die Messkonfigurationsdatei der Demo mit Hilfe der Ladefunktion der Systemleiste. Sobald die Messkonfiguration geladen ist, erstellt der Benutzer den Messversuch und startet ihn danach.
+\item []\textbf{Reaktionen:} Nach dem Laden ist die Messkonfiguration in der Konfigurationsfeld sichtbar. Nach dem Starten der Messung sieht der Benutzer wie die Daten im Graph dargestellt werden.
+\item []\textbf{Nachbedingung:} Die Anwendung ist offen. Eine gültige Messkonfiguration ist in der Konfigurationsfeld geladen. Die Messung läuft ohne Fehler und die Ergebnisse werden richtig dargestellt.
 
-\item []\textbf{Ergebnis:} Die Anwendung kann eine Konfiguration, die nur Daten aus einer Datei benötigt, problemlos ohne angeschlossenem \gls{RasPi} durchführen. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F130 Starten einer Messung, F160 Laden einer Konfiguration
+\item []\textbf{Ergebnis:} Die Anwendung kann eine Messkonfiguration, die nur Daten aus einer Datei benötigt, problemlos ohne angeschlossenem \gls{RasPi} durchführen. 
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F130 Starten einer Messung, F160 Laden einer Messkonfiguration
 
 \end{itemize}
 
 
 
-\item[T030] Lehrer erstellt und speichert eine Konfiguration
+\item[T030] Lehrer erstellt und speichert eine Messkonfiguration
 \begin{itemize}
 
-\item []\textbf{Testziel:} Teste eine typische Verwendung der Software anhand des gegebenen Szenarios. Dabei wird das Erstellen, Verändern und Speichern einer Konfiguration getestet.
+\item []\textbf{Testziel:} Teste eine typische Verwendung der Software anhand des gegebenen Szenarios. Dabei wird das Erstellen, Verändern und Speichern einer Messkonfiguration getestet.
 
-\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Konfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
-\item []\textbf{Aktionen:} Der Lehrer zieht zwei angeschlossene Sensoren und eine Transformation in die Konfigurationsfläche. Danach ändert er einige Einstellungen an der Konfiguration. Das Ergebnis speichert er über die Systemleiste als Konfigurationsdatei.
-\item []\textbf{Reaktion:} Nach jedem hinzufügen eines Sensors oder einer Transformation, wird an der entsprechenden Stelle das jeweilige Icon sichtbar. Nach dem Speichern der Konfiguration sieht der Lehrer die erstellte Datei.
-\item []\textbf{Nachbedingung:} Die Anwendung prüft beim Hinzufügen eines Sensor-Icons, ob der Sensor angeschlossen ist. Die Anwendung speichert die angepassten Einstellungen, sofern sie gültig sind. Die Konfigurationsdatei wird erstellt, unabhängig ob die Konfiguration vollständig oder gültig ist.
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Messkonfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
+\item []\textbf{Aktionen:} Der Lehrer zieht zwei angeschlossene Sensoren und eine Transformation in die Konfigurationsfeld. Danach ändert er einige Einstellungen an der Messkonfiguration. Das Ergebnis speichert er über die Systemleiste als Messkonfigurationsdatei.
+\item []\textbf{Reaktion:} Nach jedem Hinzufügen eines Sensors oder einer Transformation, wird an der entsprechenden Stelle das jeweilige Icon sichtbar. Nach dem Speichern der Messkonfiguration sieht der Lehrer die erstellte Datei.
+\item []\textbf{Nachbedingung:} Die Anwendung prüft beim Hinzufügen eines Sensor-Icons, ob der Sensor angeschlossen ist. Die Anwendung speichert die angepassten Einstellungen, sofern sie gültig sind. Die Messkonfigurationsdatei wird erstellt, unabhängig ob die Messkonfiguration vollständig oder gültig ist.
 
-\item []\textbf{Ergebnis:} Die Anwendung kann eine Konfiguration als Datei speichern und prüfen, ob ein Sensor angeschlossen ist.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F180 füge Sensor hinzu, F190 prüfe ob Sensor angeschlossen, F210 füge Transformation hinzu, F270 speichere Konfiguration, F310 Einstellungen Konfiguration 
+\item []\textbf{Ergebnis:} Die Anwendung kann eine Messkonfiguration als Datei speichern und prüfen, ob ein Sensor angeschlossen ist.
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F180 füge Sensor hinzu, F190 prüfe ob Sensor angeschlossen, F210 füge Transformation hinzu, F250 speichere Messkonfiguration, F290 Einstellungen Messkonfiguration 
 
 \end{itemize}
 
@@ -599,15 +832,16 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Testziel:} Teste die Anwendung aus Sicht eines Schülers, der eine Aufgabe bearbeiten soll.
 
-\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Konfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Messkonfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
 
-\item []\textbf{Aktionen:} Der Schüler lädt über die Systemleiste die Konfiguration der Aufgabe. Danach informiert er sich über die Sensoren, Transformationen und Darstellungen über die Hilfestellungen neben den Icons. Als Nächstens vollendet er die Konfiguration. Dann wird sie erstellt. 
-\item []\textbf{Reaktionen:} Nach dem Laden sieht der Schüler die Konfiguration in der Konfigurationsfläche. Wenn der Schüler die Hilfe-Icons aufruft, bekommt er die wesentlichen Informationen die er zur Verwendung der Anwendung braucht. Weiter sieht er, wie sich die graphische Darstellung der Konfiguration durch seine Aktionen verändert. 
-\item []\textbf{Nachbedingung:} Die Anwendung prüft beim Laden der Konfiguration, ob die Sensoren angeschlossen sind. Weiter prüft sie, ob die Konfiguration beim Erstellen gültig ist. 
+\item []\textbf{Aktionen:} Der Schüler lädt über die Systemleiste die Messkonfiguration der Aufgabe. Danach informiert er sich über die Sensoren, Transformationen und Darstellungen über die angebotene Hilfestellungen. Als Nächstens vollendet er die Messkonfiguration.
+ 
+\item []\textbf{Reaktionen:} Nach dem Laden sieht der Schüler die Messkonfiguration in der Konfigurationsfeld. Wenn der Schüler die Hilfe aufruft, bekommt er die wesentlichen Informationen die er zur Verwendung der Anwendung braucht. Weiter sieht er, wie sich die graphische Darstellung der Messkonfiguration durch seine Aktionen verändert. 
+\item []\textbf{Nachbedingung:} Die Anwendung prüft beim Laden der Messkonfiguration, ob die Sensoren angeschlossen sind. 
 
 
-\item []\textbf{Ergebnis:} Der Benutzer kann Konfigurationen laden, diese verändern und durch das Erstellen auf Gültigkeit prüfen. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F240 füge Darstellung, F470 Hilfe Bausteine, TODO Erstellen Konfiguration
+\item []\textbf{Ergebnis:} Der Benutzer kann Messkonfigurationen laden, diese verändern und durch das Erstellen auf Gültigkeit prüfen. 
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F230 füge Darstellung, F470 Hilfe Bausteine
 
 \end{itemize}
 
@@ -616,15 +850,15 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Testziel:} Teste die Anwendung aus Sicht eines Schülers, der Messung starten und deren Ergebnisse speichern soll.
 
-\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es ist die in T040 erstelle Konfiguration geladen und erstellt worden.
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es ist die in T040 erstelle Messkonfiguration geladen worden.
 
 \item []\textbf{Aktionen:} Der Schüler startet die Messung. Während der Messung beeinflusst er die Daten durch einen Sensor. Am Ende der Messung speichert der Schüler den resultierenden Graphen und die Werte als Dateien ab.
 \item []\textbf{Reaktionen:} Nach dem Starten, sieht er, wie die Daten als Graphen dargestellt und diese durch seine Aktionen verändert werden. Die Ergebnisse der Messung sieht er nach dem Speichern als erstellte Dateien.
-\item []\textbf{Nachbedingung:} Während die Messung läuft, werden die Daten verarbeitet und dargestellt unabhängig davon, ob der Schüler sie durch den Sensor beeinflusst. Die Ergebnisse sind zum Speichern verfügbar, sobald die Messung angehalten wurde.
+\item []\textbf{Nachbedingung:} Die Anwendung prüft vor dem Starten der Messung, ob die Messkonfiguration gültig ist. Während die Messung läuft, werden die Daten verarbeitet und dargestellt unabhängig davon, ob der Schüler sie durch den Sensor beeinflusst. Die Ergebnisse sind zum Speichern verfügbar, sobald die Messung angehalten wurde.
 
 
-\item []\textbf{Ergebnis:} Der Benutzer die Messung einer gültigen Konfiguration starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F F320 Starte Messung, F330 stelle Ergebnisse dar, F400 speichere Messdaten, F410 speichere Messgraph
+\item []\textbf{Ergebnis:} Der Benutzer die Messung einer gültigen Messkonfiguration starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F300 Starte Messung, F320 stelle Ergebnisse dar, F400 speichere Messdaten, F410 speichere Messgraph
 
 
 \end{itemize}
@@ -634,10 +868,10 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \begin{itemize} 
 
-\item[T200] Laden einer ungültigen Datei als Konfiguration
+\item[T200] Laden einer ungültigen Datei als Messkonfiguration
 \begin{itemize}
 
-\item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Laden von ungültigen Konfigurationsdateien.
+\item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Laden von ungültigen Messkonfigurationsdateien.
 
 \item []\textbf{Vorbedingung:} Geöffnete Anwendung.
 \item []\textbf{Aktionen:} Der Benutzer öffnet den Dialog zum Laden einer Datei über die Systemleiste und wählt eine Datei mit ungültigem Format zum Laden aus.
@@ -645,7 +879,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Die Anwendung überprüft, ob die Datei ein gültiges Format hat und verhindert das Laden von ungültigen Formaten. 
 
 
-\item []\textbf{Ergebnis:} Die Anwendung kann beim Laden von Konfigurationen zwischen gültigen und ungültigen Dateiformaten unterscheiden und entsprechend reagieren.
+\item []\textbf{Ergebnis:} Die Anwendung kann beim Laden von Messkonfigurationen zwischen gültigen und ungültigen Dateiformaten unterscheiden und entsprechend reagieren.
 \item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F430 überprüfe Format bei Laden
 
 \end{itemize}
@@ -657,12 +891,12 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Vorbedingung:} Das Hauptfenster der Anwendung ist geöffnet. Die verwendeten Sensoren sind angeschlossen.
 
-\item []\textbf{Aktionen:} Der Benutzer konstruiert eine Konfiguration aus zwei Sensoren, einer Transformation und einer Darstellung. Allerdings verbindet er die Darstellung nicht mit dem Rest der Konstruktion und erstellt die Messkonfiguration.
-\item []\textbf{Reaktionen:} Eine Fehlermeldung wird ausgegeben. Die Anwendung bleibt offen.
-\item []\textbf{Nachbedingung:} Die Anwendung überprüft beim Erstellen der Messkonfiguration, ob diese gültig ist.
+\item []\textbf{Aktionen:} Der Benutzer konstruiert eine Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung. Allerdings verbindet er die Darstellung nicht mit dem Rest der Konstruktion und startet die Messkonfiguration.
+\item []\textbf{Reaktionen:} Die Messung wird nicht gestartet, sondern eine Fehlermeldung wird ausgegeben.
+\item []\textbf{Nachbedingung:} Die Anwendung überprüft vor dem Starten der Messkonfiguration, ob diese gültig ist.
 
-\item []\textbf{Ergebnis:} Die Anwendung kann beim Erstellen zwischen gültigen und ungültigen Konfigurationen unterscheiden und entsprechend reagieren
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} TO DO
+\item []\textbf{Ergebnis:} Die Anwendung kann beim Starten zwischen gültigen und ungültigen Messkonfigurationen unterscheiden und entsprechend reagieren.
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F310 überprüfe Messkonfiguration beim Start
 
 \end{itemize}
 
@@ -671,13 +905,13 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Testziel:} Teste das Verhalten der Anwendung, wenn ein Sensor ausfällt und dessen Datenstrom abbricht.
 
-\item []\textbf{Vorbedingung:} Die Anwendung ist geöffnet. Alle verwendeten Sensoren sind angeschlossen und betriebsbereit. Eine Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung wurde geladen und erstellt.
+\item []\textbf{Vorbedingung:} Die Anwendung ist geöffnet. Alle verwendeten Sensoren sind angeschlossen und betriebsbereit. Eine gültige Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung wurde geladen.
 \item []\textbf{Aktionen:} Der Benutzer startet die Messung. Aus einem unbekannten Grund wird die Verbindung zu einem Sensor getrennt.
 \item []\textbf{Reaktionen:} Die Messung stoppt. Eine Fehlermeldung wird ausgegeben.
 \item []\textbf{Nachbedingung:} \gls{PhyPiDAQ} verliert die Verbindung zu einem Sensor und sendet keine Daten mehr an die Anwendung. Die Anwendung stürzt nicht ab, sondern gibt eine Fehlermeldung aus.
 
-\item []\textbf{Ergebnis:} Die Anwendung kann mit dem ungewollten Verlust eines Datenstroms umgehen ohne einen Absturz.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F460 Melde Abbruch des Datenstrom
+\item []\textbf{Ergebnis:} Die Anwendung kann mit dem ungewollten Verlust eines Datenstroms umgehen ohne abzustürzen.
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F450 Melde Abbruch des Datenstrom
 
 \end{itemize}
 
@@ -689,11 +923,11 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 Das projektierte Gesamtsystem wird aller Voraussicht nach drei Systemprozesse benötigen, die wie in Abbildung \ref{DeploymentDiagram} dargestellt, miteinander Daten austauschen.
 
-Einer dieser drei Systemprozesse hostet die Java-Virtual-Machine, auf der die zu erstellende Hauptkomponente läuft. Diese enthält die grafische Benutzungsoberfläche, die im Wesentlichen die Erstellung der Werte verarbeitenden Messkonfiguration ermöglicht, und die auch deren Betrieb darstellen kann. 
+Einer dieser drei Systemprozesse hostet die \gls{JVM}, auf der die zu erstellende Hauptkomponente läuft. Diese enthält die grafische Benutzungsoberfläche, die im Wesentlichen die Erstellung der Werte verarbeitenden Messkonfiguration ermöglicht, und die auch deren Betrieb darstellen kann. 
 
-Zum Ansteuern und Auslesen der Sensoren auf dem Rasperry Pi wird das auf Python basierende Framework PhyPiDAQ bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die Java-Virtual-Machine ausgeführt werden kann, wird für diesen ein zweiter Systemprozess benötigt.
+Zum Ansteuern und Auslesen der Sensoren auf dem \gls{RasPi} wird das auf Python basierende Framework \gls{PhyPiDAQ} bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die \gls{JVM} ausgeführt werden kann, wird für diesen ein zweiter Systemprozess benötigt.
 
-Um Resourcenknappheit auf dem Rasperry Pi aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend ebenso auf dem Rasperry Pi ausgeführt werden müssen. 
+Um Ressourcenknappheit auf dem \gls{RasPi} aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend ebenso auf dem \gls{RasPi} ausgeführt werden müssen. 
 
 Falls denn nun die Hauptkomponente tatsächlich auf einem anderen Rechner ausgeführt werden sollte, so muss sie mit dem Python-Interpreter hardware- bzw. plattformübergreifend Daten austauschen können. Bisher stellt PhyPiDAQ hierfür jedoch keine Funktionalität zur Verfügung.
 
@@ -710,7 +944,7 @@ Zur Realisierung der hardwareübergreifenden Kommunikation sind die folgenden zw
 
 Da bei letzterer Variante die Utility-Softwarekompomente zusätzlich auch noch eine Überwachungsfunktion bezüglich PhyPiDAQ übernehmen und dieses im Falle von Abstürzen und Nicht-Responsivität erneut ausführen kann, ist letztere Lösungsvariante die bevorzugte Lösungsvariante zur Realisierung der optionalen hardwareübergreifenden Kommunikation. 
 
-Abbildung \ref{DeploymentDiagram} stellt die Verteilung der Systemkomponenten auf zwei Rechnern mittels der gewählten zweiten Lösungsvariante dar, und benennt die notwendige Utility-Komponente mit "Measurement-Server". 
+Abbildung \ref{DeploymentDiagram} stellt die Verteilung der Systemkomponenten auf zwei Rechnern mittels der gewählten zweiten Lösungsvariante dar, und benennt die notwendige Utility-Komponente mit ,,Measurement-Server``. 
  
 
 \begin{figure}[h]
@@ -729,7 +963,7 @@ Das Ziel der Benutzeroberfläche ist es dem Anwender eine intuitive Benutzung de
 
 \subsection{Generell}
 
-Um die Ziele zu erfüllen wird das Programm über eine \gls{GrafBenOber}) (kurz "GUI") bedient. Der Anwender soll in der Lage sein bereits vorhandene Computer und Mobilgerät Kenntnisse zu nutzen.
+Um die Ziele zu erfüllen wird das Programm über eine \gls{GrafBenOber}) (kurz ,,GUI``) bedient. Der Anwender soll in der Lage sein bereits vorhandene Computer und Mobilgerät Kenntnisse zu nutzen.
 
 \subsection{Eingabegeäte}
 
@@ -767,7 +1001,7 @@ In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte 
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/PhyPiDAQ.png} & Der Name des Programmes wird hier angezeigt. Rechts daneben steht, sofern vorhanden, der Name der Datei, die gerade geöffnet ist.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Maximieren.png} & Das ''Maximieren''-Symbol vergrößert das Programmfenster auf die maximale Größe. Die Größe ist von der Benutzungsumgebung abhängig.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Minimieren.png} & Das ''Minimieren''-Symbol blendet das Programmfenster aus. Es ist weiterhin geöffnet und wieder aufrufbar. \\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Schliessen.png} & Das ''Schliessen''-Symbol beendet die Anwendung. Vor dem Beenden findet eine Abfrage statt, ob der Anwender eventuell vorgenommene Änderungen speichern möchte.\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Schliessen.png} & Das ''Schließen''-Symbol beendet die Anwendung. Vor dem Beenden findet eine Abfrage statt, ob der Anwender eventuell vorgenommene Änderungen speichern möchte.\\
 \end{tabular}
 
 \subsubsection{Auswahl}
@@ -783,7 +1017,7 @@ In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte 
 	\begin{itemize} 
 		\item Das Kopieren eines ausgewählten Objektes
 		\item Das Einfügen eines gespeicherten Objektes
-		\item Das Anpassen eines ausgewälten Elements. Diese Einstellungsmöglichkeiten sind von dem Objekt abhängig.
+		\item Das Anpassen eines ausgewählten Elements. Diese Einstellungsmöglichkeiten sind von dem Objekt abhängig.
 	\end{itemize}\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensor.png} & Der Benutzer kann sich eine Auswahl von \glspl{sensor} anzeigen lassen. Die \glspl{sensor} können anschließend in das Konfigurationsfeld eingefügt werden. Die angezeigte Auswahl ist unabhängig von den angeschlossenen Sensoren\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindung.png} & Der Benutzer kann sich eine Auswahl von \glspl{transformation} anzeigen lassen. Die \glspl{transformation} können anschließend per \gls{dragdrop} in das Konfigurationsfeld gezogen werden. Die Auswahl kann unter Optionen erweitert werden.\newline\\
@@ -796,17 +1030,17 @@ In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte 
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Hilfe.png} & Der Benutzer kann sich eine allgemeine Hilfe anzeigen lassen. In der Hilfe werden die Funktionen der Anwendung erklärt.\newline\\
 \end{tabular}
 
-Im Laufe der Entwicklung kann es sich als sinnvoll herrausstellen weitere Optionen einzufügen bzw. bestehende Optionen zusammenzufügen.
+Im Laufe der Entwicklung kann es sich als sinnvoll herausstellen weitere Optionen einzufügen bzw. bestehende Optionen zusammenzufügen.
 
 \subsubsection{Konfigurationsfeld}
 
 \begin{tabular}[t]{p{1cm} p{10cm}}
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Information.png} & Das ''Informations''-Symbol zeigt nach einem Click weiterführende Informationen zu dem Element an, zu dem es gehört. So würde beispielsweise bei einer Transformation die Funktion angezeigt werde, die sie realisiert.\newline\\\cline{1-2}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensorelement.png} & Repräsentation eines Sensors, der in PhyPiDAQ erkannt werden kann. Vorraussetzung hierfür ist die Existenz einer \gls{konfigdata}.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensorelement.png} & Repräsentation eines Sensors, der in PhyPiDAQ erkannt werden kann. Voraussetzung hierfür ist die Existenz einer \gls{konfigdata}.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Sensor.png} & Die zu einem Sensor gehörende Eingabe. Die Eingabe wird nur angezeigt, wenn auch die Kanäle angezeigt werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Sensor.png} & Die zu einem Sensor gehörende Ausgabe. Jeder Sensor hat genau eine Ausgabe.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Kanal.png} & Der zu einem Sensor gehörende Kanal. Die Anzahl an angezeigten Kanlälen hängt von dem Sensor ab. In den Optionen kann eingestellt werden, ob die Kanäle angezeigt werden.\newline\\\cline{1-2}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.png} & Repräsentation einer \gls{transformation}. Abhängig von der Anzahl an Eingängen der Transformation besitzt die GUI dementsprechend viele Eingänge. Jedem Eingang können durch Einfügen von einer Verbindung Daten übergegen werden.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.png} & Repräsentation einer \gls{transformation}. Abhängig von der Anzahl an Eingängen der Transformation besitzt die GUI dementsprechend viele Eingänge. Jedem Eingang können durch Einfügen von einer Verbindung Daten übergeben werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Verbindung.png} & Die Eingabe einer Transformation. Die Anzahl der verfügbaren Eingaben hängt von der Transformation ab.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Transformation.png} & Die Ausgabe einer Transformation. Jede Transformation hat genau eine Ausgabe.\newline\\\cline{1-2}
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungspfeil.png} & Eine Verbindung zwischen zwei Elementen. Sie besitz eine Richtung. Daten ''fließen'' also nicht in beide Richtungen. Sie wird durch cklicken auf zwei Elemente erstellt. Dabei ist das Element welches zuerst geclickt wurde der Anfang der Verbindung.\newline\\
@@ -828,6 +1062,11 @@ Eine Erweiterungsmöglichkeit wäre das Einfügen eines Startbildschirmes vor de
 
 \section{Spezielle Anforderungen an die Entwicklungsumgebung}\label{entwicklungsumgebung}
 
+Für die Umsetzung des Projekts ist Zugang zu funktionierender Hardware (konkret: mindestens ein \gls{RasPi}, möglichst mehrere \glspl{sensor}, Peripheriegeräte) notwendig, um die Funktionalität des Produkts sicherzustellen.\newline
+Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen werden.
+
+Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in PhyPiDAQ fehlerhaft sind können möglicherweise nicht korrekt implementiert werden. PhyPiDAQ sollte beispielsweise im Fall eines Programmfehlers eindeutige Fehlercodes produzieren, damit der Benutzer aussagekräftig über das Problem informiert werden kann.
+
 \section{Zeit- und Ressourcenplanung}\label{zeit}
 
 \subsection{Projektphasen}
@@ -837,19 +1076,19 @@ Eine Erweiterungsmöglichkeit wäre das Einfügen eines Startbildschirmes vor de
 	\textbf{Phase} & \textbf{Verantwortlicher} & \textbf{Zeitraum} & \textbf{Kolloquium} \\ \hline
 	Pflichtenheft & Jan Küblbeck & KW 20–22 & 04.06.2019 \\
 	Entwurf & Leon Huck & KW 23–26 & 02.07.2019 \\
-	Implementierung & Stefan Geretschläger & KW 27–29, 31 & (?) \\
+	Implementierung & Stefan Geretschläger & KW 27–29, 31 & (tbd) \\
 	Klausurenphase & — & KW 30, 32 & — \\
 	Qualitätssicherung & David Gawron & KW 33–35 & 03.09.2019 \\
 	Abnahme & — & KW 36 & — \\
-	Abschlussprüfung & Linus Ruhnke & KW 37/38 & (?) \\
+	Abschlussprüfung & Linus Ruhnke & KW 37/38 & (tbd) \\
 	\hline
 \end{tabular}
 
-\subsection{Entwurfsphase}
+\subsection{Risikomanagement}
 
-\subsection{Implementierungsphase}
+In jeder Phase treten unterschiedliche Risiken auf.
 
-\section{Ergänzungen}\label{erweiterung}
+Das Ausfallen eines Teammitglieds durch Krankheit oder anderen Gründen ist ein bedeutendes Risiko. In diesem Fall muss die zusätzliche Arbeit gerecht auf die anderen Teilnehmer verteilt werden. Eventuell können dadurch einzelne Kriterien und Anforderungen nicht mehr zufriedenstellend erfüllt werden.
 
 \section{Glossar}\label{glossar}
 
