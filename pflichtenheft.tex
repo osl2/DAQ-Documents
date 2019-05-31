@@ -111,21 +111,21 @@
 	name=Musskriterien,
 	description ={Werden zusammen mit Soll- und Wunschkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung höchste Priorität. 
 	Dass ein Musskriterium in den nachfolgenden Projektphasen nicht umgesetzt wird, ist nur dann zulässig, falls unerwartet unausweichliche Probleme bei der Umsetzung auftreten. 
-	In diesem Fall ist es erforderlich, dass diese Probleme sehr genau dokumentiert werden}
+	In diesem Fall ist es erforderlich, dass diese Probleme sehr genau dokumentiert werden.}
 }
 
 \newglossaryentry{Sollkriterien}{
 	name=Sollkriterien,
 	description ={Werden zusammen mit Muss- und Wunschkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung mittlere Priorität. 
 	Falls ein Sollkriterium umgesetzt werden kann, dann muss es nach Möglichkeit auch realisiert werden. 
-	Falls ein Sollkriterium in den nachfolgenden Projektphasen nicht umgesetzt werden kann, so muss dies dokumentiert und begründet werden}
+	Falls ein Sollkriterium in den nachfolgenden Projektphasen nicht umgesetzt werden kann, so muss dies dokumentiert und begründet werden. }
 }
 
 \newglossaryentry{Wunschkriterien}{
 	name=Wunschkriterien,
 	description ={Werden zusammen mit Muss- und Sollkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung niedrige Priorität. 
 	Je nach Resourcenlage können sie nach Bearbeitung aller Muss- und Kannkriterien umgesetzt werden. 
-	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden}
+	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden.  }
 }
 
 \newglossaryentry{BenOber}{
@@ -151,7 +151,7 @@
 \newglossaryentry{Konfigurationsbaustein}{
 	name=Konfigurationsbaustein,
 	plural=Konfigurationsbausteine,
-	description ={Teil einer Messkonfiguration, der eine Teilaufgabe bestimmten Typs erfüllen kann. Es gibt Sensorbausteine, Konfigurationsbausteine und Darstellungsbausteine. Liegt am Ausgang eines Bausteins ein Wert an, so kann dieser an den Eingang eines  nachgelagerten Bausteins weitergeleitet werden}
+	description ={Teil einer Messkonfiguration, der eine Teilaufgabe bestimmten Typs erfüllen kann. Es gibt Sensorbausteine, Konfigurationsbausteine und Darstellungsbausteine. Liegt am Ausgang eines Bausteins ein Wert an, so kann dieser an den Eingang eines  nachgelagerten Bausteins weitergeleitet werden.}
 }
 
 \newglossaryentry{Benutzerkonfiguration}{
@@ -161,13 +161,13 @@
 
 \newglossaryentry{Bausteinprototyp}{
 	name=Bausteinprototyp,
-	description={Baustein, von dem eine Kopie angelegt wird, wenn der Benutzer ein neues Baustein-Exemplar einem Entwurf hinzufügen möchte}
+	description={Baustein, von dem eine Kopie angelegt wird, wenn der Benutzer ein neues Baustein-Exemplar einem Entwurf hinzufügen möchte.}
 }
 
 \newglossaryentry{Messlauf}{
 	name=Messlauf,
 	plural=Messläufe,
-	description={Zeitabschnitt, in dem zu definierten Zeitpunkten an allen Bausteinen eines Entwurfs sukzessive die Werte an allen Ausgängen und Eingängen bestimmt werden}
+	description={Zeitabschnitt, in dem zu definierten Zeitpunkten an allen Bausteinen eines Entwurfs sukzessive die Werte an allen Ausgängen und Eingängen bestimmt werden.}
 }
 
 \subject{Pflichtenheft}
@@ -771,6 +771,8 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 
 \section{Globale Testfälle und Testszenarien}\label{testfall}
 
+\subsection{Testfälle zur Handhabung von Fehlern}
+
 \subsection{Einführung}
 
 In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur Handhabung von Fehlern dargestellt. Zum besseren Verständnis werden noch einmal einige verwendete Begriffe und der generelle Ablauf einer Nutzung erläutert. Die Anwendung bezeichnet die gesamte in diesem Projekt erstellte Software. Sie benutzt \gls{Benutzerkonfiguration}en um einen Versuchsaufbau zu modellieren. Eine Messkonfiguration besteht aus Bausteinen(\gls{sensor}, \gls{transformation}, \gls{darstellung}) und deren Verbindungen untereinander. Die Bausteine können selbst wieder  durch eine \gls{konfigdata} eingestellt werden. Die Messkonfigurationen werden in der Konfigurationsfeld erstellt. Außerdem können sie geladen und gespeichert werden. Beim Starten überprüft die Anwendung, ob eine gültige Messkonfiguration vorliegt. Um die resultierenden Daten und Graphen zu speichern, muss die Messung gestoppt werden.
@@ -790,7 +792,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Nach dem öffnen der Anwendung, überprüft diese, ob ein \gls{RasPi} angeschlossen ist. Jeder dargestellte Text ist auf Deutsch.
 
 \item []\textbf{Ergebnis:} Der Benutzer kann die Anwendung starten. Die Bedienung der Anwendung ist komplett auf Deutsch möglich.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F010 erreiche GUI nach Start, F140 leere Darstellung nach Anwendungsstart, F480 Hilfe zu Anwendung, F490 Texte der Anwendung auf Deutsch
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F010 erreiche GUI nach Start, F140 leere Darstellung nach Anwendungsstart, F480 Hilfe zu Anwendung, F490
 
 \end{itemize}
 
@@ -823,7 +825,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Die Anwendung prüft beim Hinzufügen eines Sensor-Icons, ob der Sensor angeschlossen ist. Die Anwendung speichert die angepassten Einstellungen, sofern sie gültig sind. Die Messkonfigurationsdatei wird erstellt, unabhängig ob die Messkonfiguration vollständig oder gültig ist.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann eine Messkonfiguration als Datei speichern und prüfen, ob ein Sensor angeschlossen ist.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F180 füge Sensor hinzu, F190 prüfe ob Sensor angeschlossen, F210 füge Transformation hinzu, F250 speichere Messkonfiguration, F290 Einstellungen Messkonfiguration 
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F180 füge Sensor hinzu, F190 prüfe ob Sensor angeschlossen, F210 füge Transformation hinzu, F270 speichere Messkonfiguration, F310 Einstellungen Messkonfiguration 
 
 \end{itemize}
 
@@ -841,7 +843,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Der Benutzer kann Messkonfigurationen laden, diese verändern und durch das Erstellen auf Gültigkeit prüfen. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F230 füge Darstellung, F470 Hilfe Bausteine
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F240 füge Darstellung, F470 Hilfe Bausteine
 
 \end{itemize}
 
@@ -858,7 +860,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Der Benutzer die Messung einer gültigen Messkonfiguration starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F300 Starte Messung, F320 stelle Ergebnisse dar, F400 speichere Messdaten, F410 speichere Messgraph
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F F320 Starte Messung, F330 stelle Ergebnisse dar, F400 speichere Messdaten, F410 speichere Messgraph
 
 
 \end{itemize}
@@ -911,7 +913,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} \gls{PhyPiDAQ} verliert die Verbindung zu einem Sensor und sendet keine Daten mehr an die Anwendung. Die Anwendung stürzt nicht ab, sondern gibt eine Fehlermeldung aus.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann mit dem ungewollten Verlust eines Datenstroms umgehen ohne abzustürzen.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F450 Melde Abbruch des Datenstrom
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F460 Melde Abbruch des Datenstrom
 
 \end{itemize}
 
