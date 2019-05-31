@@ -971,9 +971,9 @@ Die Verwendung anderer Eingabegeräte ist nicht vorgesehen.
 
 \subsection{Überblick}
 
-\begin{figure}[htbp]
+\begin{figure}[h]
 	\begin{center}
-		\includegraphics[width = 11cm]{Grafik/GUI-mit-Segmenten.png}
+		\includegraphics[width = 15cm]{Grafik/GUI-mit-Segmenten.png}
 		\caption{Der Grundlegende Aufbau der Hauptbenutzeroberfläche}
 		\label{GUI_Grundlage}
 	\end{center}
@@ -991,7 +991,7 @@ Das Design der Einzelnen Elemente kann sich im Verlauf der Anwendungsentwicklung
 
 Die zu dem jeweiligen logischen Teil gehörenden Elemente sollen im folgenden erklärt werden.
 
-\subsection{Element Beschreibungen}
+\subsection{Die einzelnen Teile}
 
 \subsubsection{Systemmenüleiste}
 In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte \gls{GrafBenOber} haben.
@@ -1005,7 +1005,7 @@ In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte 
 
 \subsubsection{Auswahl}
 
-\begin{tabular}[t]{p{1cm} p{10cm}} %Auswahlelemente Teil 1
+\begin{tabular}[t]{p{1cm} p{10cm}} %Alle Auswahlelemente in einer Tabelle
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Datei.png} & Der Benutzer hat die Möglichkeit Dateien zu bearbeiten. Die wichtigsten Funktionen sind:
 	\begin{itemize} 
 		\item Das anlegen einer neuen Datei
@@ -1019,9 +1019,6 @@ In der Systemmenüleiste befinden sich Funktionen, die Einfluss auf die gesamte 
 		\item Das Anpassen eines ausgewählten Elements. Diese Einstellungsmöglichkeiten sind von dem Objekt abhängig.
 	\end{itemize}\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensor.png} & Der Benutzer kann sich eine Auswahl von \glspl{sensor} anzeigen lassen. Die \glspl{sensor} können anschließend in das Konfigurationsfeld eingefügt werden. Die angezeigte Auswahl ist unabhängig von den angeschlossenen Sensoren\newline\\
-\end{tabular}
-
-\begin{tabular}[t]{p{1cm} p{10cm}} %Auswahlelemente Teil 2
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindung.png} & Der Benutzer kann sich eine Auswahl von \glspl{transformation} anzeigen lassen. Die \glspl{transformation} können anschließend per \gls{dragdrop} in das Konfigurationsfeld gezogen werden. Die Auswahl kann unter Optionen erweitert werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Darstellung.png} & Der Benutzer kann sich eine Auswahl von \glspl{darstellung} anzeigen lassen. Die \glspl{darstellung} können anschließend in das Konfigurationsfeld eingefügt werden. Die Auswahl kann erweitert werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Optionen.png} & Der Benutzer kann sich eine Auswahl an Optionen anzeigen lassen. Beispiele hierfür sind
@@ -1042,10 +1039,10 @@ Im Laufe der Entwicklung kann es sich als sinnvoll herausstellen weitere Optione
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Sensor.png} & Die zu einem Sensor gehörende Eingabe. Die Eingabe wird nur angezeigt, wenn auch die Kanäle angezeigt werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Sensor.png} & Die zu einem Sensor gehörende Ausgabe. Jeder Sensor hat genau eine Ausgabe.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Kanal.png} & Der zu einem Sensor gehörende Kanal. Die Anzahl an angezeigten Kanlälen hängt von dem Sensor ab. In den Optionen kann eingestellt werden, ob die Kanäle angezeigt werden.\newline\\\cline{1-2}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.png} & Repräsentation einer \gls{transformation}. Jedem Eingang können durch Einfügen von einer Verbindung Daten übergeben werden.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.png} & Repräsentation einer \gls{transformation}. Abhängig von der Anzahl an Eingängen der Transformation besitzt die GUI dementsprechend viele Eingänge. Jedem Eingang können durch Einfügen von einer Verbindung Daten übergeben werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Verbindung.png} & Die Eingabe einer Transformation. Die Anzahl der verfügbaren Eingaben hängt von der Transformation ab.\newline\\
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Transformation.png} & Die Ausgabe einer Transformation. Die Anzahl der verfügbaren Ausgaben hängt von der Transformation ab.\newline\\\cline{1-2}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungspfeil.png} & Eine Verbindung zwischen zwei Elementen. Sie besitz eine Richtung. Daten ''fließen'' also nicht in beide Richtungen.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Transformation.png} & Die Ausgabe einer Transformation. Jede Transformation hat genau eine Ausgabe.\newline\\\cline{1-2}
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungspfeil.png} & Eine Verbindung zwischen zwei Elementen. Sie besitz eine Richtung. Daten ''fließen'' also nicht in beide Richtungen. Sie wird durch cklicken auf zwei Elemente erstellt. Dabei ist das Element welches zuerst geclickt wurde der Anfang der Verbindung.\newline\\
 \end{tabular}
 
 \subsection{Erweiterungsmöglichkeiten}
@@ -1061,18 +1058,6 @@ Im Laufe der Entwicklung kann es sich als sinnvoll herausstellen weitere Optione
 \end{figure}
 
 Eine Erweiterungsmöglichkeit wäre das Einfügen eines Startbildschirmes vor dem Öffnen der Anwendung. Dieser ist in Abbildung \ref{startbildschirm} angedeutet.
-
-\subsubsection{Fehlermeldung}
-
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width = 10cm]{Grafik/Fehlerfenster}
-		\caption{Ein Beispiel für ein Fehlermeldungsfenster}
-		\label{fehlerfenster}
-	\end{center}
-\end{figure}
-
-Für die Fehlermeldungen könnten eigene Fenster erscheinen. Abbildung \ref{fehlerfenster} zeigt ein mögliches Design. Für unterschiedliche Fehler könnten unterschiedliche Designs verwendet werden.
 
 \section{Spezielle Anforderungen an die Entwicklungsumgebung}\label{entwicklungsumgebung}
 
