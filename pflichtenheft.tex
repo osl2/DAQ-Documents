@@ -1071,7 +1071,7 @@ Einer dieser drei Systemprozesse enthält die \gls{JVM}, auf der die zu erstelle
 
 Zum Ansteuern und Auslesen der Sensoren auf dem \gls{RasPi} wird das auf Python basierende Framework \gls{PhyPiDAQ} bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die \gls{JVM} ausgeführt werden kann, wird für PhyPiDAQ ein zweiter Systemprozess benötigt.
 
-Um Ressourcenknappheit auf dem \gls{RasPi} aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend ebenso auf dem \gls{RasPi} ausgeführt werden müssen. 
+Um Ressourcenknappheit auf dem \gls{RasPi} aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend so wie PhyPiDAQ auf dem \gls{RasPi} ausgeführt werden müssen. 
 
 Falls denn nun die Hauptkomponente tatsächlich auf einem anderen Rechner ausgeführt werden sollte, so muss sie mit dem Python-Interpreter hardware- bzw. plattformübergreifend Daten austauschen können. Bisher stellt PhyPiDAQ hierfür jedoch keine Funktionalität zur Verfügung. 
 
@@ -1090,7 +1090,7 @@ Abbildung \ref{DeploymentDiagram} stellt die Verteilung der Systemkomponenten au
 
 Da sich PhyPiDAQ und Measurement-Server in jedem Fall auf derselben Plattform befinden, kann die Kommunikation zwischen den beiden Instanzen invariant unter Zuhilfenahme einer von Linux gegebenen  Inter-Prozess-Kommunikation erfolgen, beispielsweise mittels einer Verknüpfung von Standard-Eingabe und Standard-Ausgabe über eine ,,Pipe``.
 
-Measurement-Server und Hauptkomponente befinden sich im Kontrast hierzu jedoch nicht zwingend auf derselben Plattform. Es besteht das Risiko, dass sich nicht wenige Code-Fragmente für den Datenaustausch bei den beiden Szenarien stark unterscheiden, beispielsweise in Bezug auf die zeitliche Koordination im anwendungsspezifischen Protokollablauf. Softwaretechnisch ist es deshalb Best-Practice, eine leichte Austauschbarkeit der Implementierungsvarianten sicherzustellen, indem man diese hinter einer invarianten Schnittstelle verbirgt, so wie im Klassendiagramm \ref{ClassDiagram} dargestellt.
+Measurement-Server und Hauptkomponente befinden sich im Kontrast hierzu jedoch nicht zwingend auf derselben Plattform. Es besteht das Risiko, dass sich nicht wenige Code-Fragmente für den Datenaustausch bei den beiden Szenarien stark unterscheiden, beispielsweise in Bezug auf die zeitliche Koordination im anwendungsspezifischen Protokollablauf. Softwaretechnisch ist es deshalb das beste Vorgehen, eine leichte Austauschbarkeit der Implementierungsvarianten sicherzustellen, indem man diese hinter einer invarianten Schnittstelle verbirgt, so wie im Klassendiagramm \ref{ClassDiagram} dargestellt.
 
 Ob es sich beispielsweise bei der verteilten Kommunikation um WLAN per Netzwerkadapter und bei der Stand-Alone-Kommunikation um WLAN per Local-Loop handelt, oder ob es sich (ebenso beispielsweise) bei der verteilten Kommunikation um USB und bei der Stand-Alone-Kommunikation um IPC handelt, sollte spätestens zu Beginn der Implementierungsphase entschieden werden.  
 
@@ -1268,11 +1268,11 @@ Für die Fehlermeldungen könnten eigene Fenster erscheinen. Abbildung \ref{fehl
 
 \subsection{Risikomanagement}
 
-Beim Herstellungsprozess einer Software gibt es viele Risiken, die zu berücksichtigen sind. Wir haben die Auftrittswahrscheinlichkeit, die Kosten für Vorsichtsmaßnahmen und die möglichen Auswirkungen auf \hyperref[funktionale]{Funktionalität}  und \hyperref[quali]{Qualität} unserer Anwendung gegeneinander abgewogen und uns damit für das folgende Risikomanagement entschieden. 
+Beim Herstellungsprozess einer Software gibt es viele Risiken, die zu berücksichtigen sind. Wir haben bezüglich einiger Worst-Case-Szenarien die vermutete Auftrittswahrscheinlichkeit, die Kosten für Vorsichtsmaßnahmen und die möglichen negativen Auswirkungen auf \hyperref[funktionale]{Funktionalität}  und \hyperref[quali]{Qualität} unserer Anwendung gegeneinander abgewogen und uns damit für das folgende Risikomanagement entschieden. 
 
-In der Planungsphase sticht vor allem das Risiko hervor, dass wir uns zu viel vornehmen und den resultierenden Aufwand in späteren Projektphasen, unterschätzen. Unsere Gegenmaßnahme dafür ist die Einteilung der Kriterien. Wir setzen nur die Features als Musskriterien, die unbedingt in der Software enthalten sein müssen. Der Rest ist als Soll- oder Wunschkriterien optional.
+In der Planungsphase sticht vor allem das Risiko hervor, dass wir uns zu viel vornehmen und den resultierenden Aufwand in späteren Projektphasen, unterschätzen. Unsere Gegenmaßnahme dafür ist die Einteilung der Kriterien in Prioritätsklassen. Wir setzen nur die Features als Musskriterien, die unbedingt in der Software enthalten sein müssen. Der Rest ist als Soll- oder Wunschkriterien optional.
  
-In der Entwurfsphase ist das größte Risiko, dass unsere Entwürfe später nicht funktionieren. Ob dies der Fall ist, wird hauptsächlich in der Qualitätssicherungsphase deutlich. Unsere Gegenmaßnahme dazu ist ein Fallbackplan für wichtige Entscheidungen der Planungsphase. Diese Pläne werden wir in der Entwurfsphase berücksichtigen. Dazu zählt z.B. der Fallbackplan, dass unsere Anwendung auch auf einem Desktop-Computer laufen kann, falls die Hardware des \gls{RasPi} nicht ausreicht.
+In der Entwurfsphase ist das größte Risiko, dass in der Qualitätssicherungsphase bei Integrationstests unvorhergesehene Probleme auftauchen und unsere Entwürfe für dann notwendige Fall-Backs oder Work-Arounds zu unflexibel. Unsere Gegenmaßnahme dazu ist ein Fallback-Plan für wichtige Entscheidungen der Definitionsphase. Diese Pläne werden wir in der Entwurfsphase berücksichtigen. Dazu zählt z.B. der Fallbackplan, dass unsere Anwendung auch auf einem Desktop-Computer laufen kann, falls die Hardware des \gls{RasPi} nicht ausreicht.
  
 In der Implementierungsphase ist das Hauptrisiko das Implementieren von Fehlern. Unsere Gegenmaßnahme hierzu ist eine gute Testabdeckung, um das Risiko von Fehlern zu minimieren.
  
