@@ -524,13 +524,13 @@ Die Anwendung soll ebenfalls nicht nur von physikbegeisterten Schülern verwende
 
 \subsection{Betriebsbedingungen}
 
-Die Anwendung läuft auf Computern, welche über eine USB-Schnittstelle mit einem \gls{RasPi} verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden die an das \gls{RasPi} angeschlossenen Messsensoren adressiert, welche die Messdaten wiederum über das \gls{RasPi} an die am Computer laufende Anwendung schicken. 
+Die Anwendung läuft auf Computern, welche über eine USB-Schnittstelle mit einem \gls{RasPi} verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden die an das \gls{RasPi} angeschlossenen Messsensoren adressiert, welche die \gls{messdaten} wiederum über das \gls{RasPi} an die am Computer laufende Anwendung schicken. 
 
 
 \clearpage
 \section{Produktumgebung}\label{produktumgebung}
 
-Die Anwendung läuft auf einem Computer, die Messdaten werden über \glspl{sensor} an einem \gls{RasPi} erfasst.
+Die Anwendung läuft auf einem Computer, die \gls{messdaten} werden über \glspl{sensor} an einem \gls{RasPi} erfasst.
 
 \subsection{Software}
 
@@ -603,7 +603,7 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 \begin{description}
 
 \item[F160] Über F030 kann der Benutzer eine gespeicherte \gls{Benutzerkonfiguration} öffnen oder alte Messwerte verwenden.
-\item[F170] Durch F160 geladene Konfigurationen und Messdaten werden automatisch nach Format überprüft.
+\item[F170] Durch F160 geladene Konfigurationen und \gls{messdaten} werden automatisch nach Format überprüft.
 \item[F180] Aus F050 kann der Benutzer Sensoren durch \gls{dragdrop} in das Konfigurationsfeld ziehen.
 \item[F190] Die Anwendung sollte automatisch überprüfen, ob der ausgewählte Sensor richtig angeschlossen ist.
 \item[F200] Durch F190 wird dem Benutzer automatisch eine visuelle Rückmeldung gegeben.
