@@ -522,19 +522,39 @@ Die Anwendung läuft auf Computern, welche über eine USB-Schnittstelle mit eine
 
 
 \clearpage
+\section{Produkteinsatz}\label{produkteinsatz}
+
+\subsection{Anwendungsbereiche}
+
+Die Anwendung ist für die Verwendung in Schulklassen ab der 7. bis zu 10. Klasse für Schüler und Lehrer im Physikunterricht konzipiert. Ebenfalls soll die Anwendung in Physikprojekten, sowie \gls{Science Labs} verwendet werden können. 
+Als \gls{opensource} Projekt im Rahmen des \gls{osl2} steht die Anwendung jedoch jedem Interessierten, zur Verwendung und Weiterentwicklung, zur Verfügung.
+
+
+\subsection{Zielgruppe}
+
+Die Zielgruppen sind hauptsächlich Schülerinnen und Schüler im Physikunterricht.  Diese verwenden die Anwendung, um erste eigene Messungen durchzuführen. Ein Ziel ist es, den Schülern erste Einblicke in Messtechniken zu geben. Weiter soll ihnen der Zusammenhang zwischen Ursache und Wirkung gezeigt werden. 
+Einerseits soll die Anwendung physikbegeisterten Schüler ansprechen. Andererseits soll sie auch von Schülern, die kein großes Vorwissen in Physik und Messtechnik haben, verwendet werden können. Diesen Schülern soll ebenfalls eine interessante und einfach zu bedienende Plattform geboten werden.
+
+
+\subsection{Betriebsbedingungen}
+
+Die Anwendung läuft auf Computern, welche über eine USB-Schnittstelle mit einem \gls{RasPi} verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden, die an das \gls{RasPi} angeschlossenen, Messsensoren adressiert. Die Messsensoren schicken die dann \gls{messdaten} über das \gls{RasPi} an die Anwendung, die am Computer läuft. 
+
+
+\clearpage
 \section{Produktumgebung}\label{produktumgebung}
 
-Die Anwendung läuft auf einem Computer, die \gls{messdaten} werden über \glspl{sensor} an einem \gls{RasPi} erfasst.
+Die Anwendung läuft auf einem Computer. Die \gls{messdaten} werden über \glspl{sensor} an einem \gls{RasPi} erfasst.
 
 \subsection{Software}
 
-Die Anwendung läuft auf Computern mit den Betriebssystemen Linux ab Kernel 4.15 oder Microsoft Windows ab Windows 10
+Die Anwendung läuft auf Computern mit den Betriebssystemen Linux ab Kernel 4.15 oder Microsoft Windows ab Windows 10.
 Ebenfalls muss eine \gls{JVM} Version 8 installiert sein. Die Anwendung muss auf dem Computer vollständig installiert sein. 
 
 \subsection{Hardware}
 
 Die Anwendung läuft auf Computern, welche für den generellen Einsatz in der Schule gedacht sind.
-Die enthaltenen Komponenten sollten beispielsweise ein aktueller 4-Kern-Prozessor, 8 GB RAM,
+Die enthaltenen Komponenten sollten beispielsweise ein aktueller 4-Kern-Prozessor, 8 GB RAM und
 mindestens 256 GB Speicherplatz sein.\footnote{Beispielkonfiguration eines Schulcomputers nach dem Beraterkreis zur IT-Ausstattung von Schulen des Bayrischen Staatsministerium für Bildung und Kultus, Wissenschaft und Kunst, Votum 2016 unter \url{https://www.mebis.bayern.de/infoportal/konzepte/it-ausstattung/votum/}} Schnittstellen für USB und Netzwerk sind ebenfalls erforderlich. 
 Auf dem per USB-Schnittstelle verbundenen \gls{RasPi} des Models 3B+ muss \gls{PhyPiDAQ} installiert und verwendungsfähig sein.
 Die an den \gls{RasPi} angeschlossenen Sensoren müssen richtig und sinnvoll angeschlossen sein.
@@ -555,7 +575,7 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 \hypertarget{link-f010}{\item[F010]} Die Benutzer erreichen nach Öffnung der Anwendung direkt die \gls{GUI}, welche aus Menüleiste, Konfigurationsfeld und Darstellungsfeld besteht.
 \hypertarget{link-f020}{\item[F020]} Die Anwendung ist über Optionen konfigurierbar. 
 \hypertarget{link-f030}{\item[F030]} Die Anwendung besitzt eine Dateiverwaltung.
-\hypertarget{link-f040}{\item[F040]} Die Anwendung bietet eine Hilfe-Oberfläche.
+\hypertarget{link-f040}{\item[F040]} Die Anwendung bietet eine Hilfe-Oberfläche an.
 \end{description}
 
 \subsubsection{Menüfeld}
@@ -564,7 +584,7 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 \hypertarget{link-f050}{\item[F050]} Es gibt eine grafische Auswahl an vordefinierten \glspl{sensor}.
 \hypertarget{link-f060}{\item[F060]} Es gibt eine grafische Auswahl an vordefinierten \glspl{transformation}.
 \hypertarget{link-f070}{\item[F070]} Es gibt eine grafische Auswahl an vordefinierten \glspl{darstellung}.
-\hypertarget{link-f080}{\item[F080] }Der Benutzer erhält durch visuelle Repräsentationen der Konfigurationsbausteine eine Darstellung ihrer Komplexität.
+\hypertarget{link-f080}{\item[F080] }Der Benutzer erhält, durch visuelle Repräsentationen der Konfigurationsbausteine, eine Darstellung ihrer Komplexität.
 \end{description}
 
 \subsubsection{Optional: Zusätzliche Funktionen im Menüfeld}
@@ -606,7 +626,7 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 \hypertarget{link-f230}{\item[F230]} Aus \hyperlink{link-f070}{F070} kann der Benutzer eine Darstellungsart per \gls{dragdrop} in das Konfigurationsfeld zu ziehen.
 \hypertarget{link-f240}{\item[F240]} Die Ausgewählte Darstellung kann der Benutzer mit einer Transformation verknüpfen.
 \hypertarget{link-f250}{\item[F250]} Über \hyperlink{link-f030}{F030} kann der Benutzer seine eigene\gls{Benutzerkonfiguration} speichern.
-\hypertarget{link-f260}{\item[F260]} Konfigurationsbausteine können durch \gls{dragdrop} in die Menüleiste wieder aus dem Konfigurationsfeld entfernt werden.
+\hypertarget{link-f260}{\item[F260]} Konfigurationsbausteine können durch \gls{dragdrop} wieder aus dem Konfigurationsfeld entfernt werden.
 
 \end{description}
 
@@ -614,8 +634,8 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 
 \begin{description}
 
-\hypertarget{link-f270}{\item[(opt.) F270]} Die Anwendung besitzt eine Check-Funktion, welche die \gls{Benutzerkonfiguration} auf Vollständigkeit und Korrektheit kontrolliert
-\hypertarget{link-f280}{\item[(opt.) F280]} Durch \hyperlink{link-f270}{F270} wird durch visuelle Rückmeldung dargestellt,ob die Konfiguration verwendet werden kann.
+\hypertarget{link-f270}{\item[(opt.) F270]} Die Anwendung besitzt eine Check-Funktion, welche die \gls{Benutzerkonfiguration} auf Vollständigkeit und Korrektheit kontrolliert.
+\hypertarget{link-f280}{\item[(opt.) F280]} Durch \hyperlink{link-f270}{F270} wird durch visuelle Rückmeldung dargestellt, ob die Messkonfiguration verwendet werden kann.
 
 \end{description}
 
@@ -624,13 +644,13 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 \begin{description}
 
 \hypertarget{link-f290}{\item[F290]} Der Benutzer kann Messlänge und die Wertebereiche einer Messung festlegen.
-\hypertarget{link-f300}{\item[F300]} Der Benutzer kann eine Messung nach der \gls{Benutzerkonfiguration} starten.
+\hypertarget{link-f300}{\item[F300]} Der Benutzer kann nur die \gls{Benutzerkonfiguration} starten, die sich aktuell im Konfigurationsfeld befindet.
 \hypertarget{link-f310}{\item[F310]} Bei \hyperlink{link-f300}{F300} wird automatisch überprüft ob die \gls{Benutzerkonfiguration} eine sinnvolle Kombination von Sensoren, Transformationen und Darstellungen ist.
 \hypertarget{link-f320}{\item[F320]} Durch \hyperlink{link-f300}{F300} wird automatisch mit der visuellen Darstellung der Messdaten begonnen.
 \hypertarget{link-f330}{\item[F330]} Der Benutzer kann eine Messung löschen.
 \hypertarget{link-f340}{\item[F340]} Bei \hyperlink{link-f330}{F330} wird die Messung gestoppt und die visuelle Darstellung auf den Ausgangszustand gebracht.
 \hypertarget{link-f350}{\item[F350]} Durch \hyperlink{link-f330}{F330} wird nicht die \gls{Benutzerkonfiguration} gelöscht.
-\hypertarget{link-f360}{\item[F360]} Durch \hyperlink{link-f330}{F330} muss der Benutzer erst die Messung starten um weiter zu messen.
+\hypertarget{link-f360}{\item[F360]} Durch \hyperlink{link-f330}{F330} muss der Benutzer erst die Messung starten, um weiter zu messen.
 \hypertarget{link-f370}{\item[F370]} Der Benutzer kann eine Messung pausieren.
 \hypertarget{link-f380}{\item[F380]} Der Benutzer kann eine Messung fortsetzen.
 \hypertarget{link-f390}{\item[F390]} Der Benutzer kann eine Messung durch \hyperlink{link-f380}{F380} nur fortsetzen, wenn sie zuvor durch \hyperlink{link-f370}{F370} pausiert wurde.
@@ -646,7 +666,7 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 \hypertarget{link-f430}{\item[F430]} Durch \hyperlink{link-f170}{F170} wird bei einem falschen Format eine aussagekräftige Fehlermeldung zurückgegeben.
 \hypertarget{link-f440}{\item[F440]} Die Anwendung sollte dem Benutzer automatisch beim Löschen einer Messung oder beim Schließen der Anwendung darauf hinweisen, dass die Messdaten ohne Speichern der Messdaten verloren gehen.
 \hypertarget{link-f450}{\item[F450]} Die Anwendung sollte dem Benutzer eine aussagekräftige Fehlermeldung zurückgeben, falls es zu einem Datenabbruch der Messdaten kommt.
-\hypertarget{link-f460}{\item[F460]} Durch \hyperlink{link-f310}{F310} wird bei einer \gls{Benutzerkonfiguration}, welche nicht verwendet werden kann eine aussagekräftige Fehlermeldung zurückgegeben.
+\hypertarget{link-f460}{\item[F460]} Durch \hyperlink{link-f310}{F310} wird bei einer \gls{Benutzerkonfiguration}, welche nicht verwendet werden kann, eine aussagekräftige Fehlermeldung zurückgegeben.
 
 \end{description}
 
@@ -654,7 +674,7 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 
 \begin{description}
 
-\hypertarget{link-f470}{\item[F470]} Die Konfigurationsbausteine erhalten Informationen, über welche der Benutzer Informationen und Hilfestellung bereitgestellt bekommt.
+\hypertarget{link-f470}{\item[F470]} Die Konfigurationsbausteine enthalten Informationen und Hilfestellung, die der Benutzer aufrufen kann.
 \hypertarget{link-f480}{\item[F480]} Über \hyperlink{link-f040}{F040} erhält der Nutzer eine kurze Beschreibung zur Funktionalität der Anwendung.
 
 \end{description}
@@ -681,7 +701,7 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 
 \begin{description}
 
-\hypertarget{link-f520}{\item[F520]} Die in der Anwendung enthaltenen Farben sollten mit Rücksicht auf Benutzer mit Rot-Grün Schwäche oder Farbenblindheit ein barrierefreies Verwendung der Anwendung ermöglichen.
+\hypertarget{link-f520}{\item[F520]} Die in der Anwendung enthaltenen Farben sollten, mit Rücksicht auf Benutzer mit Rot-Grün Schwäche oder Farbenblindheit, ein barrierefreies Verwendung der Anwendung ermöglichen.
 
 \end{description}
 
@@ -689,8 +709,8 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 
 \begin{description}
 
-\hypertarget{link-f530}{\item[(opt.) F530]} Durch \hyperlink{link-f020}{F020} sollte der Benutzer die in der Anwendung verwendeten Farben ändern können.
-\hypertarget{link-f540}{\item[(opt.) F540]} Durch \hyperlink{link-f020}{F020} sollte der Benutzer die in der Anwendung verwenden Buchstabengröße verändern können.
+\hypertarget{link-f530}{\item[(opt.) F530]} Durch \hyperlink{link-f020}{F020} sollte der Benutzer, die in der Anwendung verwendeten Farben, ändern können.
+\hypertarget{link-f540}{\item[(opt.) F540]} Durch \hyperlink{link-f020}{F020} sollte der Benutzer, die in der Anwendung verwendete Buchstabengröße, verändern können.
 
 \end{description}
 
@@ -701,7 +721,7 @@ Zu speichern sind ausschließlich:
 
 \begin{description}
 
-\item[D010] \gls{Benutzerkonfiguration}(en)
+\item[D010] \glspl{Benutzerkonfiguration}
 \item[D020] \gls{messdaten} und deren Darstellungen
 \item[D030] Benutzererstellte Bausteinprototypen (beinhaltet beispielsweise neu angepasste Sensorkonfigurationsdaten im Falle eines Protoypen vom Typ Sensor)
 \item[D040] Lokaler Datenfluss bei einem Baustein während eines Messlaufs 
