@@ -1256,7 +1256,20 @@ Für die Fehlermeldungen könnten eigene Fenster erscheinen. Abbildung \ref{fehl
 
 \subsection{Risikomanagement}
 
-Das Ausfallen eines Teammitglieds durch Krankheit oder anderen Gründen ist ein bedeutendes Risiko. In diesem Fall muss die zusätzliche Arbeit gerecht auf die anderen Teilnehmer verteilt werden. Eventuell können dadurch einzelne Kriterien und Anforderungen nicht mehr zufriedenstellend erfüllt werden.
+Beim Herstellungsprozess einer Software gibt es viele Risiken, die zu berücksichtigen sind. Dabei unterscheidet sich die Relevanz der Risiken, die während den einzelnen Projektphasen eintreffen können. 
+
+In der Planungsphase sticht vor allem das Risiko hervor, dass wir uns zu viel vornehmen und den resultierenden Aufwand in späteren Projektphasen, unterschätzen. Unsere Gegenmaßnahme dafür ist die Einteilung der Kriterien. Wir setzen nur die Features als Musskriterien, die unbedingt in der Software enthalten sein müssen. Der Rest ist als Soll- oder Wunschkriterien optional.
+ 
+In der Entwurfsphase ist das größte Risiko, dass unsere Entwürfe später nicht funktionieren. Ob dies der Fall ist, wird hauptsächlich in der Qualitätssicherungsphase deutlich. Unsere Gegenmaßnahme dazu ist ein Fallbackplan für wichtige Entscheidungen der Planungsphase. Diese Pläne werden wir in der Entwurfsphase berücksichtigen. Dazu zählt z.B. der Fallbackplan, dass unsere Anwendung auch auf einem Desktop-Computer laufen kann, falls die Hardware des \gls{RasPi} nicht ausreicht.
+ 
+In der Implementierungsphase ist das Hauptrisiko das Implementieren von Fehlern. Unsere Gegenmaßnahme hierzu ist eine gute Testabdeckung, um das Risiko von Fehlern zu minimieren.
+ 
+In der Qualitätssicherungsphase liegt das Hauptrisiko dabei, dass wir uns zu sehr aus Kleinigkeiten versteifen und das Wesentliche 
+übersehen. Dazu planen wir unsere Anwendung mit Schülern zu testen. Damit sollen wir auf für uns unscheinbare Schwierigkeiten hingewiesen zu werden.
+
+In der Abnahmephase liegt das Hauptrisiko dabei, dass wir Features aus der Planungsphase nicht fertiggestellt bekommen. Dagegen wird aber schon in der Planungsphase durch die Einteilung der Kriterien gesorgt.
+
+Ein Risiko, das sich durch alle Projektphasen durchzieht, ist der Ausfall eines Teammitglieds durch Krankheit. Bei einem Team von fünf Mitgliedern, bedeutet ein Ausfall ein Verlust von 20\%. Unsere Gegenmaßnahme ist die Einplanung von Pufferzeit in jede Projektphase. Ein weiteres phasenübergreifendes Risiko ist ein Ausfall wegen Urlaub oder Klausuren. Dieses Risiko wird aber durch unsere frühzeitige Planung und durch das Einplanen von Klausurpausen minimiert.
 
 \subsection{Spezielle Anforderungen}\label{entwicklungsumgebung}
 
