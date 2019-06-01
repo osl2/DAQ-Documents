@@ -150,7 +150,7 @@
 \newglossaryentry{Konfigurationsbaustein}{
 	name=Konfigurationsbaustein,
 	plural=Konfigurationsbausteine,
-	description ={Teil einer Messkonfiguration, der eine Teilaufgabe bestimmten Typs erfüllen kann. Es gibt Sensorbausteine, Konfigurationsbausteine und Darstellungsbausteine. Liegt am Ausgang eines Bausteins ein Wert an, so kann dieser an den Eingang eines  nachgelagerten Bausteins weitergeleitet werden}
+	description ={Teil einer Messkonfiguration, der eine Teilaufgabe bestimmten Typs erfüllen kann. Es gibt Sensorbausteine, Konfigurationsbausteine und Darstellungsbausteine. Liegt am Ausgang eines Bausteins ein Wert an, so kann dieser an den Eingang eines nachgelagerten Bausteins weitergeleitet werden}
 }
 
 \newglossaryentry{Benutzerkonfiguration}{
@@ -175,8 +175,19 @@
 	description={Im Vergleich zu einem PC-System bietet ein Raspberry Pi lediglich beschränkte Ressourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Ressourcen maximieren.}
 }
 
+\newglossaryentry{Stand-Alone-Kommunikation}{
+	name={Stand-Alone-Kommunikation},
+	description={Bezeichnet im Kontext unseres Software-Projekt die systeminterne Kommunikation innerhalb eines Betriebssystems, beispielsweise per Interprozess-Kommunikation (IPC.)}
+	}
+
+
+\newglossaryentry{Local-Loop}{
+	name={Local-Loop},
+	description={Bezeichnet einen virtuellen Netzwerkadapter, der Pakete, die an ihn verschickt werden, unmittelbar danach auch wieder empfängt.}
+}
+
 \subject{Pflichtenheft}
-\title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
+\title{Visuelle ProgrammiersBezeichnet im Kontext unseres Software-Projekt die systeminterne Kommunikation innerhalb eines Betriebssystems, beispielsweise per Interprozess-Kommunikation (IPC.)prache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
 \subtitle{Version 0.3.1}
 \author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
 \date{\today}
@@ -1077,7 +1088,7 @@ Da sich PhyPiDAQ und Measurement-Server in jedem Fall auf derselben Plattform be
 
 Measurement-Server und Hauptkomponente befinden sich im Kontrast hierzu jedoch nicht zwingend auf derselben Plattform. Es besteht das Risiko, dass sich nicht wenige Code-Fragmente für den Datenaustausch bei den beiden Szenarien stark unterscheiden, beispielsweise in Bezug auf die zeitliche Koordination im anwendungsspezifischen Protokollablauf. Softwaretechnisch ist es deshalb das beste Vorgehen, eine leichte Austauschbarkeit der Implementierungsvarianten sicherzustellen, indem man diese hinter einer invarianten Schnittstelle verbirgt, so wie im Klassendiagramm \ref{ClassDiagram} dargestellt.
 
-Ob es sich beispielsweise bei der verteilten Kommunikation um WLAN per Netzwerkadapter und bei der Stand-Alone-Kommunikation um WLAN per Local-Loop handelt, oder ob es sich (ebenso beispielsweise) bei der verteilten Kommunikation um USB und bei der Stand-Alone-Kommunikation um IPC handelt, sollte spätestens zu Beginn der Implementierungsphase entschieden werden.  
+Ob es sich beispielsweise bei der verteilten Kommunikation um WLAN per Netzwerkadapter und bei der \gls{Stand-Alone-Kommunikation} um WLAN per \gls{Local-Loop} handelt, oder ob es sich (ebenso beispielsweise) bei der verteilten Kommunikation um USB und bei der Stand-Alone-Kommunikation um IPC handelt, sollte spätestens zu Beginn der Implementierungsphase entschieden werden.  
 
 
 \begin{figure}[h]
