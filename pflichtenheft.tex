@@ -178,7 +178,7 @@
 
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
-\subtitle{Version 0.3.0}
+\subtitle{Version 0.3.1}
 \author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
 \date{\today}
 
@@ -201,6 +201,7 @@ Die hardwarenahe Ansteuerung der Sensoren soll durch das bereits vorhandene Soft
 Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel \ref{funktionale} bzw. \ref{nichtfunktionale} aufgelistet.
 Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient werden. (siehe Kapitel \ref{gui}).
 
+\clearpage
 \section{Zielbestimmung}\label{zielbestimmung}
 
 Die Anwendung soll es Lehrern ermöglichen, Schülern ab der siebten Klasse Grundkenntnisse der digitalen Messwerterfassung in einer für Schüler interessante und motivierenden Weise näher zu bringen. 
@@ -508,6 +509,7 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 	
 \end{itemize}
 
+\clearpage
 \section{Produkteinsatz}\label{produkteinsatz}
 
 \subsection{Anwendungsbereiche}
@@ -527,6 +529,7 @@ Die Anwendung soll ebenfalls nicht nur von physikbegeisterten Schülern verwende
 Die Anwendung läuft auf Computern, welche über eine USB-Schnittstelle mit einem \gls{RasPi} verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden die an das \gls{RasPi} angeschlossenen Messsensoren adressiert, welche die Messdaten wiederum über das \gls{RasPi} an die am Computer laufende Anwendung schicken. 
 
 
+\clearpage
 \section{Produktumgebung}\label{produktumgebung}
 
 Die Anwendung läuft auf einem Computer, die Messdaten werden über \glspl{sensor} an einem \gls{RasPi} erfasst.
@@ -547,6 +550,7 @@ Die an den \gls{RasPi} angeschlossenen Sensoren müssen richtig und sinnvoll ang
 
 Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache \gls{python3} geschrieben ist bietet einheitliche Schnittstellen zur Verwendung der Sensoren mit dem \gls{RasPi}. Die Verwendung setzt jedoch Grundkenntnisse im Umgang mit \gls{python3} und dem \gls{RasPi} voraus, weshalb es ungeeignet für den Einsatz in Schulen ist.
 
+\clearpage
 \section{Funktionale Anforderungen}\label{funktionale}
 
 
@@ -695,6 +699,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \end{itemize}
 
+\clearpage
 \section{Produktdaten}\label{produktdaten}
 
 Zu speichern sind ausschließlich:
@@ -708,7 +713,27 @@ Zu speichern sind ausschließlich:
 
 \end{itemize}
 
+\clearpage
 \section{Nichtfunktionale Anforderungen}\label{nichtfunktionale}
+
+\subsection{Qualitätsanforderungen}
+
+Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
+
+\begin{tabular}{ | c | c | c | c | c | }
+	\hline
+	\textbf{Merkmal} & \textbf{sehr wichtig} & \textbf{wichtig} & \textbf{weniger wichtig} & \textbf{unwichtig} \\
+	\hline
+	Robustheit & X & & & \\
+	Zuverlässigkeit & & X & & \\
+	Benutzerfreundlichkeit & X & & & \\
+	Sicherheit & & & & X \\
+	Erweiterbarkeit & & X & & \\
+	Effizienz & & X & & \\
+	Portierbarkeit & & & X & \\
+	Kompatibilität & & & X & \\
+	\hline
+\end{tabular}
 
 \subsection{Produktleistungen}
 
@@ -755,31 +780,14 @@ Zu speichern sind ausschließlich:
 
 \begin{itemize}
 
-\item[NF310] Die Software erfüllt die Definition von \gls{opensource}- und freier Software.\footnote{\url{https://www.gnu.org/philosophy/free-sw.de.html}}
+\item[NF310] Die Software erfüllt die Definition von \gls{opensource}- und freier Software.\footnote{\url{https://opensource.org/osd} und \url{https://www.gnu.org/philosophy/free-sw.de.html}}
 \item[NF320] Die Software ist erweiterbar und anpassbar an veränderte Umstände, auch durch Außenstehende.
 \item[NF330] Die \gls{DSGVO} wird nicht verletzt; d.h. personenbezogene Daten werden ausschließlich dann verarbeitet, wenn sie vom Benutzer freiwillig eingespeist werden.
 \item[NF340] Daten werden ausschließlich lokal gespeichert.
 
 \end{itemize}
 
-\subsection{Qualitätsanforderungen}
-
-Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
-
-\begin{tabular}{ | c | c | c | c | c | }
-	\hline
-	\textbf{Merkmal} & \textbf{sehr wichtig} & \textbf{wichtig} & \textbf{weniger wichtig} & \textbf{unwichtig} \\
-	\hline
-	Robustheit & X & & & \\
-	Zuverlässigkeit & & X & & \\
-	Benutzerfreundlichkeit & X & & & \\
-	Sicherheit & & & & X \\
-	Erweiterbarkeit & & X & & \\
-	\gls{Effizienz} & & X & & \\
-	Portierbarkeit & & & X & \\
-	Kompatibilität & & & X & \\
-	\hline
-\end{tabular}
+\clearpage
 
 \section{Globale Testfälle und Testszenarien}\label{testfall}
 
@@ -970,6 +978,7 @@ Abbildung \ref{UseCaseDiagramm} zeigt die Use-Cases und deren Ablauf für das nu
 	\end{center}
 \end{figure}
 
+\clearpage
 \section{Systemmodelle}\label{systemmodell}
 
 Das projektierte Gesamtsystem wird aller Voraussicht nach drei Systemprozesse benötigen, die wie in Abbildung \ref{DeploymentDiagram} dargestellt, miteinander Daten austauschen.
@@ -1006,6 +1015,7 @@ Abbildung \ref{DeploymentDiagram} stellt die Verteilung der Systemkomponenten au
 	\end{center}
 \end{figure}
 
+\clearpage
 \section{Benutzungsoberfläche}\label{gui}
 
 \subsection{Ziel der Benutzeroberfläche}
@@ -1126,13 +1136,15 @@ Eine Erweiterungsmöglichkeit wäre das Einfügen eines Startbildschirmes vor de
 
 Für die Fehlermeldungen könnten eigene Fenster erscheinen. Abbildung \ref{fehlerfenster} zeigt ein mögliches Design. Für unterschiedliche Fehler könnten unterschiedliche Designs verwendet werden.
 
-\section{Spezielle Anforderungen an die Entwicklungsumgebung}\label{entwicklungsumgebung}
+\clearpage
+\section{Spezielle Anforderungen}\label{entwicklungsumgebung}
 
 Für die Umsetzung des Projekts ist Zugang zu funktionierender Hardware (konkret: mindestens ein \gls{RasPi}, möglichst mehrere \glspl{sensor}, Peripheriegeräte) notwendig, um die Funktionalität des Produkts sicherzustellen.\newline
 Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen werden.
 
 Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in PhyPiDAQ fehlerhaft sind können möglicherweise nicht korrekt implementiert werden. PhyPiDAQ sollte beispielsweise im Fall eines Programmfehlers eindeutige Fehlercodes produzieren, damit der Benutzer aussagekräftig über das Problem informiert werden kann.
 
+\clearpage
 \section{Zeit- und Ressourcenplanung}\label{zeit}
 
 \subsection{Projektphasen}
@@ -1156,6 +1168,7 @@ In jeder Phase treten unterschiedliche Risiken auf.
 
 Das Ausfallen eines Teammitglieds durch Krankheit oder anderen Gründen ist ein bedeutendes Risiko. In diesem Fall muss die zusätzliche Arbeit gerecht auf die anderen Teilnehmer verteilt werden. Eventuell können dadurch einzelne Kriterien und Anforderungen nicht mehr zufriedenstellend erfüllt werden.
 
+\clearpage
 \section{Glossar}\label{glossar}
 
 \renewcommand*{\glossarysection}[2][]{}	% prevents double glossary section heading
