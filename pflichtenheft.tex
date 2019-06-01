@@ -193,11 +193,11 @@
 
 \section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
 
-Die im Rahmen des \gls{osl2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}). Die erhoffte Konsequenz ist, dass mehr Schüler für wissenschaftliche und technische Fächer motiviert werden.
+Die im Rahmen des \gls{osl2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}).
 Demzufolge kommt die Anwendung in Schulen zum Einsatz. 
 Die Zielgruppe sind Schüler in der siebten Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
 Die Anwendung läuft in einer \gls{JVM} und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). 
-Die hardwarenahe Ansteuerung der Sensoren soll durch das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} erfolgen (siehe Kapitel \ref{systemmodell}).
+Die hardwarenahe Ansteuerung der Sensoren soll durch das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} erfolgen. (siehe Kapitel \ref{systemmodell}).
 Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel \ref{funktionale} bzw. \ref{nichtfunktionale} aufgelistet.
 Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient werden. (siehe Kapitel \ref{gui}).
 
@@ -557,7 +557,7 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 \subsection{GUI} % Glossarverweise in Überschriften besser vermeiden
 
 \begin{description}
-\item[F010] Die Benutzer erreichen nach Öffnung der Anwendung direkt die \gls{GUI}, welche aus Menüleiste, Kofigurationsfeld und Darstellungsfeld besteht.
+\item[F010] Die Benutzer erreichen nach Öffnung der Anwendung direkt die \gls{GUI}, welche aus Menüleiste, Konfigurationsfeld und Darstellungsfeld besteht.
 \item[F020] Die Anwendung ist über Optionen konfigurierbar. 
 \item[F030] Die Anwendung besitzt eine Dateiverwaltung.
 \item[F040] Die Anwendung bietet eine Hilfe-Oberfläche.
@@ -575,10 +575,9 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 \subsubsection{Optional: Zusätzliche Funktionen im Menüfeld}
 
 \begin{description}
-
-\item[F090] Der Benutzer soll in F050 weitere Sensoren hinzufügen können.
-\item[F100] Der Benutzer soll in F060 weitere Transformation hinzufügen können.
-\item[F110] Die Transformationen in F100 sollen in eigenen Python-Skripten geschrieben werden können.
+\item[(opt.) F090] Der Benutzer soll in F050 weitere Sensoren hinzufügen können.
+\item[(opt.) F100] Der Benutzer soll in F060 weitere Transformation hinzufügen können.
+\item[(opt.) F110] Die Transformationen in F100 sollen in eigenen Python-Skripten geschrieben werden können.
 \end{description}
 
 \subsubsection{Konfigurationsfeld}
@@ -620,8 +619,8 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 
 \begin{description}
 
-\item[F270] Die Anwendung besitzt eine Check-Funktion, welche die \gls{Benutzerkonfiguration} auf Vollständigkeit und Korrektheit kontrolliert
-\item[F280] Durch F270 wird durch visuelle Rückmeldung dargestellt,ob die Konfiguration verwendet werden kann.
+\item[(opt.) F270] Die Anwendung besitzt eine Check-Funktion, welche die \gls{Benutzerkonfiguration} auf Vollständigkeit und Korrektheit kontrolliert
+\item[(opt.) F280] Durch F270 wird durch visuelle Rückmeldung dargestellt,ob die Konfiguration verwendet werden kann.
 
 \end{description}
 
@@ -677,12 +676,13 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 
 \begin{description}
 
-\item[F500] Die Anwendung stellt dem Benutzer weitere Sprachpakete für die \gls{GUI} zur Verfügung.
-\item[F510] Durch F020 ist die Sprache für den Benutzer änderbar.
+\item[(opt.) F500] Die Anwendung stellt dem Benutzer weitere Sprachpakete für die \gls{GUI} zur Verfügung.
+\item[(opt.) F510] Durch F020 ist die Sprache für den Benutzer änderbar.
 
 \end{description}
 
 \subsection{Sonstiges}
+
 
 \begin{description}
 
@@ -694,8 +694,8 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 
 \begin{description}
 
-\item[F530] Durch F020 sollte der Benutzer die in der Anwendung verwendeten Farben ändern können.
-\item[F540] Durch F020 sollte der Benutzer die in der Anwendung verwenden Buchstabengröße verändern können.
+\item[(opt.) F530] Durch F020 sollte der Benutzer die in der Anwendung verwendeten Farben ändern können.
+\item[(opt.) F540] Durch F020 sollte der Benutzer die in der Anwendung verwenden Buchstabengröße verändern können.
 
 \end{description}
 
@@ -1207,6 +1207,14 @@ Eine Erweiterungsmöglichkeit wäre das Einfügen eines Startbildschirmes vor de
 Für die Fehlermeldungen könnten eigene Fenster erscheinen. Abbildung \ref{fehlerfenster} zeigt ein mögliches Design. Für unterschiedliche Fehler könnten unterschiedliche Designs verwendet werden.
 
 \clearpage
+\section{Spezielle Anforderungen}\label{entwicklungsumgebung}
+
+Für die Umsetzung des Projekts ist Zugang zu funktionierender Hardware (konkret: mindestens ein \gls{RasPi}, möglichst mehrere \glspl{sensor}, Peripheriegeräte) notwendig, um die Funktionalität des Produkts sicherzustellen.\newline
+Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen werden.
+
+Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in PhyPiDAQ fehlerhaft sind können möglicherweise nicht korrekt implementiert werden. PhyPiDAQ sollte beispielsweise im Fall eines Programmfehlers eindeutige Fehlercodes produzieren, damit der Benutzer aussagekräftig über das Problem informiert werden kann.
+
+\clearpage
 \section{Zeit- und Ressourcenplanung}\label{zeit}
 
 \subsection{Projektphasen}
@@ -1226,14 +1234,9 @@ Für die Fehlermeldungen könnten eigene Fenster erscheinen. Abbildung \ref{fehl
 
 \subsection{Risikomanagement}
 
+In jeder Phase treten unterschiedliche Risiken auf.
+
 Das Ausfallen eines Teammitglieds durch Krankheit oder anderen Gründen ist ein bedeutendes Risiko. In diesem Fall muss die zusätzliche Arbeit gerecht auf die anderen Teilnehmer verteilt werden. Eventuell können dadurch einzelne Kriterien und Anforderungen nicht mehr zufriedenstellend erfüllt werden.
-
-\subsection{Spezielle Anforderungen}\label{entwicklungsumgebung}
-
-Für die Umsetzung des Projekts ist Zugang zu funktionierender Hardware (konkret: mindestens ein \gls{RasPi}, möglichst mehrere \glspl{sensor}, Peripheriegeräte) notwendig, um die Funktionalität des Produkts sicherzustellen.\newline
-Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen werden.
-
-Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in PhyPiDAQ fehlerhaft sind können möglicherweise nicht korrekt implementiert werden. PhyPiDAQ sollte beispielsweise im Fall eines Programmfehlers eindeutige Fehlercodes produzieren, damit der Benutzer aussagekräftig über das Problem informiert werden kann.
 
 \clearpage
 \section{Glossar}\label{glossar}
