@@ -968,7 +968,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \end{itemize}
 
-\hypertarget{link-t210}{\item[T210]} Erstellen einer ungültigen Messkonfiguration
+\hypertarget{link-t210}{\item[T210]} Starten einer ungültigen Messkonfiguration
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -979,9 +979,9 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \end{figure}
 \begin{itemize}
 
-\item []\textbf{Testziel:} 
+\item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Starten einer ungültigen Messkonfiguration. Der Ablauf ist in Abbildung \ref{T210-Ablauf} zu sehen.
 
-\item []\textbf{Vorbedingung:} Das Hauptfenster der Anwendung ist geöffnet. Die verwendeten Sensoren sind angeschlossen. Der Ablauf ist in Abbildung \ref{T210-Ablauf} zu sehen.
+\item []\textbf{Vorbedingung:} Das Hauptfenster der Anwendung ist geöffnet. Die verwendeten Sensoren sind angeschlossen. 
 
 \item []\textbf{Aktionen:} Der Benutzer konstruiert eine Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung. Allerdings verbindet er die Darstellung nicht mit dem Rest der Konstruktion und startet die Messkonfiguration.
 \item []\textbf{Reaktionen:} Die Messung wird nicht gestartet, sondern eine aussagekräftige Fehlermeldung wird ausgegeben.
