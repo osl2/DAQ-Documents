@@ -1051,37 +1051,49 @@ Abbildung \ref{UseCaseDiagramm} zeigt die Use-Cases und deren Ablauf für das nu
 \clearpage
 \section{Systemmodelle}\label{systemmodell}
 
-Das projektierte Gesamtsystem wird aller Voraussicht nach drei Systemprozesse benötigen, die wie in Abbildung \ref{DeploymentDiagram} dargestellt, miteinander Daten austauschen.
+Das projektierte Gesamtsystem wird aller Voraussicht nach auf drei Systemprozesse verteilt sein, die wie in Abbildung \ref{DeploymentDiagram} dargestellt, miteinander Daten austauschen.
 
-Einer dieser drei Systemprozesse hostet die \gls{JVM}, auf der die zu erstellende Hauptkomponente läuft. Diese enthält die grafische Benutzungsoberfläche, die im Wesentlichen die Erstellung der Werte verarbeitenden Messkonfiguration ermöglicht, und die auch deren Betrieb darstellen kann. 
+Einer dieser drei Systemprozesse enthält die \gls{JVM}, auf der die zu erstellende Hauptkomponente läuft. Diese enthält wiederum die grafische Benutzungsoberfläche, mit deren Hilfe Benutzer  Messkonfigurationen entwerfen und den Betrieb von Messläufen steuern und überwachen können.
 
-Zum Ansteuern und Auslesen der Sensoren auf dem \gls{RasPi} wird das auf Python basierende Framework \gls{PhyPiDAQ} bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die \gls{JVM} ausgeführt werden kann, wird für diesen ein zweiter Systemprozess benötigt.
+Zum Ansteuern und Auslesen der Sensoren auf dem \gls{RasPi} wird das auf Python basierende Framework \gls{PhyPiDAQ} bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die \gls{JVM} ausgeführt werden kann, wird für PhyPiDAQ ein zweiter Systemprozess benötigt.
 
 Um Ressourcenknappheit auf dem \gls{RasPi} aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend ebenso auf dem \gls{RasPi} ausgeführt werden müssen. 
 
-Falls denn nun die Hauptkomponente tatsächlich auf einem anderen Rechner ausgeführt werden sollte, so muss sie mit dem Python-Interpreter hardware- bzw. plattformübergreifend Daten austauschen können. Bisher stellt PhyPiDAQ hierfür jedoch keine Funktionalität zur Verfügung.
+Falls denn nun die Hauptkomponente tatsächlich auf einem anderen Rechner ausgeführt werden sollte, so muss sie mit dem Python-Interpreter hardware- bzw. plattformübergreifend Daten austauschen können. Bisher stellt PhyPiDAQ hierfür jedoch keine Funktionalität zur Verfügung. 
 
-Zur Realisierung der hardwareübergreifenden Kommunikation sind die folgenden zwei Lösungsvarianten denkbar: 
+Als Lösungsalternativen bieten sich hier die Kommunikation über eine Netzwerkschnittstelle wie z. B. WLAN und die Kommunikation über eine Peripherieschnittstelle wie z. B. USB an.
+
+Es wäre sicher möglich, PhyPiDAQ um den benötigten Programmcode zur anwendungsspezifischen Kommunikation zu erweitern. (In diesem Fall hätte das projektierte Gesamtsystem lediglich zwei Systemprozesse.) Lukrativer erscheint es aber, eine Utility-Softwarekomponente zur Datenvermittlung zu implementieren, die in einem dritten Systemprozess auf demselben Rechner wie PhyPiDAQ, also auf dem Raspberry Pi läuft. Sofern diese einfach gehalten und robust implementiert ist, kann diese zusätzlich eine Überwachungsfunktion bezüglich PhyPiDAQ übernehmen und dieses im Falle von Abstürzen und Nicht-Responsivität erneut ausführen. In Abbildung \ref{DeploymentDiagram} und im Folgenden wird diese Utility-Komponente ,,Measurement-Server`` genannt.
+\newpage
+Es gibt also zwei Szenarien, die 3 Systemprozesse zu verteilen: 
 
 \begin{itemize}
-
-
-	\item PhyPiDAQ wird um eine Kommunikationsschnittstelle erweitert, beispielsweise zur Kommunikation über eine Netzwerkschnittstelle wie z. B. WLAN oder zur Kommunikation über eine Peripherieschnittstelle wie z. b. USB.
-	
-%	\item In einem dritten Systemprozess, der auf dem selben Rechner wie PhyPiDAQ läuft, stellt eine Utility-Softwarekomponente einen entsprechenden Kommunikationsdienst bereit. In diesem Fall sollte keine Notwendigkeit bestehen, dass PhyPiDAQ wesentlich erweitert werden muss, und der Datenaustausch mit PhyPiDAQ sollte auf möglichst einfache Art und Weise, beispielsweise per Standardeingabe und Standardausösungsvariante erfolgen können.
-
+	\item Der Systemprozess mit der Hauptkomponente läuft einem PC, und die beiden Systemprozesse mit Measurement-Server und PhyPiDAQ laufen auf dem Raspberry Pi. 
+	\item Alle drei Systemprozesse laufen auf dem Raspberry Pi.
 \end{itemize}
 
-Da bei letzterer Variante die Utility-Softwarekompomente zusätzlich auch noch eine Überwachungsfunktion bezüglich PhyPiDAQ übernehmen und dieses im Falle von Abstürzen und Nicht-Responsivität erneut ausführen kann, ist letztere Lösungsvariante die bevorzugte Lösungsvariante zur Realisierung der optionalen hardwareübergreifenden Kommunikation. 
+Abbildung \ref{DeploymentDiagram} stellt die Verteilung der Systemkomponenten auf zwei Rechnern, also das erste Szenario dar.
 
-Abbildung \ref{DeploymentDiagram} stellt die Verteilung der Systemkomponenten auf zwei Rechnern mittels der gewählten zweiten Lösungsvariante dar, und benennt die notwendige Utility-Komponente mit ,,Measurement-Server``. 
- 
+Da sich PhyPiDAQ und Measurement-Server in jedem Fall auf derselben Plattform befinden, kann die Kommunikation zwischen den beiden Instanzen invariant unter Zuhilfenahme einer von Linux gegebenen  Inter-Prozess-Kommunikation erfolgen, beispielsweise mittels einer Verknüpfung von Standard-Eingabe und Standard-Ausgabe über eine ,,Pipe``.
+
+Measurement-Server und Hauptkomponente befinden sich im Kontrast hierzu jedoch nicht zwingend auf derselben Plattform. Es besteht das Risiko, dass sich nicht wenige Code-Fragmente für den Datenaustausch bei den beiden Szenarien stark unterscheiden, beispielsweise in Bezug auf die zeitliche Koordination im anwendungsspezifischen Protokollablauf. Softwaretechnisch ist es deshalb Best-Practice, eine leichte Austauschbarkeit der Implementierungsvarianten sicherzustellen, indem man diese hinter einer invarianten Schnittstelle verbirgt, so wie im Klassendiagramm \ref{ClassDiagram} dargestellt.
+
+Ob es sich beispielsweise bei der verteilten Kommunikation um WLAN per Netzwerkadapter und bei der Stand-Alone-Kommunikation um WLAN per Local-Loop handelt, oder ob es sich (ebenso beispielsweise) bei der verteilten Kommunikation um USB und bei der Stand-Alone-Kommunikation um IPC handelt, sollte spätestens zu Beginn der Implementierungsphase entschieden werden.  
+
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width = 12cm]{Grafik/DeploymentDiagram.png}
 		\caption{UML-Deployment-Diagramm}
 		\label{DeploymentDiagram}
+	\end{center}
+\end{figure}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafik/ClassDiagramForCommunication.png}
+		\caption{UML-Klassen-Diagramm}
+		\label{ClassDiagram}
 	\end{center}
 \end{figure}
 
