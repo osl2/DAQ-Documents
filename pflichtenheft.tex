@@ -170,6 +170,12 @@
 	description={Zeitabschnitt, in dem zu definierten Zeitpunkten an allen Bausteinen eines Entwurfs sukzessive die Werte an allen Ausgängen und Eingängen bestimmt werden}
 }
 
+\newglossaryentry{Effizienz}{
+	name=Effizienz,
+	plural=Effizienz,
+	description={Im Vergleich zu einem PC-System bietet ein Raspberry Pi lediglich beschränkte Resourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Resourcen maximieren.}
+}
+
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
 \subtitle{Version 0.3.0}
@@ -257,45 +263,7 @@ Für die Beschreibung der Kriterien ist es hilfreich, ein paar grundsätzliche �
 
 
 
-\subsection{Handhabung von Bausteinprotoypen}
 
-Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wird einem \gls{Bausteinprototyp}en eine Kopie angelegt.
-
-\begin{itemize}
-	
-	\item 
-	\begin{MussKrit} 
-		Der Benutzer kann die Eigenschaften eines Bausteinprototyps einsehen.
-	\end{MussKrit}
-	
-	\item Der Benutzer soll von allen Bausteintypen neue Prototypen erstellen können. Dies kann auf zweierlei Art und Weise geschen: 
-	
-	\begin{itemize}
-	
-		\item 
-		\begin{MussKrit} 
-			durch Anpassung bereits vorhandener (evtl. auch generischer) Bausteintypen,
-		\end{MussKrit}
-		
-		\item 
-		\begin{SollKrit} 
-			durch Erweiterung um neue Softwarekomponenten, die definierte programmtechnische Schnittstellen nutzen.
-		\end{SollKrit}
-
-	\end{itemize}
-	
-	\item 
-	\begin{MussKrit}
-		Der Benutzer soll die Eigenschaften benutzererstellter Bausteinprototypen verändern können.
-	\end{MussKrit}
-	
-	\item 
-	\begin{MussKrit}
-		Der Benutzer soll benutzererstellte Bausteinprototypen löschen können.
-	\end{MussKrit}
-	
-	
-\end{itemize}
 
 \subsection{Entwurf von Messkonfigurationen}
 
@@ -303,38 +271,78 @@ Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wi
 	
 	\item 
 	\begin{MussKrit} 			
-		Hinzufügen eines Bausteins zur Messkonfiguration, d. h. Auswahl eines Prototypen und Platzieren des Bausteinexemplars auf der Entwurfsfläche
+		Der Benutzer soll einen Baustein zur Messkonfiguration hinzufügen können, d. h. er soll einen Prototypen auswählen und das Bausteinexemplars auf der Entwurfsfläche platzieren können. 
 	\end{MussKrit}
 	
 	\item 
 	\begin{MussKrit} 		
-		Bearbeiten der Baustein-Eigenschaften oder Verändern der Position des Bausteins auf der Entwurfsfläche 	
+		Der Benutzer soll die Baustein-Eigenschaften und die Position des Bausteins auf der Entwurfsfläche nach seinen Wünschen anpassen können.
 	\end{MussKrit}
 	
 	\item 
 	\begin{MussKrit} 			
-		Löschen eines Bausteins aus der Konfiguration
+		Der Benutzer soll einen Baustein aus der Konfiguration löschen können.
 	\end{MussKrit}
 	
 	\item 
 	\begin{MussKrit} 			
-		Erstellen einer Weiterleitungsregel bzw. eines ,,Drahtes`` vom Ausgang eines Bausteins zum Eingang eines anderen Bausteins. 
+		Der Benutzer soll eine Weiterleitungsregel bzw. einen ,,Draht`` vom Ausgang eines Bausteins zum Eingang eines anderen Bausteins erstellen können.
 	\end{MussKrit}
 	
 	\item 
 	\begin{MussKrit} 			
-		Löschen einer Weiterleitungsregel bzw. eines ,,Drahtes``
+		Der Benutzer soll eine Weiterleitungsregel bzw. einen ,,Draht`` löschen können.
 	\end{MussKrit}
 	
 	\item 
 	\begin{SollKrit} 			
-		Anbieten einer Undo- und einer Redo-Funktion
+		Das System soll dem Benutzer eine Undo- und eine Redo-Funktion anbieten.
 	\end{SollKrit}
 			
 	\item 
 	\begin{WunschKrit} 
-		Hinzufügen, Darstellen, Bearbeiten und Löschen ergänzender Text- und evtl. auch Bildinformation, beispielsweise zur ausführlichen Beschreibung der physikalische Hintergründe oder für Memos, To-dos, etc
+		Hinzufügen, Darstellen, Bearbeiten und Löschen ergänzender Text- und evtl. auch Bildinformation, beispielsweise zur ausführlichen Beschreibung der physikalische Hintergründe oder für Memos, To-dos, etc.
 	\end{WunschKrit}.
+	
+\end{itemize}
+
+\subsection{Handhabung von Bausteinprotoypen}
+
+Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wird einem \gls{Bausteinprototyp}en eine Kopie angelegt.
+
+\begin{itemize}
+	
+	\item 
+	\begin{SollKrit} 
+		Der Benutzer kann die Eigenschaften eines Bausteinprototyps einsehen.
+	\end{SollKrit}
+	
+	\item Der Benutzer soll von allen Bausteintypen (Sensor, Transformation und Darstellung) neue Prototypen erstellen können. Dies kann auf zweierlei Art und Weise geschen: 
+	
+	\begin{itemize}
+		
+		\item 
+		\begin{SollKrit} 
+			durch Anpassung bereits vorhandener (evtl. auch generischer) Bausteintypen,
+		\end{SollKrit}
+		
+		\item 
+		\begin{WunschKrit} 
+			durch Erweiterung um neue Softwarekomponenten, die definierte programmtechnische Schnittstellen nutzen.
+		\end{WunschKrit}
+		
+	\end{itemize}
+	
+	\item 
+	\begin{SollKrit}
+		Der Benutzer soll die Eigenschaften benutzererstellter Bausteinprototypen verändern können.
+	\end{SollKrit}
+	
+	\item 
+	\begin{SollKrit}
+		Der Benutzer soll benutzererstellte Bausteinprototypen löschen können.
+	\end{SollKrit}
+	
 	
 \end{itemize}
 
@@ -471,6 +479,9 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 	\item 
 	\begin{SollKrit}
 		Die Anwendung hält interaktiv zugängliche Erklärungen und Informationen zu den einzelnen GUI-Elementen bereit.
+	\end{SollKrit}
+	\begin{SollKrit}
+		Die Anwendung soll, wo möglich, Fehlverhalten des Benutzers verhindern oder mit Hinweisen davor warnen. 
 	\end{SollKrit}
 	\item 
 	\begin{WunschKrit} 
@@ -691,8 +702,9 @@ Zu speichern sind ausschließlich:
 \begin{itemize}
 
 \item[D010] \gls{Benutzerkonfiguration}(en)
-\item[D020] Messdaten
-\item[D030] Sensorkonfigurationsdaten
+\item[D020] Messdaten und deren Darstellungen
+\item[D030] Benutzererstellte Bausteinprototypen (beinhaltet beispielsweise neu angepasste Sensorkonfigurationsdaten im Falle eines Protoypen vom Typ Sensor)
+\item[D040] Lokaler Datenfluss bei einem Baustein während eines Messlaufs 
 
 \end{itemize}
 
@@ -763,7 +775,7 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 	Benutzerfreundlichkeit & X & & & \\
 	Sicherheit & & & & X \\
 	Erweiterbarkeit & & X & & \\
-	Effizienz & & X & & \\
+	\gls{Effizienz} & & X & & \\
 	Portierbarkeit & & & X & \\
 	Kompatibilität & & & X & \\
 	\hline
@@ -790,7 +802,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Nach dem öffnen der Anwendung, überprüft diese, ob ein \gls{RasPi} angeschlossen ist. Jeder dargestellte Text ist auf Deutsch.
 
 \item []\textbf{Ergebnis:} Der Benutzer kann die Anwendung starten. Die Bedienung der Anwendung ist komplett auf Deutsch möglich.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F010 erreiche GUI nach Start, F140 leere Darstellung nach Anwendungsstart, F480 Hilfe zu Anwendung, F490 Texte der Anwendung auf Deutsch
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen} F010 erreiche GUI nach Start, F140 leere Darstellung nach Anwendungsstart, F480 Hilfe zu Anwendung, F490 Texte der Anwendung auf Deutsch
 
 \end{itemize}
 
@@ -806,7 +818,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Die Anwendung ist offen. Eine gültige Messkonfiguration ist in der Konfigurationsfeld geladen. Die Messung läuft ohne Fehler und die Ergebnisse werden richtig dargestellt.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann eine Messkonfiguration, die nur Daten aus einer Datei benötigt, problemlos ohne angeschlossenem \gls{RasPi} durchführen. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F130 Starten einer Messung, F160 Laden einer Messkonfiguration
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F130 Starten einer Messung, F160 Laden einer Messkonfiguration
 
 \end{itemize}
 
@@ -823,7 +835,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Die Anwendung prüft beim Hinzufügen eines Sensor-Icons, ob der Sensor angeschlossen ist. Die Anwendung speichert die angepassten Einstellungen, sofern sie gültig sind. Die Messkonfigurationsdatei wird erstellt, unabhängig ob die Messkonfiguration vollständig oder gültig ist.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann eine Messkonfiguration als Datei speichern und prüfen, ob ein Sensor angeschlossen ist.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F180 füge Sensor hinzu, F190 prüfe ob Sensor angeschlossen, F210 füge Transformation hinzu, F250 speichere Messkonfiguration, F290 Einstellungen Messkonfiguration 
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F180 füge Sensor hinzu, F190 prüfe ob Sensor angeschlossen, F210 füge Transformation hinzu, F250 speichere Messkonfiguration, F290 Einstellungen Messkonfiguration 
 
 \end{itemize}
 
@@ -841,7 +853,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Der Benutzer kann Messkonfigurationen laden, diese verändern und durch das Erstellen auf Gültigkeit prüfen. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F230 füge Darstellung, F470 Hilfe Bausteine
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F230 füge Darstellung, F470 Hilfe Bausteine
 
 \end{itemize}
 
@@ -858,7 +870,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Der Benutzer die Messung einer gültigen Messkonfiguration starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F300 Starte Messung, F320 stelle Ergebnisse dar, F400 speichere Messdaten, F410 speichere Messgraph
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F300 Starte Messung, F320 stelle Ergebnisse dar, F400 speichere Messdaten, F410 speichere Messgraph
 
 
 \end{itemize}
@@ -880,7 +892,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Die Anwendung kann beim Laden von Messkonfigurationen zwischen gültigen und ungültigen Dateiformaten unterscheiden und entsprechend reagieren.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F430 überprüfe Format bei Laden
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F430 überprüfe Format bei Laden
 
 \end{itemize}
 
@@ -896,7 +908,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Die Anwendung überprüft vor dem Starten der Messkonfiguration, ob diese gültig ist.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann beim Starten zwischen gültigen und ungültigen Messkonfigurationen unterscheiden und entsprechend reagieren.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F310 überprüfe Messkonfiguration beim Start
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F310 überprüfe Messkonfiguration beim Start
 
 \end{itemize}
 
@@ -911,13 +923,52 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} \gls{PhyPiDAQ} verliert die Verbindung zu einem Sensor und sendet keine Daten mehr an die Anwendung. Die Anwendung stürzt nicht ab, sondern gibt eine Fehlermeldung aus.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann mit dem ungewollten Verlust eines Datenstroms umgehen ohne abzustürzen.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die noch nicht abgedeckt wurden:} F450 Melde Abbruch des Datenstrom
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F450 Melde Abbruch des Datenstrom
 
 \end{itemize}
 
 
 \end{itemize}
 
+
+\section{Szenario mit Use-case-Diagramm}\label{scenario}
+
+Abbildung \ref{UseCaseDiagramm} zeigt die Use-Cases und deren Ablauf für das nun im Folgenden beschriebene Szenario. Akteure in diesem Szenario sind ein Lehrer, ein Schüler sowie ein weiterer Lehrer. Das Szenario verwendet weitestgehend Testfälle aus Kapitel \ref{testfall}. (Bausteinprototypen sind lediglich in Sollkriterien spezifiziert und werden von den Testfällen in Kapitel \ref{testfall} nicht abgedeckt.)
+
+\begin{enumerate}
+	\item Lehrer A kennt das Messkonfigurationswerkzeug noch nicht so gut und erstellt zunächst eine ungültige \gls{Benutzerkonfiguration}. 
+	
+	\item Der zweite Versuch gelingt und Lehrer A erstellt erfolgreiche eine Messkonfiguration, die sich gut als Basis für seinen Unterricht eignet. Diese Messkonfiguration speichert er sogleich auf seinem Speicherstick.
+	
+	\item Am nächsten Tag gibt Lehrer A den Speicherstick einem seiner Schüler. 
+	
+	\item Dieser soll die vorbereitete Aufgabe bearbeiten. Also öffnet er die Messkonfiguration und bearbeitet diese.
+	
+	\item Da Lehrer A zunächst Zweifel hat, dass sein Schüler die Aufgabe ordnungsgemäß gelöst hat, lässt er ihn einen Messlauf durchführen. Der Messlauf verläuft wie erwartet, und weil der Schüler sehr ordentlich ist, speichert er die Messergebnisse.
+	
+	\item Es hat sich herumgesprochen, dass die Schüler von Lehrer A ganz begeistert von seinem Physik-Unterricht sind, und deshalb möchte Lehrer B einen ähnlichen Unterricht machen. Da er nicht so wie Lehrer A bei Null anfangen möchte, lässt er sich die eingangs von Lehrer A erstellte Messkonfiguration auf einem Speicherstick geben. 
+	
+	\item Lehrer B öffnet die Messkonfiguration und schaut sie sich genau an.
+	
+	\item Die Messkonfiguration enthält zwar einen brauchbaren Darstellungsbaustein. Da Lehrer B aber ein paar sehr schwache Schüler in seiner Klasse hat, möchte ein paar Aspekte auf den Darstellungen, die er erhält, besser hervorheben. Und er sieht schon kommen, dass er (und evtl. auch seine Kollegen) in Zukunft noch öfter von der verbesserten Darstellungsart profitieren könnten. Also erstellt er einen neuen optimierten Bausteinprototyp für Darstellungen.
+	
+	\item Lehrer B ersetzt den alten Darstellungsbaustein durch einen mit der verbesserten Darstellungsart. 
+	
+	\item Da die neue Darstellungsart auch in Zukunft noch öfter zum Einsatz kommen soll, speichert Lehrer B sie persistent. 
+	
+	\item Im darauffolgenden Schuljahr bekommt Lehrer A wieder eine Klasse der gleichen Klassenstufe zugewiesen, und dieses Mal hat auch er das Pech, ein paar sehr schwache Schüler in seiner Klasse zu haben. Er erzählt Lehrer B davon, und dieser überlässt ihm per Speicherstick eine Kopie der Datei, welche den bereits vor einem Jahr erstellten Bausteinprototypen enthält. 	
+	
+	\item Lehrer A öffnet die Datei und erkennt, dass die neuen Darstellungsbausteine, die er seinen Messkonfigurationen nun hinzufügen kann, sehr viel anschaulicher sind.
+\end{enumerate}
+
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafik/UseCaseDiagram.png}
+		\caption{Use-Case-Diagramm}
+		\label{UseCaseDiagramm}
+	\end{center}
+\end{figure}
 
 \section{Systemmodelle}\label{systemmodell}
 
