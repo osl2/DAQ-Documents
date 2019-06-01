@@ -150,18 +150,12 @@
 \newglossaryentry{Konfigurationsbaustein}{
 	name=Konfigurationsbaustein,
 	plural=Konfigurationsbausteine,
-	description ={Teil einer Messkonfiguration, der eine Teilaufgabe bestimmten Typs erfüllen kann. Es gibt Sensorbausteine, Konfigurationsbausteine und Darstellungsbausteine. Liegt am Ausgang eines Bausteins ein Wert an, so kann dieser an den Eingang eines  nachgelagerten Bausteins weitergeleitet werden}
+	description ={Teil einer Messkonfiguration, der eine Teilaufgabe bestimmten Typs erfüllen kann. Es gibt Sensorbausteine, Konfigurationsbausteine und Darstellungsbausteine. Liegt am Ausgang eines Bausteins ein Wert an, so kann dieser an den Eingang eines nachgelagerten Bausteins weitergeleitet werden}
 }
 
 \newglossaryentry{Benutzerkonfiguration}{
 	name =Messkonfiguration,
 	description ={Gerichteter zyklenfreier Graph mit Knoten vom Typ Sensor, Transformation oder Darstellung. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellungen keine Ausgangskanten haben dürfen}
-}
-
-\newglossaryentry{Baustein}{
-	name=Baustein,
-	plural=Bausteine,
-	description={Bausteine sind grafische Elemente, die entweder einen Sensor, eine Transformation oder eine Darstellung repräsentieren. Bausteine können Aus- und Eingänge besitzen, anhand welcher sie mit anderen Bausteinen verbunden werden können}
 }
 
 \newglossaryentry{Bausteinprototyp}{
@@ -179,6 +173,17 @@
 	name=Effizienz,
 	plural=Effizienz,
 	description={Im Vergleich zu einem PC-System bietet ein Raspberry Pi lediglich beschränkte Ressourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Ressourcen maximieren.}
+}
+
+\newglossaryentry{Stand-Alone-Kommunikation}{
+	name={Stand-Alone-Kommunikation},
+	description={Bezeichnet im Kontext unseres Software-Projekt die systeminterne Kommunikation innerhalb eines Betriebssystems, beispielsweise per Interprozess-Kommunikation (IPC.)}
+	}
+
+
+\newglossaryentry{Local-Loop}{
+	name={Local-Loop},
+	description={Bezeichnet einen virtuellen Netzwerkadapter, der Pakete, die an ihn verschickt werden, unmittelbar danach auch wieder empfängt.}
 }
 
 \subject{Pflichtenheft}
@@ -209,7 +214,7 @@ Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient 
 \clearpage
 \section{Zielbestimmung}\label{zielbestimmung}
 
-Die Anwendung soll es Lehrern ermöglichen, Schülern ab der siebten Klasse Grundkenntnisse der digitalen Messwerterfassung in einer für Schüler interessante und motivierenden Weise näher zu bringen. 
+Die Anwendung soll es Lehrern ermöglichen, Schülern ab der siebten Klasse Grundkenntnisse der digitalen Messwerterfassung in einer für Schüler interessanten und motivierenden Art und Weise näher zu bringen. 
 
 In einem nicht etwas komplexeren Versuchsaufbau sind die wesentlichen Schritte einer messtechnischen Verarbeitung die Folgenden: 
 
@@ -232,7 +237,7 @@ Aus didaktischer Sicht überflüssige technische Details wie z. B. die zum Ausle
 Der Schüler wird so nicht überfordert, sondern soll ermutigt werden, selbstständig mit der Software umzugehen. 
 Dabei kann er im spielerischen Umgang mit Versuchsaufbauten Prinzipien der digitalen Messtechnik wie z. B. Kaskadierung und natürlich auch das Grundprinzip von Ursache und Wirkung erfahren.
 
-Es wird eine grafische Oberfläche angeboten, die es dem Schüler ermöglicht, allein per \gls{dragdrop} eine Messanordnung bestehend aus \glspl{Baustein}\textit{n} zu entwerfen. 
+Es wird eine grafische Oberfläche angeboten, die es dem Schüler ermöglicht, allein per \gls{dragdrop} eine Messanordnung zu entwerfen. 
 Überflüssige Details, die dahinter stecken, bleiben vor dem Schüler verborgen.
 Die Anwendung motiviert den Schüler dazu, mit \glspl{sensor}, \glspl{transformation} und \glspl{darstellung} zu spielen und Dinge auszuprobieren. 
 Dabei wird ihm durch eine intuitive Status- und Fehleranzeige gezeigt, ob sein Entwurf funktioniert. 
@@ -247,7 +252,7 @@ Weiter ermöglicht es die Anwendung, dass Schüler aus höheren Klassen mit mehr
 
 Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verstehen. Sie ermöglicht dem Nutzer, über eine übersichtliche, strukturierte und intuitive GUI sowie über eine einfache Bedienung die Nutzung eines \gls{RasPi} mit \gls{PhyPiDAQ}. Dadurch soll dem Schüler digitale Messwerterfassung, Physik und auch Informatik in einer motivierenden Weise näher gebracht werden. Womöglich kann die Anwendung den Schüler auch für diese Themen begeistern.  
 
-\subsection{Einige hilfreiche Begriffsdefinitionen}
+\subsection{Begriffsdefinitionen}
 
 Im Folgenden werden \gls{Musskriterien} (MK), \gls{Sollkriterien} (SK) und \gls{Wunschkriterien} (WK) zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittlerer und niedriger Priorität betrieben.
 
@@ -297,7 +302,7 @@ Im Folgenden werden \gls{Musskriterien} (MK), \gls{Sollkriterien} (SK) und \gls{
 	
 \end{itemize}
 
-\subsection{Handhabung von Bausteinprotoypen}
+\subsection{Handhabung von Bausteinprototypen}
 
 Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wird einem \gls{Bausteinprototyp}en eine Kopie angelegt.
 
@@ -733,8 +738,8 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 	\textbf{Merkmal} & \textbf{Begründung für die Werteverteilung}\\
 	\hline
 	Robustheit & Durch eine robuste Anwendung sollen möglichst wenige Komplikationen während des Unterrichtes auftreten. Der Lehrer soll sich nicht mit Softwareproblemen beschäftigen müssen. Das Qualitätsmerkmal ist deshalb sehr wichtig, da von unvorhergesehenen Situationen, wie etwa Fehlbedienungen, ausgegangen werden muss.\\\cline{1-2}
-	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der Betrieb in der vorgesehenen Umgebung (siehe Kapitel \ref{produktumgebung})gewährt werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die in einer erwarteten Umgebung bereits scheitert, nicht robust sein kann.\\\cline{1-2}
-	Benutzer-\newline freundlichkeit & Da die Anwendung einen wissensvermittelnden Auftrag hat ist es sehr wichtig, dass die Anwendung für Schüler verständlich ist. Die Schüler sollen durch eine hohe Benutzerfreundlichkeit dazu angehalten werden sich selbstständig mit den wissenschaftlichen Themen zu beschäftigen. Umgekehrt könnte das Fehlen von einem hohen Grad an Benutzerfreundlichkeit ein Scheitern der Anwendung zur Folge haben.\\\cline{1-2}
+	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der Betrieb in der vorgesehenen Umgebung (siehe Kapitel \ref{produktumgebung}) gewährt werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die in einer erwarteten Umgebung bereits scheitert, nicht robust sein kann.\\\cline{1-2}
+	Benutzer-\newline freundlichkeit & Da die Anwendung einen wissensvermittelnden Auftrag hat, ist es sehr wichtig, dass die Anwendung für Schüler verständlich ist. Die Schüler sollen durch eine hohe Benutzerfreundlichkeit dazu angehalten werden sich selbstständig mit den wissenschaftlichen Themen zu beschäftigen. Umgekehrt könnte das Fehlen von einem hohen Grad an Benutzerfreundlichkeit ein Scheitern der Anwendung zur Folge haben.\\\cline{1-2}
 	Sicherheit & Die Anwendung soll ausschließlich in einer sicheren Umgebung verwendet werden. Das bereits vorhandene Rechtssystem, des Bestriebssystems, sollte daher ausreichen. Das Qualitätsmerkmal ist somit unwichtig.\\\cline{1-2}
 	Erweiterbarkeit & Es ist angedacht die Anwendung um weitere Elemente, wie etwa Sensoren, erweitern zu können. Außerdem sollen Schüler eigene Transformationen erstellen und diese auch speichern können. Es ist daher wichtig, dass die Anwendung mit diesen Aufgaben umgehen kann.\\\cline{1-2}
 	Effizienz & Im Vergleich zu einem PC-System bietet ein Raspberry Pi lediglich beschränkte Ressourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Ressourcen maximieren. Das Qualitätsmerkmal ist somit wichtig.\\\cline{1-2}
@@ -796,7 +801,6 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 \end{description}
 
 \clearpage
-
 \section{Globale Testfälle und Testszenarien}\label{testfall}
 
 \subsection{Einführung}
@@ -964,7 +968,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \end{itemize}
 
-\hypertarget{link-t210}{\item[T210]} Erstellen einer ungültigen Messkonfiguration
+\hypertarget{link-t210}{\item[T210]} Starten einer ungültigen Messkonfiguration
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -975,9 +979,9 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \end{figure}
 \begin{itemize}
 
-\item []\textbf{Testziel:} 
+\item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Starten einer ungültigen Messkonfiguration. Der Ablauf ist in Abbildung \ref{T210-Ablauf} zu sehen.
 
-\item []\textbf{Vorbedingung:} Das Hauptfenster der Anwendung ist geöffnet. Die verwendeten Sensoren sind angeschlossen. Der Ablauf ist in Abbildung \ref{T210-Ablauf} zu sehen.
+\item []\textbf{Vorbedingung:} Das Hauptfenster der Anwendung ist geöffnet. Die verwendeten Sensoren sind angeschlossen. 
 
 \item []\textbf{Aktionen:} Der Benutzer konstruiert eine Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung. Allerdings verbindet er die Darstellung nicht mit dem Rest der Konstruktion und startet die Messkonfiguration.
 \item []\textbf{Reaktionen:} Die Messung wird nicht gestartet, sondern eine aussagekräftige Fehlermeldung wird ausgegeben.
@@ -1014,7 +1018,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \end{description}
 
-
+\clearpage
 \section{Szenario mit Use-case-Diagramm}\label{scenario}
 
 Abbildung \ref{UseCaseDiagramm} zeigt die Use-Cases und deren Ablauf für das nun im Folgenden beschriebene Szenario. Akteure in diesem Szenario sind ein Lehrer, ein Schüler sowie ein weiterer Lehrer. Das Szenario verwendet weitestgehend Testfälle aus Kapitel \ref{testfall}. (Bausteinprototypen sind lediglich in Sollkriterien spezifiziert und werden von den Testfällen in Kapitel \ref{testfall} nicht abgedeckt.)
@@ -1084,7 +1088,7 @@ Da sich PhyPiDAQ und Measurement-Server in jedem Fall auf derselben Plattform be
 
 Measurement-Server und Hauptkomponente befinden sich im Kontrast hierzu jedoch nicht zwingend auf derselben Plattform. Es besteht das Risiko, dass sich nicht wenige Code-Fragmente für den Datenaustausch bei den beiden Szenarien stark unterscheiden, beispielsweise in Bezug auf die zeitliche Koordination im anwendungsspezifischen Protokollablauf. Softwaretechnisch ist es deshalb das beste Vorgehen, eine leichte Austauschbarkeit der Implementierungsvarianten sicherzustellen, indem man diese hinter einer invarianten Schnittstelle verbirgt, so wie im Klassendiagramm \ref{ClassDiagram} dargestellt.
 
-Ob es sich beispielsweise bei der verteilten Kommunikation um WLAN per Netzwerkadapter und bei der Stand-Alone-Kommunikation um WLAN per Local-Loop handelt, oder ob es sich (ebenso beispielsweise) bei der verteilten Kommunikation um USB und bei der Stand-Alone-Kommunikation um IPC handelt, sollte spätestens zu Beginn der Implementierungsphase entschieden werden.  
+Ob es sich beispielsweise bei der verteilten Kommunikation um WLAN per Netzwerkadapter und bei der \gls{Stand-Alone-Kommunikation} um WLAN per \gls{Local-Loop} handelt, oder ob es sich (ebenso beispielsweise) bei der verteilten Kommunikation um USB und bei der Stand-Alone-Kommunikation um IPC handelt, sollte spätestens zu Beginn der Implementierungsphase entschieden werden.  
 
 
 \begin{figure}[h]
@@ -1112,9 +1116,9 @@ Das Ziel der Benutzeroberfläche ist es dem Anwender eine intuitive Benutzung de
 
 \subsection{Generell}
 
-Um die Ziele zu erfüllen wird das Programm über eine \gls{GrafBenOber}) (kurz ,,GUI``) bedient. Der Anwender soll in der Lage sein bereits vorhandene Computer und Mobilgerät Kenntnisse zu nutzen.
+Um die Ziele zu erfüllen wird das Programm über eine \gls{GrafBenOber} (kurz ,,GUI``) bedient. Der Anwender soll in der Lage sein bereits vorhandene Computer und Mobilgerät Kenntnisse zu nutzen.
 
-\subsection{Eingabegeäte}
+\subsection{Eingabegeräte}
 
 Die \gls{GrafBenOber} soll Maus und Tastatureingaben unterstützen. Außerdem soll eine \gls{dragdrop} Eingabe möglich sein.
 Die Verwendung anderer Eingabegeräte ist nicht vorgesehen.
@@ -1264,14 +1268,14 @@ Beim Herstellungsprozess einer Software gibt es viele Risiken, die zu berücksic
 
 In der Planungsphase sticht vor allem das Risiko hervor, dass wir uns zu viel vornehmen und den resultierenden Aufwand in späteren Projektphasen, unterschätzen. Unsere Gegenmaßnahme dafür ist die Einteilung der Kriterien in Prioritätsklassen. Wir setzen nur die Features als Musskriterien, die unbedingt in der Software enthalten sein müssen. Der Rest ist als Soll- oder Wunschkriterien optional.
  
-In der Entwurfsphase ist das größte Risiko, dass in der Qualitätssicherungsphase bei Integrationstests unvorhergesehene Probleme auftauchen und unsere Entwürfe für dann notwendige Fall-Backs oder Work-Arounds zu unflexibel. Unsere Gegenmaßnahme dazu ist ein Fallback-Plan für wichtige Entscheidungen der Definitionsphase. Diese Pläne werden wir in der Entwurfsphase berücksichtigen. Dazu zählt z.B. der Fallbackplan, dass unsere Anwendung auch auf einem Desktop-Computer laufen kann, falls die Hardware des \gls{RasPi} nicht ausreicht.
+In der Entwurfsphase ist das größte Risiko, dass in der Qualitätssicherungsphase bei Integrationstests unvorhergesehene Probleme auftauchen und unsere Entwürfe für dann notwendige Fall-Backs oder Work-Arounds zu unflexibel sind. Unsere Gegenmaßnahme dazu ist ein Fallback-Plan für wichtige Entscheidungen der Definitionsphase. Diese Pläne werden wir in der Entwurfsphase berücksichtigen. Dazu zählt z.B. der Fallbackplan, dass unsere Anwendung auch auf einem Desktop-Computer laufen kann, falls die Ressourcen des \gls{RasPi} nicht ausreichen.
  
-In der Implementierungsphase ist das Hauptrisiko das Implementieren von Fehlern. Unsere Gegenmaßnahme hierzu ist eine gute Testabdeckung, um das Risiko von Fehlern zu minimieren.
+In der Implementierungsphase ist das Hauptrisiko das Produzieren von Implementierungsfehlern. Unsere Gegenmaßnahme hierzu ist eine gute Testabdeckung, um das Risiko von Fehlern zu minimieren.
  
-In der Qualitätssicherungsphase liegt das Hauptrisiko dabei, dass wir uns zu sehr aus Kleinigkeiten versteifen und das Wesentliche 
-übersehen. Dazu planen wir unsere Anwendung mit Schülern zu testen. Damit sollen wir auf für uns unscheinbare Schwierigkeiten hingewiesen zu werden.
+In der Qualitätssicherungsphase liegt das Hauptrisiko darin, dass wir uns zu sehr auf Kleinigkeiten konzentrieren und das Wesentliche 
+übersehen. Dazu planen wir unsere Anwendung mit Schülern zu testen. Damit sollen wir zuvor übersehene Schwierigkeiten hingewiesen zu werden.
 
-Ein Risiko, das sich durch alle Projektphasen durchzieht, ist der Ausfall eines Teammitglieds durch Krankheit. Bei einem Team von fünf Mitgliedern, bedeutet ein Ausfall ein Verlust von 20\%. Unsere Gegenmaßnahme ist die Einplanung von Pufferzeit in jede Projektphase. Ein weiteres phasenübergreifendes Risiko ist ein Ausfall wegen Urlaub oder Klausuren. Dieses Risiko wird aber durch unsere frühzeitige Planung und durch das Einplanen von Klausurpausen minimiert.
+Ein Risiko, das sich durch alle Projektphasen durchzieht, ist der Ausfall eines Teammitglieds, beispielsweise durch Krankheit. Bei einem Team von fünf Mitgliedern, bedeutet ein Ausfall ein Verlust von 20\%. Unsere Gegenmaßnahme ist die Einplanung von Pufferzeit in jede Projektphase. Ein weiteres phasenübergreifendes Risiko ist ein Ausfall wegen Urlaub oder Klausuren. Dieses Risiko wird aber durch unsere frühzeitige Planung und durch das Einplanen von Klausurpausen minimiert.
 
 \subsection{Spezielle Anforderungen}\label{entwicklungsumgebung}
 
