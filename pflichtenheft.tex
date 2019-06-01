@@ -737,6 +737,21 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 	\hline
 \end{tabular}
 
+\begin{tabular}{| p{3cm} | p{10cm} |}
+	\hline
+	\textbf{Merkmal} & \textbf{Begründung für die Werteverteilung}\\
+	\hline
+	Robustheit & Durch eine robuste Anwendung sollen möglichst wenige Komplikationen während des Unterrichtes auftreten. Der Lehrer soll sich nicht um häufige Abstürze der Anwendung kümmern müssen. Das Qualitätsmerkmal ist deshalb sehr wichtig, da von Fehlbedienungen ausgegangen werden muss.\\\cline{1-2}
+	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der ordnungsgemäße Betrieb in der vorgesehenen Umgebung gewährt werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die im Normalbetrieb bereits scheitert, auch nicht robust seien kann.\\\cline{1-2}
+	Benutzer-\newline freundlichkeit & Da die Anwendung einen wissensvermittelnden Auftrag hat ist es sehr wichtig, dass die Anwendung für Schüler verständlich ist. Die Schüler sollen durch eine hohe Benutzerfreundlichkeit dazu angehalten werden sich selbstständig mit den wissenschaftlichen Themen zu beschäftigen. Umgekehrt könnte das Fehlen von einem hohen Grad an Benutzerfreundlichkeit ein Scheitern der Anwendung zur folge haben.\\\cline{1-2}
+	Sicherheit & In der Anwendung sind keine Sicherheits-Funktionen vorgesehen. Das Qualitätsmerkmal ist daher unwichtig.\\\cline{1-2}
+	Erweiterbarkeit & Es ist angedacht die Anwendung um weitere Elemente, wie etwa Sensoren, erweitern zu können. Außerdem sollen Schüler eigene Transformationen erstellen und diese auch speichern können. Es ist daher wichtig, dass die Anwendung mit diesen Aufgaben umgehen kann.\\\cline{1-2}
+	Effizienz & Die Anwendung soll auf einem \gls{RasPi} laufen. Außerdem können die Messkonfigurationen, unter anderem durch die grafischen Darstellungen, eine große Rechenleistung fordern. Das Qualitätsmerkmal ist wichtig, damit auch bei größeren Messkonfigurationen eine Änderung der Darstellungen in annähernd Echtzeit zu erkennen sind.\\\cline{1-2}
+	Portierbarkeit & Zum aktuellen Zeitpunkt ist keine Portierung der Anwendung auf viele unterschiedliche Betriebssysteme vorgesehen. Das Qualitätsmerkmal ist deshalb weniger wichtig.\\\cline{1-2}
+	Kompatibilität & Da die Anwendung die Daten von einer externen Quelle, wie zum Beispiel \gls{PhyPiDAQ} bekommt, muss sie nicht stark auf sich verändernde Teile reagieren. Das Qualitätsmerkmal ist daher weniger wichtig.\\\cline{1-2}
+	\hline
+\end{tabular}
+
 \subsection{Produktleistungen}
 
 \begin{description}
@@ -801,12 +816,12 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \begin{description} 
 
-\item[\textbf{T010}]Starten der Anwendung und Hilfe
+\hypertarget{link-t010}{\item[\textbf{T010}]}Starten der Anwendung und Hilfe
 
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 10cm]{Grafik/T010-Ablauf.png}
-		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T010}}
+		\caption{Kurze Darstellung des Ablaufs von Testfall \textbf{T010}.}
 		\label{T010-Ablauf}
 	\end{center}
 \end{figure}
@@ -820,17 +835,17 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Nach dem öffnen der Anwendung, überprüft diese, ob ein \gls{RasPi} angeschlossen ist. Jeder dargestellte Text ist auf Deutsch.
 
 \item []\textbf{Ergebnis:} Der Benutzer kann die Anwendung starten. Die Bedienung der Anwendung ist komplett auf Deutsch möglich.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen} \textbf{F010} erreiche GUI nach Start, \textbf{F140} leere Darstellung nach Anwendungsstart, \textbf{F480} Hilfe zu Anwendung, \textbf{F490} Texte der Anwendung auf Deutsch
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen} \hyperlink{link-f010}{\textbf{F010}} erreiche GUI nach Start, \hyperlink{link-f140}{\textbf{F140}} leere Darstellung nach Anwendungsstart, \hyperlink{link-f480}{\textbf{F480}} Hilfe zu Anwendung, \hyperlink{link-f490}{\textbf{F490}} Texte der Anwendung auf Deutsch
 
 \end{itemize}
 
 
-\item[\textbf{T020}] Starten der Demo 
+\hypertarget{link-t020}{\item[\textbf{T020}]} Starten der Demo 
 
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 10cm]{Grafik/T020-Ablauf.png}
-		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T020}}
+		\caption{Kurze Darstellung des Ablaufs von Testfall \textbf{T020}.}
 		\label{T020-Ablauf}
 	\end{center}
 \end{figure}
@@ -844,18 +859,18 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Die Anwendung ist offen. Eine gültige Messkonfiguration ist in der Konfigurationsfeld geladen. Die Messung läuft ohne Fehler und die Ergebnisse werden richtig dargestellt.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann eine Messkonfiguration, die nur Daten aus einer Datei benötigt, problemlos ohne angeschlossenem \gls{RasPi} durchführen. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F130} Starten einer Messung, \textbf{F160} Laden einer Messkonfiguration
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \hyperlink{link-f130}{\textbf{F130}} Starten einer Messung, \hyperlink{link-f160}{\textbf{F160}} Laden einer Messkonfiguration
 
 \end{itemize}
 
 
 
-\item[\textbf{T030}] Lehrer erstellt und speichert eine Messkonfiguration
+\hypertarget{link-t030}{\item[\textbf{T030}]} Lehrer erstellt und speichert eine Messkonfiguration
 
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 13cm]{Grafik/T030-Ablauf.png}
-		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T030}}
+		\caption{Kurze Darstellung des Ablaufs von Testfall \textbf{T030}.}
 		\label{T030-Ablauf}
 	\end{center}
 \end{figure}
@@ -873,7 +888,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Die Anwendung prüft beim Hinzufügen eines Sensorbausteins, ob der Sensor angeschlossen ist. Die Anwendung speichert die angepassten Einstellungen, sofern sie gültig sind. Die Messkonfigurationsdatei wird erstellt, unabhängig ob die Messkonfiguration vollständig oder gültig ist.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann eine Messkonfiguration als Datei speichern und prüfen, ob ein Sensor angeschlossen ist.
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F180} füge Sensor hinzu, \textbf{F190} prüfe ob Sensor angeschlossen, \textbf{F210} füge Transformation hinzu, \textbf{F250} speichere Messkonfiguration, \textbf{F290} Einstellungen Messkonfiguration 
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \hyperlink{link-f180}{\textbf{F180}} füge Sensor hinzu, \hyperlink{link-f190}{\textbf{F190}} prüfe ob Sensor angeschlossen, \hyperlink{link-f210}{\textbf{F210}} füge Transformation hinzu, \hyperlink{link-f250}{\textbf{F250}} speichere Messkonfiguration, \hyperlink{link-f290}{\textbf{F290}} Einstellungen Messkonfiguration 
 
 \end{itemize}
 
@@ -882,7 +897,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 13cm]{Grafik/T040-Ablauf.png}
-		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T040}}
+		\caption{Kurze Darstellung des Ablaufs von Testfall \textbf{T040}.}
 		\label{T040-Ablauf}
 	\end{center}
 \end{figure}
@@ -899,16 +914,16 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Der Benutzer kann Messkonfigurationen laden, diese verändern und durch das Erstellen auf Gültigkeit prüfen. 
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F230} füge Darstellung hinzu, \textbf{F470} Hilfe Bausteine
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \hyperlink{link-f230}{\textbf{F230}} füge Darstellung hinzu, \hyperlink{link-f470}{\textbf{F470}} Hilfe Bausteine
 
 \end{itemize}
 
-\item[\textbf{T050}] Schüler startet Messung und speichert Ergebnisse
+\hypertarget{link-t050}{\item[\textbf{T050}]} Schüler startet Messung und speichert Ergebnisse
 
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 13cm]{Grafik/T050-Ablauf.png}
-		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T050}}
+		\caption{Kurze Darstellung des Ablaufs von Testfall \textbf{T050}.}
 		\label{T050-Ablauf}
 	\end{center}
 \end{figure}
@@ -924,7 +939,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Der Benutzer die Messung einer gültigen Messkonfiguration starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F300} Starte Messung, \textbf{F320} stelle Ergebnisse dar, \textbf{F400} speichere Messdaten, \textbf{F410} speichere Messgraph
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \hyperlink{link-f300}{\textbf{F300}} Starte Messung, \hyperlink{link-f320}{\textbf{F320}} stelle Ergebnisse dar, \hyperlink{link-f400}{\textbf{F400}} speichere Messdaten, \hyperlink{link-f410}{\textbf{F410}} speichere Messgraph
 
 
 \end{itemize}
@@ -934,12 +949,12 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \begin{description} 
 
-\item[\textbf{T200}] Laden einer ungültigen Datei als Messkonfiguration
+\hypertarget{link-t200}{\item[\textbf{T200}]} Laden einer ungültigen Datei als Messkonfiguration
 
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 7cm]{Grafik/T200-Ablauf.png}
-		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T200}}
+		\caption{Kurze Darstellung des Ablaufs von Testfall \textbf{T200}.}
 		\label{T200-Ablauf}
 	\end{center}
 \end{figure}
@@ -954,16 +969,16 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Die Anwendung kann beim Laden von Messkonfigurationen zwischen gültigen und ungültigen Dateiformaten unterscheiden und entsprechend reagieren.
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F430} überprüfe Format bei Laden
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \hyperlink{link-f430}{\textbf{F430}} überprüfe Format bei Laden
 
 \end{itemize}
 
-\item[\textbf{T210}] Erstellen einer ungültigen Messkonfiguration
+\hypertarget{link-t210}{\item[\textbf{T210}]} Erstellen einer ungültigen Messkonfiguration
 
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 10cm]{Grafik/T210-Ablauf.png}
-		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T210}}
+		\caption{Kurze Darstellung des Ablaufs von Testfall \textbf{T210}.}
 		\label{T210-Ablauf}
 	\end{center}
 \end{figure}
@@ -978,16 +993,16 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Die Anwendung überprüft vor dem Starten der Messkonfiguration, ob diese gültig ist.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann beim Starten zwischen gültigen und ungültigen Messkonfigurationen unterscheiden und entsprechend reagieren.
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F310} überprüfe Messkonfiguration beim Start
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \hyperlink{link-f310}{\textbf{F310}} überprüfe Messkonfiguration beim Start
 
 \end{itemize}
 
-\item[\textbf{T220}] Entfernen eines Sensors bei laufender Messung
+\hypertarget{link-t220}{\item[\textbf{T220}]} Entfernen eines Sensors bei laufender Messung
 
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 10cm]{Grafik/T220-Ablauf.png}
-		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T220}}
+		\caption{Kurze Darstellung des Ablaufs von Testfall \textbf{T220}.}
 		\label{T220-Ablauf}
 	\end{center}
 \end{figure}
@@ -1001,7 +1016,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} \gls{PhyPiDAQ} verliert die Verbindung zu einem Sensor und sendet keine Daten mehr an die Anwendung. Die Anwendung stürzt nicht ab, sondern gibt eine Fehlermeldung aus.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann mit dem ungewollten Verlust eines Datenstroms umgehen ohne abzustürzen.
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F450} Melde Abbruch des Datenstrom
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \hyperlink{link-f450}{\textbf{F450}} Melde Abbruch des Datenstrom
 
 \end{itemize}
 
