@@ -465,9 +465,7 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 	\end{WunschKrit}
 	\item 
 	\begin{SollKrit}
-		Die Anwendung reagiert auf jede Benutzereingabe innerhalb von zwei Sekunde. 
-		Benötigt die Anwendung zur Reaktion auf eine Benutzereingabe länger als zwei Sekunden, so präsentiert sie dem Benutzer fortlaufend mindestens ein Mal pro Sekunde ein möglichst aussagekräftiges Zwischenergebnis, mindestens in Form eines Fortschrittsbalkens. 
-		Nach Ablauf eines einstellbaren Timeouts präsentiert die Anwendung eine möglichst aussagekräftige Fehlermeldung. Benötigt die Bearbeitung einer Benutzereingabe länger als 2 Sekunden, so hat der Benutzer die Möglichkeit, den Bearbeitungsvorgang abzubrechen. 
+		Die Anwendung reagiert zuverlässig auf Benutzereingaben.
 	\end{SollKrit}
 	\item 
 	\begin{SollKrit} 
@@ -559,7 +557,7 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 \subsection{GUI} % Glossarverweise in Überschriften besser vermeiden
 
 \begin{itemize}
-\item[\textbf{F010}] Die Benutzer erreichen nach Öffnung der Anwendung direkt die \gls{GUI}, welche aus Menüleiste, Kofigurationsfeld und Darstellungsfeld besteht.
+\item[\textbf{F010}] Die Benutzer erreichen nach Öffnung der Anwendung direkt die \gls{GUI}, welche aus Menüleiste, Konfigurationsfeld und Darstellungsfeld besteht.
 \item[\textbf{F020}] Die Anwendung ist über Optionen konfigurierbar. 
 \item[\textbf{F030}] Die Anwendung besitzt eine Dateiverwaltung.
 \item[\textbf{F040}] Die Anwendung bietet eine Hilfe-Oberfläche.
@@ -578,9 +576,9 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 
 \begin{itemize}
 
-\item[\textbf{F090}] Der Benutzer soll in F050 weitere Sensoren hinzufügen können.
-\item[\textbf{F100}] Der Benutzer soll in F060 weitere Transformation hinzufügen können.
-\item[\textbf{F110}] Die Transformationen in F100 sollen in eigenen Python-Skripten geschrieben werden können.
+\item[\textbf{(opt.) F090}] Der Benutzer soll in F050 weitere Sensoren hinzufügen können.
+\item[\textbf{(opt.) F100}] Der Benutzer soll in F060 weitere Transformation hinzufügen können.
+\item[\textbf{(opt.) F110}] Die Transformationen in F100 sollen in eigenen Python-Skripten geschrieben werden können.
 \end{itemize}
 
 \subsubsection{Konfigurationsfeld}
@@ -622,8 +620,8 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 
 \begin{itemize}
 
-\item[\textbf{F270}] Die Anwendung besitzt eine Check-Funktion, welche die \gls{Benutzerkonfiguration} auf Vollständigkeit und Korrektheit kontrolliert
-\item[\textbf{F280}] Durch F270 wird durch visuelle Rückmeldung dargestellt,ob die Konfiguration verwendet werden kann.
+\item[\textbf{(opt.) F270}] Die Anwendung besitzt eine Check-Funktion, welche die \gls{Benutzerkonfiguration} auf Vollständigkeit und Korrektheit kontrolliert
+\item[\textbf{(opt.) F280}] Durch F270 wird durch visuelle Rückmeldung dargestellt,ob die Konfiguration verwendet werden kann.
 
 \end{itemize}
 
@@ -679,12 +677,13 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 
 \begin{itemize}
 
-\item[\textbf{F500}] Die Anwendung stellt dem Benutzer weitere Sprachpakete für die \gls{GUI} zur Verfügung.
-\item[\textbf{F510}] Durch F020 ist die Sprache für den Benutzer änderbar.
+\item[\textbf{(opt.) F500}] Die Anwendung stellt dem Benutzer weitere Sprachpakete für die \gls{GUI} zur Verfügung.
+\item[\textbf{(opt.) F510}] Durch F020 ist die Sprache für den Benutzer änderbar.
 
 \end{itemize}
 
 \subsection{Sonstiges}
+
 
 \begin{itemize}
 
@@ -696,8 +695,8 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 
 \begin{itemize}
 
-\item[\textbf{F530}] Durch F020 sollte der Benutzer die in der Anwendung verwendeten Farben ändern können.
-\item[\textbf{F540}] Durch F020 sollte der Benutzer die in der Anwendung verwenden Buchstabengröße verändern können.
+\item[\textbf{(opt.) F530}] Durch F020 sollte der Benutzer die in der Anwendung verwendeten Farben ändern können.
+\item[\textbf{(opt.) F540}] Durch F020 sollte der Benutzer die in der Anwendung verwenden Buchstabengröße verändern können.
 
 \end{itemize}
 
@@ -706,14 +705,14 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 
 Zu speichern sind ausschließlich:
 
-\begin{itemize}
+\begin{description}
 
 \item[D010] \gls{Benutzerkonfiguration}(en)
 \item[D020] Messdaten und deren Darstellungen
 \item[D030] Benutzererstellte Bausteinprototypen (beinhaltet beispielsweise neu angepasste Sensorkonfigurationsdaten im Falle eines Protoypen vom Typ Sensor)
 \item[D040] Lokaler Datenfluss bei einem Baustein während eines Messlaufs 
 
-\end{itemize}
+\end{description}
 
 \clearpage
 \section{Nichtfunktionale Anforderungen}\label{nichtfunktionale}
@@ -739,7 +738,7 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 
 \subsection{Produktleistungen}
 
-\begin{itemize}
+\begin{description}
 
 \item[NF010] Auslesen von \gls{messdaten} von einem einzelnen Sensor innerhalb von 50 ms.
 \item[NF020] Alle 20 ms können neue Messdaten angefordert werden.
@@ -750,44 +749,44 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 \item[NF055] Darstellung von Daten benötigt maximal 30 ms pro Darstellungsbaustein.
 \item[NF060] Die Anwendung reagiert auf Benutzereingaben innerhalb von zwei Sekunden; mindestens mit einem Zwischenergebnis, Ladebalken oder ähnlichem.
 
-\end{itemize}
+\end{description}
 
 \subsection{Benutzbarkeit}
 
-\begin{itemize}
+\begin{description}
 
-\item[NF110] Die \gls{BenOber} ist ergonomisch gestaltet, orientiert an ISO 9241.
-\item[NF115] Nichttriviale Funktionen werden dem Benutzer erklärt.
-\item[NF120] Ungespeicherte Daten werden nicht ohne Warnung verworfen.
-\item[NF130] Über Programmfehler wird der Benutzer durch aussagekräftige Fehlermeldungen informiert.
-\item[NF140] Schriftgröße von Text kann verändert werden.
-\item[NF150] Farbschema von farbigen \gls{UI}-Elementen ist veränderbar.
-\item[NF160] Die Sprache der Benutzeroberfläche kann verändert werden.
+\item[NF070] Die \gls{BenOber} ist ergonomisch gestaltet, orientiert an ISO 9241.
+\item[NF080] Nichttriviale Funktionen werden dem Benutzer erklärt.
+\item[NF090] Ungespeicherte Daten werden nicht ohne Warnung verworfen.
+\item[NF100] Über Programmfehler wird der Benutzer durch aussagekräftige Fehlermeldungen informiert.
+\item[NF110] Schriftgröße von Text kann verändert werden.
+\item[NF120] Farbschema von farbigen \gls{UI}-Elementen ist veränderbar.
+\item[NF130] Die Sprache der Benutzeroberfläche kann verändert werden.
 
-\end{itemize}
+\end{description}
 
 \subsection{Zuverlässigkeit}
 
-\begin{itemize}
+\begin{description}
 
-\item[NF210] Konsistenz: Bei gleichen Vorbedingungen führen identische Eingaben auch zum gleichen Ergebnis.
-\item[NF220] Korrektheit: Bei korrekten Eingaben werden die erwarteten funktionalen Anforderungen erfüllt.
-\item[NF230] Unerwartete und fehlerhafte Eingaben führen nicht zum Absturz der Anwendung.
-\item[NF240] Verbindungsverlust von \glspl{sensor} führt nicht zum Absturz der Anwendung.
-\item[NF250] Unerwartete \gls{messdaten} (z.B. außerhalb eines eingestellten Wertebereichs) führen nicht zum Absturz der Anwendung.
+\item[NF140] Konsistenz: Bei gleichen Vorbedingungen führen identische Eingaben auch zum gleichen Ergebnis.
+\item[NF150] Korrektheit: Bei korrekten Eingaben werden die erwarteten funktionalen Anforderungen erfüllt.
+\item[NF160] Unerwartete und fehlerhafte Eingaben führen nicht zum Absturz der Anwendung.
+\item[NF170] Verbindungsverlust von \glspl{sensor} führt nicht zum Absturz der Anwendung.
+\item[NF180] Unerwartete \gls{messdaten} (z.B. außerhalb eines eingestellten Wertebereichs) führen nicht zum Absturz der Anwendung.
 
-\end{itemize}
+\end{description}
 
 \subsection{Sonstige}
 
-\begin{itemize}
+\begin{description}
 
-\item[NF310] Die Software erfüllt die Definition von \gls{opensource}- und freier Software.\footnote{\url{https://opensource.org/osd} und \url{https://www.gnu.org/philosophy/free-sw.de.html}}
-\item[NF320] Die Software ist erweiterbar und anpassbar an veränderte Umstände, auch durch Außenstehende.
-\item[NF330] Die \gls{DSGVO} wird nicht verletzt; d.h. personenbezogene Daten werden ausschließlich dann verarbeitet, wenn sie vom Benutzer freiwillig eingespeist werden.
-\item[NF340] Daten werden ausschließlich lokal gespeichert.
+\item[NF190] Die Software erfüllt die Definition von \gls{opensource}- und freier Software.\footnote{\url{https://opensource.org/osd} und \url{https://www.gnu.org/philosophy/free-sw.de.html}}
+\item[NF200] Die Software ist erweiterbar und anpassbar an veränderte Umstände, auch durch Außenstehende.
+\item[NF210] Die \gls{DSGVO} wird nicht verletzt; d.h. personenbezogene Daten werden ausschließlich dann verarbeitet, wenn sie vom Benutzer freiwillig eingespeist werden.
+\item[NF220] Daten werden ausschließlich lokal gespeichert.
 
-\end{itemize}
+\end{description}
 
 \clearpage
 
@@ -799,7 +798,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \subsection{Testfälle zur Nutzung der Anwendung}
 
-\begin{itemize} 
+\begin{description} 
 
 \item[\textbf{T010}]Starten der Anwendung und Hilfe
 
@@ -928,11 +927,11 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \end{itemize}
-\end{itemize}
+\end{description}
 
 \subsection{Testfälle zur Handhabung von Fehlern}
 
-\begin{itemize} 
+\begin{description} 
 
 \item[\textbf{T200}] Laden einer ungültigen Datei als Messkonfiguration
 
@@ -1006,7 +1005,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \end{itemize}
 
 
-\end{itemize}
+\end{description}
 
 
 \section{Szenario mit Use-case-Diagramm}\label{scenario}
