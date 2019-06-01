@@ -2,10 +2,9 @@
 
 \usepackage[utf8]{inputenc}			% Umlaute, Sonderzeichen
 \usepackage[ngerman]{babel}			% deutsche Sprache
-%\usepackage[tocfullflat]{tocstyle}		% Inhaltsverzeichnis
 \usepackage{enumitem}				% Listen
-\usepackage{graphicx}					% Grafiken
-\usepackage{hyperref}					% Hyperlinks
+\usepackage{graphicx}				% Grafiken
+\usepackage{hyperref}				% Hyperlinks
 \usepackage[nonumberlist]{glossaries}		% Glossar
 \usepackage{amsmath}
 
@@ -24,7 +23,6 @@
 \makeatother
 
 
-%\setcounter{tocdepth}{2}				% keine subsubsections im Inhaltsverzeichnis
 \makenoidxglossaries
 
 \newglossaryentry{RasPi}{
@@ -35,7 +33,7 @@
 
 \newglossaryentry{PhyPiDAQ}{
 	name=PhyPiDAQ,
-	description={Siehe Abschnitt 4.3 ,,PhyPiDAQ``}
+	description={PhyPiDAQ ist eine Anwendung zur Datenerfassung und Analyse mit einem Raspberry Pi. Siehe auch Abschnitt 4.3 ,,PhyPiDAQ`` sowie \url{https://github.com/GuenterQuast/PhyPiDAQ}}
 }
 
 \newglossaryentry{Science Labs}{
@@ -50,7 +48,7 @@
 
 \newglossaryentry{osl2}{
 	name=OSL\textsuperscript{2},
-	description={Open-Source-Lehrsoftware-Labor, \url{https://formal.iti.kit.edu/projects/oslsl/?lang=de}}
+	description={Open-Source-Lehrsoftware-Labor, siehe \url{https://formal.iti.kit.edu/projects/oslsl/?lang=de}}
 }
 
 \newglossaryentry{dragdrop}{
@@ -187,10 +185,10 @@
 
 \maketitle
 
-\newpage
+\clearpage
 \tableofcontents 					% generate pdf twice to update
-\newpage
 
+\clearpage
 \section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
 
 Die im Rahmen des \gls{osl2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}). Die erhoffte Konsequenz ist, dass mehr Schüler für wissenschaftliche und technische Fächer motiviert werden.
@@ -546,7 +544,7 @@ Die an den \gls{RasPi} angeschlossenen Sensoren müssen richtig und sinnvoll ang
 
 \subsection{PhyPiDAQ}
 
-Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache \gls{python3} geschrieben ist bietet einheitliche Schnittstellen zur Verwendung der Sensoren mit dem \gls{RasPi}. Die Verwendung setzt jedoch Grundkenntnisse im Umgang mit \gls{python3} und dem \gls{RasPi} voraus, weshalb es ungeeignet für den Einsatz in Schulen ist.
+Bei PhyPiDAQ handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache \gls{python3} geschrieben ist bietet einheitliche Schnittstellen zur Verwendung der Sensoren mit dem \gls{RasPi}. Die Verwendung setzt jedoch Grundkenntnisse im Umgang mit \gls{python3} und dem \gls{RasPi} voraus, weshalb es ungeeignet für den Einsatz in Schulen ist.
 
 \clearpage
 \section{Funktionale Anforderungen}\label{funktionale}
@@ -816,7 +814,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \begin{description} 
 
-\hypertarget{link-t010}{\item[\textbf{T010}]}Starten der Anwendung und Hilfe
+\hypertarget{link-t010}{\item[T010]}Starten der Anwendung und Hilfe
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -840,7 +838,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \end{itemize}
 
 
-\hypertarget{link-t020}{\item[\textbf{T020}]} Starten der Demo 
+\hypertarget{link-t020}{\item[T020]} Starten der Demo 
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -865,7 +863,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 
-\hypertarget{link-t030}{\item[\textbf{T030}]} Lehrer erstellt und speichert eine Messkonfiguration
+\hypertarget{link-t030}{\item[T030]} Lehrer erstellt und speichert eine Messkonfiguration
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -892,7 +890,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \end{itemize}
 
-\hypertarget{link-t040}{\item[\textbf{T040}]} Schüler bearbeitet Aufgabe
+\hypertarget{link-t040}{\item[T040]} Schüler bearbeitet Aufgabe
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -918,7 +916,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \end{itemize}
 
-\hypertarget{link-t050}{\item[\textbf{T050}]} Schüler startet Messung und speichert Ergebnisse
+\hypertarget{link-t050}{\item[T050]} Schüler startet Messung und speichert Ergebnisse
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -949,7 +947,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \begin{description} 
 
-\hypertarget{link-t200}{\item[\textbf{T200}]} Laden einer ungültigen Datei als Messkonfiguration
+\hypertarget{link-t200}{\item[T200]} Laden einer ungültigen Datei als Messkonfiguration
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -973,7 +971,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \end{itemize}
 
-\hypertarget{link-t210}{\item[\textbf{T210}]} Erstellen einer ungültigen Messkonfiguration
+\hypertarget{link-t210}{\item[T210]} Erstellen einer ungültigen Messkonfiguration
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -997,7 +995,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \end{itemize}
 
-\hypertarget{link-t220}{\item[\textbf{T220}]} Entfernen eines Sensors bei laufender Messung
+\hypertarget{link-t220}{\item[T220]} Entfernen eines Sensors bei laufender Messung
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -1251,7 +1249,7 @@ Für die Fehlermeldungen könnten eigene Fenster erscheinen. Abbildung \ref{fehl
 	Klausurenphase & — & KW 30, 32 & — \\
 	Qualitätssicherung & David Gawron & KW 33–35 & 03.09.2019 \\
 	Abnahme & — & KW 36 & — \\
-	Abschlussprüfung & Linus Ruhnke & KW 37/38 & (tbd) \\
+	Abschlussprüfung & Linus Ruhnke & KW 37/38 & t.b.d. \\
 	\hline
 \end{tabular}
 
@@ -1264,7 +1262,8 @@ Das Ausfallen eines Teammitglieds durch Krankheit oder anderen Gründen ist ein 
 Für die Umsetzung des Projekts ist Zugang zu funktionierender Hardware (konkret: mindestens ein \gls{RasPi}, möglichst mehrere \glspl{sensor}, Peripheriegeräte) notwendig, um die Funktionalität des Produkts sicherzustellen.\newline
 Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen werden.
 
-Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in PhyPiDAQ fehlerhaft sind können möglicherweise nicht korrekt implementiert werden. PhyPiDAQ sollte beispielsweise im Fall eines Programmfehlers eindeutige Fehlercodes produzieren, damit der Benutzer aussagekräftig über das Problem informiert werden kann.
+Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in PhyPiDAQ fehlerhaft sind können möglicherweise nicht korrekt implementiert werden. PhyPiDAQ sollte beispielsweise im Fall eines Programmfehlers eindeutige Fehlercodes produzieren, damit der Benutzer aussagekräftig über das Problem informiert werden kann.\newline
+Durch Kooperation mit den PhyPiDAQ-Entwicklern können derartige Probleme vermieden werden.
 
 \clearpage
 \section{Glossar}\label{glossar}
