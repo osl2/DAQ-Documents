@@ -127,6 +127,11 @@
 	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden}
 }
 
+\newglossaryentry{Abgrenzungskriterien}{
+	name=Abgrenzungskriterien,
+	description ={Abgrenzungskriterien beschreiben Aspekte, die explizit nicht umgesetzt werden müssen}
+}
+
 \newglossaryentry{BenOber}{
 	name=Benutzeroberfläche,
 	description = {Steht für die Oberfläche, die der Benutzer verwendet um die Anwendung zu bedienen}
@@ -170,12 +175,6 @@
 	description={Zeitabschnitt, in dem zu definierten Zeitpunkten an allen Bausteinen eines Entwurfs sukzessive die Werte an allen Ausgängen und Eingängen bestimmt werden}
 }
 
-\newglossaryentry{Effizienz}{
-	name=Effizienz,
-	plural=Effizienz,
-	description={Im Vergleich zu einem PC-System bietet ein Raspberry Pi lediglich beschränkte Ressourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Ressourcen maximieren.}
-}
-
 \newglossaryentry{Stand-Alone-Kommunikation}{
 	name={Stand-Alone-Kommunikation},
 	description={Bezeichnet im Kontext unseres Software-Projekt die systeminterne Kommunikation innerhalb eines Betriebssystems, beispielsweise per Interprozess-Kommunikation (IPC.)}
@@ -189,7 +188,7 @@
 
 \subject{Pflichtenheft}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
-\subtitle{Version 0.3.1}
+\subtitle{Version 0.3.1} % Abgabe = 1.0.0
 \author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
 \date{\today}
 
@@ -255,7 +254,7 @@ Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verst
 
 \subsection{Begriffsdefinitionen}
 
-Im Folgenden werden \gls{Musskriterien} (MK), \gls{Sollkriterien} (SK) und \gls{Wunschkriterien} (WK) zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittlerer und niedriger Priorität betrieben.
+Im Folgenden werden \gls{Musskriterien} (MK), \gls{Sollkriterien} (SK), \gls{Wunschkriterien} (WK) und \gls{Abgrenzungskriterien} (AK) zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittlerer und niedriger Priorität betrieben.
 
 \newtheorem{MussKrit}{MK}
 \newtheorem{SollKrit}{SK}
@@ -499,9 +498,9 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 
 \begin{itemize}
 	
-	\item Unterschiedliche Benutzerkonten bzw. personalisierte Arbeitsumgebungen  für die einzelnen Benutzer sieht das Produkt nicht vor. 
+	\item \textbf{AK 1} Unterschiedliche Benutzerkonten bzw. personalisierte Arbeitsumgebungen  für die einzelnen Benutzer sieht das Produkt nicht vor. 
 	
-	\item Die zu erstellende Anwendung sieht keinerlei Erfassung oder Speicherung personenbezogener Nutzerdaten vor. Der Einsatz der Software erfordert dementsprechend keine Einverständniserklärung der Nutzer gemäß europäischer \gls{DSGVO}.
+	\item \textbf{AK 2} Die zu erstellende Anwendung sieht keinerlei Erfassung oder Speicherung personenbezogener Nutzerdaten vor. Der Einsatz der Software erfordert dementsprechend keine Einverständniserklärung der Nutzer gemäß europäischer \gls{DSGVO}.
 	
 \end{itemize}
 
@@ -740,12 +739,12 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 	\hline
 	\textbf{Merkmal} & \textbf{Begründung für die Werteverteilung}\\
 	\hline
-	Robustheit & Durch eine robuste Anwendung sollen möglichst wenige Komplikationen während des Unterrichtes auftreten. Der Lehrer soll sich nicht mit Softwareproblemen beschäftigen müssen. Das Qualitätsmerkmal ist deshalb sehr wichtig, da von unvorhergesehenen Situationen, wie etwa Fehlbedienungen, ausgegangen werden muss.\\\cline{1-2}
-	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der Betrieb in der vorgesehenen Umgebung (siehe Kapitel \ref{produktumgebung}) gewährt werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die in einer erwarteten Umgebung bereits scheitert, nicht robust sein kann.\\\cline{1-2}
+	Robustheit & Durch eine robuste Anwendung sollen möglichst wenige Komplikationen während des Unterrichtes auftreten. Der Lehrer soll sich nicht mit Softwareproblemen beschäftigen müssen. Das Qualitätsmerkmal ist deshalb sehr wichtig, da von unvorhergesehenen Situationen, wie etwa Fehlbedienung, ausgegangen werden muss.\\\cline{1-2}
+	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der Betrieb in der vorgesehenen Umgebung (siehe Kapitel \ref{produktumgebung}) gewährleistet werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die in einer erwarteten Umgebung bereits scheitert, nicht robust sein kann.\\\cline{1-2}
 	Benutzer-\newline freundlichkeit & Da die Anwendung einen wissensvermittelnden Auftrag hat, ist es sehr wichtig, dass die Anwendung für Schüler verständlich ist. Die Schüler sollen durch eine hohe Benutzerfreundlichkeit dazu angehalten werden, sich selbstständig mit den wissenschaftlichen Themen zu beschäftigen. Umgekehrt könnte das Fehlen eines hohen Grads an Benutzerfreundlichkeit ein Scheitern der Anwendung zur Folge haben.\\\cline{1-2}
-	Sicherheit & Die Anwendung soll ausschließlich in einer sicheren Umgebung verwendet werden. Das bereits vorhandene Rechtssystem, des Bestriebssystems, sollte daher ausreichen. Das Qualitätsmerkmal ist somit unwichtig.\\\cline{1-2}
-	Erweiterbarkeit & Es ist angedacht die Anwendung um weitere Elemente, wie etwa Sensoren, erweitern zu können. Außerdem sollen Schüler eigene Transformationen erstellen und diese auch speichern können. Es ist daher wichtig, dass die Anwendung mit diesen Aufgaben umgehen kann.\\\cline{1-2}
-	Effizienz & Im Vergleich zu einem PC-System bietet ein Raspberry Pi lediglich beschränkte Ressourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Ressourcen maximieren. Das Qualitätsmerkmal ist somit wichtig.\\\cline{1-2}
+	Sicherheit & Die Anwendung soll ausschließlich in einer sicheren Umgebung verwendet werden. Das bereits vorhandene Berechtigungssystem des Betriebssystems sollte daher ausreichen. Das Qualitätsmerkmal ist somit unwichtig.\\\cline{1-2}
+	Erweiterbarkeit & Es ist angedacht, die Anwendung um weitere Elemente, wie etwa Sensoren, erweitern zu können. Außerdem sollen Schüler eigene Transformationen erstellen und diese auch speichern können. Es ist daher wichtig, dass die Anwendung mit diesen Aufgaben umgehen kann.\\\cline{1-2}
+	Effizienz & Im Vergleich zu einem PC bietet ein Raspberry Pi lediglich beschränkte Ressourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Ressourcen maximieren. Das Qualitätsmerkmal ist somit wichtig.\\\cline{1-2}
 	Portierbarkeit & Zum aktuellen Zeitpunkt ist keine Portierung der Anwendung auf viele unterschiedliche Betriebssysteme vorgesehen. Das Qualitätsmerkmal ist deshalb weniger wichtig.\\\cline{1-2}
 	Kompatibilität & Da die Anwendung die Daten von einer externen Quelle, wie zum Beispiel \gls{PhyPiDAQ} bekommt, muss sie nicht stark auf sich verändernde Teile reagieren. Das Qualitätsmerkmal ist daher weniger wichtig.\\\cline{1-2}
 	\hline
@@ -770,12 +769,12 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 
 \begin{description}
 
-\item[NF070] Die \gls{BenOber} ist ergonomisch gestaltet, orientiert an ISO 9241.
+\item[NF070] Die \gls{GUI} ist ergonomisch gestaltet, orientiert an ISO 9241.
 \item[NF080] Nichttriviale Funktionen werden dem Benutzer erklärt.
 \item[NF090] Ungespeicherte Daten werden nicht ohne Warnung verworfen.
 \item[NF100] Über Programmfehler wird der Benutzer durch aussagekräftige Fehlermeldungen informiert.
 \item[NF110] Schriftgröße von Text kann verändert werden.
-\item[NF120] Farbschema von farbigen \gls{UI}-Elementen ist veränderbar.
+\item[NF120] Farbschema von farbigen GUI-Elementen ist veränderbar.
 \item[NF130] Die Sprache der Benutzeroberfläche kann verändert werden.
 
 \end{description}
@@ -808,7 +807,7 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 
 \subsection{Einführung}
 
-In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur Handhabung von Fehlern dargestellt. Zum besseren Verständnis werden noch einmal einige verwendete Begriffe und der generelle Ablauf einer Nutzung erläutert. Die Anwendung bezeichnet die gesamte in diesem Projekt erstellte Software. Sie benutzt \gls{Benutzerkonfiguration}en um einen Versuchsaufbau zu modellieren. Eine Messkonfiguration besteht aus Bausteinen(\gls{sensor}, \gls{transformation}, \gls{darstellung}) und deren Verbindungen untereinander. Die Bausteine können selbst wieder  durch eine \gls{konfigdata} eingestellt werden. Die Messkonfigurationen werden in dem Konfigurationsfeld erstellt. Außerdem können sie geladen und gespeichert werden. Beim Starten überprüft die Anwendung, ob eine gültige Messkonfiguration vorliegt. Um die resultierenden Daten und Graphen zu speichern, muss die Messung gestoppt werden.
+In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur Handhabung von Fehlern dargestellt. Zum besseren Verständnis werden noch einmal einige verwendete Begriffe und der generelle Ablauf einer Nutzung erläutert. Die Anwendung bezeichnet die gesamte in diesem Projekt erstellte Software. Sie benutzt \gls{Benutzerkonfiguration}en um einen Versuchsaufbau zu modellieren. Eine Messkonfiguration besteht aus Bausteinen(\gls{sensor}, \gls{transformation}, \gls{darstellung}) und deren Verbindungen untereinander. Die Bausteine können selbst wieder  durch eine \gls{konfigdata} eingestellt werden. Die Messkonfigurationen werden im Konfigurationsfeld erstellt. Außerdem können sie geladen und gespeichert werden. Beim Starten überprüft die Anwendung, ob eine gültige Messkonfiguration vorliegt. Um die resultierenden Daten und Graphen zu speichern, muss die Messung gestoppt werden.
 
 \subsection{Testfälle zur Nutzung der Anwendung}
 
@@ -852,7 +851,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Ausführen der Demo. Die Demo nutzt Daten aus einer Datei und benötigt keinen angeschlossenen \gls{RasPi}. Der Ablauf ist in Abbildung \ref{T020-Ablauf} zu sehen.
 
 \item []\textbf{Vorbedingung:} Die Anwendung ist gestartet worden. Zu Sehen ist das offene Hauptfenster mit leerem Konfigurationsfeld.
-\item []\textbf{Aktionen:} Der Benutzer öffnet die Messkonfigurationsdatei der Demo mit Hilfe der Ladefunktion der Systemleiste. Sobald die Messkonfiguration geladen ist, startet der Benutzer die Messung.
+\item []\textbf{Aktionen:} Der Benutzer öffnet die Messkonfigurationsdatei der Demo mithilfe der Ladefunktion der Systemleiste. Sobald die Messkonfiguration geladen ist, startet der Benutzer die Messung.
 \item []\textbf{Reaktionen:} Nach dem Laden ist die Messkonfiguration in dem Konfigurationsfeld sichtbar. Nach dem Starten der Messung sieht der Benutzer wie die Daten im Graph dargestellt werden.
 \item []\textbf{Nachbedingung:} Die Anwendung ist offen. Eine gültige Messkonfiguration ist in der Konfigurationsfeld geladen. Die Messung läuft ohne Fehler und die Ergebnisse werden richtig dargestellt.
 
@@ -912,7 +911,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Der Benutzer kann Messkonfigurationen laden, diese verändern und durch das Erstellen auf Gültigkeit prüfen. 
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \hyperlink{link-f230}{\textbf{F230}} füge Darstellung hinzu, \hyperlink{link-f470}{\textbf{F470}} Hilfe Bausteine
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \hyperlink{link-f230}{\textbf{F230}} füge Darstellung hinzu, \hyperlink{link-f470}{\textbf{F470}} Hilfe zu Bausteinen
 
 \end{itemize}
 
