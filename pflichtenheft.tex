@@ -160,7 +160,6 @@
 
 \newglossaryentry{Bausteinprototyp}{
 	name=Bausteinprototyp,
-	plural=Bausteinprototypen,
 	description={Baustein, von dem eine Kopie angelegt wird, wenn der Benutzer ein neues Baustein-Exemplar einem Entwurf hinzufügen möchte}
 }
 
@@ -204,7 +203,7 @@
 \clearpage
 \section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
 
-Die im Rahmen des \gls{osl2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel~\ref{zielbestimmung}). Die erhoffte Konsequenz ist, dass mehr Schüler für wissenschaftliche und technische Fächer motiviert werden.
+Die im Rahmen des \gls{osl2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel \ref{zielbestimmung}). Die erhoffte Konsequenz ist, dass mehr Schüler für wissenschaftliche und technische Fächer motiviert werden.
 Demzufolge kommt die Anwendung in Schulen zum Einsatz. 
 Die Zielgruppe sind Schüler in der siebten Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
 Die Anwendung läuft in einer \gls{JVM} und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). 
@@ -217,7 +216,7 @@ Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient 
 
 Die Anwendung soll es Lehrern ermöglichen, Schülern ab der siebten Klasse Grundkenntnisse der digitalen Messwerterfassung in einer für Schüler interessanten und motivierenden Art und Weise näher zu bringen. 
 
-In einem einfachen Versuchsaufbau sind die wesentlichen Schritte einer messtechnischen Verarbeitung die Folgenden: 
+In einem nicht etwas komplexeren Versuchsaufbau sind die wesentlichen Schritte einer messtechnischen Verarbeitung die Folgenden: 
 
 \begin{enumerate}
 	\item Abtastung der physikalischen Größen
@@ -228,7 +227,7 @@ In einem einfachen Versuchsaufbau sind die wesentlichen Schritte einer messtechn
 	
 \end{enumerate}
 
-Das projektierte Softwareprodukt soll die Schüler dabei unterstützen, die gängigen Schritte einer messtechnischen Verarbeitung zu definieren und zueinander in Beziehung zu setzen. Hierzu soll das Produkt \glspl{Konfigurationsbaustein} unterschiedlichen Typs anbieten, aus denen ein Schüler dann eine Messkonfiguration entwerfen kann. Die Konfigurationsbausteine sollen anpassbar sein, nicht nur um die Software für möglichst viele physikalische Fragestellungen einsetzen zu können, sondern auch um den Bedürfnissen unterschiedlicher Altersstufen gerecht zu werden. 
+Das projektierte Softwareprodukt soll die Schüler dabei unterstützen, die gängigen Schritte einer messtechnischen Verarbeitung zu definieren und zueinander in Beziehung zu setzen. Hierzu soll das Produkt \glspl{Konfigurationsbaustein} unterschiedlichen Typs anbieten, aus denen ein Schüler dann eine Messkonfiguration entwerfen kann. Die Konfigurationsbausteine sollen anpassbar sein, nicht nur um die Software für möglichst viele physikalische Fragestellungen einsetzen zu können sondern auch um den Bedürfnissen unterschiedlicher Altersstufen gerecht zu werden. 
 
 Natürlich soll dann auch der Betrieb der Messkonfiguration gesteuert werden können und das Produkt sollte eventuell auch Einblicke in Abläufe während des Betriebs unterstützen, beispielsweise zur Analyse unerwünschten Verhaltens.
 
@@ -238,7 +237,7 @@ Aus didaktischer Sicht überflüssige technische Details wie z. B. die zum Ausle
 Der Schüler wird so nicht überfordert, sondern soll ermutigt werden, selbstständig mit der Software umzugehen. 
 Dabei kann er im spielerischen Umgang mit Versuchsaufbauten Prinzipien der digitalen Messtechnik wie z. B. Kaskadierung und natürlich auch das Grundprinzip von Ursache und Wirkung erfahren.
 
-Es wird eine \gls{GrafBenOber} angeboten, die es dem Schüler ermöglicht, allein per \gls{dragdrop} eine Messkonfiguration zu entwerfen. 
+Es wird eine grafische Oberfläche angeboten, die es dem Schüler ermöglicht, allein per \gls{dragdrop} eine Messanordnung zu entwerfen. 
 Überflüssige Details, die dahinter stecken, bleiben vor dem Schüler verborgen.
 Die Anwendung motiviert den Schüler dazu, mit \glspl{sensor}, \glspl{transformation} und \glspl{darstellung} zu spielen und Dinge auszuprobieren. 
 Dabei wird ihm durch eine intuitive Status- und Fehleranzeige gezeigt, ob sein Entwurf funktioniert. 
@@ -251,7 +250,7 @@ Die Anwendung ermöglicht es dem Lehrer vor dem Unterricht, eine Reihe von Messv
 
 Weiter ermöglicht es die Anwendung, dass Schüler aus höheren Klassen mit mehr Details der digitalen Messwerterfassung zusammen gebracht werden. Diese nutzen keine oder nur eine abstrakt bzw. lückenhaft vorgefertigte Konfiguration. Sie können dann auch selbst einen Baustein modifizieren oder erstellen. Trotz des höheren Detailgrads bleibt die Anwendung übersichtlich und strukturiert. Damit bleiben auch komplexere Messversuche für den Schüler motivierend. 
 
-Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verstehen. Sie ermöglicht dem Nutzer, über eine übersichtliche, strukturierte und intuitive \gls{GrafBenOber} sowie über eine einfache Bedienung die Nutzung eines \gls{RasPi} mit \gls{PhyPiDAQ}. Dadurch soll dem Schüler digitale Messwerterfassung, Physik und auch Informatik in einer motivierenden Weise näher gebracht werden. Womöglich kann die Anwendung den Schüler auch für diese Themen begeistern.  
+Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verstehen. Sie ermöglicht dem Nutzer, über eine übersichtliche, strukturierte und intuitive GUI sowie über eine einfache Bedienung die Nutzung eines \gls{RasPi} mit \gls{PhyPiDAQ}. Dadurch soll dem Schüler digitale Messwerterfassung, Physik und auch Informatik in einer motivierenden Weise näher gebracht werden. Womöglich kann die Anwendung den Schüler auch für diese Themen begeistern.  
 
 \subsection{Begriffsdefinitionen}
 
@@ -268,17 +267,17 @@ Im Folgenden werden \gls{Musskriterien} (MK), \gls{Sollkriterien} (SK) und \gls{
 	
 	\item 
 	\begin{MussKrit} 			
-		Der Benutzer soll einen Baustein zur Messkonfiguration hinzufügen können, d.h. er soll einen Prototypen auswählen und das Bausteinexemplars auf der Konfigurationsfeld platzieren können. 
+		Der Benutzer soll einen Baustein zur Messkonfiguration hinzufügen können, d. h. er soll einen Prototypen auswählen und das Bausteinexemplars auf der Entwurfsfläche platzieren können. 
 	\end{MussKrit}
 	
 	\item 
 	\begin{MussKrit} 		
-		Der Benutzer soll die Baustein-Eigenschaften und die Position des Bausteins auf der Konfigurationsfeld nach seinen Wünschen anpassen können.
+		Der Benutzer soll die Baustein-Eigenschaften und die Position des Bausteins auf der Entwurfsfläche nach seinen Wünschen anpassen können.
 	\end{MussKrit}
 	
 	\item 
 	\begin{MussKrit} 			
-		Der Benutzer soll einen Baustein aus der Messkonfiguration entfernen können.
+		Der Benutzer soll einen Baustein aus der Konfiguration löschen können.
 	\end{MussKrit}
 	
 	\item 
@@ -305,7 +304,7 @@ Im Folgenden werden \gls{Musskriterien} (MK), \gls{Sollkriterien} (SK) und \gls{
 
 \subsection{Handhabung von Bausteinprototypen}
 
-Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wird einem \glspl{Bausteinprototyp} eine Kopie angelegt.
+Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wird einem \gls{Bausteinprototyp}en eine Kopie angelegt.
 
 \begin{itemize}
 	
@@ -314,7 +313,7 @@ Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wi
 		Der Benutzer kann die Eigenschaften eines Bausteinprototyps einsehen.
 	\end{SollKrit}
 	
-	\item Der Benutzer soll von allen Bausteintypen (Sensor, Transformation und Darstellung) neue Prototypen erstellen können. Dies kann auf zweierlei Art und Weise geschehen: 
+	\item Der Benutzer soll von allen Bausteintypen (Sensor, Transformation und Darstellung) neue Prototypen erstellen können. Dies kann auf zweierlei Art und Weise geschen: 
 	
 	\begin{itemize}
 		
@@ -378,7 +377,7 @@ Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wi
 		
 		\item 
 		\begin{MussKrit} 		
-			Sensorbausteine generischer Natur, beispielsweise für einen \newline Analog/Digital-Wandler, sowie bereits spezialisierte Sensorbausteine, beispielsweise für Licht, Temperatur oder Lage.	
+			Sensorbausteine generischer Natur, beispielsweise für einen Analog/Digital-Wandler, sowie bereits spezialisierte Sensorbausteine, beispielsweise für Licht, Temperatur oder Lage,	
 		\end{MussKrit} 
 		
 		\item 
@@ -443,7 +442,6 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 		Der Benutzer soll bei jedem Baustein den lokalen Datenfluss während eines Messlaufs aufzeichnen, einsehen und speichern können. 
 	\end{WunschKrit}
 		
-	\item
 	\begin{WunschKrit} 
 		Für einen Darstellungsbaustein wäre eine Druckfunktion für die von ihr generierte Darstellung wünschenswert. 
 	\end{WunschKrit}
@@ -458,7 +456,7 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 	
 	\item 
 	\begin{WunschKrit} 		
-		Die \gls{GUI} bietet als Sprache mindestens Deutsch an und muss leicht um weitere Sprachen ergänzt werden können. Sobald die Anwendung mehr als eine Sprache anbietet, kann der Benutzer die GUI von einer Sprache auf eine andere umstellen.	
+		Die Benutzungsoberfläche bietet als Sprache mindestens Deutsch an und muss leicht um weitere Sprachen ergänzt werden können. Sobald die Anwendung mehr als eine Sprache anbietet, kann der Benutzer die GUI von einer Sprache auf eine andere umstellen.	
 	\end{WunschKrit}
 	\item 
 	\begin{SollKrit}
@@ -466,17 +464,16 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 	\end{SollKrit}
 	\item 
 	\begin{SollKrit} 
-		Beim Entwurf einer Messkonfiguration soll der Benutzer die von ihm beabsichtigten Aktionen per Drag and Drop anstoßen können. Dies betrifft beispielsweise das Hinzufügen eines Konfigurationsbausteins oder das Erstellen einer Kante zwischen zwei Bausteinen.
+		Beim Entwurf einer Messkonfiguration soll der Benutzer die von ihm beabsichtigten Aktionen per Drag and Drop anstoßen können. Dies betrifft beispielsweise das Hinzufügen eines Konfigurationsbausteins oder das Erstellen einer Kante vom Ausgangs eines Bausteins mit dem Ausgang Baustein eines anderen Bausteins.
 	\end{SollKrit}
 	\item 
 	\begin{WunschKrit}
-		Da nicht immer alle Eingänge oder Ausgänge Verwendung finden, sollen nicht benötigte Eingänge oder Ausgänge bei einem Baustein bzw. Bausteinprotoyp ausgeblendet bzw. unsichtbar gemacht werden können. 
+		Da nicht immer alle Eingänge oder Ausgänge Verwendung finden müssen, sollen nicht benötigte Eingänge oder Ausgänge bei einem Baustein bzw. Bausteinprotoyp ausgeblendet bzw. unsichtbar gemacht werden können. 
 	\end{WunschKrit}
 	\item 
 	\begin{SollKrit}
 		Die Anwendung hält interaktiv zugängliche Erklärungen und Informationen zu den einzelnen GUI-Elementen bereit.
 	\end{SollKrit}
-	\item
 	\begin{SollKrit}
 		Die Anwendung soll, wo möglich, Fehlverhalten des Benutzers verhindern oder mit Hinweisen davor warnen. 
 	\end{SollKrit}
@@ -742,7 +739,7 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 	\hline
 	Robustheit & Durch eine robuste Anwendung sollen möglichst wenige Komplikationen während des Unterrichtes auftreten. Der Lehrer soll sich nicht mit Softwareproblemen beschäftigen müssen. Das Qualitätsmerkmal ist deshalb sehr wichtig, da von unvorhergesehenen Situationen, wie etwa Fehlbedienungen, ausgegangen werden muss.\\\cline{1-2}
 	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der Betrieb in der vorgesehenen Umgebung (siehe Kapitel \ref{produktumgebung}) gewährt werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die in einer erwarteten Umgebung bereits scheitert, nicht robust sein kann.\\\cline{1-2}
-	Benutzer-\newline freundlichkeit & Da die Anwendung einen wissensvermittelnden Auftrag hat, ist es sehr wichtig, dass die Anwendung für Schüler verständlich ist. Die Schüler sollen durch eine hohe Benutzerfreundlichkeit dazu angehalten werden, sich selbstständig mit den wissenschaftlichen Themen zu beschäftigen. Umgekehrt könnte das Fehlen eines hohen Grads an Benutzerfreundlichkeit ein Scheitern der Anwendung zur Folge haben.\\\cline{1-2}
+	Benutzer-\newline freundlichkeit & Da die Anwendung einen wissensvermittelnden Auftrag hat, ist es sehr wichtig, dass die Anwendung für Schüler verständlich ist. Die Schüler sollen durch eine hohe Benutzerfreundlichkeit dazu angehalten werden sich selbstständig mit den wissenschaftlichen Themen zu beschäftigen. Umgekehrt könnte das Fehlen von einem hohen Grad an Benutzerfreundlichkeit ein Scheitern der Anwendung zur Folge haben.\\\cline{1-2}
 	Sicherheit & Die Anwendung soll ausschließlich in einer sicheren Umgebung verwendet werden. Das bereits vorhandene Rechtssystem, des Bestriebssystems, sollte daher ausreichen. Das Qualitätsmerkmal ist somit unwichtig.\\\cline{1-2}
 	Erweiterbarkeit & Es ist angedacht die Anwendung um weitere Elemente, wie etwa Sensoren, erweitern zu können. Außerdem sollen Schüler eigene Transformationen erstellen und diese auch speichern können. Es ist daher wichtig, dass die Anwendung mit diesen Aufgaben umgehen kann.\\\cline{1-2}
 	Effizienz & Im Vergleich zu einem PC-System bietet ein Raspberry Pi lediglich beschränkte Ressourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Ressourcen maximieren. Das Qualitätsmerkmal ist somit wichtig.\\\cline{1-2}
@@ -828,7 +825,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Testziel:} Teste das Verhalten der Anwendung aus der Sicht eines Benutzers, der diese zum ersten Mal verwendet. Der Ablauf ist in Abbildung \ref{T010-Ablauf} zu sehen.
 
 \item []\textbf{Vorbedingung:} Die Anwendung ist installiert. Zu Sehen ist der Desktop des Benutzers mit einer Verknüpfung zur Anwendung.
-\item []\textbf{Aktion:} Der Benutzer öffnet die Anwendung über die Verknüpfung. Danach informiert er sich über die Anwendung über die Hilfe in der Systemleiste.
+\item []\textbf{Aktion:} Der Benutzer öffnet die Anwendung über die Verknüpfung. Danach informiert er sich über die Anwendung mittels der Hilfe.
 \item []\textbf{Reaktion:} Die Anwendung öffnet sich. Zu Sehen ist das Hauptfenster mit leerem Konfigurationsfeld und leeren Darstellungen. Nach dem Öffnen der Hilfe, sieht der Benutzer die nötigen Informationen zur Bedienung der Anwendung. 
 \item []\textbf{Nachbedingung:} Nach dem öffnen der Anwendung, überprüft diese, ob ein \gls{RasPi} angeschlossen ist. Jeder dargestellte Text ist auf Deutsch.
 
@@ -933,7 +930,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Aktionen:} Der Schüler startet die Messung. Während der Messung beeinflusst er die Daten durch einen Sensor. Am Ende der Messung speichert der Schüler den resultierenden Graphen und die Werte als Dateien ab.
 \item []\textbf{Reaktionen:} Nach dem Starten, sieht er, wie die Daten als Graphen dargestellt werden. Außerdem sieht er, wie diese durch seine Aktionen verändert werden. Die Ergebnisse der Messung sieht er nach dem Speichern als erstellte Dateien.
-\item []\textbf{Nachbedingung:} Die Anwendung prüft vor dem Starten der Messung, ob die Messkonfiguration gültig ist. Während die Messung läuft, werden die Daten verarbeitet und dargestellt unabhängig davon, ob der Schüler sie durch den Sensor beeinflusst. Die Ergebnisse sind zum Speichern verfügbar, sobald die Messung angehalten wurde.
+\item []\textbf{Nachbedingung:} Die Anwendung prüft vor dem Starten der Messung, ob die Messkonfiguration gültig ist. Während die Messung läuft, werden die Daten verarbeitet und dargestellt. Die Ergebnisse sind zum Speichern verfügbar, sobald die Messung angehalten wurde.
 
 
 \item []\textbf{Ergebnis:} Der Benutzer die Messung einer gültigen Messkonfiguration starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
@@ -1066,13 +1063,13 @@ Abbildung \ref{UseCaseDiagramm} zeigt die Use-Cases und deren Ablauf für das nu
 
 Das projektierte Gesamtsystem wird aller Voraussicht nach auf drei Systemprozesse verteilt sein, die wie in Abbildung \ref{DeploymentDiagram} dargestellt, miteinander Daten austauschen.
 
-Einer dieser drei Systemprozesse enthält die \gls{JVM}, auf der die zu erstellende Hauptkomponente läuft. Diese enthält wiederum die grafische Benutzungsoberfläche, mit deren Hilfe Benutzer  Messkonfigurationen entwerfen und den Betrieb von Messläufen steuern und überwachen können.
+Einer dieser drei Systemprozesse enthält die \gls{JVM}, auf der die zu erstellende Hauptkomponente läuft. Diese enthält wiederum die grafische \gls{GrafBenOber}, mit deren Hilfe Benutzer Messkonfigurationen entwerfen und den Betrieb von Messläufen steuern und überwachen können.
 
 Zum Ansteuern und Auslesen der Sensoren auf dem \gls{RasPi} wird das auf Python basierende Framework \gls{PhyPiDAQ} bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die \gls{JVM} ausgeführt werden kann, wird für PhyPiDAQ ein zweiter Systemprozess benötigt.
 
 Um Ressourcenknappheit auf dem \gls{RasPi} aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend so wie PhyPiDAQ auf dem \gls{RasPi} ausgeführt werden müssen. 
 
-Falls denn nun die Hauptkomponente tatsächlich auf einem anderen Rechner ausgeführt werden sollte, so muss sie mit dem Python-Interpreter hardware- bzw. plattformübergreifend Daten austauschen können. Bisher stellt PhyPiDAQ hierfür jedoch keine Funktionalität zur Verfügung. 
+Falls die Hauptkomponente tatsächlich auf einem anderen Rechner ausgeführt werden sollte, so muss sie mit dem Python-Interpreter hardware- bzw. plattformübergreifend Daten austauschen können. Bisher stellt PhyPiDAQ hierfür jedoch keine Funktionalität zur Verfügung. 
 
 Als Lösungsalternativen bieten sich hier die Kommunikation über eine Netzwerkschnittstelle wie z. B. WLAN und die Kommunikation über eine Peripherieschnittstelle wie z. B. USB an.
 
@@ -1115,7 +1112,7 @@ Ob es sich beispielsweise bei der verteilten Kommunikation um WLAN per Netzwerka
 
 \subsection{Ziel der Benutzeroberfläche}
 
-Das Ziel der Benutzeroberfläche ist es dem Anwender eine intuitive Benutzung des Programmes zu ermöglichen. Da das Programm im Schulbetrieb eingesetzt werden soll ist eine gute Verständlichkeit wichtig. So soll auch eine lange Einarbeitungszeit für den Anwender vermieden werden. Dabei soll keine Funktionalität verloren gehen.
+Das Ziel der Benutzeroberfläche ist es dem Anwender eine intuitive Benutzung des Programmes zu ermöglichen. Da das Programm im Schulbetrieb eingesetzt werden soll, ist eine gute Verständlichkeit wichtig. So soll auch eine lange Einarbeitungszeit für den Anwender vermieden werden. Dabei soll keine Funktionalität verloren gehen.
 
 \subsection{Generell}
 
@@ -1136,9 +1133,9 @@ Die Verwendung anderer Eingabegeräte ist nicht vorgesehen.
 	\end{center}
 \end{figure}
 
-Abbildung \ref{GUI_Grundlage} zeigt den Aufbau einer möglichen \gls{GrafBenOber}. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Programmfenster, die logische Unterteilung an.
+Abbildung \ref{GUI_Grundlage} zeigt den Aufbau einer möglichen Graphischen Benutzeroberfläche. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Programmfenster, die logische Unterteilung an.
 
-Das Design der Einzelnen Elemente kann sich im Verlauf der Anwendungsentwicklung ändern. Die Grundlegenden Bausteine der \gls{GrafBenOber} werden sich in ihrer Aufgabe nicht ändern. Zu ihnen gehören:
+Das Design der einzelnen Elemente kann sich im Verlauf der Anwendungsentwicklung ändern. Die Grundlegenden Bausteine der \gls{GrafBenOber} werden sich in ihrer Aufgabe nicht ändern. Zu ihnen gehören:
 
 \begin{itemize}
 	\item \glspl{sensor}
@@ -1216,7 +1213,10 @@ Im Konfigurationsfeld wird die in Bearbeitung befindliche Messkonfiguration des 
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.png} & Repräsentation einer \gls{transformation}. Jedem Eingang können durch Einfügen einer Verbindung Daten übergeben werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Verbindung.png} & Die Eingabe einer Transformation. Die Anzahl der verfügbaren Eingaben hängt von der Transformation ab.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Transformation.png} & Die Ausgabe einer Transformation. Die Anzahl der verfügbaren Ausgaben hängt von der Transformation ab.\newline\\\cline{1-2}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungspfeil.png} & Eine Verbindung zwischen zwei Elementen. Sie besitzt eine Richtung. Daten ''fließen'' also nicht in beide Richtungen.\newline\\
+
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungspfeil.png} & Eine Verbindung zwischen zwei Elementen. Sie besitzt eine Richtung. Daten ''fließen'' also nicht in beide Richtungen.\newline\\\cline{1-2}
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Darstellungsfenster } & Eine Darstellung erhält Daten und stellt diese grafisch da.\newline\\
+
 \end{tabular}
 
 \clearpage
