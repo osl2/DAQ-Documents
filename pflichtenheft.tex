@@ -1134,7 +1134,7 @@ Die Verwendung anderer Eingabegeräte ist nicht vorgesehen.
 	\end{center}
 \end{figure}
 
-Abbildung \ref{GUI_Grundlage} zeigt den Aufbau einer möglichen \gls{GrafBenOber}. Dabei geben die Zahlen in den roten Kästchen auf der rechten Seite die logische Unterteilung an.
+Abbildung \ref{GUI_Grundlage} zeigt den Aufbau einer möglichen \gls{GrafBenOber}. Dabei geben die Zahlen in den roten Kästchen auf der rechten Seite die logische Unterteilung an: Systemmenüleiste (1), Auswahl (2), Konfigurationsfeld (3)
 
 Das Design der einzelnen Elemente und deren Layout kann sich im Verlauf der Anwendungsentwicklung ändern. Die grundlegenden Bausteine der \gls{GrafBenOber} werden sich in ihrer Aufgabe nicht ändern. Zu ihnen gehören:
 
@@ -1143,8 +1143,6 @@ Das Design der einzelnen Elemente und deren Layout kann sich im Verlauf der Anwe
 	\item \glspl{transformation}
 	\item \glspl{darstellung}
 \end{itemize}
-
-Die zu dem jeweiligen logischen Teil gehörenden Elemente sollen im folgenden erklärt werden.
 
 \subsection{Element Beschreibungen}
 
@@ -1166,18 +1164,18 @@ In der Auswahl befinden sich Funktionen, die das Bearbeiten des Konfigurationsfe
 \begin{tabular}[t]{p{1cm} p{10cm}} %Auswahlelemente Teil 1
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Datei.png} & Der Benutzer hat die Möglichkeit Dateien zu bearbeiten. Die wichtigsten Funktionen sind:
 	\begin{itemize} 
-		\item Das anlegen einer neuen Datei
-		\item Das Speichern der aktuellen Datei
-		\item Das Öffnen einer bereits erstellten Datei
+		\item Anlegen einer neuen Datei
+		\item Speichern der aktuellen Datei
+		\item Öffnen einer bereits erstellten Datei
 	\end{itemize}\\
 \end{tabular}
 
 \begin{tabular}[t]{p{1cm} p{10cm}} %Auswahlelemente Teil 2
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Bearbeiten.png} & Der Benutzer hat die Möglichkeit den Inhalt der aktuell geöffneten Datei zu bearbeiten. Die wichtigsten Funktionen sind:
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Bearbeiten.png} & Der Benutzer hat die Möglichkeit, den Inhalt der aktuell geöffneten Datei zu bearbeiten. Die wichtigsten Funktionen sind:
 	\begin{itemize} 
-		\item Das Kopieren eines ausgewählten Objektes
-		\item Das Einfügen eines gespeicherten Objektes
-		\item Das Anpassen eines ausgewählten Elements. Diese Einstellungsmöglichkeiten sind von dem Objekt abhängig.
+		\item Kopieren eines ausgewählten Objektes
+		\item Einfügen eines gespeicherten Objektes
+		\item Anpassen eines ausgewählten Elements. Diese Einstellungsmöglichkeiten sind von dem Objekt abhängig.
 	\end{itemize}
 \end{tabular}
 
@@ -1193,8 +1191,8 @@ In der Auswahl befinden sich Funktionen, die das Bearbeiten des Konfigurationsfe
 \begin{tabular}[t]{p{1cm} p{10cm}} %Auswahlelemente Teil 5
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Optionen.png} & Der Benutzer kann sich eine Auswahl an Optionen anzeigen lassen. Beispiele hierfür sind
 	\begin{itemize} 
-		\item Das Ändern von angezeigten Farben
-		\item Das Erweitern der Transformations- und Darstellungsauswahl
+		\item das Ändern von angezeigten Farben
+		\item das Erweitern der Transformations- und Darstellungsauswahl
 	\end{itemize}\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Hilfe.png} & Der Benutzer kann sich eine allgemeine Hilfe anzeigen lassen. In der Hilfe werden die Funktionen der Anwendung erklärt.\newline
 \end{tabular}
