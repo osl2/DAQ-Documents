@@ -52,8 +52,8 @@
 }
 
 \newglossaryentry{dragdrop}{
-	name=Drag-and-Drop,
-	description={Methode, um mit graphischen Benutzeroberflächen zu interagieren. Dabei wird ein Objekt erst mit der Maus festgehalten und an einen anderen Ort gezogen. Durch das Lösen der Maustaste wird das Objekt platziert}
+	name=Drag and Drop,
+	description={Methode, um mit grafischen Benutzeroberflächen zu interagieren. Dabei wird ein Objekt erst mit der Maus festgehalten und an einen anderen Ort gezogen. Durch das Lösen der Maustaste wird das Objekt platziert}
 }
 
 \newglossaryentry{click}{
@@ -64,7 +64,7 @@
 \newglossaryentry{transformation}{
 	name=Transformation,
 	plural={Transformationen},
-	description={Erzeugen eines Datenstroms unter Verwendung von einem oder mehreren bereits vorhandenen Datenströmen. Eine Transformation kann durch mathematische Funktion realisiert werden}
+	description={Bausteine vom Typ Transformation haben einen oder mehrere Eingänge sowie einen oder mehrere Ausgänge. Für jeden Ausgang kann  ein Transformationsbaustein eine Vorschrift zur Berechnung eines Ausgangswertes aus einem Satz von Eingangswerten beinhalten. Eine Berechnungsvorschrift soll durch eine mathematische und logische Funktionen oder durch eine programmtechnisch definierte Verarbeitung definiert werden können}
 }
 
 \newglossaryentry{konfigdata}{
@@ -76,7 +76,7 @@
 \newglossaryentry{sensor}{
 	name=Sensor,
 	plural={Sensoren},
-	description={Ein Sensor erfasst Messwerte physikalischer Größen. In einer Messkonfiguration stellen sie die Eingangspunkte dar}
+	description={Der Begriff ,,Sensor`` bezeichnet ein technisches Bauteil, welches phyiskalische Eigenschaften als Messwerte erfasst. In der Anwendung werden diese Sensoren abstrahiert als Bausteine präsentiert. Ein solcher (logischer) Sensorbaustein muss alle Informationen referenzieren können, die zum Ansprechen eines tatsächlichen Sensors benötigt werden. Da ein Messgerät Ausgänge bzw. Messkanäle haben kann, muss ein Sensorbaustein mindestens einen oder auch mehrere Ausgänge haben. Eingänge besitzt ein Sensorbaustein nicht}
 }
 
 \newglossaryentry{messdaten}{
@@ -87,7 +87,7 @@
 \newglossaryentry{darstellung}{
 	name=Darstellung,
 	plural={Darstellungen},
-	description={Gibt Daten aus eingehendem Datenstrom graphisch wieder}
+	description={Bausteine vom Typ Darstellung haben einen oder mehrere Eingänge. Ein Darstellungsbaustein soll definieren können, wie ein Satz von Eingangswerten die Erstellung bzw. Aktualisierung einer Darstellung beeinflusst. Ausgänge besitzt ein Darstellungsbaustein nicht}
 }
 
 \newglossaryentry{python3}{
@@ -101,8 +101,9 @@
 }
 
 \newglossaryentry{DSGVO}{
-	name=Datenschutz-Grundverordnung,
-	description ={kurz DSGVO, Verordnung der Europäischen Union vom 25. Mai 2018}
+	name=DSGVO,
+	first={Datenschutz-Grundverordnung (DSGVO)},
+	description ={Verordnung der Europäischen Union vom 25. Mai 2018}
 }
 
 \newglossaryentry{Musskriterien}{
@@ -155,6 +156,12 @@
 \newglossaryentry{Benutzerkonfiguration}{
 	name =Messkonfiguration,
 	description ={Gerichteter zyklenfreier Graph mit Knoten vom Typ Sensor, Transformation oder Darstellung. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellungen keine Ausgangskanten haben dürfen}
+}
+
+\newglossaryentry{Baustein}{
+	name=Baustein,
+	plural=Bausteine,
+	description={Bausteine sind grafische Elemente, die entweder einen Sensor, eine Transformation oder eine Darstellung repräsentieren. Bausteine können Aus- und Eingänge besitzen, anhand welcher sie mit anderen Bausteinen verbunden werden können}
 }
 
 \newglossaryentry{Bausteinprototyp}{
@@ -225,9 +232,9 @@ Aus didaktischer Sicht überflüssige technische Details wie z. B. die zum Ausle
 Der Schüler wird so nicht überfordert, sondern soll ermutigt werden, selbstständig mit der Software umzugehen. 
 Dabei kann er im spielerischen Umgang mit Versuchsaufbauten Prinzipien der digitalen Messtechnik wie z. B. Kaskadierung und natürlich auch das Grundprinzip von Ursache und Wirkung erfahren.
 
-Es wird eine graphische Oberfläche angeboten, die es dem Schüler ermöglicht, allein per Drag and Drop eine Messanordnung zu entwerfen. 
+Es wird eine grafische Oberfläche angeboten, die es dem Schüler ermöglicht, allein per \gls{dragdrop} eine Messanordnung bestehend aus \glspl{Baustein}\textit{n} zu entwerfen. 
 Überflüssige Details, die dahinter stecken, bleiben vor dem Schüler verborgen.
-Die Anwendung motiviert den Schüler dazu, mit Sensoren, Transformationen und Darstellungen zu spielen und Dinge auszuprobieren. 
+Die Anwendung motiviert den Schüler dazu, mit \glspl{sensor}, \glspl{transformation} und \glspl{darstellung} zu spielen und Dinge auszuprobieren. 
 Dabei wird ihm durch eine intuitive Status- und Fehleranzeige gezeigt, ob sein Entwurf funktioniert. 
 Wenn nicht, dann hilft sie ihm das Problem einzugrenzen und gibt Hinweise zur Problembehebung. 
 Eine lästige Fehlersuche soll dem Schüler weitestgehend erspart bleiben. 
@@ -242,26 +249,11 @@ Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verst
 
 \subsection{Einige hilfreiche Begriffsdefinitionen}
 
-Im Folgenden werden \gls{Musskriterien}, \gls{Sollkriterien} und \gls{Wunschkriterien} zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittlerer und niedriger Priorität betrieben. Musskriterien werden mit MK, Sollkriterien werden mit SK, Wunschkriterien werden mit WK abgekürzt.
+Im Folgenden werden \gls{Musskriterien} (MK), \gls{Sollkriterien} (SK) und \gls{Wunschkriterien} (WK) zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittlerer und niedriger Priorität betrieben.
 
 \newtheorem{MussKrit}{MK}
 \newtheorem{SollKrit}{SK}
 \newtheorem{WunschKrit}{WK}
-
-Für die Beschreibung der Kriterien ist es hilfreich, ein paar grundsätzliche Überlegungen vorzunehmen, wie Bausteine geartet sein müssen, um eine (Teil-)Aufgabe erfüllen zu können. Denn es macht Sinn, gänzlich unterschiedliche Teilaufgaben dann auch von Bausteinen unterschiedlichen Typs erledigen zu lassen bzw. im Umkehrschluss ähnliche Teilaufgaben jeweils einen bestimmten Bausteintyp vorzusehen.
-
-\begin{itemize}
-	
-	\item Bausteine vom Typ Sensor haben nur Ausgänge. Ein solcher (logischer) Sensorbaustein muss alle Informationen referenzieren können, die zum Ansprechen eines Messgeräts bzw. physikalischen Sensors benötigt werden. Da ein Messgerät Ausgänge bzw. Messkanäle haben kann, kann ein Sensorbaustein mehrere Ausgänge haben. Eingänge besitzt ein Sensorbaustein nicht. 
-	
-	\item Bausteine vom Typ Transformation haben einen oder mehrere Eingänge sowie einen oder mehrere Ausgänge. Für jeden Ausgang kann  ein Transformationsbaustein eine Vorschrift zur Berechnung eines Ausgangswertes aus einem Satz von Eingangswerten beinhalten. Eine Berechnungsvorschrift soll durch eine mathematische Funktionen oder durch eine programmtechnisch definierte Verarbeitung definiert werden können.
-	
-	\item Bausteine vom Typ Darstellung haben einen oder mehrere Eingänge. Ein Darstellungsbaustein soll definieren können, wie ein Satz von Eingangswerten die Erstellung bzw. Aktualisierung einer Darstellung beeinflusst. Ausgänge besitzt ein Darstellungsbaustein nicht.
-	
-\end{itemize}
-
-
-
 
 
 \subsection{Entwurf von Messkonfigurationen}
@@ -565,9 +557,9 @@ Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung de
 \subsubsection{Menüfeld}
 
 \begin{description}
-\hypertarget{link-f050}{\item[F050]} Es gibt eine graphische Auswahl an vordefinierten \glspl{sensor}.
-\hypertarget{link-f060}{\item[F060]} Es gibt eine graphische Auswahl an vordefinierten \glspl{transformation}.
-\hypertarget{link-f070}{\item[F070]} Es gibt eine graphische Auswahl an vordefinierten \glspl{darstellung}.
+\hypertarget{link-f050}{\item[F050]} Es gibt eine grafische Auswahl an vordefinierten \glspl{sensor}.
+\hypertarget{link-f060}{\item[F060]} Es gibt eine grafische Auswahl an vordefinierten \glspl{transformation}.
+\hypertarget{link-f070}{\item[F070]} Es gibt eine grafische Auswahl an vordefinierten \glspl{darstellung}.
 \hypertarget{link-f080}{\item[F080] }Der Benutzer erhält durch visuelle Repräsentationen der Konfigurationsbausteine eine Darstellung ihrer Komplexität.
 \end{description}
 
@@ -908,7 +900,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \item []\textbf{Aktionen:} Der Schüler lädt über die Systemleiste die Messkonfiguration der Aufgabe. Danach informiert er sich über die Sensoren, Transformationen und Darstellungen über die angebotene Hilfestellungen. Als Nächstens vollendet er die Messkonfiguration.
  
-\item []\textbf{Reaktionen:} Nach dem Laden sieht der Schüler die Messkonfiguration in dem Konfigurationsfeld. Wenn der Schüler die Hilfe aufruft, bekommt er die wesentlichen Informationen die er zur Verwendung der Anwendung braucht. Weiter sieht er, wie sich die graphische Darstellung der Messkonfiguration durch seine Aktionen verändert. 
+\item []\textbf{Reaktionen:} Nach dem Laden sieht der Schüler die Messkonfiguration in dem Konfigurationsfeld. Wenn der Schüler die Hilfe aufruft, bekommt er die wesentlichen Informationen die er zur Verwendung der Anwendung braucht. Weiter sieht er, wie sich die grafische Darstellung der Messkonfiguration durch seine Aktionen verändert. 
 \item []\textbf{Nachbedingung:} Die Anwendung prüft beim Laden der Messkonfiguration, ob die Sensoren angeschlossen sind. 
 
 
@@ -1071,7 +1063,7 @@ Einer dieser drei Systemprozesse enthält die \gls{JVM}, auf der die zu erstelle
 
 Zum Ansteuern und Auslesen der Sensoren auf dem \gls{RasPi} wird das auf Python basierende Framework \gls{PhyPiDAQ} bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die \gls{JVM} ausgeführt werden kann, wird für PhyPiDAQ ein zweiter Systemprozess benötigt.
 
-Um Ressourcenknappheit auf dem \gls{RasPi} aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend ebenso auf dem \gls{RasPi} ausgeführt werden müssen. 
+Um Ressourcenknappheit auf dem \gls{RasPi} aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend so wie PhyPiDAQ auf dem \gls{RasPi} ausgeführt werden müssen. 
 
 Falls denn nun die Hauptkomponente tatsächlich auf einem anderen Rechner ausgeführt werden sollte, so muss sie mit dem Python-Interpreter hardware- bzw. plattformübergreifend Daten austauschen können. Bisher stellt PhyPiDAQ hierfür jedoch keine Funktionalität zur Verfügung. 
 
@@ -1090,7 +1082,7 @@ Abbildung \ref{DeploymentDiagram} stellt die Verteilung der Systemkomponenten au
 
 Da sich PhyPiDAQ und Measurement-Server in jedem Fall auf derselben Plattform befinden, kann die Kommunikation zwischen den beiden Instanzen invariant unter Zuhilfenahme einer von Linux gegebenen  Inter-Prozess-Kommunikation erfolgen, beispielsweise mittels einer Verknüpfung von Standard-Eingabe und Standard-Ausgabe über eine ,,Pipe``.
 
-Measurement-Server und Hauptkomponente befinden sich im Kontrast hierzu jedoch nicht zwingend auf derselben Plattform. Es besteht das Risiko, dass sich nicht wenige Code-Fragmente für den Datenaustausch bei den beiden Szenarien stark unterscheiden, beispielsweise in Bezug auf die zeitliche Koordination im anwendungsspezifischen Protokollablauf. Softwaretechnisch ist es deshalb Best-Practice, eine leichte Austauschbarkeit der Implementierungsvarianten sicherzustellen, indem man diese hinter einer invarianten Schnittstelle verbirgt, so wie im Klassendiagramm \ref{ClassDiagram} dargestellt.
+Measurement-Server und Hauptkomponente befinden sich im Kontrast hierzu jedoch nicht zwingend auf derselben Plattform. Es besteht das Risiko, dass sich nicht wenige Code-Fragmente für den Datenaustausch bei den beiden Szenarien stark unterscheiden, beispielsweise in Bezug auf die zeitliche Koordination im anwendungsspezifischen Protokollablauf. Softwaretechnisch ist es deshalb das beste Vorgehen, eine leichte Austauschbarkeit der Implementierungsvarianten sicherzustellen, indem man diese hinter einer invarianten Schnittstelle verbirgt, so wie im Klassendiagramm \ref{ClassDiagram} dargestellt.
 
 Ob es sich beispielsweise bei der verteilten Kommunikation um WLAN per Netzwerkadapter und bei der Stand-Alone-Kommunikation um WLAN per Local-Loop handelt, oder ob es sich (ebenso beispielsweise) bei der verteilten Kommunikation um USB und bei der Stand-Alone-Kommunikation um IPC handelt, sollte spätestens zu Beginn der Implementierungsphase entschieden werden.  
 
@@ -1268,11 +1260,11 @@ Für die Fehlermeldungen könnten eigene Fenster erscheinen. Abbildung \ref{fehl
 
 \subsection{Risikomanagement}
 
-Beim Herstellungsprozess einer Software gibt es viele Risiken, die zu berücksichtigen sind. Wir haben die Auftrittswahrscheinlichkeit, die Kosten für Vorsichtsmaßnahmen und die möglichen Auswirkungen auf \hyperref[funktionale]{Funktionalität}  und \hyperref[quali]{Qualität} unserer Anwendung gegeneinander abgewogen und uns damit für das folgende Risikomanagement entschieden. 
+Beim Herstellungsprozess einer Software gibt es viele Risiken, die zu berücksichtigen sind. Wir haben bezüglich einiger Worst-Case-Szenarien die vermutete Auftrittswahrscheinlichkeit, die Kosten für Vorsichtsmaßnahmen und die möglichen negativen Auswirkungen auf \hyperref[funktionale]{Funktionalität}  und \hyperref[quali]{Qualität} unserer Anwendung gegeneinander abgewogen und uns damit für das folgende Risikomanagement entschieden. 
 
-In der Planungsphase sticht vor allem das Risiko hervor, dass wir uns zu viel vornehmen und den resultierenden Aufwand in späteren Projektphasen, unterschätzen. Unsere Gegenmaßnahme dafür ist die Einteilung der Kriterien. Wir setzen nur die Features als Musskriterien, die unbedingt in der Software enthalten sein müssen. Der Rest ist als Soll- oder Wunschkriterien optional.
+In der Planungsphase sticht vor allem das Risiko hervor, dass wir uns zu viel vornehmen und den resultierenden Aufwand in späteren Projektphasen, unterschätzen. Unsere Gegenmaßnahme dafür ist die Einteilung der Kriterien in Prioritätsklassen. Wir setzen nur die Features als Musskriterien, die unbedingt in der Software enthalten sein müssen. Der Rest ist als Soll- oder Wunschkriterien optional.
  
-In der Entwurfsphase ist das größte Risiko, dass unsere Entwürfe später nicht funktionieren. Ob dies der Fall ist, wird hauptsächlich in der Qualitätssicherungsphase deutlich. Unsere Gegenmaßnahme dazu ist ein Fallbackplan für wichtige Entscheidungen der Planungsphase. Diese Pläne werden wir in der Entwurfsphase berücksichtigen. Dazu zählt z.B. der Fallbackplan, dass unsere Anwendung auch auf einem Desktop-Computer laufen kann, falls die Hardware des \gls{RasPi} nicht ausreicht.
+In der Entwurfsphase ist das größte Risiko, dass in der Qualitätssicherungsphase bei Integrationstests unvorhergesehene Probleme auftauchen und unsere Entwürfe für dann notwendige Fall-Backs oder Work-Arounds zu unflexibel. Unsere Gegenmaßnahme dazu ist ein Fallback-Plan für wichtige Entscheidungen der Definitionsphase. Diese Pläne werden wir in der Entwurfsphase berücksichtigen. Dazu zählt z.B. der Fallbackplan, dass unsere Anwendung auch auf einem Desktop-Computer laufen kann, falls die Hardware des \gls{RasPi} nicht ausreicht.
  
 In der Implementierungsphase ist das Hauptrisiko das Implementieren von Fehlern. Unsere Gegenmaßnahme hierzu ist eine gute Testabdeckung, um das Risiko von Fehlern zu minimieren.
  
