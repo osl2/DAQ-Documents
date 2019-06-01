@@ -1205,14 +1205,6 @@ Eine Erweiterungsmöglichkeit wäre das Einfügen eines Startbildschirmes vor de
 Für die Fehlermeldungen könnten eigene Fenster erscheinen. Abbildung \ref{fehlerfenster} zeigt ein mögliches Design. Für unterschiedliche Fehler könnten unterschiedliche Designs verwendet werden.
 
 \clearpage
-\section{Spezielle Anforderungen}\label{entwicklungsumgebung}
-
-Für die Umsetzung des Projekts ist Zugang zu funktionierender Hardware (konkret: mindestens ein \gls{RasPi}, möglichst mehrere \glspl{sensor}, Peripheriegeräte) notwendig, um die Funktionalität des Produkts sicherzustellen.\newline
-Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen werden.
-
-Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in PhyPiDAQ fehlerhaft sind können möglicherweise nicht korrekt implementiert werden. PhyPiDAQ sollte beispielsweise im Fall eines Programmfehlers eindeutige Fehlercodes produzieren, damit der Benutzer aussagekräftig über das Problem informiert werden kann.
-
-\clearpage
 \section{Zeit- und Ressourcenplanung}\label{zeit}
 
 \subsection{Projektphasen}
@@ -1232,9 +1224,14 @@ Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in Ph
 
 \subsection{Risikomanagement}
 
-In jeder Phase treten unterschiedliche Risiken auf.
-
 Das Ausfallen eines Teammitglieds durch Krankheit oder anderen Gründen ist ein bedeutendes Risiko. In diesem Fall muss die zusätzliche Arbeit gerecht auf die anderen Teilnehmer verteilt werden. Eventuell können dadurch einzelne Kriterien und Anforderungen nicht mehr zufriedenstellend erfüllt werden.
+
+\subsection{Spezielle Anforderungen}\label{entwicklungsumgebung}
+
+Für die Umsetzung des Projekts ist Zugang zu funktionierender Hardware (konkret: mindestens ein \gls{RasPi}, möglichst mehrere \glspl{sensor}, Peripheriegeräte) notwendig, um die Funktionalität des Produkts sicherzustellen.\newline
+Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen werden.
+
+Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in PhyPiDAQ fehlerhaft sind können möglicherweise nicht korrekt implementiert werden. PhyPiDAQ sollte beispielsweise im Fall eines Programmfehlers eindeutige Fehlercodes produzieren, damit der Benutzer aussagekräftig über das Problem informiert werden kann.
 
 \clearpage
 \section{Glossar}\label{glossar}
