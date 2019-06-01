@@ -553,49 +553,49 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 \clearpage
 \section{Funktionale Anforderungen}\label{funktionale}
 
-
+Funktionale Anforderungen enthalten eine genaue und detaillierte Beschreibung der Produktfunktionen. Diese Produktfunktionen legen fest, was die Anwendung tun soll.
 
 
 \subsection{GUI} % Glossarverweise in Überschriften besser vermeiden
 
 \begin{itemize}
-\item[F010] Die Benutzer erreichen nach Öffnung der Anwendung direkt die \gls{GUI}.
-\item[F020] Die Anwendung ist konfigurierbar. 
-\item[F030] Die Anwendung besitzt eine Dateiverwaltung.
-\item[F040] Die Anwendung bietet eine Hilfe-Oberfläche.
+\item[\textbf{F010}] Die Benutzer erreichen nach Öffnung der Anwendung direkt die \gls{GUI}, welche aus Menüleiste, Kofigurationsfeld und Darstellungsfeld besteht.
+\item[\textbf{F020}] Die Anwendung ist über Optionen konfigurierbar. 
+\item[\textbf{F030}] Die Anwendung besitzt eine Dateiverwaltung.
+\item[\textbf{F040}] Die Anwendung bietet eine Hilfe-Oberfläche.
 \end{itemize}
 
 \subsubsection{Menüfeld}
 
 \begin{itemize}
-\item[F050] Es gibt eine graphische Auswahl an vordefinierten \glspl{sensor}.
-\item[F060] Es gibt eine graphische Auswahl an vordefinierten \glspl{transformation}.
-\item[F070] Es gibt eine graphische Auswahl an vordefinierten \glspl{darstellung}.
-\item[F080] Der Benutzer erhält durch visuelle Repräsentationen der Konfigurationsbausteine eine Darstellung ihrer Komplexität.
+\item[\textbf{F050}] Es gibt eine graphische Auswahl an vordefinierten \glspl{sensor}.
+\item[\textbf{F060}] Es gibt eine graphische Auswahl an vordefinierten \glspl{transformation}.
+\item[\textbf{F070}] Es gibt eine graphische Auswahl an vordefinierten \glspl{darstellung}.
+\item[\textbf{F080}] Der Benutzer erhält durch visuelle Repräsentationen der Konfigurationsbausteine eine Darstellung ihrer Komplexität.
 \end{itemize}
 
 \subsubsection{Optional: Zusätzliche Funktionen im Menüfeld}
 
 \begin{itemize}
 
-\item[F090] Der Benutzer soll in F050 weitere Sensoren hinzufügen können.
-\item[F100] Der Benutzer soll in F060 weitere Transformation hinzufügen können.
-\item[F110] Die Transformationen in F100 sollen in eigenen Python-Skripten geschrieben werden können.
+\item[\textbf{F090}] Der Benutzer soll in F050 weitere Sensoren hinzufügen können.
+\item[\textbf{F100}] Der Benutzer soll in F060 weitere Transformation hinzufügen können.
+\item[\textbf{F110}] Die Transformationen in F100 sollen in eigenen Python-Skripten geschrieben werden können.
 \end{itemize}
 
 \subsubsection{Konfigurationsfeld}
 
 \begin{itemize}
-\item[F120] Durch \gls{dragdrop} kann der Benutzer \glspl{Konfigurationsbaustein} im Konfigurationsfeld platzieren.
-\item[F130] Der Benutzer kann eine Messung starten.
+\item[\textbf{F120}] Durch \gls{dragdrop} kann der Benutzer \glspl{Konfigurationsbaustein} im Konfigurationsfeld platzieren.
+\item[\textbf{F130}] Der Benutzer kann eine Messung starten.
 \end{itemize}
 
 
 \subsubsection{Darstellungsfenster}
 
 \begin{itemize}
-\item[F140] Das Darstellungsfenster ist bei der Initialisierung der Anwendung leer.
-\item[F150] Durch die \gls{Benutzerkonfiguration} im Konfigurationsfeld wird durch F130 automatisch die Darstellungsart im Darstellungsfenster geöffnet.
+\item[\textbf{F140}] Das Darstellungsfenster ist bei der Initialisierung der Anwendung leer.
+\item[\textbf{F150}] Durch die \gls{Benutzerkonfiguration} im Konfigurationsfeld wird durch F130 automatisch die Darstellungsart im Darstellungsfenster geöffnet.
 \end{itemize}
 
 
@@ -604,17 +604,17 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F160] Über F030 kann der Benutzer eine gespeicherte \gls{Benutzerkonfiguration} öffnen oder alte Messwerte verwenden.
-\item[F170] Durch F160 geladene Konfigurationen und Messdaten werden automatisch nach Format überprüft.
-\item[F180] Aus F050 kann der Benutzer Sensoren durch \gls{dragdrop} in das Konfigurationsfeld ziehen.
-\item[F190] Die Anwendung sollte automatisch überprüfen, ob der ausgewählte Sensor richtig angeschlossen ist.
-\item[F200] Durch F190 wird dem Benutzer automatisch eine visuelle Rückmeldung gegeben.
-\item[F210] Aus F060 kann der Benutzer eine oder mehrere Transformationen durch \gls{dragdrop} in das Konfigurationsfeld ziehen.
-\item[F220] Die ausgewählten Transformationen kann der Benutzer mit einem ausgewählten Sensor verknüpfen.
-\item[F230] Aus F070 kann der Benutzer eine Darstellungsart per \gls{dragdrop} in das Konfigurationsfeld zu ziehen.
-\item[F240] Die Ausgewählte Darstellung kann der Benutzer mit einer Transformation verknüpfen.
-\item[F250] Über F030 kann der Benutzer seine eigene\gls{Benutzerkonfiguration} speichern.
-\item[F260] Konfigurationsbausteine können durch \gls{dragdrop} in die Menüleiste wieder aus dem Konfigurationsfeld entfernt werden.
+\item[\textbf{F160}] Über F030 kann der Benutzer eine gespeicherte \gls{Benutzerkonfiguration} öffnen oder alte Messwerte verwenden.
+\item[\textbf{F170}] Durch F160 geladene Konfigurationen und Messdaten werden automatisch nach Format überprüft.
+\item[\textbf{F180}] Aus F050 kann der Benutzer Sensoren durch \gls{dragdrop} in das Konfigurationsfeld ziehen.
+\item[\textbf{F190}] Die Anwendung sollte automatisch überprüfen, ob der ausgewählte Sensor richtig angeschlossen ist.
+\item[\textbf{F200}] Durch F190 wird dem Benutzer automatisch eine visuelle Rückmeldung gegeben.
+\item[\textbf{F210}] Aus F060 kann der Benutzer eine oder mehrere Transformationen durch \gls{dragdrop} in das Konfigurationsfeld ziehen.
+\item[\textbf{F220}] Die ausgewählten Transformationen kann der Benutzer mit einem ausgewählten Sensor verknüpfen.
+\item[\textbf{F230}] Aus F070 kann der Benutzer eine Darstellungsart per \gls{dragdrop} in das Konfigurationsfeld zu ziehen.
+\item[\textbf{F240}] Die Ausgewählte Darstellung kann der Benutzer mit einer Transformation verknüpfen.
+\item[\textbf{F250}] Über F030 kann der Benutzer seine eigene\gls{Benutzerkonfiguration} speichern.
+\item[\textbf{F260}] Konfigurationsbausteine können durch \gls{dragdrop} in die Menüleiste wieder aus dem Konfigurationsfeld entfernt werden.
 
 \end{itemize}
 
@@ -622,8 +622,8 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F270] Die Anwendung besitzt eine Check-Funktion, welche die \gls{Benutzerkonfiguration} auf Vollständigkeit und Korrektheit kontrolliert
-\item[F280] Durch F270 wird durch visuelle Rückmeldung dargestellt,ob die Konfiguration verwendet werden kann.
+\item[\textbf{F270}] Die Anwendung besitzt eine Check-Funktion, welche die \gls{Benutzerkonfiguration} auf Vollständigkeit und Korrektheit kontrolliert
+\item[\textbf{F280}] Durch F270 wird durch visuelle Rückmeldung dargestellt,ob die Konfiguration verwendet werden kann.
 
 \end{itemize}
 
@@ -631,30 +631,30 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F290] Der Benutzer kann Messlänge und die Wertebereiche einer Messung festlegen.
-\item[F300] Der Benutzer kann eine Messung nach der \gls{Benutzerkonfiguration} starten.
-\item[F310] Bei F300 wird automatisch überprüft ob die \gls{Benutzerkonfiguration} eine sinnvolle Kombination von Sensoren, Transformationen und Darstellungen ist.
-\item[F320] Durch F300 wird automatisch mit der visuellen Darstellung der Messdaten begonnen.
-\item[F330] Der Benutzer kann eine Messung löschen.
-\item[F340] Bei F330 wird die Messung gestoppt und die visuelle Darstellung auf den Ausgangszustand gebracht.
-\item[F350] Durch F330 wird nicht die \gls{Benutzerkonfiguration} gelöscht.
-\item[F360] Durch F330 muss der Benutzer erst die Messung starten um weiter zu messen.
-\item[F370] Der Benutzer kann eine Messung pausieren.
-\item[F380] Der Benutzer kann eine Messung fortsetzen.
-\item[F390] Der Benutzer kann eine Messung durch F380 nur fortsetzen, wenn sie zuvor durch F370 pausiert wurde.
-\item[F400] Der Benutzer kann die Messdaten speichern.
-\item[F410] Der Benutzer kann den durch die Messung erzeugten Graphen speichern.
-\item[F420] Bei F400 und F410 öffnet sich automatisch das Verzeichnis und der Benutzer muss einen eigenen Dateinamen eingeben und speichern. 
+\item[\textbf{F290}] Der Benutzer kann Messlänge und die Wertebereiche einer Messung festlegen.
+\item[\textbf{F300}] Der Benutzer kann eine Messung nach der \gls{Benutzerkonfiguration} starten.
+\item[\textbf{F310}] Bei F300 wird automatisch überprüft ob die \gls{Benutzerkonfiguration} eine sinnvolle Kombination von Sensoren, Transformationen und Darstellungen ist.
+\item[\textbf{F320}] Durch F300 wird automatisch mit der visuellen Darstellung der Messdaten begonnen.
+\item[\textbf{F330}] Der Benutzer kann eine Messung löschen.
+\item[\textbf{F340}] Bei F330 wird die Messung gestoppt und die visuelle Darstellung auf den Ausgangszustand gebracht.
+\item[\textbf{F350}] Durch F330 wird nicht die \gls{Benutzerkonfiguration} gelöscht.
+\item[\textbf{F360}] Durch F330 muss der Benutzer erst die Messung starten um weiter zu messen.
+\item[\textbf{F370}] Der Benutzer kann eine Messung pausieren.
+\item[\textbf{F380}] Der Benutzer kann eine Messung fortsetzen.
+\item[\textbf{F390}] Der Benutzer kann eine Messung durch F380 nur fortsetzen, wenn sie zuvor durch F370 pausiert wurde.
+\item[\textbf{F400}] Der Benutzer kann die Messdaten speichern.
+\item[\textbf{F410}] Der Benutzer kann den durch die Messung erzeugten Graphen speichern.
+\item[\textbf{F420}] Bei F400 und F410 öffnet sich automatisch das Verzeichnis und der Benutzer muss einen eigenen Dateinamen eingeben und speichern. 
 
 \end{itemize}
 
 \subsection{Fehlermeldungen}
 
 \begin{itemize}
-\item[F430] Durch F170 wird bei einem falschen Format eine aussagekräftige Fehlermeldung zurückgegeben.
-\item[F440] Die Anwendung sollte dem Benutzer automatisch beim Löschen einer Messung oder beim Schließen der Anwendung darauf hinweisen, dass die Messdaten ohne Speichern der Messdaten verloren gehen.
-\item[F450] Die Anwendung sollte dem Benutzer eine aussagekräftige Fehlermeldung zurückgeben, falls es zu einem Datenabbruch der Messdaten kommt.
-\item[F460] Durch F310 wird bei einer \gls{Benutzerkonfiguration}, welche nicht verwendet werden kann eine aussagekräftige Fehlermeldung zurückgegeben.
+\item[\textbf{F430}] Durch F170 wird bei einem falschen Format eine aussagekräftige Fehlermeldung zurückgegeben.
+\item[\textbf{F440}] Die Anwendung sollte dem Benutzer automatisch beim Löschen einer Messung oder beim Schließen der Anwendung darauf hinweisen, dass die Messdaten ohne Speichern der Messdaten verloren gehen.
+\item[\textbf{450}] Die Anwendung sollte dem Benutzer eine aussagekräftige Fehlermeldung zurückgeben, falls es zu einem Datenabbruch der Messdaten kommt.
+\item[\textbf{F460}] Durch F310 wird bei einer \gls{Benutzerkonfiguration}, welche nicht verwendet werden kann eine aussagekräftige Fehlermeldung zurückgegeben.
 
 \end{itemize}
 
@@ -662,8 +662,8 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F470] Die Konfigurationsbausteine erhalten Informationen, über welche der Benutzer Informationen und Hilfestellung bereitgestellt bekommt.
-\item[F480] Über F040 erhält der Nutzer eine kurze Beschreibung zur Funktionalität der Anwendung.
+\item[\textbf{F470}] Die Konfigurationsbausteine erhalten Informationen, über welche der Benutzer Informationen und Hilfestellung bereitgestellt bekommt.
+\item[\textbf{F480}] Über F040 erhält der Nutzer eine kurze Beschreibung zur Funktionalität der Anwendung.
 
 \end{itemize}
 
@@ -671,7 +671,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F490] Die Anwendung ist in deutscher Sprache.
+\item[\textbf{F490}] Die Anwendung ist in deutscher Sprache.
 
 \end{itemize}
 
@@ -679,8 +679,8 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F500] Die Anwendung stellt dem Benutzer weitere Sprachpakete für die \gls{GUI} zur Verfügung.
-\item[F510] Durch F020 ist die Sprache für den Benutzer änderbar.
+\item[\textbf{F500}] Die Anwendung stellt dem Benutzer weitere Sprachpakete für die \gls{GUI} zur Verfügung.
+\item[\textbf{F510}] Durch F020 ist die Sprache für den Benutzer änderbar.
 
 \end{itemize}
 
@@ -688,7 +688,7 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F520] Die in der Anwendung enthaltenen Farben sollten mit Rücksicht auf Benutzer mit Rot-Grün Schwäche oder Farbenblindheit ein barrierefreies Verwendung der Anwendung ermöglichen.
+\item[\textbf{F520}] Die in der Anwendung enthaltenen Farben sollten mit Rücksicht auf Benutzer mit Rot-Grün Schwäche oder Farbenblindheit ein barrierefreies Verwendung der Anwendung ermöglichen.
 
 \end{itemize}
 
@@ -696,8 +696,8 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \begin{itemize}
 
-\item[F530] Durch F020 sollte der Benutzer die in der Anwendung verwendeten Farben ändern können.
-\item[F540] Durch F020 sollte der Benutzer die in der Anwendung verwenden Buchstabengröße verändern können.
+\item[\textbf{F530}] Durch F020 sollte der Benutzer die in der Anwendung verwendeten Farben ändern können.
+\item[\textbf{F540}] Durch F020 sollte der Benutzer die in der Anwendung verwenden Buchstabengröße verändern können.
 
 \end{itemize}
 
