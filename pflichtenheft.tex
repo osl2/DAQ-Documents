@@ -1066,13 +1066,13 @@ Abbildung \ref{UseCaseDiagramm} zeigt die Use-Cases und deren Ablauf für das nu
 
 Das projektierte Gesamtsystem wird aller Voraussicht nach auf drei Systemprozesse verteilt sein, die wie in Abbildung \ref{DeploymentDiagram} dargestellt, miteinander Daten austauschen.
 
-Einer dieser drei Systemprozesse enthält die \gls{JVM}, auf der die zu erstellende Hauptkomponente läuft. Diese enthält wiederum die grafische Benutzungsoberfläche, mit deren Hilfe Benutzer  Messkonfigurationen entwerfen und den Betrieb von Messläufen steuern und überwachen können.
+Einer dieser drei Systemprozesse enthält die \gls{JVM}, auf der die zu erstellende Hauptkomponente läuft. Diese enthält wiederum die grafische \gls{GrafBenOber}, mit deren Hilfe Benutzer Messkonfigurationen entwerfen und den Betrieb von Messläufen steuern und überwachen können.
 
 Zum Ansteuern und Auslesen der Sensoren auf dem \gls{RasPi} wird das auf Python basierende Framework \gls{PhyPiDAQ} bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die \gls{JVM} ausgeführt werden kann, wird für PhyPiDAQ ein zweiter Systemprozess benötigt.
 
 Um Ressourcenknappheit auf dem \gls{RasPi} aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend so wie PhyPiDAQ auf dem \gls{RasPi} ausgeführt werden müssen. 
 
-Falls denn nun die Hauptkomponente tatsächlich auf einem anderen Rechner ausgeführt werden sollte, so muss sie mit dem Python-Interpreter hardware- bzw. plattformübergreifend Daten austauschen können. Bisher stellt PhyPiDAQ hierfür jedoch keine Funktionalität zur Verfügung. 
+Falls die Hauptkomponente tatsächlich auf einem anderen Rechner ausgeführt werden sollte, so muss sie mit dem Python-Interpreter hardware- bzw. plattformübergreifend Daten austauschen können. Bisher stellt PhyPiDAQ hierfür jedoch keine Funktionalität zur Verfügung. 
 
 Als Lösungsalternativen bieten sich hier die Kommunikation über eine Netzwerkschnittstelle wie z. B. WLAN und die Kommunikation über eine Peripherieschnittstelle wie z. B. USB an.
 
@@ -1115,7 +1115,7 @@ Ob es sich beispielsweise bei der verteilten Kommunikation um WLAN per Netzwerka
 
 \subsection{Ziel der Benutzeroberfläche}
 
-Das Ziel der Benutzeroberfläche ist es dem Anwender eine intuitive Benutzung des Programmes zu ermöglichen. Da das Programm im Schulbetrieb eingesetzt werden soll ist eine gute Verständlichkeit wichtig. So soll auch eine lange Einarbeitungszeit für den Anwender vermieden werden. Dabei soll keine Funktionalität verloren gehen.
+Das Ziel der Benutzeroberfläche ist es dem Anwender eine intuitive Benutzung des Programmes zu ermöglichen. Da das Programm im Schulbetrieb eingesetzt werden soll, ist eine gute Verständlichkeit wichtig. So soll auch eine lange Einarbeitungszeit für den Anwender vermieden werden. Dabei soll keine Funktionalität verloren gehen.
 
 \subsection{Generell}
 
@@ -1136,9 +1136,9 @@ Die Verwendung anderer Eingabegeräte ist nicht vorgesehen.
 	\end{center}
 \end{figure}
 
-Abbildung \ref{GUI_Grundlage} zeigt den Aufbau einer möglichen \gls{GrafBenOber}. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Programmfenster, die logische Unterteilung an.
+Abbildung \ref{GUI_Grundlage} zeigt den Aufbau einer möglichen Graphischen Benutzeroberfläche. Dabei geben die Zahlen in den roten Kästchen, rechts von dem Programmfenster, die logische Unterteilung an.
 
-Das Design der Einzelnen Elemente kann sich im Verlauf der Anwendungsentwicklung ändern. Die Grundlegenden Bausteine der \gls{GrafBenOber} werden sich in ihrer Aufgabe nicht ändern. Zu ihnen gehören:
+Das Design der einzelnen Elemente kann sich im Verlauf der Anwendungsentwicklung ändern. Die Grundlegenden Bausteine der \gls{GrafBenOber} werden sich in ihrer Aufgabe nicht ändern. Zu ihnen gehören:
 
 \begin{itemize}
 	\item \glspl{sensor}
