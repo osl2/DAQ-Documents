@@ -28,17 +28,17 @@
 \newglossaryentry{RasPi}{
 	name=Raspberry Pi,
 	plural=Raspberry Pis,
-	description={Der Raspberry Pi ist ein Einplatinencomputer. In diesem Projekt dient der Raspberry Pi als Hardwareplattform, um unterschiedliche Sensoren zu verbinden und ihre Daten auszulesen}
+	description={Der Raspberry Pi ist ein Einplatinencomputer. In diesem Projekt dient der Raspberry Pi als Hardwareplattform, um Messwerte aus angeschlossenen Sensoren auszulesen}
 }
 
 \newglossaryentry{PhyPiDAQ}{
 	name=PhyPiDAQ,
-	description={PhyPiDAQ ist eine Anwendung zur Datenerfassung und Analyse mit einem Raspberry Pi. Siehe auch Abschnitt 4.3 ,,PhyPiDAQ`` sowie \url{https://github.com/GuenterQuast/PhyPiDAQ}}
+	description={PhyPiDAQ ist ein Framework zur Erfassung und Analyse von Messwerten mit einem Raspberry Pi. Siehe auch Abschnitt 4.3 ,,PhyPiDAQ`` sowie \url{https://github.com/GuenterQuast/PhyPiDAQ}}
 }
 
 \newglossaryentry{Science Labs}{
 	name=Science Labs,
-	description={Ein Science Lab ist ein Arbeitsplatz, welcher Schülern ermöglicht wissenschaftliche Forschungen unter kontrollierten Bedingungen durchzuführen} 
+	description={Ein Science Lab ist ein Arbeitsplatz, welcher Schülern ermöglicht, wissenschaftliche Forschungen unter kontrollierten Bedingungen durchzuführen} 
 }
 
 \newglossaryentry{opensource}{
@@ -64,7 +64,7 @@
 \newglossaryentry{transformation}{
 	name=Transformation,
 	plural={Transformationen},
-	description={Bausteine vom Typ Transformation haben einen oder mehrere Eingänge sowie einen oder mehrere Ausgänge. Für jeden Ausgang kann  ein Transformationsbaustein eine Vorschrift zur Berechnung eines Ausgangswertes aus einem Satz von Eingangswerten beinhalten. Eine Berechnungsvorschrift soll durch eine mathematische und logische Funktionen oder durch eine programmtechnisch definierte Verarbeitung definiert werden können}
+	description={Bausteine vom Typ Transformation haben einen oder mehrere Eingänge sowie einen oder mehrere Ausgänge. Für jeden Ausgang kann  ein Transformationsbaustein eine Vorschrift zur Berechnung eines Ausgangswertes aus einem Satz von Eingangswerten beinhalten. Eine Berechnungsvorschrift soll durch eine mathematische bzw. logische Funktionen oder durch eine programmtechnisch definierte Verarbeitung definiert werden können}
 }
 
 \newglossaryentry{konfigdata}{
@@ -76,7 +76,7 @@
 \newglossaryentry{sensor}{
 	name=Sensor,
 	plural={Sensoren},
-	description={Der Begriff ,,Sensor`` bezeichnet ein technisches Bauteil, welches phyiskalische Eigenschaften als Messwerte erfasst. In der Anwendung werden diese Sensoren abstrahiert als Bausteine präsentiert. Ein solcher (logischer) Sensorbaustein muss alle Informationen referenzieren können, die zum Ansprechen eines tatsächlichen Sensors benötigt werden. Da ein Messgerät Ausgänge bzw. Messkanäle haben kann, muss ein Sensorbaustein mindestens einen oder auch mehrere Ausgänge haben. Eingänge besitzt ein Sensorbaustein nicht}
+	description={Der Begriff ,,Sensor`` bezeichnet ein technisches Bauteil, welches physikalische Größen misst und analoge oder digitale Messwerte liefert. In unserer Anwendung werden Sensoren abstrakt als grafische Bausteine eines Messkonfiguration präsentiert. Ein solcher (logischer) Sensorbaustein muss alle Informationen referenzieren können, die zum Ansprechen eines tatsächlichen Sensors benötigt werden. Da ein Messgerät Ausgänge bzw. Messkanäle haben kann, muss ein Sensorbaustein mindestens einen oder auch mehrere Ausgänge haben. Eingänge besitzt ein Sensorbaustein nicht}
 }
 
 \newglossaryentry{messdaten}{
@@ -92,7 +92,7 @@
 
 \newglossaryentry{python3}{
 	name=Python 3,
-	description={Python ist eine universelle Programmiersprache. Sie ist die offizielle Programmiersprache des Raspberry Pi und wurde deswegen zur Programmierung von PhyPiDAQ verwendet}
+	description={Python ist eine Skriptsprache, die auf dem Raspberry Pi als Standardsprache zur Programmierung vorgesehen ist. Python wurde zur Implementierung von PhyPiDAQ verwendet}
 }
 
 \newglossaryentry{JVM}{
@@ -103,7 +103,7 @@
 \newglossaryentry{DSGVO}{
 	name=DSGVO,
 	first={Datenschutz-Grundverordnung (DSGVO)},
-	description ={Verordnung der Europäischen Union vom 25. Mai 2018}
+	description ={Datenschutz-Grundverordnung der Europäischen Union vom 25. Mai 2018}
 }
 
 \newglossaryentry{Musskriterien}{
@@ -122,14 +122,14 @@
 
 \newglossaryentry{Wunschkriterien}{
 	name=Wunschkriterien,
-	description ={Werden zusammen mit Muss- und Sollkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung niedrige Priorität. 
+	description ={Werden zusammen mit Muss- und Sollkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung eine niedrige Priorität. 
 	Je nach Resourcenlage können sie nach Bearbeitung aller Muss- und Kannkriterien umgesetzt werden. 
-	Falls ein Wunschkriterium nicht umgesetzt werden kann, so muss dies nicht begründet werden}
+	Falls ein Wunschkriterium nicht umgesetzt wird, so muss dies nicht begründet werden}
 }
 
 \newglossaryentry{Abgrenzungskriterien}{
 	name=Abgrenzungskriterien,
-	description ={Abgrenzungskriterien beschreiben Aspekte, die explizit nicht umgesetzt werden müssen}
+	description ={Abgrenzungskriterien beschreiben Aspekte, die explizit nicht umgesetzt werden sollen.}
 }
 
 \newglossaryentry{BenOber}{
@@ -144,7 +144,7 @@
 
 \newglossaryentry{GrafBenOber}{
 	name=Grafische Benutzeroberfläche,
-	description = {Eine Oberfläche, die eine Anwendung durch grafische Symbole bedienbar macht}
+	description = {Eine Benutzungsschnittstelle, die eine Anwendung durch Fenster, grafische Symbole, Menüs und Mauszeiger bedienbar macht}
 }
 
 \newglossaryentry{GUI}{
@@ -176,13 +176,13 @@
 
 \newglossaryentry{Stand-Alone-Kommunikation}{
 	name={Stand-Alone-Kommunikation},
-	description={Bezeichnet im Kontext unseres Software-Projekt die systeminterne Kommunikation innerhalb eines Betriebssystems, beispielsweise per Interprozess-Kommunikation (IPC.)}
+	description={Bezeichnet im Kontext unseres Software-Projekt die systeminterne Kommunikation innerhalb eines Betriebssystems, beispielsweise per Inter-Prozess-Kommunikation (IPC)}
 	}
 
 
 \newglossaryentry{Local-Loop}{
 	name={Local-Loop},
-	description={Bezeichnet einen virtuellen Netzwerkadapter, der Pakete, die an ihn verschickt werden, unmittelbar danach auch wieder empfängt.}
+	description={Bezeichnet einen virtuellen Netzwerkadapter, der Pakete, die durch ihn verschickt werden, unmittelbar danach auch wieder empfängt.}
 }
 
 \subject{Pflichtenheft}
@@ -1270,7 +1270,7 @@ Beim Herstellungsprozess einer Software gibt es viele Risiken, die zu berücksic
 
 In der Planungsphase sticht vor allem das Risiko hervor, dass wir uns zu viel vornehmen und den resultierenden Aufwand in späteren Projektphasen, unterschätzen. Unsere Gegenmaßnahme dafür ist die Einteilung der Kriterien in Prioritätsklassen. Wir setzen nur die Features als Musskriterien, die unbedingt in der Software enthalten sein müssen. Der Rest ist als Soll- oder Wunschkriterien optional.
  
-In der Entwurfsphase ist das größte Risiko, dass in der Qualitätssicherungsphase bei Integrationstests unvorhergesehene Probleme auftauchen und unsere Entwürfe für dann notwendige Fall-Backs oder Work-Arounds zu unflexibel sind. Unsere Gegenmaßnahme dazu ist ein Fallback-Plan für wichtige Entscheidungen der Definitionsphase. Diese Pläne werden wir in der Entwurfsphase berücksichtigen. Dazu zählt z.B. der Fallbackplan, dass unsere Anwendung auch auf einem Desktop-Computer laufen kann, falls die Ressourcen des \gls{RasPi} nicht ausreichen.
+In der Entwurfsphase scheint das größte Risiko zu sein, dass bei den Integrationstests der Qualitätssicherungsphase unvorhergesehene Probleme auftauchen und unsere Entwürfe für dann notwendige Fall-Backs oder Work-Arounds zu unflexibel sind. Unsere Gegenmaßnahme dazu ist ein Fallback-Plan für wichtige Entscheidungen der Definitionsphase. Diese Pläne werden wir in der Entwurfsphase berücksichtigen. Dazu zählt z.B. der Fallbackplan, dass unsere Anwendung auch auf einem Desktop-Computer laufen kann, falls die Ressourcen des \gls{RasPi} nicht ausreichen.
  
 In der Implementierungsphase ist das Hauptrisiko das Produzieren von Implementierungsfehlern. Unsere Gegenmaßnahme hierzu ist eine gute Testabdeckung, um das Risiko von Fehlern zu minimieren.
  
