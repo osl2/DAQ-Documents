@@ -717,7 +717,7 @@ Zu speichern sind ausschließlich:
 
 Nichtfunktionale Anforderungen gehen über funktionale Anforderungen hinaus, indem sie Aspekte beschreiben, die sich nicht direkt auf das funktionale Verhalten des Systems beziehen. Unter anderem zählen dazu gewisse Qualitätsmerkmale und Zusicherungen für die Leistung des Produkts.
 
-\subsection{Qualitätsanforderungen}
+\subsection{Qualitätsanforderungen}\label{quali}
 
 Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 
@@ -740,12 +740,12 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 	\hline
 	\textbf{Merkmal} & \textbf{Begründung für die Werteverteilung}\\
 	\hline
-	Robustheit & Durch eine robuste Anwendung sollen möglichst wenige Komplikationen während des Unterrichtes auftreten. Der Lehrer soll sich nicht um häufige Abstürze der Anwendung kümmern müssen. Das Qualitätsmerkmal ist deshalb sehr wichtig, da von Fehlbedienungen ausgegangen werden muss.\\\cline{1-2}
-	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der ordnungsgemäße Betrieb in der vorgesehenen Umgebung gewährt werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die im Normalbetrieb bereits scheitert, auch nicht robust seien kann.\\\cline{1-2}
-	Benutzer-\newline freundlichkeit & Da die Anwendung einen wissensvermittelnden Auftrag hat ist es sehr wichtig, dass die Anwendung für Schüler verständlich ist. Die Schüler sollen durch eine hohe Benutzerfreundlichkeit dazu angehalten werden sich selbstständig mit den wissenschaftlichen Themen zu beschäftigen. Umgekehrt könnte das Fehlen von einem hohen Grad an Benutzerfreundlichkeit ein Scheitern der Anwendung zur folge haben.\\\cline{1-2}
-	Sicherheit & In der Anwendung sind keine Sicherheits-Funktionen vorgesehen. Das Qualitätsmerkmal ist daher unwichtig.\\\cline{1-2}
+	Robustheit & Durch eine robuste Anwendung sollen möglichst wenige Komplikationen während des Unterrichtes auftreten. Der Lehrer soll sich nicht mit Softwareproblemen beschäftigen müssen. Das Qualitätsmerkmal ist deshalb sehr wichtig, da von unvorhergesehenen Situationen, wie etwa Fehlbedienungen, ausgegangen werden muss.\\\cline{1-2}
+	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der Betrieb in der vorgesehenen Umgebung (siehe Kapitel \ref{produktumgebung})gewährt werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die in einer erwarteten Umgebung bereits scheitert, nicht robust sein kann.\\\cline{1-2}
+	Benutzer-\newline freundlichkeit & Da die Anwendung einen wissensvermittelnden Auftrag hat ist es sehr wichtig, dass die Anwendung für Schüler verständlich ist. Die Schüler sollen durch eine hohe Benutzerfreundlichkeit dazu angehalten werden sich selbstständig mit den wissenschaftlichen Themen zu beschäftigen. Umgekehrt könnte das Fehlen von einem hohen Grad an Benutzerfreundlichkeit ein Scheitern der Anwendung zur Folge haben.\\\cline{1-2}
+	Sicherheit & Die Anwendung soll ausschließlich in einer sicheren Umgebung verwendet werden. Das bereits vorhandene Rechtssystem, des Bestriebssystems, sollte daher ausreichen. Das Qualitätsmerkmal ist somit unwichtig.\\\cline{1-2}
 	Erweiterbarkeit & Es ist angedacht die Anwendung um weitere Elemente, wie etwa Sensoren, erweitern zu können. Außerdem sollen Schüler eigene Transformationen erstellen und diese auch speichern können. Es ist daher wichtig, dass die Anwendung mit diesen Aufgaben umgehen kann.\\\cline{1-2}
-	Effizienz & Die Anwendung soll auf einem \gls{RasPi} laufen. Außerdem können die Messkonfigurationen, unter anderem durch die grafischen Darstellungen, eine große Rechenleistung fordern. Das Qualitätsmerkmal ist wichtig, damit auch bei größeren Messkonfigurationen eine Änderung der Darstellungen in annähernd Echtzeit zu erkennen sind.\\\cline{1-2}
+	Effizienz & Im Vergleich zu einem PC-System bietet ein Raspberry Pi lediglich beschränkte Ressourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Ressourcen maximieren. Das Qualitätsmerkmal ist somit wichtig.\\\cline{1-2}
 	Portierbarkeit & Zum aktuellen Zeitpunkt ist keine Portierung der Anwendung auf viele unterschiedliche Betriebssysteme vorgesehen. Das Qualitätsmerkmal ist deshalb weniger wichtig.\\\cline{1-2}
 	Kompatibilität & Da die Anwendung die Daten von einer externen Quelle, wie zum Beispiel \gls{PhyPiDAQ} bekommt, muss sie nicht stark auf sich verändernde Teile reagieren. Das Qualitätsmerkmal ist daher weniger wichtig.\\\cline{1-2}
 	\hline
@@ -815,7 +815,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \begin{description} 
 
-\hypertarget{link-t010}{\item[\textbf{T010}]}Starten der Anwendung und Hilfe
+\hypertarget{link-t010}{\item[T010]}Starten der Anwendung und Hilfe
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -839,7 +839,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \end{itemize}
 
 
-\hypertarget{link-t020}{\item[\textbf{T020}]} Starten der Demo 
+\hypertarget{link-t020}{\item[T020]} Starten der Demo 
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -864,7 +864,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 
-\hypertarget{link-t030}{\item[\textbf{T030}]} Lehrer erstellt und speichert eine Messkonfiguration
+\hypertarget{link-t030}{\item[T030]} Lehrer erstellt und speichert eine Messkonfiguration
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -891,7 +891,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \end{itemize}
 
-\hypertarget{link-t040}{\item[\textbf{T040}]} Schüler bearbeitet Aufgabe
+\hypertarget{link-t040}{\item[T040]} Schüler bearbeitet Aufgabe
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -917,7 +917,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \end{itemize}
 
-\hypertarget{link-t050}{\item[\textbf{T050}]} Schüler startet Messung und speichert Ergebnisse
+\hypertarget{link-t050}{\item[T050]} Schüler startet Messung und speichert Ergebnisse
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -948,7 +948,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \begin{description} 
 
-\hypertarget{link-t200}{\item[\textbf{T200}]} Laden einer ungültigen Datei als Messkonfiguration
+\hypertarget{link-t200}{\item[T200]} Laden einer ungültigen Datei als Messkonfiguration
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -972,7 +972,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \end{itemize}
 
-\hypertarget{link-t210}{\item[\textbf{T210}]} Erstellen einer ungültigen Messkonfiguration
+\hypertarget{link-t210}{\item[T210]} Erstellen einer ungültigen Messkonfiguration
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -996,7 +996,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \end{itemize}
 
-\hypertarget{link-t220}{\item[\textbf{T220}]} Entfernen eines Sensors bei laufender Messung
+\hypertarget{link-t220}{\item[T220]} Entfernen eines Sensors bei laufender Messung
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -1239,7 +1239,7 @@ Für die Fehlermeldungen könnten eigene Fenster erscheinen. Abbildung \ref{fehl
 \clearpage
 \section{Zeit- und Ressourcenplanung}\label{zeit}
 
-\subsection{Projektphasen}
+\subsection{Projektphasen} \label{projektphasen}
 
 \begin{tabular}{| l | l | l | r |}
 	\hline
@@ -1256,7 +1256,18 @@ Für die Fehlermeldungen könnten eigene Fenster erscheinen. Abbildung \ref{fehl
 
 \subsection{Risikomanagement}
 
-Das Ausfallen eines Teammitglieds durch Krankheit oder anderen Gründen ist ein bedeutendes Risiko. In diesem Fall muss die zusätzliche Arbeit gerecht auf die anderen Teilnehmer verteilt werden. Eventuell können dadurch einzelne Kriterien und Anforderungen nicht mehr zufriedenstellend erfüllt werden.
+Beim Herstellungsprozess einer Software gibt es viele Risiken, die zu berücksichtigen sind. Wir haben die Auftrittswahrscheinlichkeit, die Kosten für Vorsichtsmaßnahmen und die möglichen Auswirkungen auf \hyperref[funktionale]{Funktionalität}  und \hyperref[quali]{Qualität} unserer Anwendung gegeneinander abgewogen und uns damit für das folgende Risikomanagement entschieden. 
+
+In der Planungsphase sticht vor allem das Risiko hervor, dass wir uns zu viel vornehmen und den resultierenden Aufwand in späteren Projektphasen, unterschätzen. Unsere Gegenmaßnahme dafür ist die Einteilung der Kriterien. Wir setzen nur die Features als Musskriterien, die unbedingt in der Software enthalten sein müssen. Der Rest ist als Soll- oder Wunschkriterien optional.
+ 
+In der Entwurfsphase ist das größte Risiko, dass unsere Entwürfe später nicht funktionieren. Ob dies der Fall ist, wird hauptsächlich in der Qualitätssicherungsphase deutlich. Unsere Gegenmaßnahme dazu ist ein Fallbackplan für wichtige Entscheidungen der Planungsphase. Diese Pläne werden wir in der Entwurfsphase berücksichtigen. Dazu zählt z.B. der Fallbackplan, dass unsere Anwendung auch auf einem Desktop-Computer laufen kann, falls die Hardware des \gls{RasPi} nicht ausreicht.
+ 
+In der Implementierungsphase ist das Hauptrisiko das Implementieren von Fehlern. Unsere Gegenmaßnahme hierzu ist eine gute Testabdeckung, um das Risiko von Fehlern zu minimieren.
+ 
+In der Qualitätssicherungsphase liegt das Hauptrisiko dabei, dass wir uns zu sehr aus Kleinigkeiten versteifen und das Wesentliche 
+übersehen. Dazu planen wir unsere Anwendung mit Schülern zu testen. Damit sollen wir auf für uns unscheinbare Schwierigkeiten hingewiesen zu werden.
+
+Ein Risiko, das sich durch alle Projektphasen durchzieht, ist der Ausfall eines Teammitglieds durch Krankheit. Bei einem Team von fünf Mitgliedern, bedeutet ein Ausfall ein Verlust von 20\%. Unsere Gegenmaßnahme ist die Einplanung von Pufferzeit in jede Projektphase. Ein weiteres phasenübergreifendes Risiko ist ein Ausfall wegen Urlaub oder Klausuren. Dieses Risiko wird aber durch unsere frühzeitige Planung und durch das Einplanen von Klausurpausen minimiert.
 
 \subsection{Spezielle Anforderungen}\label{entwicklungsumgebung}
 
