@@ -173,7 +173,7 @@
 \newglossaryentry{Effizienz}{
 	name=Effizienz,
 	plural=Effizienz,
-	description={Im Vergleich zu einem PC-System bietet ein Raspberry Pi lediglich beschränkte Resourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Resourcen maximieren.}
+	description={Im Vergleich zu einem PC-System bietet ein Raspberry Pi lediglich beschränkte Ressourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Ressourcen maximieren.}
 }
 
 \subject{Pflichtenheft}
@@ -244,7 +244,7 @@ Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verst
 
 \subsection{Einige hilfreiche Begriffsdefinitionen}
 
-Im Folgenden werden \gls{Musskriterien}, \gls{Sollkriterien} und \gls{Wunschkriterien} zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittler und niedriger Priorität betrieben. Musskriterien werden mit MK, Sollkriterien werden mit SK, Wunschkriterien werden mit WK abgekürzt.
+Im Folgenden werden \gls{Musskriterien}, \gls{Sollkriterien} und \gls{Wunschkriterien} zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittlerer und niedriger Priorität betrieben. Musskriterien werden mit MK, Sollkriterien werden mit SK, Wunschkriterien werden mit WK abgekürzt.
 
 \newtheorem{MussKrit}{MK}
 \newtheorem{SollKrit}{SK}
@@ -541,7 +541,7 @@ Die Anwendung läuft auf Computern mit den Betriebssystemen Linux ab Kernel 4.15
 Die Anwendung läuft auf Computern, welche für den generellen Einsatz in der Schule gedacht sind.
 Die enthaltenen Komponenten sollten beispielsweise ein aktueller 4-Kern-Prozessor, 8 GB RAM,
 mindestens 256 GB Speicherplatz sein.\footnote{Beispielkonfiguration eines Schulcomputers nach dem Beraterkreis zur IT-Ausstattung von Schulen des Bayrischen Staatsministerium für Bildung und Kultus, Wissenschaft und Kunst, Votum 2016 unter \url{https://www.mebis.bayern.de/infoportal/konzepte/it-ausstattung/votum/}} Schnittstellen für USB und Netzwerk sind ebenfalls erforderlich. 
-Auf dem per USB-Schnittstelle verbundenen \gls{RasPi} der Variante 3 Mod. B+ muss \gls{PhyPiDAQ} installiert und verwendungsfähig sein.
+Auf dem per USB-Schnittstelle verbundenen \gls{RasPi} des Models 3B+ muss \gls{PhyPiDAQ} installiert und verwendungsfähig sein.
 Die an den \gls{RasPi} angeschlossenen Sensoren müssen richtig und sinnvoll angeschlossen sein.
 
 \subsection{PhyPiDAQ}
@@ -550,6 +550,8 @@ Bei PhyPiDAQ\footnote{\url{https://github.com/GuenterQuast/PhyPiDAQ}} handelt es
 
 \clearpage
 \section{Funktionale Anforderungen}\label{funktionale}
+
+
 
 
 \subsection{GUI} % Glossarverweise in Überschriften besser vermeiden
@@ -795,10 +797,18 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \begin{description} 
 
-\item[T010]Starten der Anwendung und Hilfe
+\item[\textbf{T010}]Starten der Anwendung und Hilfe
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 10cm]{Grafik/T010-Ablauf.png}
+		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T010}}
+		\label{T010-Ablauf}
+	\end{center}
+\end{figure}
 \begin{itemize}
 
-\item []\textbf{Testziel:} Teste das Verhalten der Anwendung aus der Sicht eines Benutzers, der diese zum ersten Mal verwendet.
+\item []\textbf{Testziel:} Teste das Verhalten der Anwendung aus der Sicht eines Benutzers, der diese zum ersten Mal verwendet. Der Ablauf ist in Abbildung \ref{T010-Ablauf} zu sehen.
 
 \item []\textbf{Vorbedingung:} Die Anwendung ist installiert. Zu Sehen ist der Desktop des Benutzers mit einer Verknüpfung zur Anwendung.
 \item []\textbf{Aktion:} Der Benutzer öffnet die Anwendung über die Verknüpfung. Danach informiert er sich über die Anwendung über die Hilfe in der Systemleiste.
@@ -806,32 +816,52 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Nach dem öffnen der Anwendung, überprüft diese, ob ein \gls{RasPi} angeschlossen ist. Jeder dargestellte Text ist auf Deutsch.
 
 \item []\textbf{Ergebnis:} Der Benutzer kann die Anwendung starten. Die Bedienung der Anwendung ist komplett auf Deutsch möglich.
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen} F010 erreiche GUI nach Start, F140 leere Darstellung nach Anwendungsstart, F480 Hilfe zu Anwendung, F490 Texte der Anwendung auf Deutsch
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen} \textbf{F010} erreiche GUI nach Start, \textbf{F140} leere Darstellung nach Anwendungsstart, \textbf{F480} Hilfe zu Anwendung, \textbf{F490} Texte der Anwendung auf Deutsch
 
 \end{itemize}
 
 
-\item[T020] Starten der Demo 
+\item[\textbf{T020}] Starten der Demo 
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 10cm]{Grafik/T020-Ablauf.png}
+		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T020}}
+		\label{T020-Ablauf}
+	\end{center}
+\end{figure}
 \begin{itemize}
 
-\item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Ausführen der Demo. Die Demo nutzt Daten aus einer Datei und benötigt keinen angeschlossenen \gls{RasPi}.
+\item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Ausführen der Demo. Die Demo nutzt Daten aus einer Datei und benötigt keinen angeschlossenen \gls{RasPi}. Der Ablauf ist in Abbildung \ref{T020-Ablauf} zu sehen.
 
 \item []\textbf{Vorbedingung:} Die Anwendung ist gestartet worden. Zu Sehen ist das offene Hauptfenster mit leerem Konfigurationsfeld.
-\item []\textbf{Aktionen:} Der Benutzer öffnet die Messkonfigurationsdatei der Demo mit Hilfe der Ladefunktion der Systemleiste. Sobald die Messkonfiguration geladen ist, erstellt der Benutzer den Messversuch und startet ihn danach.
+\item []\textbf{Aktionen:} Der Benutzer öffnet die Messkonfigurationsdatei der Demo mit Hilfe der Ladefunktion der Systemleiste. Sobald die Messkonfiguration geladen ist, startet der Benutzer die Messung.
 \item []\textbf{Reaktionen:} Nach dem Laden ist die Messkonfiguration in dem Konfigurationsfeld sichtbar. Nach dem Starten der Messung sieht der Benutzer wie die Daten im Graph dargestellt werden.
 \item []\textbf{Nachbedingung:} Die Anwendung ist offen. Eine gültige Messkonfiguration ist in der Konfigurationsfeld geladen. Die Messung läuft ohne Fehler und die Ergebnisse werden richtig dargestellt.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann eine Messkonfiguration, die nur Daten aus einer Datei benötigt, problemlos ohne angeschlossenem \gls{RasPi} durchführen. 
-\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F130 Starten einer Messung, F160 Laden einer Messkonfiguration
+\item []\textbf{Wichtige abgedeckte Funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F130} Starten einer Messung, \textbf{F160} Laden einer Messkonfiguration
 
 \end{itemize}
 
 
 
-\item[T030] Lehrer erstellt und speichert eine Messkonfiguration
+\item[\textbf{T030}] Lehrer erstellt und speichert eine Messkonfiguration
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 13cm]{Grafik/T030-Ablauf.png}
+		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T030}}
+		\label{T030-Ablauf}
+	\end{center}
+\end{figure}
+
+
+
+
 \begin{itemize}
 
-\item []\textbf{Testziel:} Teste eine typische Verwendung der Software anhand des gegebenen Szenarios. Dabei wird das Erstellen, Verändern und Speichern einer Messkonfiguration getestet.
+\item []\textbf{Testziel:} Teste eine typische Verwendung der Software anhand des gegebenen Szenarios. Dabei wird das Erstellen, Verändern und Speichern einer Messkonfiguration getestet. Der Ablauf ist in Abbildung \ref{T030-Ablauf} zu sehen.
 
 \item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Messkonfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
 \item []\textbf{Aktionen:} Der Lehrer zieht zwei angeschlossene Sensoren und eine Transformation in das Konfigurationsfeld. Danach ändert er einige Einstellungen an der Messkonfiguration. Das Ergebnis speichert er über die Systemleiste als Messkonfigurationsdatei.
@@ -839,16 +869,24 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} Die Anwendung prüft beim Hinzufügen eines Sensorbausteins, ob der Sensor angeschlossen ist. Die Anwendung speichert die angepassten Einstellungen, sofern sie gültig sind. Die Messkonfigurationsdatei wird erstellt, unabhängig ob die Messkonfiguration vollständig oder gültig ist.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann eine Messkonfiguration als Datei speichern und prüfen, ob ein Sensor angeschlossen ist.
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F180 füge Sensor hinzu, F190 prüfe ob Sensor angeschlossen, F210 füge Transformation hinzu, F250 speichere Messkonfiguration, F290 Einstellungen Messkonfiguration 
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F180} füge Sensor hinzu, \textbf{F190} prüfe ob Sensor angeschlossen, \textbf{F210} füge Transformation hinzu, \textbf{F250} speichere Messkonfiguration, \textbf{F290} Einstellungen Messkonfiguration 
 
 \end{itemize}
 
-\item[T040] Schüler bearbeitet Aufgabe
+\item[\textbf{T040}] Schüler bearbeitet Aufgabe
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 13cm]{Grafik/T040-Ablauf.png}
+		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T040}}
+		\label{T040-Ablauf}
+	\end{center}
+\end{figure}
 \begin{itemize}
 
 \item []\textbf{Testziel:} Teste die Anwendung aus Sicht eines Schülers, der eine Aufgabe bearbeiten soll.
 
-\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Messkonfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen.
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es liegt keine Messkonfiguration vor. Die Anwendung hat Zugriff auf einen laufenden \gls{RasPi} mit \gls{PhyPiDAQ}. Die Sensoren die verwendet werden sollen sind ordnungsgemäß angeschlossen. Der Ablauf ist in Abbildung \ref{T040-Ablauf} zu sehen.
 
 \item []\textbf{Aktionen:} Der Schüler lädt über die Systemleiste die Messkonfiguration der Aufgabe. Danach informiert er sich über die Sensoren, Transformationen und Darstellungen über die angebotene Hilfestellungen. Als Nächstens vollendet er die Messkonfiguration.
  
@@ -857,16 +895,24 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Der Benutzer kann Messkonfigurationen laden, diese verändern und durch das Erstellen auf Gültigkeit prüfen. 
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F230 füge Darstellung hinzu, F470 Hilfe Bausteine
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F230} füge Darstellung hinzu, \textbf{F470} Hilfe Bausteine
 
 \end{itemize}
 
-\item[T050] Schüler startet Messung und speichert Ergebnisse
+\item[\textbf{T050}] Schüler startet Messung und speichert Ergebnisse
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 13cm]{Grafik/T050-Ablauf.png}
+		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T050}}
+		\label{T050-Ablauf}
+	\end{center}
+\end{figure}
 \begin{itemize}
 
-\item []\textbf{Testziel:} Teste die Anwendung aus Sicht eines Schülers, der Messung starten und deren Ergebnisse speichern soll.
+\item []\textbf{Testziel:} Teste die Anwendung aus Sicht eines Schülers, der Messung starten und deren Ergebnisse speichern soll. Der Ablauf ist in Abbildung \ref{T050-Ablauf} zu sehen.
 
-\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es ist die in T040 erstelle Messkonfiguration geladen worden.
+\item []\textbf{Vorbedingung:} Die Anwendung ist gestartet und es ist die in \textbf{T040} erstelle Messkonfiguration geladen worden.
 
 \item []\textbf{Aktionen:} Der Schüler startet die Messung. Während der Messung beeinflusst er die Daten durch einen Sensor. Am Ende der Messung speichert der Schüler den resultierenden Graphen und die Werte als Dateien ab.
 \item []\textbf{Reaktionen:} Nach dem Starten, sieht er, wie die Daten als Graphen dargestellt werden. Außerdem sieht er, wie diese durch seine Aktionen verändert werden. Die Ergebnisse der Messung sieht er nach dem Speichern als erstellte Dateien.
@@ -874,7 +920,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Der Benutzer die Messung einer gültigen Messkonfiguration starten. Die Ergebnisse kann er als Graphen oder als Werte speichern. 
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F300 Starte Messung, F320 stelle Ergebnisse dar, F400 speichere Messdaten, F410 speichere Messgraph
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F300} Starte Messung, \textbf{F320} stelle Ergebnisse dar, \textbf{F400} speichere Messdaten, \textbf{F410} speichere Messgraph
 
 
 \end{itemize}
@@ -884,10 +930,18 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 \begin{description} 
 
-\item[T200] Laden einer ungültigen Datei als Messkonfiguration
+\item[\textbf{T200}] Laden einer ungültigen Datei als Messkonfiguration
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafik/T200-Ablauf.png}
+		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T200}}
+		\label{T200-Ablauf}
+	\end{center}
+\end{figure}
 \begin{itemize}
 
-\item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Laden von ungültigen Messkonfigurationsdateien.
+\item []\textbf{Testziel:} Teste das Verhalten der Anwendung beim Laden von ungültigen Messkonfigurationsdateien. Der Ablauf ist in Abbildung \ref{T200-Ablauf} zu sehen.
 
 \item []\textbf{Vorbedingung:} Geöffnete Anwendung.
 \item []\textbf{Aktionen:} Der Benutzer öffnet den Dialog zum Laden einer Datei über die Systemleiste und wählt eine Datei mit ungültigem Format zum Laden aus.
@@ -896,30 +950,46 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 
 
 \item []\textbf{Ergebnis:} Die Anwendung kann beim Laden von Messkonfigurationen zwischen gültigen und ungültigen Dateiformaten unterscheiden und entsprechend reagieren.
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F430 überprüfe Format bei Laden
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F430} überprüfe Format bei Laden
 
 \end{itemize}
 
-\item[T210] Erstellen einer ungültigen Messkonfiguration
+\item[\textbf{T210}] Erstellen einer ungültigen Messkonfiguration
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 10cm]{Grafik/T210-Ablauf.png}
+		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T210}}
+		\label{T210-Ablauf}
+	\end{center}
+\end{figure}
 \begin{itemize}
 
 \item []\textbf{Testziel:} 
 
-\item []\textbf{Vorbedingung:} Das Hauptfenster der Anwendung ist geöffnet. Die verwendeten Sensoren sind angeschlossen.
+\item []\textbf{Vorbedingung:} Das Hauptfenster der Anwendung ist geöffnet. Die verwendeten Sensoren sind angeschlossen. Der Ablauf ist in Abbildung \ref{T210-Ablauf} zu sehen.
 
 \item []\textbf{Aktionen:} Der Benutzer konstruiert eine Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung. Allerdings verbindet er die Darstellung nicht mit dem Rest der Konstruktion und startet die Messkonfiguration.
 \item []\textbf{Reaktionen:} Die Messung wird nicht gestartet, sondern eine aussagekräftige Fehlermeldung wird ausgegeben.
 \item []\textbf{Nachbedingung:} Die Anwendung überprüft vor dem Starten der Messkonfiguration, ob diese gültig ist.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann beim Starten zwischen gültigen und ungültigen Messkonfigurationen unterscheiden und entsprechend reagieren.
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F310 überprüfe Messkonfiguration beim Start
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F310} überprüfe Messkonfiguration beim Start
 
 \end{itemize}
 
-\item[T220] Entfernen eines Sensors bei laufender Messung
+\item[\textbf{T220}] Entfernen eines Sensors bei laufender Messung
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 10cm]{Grafik/T220-Ablauf.png}
+		\caption{kurze Darstellung des Ablaufs von Testfall \textbf{T220}}
+		\label{T220-Ablauf}
+	\end{center}
+\end{figure}
 \begin{itemize}
 
-\item []\textbf{Testziel:} Teste das Verhalten der Anwendung, wenn ein Sensor ausfällt und dessen Datenstrom abbricht.
+\item []\textbf{Testziel:} Teste das Verhalten der Anwendung, wenn ein Sensor ausfällt und dessen Datenstrom abbricht. Der Ablauf ist in Abbildung \ref{T220-Ablauf} zu sehen.
 
 \item []\textbf{Vorbedingung:} Die Anwendung ist geöffnet. Alle verwendeten Sensoren sind angeschlossen und betriebsbereit. Eine gültige Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung wurde geladen.
 \item []\textbf{Aktionen:} Der Benutzer startet die Messung. Aus einem unbekannten Grund wird die Verbindung zu einem Sensor getrennt.
@@ -927,7 +997,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \item []\textbf{Nachbedingung:} \gls{PhyPiDAQ} verliert die Verbindung zu einem Sensor und sendet keine Daten mehr an die Anwendung. Die Anwendung stürzt nicht ab, sondern gibt eine Fehlermeldung aus.
 
 \item []\textbf{Ergebnis:} Die Anwendung kann mit dem ungewollten Verlust eines Datenstroms umgehen ohne abzustürzen.
-\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} F450 Melde Abbruch des Datenstrom
+\item []\textbf{Wichtige abgedeckte funktionale Anforderungen, die in den vorangegangenen Testfällen noch nicht abgedeckt wurden:} \textbf{F450} Melde Abbruch des Datenstrom
 
 \end{itemize}
 
