@@ -228,7 +228,23 @@ In einem einfachen Versuchsaufbau sind die wesentlichen Schritte einer messtechn
 	
 \end{enumerate}
 
-Das projektierte Softwareprodukt soll die Schüler dabei unterstützen, die gängigen Schritte einer messtechnischen Verarbeitung zu definieren und zueinander in Beziehung zu setzen. Hierzu soll das Produkt \glspl{Konfigurationsbaustein} unterschiedlichen Typs anbieten, aus denen ein Schüler dann eine Messkonfiguration entwerfen kann. Die Konfigurationsbausteine sollen anpassbar sein, nicht nur um die Software für möglichst viele physikalische Fragestellungen einsetzen zu können, sondern auch um den Bedürfnissen unterschiedlicher Altersstufen gerecht zu werden. 
+Das projektierte Softwareprodukt soll die Schüler dabei unterstützen, die Schritte einer messtechnischen Verarbeitung spezifisch für eine physikalisches Experiment zu definieren und zueinander in Beziehung zu setzen. Hierzu soll das Produkt sogenannte \glspl{Konfigurationsbaustein} unterschiedlichen Typs anbieten, aus denen ein Schüler dann eine Messkonfiguration entwerfen kann. 
+
+ Der grundlegende softwaretechnische Ansatz des projektierten Systems besteht darin, während eines Messvorgangs für ähnliche Teilaufgaben jeweils einen bestimmten Bausteintyp vorzusehen und im Umkehrschluss gänzlich unterschiedliche Teilaufgaben einer Messkonfiguration von Konfigurationsbausteinen unterschiedlichen Typs erledigen zu lassen.
+ 
+  Eine Analyse zeigt, wie die angebotenen Konfigurationsbausteine geartet sein müssen, damit sie während eines Messvorgangs das ganze Spektrum der typischen Teilaufgaben erfüllen können:
+
+\begin{itemize}
+	
+	\item Bausteine vom Typ Sensor haben nur Ausgänge. Ein solcher (logischer) Sensorbaustein muss alle Informationen referenzieren können, die zum Ansprechen eines Messgeräts bzw. physikalischen Sensors benötigt werden. Da ein Messgerät Ausgänge bzw. Messkanäle haben kann, kann ein Sensorbaustein mehrere Ausgänge haben. Eingänge besitzt ein Sensorbaustein nicht. 
+	
+	\item Bausteine vom Typ Transformation haben einen oder mehrere Eingänge sowie einen oder mehrere Ausgänge. Für jeden Ausgang kann  ein Transformationsbaustein eine Vorschrift zur Berechnung eines Ausgangswertes aus einem Satz von Eingangswerten beinhalten. Eine Berechnungsvorschrift soll durch eine mathematische Funktionen oder durch eine programmtechnisch definierte Verarbeitung definiert werden können.
+	
+	\item Bausteine vom Typ Darstellung haben einen oder mehrere Eingänge. Ein Darstellungsbaustein soll definieren können, wie ein Satz von Eingangswerten die Erstellung bzw. Aktualisierung einer Darstellung beeinflusst. Ausgänge besitzt ein Darstellungsbaustein nicht. 
+	
+\end{itemize}
+
+Die Konfigurationsbausteine sollen anpassbar sein, nicht nur um die Software für möglichst viele physikalische Fragestellungen einsetzen zu können, sondern auch um den Bedürfnissen unterschiedlicher Altersstufen gerecht zu werden. 
 
 Natürlich soll dann auch der Betrieb der Messkonfiguration gesteuert werden können und das Produkt sollte eventuell auch Einblicke in Abläufe während des Betriebs unterstützen, beispielsweise zur Analyse unerwünschten Verhaltens.
 
