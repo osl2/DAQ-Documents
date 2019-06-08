@@ -212,6 +212,14 @@ Die hardwarenahe Ansteuerung der Sensoren soll durch das bereits vorhandene Soft
 Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel \ref{funktionale} bzw. \ref{nichtfunktionale} aufgelistet.
 Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient werden. (siehe Kapitel \ref{gui}).
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafik/Konkreter-Anwendungsfall-Vorschau.png}
+		\caption{Der Grundlegende Aufbau der Hauptbenutzeroberfläche}
+		\label{GUI_Vorschau}
+	\end{center}
+\end{figure}
+
 \clearpage
 \section{Zielbestimmung}\label{zielbestimmung}
 
@@ -743,22 +751,36 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 
 \begin{tabular}{| p{3cm} | p{10cm} |}
 	\hline
-	\textbf{Merkmal} & \textbf{Begründung für die Werteverteilung}\\
+	\textbf{Merkmal} & \textbf{Begründung für ''Sehr Wichtig''}\\
 	\hline
 	
 	Robustheit & Durch eine robuste Anwendung sollen möglichst wenige Komplikationen während des Unterrichtes auftreten. Der Lehrer soll sich nicht mit Softwareproblemen beschäftigen müssen. Das Qualitätsmerkmal ist deshalb sehr wichtig, da von unvorhergesehenen Situationen, wie etwa Fehlbedienung, ausgegangen werden muss.\\\cline{1-2}
 	
 	Benutzer-\newline freundlichkeit & Da die Anwendung einen wissensvermittelnden Auftrag hat, ist es sehr wichtig, dass die Anwendung für Schüler verständlich ist. Die Schüler sollen durch eine hohe Benutzerfreundlichkeit dazu angehalten werden, sich selbstständig mit den wissenschaftlichen Themen zu beschäftigen. Umgekehrt könnte das Fehlen eines hohen Grads an Benutzerfreundlichkeit ein Scheitern der Anwendung zur Folge haben.\\\cline{1-2}
 	
-	Erlernbarkeit & Der Physikunterricht ist zeitlich begrenzt. Je mehr Zeit der Lehrer damit verbringen muss die Schüler in eine neue Software einzulernen, desto weniger Zeit bleibt ihm neue Inhalte zu vermitteln.\\\cline{1-2}
-		
+	Erlernbarkeit & Der Physikunterricht ist zeitlich begrenzt. Je mehr Zeit der Lehrer damit verbringen muss die Schüler in eine neue Software einzulernen, desto weniger Zeit bleibt ihm neue Inhalte zu vermitteln. Das Qualitätsmerkmal ist deshalb sehr wichtig.\\\cline{1-2}
+\end{tabular}
+
+\begin{tabular}{| p{3cm} | p{10cm} |}
+	\hline
+	\textbf{Merkmal} & \textbf{Begründung für ''Wichtig''}\\
+	\hline
+	
 	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der Betrieb in der vorgesehenen Umgebung (siehe Kapitel \ref{produktumgebung}) gewährleistet werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die in einer erwarteten Umgebung bereits scheitert, nicht robust sein kann.\\\cline{1-2}
 	
 	Erweiterbarkeit & Es ist angedacht, die Anwendung um weitere Elemente, wie etwa Sensoren, erweitern zu können. Außerdem sollen Schüler eigene Transformationen erstellen und diese auch speichern können. Es ist daher wichtig, dass die Anwendung mit diesen Aufgaben umgehen kann.\\\cline{1-2}
 	
 	Effizienz & Im Vergleich zu einem PC bietet ein Raspberry Pi lediglich beschränkte Ressourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Ressourcen maximieren. Das Qualitätsmerkmal ist somit wichtig.\\\cline{1-2}
-	
-	Sicherheit & Die Anwendung soll ausschließlich in einer sicheren Umgebung verwendet werden. Das bereits vorhandene Berechtigungssystem des Betriebssystems sollte daher ausreichen. Das Qualitätsmerkmal ist somit unwichtig.\\\cline{1-2}
+
+	\hline
+\end{tabular}
+
+\begin{tabular}{| p{3cm} | p{10cm} |}
+	\hline
+	\textbf{Merkmal} & \textbf{Begründung für ''Weniger Wichtig''}\\
+	\hline
+		
+	Sicherheit & Die Anwendung soll ausschließlich in einer sicheren Umgebung verwendet werden. Das bereits vorhandene Berechtigungssystem des Betriebssystems sollte daher ausreichen. Jedoch ist für eine grundlegende Betriebssicherheit zu sorgen. Deshalb ist das Qualitätsmerkmal weniger wichtig.\\\cline{1-2}
 	
 	Portierbarkeit & Zum aktuellen Zeitpunkt ist keine Portierung der Anwendung auf viele unterschiedliche Betriebssysteme vorgesehen. Das Qualitätsmerkmal ist deshalb weniger wichtig.\\\cline{1-2}
 	
