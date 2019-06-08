@@ -808,6 +808,46 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 \end{description}
 
 \clearpage
+\section{Szenario mit Use-Case-Diagramm}\label{scenario}
+
+Abbildung \ref{UseCaseDiagramm} zeigt die Use-Cases und deren Ablauf für das nun im Folgenden beschriebene Szenario. Akteure in diesem Szenario sind ein Lehrer, ein Schüler sowie ein weiterer Lehrer. Das Szenario verwendet weitestgehend Testfälle aus Kapitel \ref{testfall}. (Bausteinprototypen sind lediglich in Sollkriterien spezifiziert und werden von den Testfällen in Kapitel \ref{testfall} nicht abgedeckt.)
+
+\begin{enumerate}
+	\item Lehrer A kennt das Messkonfigurationswerkzeug noch nicht so gut und erstellt zunächst eine ungültige \gls{Benutzerkonfiguration}. 
+	
+	\item Der zweite Versuch gelingt und Lehrer A erstellt erfolgreiche eine Messkonfiguration, die sich gut als Basis für seinen Unterricht eignet. Diese Messkonfiguration speichert er sogleich auf seinem Speicherstick.
+	
+	\item Am nächsten Tag gibt Lehrer A den Speicherstick einem seiner Schüler. 
+	
+	\item Dieser soll die vorbereitete Aufgabe bearbeiten. Also öffnet er die Messkonfiguration und bearbeitet diese.
+	
+	\item Da Lehrer A zunächst Zweifel hat, dass sein Schüler die Aufgabe ordnungsgemäß gelöst hat, lässt er ihn einen Messlauf durchführen. Der Messlauf verläuft wie erwartet, und weil der Schüler sehr ordentlich ist, speichert er die Messergebnisse.
+	
+	\item Es hat sich herumgesprochen, dass die Schüler von Lehrer A ganz begeistert von seinem Physik-Unterricht sind, und deshalb möchte Lehrer B einen ähnlichen Unterricht machen. Da er nicht so wie Lehrer A bei Null anfangen möchte, lässt er sich die eingangs von Lehrer A erstellte Messkonfiguration auf einem Speicherstick geben. 
+	
+	\item Lehrer B öffnet die Messkonfiguration und schaut sie sich genau an.
+	
+	\item Die Messkonfiguration enthält zwar einen brauchbaren Darstellungsbaustein. Da Lehrer B aber ein paar sehr schwache Schüler in seiner Klasse hat, möchte ein paar Aspekte auf den Darstellungen, die er erhält, besser hervorheben. Und er sieht schon kommen, dass er (und evtl. auch seine Kollegen) in Zukunft noch öfter von der verbesserten Darstellungsart profitieren könnten. Also erstellt er einen neuen optimierten Bausteinprototyp für Darstellungen.
+	
+	\item Lehrer B ersetzt den alten Darstellungsbaustein durch einen mit der verbesserten Darstellungsart. 
+	
+	\item Da die neue Darstellungsart auch in Zukunft noch öfter zum Einsatz kommen soll, speichert Lehrer B sie persistent. 
+	
+	\item Im darauffolgenden Schuljahr bekommt Lehrer A wieder eine Klasse der gleichen Klassenstufe zugewiesen, und dieses Mal hat auch er das Pech, ein paar sehr schwache Schüler in seiner Klasse zu haben. Er erzählt Lehrer B davon, und dieser überlässt ihm per Speicherstick eine Kopie der Datei, welche den bereits vor einem Jahr erstellten Bausteinprototypen enthält. 	
+	
+	\item Lehrer A öffnet die Datei und erkennt, dass die neuen Darstellungsbausteine, die er seinen Messkonfigurationen nun hinzufügen kann, sehr viel anschaulicher sind.
+\end{enumerate}
+
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafik/UseCaseDiagram.png}
+		\caption{Use-Case-Diagramm}
+		\label{UseCaseDiagramm}
+	\end{center}
+\end{figure}
+
+\clearpage
 \section{Globale Testfälle und Testszenarien}\label{testfall}
 
 \subsection{Einführung}
@@ -1027,46 +1067,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \end{description}
 
 \clearpage
-\section{Szenario mit Use-Case-Diagramm}\label{scenario}
 
-Abbildung \ref{UseCaseDiagramm} zeigt die Use-Cases und deren Ablauf für das nun im Folgenden beschriebene Szenario. Akteure in diesem Szenario sind ein Lehrer, ein Schüler sowie ein weiterer Lehrer. Das Szenario verwendet weitestgehend Testfälle aus Kapitel \ref{testfall}. (Bausteinprototypen sind lediglich in Sollkriterien spezifiziert und werden von den Testfällen in Kapitel \ref{testfall} nicht abgedeckt.)
-
-\begin{enumerate}
-	\item Lehrer A kennt das Messkonfigurationswerkzeug noch nicht so gut und erstellt zunächst eine ungültige \gls{Benutzerkonfiguration}. 
-	
-	\item Der zweite Versuch gelingt und Lehrer A erstellt erfolgreiche eine Messkonfiguration, die sich gut als Basis für seinen Unterricht eignet. Diese Messkonfiguration speichert er sogleich auf seinem Speicherstick.
-	
-	\item Am nächsten Tag gibt Lehrer A den Speicherstick einem seiner Schüler. 
-	
-	\item Dieser soll die vorbereitete Aufgabe bearbeiten. Also öffnet er die Messkonfiguration und bearbeitet diese.
-	
-	\item Da Lehrer A zunächst Zweifel hat, dass sein Schüler die Aufgabe ordnungsgemäß gelöst hat, lässt er ihn einen Messlauf durchführen. Der Messlauf verläuft wie erwartet, und weil der Schüler sehr ordentlich ist, speichert er die Messergebnisse.
-	
-	\item Es hat sich herumgesprochen, dass die Schüler von Lehrer A ganz begeistert von seinem Physik-Unterricht sind, und deshalb möchte Lehrer B einen ähnlichen Unterricht machen. Da er nicht so wie Lehrer A bei Null anfangen möchte, lässt er sich die eingangs von Lehrer A erstellte Messkonfiguration auf einem Speicherstick geben. 
-	
-	\item Lehrer B öffnet die Messkonfiguration und schaut sie sich genau an.
-	
-	\item Die Messkonfiguration enthält zwar einen brauchbaren Darstellungsbaustein. Da Lehrer B aber ein paar sehr schwache Schüler in seiner Klasse hat, möchte ein paar Aspekte auf den Darstellungen, die er erhält, besser hervorheben. Und er sieht schon kommen, dass er (und evtl. auch seine Kollegen) in Zukunft noch öfter von der verbesserten Darstellungsart profitieren könnten. Also erstellt er einen neuen optimierten Bausteinprototyp für Darstellungen.
-	
-	\item Lehrer B ersetzt den alten Darstellungsbaustein durch einen mit der verbesserten Darstellungsart. 
-	
-	\item Da die neue Darstellungsart auch in Zukunft noch öfter zum Einsatz kommen soll, speichert Lehrer B sie persistent. 
-	
-	\item Im darauffolgenden Schuljahr bekommt Lehrer A wieder eine Klasse der gleichen Klassenstufe zugewiesen, und dieses Mal hat auch er das Pech, ein paar sehr schwache Schüler in seiner Klasse zu haben. Er erzählt Lehrer B davon, und dieser überlässt ihm per Speicherstick eine Kopie der Datei, welche den bereits vor einem Jahr erstellten Bausteinprototypen enthält. 	
-	
-	\item Lehrer A öffnet die Datei und erkennt, dass die neuen Darstellungsbausteine, die er seinen Messkonfigurationen nun hinzufügen kann, sehr viel anschaulicher sind.
-\end{enumerate}
-
-
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width = 12cm]{Grafik/UseCaseDiagram.png}
-		\caption{Use-Case-Diagramm}
-		\label{UseCaseDiagramm}
-	\end{center}
-\end{figure}
-
-\clearpage
 \section{Systemmodelle}\label{systemmodell}
 
 Das projektierte Gesamtsystem wird aller Voraussicht nach auf drei Systemprozesse verteilt sein, die wie in Abbildung \ref{DeploymentDiagram} dargestellt, miteinander Daten austauschen.
