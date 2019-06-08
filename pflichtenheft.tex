@@ -730,11 +730,11 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 	\textbf{Merkmal} & \textbf{sehr wichtig} & \textbf{wichtig} & \textbf{weniger wichtig} & \textbf{unwichtig} \\
 	\hline
 	Robustheit & X & & & \\
-	Zuverlässigkeit & & X & & \\
 	Benutzerfreundlichkeit & X & & & \\
-	Sicherheit & & & & X \\
+	Zuverlässigkeit & & X & & \\
 	Erweiterbarkeit & & X & & \\
 	Effizienz & & X & & \\
+	Sicherheit & & & X & \\
 	Portierbarkeit & & & X & \\
 	Kompatibilität & & & X & \\
 	\hline
@@ -744,13 +744,21 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 	\hline
 	\textbf{Merkmal} & \textbf{Begründung für die Werteverteilung}\\
 	\hline
+	
 	Robustheit & Durch eine robuste Anwendung sollen möglichst wenige Komplikationen während des Unterrichtes auftreten. Der Lehrer soll sich nicht mit Softwareproblemen beschäftigen müssen. Das Qualitätsmerkmal ist deshalb sehr wichtig, da von unvorhergesehenen Situationen, wie etwa Fehlbedienung, ausgegangen werden muss.\\\cline{1-2}
-	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der Betrieb in der vorgesehenen Umgebung (siehe Kapitel \ref{produktumgebung}) gewährleistet werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die in einer erwarteten Umgebung bereits scheitert, nicht robust sein kann.\\\cline{1-2}
+	
 	Benutzer-\newline freundlichkeit & Da die Anwendung einen wissensvermittelnden Auftrag hat, ist es sehr wichtig, dass die Anwendung für Schüler verständlich ist. Die Schüler sollen durch eine hohe Benutzerfreundlichkeit dazu angehalten werden, sich selbstständig mit den wissenschaftlichen Themen zu beschäftigen. Umgekehrt könnte das Fehlen eines hohen Grads an Benutzerfreundlichkeit ein Scheitern der Anwendung zur Folge haben.\\\cline{1-2}
-	Sicherheit & Die Anwendung soll ausschließlich in einer sicheren Umgebung verwendet werden. Das bereits vorhandene Berechtigungssystem des Betriebssystems sollte daher ausreichen. Das Qualitätsmerkmal ist somit unwichtig.\\\cline{1-2}
+	
+	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der Betrieb in der vorgesehenen Umgebung (siehe Kapitel \ref{produktumgebung}) gewährleistet werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die in einer erwarteten Umgebung bereits scheitert, nicht robust sein kann.\\\cline{1-2}
+	
 	Erweiterbarkeit & Es ist angedacht, die Anwendung um weitere Elemente, wie etwa Sensoren, erweitern zu können. Außerdem sollen Schüler eigene Transformationen erstellen und diese auch speichern können. Es ist daher wichtig, dass die Anwendung mit diesen Aufgaben umgehen kann.\\\cline{1-2}
+	
 	Effizienz & Im Vergleich zu einem PC bietet ein Raspberry Pi lediglich beschränkte Ressourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Ressourcen maximieren. Das Qualitätsmerkmal ist somit wichtig.\\\cline{1-2}
+	
+	Sicherheit & Die Anwendung soll ausschließlich in einer sicheren Umgebung verwendet werden. Das bereits vorhandene Berechtigungssystem des Betriebssystems sollte daher ausreichen. Das Qualitätsmerkmal ist somit unwichtig.\\\cline{1-2}
+	
 	Portierbarkeit & Zum aktuellen Zeitpunkt ist keine Portierung der Anwendung auf viele unterschiedliche Betriebssysteme vorgesehen. Das Qualitätsmerkmal ist deshalb weniger wichtig.\\\cline{1-2}
+	
 	Kompatibilität & Da die Anwendung die Daten von einer externen Quelle, wie zum Beispiel \gls{PhyPiDAQ} bekommt, muss sie nicht stark auf sich verändernde Teile reagieren. Das Qualitätsmerkmal ist daher weniger wichtig.\\\cline{1-2}
 	\hline
 \end{tabular}
