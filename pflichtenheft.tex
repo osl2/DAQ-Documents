@@ -292,12 +292,12 @@ Im Folgenden werden \gls{Musskriterien} (MK), \gls{Sollkriterien} (SK), \gls{Wun
 	
 	\item 
 	\begin{MussKrit} 			
-		Der Benutzer muss einen Baustein zur Messkonfiguration hinzufügen können, d. h. er soll einen Prototypen auswählen und das Bausteinexemplars auf dem Konfigurationsfeld platzieren können. 
+		Der Benutzer muss einen Baustein zur Messkonfiguration hinzufügen können, d. h. er soll einen Prototypen auswählen und das Bausteinexemplar auf dem Konfigurationsfeld platzieren können. 
 	\end{MussKrit}
 	
 	\item 
 	\begin{MussKrit} 		
-		Der Benutzer muss die Baustein-Eigenschaften und die Position des Bausteins auf der Konfigurationsfeld nach seinen Wünschen anpassen können.
+		Der Benutzer muss wichtige funktionale Baustein-Eigenschaften und die Position des Bausteins auf der Konfigurationsfeld nach seinen Wünschen anpassen können.
 	\end{MussKrit}
 	
 	\item 
@@ -329,7 +329,7 @@ Im Folgenden werden \gls{Musskriterien} (MK), \gls{Sollkriterien} (SK), \gls{Wun
 
 \subsection{Handhabung von Bausteinprototypen}
 
-Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wird einem \glspl{Bausteinprototyp} eine Kopie angelegt.
+Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wird von einem \glspl{Bausteinprototyp} eine Kopie angelegt.
 
 \begin{itemize}
 	
@@ -344,7 +344,7 @@ Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wi
 		
 		\item 
 		\begin{SollKrit} 
-			durch Anpassung bereits vorhandener (evtl. auch generischer) Bausteintypen,
+			durch Kopie und Anpassung bereits vorhandener (evtl. auch generischer) Bausteinprototypen
 		\end{SollKrit}
 		
 		\item 
@@ -419,13 +419,13 @@ Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wi
 	
 	\item 
 	\begin{SollKrit} 
-		Die Anwendung sollte mindestens drei vorgefertigte Messkonfigurationen unterschiedliche Komplexität enthalten. 			
+		Die Anwendung sollte mindestens drei vorgefertigte Messkonfigurationen unterschiedlicher Komplexität enthalten. 			
 	\end{SollKrit}
 
 	\item
 	\begin{WunschKrit}
-Die Anwendung enthält Spiele, z.B kann ein Schüler versuchen ein vorgegebenes Messergebniss möglichst genau nachzumachen oder zu reproduzieren.
-\end{WunschKrit}
+		Die Anwendung enthält Spiele, die beispielsweise das Reproduzieren bzw. ,,Nachmachen`` von Messergebnissen vorsehen.
+	\end{WunschKrit}
 
 	
 \end{itemize}
@@ -450,7 +450,7 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 	
 	\item 
 	\begin{SollKrit} 
-		Während des Entwurfs bzw. der Bearbeitung einer Messkonfiguration soll der Nutzer Checks vornehmen, um überprüfen, ob die gesamte Messkonfiguration oder Teile in ihrem derzeitigen Zustand funktionieren. Bei negativem Ergebnis erhält der Benutzer möglichst aussagekräftige Hinweise. 
+		Während des Entwurfs bzw. der Bearbeitung einer Messkonfiguration soll der Nutzer Checks vornehmen, um zu überprüfen, ob die gesamte Messkonfiguration oder Teile in ihrem derzeitigen Zustand funktionieren. Bei negativem Ergebnis erhält der Benutzer möglichst aussagekräftige Hinweise. 
  
 	
 		\begin{itemize}
@@ -525,31 +525,36 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 
 \begin{itemize}
 	
-	\item \textbf{AK 1} Unterschiedliche Benutzerkonten bzw. personalisierte Arbeitsumgebungen  für die einzelnen Benutzer sieht das Produkt nicht vor. 
+	\item \textbf{AK 1} Unterschiedliche Benutzerkonten bzw. personalisierte Arbeitsumgebungen  für die einzelnen Benutzer sieht das Produkt nicht vor. 	
 	
 	\item \textbf{AK 2} Die zu erstellende Anwendung sieht keinerlei Erfassung oder Speicherung personenbezogener Nutzerdaten vor. Der Einsatz der Software erfordert dementsprechend keine Einverständniserklärung der Nutzer gemäß europäischer \gls{DSGVO}.
+	
+	\item \textbf{AK 3} Die Anwendung sieht lediglich ein lokales Speichern ihrer persistenten Daten vor. Sie macht keinen Gebrauch von Diensten aus dem Internet und enthält auch eine Teilen-Funktion.
+	
 	
 \end{itemize}
 
 \clearpage
 \section{Produkteinsatz}\label{produkteinsatz}
 
-\subsection{Anwendungsbereiche}
+\subsection{Einsatzbereiche}
 
 Die Anwendung ist für die Verwendung in Schulklassen ab der 7. bis zu 10. Klasse für Schüler und Lehrer im Physikunterricht konzipiert. Ebenfalls soll die Anwendung in Physikprojekten, sowie \gls{Science Labs} verwendet werden können. 
-Als \gls{opensource} Projekt im Rahmen des \gls{osl2} steht die Anwendung jedoch jedem Interessierten, zur Verwendung und Weiterentwicklung, zur Verfügung.
+Als \gls{opensource} Projekt im Rahmen des \gls{osl2} steht die Anwendung jedoch jedem Interessierten zur Verwendung und Weiterentwicklung zur Verfügung.
 
 
 \subsection{Zielgruppe}
 
-Die Zielgruppen sind hauptsächlich Schülerinnen und Schüler im Physikunterricht.  Diese verwenden die Anwendung, um erste eigene Messungen durchzuführen. Ein Ziel ist es, den Schülern erste Einblicke in Messtechniken zu geben. Weiter soll ihnen der Zusammenhang zwischen Ursache und Wirkung gezeigt werden. 
-Einerseits soll die Anwendung physikbegeisterten Schüler ansprechen. Andererseits soll sie auch von Schülern, die kein großes Vorwissen in Physik und Messtechnik haben, verwendet werden können. Diesen Schülern soll ebenfalls eine interessante und einfach zu bedienende Plattform geboten werden.
-Die Schüler brauchen ebenfalls keine Kenntnisse im Umgang mit der Programmiersprache Python oder mit einem Raspberry Pi.
+Die Zielgruppen sind hauptsächlich Schülerinnen und Schüler im Physikunterricht und deren Lehrer. 
+
+Die Schüler verwenden die Anwendung, um erste eigene Messungen durchzuführen. Ein Ziel ist es, den Schülern erste Einblicke in Messtechniken zu geben. Weiter soll ihnen der Zusammenhang zwischen Ursache und Wirkung gezeigt werden. 
+
+Einerseits soll die Anwendung physikbegeisterte Schüler ansprechen. Andererseits soll sie auch von Schülern, die kein großes Vorwissen in Physik und Messtechnik haben, verwendet werden können. Diesen Schülern soll ebenfalls eine interessante und einfach zu bedienende Plattform geboten werden und sie sollen keine Kenntnisse im Umgang mit der Programmiersprache Python oder mit einem Raspberry Pi benötigen.
 
 
 \subsection{Betriebsbedingungen}
 
-Die Anwendung läuft auf Computern, welche über eine Schnittstelle mit einem \gls{RasPi} verbunden sind, auf welchem das Programm \gls{PhyPiDAQ} läuft. Über das \gls{PhyPiDAQ} werden, die an das \gls{RasPi} angeschlossenen Sensoren adressiert. Die Sensoren schicken die \gls{messdaten} über das \gls{RasPi} an die Anwendung, die auf dem Computer läuft. 
+Damit \gls{PhyPiDAQ} seine Funktion erfüllen kann, muss es auf einem \gls{RasPi} ausgeführt werden. Die zu erstellende Anwendung, die auf PhyPiDAQ basiert, soll jedoch in erster Linie auf einem Arbeitsplatzrechner ausführbar sein. Zur Realisierung des Gesamtsystems muss folglich der Arbeitsplatzrechner, auf dem die Anwendung ausgeführt wird, Daten mit dem \gls{RasPi} über eine Hardware-Schnittstelle austauschen können. Hier kommen USB oder WLAN in Frage. Während eines Messlaufs erfasst \gls{PhyPiDAQ}  die Messwerte von den angeschlossenen Sensoren und leitet sie an die Anwendung, die auf dem Arbeitsrechner läuft, weiter. 
 
 
 \clearpage
@@ -560,14 +565,16 @@ Die Anwendung läuft auf einem Computer. Die \gls{messdaten} werden über \glspl
 \subsection{Software}
 
 Die Anwendung läuft auf Computern mit den Betriebssystemen Linux ab Kernel 4.15 oder Microsoft Windows ab Windows 10.
-Ebenfalls muss eine \gls{JVM} Version 8 installiert sein. Die Anwendung muss auf dem Computer vollständig installiert sein. 
+Ebenfalls muss eine \gls{JVM} ab Version 8 installiert sein. 
+
+Zum Ansteuern der Sensoren bzw. zum Abtasten neuer Messdaten wird, als Backend sozusagen, gls{PhyPiDAQ} benötigt. Die zum Datenaustausch erforderliche Schnittstelle wird im nachfolgenden Unterkapitel 4.3 beschrieben. 
 
 \subsection{Hardware}
 
-Die Anwendung läuft auf Computern, welche für den generellen Einsatz in der Schule gedacht sind.
+Die Anwendung läuft auf Arbeitsplatzrechnern, wie sie generell auch in der Schule verwendet werden.
 Die enthaltenen Komponenten sollten beispielsweise ein aktueller 4-Kern-Prozessor, 8 GB RAM und
-mindestens 256 GB Speicherplatz sein.\footnote{Beispielkonfiguration eines Schulcomputers nach dem Beraterkreis zur IT-Ausstattung von Schulen des Bayrischen Staatsministerium für Bildung und Kultus, Wissenschaft und Kunst, Votum 2016 unter \url{https://www.mebis.bayern.de/infoportal/konzepte/it-ausstattung/votum/}} Die Mindestanforderungen an den Computer für die Anwendung sind jedoch geringer. Die dargestellten Komponenten stellen aber ein Computer dar, auf dem die Anwendung ohne Probleme läuft. Schnittstellen für USB und Netzwerk sind ebenfalls erforderlich. 
-Auf dem über eine Schnittstelle verbundenen \gls{RasPi} des Models 3B+ muss \gls{PhyPiDAQ} installiert und verwendungsfähig sein.
+mindestens 256 GB Speicherplatz sein.\footnote{Beispielkonfiguration eines Schulcomputers nach dem Beraterkreis zur IT-Ausstattung von Schulen des Bayrischen Staatsministerium für Bildung und Kultus, Wissenschaft und Kunst, Votum 2016 unter \url{https://www.mebis.bayern.de/infoportal/konzepte/it-ausstattung/votum/}} Die Mindestanforderungen an den Computer für die Anwendung werden jedoch aller Voraussicht nach deutlich geringer sein, d.h. auf einem Rechner mit der genannten Ausstattung läuft  die Anwendung ohne Probleme. Des weiteren ist zum Datenaustausch eine USB- bzw. Netzwerk-Schnittstelle erforderlich. 
+Auf dem über eine Schnittstelle verbundenen \gls{RasPi} des Models 3B+ muss \gls{PhyPiDAQ} installiert und einsatzbereit sein.
 
 \subsection{Schnittstelle}
 
