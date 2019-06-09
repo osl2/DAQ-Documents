@@ -1148,6 +1148,8 @@ Measurement-Server und Hauptkomponente befinden sich im Kontrast hierzu jedoch n
 
 Ob es sich beispielsweise bei der verteilten Kommunikation um WLAN per Netzwerkadapter und bei der \gls{Stand-Alone-Kommunikation} um WLAN per \gls{Local-Loop} handelt, oder ob es sich (ebenso beispielsweise) bei der verteilten Kommunikation um USB und bei der Stand-Alone-Kommunikation um IPC handelt, sollte spätestens zu Beginn der Implementierungsphase entschieden werden.  
 
+In jedem Fall ist es unabdingbar, dass der Measurement-Server ein Interface zur horizontalen Kommunikation bereitstellt, welches die Hauptkomponente zur Erfüllung der messtechnischen Teilaufgaben verwenden kann. Die Implementierung dieses Interfaces realisiert ein Protokoll auf Anwendungsschicht zur Vorbereitung und Durchführung dieser messtechnischen Teilaufgaben. Dies umfasst neben der anwendungsspezifischen Signalisierung natürlich auch die Übertragung der Messwerte. In Abbildung \ref{DeploymentDiagram} wird diese Schnittstelle ,,MeasurementInterface`` genannt und in der dafür vorgesehenen UML-Notation als Lollipop dargestellt. 
+
 
 \begin{figure}[h]
 	\begin{center}
@@ -1334,14 +1336,14 @@ In der Implementierungsphase ist das Hauptrisiko das Produzieren von Implementie
 In der Qualitätssicherungsphase liegt das Hauptrisiko darin, dass wir uns zu sehr auf Kleinigkeiten konzentrieren und das Wesentliche 
 übersehen. Dazu planen wir unsere Anwendung mit Schülern zu testen. Damit sollen wir zuvor übersehene Schwierigkeiten hingewiesen zu werden.
 
-Ein Risiko, das sich durch alle Projektphasen durchzieht, ist der Ausfall eines Teammitglieds, beispielsweise durch Krankheit. Bei einem Team von fünf Mitgliedern, bedeutet ein Ausfall ein Verlust von 20\%. Unsere Gegenmaßnahme ist die Einplanung von Pufferzeit in jede Projektphase. Ein weiteres phasenübergreifendes Risiko ist ein Ausfall wegen Urlaub oder Klausuren. Dieses Risiko wird aber durch unsere frühzeitige Planung und durch das Einplanen von Klausurpausen minimiert.
+Ein Risiko, das sich durch alle Projektphasen durchzieht, ist der Ausfall eines Teammitglieds, beispielsweise durch Krankheit. Bei einem Team von fünf Mitgliedern, bedeutet ein Ausfall ein Verlust von 20\%. Unsere Gegenmaßnahme in einem solchen Fall wäre dann nicht nur die Einplanung von Pufferzeit in jede Projektphase, sondern auch der Verzicht auf die Umsetzung von Sollkriterien. Ein weiteres phasenübergreifendes Risiko ist ein Ausfall wegen Urlaub oder Klausuren. Dieses Risiko wird aber durch unsere frühzeitige Planung und durch das Einplanen von Klausurpausen minimiert.
 
 \subsection{Spezielle Anforderungen}\label{entwicklungsumgebung}
 
 Für die Umsetzung des Projekts ist Zugang zu funktionierender Hardware (konkret: mindestens ein \gls{RasPi}, möglichst mehrere \glspl{sensor}, Peripheriegeräte) notwendig, um die Funktionalität des Produkts sicherzustellen.\newline
 Ansonsten muss gegebenenfalls auf simulierte \gls{messdaten} zurückgegriffen werden.
 
-Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen welche in PhyPiDAQ fehlerhaft sind können möglicherweise nicht korrekt implementiert werden. PhyPiDAQ sollte beispielsweise im Fall eines Programmfehlers eindeutige Fehlercodes produzieren, damit der Benutzer aussagekräftig über das Problem informiert werden kann.\newline
+Das Projekt ist von \gls{PhyPiDAQ} abhängig, das heißt Funktionen, welche in PhyPiDAQ fehlerhaft sind, können möglicherweise nicht korrekt implementiert werden. Jeder denkbare Fehler sollte von PhyPiDAQ mit einem eindeutigen Fehlercodes angezeigt werden, damit der Benutzer aussagekräftig über das Problem informiert werden kann.\newline
 Durch Kooperation mit den PhyPiDAQ-Entwicklern können derartige Probleme vermieden werden.
 
 \clearpage
