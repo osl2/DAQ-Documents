@@ -204,13 +204,21 @@
 \clearpage
 \section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
 
-Die im Rahmen des \gls{osl2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel~\ref{zielbestimmung}). Die erhoffte Konsequenz ist, dass mehr Schüler für wissenschaftliche und technische Fächer motiviert werden.
-Demzufolge kommt die Anwendung in Schulen zum Einsatz. 
-Die Zielgruppe sind Schüler in der siebten Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
-Die Anwendung läuft in einer \gls{JVM} und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). 
-Die hardwarenahe Ansteuerung der Sensoren soll durch das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} erfolgen (siehe Kapitel \ref{systemmodell}).
-Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel \ref{funktionale} bzw. \ref{nichtfunktionale} aufgelistet.
-Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient werden. (siehe Kapitel \ref{gui}).
+Dieses Projekt wird im Rahmen des \gls{osl2} entwickelt. Dabei handelt es sich um eine Anwendung zur Messwerterfassung und Analyse mit einem \gls{RasPi}. Die Anwendung baut auf das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} auf. Mit \gls{PhyPiDAQ} wird die hardwarenahe Ansteuerung der Sensoren durchgeführt. Die gesammelten Daten werden dann über eine Schnittstelle an die Anwendung übertragen. Die Anwendung läuft dabei in einer \gls{JVM} und stellt Schülern und Lehrern eine \gls{GrafBenOber} zur Verfügung. Eine Vorschau der Hauptbenutzeroberfläche einer möglichen GUI ist in Abbildung \ref{GUI_Vorschau} zu sehen.
+
+
+Mit Hilfe der GUI der Anwendung, kann der Benutzer eine \gls{Benutzerkonfiguration} erstellen, verändern, laden und speichern. Eine Messkonfiguration besteht dabei aus verschiedenen Bausteinen(\glspl{sensor}, \glspl{transformation}, \glspl{darstellung}) und deren Verbindungen untereinander. Die Messkonfiguration wird im Konfigurationsfeld erstellt, wie in Abbildung \ref{GUI_Vorschau} zu sehen ist.
+ 
+Ist eine Messkonfiguration vollständig erstellt worden, kann sie gestartet werden. Vor dem Starten einer Messung wird geprüft, ob eine Messkonfiguration gültig und somit funktionsfähig ist. Während der Messung werden die Messdaten von der Anwendung erfasst, verarbeitet und dargestellt. Ist die Messung schließlich gestoppt oder beendet, können Messergebnisse als Graphen oder als Tabellen gespeichert werden.
+
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafik/Konkreter-Anwendungsfall-Vorschau.png}
+		\caption{Der Grundlegende Aufbau der Hauptbenutzeroberfläche}
+		\label{GUI_Vorschau}
+	\end{center}
+\end{figure}
 
 \clearpage
 \section{Zielbestimmung}\label{zielbestimmung}
@@ -730,11 +738,12 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 	\textbf{Merkmal} & \textbf{sehr wichtig} & \textbf{wichtig} & \textbf{weniger wichtig} & \textbf{unwichtig} \\
 	\hline
 	Robustheit & X & & & \\
-	Zuverlässigkeit & & X & & \\
 	Benutzerfreundlichkeit & X & & & \\
-	Sicherheit & & & & X \\
+	Erlernbarkeit & X & & & \\
+	Zuverlässigkeit & & X & & \\
 	Erweiterbarkeit & & X & & \\
 	Effizienz & & X & & \\
+	Sicherheit & & & X & \\
 	Portierbarkeit & & & X & \\
 	Kompatibilität & & & X & \\
 	\hline
@@ -742,15 +751,39 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 
 \begin{tabular}{| p{3cm} | p{10cm} |}
 	\hline
-	\textbf{Merkmal} & \textbf{Begründung für die Werteverteilung}\\
+	\textbf{Merkmal} & \textbf{Begründung für ''Sehr Wichtig''}\\
 	\hline
+	
 	Robustheit & Durch eine robuste Anwendung sollen möglichst wenige Komplikationen während des Unterrichtes auftreten. Der Lehrer soll sich nicht mit Softwareproblemen beschäftigen müssen. Das Qualitätsmerkmal ist deshalb sehr wichtig, da von unvorhergesehenen Situationen, wie etwa Fehlbedienung, ausgegangen werden muss.\\\cline{1-2}
-	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der Betrieb in der vorgesehenen Umgebung (siehe Kapitel \ref{produktumgebung}) gewährleistet werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die in einer erwarteten Umgebung bereits scheitert, nicht robust sein kann.\\\cline{1-2}
+	
 	Benutzer-\newline freundlichkeit & Da die Anwendung einen wissensvermittelnden Auftrag hat, ist es sehr wichtig, dass die Anwendung für Schüler verständlich ist. Die Schüler sollen durch eine hohe Benutzerfreundlichkeit dazu angehalten werden, sich selbstständig mit den wissenschaftlichen Themen zu beschäftigen. Umgekehrt könnte das Fehlen eines hohen Grads an Benutzerfreundlichkeit ein Scheitern der Anwendung zur Folge haben.\\\cline{1-2}
-	Sicherheit & Die Anwendung soll ausschließlich in einer sicheren Umgebung verwendet werden. Das bereits vorhandene Berechtigungssystem des Betriebssystems sollte daher ausreichen. Das Qualitätsmerkmal ist somit unwichtig.\\\cline{1-2}
+	
+	Erlernbarkeit & Der Physikunterricht ist zeitlich begrenzt. Je mehr Zeit der Lehrer damit verbringen muss die Schüler in eine neue Software einzulernen, desto weniger Zeit bleibt ihm neue Inhalte zu vermitteln. Das Qualitätsmerkmal ist deshalb sehr wichtig.\\\cline{1-2}
+\end{tabular}
+
+\begin{tabular}{| p{3cm} | p{10cm} |}
+	\hline
+	\textbf{Merkmal} & \textbf{Begründung für ''Wichtig''}\\
+	\hline
+	
+	Zuverlässigkeit & Durch die Zuverlässigkeit der Anwendung soll der Betrieb in der vorgesehenen Umgebung (siehe Kapitel \ref{produktumgebung}) gewährleistet werden. Das Qualitätsmerkmal ist deshalb wichtig, da eine Anwendung, die in einer erwarteten Umgebung bereits scheitert, nicht robust sein kann.\\\cline{1-2}
+	
 	Erweiterbarkeit & Es ist angedacht, die Anwendung um weitere Elemente, wie etwa Sensoren, erweitern zu können. Außerdem sollen Schüler eigene Transformationen erstellen und diese auch speichern können. Es ist daher wichtig, dass die Anwendung mit diesen Aufgaben umgehen kann.\\\cline{1-2}
+	
 	Effizienz & Im Vergleich zu einem PC bietet ein Raspberry Pi lediglich beschränkte Ressourcen. Effizienz bedeutet in diesem Kontext, dass erstellte und importierte Software-Artefakte das Benutzererlebnis trotz knapper Ressourcen maximieren. Das Qualitätsmerkmal ist somit wichtig.\\\cline{1-2}
+
+	\hline
+\end{tabular}
+
+\begin{tabular}{| p{3cm} | p{10cm} |}
+	\hline
+	\textbf{Merkmal} & \textbf{Begründung für ''Weniger Wichtig''}\\
+	\hline
+		
+	Sicherheit & Die Anwendung soll ausschließlich in einer sicheren Umgebung verwendet werden. Das bereits vorhandene Berechtigungssystem des Betriebssystems sollte daher ausreichen. Jedoch ist für eine grundlegende Betriebssicherheit zu sorgen. Deshalb ist das Qualitätsmerkmal weniger wichtig.\\\cline{1-2}
+	
 	Portierbarkeit & Zum aktuellen Zeitpunkt ist keine Portierung der Anwendung auf viele unterschiedliche Betriebssysteme vorgesehen. Das Qualitätsmerkmal ist deshalb weniger wichtig.\\\cline{1-2}
+	
 	Kompatibilität & Da die Anwendung die Daten von einer externen Quelle, wie zum Beispiel \gls{PhyPiDAQ} bekommt, muss sie nicht stark auf sich verändernde Teile reagieren. Das Qualitätsmerkmal ist daher weniger wichtig.\\\cline{1-2}
 	\hline
 \end{tabular}
@@ -806,6 +839,46 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 \item[NF220] Daten werden ausschließlich lokal gespeichert.
 
 \end{description}
+
+\clearpage
+\section{Szenario mit Use-Case-Diagramm}\label{scenario}
+
+Abbildung \ref{UseCaseDiagramm} zeigt die Use-Cases und deren Ablauf für das nun im Folgenden beschriebene Szenario. Akteure in diesem Szenario sind ein Lehrer, ein Schüler sowie ein weiterer Lehrer. Das Szenario verwendet weitestgehend Testfälle aus Kapitel \ref{testfall}. (Bausteinprototypen sind lediglich in Sollkriterien spezifiziert und werden von den Testfällen in Kapitel \ref{testfall} nicht abgedeckt.)
+
+\begin{enumerate}
+	\item Lehrer A kennt das Messkonfigurationswerkzeug noch nicht so gut und erstellt zunächst eine ungültige \gls{Benutzerkonfiguration}. 
+	
+	\item Der zweite Versuch gelingt und Lehrer A erstellt erfolgreiche eine Messkonfiguration, die sich gut als Basis für seinen Unterricht eignet. Diese Messkonfiguration speichert er sogleich auf seinem Speicherstick.
+	
+	\item Am nächsten Tag gibt Lehrer A den Speicherstick einem seiner Schüler. 
+	
+	\item Dieser soll die vorbereitete Aufgabe bearbeiten. Also öffnet er die Messkonfiguration und bearbeitet diese.
+	
+	\item Da Lehrer A zunächst Zweifel hat, dass sein Schüler die Aufgabe ordnungsgemäß gelöst hat, lässt er ihn einen Messlauf durchführen. Der Messlauf verläuft wie erwartet, und weil der Schüler sehr ordentlich ist, speichert er die Messergebnisse.
+	
+	\item Es hat sich herumgesprochen, dass die Schüler von Lehrer A ganz begeistert von seinem Physik-Unterricht sind, und deshalb möchte Lehrer B einen ähnlichen Unterricht machen. Da er nicht so wie Lehrer A bei Null anfangen möchte, lässt er sich die eingangs von Lehrer A erstellte Messkonfiguration auf einem Speicherstick geben. 
+	
+	\item Lehrer B öffnet die Messkonfiguration und schaut sie sich genau an.
+	
+	\item Die Messkonfiguration enthält zwar einen brauchbaren Darstellungsbaustein. Da Lehrer B aber ein paar sehr schwache Schüler in seiner Klasse hat, möchte ein paar Aspekte auf den Darstellungen, die er erhält, besser hervorheben. Und er sieht schon kommen, dass er (und evtl. auch seine Kollegen) in Zukunft noch öfter von der verbesserten Darstellungsart profitieren könnten. Also erstellt er einen neuen optimierten Bausteinprototyp für Darstellungen.
+	
+	\item Lehrer B ersetzt den alten Darstellungsbaustein durch einen mit der verbesserten Darstellungsart. 
+	
+	\item Da die neue Darstellungsart auch in Zukunft noch öfter zum Einsatz kommen soll, speichert Lehrer B sie persistent. 
+	
+	\item Im darauffolgenden Schuljahr bekommt Lehrer A wieder eine Klasse der gleichen Klassenstufe zugewiesen, und dieses Mal hat auch er das Pech, ein paar sehr schwache Schüler in seiner Klasse zu haben. Er erzählt Lehrer B davon, und dieser überlässt ihm per Speicherstick eine Kopie der Datei, welche den bereits vor einem Jahr erstellten Bausteinprototypen enthält. 	
+	
+	\item Lehrer A öffnet die Datei und erkennt, dass die neuen Darstellungsbausteine, die er seinen Messkonfigurationen nun hinzufügen kann, sehr viel anschaulicher sind.
+\end{enumerate}
+
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafik/UseCaseDiagram.png}
+		\caption{Use-Case-Diagramm}
+		\label{UseCaseDiagramm}
+	\end{center}
+\end{figure}
 
 \clearpage
 \section{Globale Testfälle und Testszenarien}\label{testfall}
@@ -1027,46 +1100,7 @@ In diesem Kapitel werden einige Testfälle zur Benutzung der Anwendung und zur H
 \end{description}
 
 \clearpage
-\section{Szenario mit Use-Case-Diagramm}\label{scenario}
 
-Abbildung \ref{UseCaseDiagramm} zeigt die Use-Cases und deren Ablauf für das nun im Folgenden beschriebene Szenario. Akteure in diesem Szenario sind ein Lehrer, ein Schüler sowie ein weiterer Lehrer. Das Szenario verwendet weitestgehend Testfälle aus Kapitel \ref{testfall}. (Bausteinprototypen sind lediglich in Sollkriterien spezifiziert und werden von den Testfällen in Kapitel \ref{testfall} nicht abgedeckt.)
-
-\begin{enumerate}
-	\item Lehrer A kennt das Messkonfigurationswerkzeug noch nicht so gut und erstellt zunächst eine ungültige \gls{Benutzerkonfiguration}. 
-	
-	\item Der zweite Versuch gelingt und Lehrer A erstellt erfolgreiche eine Messkonfiguration, die sich gut als Basis für seinen Unterricht eignet. Diese Messkonfiguration speichert er sogleich auf seinem Speicherstick.
-	
-	\item Am nächsten Tag gibt Lehrer A den Speicherstick einem seiner Schüler. 
-	
-	\item Dieser soll die vorbereitete Aufgabe bearbeiten. Also öffnet er die Messkonfiguration und bearbeitet diese.
-	
-	\item Da Lehrer A zunächst Zweifel hat, dass sein Schüler die Aufgabe ordnungsgemäß gelöst hat, lässt er ihn einen Messlauf durchführen. Der Messlauf verläuft wie erwartet, und weil der Schüler sehr ordentlich ist, speichert er die Messergebnisse.
-	
-	\item Es hat sich herumgesprochen, dass die Schüler von Lehrer A ganz begeistert von seinem Physik-Unterricht sind, und deshalb möchte Lehrer B einen ähnlichen Unterricht machen. Da er nicht so wie Lehrer A bei Null anfangen möchte, lässt er sich die eingangs von Lehrer A erstellte Messkonfiguration auf einem Speicherstick geben. 
-	
-	\item Lehrer B öffnet die Messkonfiguration und schaut sie sich genau an.
-	
-	\item Die Messkonfiguration enthält zwar einen brauchbaren Darstellungsbaustein. Da Lehrer B aber ein paar sehr schwache Schüler in seiner Klasse hat, möchte ein paar Aspekte auf den Darstellungen, die er erhält, besser hervorheben. Und er sieht schon kommen, dass er (und evtl. auch seine Kollegen) in Zukunft noch öfter von der verbesserten Darstellungsart profitieren könnten. Also erstellt er einen neuen optimierten Bausteinprototyp für Darstellungen.
-	
-	\item Lehrer B ersetzt den alten Darstellungsbaustein durch einen mit der verbesserten Darstellungsart. 
-	
-	\item Da die neue Darstellungsart auch in Zukunft noch öfter zum Einsatz kommen soll, speichert Lehrer B sie persistent. 
-	
-	\item Im darauffolgenden Schuljahr bekommt Lehrer A wieder eine Klasse der gleichen Klassenstufe zugewiesen, und dieses Mal hat auch er das Pech, ein paar sehr schwache Schüler in seiner Klasse zu haben. Er erzählt Lehrer B davon, und dieser überlässt ihm per Speicherstick eine Kopie der Datei, welche den bereits vor einem Jahr erstellten Bausteinprototypen enthält. 	
-	
-	\item Lehrer A öffnet die Datei und erkennt, dass die neuen Darstellungsbausteine, die er seinen Messkonfigurationen nun hinzufügen kann, sehr viel anschaulicher sind.
-\end{enumerate}
-
-
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width = 12cm]{Grafik/UseCaseDiagram.png}
-		\caption{Use-Case-Diagramm}
-		\label{UseCaseDiagramm}
-	\end{center}
-\end{figure}
-
-\clearpage
 \section{Systemmodelle}\label{systemmodell}
 
 Das projektierte Gesamtsystem wird aller Voraussicht nach auf drei Systemprozesse verteilt sein, die wie in Abbildung \ref{DeploymentDiagram} dargestellt, miteinander Daten austauschen.
@@ -1212,16 +1246,16 @@ Im Konfigurationsfeld wird die in Bearbeitung befindliche Messkonfiguration des 
 
 \begin{tabular}[t]{p{1cm} p{10cm}}
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Information.png} & Das ,,Informations``-Symbol zeigt nach Aktivierung weiterführende Informationen zu dem Element an, zu dem es gehört. So würde beispielsweise bei einer Transformation die Funktion angezeigt werde, die sie realisiert.\newline\\\cline{1-2}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensorelement.png} & Repräsentation eines Sensors, den PhyPiDAQ ansteuern kann. Voraussetzung hierfür ist die Existenz einer \gls{konfigdata}.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Sensorelement.png} & Repräsentation eines Sensors, den PhyPiDAQ ansteuern kann. Voraussetzung hierfür ist die Existenz einer \gls{konfigdata}. Beispiele sind: Temperatursensoren, Bewegungssensoren und Lichtsensoren\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Sensor.png} & Die zu einem Sensor gehörende Eingabe. Die Eingabe wird nur angezeigt, wenn auch die Kanäle angezeigt werden.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Sensor.png} & Die zu einem Sensor gehörende Ausgabe. Jeder Sensor hat genau eine Ausgabe.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Kanal.png} & Der zu einem Sensor gehörende Kanal. Die Anzahl an angezeigten Kanälen hängt von dem Sensor ab. In den Optionen kann eingestellt werden, ob die Kanäle angezeigt werden.\newline\\\cline{1-2}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.png} & Repräsentation einer \gls{transformation}. Jedem Eingang können durch Einfügen einer Verbindung Daten übergeben werden.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungselement.png} & Repräsentation einer \gls{transformation}. Jedem Eingang können durch Einfügen einer Verbindung Daten übergeben werden. Beispiele sind: Addition zweier Werte und Bilden des Durchschnittes zweier Werte.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Eingabe-Verbindung.png} & Die Eingabe einer Transformation. Die Anzahl der verfügbaren Eingaben hängt von der Transformation ab.\newline\\
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Ausgabe-Transformation.png} & Die Ausgabe einer Transformation. Die Anzahl der verfügbaren Ausgaben hängt von der Transformation ab.\newline\\\cline{1-2}
 
 	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Verbindungspfeil.png} & Eine Verbindung zwischen zwei Elementen. Sie besitzt eine Richtung. Daten ,,fließen`` also nicht in beide Richtungen.\newline\\\cline{1-2}
-	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Darstellungsfenster.png} & Eine Darstellung erhält Daten und stellt diese grafisch da.\newline\\
+	\vspace{0cm}\includegraphics[width = 1 cm]{Grafik/Darstellungsfenster.png} & Eine Darstellung erhält Daten und stellt diese grafisch da. Beispiele sind: Ein Balkendiagramm und eine Tabelle.\newline\\
 
 \end{tabular}
 
