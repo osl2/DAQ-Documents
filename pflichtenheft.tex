@@ -204,12 +204,14 @@
 \clearpage
 \section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
 
-Dieses Projekt wird im Rahmen des \gls{osl2} entwickelt. Dabei handelt es sich um eine Anwendung zur Messwerterfassung und Analyse mit einem \gls{RasPi}. Die Anwendung baut auf das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} auf. Mit \gls{PhyPiDAQ} wird die hardwarenahe Ansteuerung der Sensoren durchgeführt. Die gesammelten Daten werden dann über eine Schnittstelle an die Anwendung übertragen. Die Anwendung läuft dabei in einer \gls{JVM} und stellt Schülern und Lehrern eine \gls{GrafBenOber} zur Verfügung. Eine Vorschau der Hauptbenutzeroberfläche einer möglichen GUI ist in Abbildung \ref{GUI_Vorschau} zu sehen.
+Dieses Projekt wird im Rahmen des \gls{osl2} entwickelt. Dabei handelt es sich um eine Anwendung zur Messwerterfassung und -analyse mit einem \gls{RasPi}. Die Anwendung baut auf das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} auf. Mit \gls{PhyPiDAQ} wird die hardwarenahe Ansteuerung der Sensoren durchgeführt. 
+
+Die erfassten Daten werden dann über eine Schnittstelle an die Anwendung übertragen. Die Anwendung läuft dabei in einer \gls{JVM} und stellt Schülern und Lehrern eine \gls{GrafBenOber} zur Verfügung. Eine Vorschau der Hauptbenutzeroberfläche einer möglichen GUI ist in Abbildung \ref{GUI_Vorschau} zu sehen.
 
 
-Mit Hilfe der GUI der Anwendung, kann der Benutzer eine \gls{Benutzerkonfiguration} erstellen, verändern, laden und speichern. Eine Messkonfiguration besteht dabei aus verschiedenen Bausteinen(\glspl{sensor}, \glspl{transformation}, \glspl{darstellung}) und deren Verbindungen untereinander. Die Messkonfiguration wird im Konfigurationsfeld erstellt, wie in Abbildung \ref{GUI_Vorschau} zu sehen ist.
+Mit Hilfe der GUI der Anwendung, kann der Benutzer sogenannte \gls{Benutzerkonfiguration} erstellen, verändern, laden und speichern. Eine Messkonfiguration besteht dabei aus verschiedenen Bausteinen(\glspl{sensor}, \glspl{transformation}, \glspl{darstellung}) und deren Verbindungen untereinander. Die Messkonfiguration wird im Konfigurationsfeld erstellt, wie in Abbildung \ref{GUI_Vorschau} zu sehen ist.
  
-Ist eine Messkonfiguration vollständig erstellt worden, kann sie gestartet werden. Vor dem Starten einer Messung wird geprüft, ob eine Messkonfiguration gültig und somit funktionsfähig ist. Während der Messung werden die Messdaten von der Anwendung erfasst, verarbeitet und dargestellt. Ist die Messung schließlich gestoppt oder beendet, können Messergebnisse als Graphen oder als Tabellen gespeichert werden.
+Ist eine Messkonfiguration vollständig erstellt worden, kann sie gestartet werden. Vor dem Starten einer Messung wird geprüft, ob eine Messkonfiguration funktionsfähig ist. Während der Messung werden die Messdaten von der Anwendung erfasst, verarbeitet und dargestellt. Ist die Messung schließlich beendet, können die Messergebnisse gespeichert werden.
 
 
 \begin{figure}[htbp]
@@ -223,7 +225,11 @@ Ist eine Messkonfiguration vollständig erstellt worden, kann sie gestartet werd
 \clearpage
 \section{Zielbestimmung}\label{zielbestimmung}
 
+
+
 Die Anwendung soll es Lehrern ermöglichen, Schülern ab der siebten Klasse Grundkenntnisse der digitalen Messwerterfassung in einer für Schüler interessanten und motivierenden Art und Weise näher zu bringen. 
+
+\subsection{Analyse der Grundfunktionen}
 
 In einem einfachen Versuchsaufbau sind die wesentlichen Schritte einer messtechnischen Verarbeitung die Folgenden: 
 
@@ -236,10 +242,12 @@ In einem einfachen Versuchsaufbau sind die wesentlichen Schritte einer messtechn
 	
 \end{enumerate}
 
-Das projektierte Softwareprodukt soll die Schüler dabei unterstützen, die Schritte einer messtechnischen Verarbeitung spezifisch für eine physikalisches Experiment zu definieren und zueinander in Beziehung zu setzen. Hierzu soll das Produkt sogenannte \glspl{Konfigurationsbaustein} unterschiedlichen Typs anbieten, aus denen ein Schüler dann eine Messkonfiguration entwerfen kann. 
+Das projektierte Softwareprodukt soll die Schüler dabei unterstützen, die Schritte einer messtechnischen Verarbeitung spezifisch für eine physikalisches Experiment zu definieren und zueinander in Beziehung zu setzen. Hierzu soll das Produkt sogenannte \glspl{Konfigurationsbaustein} unterschiedlichen Typs anbieten, die ein Schüler miteinander verbinden kann. 
 
- Der grundlegende softwaretechnische Ansatz des projektierten Systems besteht darin, während eines Messvorgangs für ähnliche Teilaufgaben jeweils einen bestimmten Bausteintyp vorzusehen und im Umkehrschluss gänzlich unterschiedliche Teilaufgaben einer Messkonfiguration von Konfigurationsbausteinen unterschiedlichen Typs erledigen zu lassen.
+ Der grundlegende softwaretechnische Ansatz des projektierten Systems besteht darin, während eines Messvorgangs für ähnliche Teilaufgaben jeweils einen bestimmten Bausteintyp vorzusehen und im Umkehrschluss gänzlich unterschiedliche Teilaufgaben einer komplexen Messwerterfassung von Konfigurationsbausteinen unterschiedlichen Typs erledigen zu lassen.
  
+Grundsätzlich soll ein Baustein keinen, einen oder mehrere Eingänge sowie keinen, einen oder mehrere Ausgänge haben können.  Liegt am Ausgang eines Bausteins ein Wert an, so kann dieser mithilfe einer Weiterleitungsregel bzw. ,,Drahts`` an den Eingang eines nachgelagerten Bausteins weitergeleitet werden.
+
   Eine Analyse zeigt, wie die angebotenen Konfigurationsbausteine geartet sein müssen, damit sie während eines Messvorgangs das ganze Spektrum der typischen Teilaufgaben erfüllen können:
 
 \begin{itemize}
@@ -252,7 +260,9 @@ Das projektierte Softwareprodukt soll die Schüler dabei unterstützen, die Schr
 	
 \end{itemize}
 
-Die Konfigurationsbausteine sollen anpassbar sein, nicht nur um die Software für möglichst viele physikalische Fragestellungen einsetzen zu können, sondern auch um den Bedürfnissen unterschiedlicher Altersstufen gerecht zu werden. 
+Aus graphentheoretischer Sicht soll ein Benutzer also die Möglichkeit haben, einen gerichteten zyklenfreien Graphen mit Knoten vom Typ Sensor, Transformation oder Darstellung zu entwerfen. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellungen keine Ausgangskanten haben dürfen. Dieser Graph wird im Folgenden ,,\gls{Benutzerkonfiguration}`` genannt.
+
+Die Konfigurationsbausteine sollen anpassbar sein, nicht nur um die Software für möglichst viele physikalische Fragestellungen einsetzen zu können, sondern auch um den Bedürfnissen unterschiedlicher Altersstufen gerecht zu werden.
 
 Natürlich soll dann auch der Betrieb der Messkonfiguration gesteuert werden können und das Produkt sollte eventuell auch Einblicke in Abläufe während des Betriebs unterstützen, beispielsweise zur Analyse unerwünschten Verhaltens.
 
@@ -277,7 +287,9 @@ Weiter ermöglicht es die Anwendung, dass Schüler aus höheren Klassen mit mehr
 
 Die Anwendung ist als Bindeglied zwischen \gls{PhyPiDAQ} und dem Nutzer zu verstehen. Sie ermöglicht dem Nutzer, über eine übersichtliche, strukturierte und intuitive \gls{GrafBenOber} sowie über eine einfache Bedienung die Nutzung eines \gls{RasPi} mit \gls{PhyPiDAQ}. Dadurch soll dem Schüler digitale Messwerterfassung, Physik und auch Informatik in einer motivierenden Weise näher gebracht werden. Womöglich kann die Anwendung den Schüler auch für diese Themen begeistern.  
 
-\subsection{Begriffsdefinitionen}
+\subsection{Definition der Abnahmekriterien}
+
+\subsubsection{Begriffsdefinitionen}
 
 Im Folgenden werden \gls{Musskriterien} (MK), \gls{Sollkriterien} (SK), \gls{Wunschkriterien} (WK) und \gls{Abgrenzungskriterien} (AK) zur Abnahme des projektierten Softwareprodukts definiert. Während der Entwicklung wird ihre Umsetzung mit hoher, mittlerer und niedriger Priorität betrieben.
 
@@ -286,7 +298,7 @@ Im Folgenden werden \gls{Musskriterien} (MK), \gls{Sollkriterien} (SK), \gls{Wun
 \newtheorem{WunschKrit}{WK}
 
 
-\subsection{Entwurf von Messkonfigurationen}
+\subsubsection{Entwurf von Messkonfigurationen}
 
 \begin{itemize}
 	
@@ -327,7 +339,7 @@ Im Folgenden werden \gls{Musskriterien} (MK), \gls{Sollkriterien} (SK), \gls{Wun
 	
 \end{itemize}
 
-\subsection{Handhabung von Bausteinprototypen}
+\subsubsection{Handhabung von Bausteinprototypen}
 
 Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wird von einem \glspl{Bausteinprototyp} eine Kopie angelegt.
 
@@ -367,7 +379,7 @@ Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wi
 	
 \end{itemize}
 
-\subsection{Gewährleisten von Persistenz}
+\subsubsection{Gewährleisten von Persistenz}
 
 \begin{itemize}
 		
@@ -393,7 +405,7 @@ Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wi
 	
 \end{itemize}
 
-\subsection {Bereitstellung vorgefertigter Teile}
+\subsubsection {Bereitstellung vorgefertigter Teile}
 
 \begin{itemize}
 	
@@ -431,7 +443,7 @@ Möchte ein Benutzer einem Entwurf ein neues Bausteinexemplar hinzufügen, so wi
 \end{itemize}
 
 
-\subsection{Handhabung von Messläufen}
+\subsubsection{Handhabung von Messläufen}
 
 Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, zufriedenstellende \glspl{Messlauf} zu erhalten.
 
@@ -483,7 +495,7 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 
 
 
-\subsection {Benutzbarkeit der GUI}
+\subsubsection {Benutzbarkeit der GUI}
 \begin{itemize}
 	
 	\item 
@@ -519,9 +531,7 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 	
 \end{itemize}
 
-
-
-\subsection{Abgrenzungskriterien}
+\subsubsection{Abgrenzungskriterien}
 
 \begin{itemize}
 	
@@ -529,7 +539,7 @@ Die folgenden Features bzw. Kriterien sollen den Benutzer dabei unterstützen, z
 	
 	\item \textbf{AK 2} Die zu erstellende Anwendung sieht keinerlei Erfassung oder Speicherung personenbezogener Nutzerdaten vor. Der Einsatz der Software erfordert dementsprechend keine Einverständniserklärung der Nutzer gemäß europäischer \gls{DSGVO}.
 	
-	\item \textbf{AK 3} Die Anwendung sieht lediglich ein lokales Speichern ihrer persistenten Daten vor. Sie macht keinen Gebrauch von Diensten aus dem Internet und enthält auch eine Teilen-Funktion.
+	\item \textbf{AK 3} Die Anwendung sieht lediglich ein lokales Speichern ihrer persistenten Daten vor. Sie macht keinen Gebrauch von Diensten aus dem Internet und enthält auch keine Teilen-Funktion.
 	
 	
 \end{itemize}
@@ -543,7 +553,7 @@ Die Anwendung ist für die Verwendung in Schulklassen ab der 7. bis zu 10. Klass
 Als \gls{opensource} Projekt im Rahmen des \gls{osl2} steht die Anwendung jedoch jedem Interessierten zur Verwendung und Weiterentwicklung zur Verfügung.
 
 
-\subsection{Zielgruppe}
+\subsection{Zielgruppen}
 
 Die Zielgruppen sind hauptsächlich Schülerinnen und Schüler im Physikunterricht und deren Lehrer. 
 
