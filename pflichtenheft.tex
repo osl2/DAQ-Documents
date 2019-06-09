@@ -735,10 +735,12 @@ Zu speichern sind ausschließlich:
 
 \item[D010] \glspl{Benutzerkonfiguration}
 \item[D020] \gls{messdaten} und deren Darstellungen
-\item[D030] Benutzererstellte Bausteinprototypen (beinhaltet beispielsweise neu angepasste Sensorkonfigurationsdaten im Falle eines Protoypen vom Typ Sensor)
+\item[D030] Defintionen der Bausteinprototypen (Im Falle eines Protoypen vom Typ Sensor sollen dessen Eigenschaften auch die erforderliche PhyPiDAQ-YAML-Sensorkonfigurationsdaten enthalten.)
 \item[D040] Lokaler Datenfluss bei einem Baustein während eines Messlaufs 
 
 \end{description}
+
+Die Serialisierungssprache, in der die Produktdaten gespeichert werden, soll textbasiert und von Benutzern editierbar sein.
 
 \clearpage
 \section{Nichtfunktionale Anforderungen}\label{nichtfunktionale}
@@ -1118,7 +1120,7 @@ Das projektierte Gesamtsystem wird aller Voraussicht nach auf drei Systemprozess
 
 Einer dieser drei Systemprozesse enthält die \gls{JVM}, auf der die zu erstellende Hauptkomponente läuft. Diese enthält wiederum die grafische \gls{GrafBenOber}, mit deren Hilfe Benutzer Messkonfigurationen entwerfen und den Betrieb von Messläufen steuern und überwachen können.
 
-Zum Ansteuern und Auslesen der Sensoren auf dem \gls{RasPi} wird das auf Python basierende Framework \gls{PhyPiDAQ} bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung diverser physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die \gls{JVM} ausgeführt werden kann, wird für PhyPiDAQ ein zweiter Systemprozess benötigt.
+Zum Ansteuern und Auslesen der Sensoren auf dem \gls{RasPi} wird das auf Python basierende Framework \gls{PhyPiDAQ} bereitgestellt. Dieses unterstützt bereits eine  ganze Reihe von Sensoren zur Messung physikalischer Größen der Mechanik, Thermodynamik und Elektrodynamik. Da der Python-Interpreter im Allgemeinen nicht im selben Systemprozess wie die \gls{JVM} ausgeführt werden kann, wird für PhyPiDAQ ein zweiter Systemprozess benötigt.
 
 Um Ressourcenknappheit auf dem \gls{RasPi} aus dem Weg zu gehen, aber auch zur Vereinfachung von Entwicklung und Demonstration, soll die Hauptkomponente nicht zwingend so wie PhyPiDAQ auf dem \gls{RasPi} ausgeführt werden müssen. 
 
@@ -1331,7 +1333,7 @@ In der Implementierungsphase ist das Hauptrisiko das Produzieren von Implementie
 In der Qualitätssicherungsphase liegt das Hauptrisiko darin, dass wir uns zu sehr auf Kleinigkeiten konzentrieren und das Wesentliche 
 übersehen. Dazu planen wir unsere Anwendung mit Schülern zu testen. Damit sollen wir zuvor übersehene Schwierigkeiten hingewiesen zu werden.
 
-Ein Risiko, das sich durch alle Projektphasen durchzieht, ist der Ausfall eines Teammitglieds, beispielsweise durch Krankheit. Bei einem Team von fünf Mitgliedern, bedeutet ein Ausfall ein Verlust von 20\%. Unsere Gegenmaßnahme in einem solchen Fall wäre dann nicht nur die Einplanung von Pufferzeit in jede Projektphase, sondern auch der Verzicht auf die Umsetzung von Sollkriterien. Ein weiteres phasenübergreifendes Risiko ist ein Ausfall wegen Urlaub oder Klausuren. Dieses Risiko wird aber durch unsere frühzeitige Planung und durch das Einplanen von Klausurpausen minimiert.
+Ein Risiko, das sich durch alle Projektphasen durchzieht, ist der Ausfall eines Teammitglieds, beispielsweise durch Krankheit. Bei einem Team von fünf Mitgliedern, bedeutet ein Ausfall ein Verlust von 20\%. Unsere Gegenmaßnahmen für einen solchen Fall sind nicht nur die Einplanung von Pufferzeit in jeder Projektphase, sondern im ,,Worst-Case`` auch der Verzicht auf die Umsetzung von Sollkriterien und der Verzicht auf den ein oder anderen vorgefertigten Bausteinprototypen. Ein weiteres phasenübergreifendes Risiko ist ein Ausfall wegen Urlaub oder Klausuren. Dieses Risiko wird aber durch unsere frühzeitige Planung und durch das Einplanen von Klausurpausen minimiert.
 
 \subsection{Spezielle Anforderungen}\label{entwicklungsumgebung}
 
