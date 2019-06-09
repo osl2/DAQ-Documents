@@ -808,13 +808,13 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 
 \begin{description}
 
-\item[NF010] Auslesen von \gls{messdaten} von einem einzelnen Sensor innerhalb von 50 ms.
+\item[NF010] Auslesen von \gls{messdaten} von einem einzelnen Sensor innerhalb von, im Mittel, 50 ms.
 \item[NF020] Alle 20 ms können neue Messdaten angefordert werden.
 \item[NF030] Bis zu drei \glspl{sensor} können zeitgleich verwendet werden, ohne die Leistung zu beeinträchtigen.
 \item[NF040] Mehrere \glspl{transformation} können sukzessive voneinander abhängig sein. Zyklische Abhängigkeiten sind nicht erlaubt.
-\item[NF045] Verarbeitung von Daten benötigt maximal 10 ms pro Transformation.
+\item[NF045] Verarbeitung von Daten benötigt, im Mittel, maximal 10 ms pro Transformation.
 \item[NF050] Mehrere \glspl{darstellung} können zeitgleich verwendet werden.
-\item[NF055] Darstellung von Daten benötigt maximal 30 ms pro Darstellungsbaustein.
+\item[NF055] Darstellung von Daten benötigt, im Mittel, maximal 30 ms pro Darstellungsbaustein.
 \item[NF060] Die Anwendung reagiert auf Benutzereingaben innerhalb von zwei Sekunden; mindestens mit einem Zwischenergebnis, Ladebalken oder ähnlichem.
 
 \end{description}
@@ -823,13 +823,10 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 
 \begin{description}
 
-\item[NF070] Die \gls{GUI} ist ergonomisch gestaltet, orientiert an ISO 9241.
+\item[NF070] Die \gls{GUI} ist ergonomisch gestaltet.
 \item[NF080] Nichttriviale Funktionen werden dem Benutzer erklärt.
 \item[NF090] Ungespeicherte Daten werden nicht ohne Warnung verworfen.
 \item[NF100] Über Programmfehler wird der Benutzer durch aussagekräftige Fehlermeldungen informiert.
-\item[NF110] Schriftgröße von Text kann verändert werden.
-\item[NF120] Farbschema von farbigen GUI-Elementen ist veränderbar.
-\item[NF130] Die Sprache der Benutzeroberfläche kann verändert werden.
 
 \end{description}
 
@@ -837,8 +834,6 @@ Auf folgende Qualitätsmerkmale wird entsprechend besonders Wert gelegt:
 
 \begin{description}
 
-\item[NF140] Konsistenz: Bei gleichen Vorbedingungen führen identische Eingaben auch zum gleichen Ergebnis.
-\item[NF150] Korrektheit: Bei korrekten Eingaben werden die erwarteten funktionalen Anforderungen erfüllt.
 \item[NF160] Unerwartete und fehlerhafte Eingaben führen nicht zum Absturz der Anwendung.
 \item[NF170] Verbindungsverlust von \glspl{sensor} führt nicht zum Absturz der Anwendung.
 \item[NF180] Unerwartete \gls{messdaten} (z.B. außerhalb eines eingestellten Wertebereichs) führen nicht zum Absturz der Anwendung.
