@@ -204,13 +204,13 @@
 \clearpage
 \section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
 
-Die im Rahmen des \gls{osl2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel~\ref{zielbestimmung}). Die erhoffte Konsequenz ist, dass mehr Schüler für wissenschaftliche und technische Fächer motiviert werden.
-Demzufolge kommt die Anwendung in Schulen zum Einsatz. 
-Die Zielgruppe sind Schüler in der siebten Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
-Die Anwendung läuft in einer \gls{JVM} und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). 
-Die hardwarenahe Ansteuerung der Sensoren soll durch das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} erfolgen (siehe Kapitel \ref{systemmodell}).
-Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel \ref{funktionale} bzw. \ref{nichtfunktionale} aufgelistet.
-Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient werden. (siehe Kapitel \ref{gui}).
+Dieses Projekt wird im Rahmen des \gls{osl2} entwickelt. Dabei handelt es sich um eine Anwendung zur Messwerterfassung und Analyse mit einem \gls{RasPi}. Die Anwendung baut dabei auf das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} auf. Mit \gls{PhyPiDAQ} wird die hardwarenahe Ansteuerung der Sensoren durchgeführt. Die Daten werden dann über eine Schnittstelle an die Anwendung übertragen. Die Anwendung läuft dabei in einer \gls{JVM} und stellt Schülern und Lehrern eine \gls{GrafBenOber} zur Verfügung. Eine Vorschau der Hauptbenutzeroberfläche einer möglichen GUI ist in Abbildung \ref{GUI_Vorschau} zu sehen.
+
+
+Über die GUI der Anwendung kann der Benutzer eine \gls{Benutzerkonfiguration} erstellen, verändern und starten. Außerdem können sie geladen und gespeichert werden. Eine Messkonfiguration besteht aus Bausteinen(\gls{sensor}, \gls{transformation}, \gls{darstellung}) und deren Verbindungen untereinander. Messkonfigurationen werden im Konfigurationsfeld erstellt, wie in Abbildung \ref{GUI_Vorschau} zu sehen ist.
+ 
+Vor dem Starten einer Messung wird geprüft, ob eine Messkonfiguration gültig und somit funktionsfähig ist. Während einer Messung werden die Messdaten von der Anwendung erfasst, verarbeitet und dargestellt. Ist eine Messung gestoppt oder beendet, können Messergebnisse als Graphen oder als Tabellen gespeichert werden.
+
 
 \begin{figure}[htbp]
 	\begin{center}
