@@ -204,13 +204,13 @@
 \clearpage
 \section{Produktübersicht} %Ein Abstrakt aus allen Sektionen
 
-Die im Rahmen des \gls{osl2} zu entwickelnde Anwendung soll es Lehrern ermöglichen, Schülern die Grundlagen von physikalischen Messtechniken zu vermitteln (siehe Kapitel~\ref{zielbestimmung}). Die erhoffte Konsequenz ist, dass mehr Schüler für wissenschaftliche und technische Fächer motiviert werden.
-Demzufolge kommt die Anwendung in Schulen zum Einsatz. 
-Die Zielgruppe sind Schüler in der siebten Klasse aufwärts (siehe Kapitel \ref{produkteinsatz}).
-Die Anwendung läuft in einer \gls{JVM} und erhält Messwerte von \glspl{sensor} (siehe Kapitel \ref{produktumgebung}). 
-Die hardwarenahe Ansteuerung der Sensoren soll durch das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} erfolgen (siehe Kapitel \ref{systemmodell}).
-Detaillierte funktionale und nicht funktionale Anforderungen sind in Kapitel \ref{funktionale} bzw. \ref{nichtfunktionale} aufgelistet.
-Die Anwendung soll über eine \gls{GrafBenOber}, mit Maus und Tastatur, bedient werden. (siehe Kapitel \ref{gui}).
+Dieses Projekt wird im Rahmen des \gls{osl2} entwickelt. Dabei handelt es sich um eine Anwendung zur Messwerterfassung und Analyse mit einem \gls{RasPi}. Die Anwendung baut auf das bereits vorhandene Softwarepaket \gls{PhyPiDAQ} auf. Mit \gls{PhyPiDAQ} wird die hardwarenahe Ansteuerung der Sensoren durchgeführt. Die gesammelten Daten werden dann über eine Schnittstelle an die Anwendung übertragen. Die Anwendung läuft dabei in einer \gls{JVM} und stellt Schülern und Lehrern eine \gls{GrafBenOber} zur Verfügung. Eine Vorschau der Hauptbenutzeroberfläche einer möglichen GUI ist in Abbildung \ref{GUI_Vorschau} zu sehen.
+
+
+Mit Hilfe der GUI der Anwendung, kann der Benutzer eine \gls{Benutzerkonfiguration} erstellen, verändern, laden und speichern. Eine Messkonfiguration besteht dabei aus verschiedenen Bausteinen(\glspl{sensor}, \glspl{transformation}, \glspl{darstellung}) und deren Verbindungen untereinander. Die Messkonfiguration wird im Konfigurationsfeld erstellt, wie in Abbildung \ref{GUI_Vorschau} zu sehen ist.
+ 
+Ist eine Messkonfiguration vollständig erstellt worden, kann sie gestartet werden. Vor dem Starten einer Messung wird geprüft, ob eine Messkonfiguration gültig und somit funktionsfähig ist. Während der Messung werden die Messdaten von der Anwendung erfasst, verarbeitet und dargestellt. Ist die Messung schließlich gestoppt oder beendet, können Messergebnisse als Graphen oder als Tabellen gespeichert werden.
+
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -578,8 +578,7 @@ Auf dem über eine Schnittstelle verbundenen \gls{RasPi} des Models 3B+ muss \gl
 
 \subsection{Schnittstelle}
 
-\subsubsection{PhyPiDAQ}
-
+Die Anwendung bekommt Daten der Sensoren über eine Schnittstelle zu dem Programm PhyPiDAQ.
 Bei PhyPiDAQ handelt es sich um eine Anwendung zur Datenerfassung und Analyse mit einem \gls{RasPi}. Diese ist nicht Bestandteil des Produktes, wird jedoch zur Datenerfassung und Datenverarbeitung und somit zur Funktionalität der Anwendung  benötigt. Das Programm, welches in der Programmiersprache \gls{python3} geschrieben ist bietet einheitliche Schnittstellen zur Verwendung der Sensoren mit dem \gls{RasPi}.
 
 \clearpage
