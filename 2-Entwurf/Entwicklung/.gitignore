@@ -1,0 +1,16 @@
+
+*.jar
+*.war
+*.ear
+*.class
+
+# eclipse specific git ignore
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+
+
+
+/bin/

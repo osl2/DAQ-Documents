@@ -1,0 +1,58 @@
+@startuml
+actor Benutzer
+
+participant ":Anwendung" as A
+participant "PR:PhyPiDAQundRaspy" as PR
+participant "K1:Konfiguration" as K1
+participant "S1:Sensor" as S1
+participant "S2:Sensor" as S2
+participant "T1:Transformation" as T1
+activate A
+
+activate K1
+activate PR
+Benutzer -> A: fuege Sensor S1 hinzu
+
+ 
+A -> S1: <<erstelle>>
+activate S1
+S1 --> A: 
+
+A -> PR: pruefe(S1)
+PR --> A:
+
+A -> K1: fugeHinzu(S1)
+K1 --> A : 
+A --> Benutzer: zeigeAn(S1)
+
+Benutzer -> A: fuege Sensor S2 hinzu
+A -> S2: <<erstelle>>
+activate S2
+S1 --> A: 
+
+A -> PR: pruefe(S2)
+PR --> A:
+
+A -> K1: fuegeHinzu(S2)
+S2 --> A: 
+
+A --> Benutzer: zeigeAn(S2)
+
+
+Benutzer -> A: fuege Transformation T1 hinzu
+A -> T1: <<erstelle>>
+activate T1
+T1 --> A: 
+
+A -> K1: fuge T1 hinzu
+K1 --> A : 
+A -->Benutzer: zeige Transformation T1 an
+
+Benutzer -> A: aendere Konfigurationseinstellungen
+A -> K1: mache Aenderungen
+K1 --> A: 
+A --> Benutzer: zeige Aenderung
+Benutzer -> A: speichere KonfigurationK1
+A -> A: speichere(K1)
+A --> Benutzer
+@enduml
