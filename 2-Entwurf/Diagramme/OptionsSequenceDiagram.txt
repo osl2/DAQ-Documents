@@ -1,0 +1,38 @@
+@startuml
+
+actor User
+
+User -> GUI : load options from file path
+activate GUI
+GUI -> OptionSingleton : loadOptions(path)
+GUI <-- OptionSingleton
+User <-- GUI
+deactivate GUI
+
+User -> GUI : change language
+activate GUI
+GUI -> GUI : Locale newlocale = new Locale(language)
+GUI -> OptionSingleton : setLocale(newlocale)
+GUI <-- OptionSingleton
+User <-- GUI
+deactivate GUI
+
+User -> GUI : change font size
+activate GUI
+GUI -> OptionSingleton : setFontSize(newfontsize)
+GUI <-- OptionSingleton
+User <-- GUI
+User -> GUI : change font (name)
+GUI -> OptionSingleton : setFontName(newfontname)
+GUI <-- OptionSingleton
+User <-- GUI
+deactivate GUI
+
+User -> GUI : save options at file path
+activate GUI
+GUI -> OptionSingleton : saveOptions(path)
+GUI <-- OptionSingleton
+User <-- GUI
+deactivate GUI
+
+@enduml

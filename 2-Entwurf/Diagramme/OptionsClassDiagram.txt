@@ -1,0 +1,18 @@
+@startuml
+
+class OptionSingleton {
+	- Locale myLocale
+	- FontData myFontData
+	__
+	+ void saveOptions(Path path)
+	+ void loadOptions(Path path)
+	..
+	+ Locale getLocale()
+	+ void setLocale(Locale locale)
+	..
+	+ FontData getFontData()
+	+ void setFontSize(int size)
+	+ void setFontName(String name)
+}
+
+@enduml
