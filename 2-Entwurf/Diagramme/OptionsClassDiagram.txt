@@ -15,4 +15,28 @@ class OptionSingleton {
 	+ void setFontName(String name)
 }
 
+package java.util {
+class Locale {
+	+ String getCountry()
+	+ String getLanguage()
+	+ String getDisplayLanguage()
+}
+}
+
+package org.eclipse.swt.graphics {
+class FontData {
+	+ String getLocale()
+	+ void setLocale(String locale)
+	+ String getName()
+	+ void setName(String name)
+	+ int getHeight()
+	+ void setHeight(int height)
+	+ int getStyle()
+	+ void setStyle(int style)
+}
+}
+
+OptionSingleton *-- Locale
+OptionSingleton *-- FontData
+
 @enduml
