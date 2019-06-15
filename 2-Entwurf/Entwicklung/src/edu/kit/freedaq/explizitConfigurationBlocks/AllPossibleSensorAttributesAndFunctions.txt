@@ -1,5 +1,7 @@
 @startuml
 class AllPossibleSensorAttributesAndFunctions {
+	'Attribute
+
 	name : String
 	function : String
 	description : String
@@ -24,5 +26,11 @@ class AllPossibleSensorAttributesAndFunctions {
 	accellerationRange : int[2G, 4G, 8G]
 	range : int[1, 2, 3]
 	type : int[]
+
+	'Methoden
+
+	+getData() : int
+	+check() : boolean
+	'getter and setter where it is usefull
 }
 @enduml
