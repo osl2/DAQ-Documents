@@ -1,11 +1,44 @@
 @startuml
-ConfigurationBlockManager <|-down- SensorBlockManager
-ConfigurationBlockManager <|-down- TransformationBlockManager
-ConfigurationBlockManager <|-down- RepresantationBlockManager
-class ConfigurationBlockManager{
-	listOfBlocks : ConfigurationBlock[]
+namespace edu.kit.freeDAQ.Sensor {
+	class Sensor
+}
+namespace edu.kit.freeDAQ.explizitConfigurationBlocks {
+Voltmeter -|> edu.kit.freeDAQ.Sensor.Sensor
+Voltmeter <|-down- INA219
+
+
+class Voltmeter{
+	measurementRange : int
+	sensorSize : Size
+	maxVoltBeforeFailure : 16
+	maxAmpBeforeFailure : 0.5
+	measurementRange : int
+	measurementRange : int
 	{abstract}+add(cb: ConfigurationBlock): boolean
 	+remove(cb: ConfigurationBlock): boolean
 	+showAllBocks(cb: ConfigurationBlock): boolean
+}
+
+INA219 *- INA219Size
+INA219Size -right-|> edu.kit.freeDAQ.attributes.Size
+
+class edu.kit.freeDAQ.attributes.Size
+note right: All measurements in mm
+
+class INA219Size {
+	width = 391
+	length = 490
+}
+class INA219 {
+	measurementRange =
+}
+}
+namespace edu.kit.freeDAQ.attributes {
+class Size{
+	width : int
+	length : int
+	height : int
+}
+	edu.kit.freeDAQ.explizitConfigurationBlocks.Voltmeter "1" *- "0..1" Size
 }
 @enduml
