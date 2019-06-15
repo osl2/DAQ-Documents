@@ -1,0 +1,11 @@
+@startuml
+ConfigurationBlockManager <|-down- SensorBlockManager
+ConfigurationBlockManager <|-down- TransformationBlockManager
+ConfigurationBlockManager <|-down- RepresantationBlockManager
+class ConfigurationBlockManager{
+	listOfBlocks : ConfigurationBlock[]
+	{abstract}+add(cb: ConfigurationBlock): boolean
+	+remove(cb: ConfigurationBlock): boolean
+	+showAllBocks(cb: ConfigurationBlock): boolean
+}
+@enduml
