@@ -1,9 +1,9 @@
 @startuml
 
 class HelpMessage {
-	- String title
-	- String messageFileName
-	+ String getMessage()
+	- title : String
+	- messageFileName : String
+	+ getMessageFile() : String
 }
 
 note right of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n[e.g. in swt browser widget]

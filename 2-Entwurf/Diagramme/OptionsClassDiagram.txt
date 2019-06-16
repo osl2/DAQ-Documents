@@ -1,38 +1,42 @@
 @startuml
 
 class OptionSingleton {
-	- Locale myLocale
-	- FontData myFontData
+	- INSTANCE : OptionSingleton
+	- myLocale : Locale
+	- myFontData : FontData
 	__
-	+ void saveOptions(String fileName)
-	+ void loadOptions(String fileName)
+	- OptionSingleton()
+	+ getInstance() : OptionSingleton
 	..
-	+ Locale getLocale()
-	+ void setLocale(Locale locale)
+	+ saveOptions(String fileName) : void
+	+ loadOptions(String fileName) : void
 	..
-	+ FontData getFontData()
-	+ void setFontSize(int size)
-	+ void setFontName(String name)
+	+ getLocale() : Locale
+	+ setLocale(Locale locale) : void
+	..
+	+ getFontData() : FontData
+	+ setFontSize(int size) : void
+	+ setFontName(String name) : void
 }
 
 package java.util {
 	class Locale {
-		+ Locale (String language)
-		+ String getLanguage()
-		+ String getDisplayLanguage()
+		+ setLocale(String language) : void
+		+ getLanguage() : String
+		+ getDisplayLanguage() : String
 	}
 }
 
 package org.eclipse.swt.graphics {
 	class FontData {
-		+ String getLocale()
-		+ void setLocale(String locale)
-		+ String getName()
-		+ void setName(String name)
-		+ int getHeight()
-		+ void setHeight(int height)
-		+ int getStyle()
-		+ void setStyle(int style)
+		+ getLocale() : String
+		+ setLocale(String locale) : void
+		+ getName() : String
+		+ setName(String name) : void
+		+ getHeight() : int
+		+ setHeight(int height) : void
+		+ getStyle() : void
+		+ setStyle(int style) : void
 	}
 }
 
