@@ -1,0 +1,14 @@
+@startuml
+
+actor User
+
+User -> GUI : opens help menu
+activate GUI
+GUI -> HelpMessage : getMessage()
+activate HelpMessage
+GUI <-- HelpMessage
+deactivate HelpMessage
+User <-- GUI : displays help message
+deactivate GUI
+
+@enduml
