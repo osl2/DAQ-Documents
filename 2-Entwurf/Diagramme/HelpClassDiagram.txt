@@ -1,11 +1,11 @@
 @startuml
 
 class HelpMessage {
-	- String title
-	- Path messagePath
-	+ Path getMessage()
+	- title : String
+	- messageFileName : String
+	+ getMessageFile() : String
 }
 
-note right of HelpMessage : "messagePath" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n[e.g. in swt browser widget]
+note right of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n[e.g. in swt browser widget]
 
 @enduml
