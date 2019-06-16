@@ -13,9 +13,10 @@ package edu.kit.easydaq.measurementProcess;
  *
  * class DataStream {
  * 
- * listOfSensors<Sensor>
+ * IdOfSensor : String
  * timeStamp : Integer
  * samplingRate : float
+ * numberOfChannels : Integer
  * rawData<float>
  * 
  * 

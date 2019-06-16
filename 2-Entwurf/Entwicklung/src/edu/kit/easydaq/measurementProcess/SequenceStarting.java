@@ -26,28 +26,28 @@ participant ":MeasurementInterface" as MR
 participant ":PhyPiDAQInterface" as PPDI
 
 participant ":Display" as D
-participant "MK1:MeasurementConfiguration" as MK
-
+participant "MC1:MeasurementConfiguration" as MC
+participant "DS1:DataStream" as DS
 
 U -> UI : start()
 UI -> MR : start()
-MR -> MR: init()
+MR -> MR: initializeMeasurement()
 activate MR
-MR -> MR : load(MK)
+MR -> MR : load(MC1)
 activate MR
-MR -> PPDI : getDataStream(MK1.daq):rawStream
+MR -> PPDI : getDataStream(MC1, DS1)
 activate PPDI
 PPDI --> MR 
-MR -> MR: run(rawStream): resultStream
+MR -> MR: runMeasurement(DS1)
 activate MR
-MR -> D : displayData(resultStream)
+ 
+MR -> D : displayData(DS1)
 activate D
-D -> D : run()
-D --> MR: showResults()
-MR --> UI : showResults()
-UI -> UI : showResultStream()
-activate UI
-UI-->U
+D -> D : displayDataStream(DS1, MC1)
+activate D
+D --> MR: 
+MR --> UI : 
+
 
 
 

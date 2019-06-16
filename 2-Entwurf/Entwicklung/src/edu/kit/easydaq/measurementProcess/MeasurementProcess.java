@@ -10,11 +10,11 @@ package edu.kit.easydaq.measurementProcess;
  *
  * class MeasurementInterface {
  * 
- * init(MeasurementConfiguration)
+ * -initializeMeasurement(MeasurementConfiguration)
  * +run(MeasurementConfiguration, DataStream)
  * +check(MeasurementConfiguration):boolean
- * -reset()
- * -stop()
+ * -resetMeasurement() : boolean
+ * -stopMeasurement() : boolean
  * 
  * 
  * 
@@ -22,8 +22,8 @@ package edu.kit.easydaq.measurementProcess;
  *
  *
  * class Display {
- * +saveGraph()
- * +saveData()
+ * +saveGraph() : boolean
+ * +saveData() : boolean
  * +displayDataStream(MeasurementConfiguration, DataStream)
  * 
  * }
@@ -39,10 +39,11 @@ package edu.kit.easydaq.measurementProcess;
  *
  *
  * class DataStream {
- * metaData : String
+ * IdOfSensor : String
  * timeStamp : Integer
  * samplingRate : float
- * 
+ * numberOfChannels : Integer
+ * rawData<float>
  * 
  * 
  * }
@@ -51,18 +52,18 @@ package edu.kit.easydaq.measurementProcess;
  * class MeasurementConfiguration {
  * name : String
  * samplingRate : float
- * listOfBlocks : Blocks?
+ * listOfBlocks<Block>
  * 
  * 
- * +save(config)
- * +load(config)
+ * +save(MeasurementConfiguration) : boolean
+ * +load(MeasurementConfiguration) : boolean
  * }
  * 
  * MeasurementInterface -down- UserInterface
  * MeasurementInterface -up- PhyPiDAQInterface
  * MeasurementConfiguration - MeasurementInterface
- * MeasurementInterface - Display
- * 
+ * MeasurementInterface -down- Display
+ * MeasurementInterface "1" -right- "0..N" DataStream : > maintains 
  * 
  *
  *

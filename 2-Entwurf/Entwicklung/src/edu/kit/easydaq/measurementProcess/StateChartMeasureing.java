@@ -10,18 +10,20 @@ package edu.kit.easydaq.measurementProcess;
 [*] --> Idle : startProgram()
 Idle -right-> [*] : quitProgram()
 
-Idle : entry / init()
+
+
+Idle : entry / initialize()
 Idle : exit / destroy()
-Idle : save(config): configFile
-Idle : load(configFile):config
-Idle : delete(config)
+Idle : save(MeasurementConfiguration): boolean
+Idle : load(Path) : MeasurementConfiguration
+Idle : delete(MeasurementConfiguration)
 Idle: saveData(data)
 Idle: saveGraph(graph)
 Idle: resetMeasurement()
 
 
-Idle -> Running : startMeasurement(config)
-Running: entry / checkSensor(config),createYaml() and RunPhyPiDAQ()
+Idle -> Running : run(MeasurementConfiguration)
+Running: entry / checkSensor(MeasurementConfiguration),createYaml() and RunPhyPiDAQ()
 Running: exit / stoppPhyPiDAQ()
 Running --> Idle: stoppMeasurement() or ERROR
 @enduml
