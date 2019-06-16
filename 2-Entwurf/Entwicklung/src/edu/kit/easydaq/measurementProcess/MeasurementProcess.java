@@ -12,7 +12,7 @@ package edu.kit.easydaq.measurementProcess;
  * 
  * init(MeasurementConfiguration)
  * +run(MeasurementConfiguration, DataStream)
- * getDataStream(.DAQ): Integer stream
+ * +check(MeasurementConfiguration):boolean
  * -reset()
  * -stop()
  * 
@@ -24,6 +24,7 @@ package edu.kit.easydaq.measurementProcess;
  * class Display {
  * +saveGraph()
  * +saveData()
+ * +displayDataStream(MeasurementConfiguration, DataStream)
  * 
  * }
  *
@@ -32,14 +33,24 @@ package edu.kit.easydaq.measurementProcess;
  * }
  *
  * class PhyPiDAQInterface {
- * 
+ * + getDataStream(MeasurementConfiguration.DAQ): Datastream
+ * + stopDataStream()
  * }
  *
+ *
+ * class DataStream {
+ * metaData : String
+ * timeStamp : Integer
+ * samplingRate : float
+ * 
+ * 
+ * 
+ * }
  *
  * 
  * class MeasurementConfiguration {
  * name : String
- * samplingRate : Integer
+ * samplingRate : float
  * listOfBlocks : Blocks?
  * 
  * 
