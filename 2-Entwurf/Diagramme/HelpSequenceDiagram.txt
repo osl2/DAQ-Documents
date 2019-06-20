@@ -2,13 +2,12 @@
 
 actor User
 
-User -> GUI : opens help menu
+User -> GUI : activates "help" button
 activate GUI
-GUI -> HelpMessage : getMessage()
+GUI -> HelpMessage : displayMessage()
 activate HelpMessage
-GUI <-- HelpMessage
+User <-- HelpMessage : displays help message
 deactivate HelpMessage
-User <-- GUI : displays help message
 deactivate GUI
 
 @enduml

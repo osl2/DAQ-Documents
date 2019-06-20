@@ -2,26 +2,17 @@
 
 class OptionSingleton {
 	- INSTANCE : OptionSingleton
-	- myLocale : Locale
-	- myFontData : FontData
 	__
 	- OptionSingleton()
 	+ getInstance() : OptionSingleton
 	..
-	+ saveOptions(String fileName) : void
-	+ loadOptions(String fileName) : void
-	..
-	+ getLocale() : Locale
-	+ setLocale(Locale locale) : void
-	..
-	+ getFontData() : FontData
-	+ setFontSize(int size) : void
-	+ setFontName(String name) : void
+	+ saveOptions(fileName : String) : void
+	+ loadOptions(fileName : String) : void
 }
 
 package java.util {
 	class Locale {
-		+ setLocale(String language) : void
+		+ Locale(language : String)
 		+ getLanguage() : String
 		+ getDisplayLanguage() : String
 	}
@@ -29,18 +20,12 @@ package java.util {
 
 package org.eclipse.swt.graphics {
 	class FontData {
-		+ getLocale() : String
-		+ setLocale(String locale) : void
-		+ getName() : String
-		+ setName(String name) : void
 		+ getHeight() : int
-		+ setHeight(int height) : void
-		+ getStyle() : void
-		+ setStyle(int style) : void
+		+ setHeight(height : int) : void
 	}
 }
 
-OptionSingleton -- Locale
-OptionSingleton -- FontData
+OptionSingleton -- Locale : - myLocale
+OptionSingleton -- FontData : - myFontData
 
 @enduml
