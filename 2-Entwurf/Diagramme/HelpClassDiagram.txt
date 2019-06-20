@@ -1,13 +1,13 @@
 @startuml
 
 class HelpMessage {
-	- title : String
 	- messageFileName : String
+	+ HelpMessage(msgFile : String)
 	+ displayMessage() : void
 }
 
-note right of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n[e.g. in swt browser widget]
+note right of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
 
-ConfigurationBlock "1" -- "1" HelpMessage : is associated with >
+ConfigurationBlock "*" --> "1" HelpMessage : can show to user >
 
 @enduml
