@@ -1,0 +1,19 @@
+# PhyPiDAQ Data recorder  190607-1458
+# Sensor Name: MMA8451
+# logging interval: 0.1
+# number of active channels: 3
+# x:acceleration(m/s²),y:(m/s²),z:(m/s²)
+# Paketstruktur (Channel-ID, Wert, Timestamp)
+(MMA8451:x,-0.057,190607-14-58-05.1)(MMA8451:y,2.006,190607-14-58-05.1)(MMA8451:z,9.586,190607-14-58-05.1)
+(MMA8451:x,9.572,190607-14-58-05.2)(MMA8451:y,-3.223,190607-14-58-05.2)(MMA8451:z,1.13,190607-14-58-05.2)
+
+
+
+
+
+
+
+
+
+
+
