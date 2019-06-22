@@ -1,0 +1,44 @@
+@startuml
+'----------------------------------------------------------------------------------------
+'All classes used in this UML Diagramm
+'----------------------------------------------------------------------------------------
+abstract class Transformation
+class Function
+class Measurement
+class Output
+class Input
+class LinearMapping
+class DependendOutput
+class CustomizedTransformation
+class PredefinedTransformation
+class TransformationManager
+class Connection
+'----------------------------------------------------------------------------------------
+'Class Attributes and methods
+'----------------------------------------------------------------------------------------
+class Function {
+
+}
+
+
+
+'----------------------------------------------------------------------------------------
+'Class Interactions
+'----------------------------------------------------------------------------------------
+
+
+
+
+'----------------------------------------------------------------------------------------
+'Note: The manager aspect of this diagramm can be found, in more detail, at another place.
+'It stands here for a complete overwiev
+'----------------------------------------------------------------------------------------
+class ConfigurationBlockManager{
+	listOfBlocks : ConfigurationBlock[]
+	{abstract}+add(cb: ConfigurationBlock): boolean
+	+remove(cb: ConfigurationBlock): boolean
+	+showAllBocks(cb: ConfigurationBlock): boolean
+}
+ConfigurationBlockManager <|-down- TransformationManager
+
+@enduml
