@@ -30,17 +30,21 @@ namespace TransformationLogic {
 	DependendOutputTransformation -up-|> PredefinedTransformation
 }
 
-namespace DataLogic {
-	class MeasurementData
-	Input -up-|> DataAccesPoint
-	Output -up-|> DataAccesPoint
+abstract class BuildingBlock {
+	-id: int
+	-name: String
+	-listOfChannels: <<Channel>>
+	+setId()
+	+esttablishConnection(String ownSourceChannelID, String targetChannelID)
+	+getDataProvider(String channelID): DataProvider
 }
+BuildingBlock <|- TransformationLogic.Transformation
 '----------------------------------------------------------------------------------------
 'Note: The manager aspect of this diagramm can be found, in more detail, at another place.
 'It stands here for a complete overview
 '----------------------------------------------------------------------------------------
 package kit.edu.freejdaq.configurationBlockManager {
-	class ConfigurationBlockManager{
+	abstract class ConfigurationBlockManager{
 		listOfBlocks : ConfigurationBlock[]
 		{abstract}+add(cb: ConfigurationBlock): boolean
 		+remove(cb: ConfigurationBlock): boolean
@@ -48,4 +52,6 @@ package kit.edu.freejdaq.configurationBlockManager {
 	}
 	ConfigurationBlockManager <|-down- TransformationManager
 }
+
+TransformationManager "1" *- "n" TransformationLogic.Transformation
 @enduml

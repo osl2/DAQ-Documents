@@ -1,0 +1,45 @@
+@startuml
+abstract class BuildingBlock {
+	-id: int
+	-name: String
+	+setId()
+}
+'class InOutManager
+class InputManager {
+	-listOfAllInputs: Input[]
+	+setInputID(): void
+	+returnInput(id: int): Input
+}
+class OutputManager {
+	-listOfAllOutputs: Output[]
+	+setOutputID(): void
+	+returnOutput(id: int): Output
+}
+
+abstract class InOut {
+	-id: int
+	+setId(id: int): void
+}
+
+
+class Input {
+	-connectedToOutput: Output
+	+setConnectedOutput(Output output):
+}
+
+class Output {
+	-connectedToInput: Input
+	+setConnectedInput(Input input):
+}
+Input -down-|> InOut
+Output -down-|> InOut
+
+'InputManager -up-|> InOutManager
+'OutputManager -up-|> InOutManager
+
+Input "n" -down-* "1" InputManager
+Output "n" -down-* "1" OutputManager
+
+InputManager "0..1" -down-* "1" BuildingBlock
+OutputManager "0..1" -down-* "1" BuildingBlock
+@enduml
