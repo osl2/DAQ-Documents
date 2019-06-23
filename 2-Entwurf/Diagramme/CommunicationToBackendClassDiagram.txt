@@ -1,0 +1,108 @@
+@startuml
+SshAndScpToPi --|> CommunicationWithPi
+WebSocketToPi  --|> CommunicationWithPi
+UsbToPi --|> CommunicationWithPi
+SshAndScpToPi -up-> NetworkConfiguration
+WebSocketToPi -up-> NetworkConfiguration 
+
+class NetworkConfiguration {
+   -port: int
+   -ipAddressOfPi: String
+}
+   
+abstract class CommunicationWithPi {
+	-busy: boolean
+	-pathToRemoteDir: String
+	-pathToLocalDir: String
+	+CommunicationWithPi(pathToRemoteDir: String, pathToLocalDir: String, listeningAgent: ICommandResponseListener)
+    +{abstract}executeCompleteCommandWithTimeout(command: String, timeOut: int): String[]
+    +{abstract}copyFileFromPi(nameOfFile: String): boolean
+    +{abstract}copyFileToPi(nameOfFile: String): boolean
+    +{abstract}executeCommandContinuously(command: String, listeningAgent: ICommandResponseListener): void
+    +{abstract}disconnect(): void
+}
+CommunicationWithPi --> "listeningProtocolAgent" ICommandResponseListener
+
+interface ICommandResponseListener {
+	receivePartOfResponse(response: String; finished: boolean)
+}
+
+ SensorInfoProtocolAgentForSsh .up.|> ICommandResponseListener
+ MeasurementProcessProtocolAgentForSsh .up.|> ICommandResponseListener
+
+class SshAndScpToPi {
+	-username: String
+	-password: String
+	+SshAndScpTo(username: String, password: String)
+	+executeCompleteCommandWithTimeout(command: String, timeOut: int): String[]
+    +copyFileFromPi(nameOfFile: String): boolean
+    +copyFileToPi(nameOfFile: String): boolean
+    +executeCommandContinuously(command: String, listeningAgent: ICommandResponseListener): void
+    +disconnect(): void
+}
+
+interface IMeasurementStreamListener {
+	-receiveData(measuredValue: int): void
+	-connectionTerminated(): void
+}
+
+MeasurementProcessProtocolAgentForSsh -right-> CommunicationWithPi 
+SensorInfoProtocolAgentForSsh -up-> CommunicationWithPi 
+MeasurementProcessProtocolAgentForSsh -left-> "*" IMeasurementStreamListener
+
+interface IAccessToSensorInfo {
+	+getIdsOfAvailableSensors(): String[]
+	+getYamlFile(sensorId: String): boolean
+	+setYamlFile(sensorId: String): boolean
+}
+
+SensorInfoProtocolAgentForSsh ..|> IAccessToSensorInfo 
+
+
+interface IAccessToMeasurementProcess{
+	+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
+	+pause(): boolean
+	+continue(): boolean
+	+stop(): boolean
+}
+
+enum MeasurementState {
+  INITAL_STATE
+  RUNNING
+  PAUSED
+}
+
+MeasurementProcessProtocolAgentForSsh .down.|> IAccessToMeasurementProcess
+MeasurementProcessProtocolAgentForSsh -up-> MeasurementState
+
+together {
+
+	class MeasurementProcessProtocolAgentForSsh {
+		+MeasurementProcessProtocolAgentForSsh(foundation: CommunicationWithPi)
+		+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
+		+pause(): boolean
+		+continue(): boolean
+		+stop(): boolean
+		+receivePartOfResponse(response: String; finished: boolean)
+	}
+	
+	class SensorInfoProtocolAgentForSsh {
+		+SensorInfoProtocolAgentForSsh(foundation: CommunicationWithPi)
+		+getIdsOfAvailableSensors(): String[]
+		+getYamlFile(sensorId: String): boolean
+		+setYamlFile(sensorId: String): boolean
+		+receivePartOfResponse(response: String; finished: boolean)
+	
+	}
+}
+
+PickupPointForISensorInfoAndIMeasurementProcess -up-> IAccessToSensorInfo
+PickupPointForISensorInfoAndIMeasurementProcess -up-> IAccessToMeasurementProcess
+class PickupPointForISensorInfoAndIMeasurementProcess {
+	+{static}createPickupPointUsingCommunicationFoundationBySsh(ipAddressOfPi: String, port: int, username: String, password: String, pathToRemoteDir: String, pathToLocalDir: String): PickupPointForISensorInfoAndIMeasurementProcess
+	+getIAccessToMeasurementProcess(): IAccessToSensorInfo
+	+getIAccessToSensorInfo(): IAccessToSensorInfo
+}
+
+@enduml
+ 
