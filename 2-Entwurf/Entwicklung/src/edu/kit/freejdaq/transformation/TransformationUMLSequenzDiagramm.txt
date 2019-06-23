@@ -47,6 +47,13 @@ U -> UI: connect TransformationOutput to BuildingBlockInput
 UI -> MC: transferCommand()
 MC -> T: setTargetedOutput()
 MC -> BB2: setTargetedInput()
+activate BB2
+T -> T: setTargetedOutput()
+BB2 -> BB2: setTargetedInput()
+T --> MC: give Feedback
+BB2 --> MC: give Feedback
+MC --> UI: return()
+UI --> U: show updated view
 '----------------------------------------------------------------------------------------
 '----------------------------------------------------------------------------------------
 '----------------------------------------------------------------------------------------
