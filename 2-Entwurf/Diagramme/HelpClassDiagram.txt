@@ -8,6 +8,6 @@ class HelpMessage {
 
 note right of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
 
-ConfigurationBlock "*" --> "1" HelpMessage : < provides help/information about
+BuildingBlock "*" --> "1" HelpMessage : < provides help/information about
 
 @enduml
