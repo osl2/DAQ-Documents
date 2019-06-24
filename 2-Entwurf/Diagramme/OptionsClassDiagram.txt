@@ -10,6 +10,8 @@ class OptionSingleton {
 	+ loadOptions(fileName : String) : void
 }
 
+note right of OptionSingleton : below are examples of options \nthat could be important to set 
+
 package java.util {
 	class Locale {
 		+ Locale(language : String)
