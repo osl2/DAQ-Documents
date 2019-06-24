@@ -1,0 +1,33 @@
+@startuml
+
+class OptionSingleton {
+	- {static} INSTANCE : OptionSingleton
+	__
+	- OptionSingleton()
+	+ {static} getInstance() : OptionSingleton
+	..
+	+ saveOptions(fileName : String) : void
+	+ loadOptions(fileName : String) : void
+}
+
+note right of OptionSingleton : below are examples of options \nthat could be important to set 
+
+package java.util {
+	class Locale {
+		+ Locale(language : String)
+		+ getLanguage() : String
+		+ getDisplayLanguage() : String
+	}
+}
+
+package org.eclipse.swt.graphics {
+	class FontData {
+		+ getHeight() : int
+		+ setHeight(height : int) : void
+	}
+}
+
+OptionSingleton --> Locale : - myLocale
+OptionSingleton --> FontData : - myFontData
+
+@enduml
