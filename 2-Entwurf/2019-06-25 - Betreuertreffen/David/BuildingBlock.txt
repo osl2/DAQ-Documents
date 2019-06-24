@@ -1,0 +1,75 @@
+@author David
+
+@startuml
+
+
+
+abstract class "BuildingBlock" as BB
+{
+
+buildingBlockId: Integer
+listOfChannels<Channel>
+establishConnection(Integer ownSourceChannelId, Integer targetChannelId)
+getDataProvider(Integer channelId): DataProvider
+
+}
+
+class "Channel" as C {
+type: String
+channelId: Integer
+connectionPartnerId: Integer
+dataProvider: DataProvider
+
+setConnectionPartnerId(String id): boolean
+
+}
+
+note right of C
+  first part of channelId is 
+  the corresponding buildingBlockId
+end note
+
+
+
+
+class "ChannelList" as CL {
+String: numberOfElements
+getChannel(Integer id): Channel
+setChannel(Integer id): boolean
+addChannel(Channel channel): boolean
+removeChannel(id): boolean
+}
+
+
+
+
+class "DataProvider" as DP {
+
+dataName: String
+dataUnit: String
+
+
+}
+
+interface "IDataProvider" as IDP {
+
+getDataProvider(Integer channelId): DataProvider
+
+}
+
+note right of IDP
+  interface to provide 
+  Data to a channel
+end note
+
+
+
+CL "1" -- "1" BB
+C "1..*"--* "1" CL
+C -- IDP
+IDP -- DP
+
+
+
+
+@enduml

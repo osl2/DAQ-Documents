@@ -1,0 +1,62 @@
+@author David
+
+@startuml
+
+
+
+abstract class "BuildingBlock" as BB
+{
+
+buildingBlockId: Integer
+listOfChannels<Channel>
+{abstract} establishConnection(Integer ownSourceChannelId, Integer targetChannelId)
+{abstract} getDataProvider(Integer channelId): DataProvider
+
+}
+
+abstract class "Sensor" as AS{
+todo
+todo()
+}
+
+abstract class "Transformation" as AT{
+todo
+todo()
+}
+
+
+abstract class "Representation" as AR{
+
+state : String
+
+updateInterval : float
+
+xSize: Integer
+ySize: Integer
+
+{abstract} saveRepresentationAsFile(Path path):boolean
+{abstract} run()
+{abstract} stop()
+{abstract} resume()
+{abstract} reset()
+{abstract} delete()
+
+{abstract} setSize(Integer xSize, Integer ySize):boolean
+{abstract} establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+
+}
+
+BB <|-- AS
+BB <|-- AR
+BB <|-- AT
+
+
+
+
+
+
+
+
+
+
+@enduml
