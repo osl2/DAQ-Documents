@@ -3,13 +3,24 @@
 
 
 class "MeasurementRun" as MR{
-	state: String
+	-state: String
+	+start(): boolean
+	+pause(): boolean
+	+resume(): boolean
+	+reset(): boolean
+	+setUpdateRate(MeasurementConfiguration config): boolean
 
 }
 
 class "MeasurementConfiguration" as MC{
-	to do
-
+	-updateRate: float
+	-listOfAllChannels: <Channel>
+	-listOfAllConnections: Connection[]
+   -configurationAdjacencyList: configuration[]
+    +addBlock(BuildingBlock block): boolean 
+    +removeBlock(Integer blockId): boolean
+    +returnConfiguration(): configuration
+	+connectChannels(Integer sourceId, Integer targetId)
 }
 
 
@@ -26,8 +37,9 @@ abstract class "BuildingBlock" as BB
 	-name: String
 	-listOfChannels: <<Channel>>
 	+setId()
+	{abstract} processValue()
 	+ {abstract} establishConnection(Integer ownSourceChannelId, Integer targetChannelId)
-	+ {abstract} getDataProvider(Integer channelId): DataProvider
+	
 
 }
 
@@ -50,9 +62,9 @@ BB <|- TransformationLogic.Transformation
 package kit.edu.freejdaq.configurationBlockManager {
 	abstract class ConfigurationBlockManager{
 		listOfBlocks : ConfigurationBlock[]
-		{abstract}+add(cb: ConfigurationBlock): boolean
-		+remove(cb: ConfigurationBlock): boolean
-		+showAllBocks(cb: ConfigurationBlock): boolean
+		{abstract}+add(BuildingBlock block): boolean
+		{abstract}+remove(BuildingBlock block): boolean
+		{abstract}+showAllBocks(BuildingBlock block): boolean
 	}
 	
 	class "RepresentationManager" as RM {
@@ -74,56 +86,19 @@ namespace RepresentationLogic {
 
 abstract class "Representation" as AR{
 
-	state : String
-
-	updateInterval : float
-
-	
-
-	{abstract} saveRepresentationAsFile(Path path):boolean
-	{abstract} run()
-	{abstract} stop()
-	{abstract} resume()
-	{abstract} reset()
-	{abstract} delete()
-
+	{abstract} processValue()
 	{abstract} establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
 
 }
-class "Trace" as T{
 
-	type: String
-	setType(String type): boolean
-
-}
 class "TableRespresentation" as TR {
-
-
-	saveRepresentationAsFile(Path path): boolean
-	run()
-	stop()
-	resume()
-	reset()
-	delete()
-
-	setSize(Integer xSize, Integer ySize): boolean
-	establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+	processValue()
+    establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
 }
 
 
 class "XYRepresentation" as XYR {
-	title: String
-	xLabel: String
-	yLabel: String
-	hasToolbar: boolean
-
-saveRepresentationAsFile(Path path):boolean
-	run()
-	stop()
-	resume()
-	reset()
-	delete()
-	setSize(Integer xSize, Integer ySize): boolean
+	processValue()
 	establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
 
 
@@ -135,32 +110,23 @@ note right of RepresentationLogic.XYR
 end note
 
 
-class "Channel X vs Time" as XvT {
-
+class "ChannelXvsTime" as XvT {
+	processValue()
 }
 
-class "Channel X vs Channel Y"  as XvY{
-
-	setChannelX(DataProvider dataProvider): boolean
-	setChannelY(DataProvider dataProvider): boolean
+class "ChannelXvsChannelY"  as XvY{
+	processValue()
+	
 }
-
-	class "N Channels vs Time"  as NvT{
-	numberOfChannels: Integer
+	
+	class "NChannelvsTime"  as NvT{
+	processValue()
 }
 XYR -up-|> AR
 XvT -up-|> XYR
 XvY -up-|> XYR
 NvT -up-|> XYR
 TR   -down-|> AR
-
-
-T "1 ..* "--o " 1 " XYR
-
-note top of  T
-  examples for type: 
-  bar, area, line
-end note
 
 
 }
@@ -213,40 +179,28 @@ namespace SensorLogic {
 
 
 class "Channel" as C {
-	type: String
-	channelId: Integer
-	connectionPartnerId: Integer
-	dataProvider: DataProvider
-
-	setConnectionPartnerId(String id): boolean
+	-type: String
+	-channelId: Integer
+	-connectionPartnerId: Integer
+	+processValue()
+	+setConnectionPartnerId(String id): boolean
 
 }
 
 
 class "ChannelManager" as CL {
-	String: numberOfElements
-	getChannel(Integer id): Channel
-	setChannel(Integer id): boolean
-	addChannel(Channel channel): boolean
-	removeChannel(id): boolean
+	-numberOfElements: Integer
+	+getChannel(Integer id): Channel
+	+setChannel(Integer id): boolean
+	+addChannel(Channel channel): boolean
+	+removeChannel(Integer id): boolean
 }
 
 
-
-
-class "Value" as DP {
-
-	dataName: String
-	dataUnit: String
-
-
-}
 
 interface "IValueHandler" as IDP {
 
-	processValue():
-	getDataProvider(Integer channelId): DataProvider
-
+	processValue()
 }
 
 
@@ -290,9 +244,9 @@ RM "1" *-- "n" RepresentationLogic.AR
 
 CL "1" -- "1" BB
 
-C --|> IDP
+C ..|> IDP
 CL "1" *-- "*" IDP
-IDP -- DP
+
 
 ConfigurationBlockManager <|-- RM
 ConfigurationBlockManager <|-- SM
