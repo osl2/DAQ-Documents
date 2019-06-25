@@ -12,9 +12,6 @@ class "MeasurementConfiguration" as MC{
 
 }
 
-class "HelpMessage" as HM{
-	to do
-}
 
 
 class "PrototypCollection" as PC{
@@ -34,10 +31,7 @@ abstract class "BuildingBlock" as BB
 
 }
 
-abstract class "Sensor" as AS{
-todo
-todo()
-}
+
 
 namespace TransformationLogic {
 	abstract class Transformation
@@ -93,7 +87,6 @@ abstract class "Representation" as AR{
 	{abstract} reset()
 	{abstract} delete()
 
-	{abstract} setSize(Integer xSize, Integer ySize):boolean
 	{abstract} establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
 
 }
@@ -136,6 +129,12 @@ saveRepresentationAsFile(Path path):boolean
 
 }
 
+note right of RepresentationLogic.XYR
+  use eclipse nebula 
+  for display
+end note
+
+
 class "Channel X vs Time" as XvT {
 
 }
@@ -158,10 +157,55 @@ TR   -down-|> AR
 
 T "1 ..* "--o " 1 " XYR
 
+note top of  T
+  examples for type: 
+  bar, area, line
+end note
+
+
 }
 
+namespace SensorLogic {
 
+	abstract class "Sensor" as AS{
+		establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+		
+		}
+	 class "AnalogDigitalConverter" as ADC {
+		establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+	}
+	
+	class "ADS1115" as ads1115 {
 
+	}
+	
+	ADC -up-|> AS
+	ads1115 -up-|> ADC
+	
+	
+	class "Current/Power" as CP {
+		establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+	}
+	
+	class "INA219" as ina219 {
+
+	}
+	
+	CP -up-|> AS
+	ina219 -up-|> CP
+		
+	class "SpectralSensor" as SpecSens {
+		establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+	}
+	
+	class "AS7262" as as7262 {
+
+	}
+	
+	SpecSens -up-|> AS
+	as7262 -up-|> SpecSens
+	
+}
 
 
 
@@ -205,6 +249,16 @@ interface "IValueHandler" as IDP {
 
 }
 
+
+class "HelpMessage" as HM{
+	- messageFileName : String
+	+ HelpMessage(msgFile : String)
+	+ displayMessage() : void
+}
+note right of HM : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
+
+BB "*" --> "1" HM : < provides help/information about
+
 note right of IDP
   interface to provide 
   Data to a channel
@@ -220,19 +274,13 @@ end note
 
 
 
-note right of XYR
-  use eclipse nebula 
-  for display
-end note
 
 
 
-note bottom of  T
-  examples for type: 
-  bar, area, line
-end note
 
-BB <|-- AS
+
+
+BB <|-- SensorLogic.AS
 BB <|-- RepresentationLogic.AR
 
 
@@ -248,7 +296,7 @@ IDP -- DP
 
 ConfigurationBlockManager <|-- RM
 ConfigurationBlockManager <|-- SM
-SM "1" *-- "*" AS
+SM "1" *-- "*" SensorLogic.AS
 MC "1" -- "*" MR
 PC "1" -- "*" BB
 MC "1" -- "*" BB
