@@ -1,0 +1,121 @@
+/**
+ * @startuml
+ * 
+ * package "GUI" {
+ * MainWindow "1" *-- "1" ConfigurationField
+ * MainWindow "1" *-- "1" PrototypeField
+ * MainWindow "1" *-- "1" ButtonField
+ * PrototypeField <|-- SensorBlockField
+ * PrototypeField <|-- TransformationBlockField
+ * PrototypeField <|-- RepresentationBlockField
+ * ConfigurationField "1" -- "0..*" BuildingBlockView
+ * BuildingBlockView <|--  SensorBlockView
+ * BuildingBlockView <|--  TransformationBlockView
+ * BuildingBlockView <|--  RepresentationBlockView
+ * SensorBlockField -- "0..*" SensorBlockView
+ * TransformationBlockField -- "0..*" TransformationBlockView
+ * RepresentationBlockField -- "0..*" RepresentationBlockView
+ * ButtonField *-right- "0..*" Button
+ * Button .right.|> ButtonHandler
+ * Button <|-- StartButton
+ * Button <|-- PauseButton
+ * Button <|-- ResumeButton
+ * Button <|-- ResetButton
+ * Button <|-- SaveDataButton
+ * Button <|-- SaveGraphButton
+ * Button <|-- SaveConfiguration
+ * Button <|-- LoadConfiguration
+ * Button <|-- NewConfiguration
+ * Button <|-- Undo
+ * Button <|-- Redo
+ * ConfigurationField -- DragAndDropHandler
+ * BuildingBlockView -- "1" HelpDecorater
+ * 
+ * class MainWindow <<singleton>> {
+ * 
+ * + static getInstance(): MainWindow
+ * +newConfiguration(): void
+ * +exit(): void
+ * 
+ * }
+ * 
+ * class ConfigurationField {
+ * -listOfBuildingBlocks: BuildingBlocks[]
+ * +add(block : BuildingBlock): void
+ * +remove(block: BuildingBlock): void
+ * }
+ * 
+ * class BuildingBlockView {
+ * -id: int
+ * -name: String
+ * -xCor: double
+ * -yCor: double
+ * -numberOfInChannels: int
+ * -numberOfOutChannels: int
+ * +setNumberOfInChannels(number : int): void
+ * +setNumberOfOutChannels(number : int): void
+ * +setCoordinates(x : double, y : double): boolean
+ * +getXCoordinate(): int
+ * +getYCoordinate(): int
+ * }
+ * 
+ * class DragAndDropHandler {
+ * +blockWasMoved(blockId : int, corX : double, corY : double)
+ * +connectionWasMade(blockId1 : int, blockId2 : int)
+ * }
+ * 
+ * class PrototypeField {
+ * +open(): void
+ * }
+ * 
+ * class SensorBlockField {
+ * -listOfSensorBlocks: SensorBlockView[]
+ * }
+ * 
+ * class TransformationBlockField {
+ * -listOfTransformationBlocks: TransformationBlockView[]
+ * }
+ * 
+ * class RepresentationBlockField {
+ * -listOfRepresentaionBlocks: RepresentationBlockView[]
+ * }
+ * 
+ * class RepresentationBlockView {
+ * +showData(): void 
+ * +setUnit(unit: String): void
+ * +setValueRangeX(valueRangeX: double): void
+ * +setValueRangex(valueRangeY: double): void 
+ * }
+ * 
+ * class Button {
+ * -image: 
+ * -label : String
+ * +function(): void
+ * }
+ * 
+ * class ButtonField {
+ * -listOfButtons : Button[]
+ * }
+ * 
+ * interface ButtonHandler {
+ * +buttonPressed()
+ * }
+ * 
+ * class ViewControllerFacade {
+ * +updateBlockWasPlaced(id: int): void
+ * +updateBlockWasRemoved(id: int): void
+ * +startButtonWasPressed():void
+ * +pauseButtonWasPressed():void
+ * +resumeButtonWasPressed(): void
+ * +resetButtonWasPressed():void
+ * +saveDataButtonWasPressed(): void
+ * +saveGraphButtonWasPressed(): void 
+ * +getHelp(id: int): void
+ * +connection 
+ * 
+ * 
+ * 
+ * 
+ * }
+ * @enduml
+ */
