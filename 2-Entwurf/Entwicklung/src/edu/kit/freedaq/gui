@@ -102,6 +102,14 @@
  * TransformationBlockView -->  "*" BuildingBlockView : "in"
  * RepresentationBlockView -->  "*" BuildingBlockView : "in"
  *
+ *  note top of BuildingBlockView 
+ * 		Positions of ChannelDecorators and 
+ * 		layout of wires in between are not 
+ * 		part of ViewModel at this version. 
+ *   	Thus those Gui-aspects are considered 
+ *   	as implementation details + computed automatically 
+ *      when gui screwed together for now.   
+ * 	end note
  	
  * }
  * 
