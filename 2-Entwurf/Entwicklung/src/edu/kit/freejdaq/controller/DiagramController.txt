@@ -1,0 +1,108 @@
+@startuml
+
+package edu.kit.freejdaq.controller {
+
+	enum BlockType {
+		SENSOR
+		TRANSFORMATION
+		REPRESENTATION
+	}
+
+	package edu.kit.freejdaq.controller.command {
+
+		interface Command {
+			+ execute() : void
+		}
+		
+		class AddBlock {
+			- blockID : int
+			+ execute() : void
+		}
+		
+		BlockType "1" <-- "*" AddBlock : - blockType
+		
+		class ModifyBlock {
+			- blockID : int
+			+ execute() : void
+		}
+		
+		class DeleteBlock {
+			- blockID : int
+			+ execute() : void
+		}
+		
+		class DisplayHelp {
+			- blockID : int
+			+ execute() : void
+		}
+		
+		class SaveConfig {
+			- filePath : String
+			+ execute() : void
+		}
+		
+		class LoadConfig {
+			- filePath : String
+			+ execute() : void
+		}
+		
+		class ResetConfig {
+			+ execute() : void
+		}
+		
+		class CreateChannelConnection {
+			- startChannelID : int
+			- endChannelID : int
+			+ execute() : void
+		}
+		
+		class ModifyChannelConnection {
+			- oldStartChannelID : int
+			- oldEndChannelID : int
+			- newStartChannelID : int
+			- newEndChannelID : int
+			+ execute() : void
+		}
+		
+		class DeleteChannelConnection {
+			- startChannelID : int
+			- endChannelID : int
+			+ execute() : void
+		}
+		
+		class StartRun {
+			+ execute() : void
+		}
+		
+		class StopRun {
+			+ execute() : void
+		}
+		
+		class PauseRun {
+			+ execute() : void
+		}
+		
+		class ResumeRun {
+			+ execute() : void
+		}
+		
+		Command <|.. AddBlock
+		Command <|.. DeleteBlock
+		Command <|.. ModifyBlock
+		Command <|.. DisplayHelp
+		Command <|.. SaveConfig
+		Command <|.. LoadConfig
+		Command <|.. ResetConfig
+		Command <|.. CreateChannelConnection
+		Command <|.. ModifyChannelConnection
+		Command <|.. DeleteChannelConnection
+		Command <|.. StartRun
+		Command <|.. StopRun
+		Command <|.. PauseRun
+		Command <|.. ResumeRun
+
+	}
+	
+}
+
+@enduml
