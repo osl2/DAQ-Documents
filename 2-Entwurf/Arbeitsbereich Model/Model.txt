@@ -1,0 +1,257 @@
+@startuml
+
+
+
+class "MeasurementRun" as MR{
+	state: String
+
+}
+
+class "MeasurementConfiguration" as MC{
+	to do
+
+}
+
+class "HelpMessage" as HM{
+	to do
+}
+
+
+class "PrototypCollection" as PC{
+	to do
+}
+
+
+abstract class "BuildingBlock" as BB
+{
+
+-id: int
+	-name: String
+	-listOfChannels: <<Channel>>
+	+setId()
+	+ {abstract} establishConnection(Integer ownSourceChannelId, Integer targetChannelId)
+	+ {abstract} getDataProvider(Integer channelId): DataProvider
+
+}
+
+abstract class "Sensor" as AS{
+todo
+todo()
+}
+
+namespace TransformationLogic {
+	abstract class Transformation
+	CustomizedTransformation -up-|> Transformation
+	PredefinedTransformation -up-|> Transformation
+	LinearMapping -up-|> PredefinedTransformation
+	DependendOutputTransformation -up-|> PredefinedTransformation
+}
+
+
+BB <|- TransformationLogic.Transformation
+'----------------------------------------------------------------------------------------
+'Note: The manager aspect of this diagramm can be found, in more detail, at another place.
+'It stands here for a complete overview
+'----------------------------------------------------------------------------------------
+package kit.edu.freejdaq.configurationBlockManager {
+	abstract class ConfigurationBlockManager{
+		listOfBlocks : ConfigurationBlock[]
+		{abstract}+add(cb: ConfigurationBlock): boolean
+		+remove(cb: ConfigurationBlock): boolean
+		+showAllBocks(cb: ConfigurationBlock): boolean
+	}
+	
+	class "RepresentationManager" as RM {
+	
+
+	}
+
+	class "SensorManager" as SM {
+
+	}
+	
+	ConfigurationBlockManager <|-down- TransformationManager
+}
+
+TransformationManager "1" *-down- "n" TransformationLogic.Transformation
+
+
+namespace RepresentationLogic {
+
+abstract class "Representation" as AR{
+
+	state : String
+
+	updateInterval : float
+
+	
+
+	{abstract} saveRepresentationAsFile(Path path):boolean
+	{abstract} run()
+	{abstract} stop()
+	{abstract} resume()
+	{abstract} reset()
+	{abstract} delete()
+
+	{abstract} setSize(Integer xSize, Integer ySize):boolean
+	{abstract} establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+
+}
+class "Trace" as T{
+
+	type: String
+	setType(String type): boolean
+
+}
+class "TableRespresentation" as TR {
+
+
+	saveRepresentationAsFile(Path path): boolean
+	run()
+	stop()
+	resume()
+	reset()
+	delete()
+
+	setSize(Integer xSize, Integer ySize): boolean
+	establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+}
+
+
+class "XYRepresentation" as XYR {
+	title: String
+	xLabel: String
+	yLabel: String
+	hasToolbar: boolean
+
+saveRepresentationAsFile(Path path):boolean
+	run()
+	stop()
+	resume()
+	reset()
+	delete()
+	setSize(Integer xSize, Integer ySize): boolean
+	establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+
+
+}
+
+class "Channel X vs Time" as XvT {
+
+}
+
+class "Channel X vs Channel Y"  as XvY{
+
+	setChannelX(DataProvider dataProvider): boolean
+	setChannelY(DataProvider dataProvider): boolean
+}
+
+	class "N Channels vs Time"  as NvT{
+	numberOfChannels: Integer
+}
+XYR -up-|> AR
+XvT -up-|> XYR
+XvY -up-|> XYR
+NvT -up-|> XYR
+TR   -down-|> AR
+
+
+T "1 ..* "--o " 1 " XYR
+
+}
+
+
+
+
+
+
+
+
+
+class "Channel" as C {
+	type: String
+	channelId: Integer
+	connectionPartnerId: Integer
+	dataProvider: DataProvider
+
+	setConnectionPartnerId(String id): boolean
+
+}
+
+
+class "ChannelManager" as CL {
+	String: numberOfElements
+	getChannel(Integer id): Channel
+	setChannel(Integer id): boolean
+	addChannel(Channel channel): boolean
+	removeChannel(id): boolean
+}
+
+
+
+
+class "Value" as DP {
+
+	dataName: String
+	dataUnit: String
+
+
+}
+
+interface "IValueHandler" as IDP {
+
+	processValue():
+	getDataProvider(Integer channelId): DataProvider
+
+}
+
+note right of IDP
+  interface to provide 
+  Data to a channel
+end note
+
+
+note right of C
+  first part of channelId is 
+  the corresponding buildingBlockId
+end note
+
+
+
+
+
+note right of XYR
+  use eclipse nebula 
+  for display
+end note
+
+
+
+note bottom of  T
+  examples for type: 
+  bar, area, line
+end note
+
+BB <|-- AS
+BB <|-- RepresentationLogic.AR
+
+
+RM "1" *-- "n" RepresentationLogic.AR
+
+
+
+CL "1" -- "1" BB
+
+C --|> IDP
+CL "1" *-- "*" IDP
+IDP -- DP
+
+ConfigurationBlockManager <|-- RM
+ConfigurationBlockManager <|-- SM
+SM "1" *-- "*" AS
+MC "1" -- "*" MR
+PC "1" -- "*" BB
+MC "1" -- "*" BB
+
+
+@enduml
