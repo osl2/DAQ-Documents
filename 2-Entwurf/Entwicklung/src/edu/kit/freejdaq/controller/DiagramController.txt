@@ -108,6 +108,18 @@ package edu.kit.freejdaq.controller {
 		+ build() : void
 	}
 	
+	class ControllerFacadeView {
+		+ blockPlaced(id : int) : void
+		+ blockRemoved(id : int) : void
+		+ startPressed() : void
+		+ stopPressed() : void
+		+ pausePressed() : void
+		+ resumePressed() : void
+		+ resetPressed() : void
+		+ getHelp() : void
+	}
+	
+	Command <.down. ControllerFacadeView
 }
 
 @enduml
