@@ -103,6 +103,11 @@ package edu.kit.freejdaq.controller {
 
 	}
 	
+	class ModelBuilder {
+		- yaml : org.yaml.snakeyaml.Yaml
+		+ build() : void
+	}
+	
 }
 
 @enduml
