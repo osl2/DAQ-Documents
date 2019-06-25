@@ -15,18 +15,22 @@ class "MeasurementRun" as MR{
 class "MeasurementConfiguration" as MC{
 	-updateRate: float
 	-listOfAllChannels: <Channel>
-	-listOfAllConnections: Connection[]
+	-listOfAllConnections: (Integer sourceId, Integer targetId)
    -configurationAdjacencyList: configuration[]
     +addBlock(BuildingBlock block): boolean 
     +removeBlock(Integer blockId): boolean
-    +returnConfiguration(): configuration
+    +returnMeasurementConfiguration(): MeasurementConfiguration
 	+connectChannels(Integer sourceId, Integer targetId)
 }
 
 
 
+'----------------------------------------------------------------------------------------
+'PrototypCollection: List of all predefined and custom BuildingBlocks
+'----------------------------------------------------------------------------------------
+
 class "PrototypCollection" as PC{
-	to do
+	 +returnCloneOfBlock(BuildingBlock: block)
 }
 
 
@@ -37,7 +41,7 @@ abstract class "BuildingBlock" as BB
 	-name: String
 	-listOfChannels: <<Channel>>
 	+setId()
-	{abstract} processValue()
+	+ {abstract} processValue()
 	+ {abstract} establishConnection(Integer ownSourceChannelId, Integer targetChannelId)
 	
 
@@ -68,7 +72,7 @@ package kit.edu.freejdaq.configurationBlockManager {
 	}
 	
 	class "RepresentationManager" as RM {
-	
+		
 
 	}
 
@@ -174,21 +178,17 @@ namespace SensorLogic {
 }
 
 
-
-
-
-
 class "Channel" as C {
 	-type: String
 	-channelId: Integer
 	-connectionPartnerId: Integer
 	+processValue()
-	+setConnectionPartnerId(String id): boolean
+	+setConnectionPartner(Integer id): boolean
 
 }
 
 
-class "ChannelManager" as CL {
+class "ChannelManager" as CM {
 	-numberOfElements: Integer
 	+getChannel(Integer id): Channel
 	+setChannel(Integer id): boolean
@@ -198,7 +198,7 @@ class "ChannelManager" as CL {
 
 
 
-interface "IValueHandler" as IDP {
+interface "IValueHandler" as VH {
 
 	processValue()
 }
@@ -213,25 +213,16 @@ note right of HM : "messageFileName" leads to [html/markdown/?] \nfile containin
 
 BB "*" --> "1" HM : < provides help/information about
 
-note right of IDP
+note right of VH
   interface to provide 
   Data to a channel
 end note
 
 
-note right of C
+note top of C
   first part of channelId is 
   the corresponding buildingBlockId
 end note
-
-
-
-
-
-
-
-
-
 
 
 BB <|-- SensorLogic.AS
@@ -242,11 +233,11 @@ RM "1" *-- "n" RepresentationLogic.AR
 
 
 
-CL "1" -- "1" BB
+CM "1" -- "1" BB
 
-C ..|> IDP
-CL "1" *-- "*" IDP
+C ..|> VH
 
+CM "1" o-- "1..*" C
 
 ConfigurationBlockManager <|-- RM
 ConfigurationBlockManager <|-- SM
