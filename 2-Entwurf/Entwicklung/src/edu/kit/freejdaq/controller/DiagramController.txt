@@ -31,7 +31,7 @@ package edu.kit.freejdaq.controller {
 			+ execute() : void
 		}
 		
-		class DisplayHelp {
+		class ShowHelp {
 			- blockID : int
 			+ execute() : void
 		}
@@ -89,7 +89,7 @@ package edu.kit.freejdaq.controller {
 		Command <|.. AddBlock
 		Command <|.. DeleteBlock
 		Command <|.. ModifyBlock
-		Command <|.. DisplayHelp
+		Command <|.. ShowHelp
 		Command <|.. SaveConfig
 		Command <|.. LoadConfig
 		Command <|.. ResetConfig
@@ -119,7 +119,10 @@ package edu.kit.freejdaq.controller {
 		+ getHelp() : void
 	}
 	
-	Command <.down. ControllerFacadeView
+	note right of ControllerFacadeView : provides a single interface for the User (through the View) to interact with the program
+	
+	Command <.down. ControllerFacadeView : < encapsulation of concrete implementations via Command pattern
+	Command <.down. ModelBuilder
 }
 
 @enduml
