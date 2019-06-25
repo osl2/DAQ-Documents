@@ -22,22 +22,19 @@ class "MeasurementRun" as MR{
 
 
 
-
-
-
-
 class "MeasurementConfiguration" as MC{
 	-updateRate: float
 	-listOfAllChannels: <Channel>
-	-listOfAllConnections: (Integer sourceId, Integer targetId)
-   -configurationAdjacencyList: configuration[]
+	-configurationAdjacencyList: configuration[]
     +addBlock(BuildingBlock block): boolean 
     +removeBlock(Integer blockId): boolean
+    +connectChannels(Integer sourceId, Integer targetId):boolean
+	+removeConnection(Integer firstId, Integer secondId): boolean
     +returnMeasurementConfiguration(): MeasurementConfiguration
-	+connectChannels(Integer sourceId, Integer targetId)
+	
 }
 
-
+ConnectionManager "1" -- "1" MC
 
 '----------------------------------------------------------------------------------------
 'PrototypCollection: List of all predefined and custom BuildingBlocks
@@ -264,8 +261,8 @@ MC "1" -- "*" BB
 class YamlRepresentation {
 
 }
-BB -- YamlRepresentation
-
+BB -left- YamlRepresentation
+	
 }
 class ModelFacadeView{
 		+giveFullModel()
@@ -298,7 +295,7 @@ ModelFacadeView -- MC
 ModelFacadeController -- BB
 ModelFacadeController -- MC
 ModelFacadeController -- MR
-
+ModelFacadeBackend -- VH
 
 
 
