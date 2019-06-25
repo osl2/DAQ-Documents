@@ -34,7 +34,6 @@ class "MeasurementConfiguration" as MC{
 	
 }
 
-ConnectionManager "1" -- "1" MC
 
 '----------------------------------------------------------------------------------------
 'PrototypCollection: List of all predefined and custom BuildingBlocks
