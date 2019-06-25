@@ -15,15 +15,19 @@
  * SensorBlockField -- "0..*" SensorBlockView
  * TransformationBlockField -- "0..*" TransformationBlockView
  * RepresentationBlockField -- "0..*" RepresentationBlockView
- * ButtonField *-right- "0..*" Button
- * Button -right- ButtonHandler
+ * ButtonField *-down- "0..*" Button
+ * Button ..|> ButtonHandler
  * Button <|-- StartButton
  * Button <|-- PauseButton
  * Button <|-- ResumeButton
  * Button <|-- ResetButton
  * Button <|-- SaveDataButton
- * Button <|-- SaveGraphButton
- * DragAndDropHandler -down- DragAndDrop
+ * Button <|-- SaveRepresentationButton
+ * Button <|-- SaveConfiguration
+ * Button <|-- LoadConfiguration
+ * Button <|-- NewConfiguration
+ * Button <|-- UndoButton
+ * Button <|-- RedoButton
  * ConfigurationField -- DragAndDropHandler
  * BuildingBlockView -- "1" HelpDecorator
  * 
@@ -59,11 +63,6 @@
  * +getYCoordinate(): int
  * }
  * 
- * class DragAndDrop {
- * +pickUp(block: BuildingBlock): void
- * +putDown(block: BuildingBlock): void
- * }
- * 
  * class DragAndDropHandler {
  * +blockWasMoved(blockId : int, corX : double, corY : double)
  * +connectionWasMade(blockId1 : int, blockId2 : int)
@@ -73,16 +72,18 @@
  * +open(): void
  * }
  * 
- * class SensorBlockField {
- * 	+ addSensorBlockView(block: SensorBlockView)
- * }
- * 
- * class TransformationBlockField {
- *  + addTransformationBlockView(block: TransformationBlockView)
- * }
- * 
- * class RepresentationBlockField {
- 	+ addRepresentationBlockView(block: RepresentationBlockView)
+ * together {
+	 * class SensorBlockField {
+	 * 	+ addSensorBlockView(block: SensorBlockView)
+	 * }
+	 * 
+	 * class TransformationBlockField {
+	 *  + addTransformationBlockView(block: TransformationBlockView)
+	 * }
+	 * 
+	 * class RepresentationBlockField {
+	 	+ addRepresentationBlockView(block: RepresentationBlockView)
+	 * }
  * }
  * 
  * class SensorBlockView {
@@ -99,13 +100,11 @@
  * }
  *
  * class Button {
- * -color 
- * +function(): void
+ * -label: String
+ * -color: String
+ * +buttonPressed(): void
  * }
  * 
- * class ButtonHandler {
- * +buttonWasPressed()
- * }
  * 
  * interface DecoratorHandler {
  *	+ decoratorPresssed():void
@@ -124,11 +123,31 @@
  *   	Thus those Gui-aspects are considered 
  *   	as implementation details and computed 
  *      automatically when gui screwed together 
- 		for now.   
+ * 		for now.   
  * 	end note
- 	
+ * 
+ 
+ * interface ButtonHandler {
+ * +buttonPressed()
  * }
  * 
+ * class ViewControllerFacade {
+ * +updateBlockWasPlaced(id: int): void
+ * +updateBlockWasRemoved(id: int): void
+ * +startButtonWasPressed():void
+ * +pauseButtonWasPressed():void
+ * +resumeButtonWasPressed(): void
+ * +resetButtonWasPressed():void
+ * +saveDataButtonWasPressed(): void
+ * +saveGraphButtonWasPressed(): void 
+ * +getHelp(id: int): void
+ * +connection 
+ * 
+ * }
+ 
+ * }
+ 
 
+ *
  * @enduml
  */
