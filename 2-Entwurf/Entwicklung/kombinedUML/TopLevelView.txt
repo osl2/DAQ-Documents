@@ -1,0 +1,34 @@
+@startuml
+namespace Backend{
+	package edu.kit.freejdaq.backend {
+		class BackendImplementation
+	}
+
+	class BackendFacade
+}
+
+namespace Model{
+	package edu.kit.freejdaq.model {
+		class ModelImplementation
+	}
+
+	class ModelFacade
+}
+
+namespace Controller{
+	package edu.kit.freejdaq.controller {
+		class ControllerImplementation
+	}
+
+	class ControllerFacade
+}
+
+namespace View{
+	package edu.kit.freejdaq.view {
+		class ViewImplementation
+	}
+
+	class ViewFacade
+}
+
+@enduml
