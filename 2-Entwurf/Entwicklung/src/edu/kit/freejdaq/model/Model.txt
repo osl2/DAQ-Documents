@@ -1,0 +1,323 @@
+@startuml
+
+
+
+
+
+
+
+
+package kit.edu.freejdaq.Model {
+
+
+class "MeasurementRun" as MR{
+	-state: String
+	+start(): boolean
+	+pause(): boolean
+	+resume(): boolean
+	+reset(): boolean
+	+setUpdateRate(MeasurementConfiguration config): boolean
+
+}
+
+
+
+class "MeasurementConfiguration" as MC{
+	-updateRate: float
+	-listOfAllChannels: <Channel>
+	-configurationAdjacencyList: configuration[]
+    +addBlock(BuildingBlock block): boolean
+    +removeBlock(Integer blockId): boolean
+    +connectChannels(Integer sourceId, Integer targetId):boolean
+	+removeConnection(Integer firstId, Integer secondId): boolean
+    +returnMeasurementConfiguration(): MeasurementConfiguration
+
+}
+
+ConnectionManager "1" -- "1" MC
+
+'----------------------------------------------------------------------------------------
+'PrototypCollection: List of all predefined and custom BuildingBlocks
+'----------------------------------------------------------------------------------------
+
+class "PrototypCollection" as PC{
+	 +returnCloneOfBlock(BuildingBlock: block)
+}
+
+
+abstract class "BuildingBlock" as BB
+{
+
+-id: int
+	-name: String
+	-listOfChannels: <<Channel>>
+	+setId()
+	+ {abstract} processValue()
+	+ establishConnection(Integer ownSourceChannelId, Integer targetChannelId)
+
+
+}
+
+
+
+namespace TransformationLogic {
+	abstract class Transformation {
+		+setFunction(String inputFunction)
+	}
+	class Function {
+		<<create>>Function(String inputFunction) : Function
+		+applyFunction(Integer data)
+	}
+	CustomizedTransformation -up-|> Transformation
+	PredefinedTransformation -up-|> Transformation
+	LinearMapping -up-|> PredefinedTransformation
+	DependendOutputTransformation -up-|> PredefinedTransformation
+	Function "1" - "*" Transformation
+}
+
+
+BB <|- TransformationLogic.Transformation
+'----------------------------------------------------------------------------------------
+'Note: The manager aspect of this diagramm can be found, in more detail, at another place.
+'It stands here for a complete overview
+'----------------------------------------------------------------------------------------
+package kit.edu.freejdaq.configurationBlockManager {
+	abstract class ConfigurationBlockManager{
+		listOfBlocks : ConfigurationBlock[]
+		{abstract}+add(BuildingBlock block): boolean
+		{abstract}+remove(BuildingBlock block): boolean
+		{abstract}+showAllBocks(BuildingBlock block): boolean
+	}
+
+	class "RepresentationManager" as RM {
+
+
+	}
+
+	class "SensorManager" as SM {
+
+	}
+
+	ConfigurationBlockManager <|-down- TransformationManager
+}
+
+TransformationManager "1" *-down- "n" TransformationLogic.Transformation
+
+
+namespace RepresentationLogic {
+
+	abstract class "Representation" as AR{
+
+		{abstract} processValue()
+
+
+		}
+
+	class "TableRespresentation" as TR {
+		processValue()
+
+	}
+
+
+	class "XYRepresentation" as XYR {
+		processValue()
+
+
+
+	}
+
+	note right of RepresentationLogic.XYR
+  	use eclipse nebula
+  	for display
+	end note
+
+
+	class "ChannelXvsTime" as XvT {
+		processValue()
+	}
+
+	class "ChannelXvsChannelY"  as XvY{
+		processValue()
+
+	}
+
+		class "NChannelvsTime"  as NvT{
+		processValue()
+	}
+	XYR -up-|> AR
+	XvT -up-|> XYR
+	XvY -up-|> XYR
+	NvT -up-|> XYR
+	TR   -down-|> AR
+
+
+}
+
+namespace SensorLogic {
+
+	abstract class "Sensor" as AS{
+		´{abstract} processValue()
+
+		}
+	 class "AnalogDigitalConverter" as ADC {
+		processValue()
+	}
+
+	class "ADS1115" as ads1115 {
+		processValue()
+	}
+
+	ADC -up-|> AS
+	ads1115 -up-|> ADC
+
+
+	class "Current/Power" as CP {
+		processValue()
+	}
+
+	class "INA219" as ina219 {
+		processValue()
+	}
+
+	CP -up-|> AS
+	ina219 -up-|> CP
+
+	class "SpectralSensor" as SpecSens {
+		processValue()
+	}
+
+	class "AS7262" as as7262 {
+		processValue()
+	}
+
+	SpecSens -up-|> AS
+	as7262 -up-|> SpecSens
+
+}
+
+
+class "Channel" as C {
+	-type: String
+	-channelId: Integer
+	-connectionPartnerId: Integer
+	+processValue()
+	+setConnectionPartner(Integer id): boolean
+
+}
+
+
+class "ChannelManager" as CM {
+	-numberOfElements: Integer
+	+getChannel(Integer id): Channel
+	+setChannel(Integer id): boolean
+	+addChannel(Channel channel): boolean
+	+removeChannel(Integer id): boolean
+}
+
+
+
+interface "IValueHandler" as VH {
+
+	processValue()
+}
+
+
+class "HelpMessage" as HM{
+	- messageFileName : String
+	+ HelpMessage(msgFile : String)
+	+ displayMessage() : void
+}
+note right of HM : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
+
+BB "*" --> "1" HM : < provides help/information about
+
+note right of VH
+  interface to provide
+  Data to a channel
+end note
+
+
+note top of C
+  first part of channelId is
+  the corresponding buildingBlockId
+end note
+
+
+BB <|-- SensorLogic.AS
+BB <|-- RepresentationLogic.AR
+
+
+RM "1" *-- "n" RepresentationLogic.AR
+
+
+
+CM "1" -- "1" BB
+
+C ..|> VH
+
+CM "1" o-- "1..*" C
+
+ConfigurationBlockManager <|-- RM
+ConfigurationBlockManager <|-- SM
+SM "1" *-- "*" SensorLogic.AS
+MC "1" -- "*" MR
+PC "1" -- "*" BB
+MC "1" -- "*" BB
+
+
+class YamlRepresentation {
+
+}
+BB -left- YamlRepresentation
+
+}
+class ModelFacadeView{
+		+giveFullModel()
+		+update()
+	}
+
+
+ModelFacadeView -- MC
+
+
+	class ModelFacadeBackend{
+		+receiveYAML(YAML sensorYAML)
+		+receiveData(int data)
+	}
+
+
+
+
+
+
+	class ModelFacadeController{
+		+addBuildingBlock(Integer id): BuildingBlock
+		+removeBuildingBlock(Integer id): boolean
+		+setChannelConnection(int firstChannelId, int secondChannelId)
+		+setBuildingBlockName(int iD): boolean
+		+startMeasurement()
+	}
+
+
+ModelFacadeController -- BB
+ModelFacadeController -- MC
+ModelFacadeController -- MR
+ModelFacadeBackend -- VH
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml
