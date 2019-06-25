@@ -202,23 +202,35 @@
 \tableofcontents 					% generate pdf twice to update
 
 \clearpage
-\section{Ziel der Entwurfsdokumentation}
+\section{Ziel der Entwurfsdokumentation} \label{einleitung}
 Die Entwurfsdokumentation soll, aufbauend auf das Pflichtenheft, Entwurfsentscheidungen festhalten. Der Rahmen des Entwurfes wird durch einen Model-View-Controller (MVC) gebildet. Die Daten werden durch das Backend zu der Verfügung gestellt. Jedes dieser Pakete kommuniziert über eine Fassade. Dadurch werden die Pakete von einander abgekoppelt.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/Grober_Aufbau.png}
+		\caption{Die grobe Struktur des Entwurfs}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
 
 \clearpage
 \section{Klassenbeschreibung}
-
+Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufbau orientiert sich dabei an der in \ref{einleitung} aufgeführten Struktur.
 
 \clearpage
 \subsection{Backend}
 
 
 \clearpage
-\subsection{Core}
+\subsection{Model}
 
 
 \clearpage
-\subsection{Frontend}
+\subsection{Controller}
+
+\clearpage
+\subsection{View}
 
 
 \clearpage
