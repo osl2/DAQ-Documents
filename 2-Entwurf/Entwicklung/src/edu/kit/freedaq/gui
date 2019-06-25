@@ -25,7 +25,7 @@
  * Button <|-- SaveGraphButton
  * DragAndDropHandler -down- DragAndDrop
  * ConfigurationField -- DragAndDropHandler
- * BuildingBlockView -- "1" HelpDecorater
+ * BuildingBlockView -- "1" HelpDecorator
  * 
  * class MainWindow <<singleton>> {
  * 
@@ -91,6 +91,20 @@
  * class ButtonHandler {
  * +buttonWasPressed()
  * }
+ * 
+ * interface DecoratorHandler {
+ *	+ decoratorPresssed():void
  * }
+ * HelpDecorator ..|> DecoratorHandler 
+ * 
+ * SensorBlockView --> "*" BuildingBlockView : "out"
+ * TransformationBlockView -->  "*" BuildingBlockView : "out"
+ * TransformationBlockView -->  "*" BuildingBlockView : "in"
+ * RepresentationBlockView -->  "*" BuildingBlockView : "in"
+ *
+ 	
+ * }
+ * 
+
  * @enduml
  */
