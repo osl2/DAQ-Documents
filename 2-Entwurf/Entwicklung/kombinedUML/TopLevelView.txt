@@ -3,7 +3,6 @@ namespace Backend{
 	package edu.kit.freejdaq.backend {
 		class BackendImplementation
 	}
-
 	class BackendFacade
 }
 
@@ -31,4 +30,15 @@ namespace View{
 	class ViewFacade
 }
 
+'edu.kit.freejdaq.view.ViewImplementation
+'edu.kit.freejdaq.controller.ControllerImplementation
+'edu.kit.freejdaq.model.ModelImplementation
+'edu.kit.freejdaq.backend.BackendImplementation
+
+Backend.BackendFacade -> Model.ModelFacade
+Model.ModelFacade -> Backend.BackendFacade
+Controller.ControllerFacade -> Model.ModelFacade
+Controller.ControllerFacade -up-> View.ViewFacade
+View.ViewFacade -up-> Model.ModelFacade
+View.ViewFacade --up--> Controller.ControllerFacade
 @enduml
