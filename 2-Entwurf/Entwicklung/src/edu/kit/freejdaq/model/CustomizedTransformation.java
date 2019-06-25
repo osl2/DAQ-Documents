@@ -1,4 +1,4 @@
-package edu.kit.freejdaq.transformation;
+package edu.kit.freejdaq.model;
 
 /**
  * 
