@@ -2,6 +2,14 @@
 
 
 
+
+
+
+
+
+package kit.edu.freejdaq.Model {
+
+
 class "MeasurementRun" as MR{
 	-state: String
 	+start(): boolean
@@ -11,6 +19,12 @@ class "MeasurementRun" as MR{
 	+setUpdateRate(MeasurementConfiguration config): boolean
 
 }
+
+
+
+
+
+
 
 class "MeasurementConfiguration" as MC{
 	-updateRate: float
@@ -42,7 +56,7 @@ abstract class "BuildingBlock" as BB
 	-listOfChannels: <<Channel>>
 	+setId()
 	+ {abstract} processValue()
-	+ {abstract} establishConnection(Integer ownSourceChannelId, Integer targetChannelId)
+	+ establishConnection(Integer ownSourceChannelId, Integer targetChannelId)
 	
 
 }
@@ -88,49 +102,49 @@ TransformationManager "1" *-down- "n" TransformationLogic.Transformation
 
 namespace RepresentationLogic {
 
-abstract class "Representation" as AR{
+	abstract class "Representation" as AR{
 
-	{abstract} processValue()
-	{abstract} establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+		{abstract} processValue()
+		
 
-}
+		}
 
-class "TableRespresentation" as TR {
-	processValue()
-    establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
-}
-
-
-class "XYRepresentation" as XYR {
-	processValue()
-	establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+	class "TableRespresentation" as TR {
+		processValue()
+    	
+	}
 
 
-}
-
-note right of RepresentationLogic.XYR
-  use eclipse nebula 
-  for display
-end note
+	class "XYRepresentation" as XYR {
+		processValue()
+		
 
 
-class "ChannelXvsTime" as XvT {
-	processValue()
-}
+	}
 
-class "ChannelXvsChannelY"  as XvY{
-	processValue()
+	note right of RepresentationLogic.XYR
+  	use eclipse nebula 
+  	for display
+	end note
+
+
+	class "ChannelXvsTime" as XvT {
+		processValue()
+	}
+
+	class "ChannelXvsChannelY"  as XvY{
+		processValue()
 	
-}
+	}
 	
-	class "NChannelvsTime"  as NvT{
-	processValue()
-}
-XYR -up-|> AR
-XvT -up-|> XYR
-XvY -up-|> XYR
-NvT -up-|> XYR
-TR   -down-|> AR
+		class "NChannelvsTime"  as NvT{
+		processValue()
+	}
+	XYR -up-|> AR
+	XvT -up-|> XYR
+	XvY -up-|> XYR
+	NvT -up-|> XYR
+	TR   -down-|> AR
 
 
 }
@@ -138,15 +152,15 @@ TR   -down-|> AR
 namespace SensorLogic {
 
 	abstract class "Sensor" as AS{
-		establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+		´{abstract} processValue()
 		
 		}
 	 class "AnalogDigitalConverter" as ADC {
-		establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+		processValue()
 	}
 	
 	class "ADS1115" as ads1115 {
-
+		processValue()
 	}
 	
 	ADC -up-|> AS
@@ -154,22 +168,22 @@ namespace SensorLogic {
 	
 	
 	class "Current/Power" as CP {
-		establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+		processValue()
 	}
 	
 	class "INA219" as ina219 {
-
+		processValue()
 	}
 	
 	CP -up-|> AS
 	ina219 -up-|> CP
 		
 	class "SpectralSensor" as SpecSens {
-		establishConnection(Integer channelIdOfPartner, Integer ownChannelId): boolean
+		processValue()
 	}
 	
 	class "AS7262" as as7262 {
-
+		processValue()
 	}
 	
 	SpecSens -up-|> AS
@@ -245,6 +259,61 @@ SM "1" *-- "*" SensorLogic.AS
 MC "1" -- "*" MR
 PC "1" -- "*" BB
 MC "1" -- "*" BB
+
+
+class YamlRepresentation {
+
+}
+BB -- YamlRepresentation
+
+}
+class ModelFacadeView{
+		+giveFullModel()
+		+update()
+	}
+
+
+ModelFacadeView -- MC
+
+
+	class ModelFacadeBackend{
+		+receiveYAML(YAML sensorYAML)
+		+receiveData(int data)
+	}
+
+
+
+
+
+
+	class ModelFacadeController{
+		+addBuildingBlock(Integer id): BuildingBlock
+		+removeBuildingBlock(Integer id): boolean
+		+setChannelConnection(int firstChannelId, int secondChannelId)
+		+setBuildingBlockName(int iD): boolean
+		+startMeasurement()
+	}
+
+
+ModelFacadeController -- BB
+ModelFacadeController -- MC
+ModelFacadeController -- MR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @enduml
