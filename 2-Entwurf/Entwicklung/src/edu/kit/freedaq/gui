@@ -41,6 +41,7 @@
  * -listOfBuildingBlocks: BuildingBlocks[]
  * +add(block : BuildingBlock): void
  * +remove(block: BuildingBlock): void
+ * +getViewModel(): List <BuildingBlockView>
  * }
  * 
  * class BuildingBlockView {
@@ -48,9 +49,10 @@
  * -name: String
  * -xCor: double
  * -yCor: double
- * -color: 
- * -shape:
- * -numberOfChannels: int
+ * -color: String
+ * -shape: String
+ * -numberOfInChannels: int
+ * -numberOfOutChannels: int
  * +setNumberOfChannels(number : int): void
  * +setCoordinates(x : double, y : double): boolean
  * +getXCoordinate(): int
@@ -72,17 +74,30 @@
  * }
  * 
  * class SensorBlockField {
- * listOfSensorBlocks: SensorBlockView[]
+ * 	+ addSensorBlockView(block: SensorBlockView)
  * }
  * 
  * class TransformationBlockField {
- * listOfTransformationBlocks: TransformationBlockView[]
+ *  + addTransformationBlockView(block: TransformationBlockView)
  * }
  * 
  * class RepresentationBlockField {
- * listOfRepresentaionBlocks: RepresentationBlockView[]
+ 	+ addRepresentationBlockView(block: RepresentationBlockView)
  * }
  * 
+ * class SensorBlockView {
+ *  + addToConnectedOutBlocksViews(blockView: BuildingBlockView)
+ * }
+ * 
+ * class TransformationBlockView {
+ *  + addToConnectedInBlocksViews(blockView: BuildingBlockView)
+ *  + addToConnectedOutBlocksViews(blockView: BuildingBlockView)
+ * }
+ *
+ * class RepresentationBlockView {
+ *  + addToConnectedInBlocksViews(blockView: BuildingBlockView)
+ * }
+ *
  * class Button {
  * -color 
  * +function(): void
@@ -107,8 +122,9 @@
  * 		layout of wires in between are not 
  * 		part of ViewModel at this version. 
  *   	Thus those Gui-aspects are considered 
- *   	as implementation details + computed automatically 
- *      when gui screwed together for now.   
+ *   	as implementation details and computed 
+ *      automatically when gui screwed together 
+ 		for now.   
  * 	end note
  	
  * }
