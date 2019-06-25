@@ -1,0 +1,20 @@
+@startuml
+package modelFacade {
+	class ModelFacadeView{
+		+giveFullModel()
+		+update()
+	}
+
+	class ModelFacadeBackend{
+		+recieveYAML(YAML sensorYAML)
+		+recieveData(int data)
+	}
+
+	class ModelFacadeController{
+		+getBuildingBlock(int iD)
+		+setChannelConnection(int firstChannelId, int secondChannelId)
+		+setId(int iD)
+		+startMeasurement()
+	}
+}
+@enduml
