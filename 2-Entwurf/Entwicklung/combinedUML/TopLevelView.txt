@@ -1,0 +1,44 @@
+@startuml
+namespace Backend{
+	package edu.kit.freejdaq.backend {
+		class BackendImplementation
+	}
+	class BackendFacade
+}
+
+namespace Model{
+	package edu.kit.freejdaq.model {
+		class ModelImplementation
+	}
+
+	class ModelFacade
+}
+
+namespace Controller{
+	package edu.kit.freejdaq.controller {
+		class ControllerImplementation
+	}
+
+	class ControllerFacade
+}
+
+namespace View{
+	package edu.kit.freejdaq.view {
+		class ViewImplementation
+	}
+
+	class ViewFacade
+}
+
+'edu.kit.freejdaq.view.ViewImplementation
+'edu.kit.freejdaq.controller.ControllerImplementation
+'edu.kit.freejdaq.model.ModelImplementation
+'edu.kit.freejdaq.backend.BackendImplementation
+
+Backend.BackendFacade -> Model.ModelFacade
+Model.ModelFacade -> Backend.BackendFacade
+Controller.ControllerFacade -> Model.ModelFacade
+Controller.ControllerFacade -up-> View.ViewFacade
+View.ViewFacade -up-> Model.ModelFacade
+View.ViewFacade --up--> Controller.ControllerFacade
+@enduml
