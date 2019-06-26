@@ -1,5 +1,5 @@
 @startuml
-scale 0.5
+scale 0.25
 '------------------------------------------------------------------------
 'Backend
 '------------------------------------------------------------------------
@@ -121,7 +121,7 @@ package edu.kit.freejdaq.backend {
 
 
 
-package kit.edu.freejdaq.Model {
+package kit.edu.freejdaq.model {
 
 
 class "MeasurementRun" as MR{
@@ -567,5 +567,151 @@ package edu.kit.freejdaq.controller {
 '------------------------------------------------------------------------
 'View
 '------------------------------------------------------------------------
+package kit.edu.freejdaq.gui {
+MainWindow "1" *-- "1" ConfigurationField
+MainWindow "1" *-- "1" PrototypeField
+MainWindow "1" *-- "1" ButtonField
+PrototypeField <|-- SensorBlockField
+PrototypeField <|-- TransformationBlockField
+PrototypeField <|-- RepresentationBlockField
+ConfigurationField "1" -- "0..*" BuildingBlockView
+BuildingBlockView <|--  SensorBlockView
+BuildingBlockView <|--  TransformationBlockView
+BuildingBlockView <|--  RepresentationBlockView
+SensorBlockField -- "0..*" SensorBlockView
+TransformationBlockField -- "0..*" TransformationBlockView
+RepresentationBlockField -- "0..*" RepresentationBlockView
+ButtonField *-down- "0..*" Button
+Button ..|> ButtonHandler
+Button <|-- StartButton
+Button <|-- PauseButton
+Button <|-- ResumeButton
+Button <|-- ResetButton
+Button <|-- SaveDataButton
+Button <|-- SaveRepresentationButton
+Button <|-- SaveConfiguration
+Button <|-- LoadConfiguration
+Button <|-- NewConfiguration
+Button <|-- UndoButton
+Button <|-- RedoButton
+ConfigurationField -- DragAndDropHandler
+BuildingBlockView -- "1" HelpDecorator
 
+class MainWindow <<singleton>> {
+
++ static getInstance(): MainWindow
++newConfiguration(): void
++openConfiguration(): void
++saveConfiguration(): boolean
++exit(): void
+
+}
+
+class ConfigurationField {
+-listOfBuildingBlocks: BuildingBlocks[]
++add(block : BuildingBlock): void
++remove(block: BuildingBlock): void
++getViewModel(): List <BuildingBlockView>
+}
+
+class BuildingBlockView {
+-id: int
+-name: String
+-xCor: double
+-yCor: double
+-color: String
+-shape: String
+-numberOfInChannels: int
+-numberOfOutChannels: int
++setNumberOfChannels(number : int): void
++setCoordinates(x : double, y : double): boolean
++getXCoordinate(): int
++getYCoordinate(): int
+}
+
+class DragAndDropHandler {
++blockWasMoved(blockId : int, corX : double, corY : double)
++connectionWasMade(blockId1 : int, blockId2 : int)
+}
+
+class PrototypeField {
++open(): void
+}
+
+together {
+ class SensorBlockField {
+ 	+ addSensorBlockView(block: SensorBlockView)
+ }
+
+ class TransformationBlockField {
+  + addTransformationBlockView(block: TransformationBlockView)
+ }
+
+ class RepresentationBlockField {
++ addRepresentationBlockView(block: RepresentationBlockView)
+ }
+}
+
+class SensorBlockView {
+ + addToConnectedOutBlocksViews(blockView: BuildingBlockView)
+
+
+class TransformationBlockView {
+ + addToConnectedInBlocksViews(blockView: BuildingBlockView)
+ + addToConnectedOutBlocksViews(blockView: BuildingBlockView)
+}
+class RepresentationBlockView {
+ + addToConnectedInBlocksViews(blockView: BuildingBlockView)
+ }
+class Button {
+-label: String
+-color: String
++buttonPressed(): void
+}
+
+
+interface DecoratorHandler {
++ decoratorPresssed():void
+}
+HelpDecorator ..|> DecoratorHandler
+
+SensorBlockView --> "*" BuildingBlockView : "out"
+TransformationBlockView -->  "*" BuildingBlockView : "out"
+TransformationBlockView -->  "*" BuildingBlockView : "in"
+RepresentationBlockView -->  "*" BuildingBlockView : "in"
+ note top of BuildingBlockView
+		Positions of ChannelDecorators and
+		layout of wires in between are not
+		part of ViewModel at this version.
+  	Thus those Gui-aspects are considered
+  	as implementation details and computed
+     automatically when gui screwed together
+		for now.
+	end note
+
+
+interface ButtonHandler {
++buttonPressed()
+}
+
+class ViewControllerFacade {
++updateBlockWasPlaced(id: int): void
++updateBlockWasRemoved(id: int): void
++startButtonWasPressed():void
++pauseButtonWasPressed():void
++resumeButtonWasPressed(): void
++resetButtonWasPressed():void
++saveDataButtonWasPressed(): void
++saveGraphButtonWasPressed(): void
++getHelp(id: int): void
++connection
+
+}
+
+}
+
+'------------------------------------------------------------------------
+'Layout Commands
+'------------------------------------------------------------------------
+hide kit.edu.freejdaq.gui -down-> kit.edu.freejdaq.model
 @enduml
