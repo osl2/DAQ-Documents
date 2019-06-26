@@ -5,7 +5,9 @@ Allgemein:
 -Viele Klassen nicht fertig
 -Multiplizäten fehlen 
 -Baustein-ID als String (z.B: 1835BS(Name der Yaml, ConfigDatei...)
--Pakete zu groß (sind eher Module)
+-Pakete zu groß (sind eher Module)´
+-eventuell Master UML Diagramm als .svg exportieren, da besser skalierbar?
+
 
 Backend:
 
@@ -43,6 +45,7 @@ state als Enum
 Businesslogic und Modell trennen?
 Funktionsparser bei Transformationen
 Exceptions
+nötige Attribute für Darstellungen im Framwork, z.B. x-Label, y-Label für XY-Graph
 
 View:
 
@@ -57,6 +60,11 @@ Controller:
 Action Listner
 Fassade-Methoden als boolean sinnvoll ?
 
+Bemerkungen zum Entwurfsdokument:
+-Funktionale Beschreibung von Klassen, Methoden und Attributen
+-Leserichtung des Entwurfdokuments sollte einer natürlichen Reihenfolge zum Verständnis entsprechen
+-Entscheidung, ob wir die Messconfig während dem Messablauf veränderbar machen, begründen
+-Sequenzendiagramme für fundamentale Usecases, die dann auch so exakt in das Klassendiagramm übertragen werden können
 
 
 
