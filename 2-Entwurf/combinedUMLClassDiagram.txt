@@ -1,0 +1,717 @@
+@startuml
+
+'------------------------------------------------------------------------
+'Backend
+'------------------------------------------------------------------------
+package edu.kit.freejdaq.backend {
+	SshAndScpToPi --|> CommunicationWithPi
+	WebSocketToPi  --|> CommunicationWithPi
+	UsbToPi --|> CommunicationWithPi
+	SshAndScpToPi -up-> NetworkConfiguration
+	WebSocketToPi -up-> NetworkConfiguration
+
+	class NetworkConfiguration {
+	   -port: int
+	   -ipAddressOfPi: String
+	}
+
+	abstract class CommunicationWithPi {
+		-busy: boolean
+		-pathToRemoteDir: String
+		-pathToLocalDir: String
+		+CommunicationWithPi(pathToRemoteDir: String, pathToLocalDir: String, listeningAgent: ICommandResponseListener)
+	    +{abstract}executeCompleteCommandWithTimeout(command: String, timeOut: int): String[]
+	    +{abstract}copyFileFromPi(nameOfFile: String): boolean
+	    +{abstract}copyFileToPi(nameOfFile: String): boolean
+	    +{abstract}executeCommandContinuously(command: String, listeningAgent: ICommandResponseListener): void
+	    +{abstract}disconnect(): void
+	}
+	CommunicationWithPi --> "listeningProtocolAgent" ICommandResponseListener
+
+	interface ICommandResponseListener {
+		receivePartOfResponse(response: String; finished: boolean)
+	}
+
+	 SensorInfoProtocolAgentForSsh .up.|> ICommandResponseListener
+	 MeasurementProcessProtocolAgentForSsh .up.|> ICommandResponseListener
+
+	class SshAndScpToPi {
+		-username: String
+		-password: String
+		+SshAndScpTo(username: String, password: String)
+		+executeCompleteCommandWithTimeout(command: String, timeOut: int): String[]
+	    +copyFileFromPi(nameOfFile: String): boolean
+	    +copyFileToPi(nameOfFile: String): boolean
+	    +executeCommandContinuously(command: String, listeningAgent: ICommandResponseListener): void
+	    +disconnect(): void
+	}
+
+	interface IMeasurementStreamListener {
+		-receiveData(measuredValue: int): void
+		-connectionTerminated(): void
+	}
+
+	MeasurementProcessProtocolAgentForSsh -right-> CommunicationWithPi
+	SensorInfoProtocolAgentForSsh -up-> CommunicationWithPi
+	MeasurementProcessProtocolAgentForSsh -left-> "*" IMeasurementStreamListener
+
+	interface IAccessToSensorInfo {
+		+getIdsOfAvailableSensors(): String[]
+		+getYamlFile(sensorId: String): boolean
+		+setYamlFile(sensorId: String): boolean
+	}
+
+	SensorInfoProtocolAgentForSsh ..|> IAccessToSensorInfo
+
+
+	interface IAccessToMeasurementProcess{
+		+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
+		+pause(): boolean
+		+continue(): boolean
+		+stop(): boolean
+	}
+
+	enum MeasurementState {
+	  INITAL_STATE
+	  RUNNING
+	  PAUSED
+	}
+
+	MeasurementProcessProtocolAgentForSsh .down.|> IAccessToMeasurementProcess
+	MeasurementProcessProtocolAgentForSsh -up-> MeasurementState
+
+	together {
+
+		class MeasurementProcessProtocolAgentForSsh {
+			+MeasurementProcessProtocolAgentForSsh(foundation: CommunicationWithPi)
+			+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
+			+pause(): boolean
+			+continue(): boolean
+			+stop(): boolean
+			+receivePartOfResponse(response: String; finished: boolean)
+		}
+
+		class SensorInfoProtocolAgentForSsh {
+			+SensorInfoProtocolAgentForSsh(foundation: CommunicationWithPi)
+			+getIdsOfAvailableSensors(): String[]
+			+getYamlFile(sensorId: String): boolean
+			+setYamlFile(sensorId: String): boolean
+			+receivePartOfResponse(response: String; finished: boolean)
+
+		}
+	}
+
+	PickupPointForISensorInfoAndIMeasurementProcess -up-> IAccessToSensorInfo
+	PickupPointForISensorInfoAndIMeasurementProcess -up-> IAccessToMeasurementProcess
+	class PickupPointForISensorInfoAndIMeasurementProcess {
+		+{static}createPickupPointUsingCommunicationFoundationBySsh(ipAddressOfPi: String, port: int, username: String, password: String, pathToRemoteDir: String, pathToLocalDir: String): PickupPointForISensorInfoAndIMeasurementProcess
+		+getIAccessToMeasurementProcess(): IAccessToSensorInfo
+		+getIAccessToSensorInfo(): IAccessToSensorInfo
+	}
+}
+'------------------------------------------------------------------------
+'Model
+'------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+package kit.edu.freejdaq.model {
+
+
+class "MeasurementRun" as MR{
+	-state: String
+	+start(): boolean
+	+pause(): boolean
+	+resume(): boolean
+	+reset(): boolean
+	+setUpdateRate(MeasurementConfiguration config): boolean
+
+}
+
+
+
+class "MeasurementConfiguration" as MC{
+	-updateRate: float
+	-listOfAllChannels: <Channel>
+	-configurationAdjacencyList: configuration[]
+    +addBlock(BuildingBlock block): boolean
+    +removeBlock(Integer blockId): boolean
+    +connectChannels(Integer sourceId, Integer targetId):boolean
+	+removeConnection(Integer firstId, Integer secondId): boolean
+    +returnMeasurementConfiguration(): MeasurementConfiguration
+
+}
+
+ConnectionManager "1" -- "1" MC
+
+'----------------------------------------------------------------------------------------
+'PrototypCollection: List of all predefined and custom BuildingBlocks
+'----------------------------------------------------------------------------------------
+
+class "PrototypCollection" as PC{
+	 +returnCloneOfBlock(BuildingBlock: block)
+}
+
+
+abstract class "BuildingBlock" as BB
+{
+
+-id: int
+	-name: String
+	-listOfChannels: <<Channel>>
+	+setId()
+	+ {abstract} processValue()
+	+ establishConnection(Integer ownSourceChannelId, Integer targetChannelId)
+
+
+}
+
+
+
+namespace TransformationLogic {
+	abstract class Transformation {
+		+<<create>> Transformation()
+		+<<create>> Transformation(Yaml inputTransformationYaml)
+		+setFunction(String inputFunction)
+		+{abstract} applyFunction(): Integer
+	}
+	class Function {
+		<<create>>Function(String inputFunction) : Function
+		+applyFunction(Integer data)
+	}
+	AdditionTransformation -up-|> Transformation
+	AverageTransformation -up-|> Transformation
+	MultiplicationTransformation -up-|> Transformation
+	DataFlowTransformation -up-|> Transformation
+	LinearMapping -up-|> DataFlowTransformation
+	DependendOutputTransformation -up-|> DataFlowTransformation
+	Function "1" - "*" Transformation
+
+	class DataFlowTransformation {
+
+	}
+	note left of TransformationLogic.DataFlowTransformation
+	Changes the output according to configuration.
+	Does not influence the values of the data stream
+	end note
+}
+
+
+BB <|- TransformationLogic.Transformation
+'----------------------------------------------------------------------------------------
+'Note: The manager aspect of this diagramm can be found, in more detail, at another place.
+'It stands here for a complete overview
+'----------------------------------------------------------------------------------------
+'package kit.edu.freejdaq.configurationBlockManager {
+'	abstract class ConfigurationBlockManager{
+'		listOfBlocks : ConfigurationBlock[]
+'		{abstract}+add(BuildingBlock block): boolean
+'		{abstract}+remove(BuildingBlock block): boolean
+'		{abstract}+showAllBocks(BuildingBlock block): boolean
+'	}
+'
+'	class "RepresentationManager" as RM {
+'
+'
+'	}
+'
+'	class "SensorManager" as SM {
+'
+'	}
+'
+'	ConfigurationBlockManager <|-down- TransformationManager
+'}
+
+TransformationManager "1" *-down- "n" TransformationLogic.Transformation
+
+
+namespace RepresentationLogic {
+
+	abstract class "Representation" as AR{
+
+		{abstract} processValue()
+
+
+		}
+
+	class "TableRespresentation" as TR {
+		processValue()
+
+	}
+
+
+	class "XYRepresentation" as XYR {
+		processValue()
+
+
+
+	}
+
+	note right of RepresentationLogic.XYR
+  	use eclipse nebula
+  	for display
+	end note
+
+
+	class "ChannelXvsTime" as XvT {
+		processValue()
+	}
+
+	class "ChannelXvsChannelY"  as XvY{
+		processValue()
+
+	}
+
+		class "NChannelvsTime"  as NvT{
+		processValue()
+	}
+	XYR -up-|> AR
+	XvT -up-|> XYR
+	XvY -up-|> XYR
+	NvT -up-|> XYR
+	TR   -down-|> AR
+
+
+}
+
+namespace SensorLogic {
+
+	abstract class "Sensor" as AS{
+		´{abstract} processValue()
+
+		}
+	 class "AnalogDigitalConverter" as ADC {
+		processValue()
+	}
+
+	class "ADS1115" as ads1115 {
+		processValue()
+	}
+
+	ADC -up-|> AS
+	ads1115 -up-|> ADC
+
+
+	class "Current/Power" as CP {
+		processValue()
+	}
+
+	class "INA219" as ina219 {
+		processValue()
+	}
+
+	CP -up-|> AS
+	ina219 -up-|> CP
+
+	class "SpectralSensor" as SpecSens {
+		processValue()
+	}
+
+	class "AS7262" as as7262 {
+		processValue()
+	}
+
+	SpecSens -up-|> AS
+	as7262 -up-|> SpecSens
+
+}
+
+
+class "Channel" as C {
+	-type: String
+	-channelId: Integer
+	-connectionPartnerId: Integer
+	+processValue()
+	+setConnectionPartner(Integer id): boolean
+
+}
+
+
+class "ChannelManager" as CM {
+	-numberOfElements: Integer
+	+getChannel(Integer id): Channel
+	+setChannel(Integer id): boolean
+	+addChannel(Channel channel): boolean
+	+removeChannel(Integer id): boolean
+}
+
+
+
+interface "IValueHandler" as VH {
+
+	processValue()
+}
+
+
+class "HelpMessage" as HM{
+	- messageFileName : String
+	+ HelpMessage(msgFile : String)
+	+ displayMessage() : void
+}
+note right of HM : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
+
+BB "*" --> "1" HM : < provides help/information about
+
+note right of VH
+  interface to provide
+  Data to a channel
+end note
+
+
+note top of C
+  first part of channelId is
+  the corresponding buildingBlockId
+end note
+
+
+BB <|-- SensorLogic.AS
+BB <|-- RepresentationLogic.AR
+
+
+RM "1" *-- "n" RepresentationLogic.AR
+
+
+
+CM "1" -- "1" BB
+
+C ..|> VH
+
+CM "1" o-- "1..*" C
+
+'ConfigurationBlockManager <|-- RM
+'ConfigurationBlockManager <|-- SM
+SM "1" *-- "*" SensorLogic.AS
+MC "1" -- "*" MR
+PC "1" -- "*" BB
+MC "1" -- "*" BB
+
+
+class YamlRepresentation {
+	<<create>>YamlRepresentation(BuildingBlock)
+}
+BB -left- YamlRepresentation
+
+}
+class ModelFacadeView{
+		+giveFullModel()
+		+update()
+	}
+
+
+ModelFacadeView -- MC
+
+
+	class ModelFacadeBackend{
+		+receiveYAML(YAML sensorYAML)
+		+receiveData(int data)
+	}
+
+
+
+
+
+
+	class ModelFacadeController{
+		+addBuildingBlock(Integer id): BuildingBlock
+		+removeBuildingBlock(Integer id): boolean
+		+setChannelConnection(int firstChannelId, int secondChannelId)
+		+setBuildingBlockName(int iD): boolean
+		+startMeasurement()
+	}
+
+
+ModelFacadeController -- BB
+ModelFacadeController -- MC
+ModelFacadeController -- MR
+ModelFacadeBackend -- VH
+
+
+
+
+
+'------------------------------------------------------------------------
+'Controller
+'------------------------------------------------------------------------
+
+package edu.kit.freejdaq.controller {
+
+	enum BlockType {
+		SENSOR
+		TRANSFORMATION
+		REPRESENTATION
+	}
+
+	package edu.kit.freejdaq.controller.command {
+
+		interface Command {
+			+ execute() : void
+		}
+
+		class AddBlock {
+			- blockID : int
+			+ execute() : void
+		}
+
+		BlockType "1" <-- "*" AddBlock : - blockType
+
+		class ModifyBlock {
+			- blockID : int
+			+ execute() : void
+		}
+
+		class DeleteBlock {
+			- blockID : int
+			+ execute() : void
+		}
+
+		class ShowHelp {
+			- blockID : int
+			+ execute() : void
+		}
+
+		class SaveConfig {
+			- filePath : String
+			+ execute() : void
+		}
+
+		class LoadConfig {
+			- filePath : String
+			+ execute() : void
+		}
+
+		class ResetConfig {
+			+ execute() : void
+		}
+
+		class CreateChannelConnection {
+			- startChannelID : int
+			- endChannelID : int
+			+ execute() : void
+		}
+
+		class ModifyChannelConnection {
+			- oldStartChannelID : int
+			- oldEndChannelID : int
+			- newStartChannelID : int
+			- newEndChannelID : int
+			+ execute() : void
+		}
+
+		class DeleteChannelConnection {
+			- startChannelID : int
+			- endChannelID : int
+			+ execute() : void
+		}
+
+		class StartRun {
+			+ execute() : void
+		}
+
+		class StopRun {
+			+ execute() : void
+		}
+
+		class PauseRun {
+			+ execute() : void
+		}
+
+		class ResumeRun {
+			+ execute() : void
+		}
+
+		Command <|.. AddBlock
+		Command <|.. DeleteBlock
+		Command <|.. ModifyBlock
+		Command <|.. ShowHelp
+		Command <|.. SaveConfig
+		Command <|.. LoadConfig
+		Command <|.. ResetConfig
+		Command <|.. CreateChannelConnection
+		Command <|.. ModifyChannelConnection
+		Command <|.. DeleteChannelConnection
+		Command <|.. StartRun
+		Command <|.. StopRun
+		Command <|.. PauseRun
+		Command <|.. ResumeRun
+
+	}
+
+	class ModelBuilder {
+		- yaml : org.yaml.snakeyaml.Yaml
+		+ build() : void
+	}
+
+	class ControllerFacadeView {
+		+ blockPlaced(id : int) : void
+		+ blockRemoved(id : int) : void
+		+ startPressed() : void
+		+ stopPressed() : void
+		+ pausePressed() : void
+		+ resumePressed() : void
+		+ resetPressed() : void
+		+ getHelp() : void
+	}
+
+	note right of ControllerFacadeView : provides a single interface for the User (through the View) to interact with the program
+
+	Command <.down. ControllerFacadeView : < encapsulation of concrete implementations via Command pattern
+	Command <.down. ModelBuilder
+}
+
+'------------------------------------------------------------------------
+'View
+'------------------------------------------------------------------------
+package kit.edu.freejdaq.gui {
+MainWindow "1" *-- "1" ConfigurationField
+MainWindow "1" *-- "1" PrototypeField
+MainWindow "1" *-- "1" ButtonField
+PrototypeField <|-- SensorBlockField
+PrototypeField <|-- TransformationBlockField
+PrototypeField <|-- RepresentationBlockField
+ConfigurationField "1" -- "0..*" BuildingBlockView
+BuildingBlockView <|--  SensorBlockView
+BuildingBlockView <|--  TransformationBlockView
+BuildingBlockView <|--  RepresentationBlockView
+SensorBlockField -- "0..*" SensorBlockView
+TransformationBlockField -- "0..*" TransformationBlockView
+RepresentationBlockField -- "0..*" RepresentationBlockView
+ButtonField *-down- "0..*" Button
+Button ..|> ButtonHandler
+Button <|-- StartButton
+Button <|-- PauseButton
+Button <|-- ResumeButton
+Button <|-- ResetButton
+Button <|-- SaveDataButton
+Button <|-- SaveRepresentationButton
+Button <|-- SaveConfiguration
+Button <|-- LoadConfiguration
+Button <|-- NewConfiguration
+Button <|-- UndoButton
+Button <|-- RedoButton
+ConfigurationField -- DragAndDropHandler
+BuildingBlockView -- "1" HelpDecorator
+
+class MainWindow <<singleton>> {
+
++ static getInstance(): MainWindow
++newConfiguration(): void
++openConfiguration(): void
++saveConfiguration(): boolean
++exit(): void
+
+}
+
+class ConfigurationField {
+-listOfBuildingBlocks: BuildingBlocks[]
++add(block : BuildingBlock): void
++remove(block: BuildingBlock): void
++getViewModel(): List <BuildingBlockView>
+}
+
+class BuildingBlockView {
+-id: int
+-name: String
+-xCor: double
+-yCor: double
+-color: String
+-shape: String
+-numberOfInChannels: int
+-numberOfOutChannels: int
++setNumberOfChannels(number : int): void
++setCoordinates(x : double, y : double): boolean
++getXCoordinate(): int
++getYCoordinate(): int
+}
+
+class DragAndDropHandler {
++blockWasMoved(blockId : int, corX : double, corY : double)
++connectionWasMade(blockId1 : int, blockId2 : int)
+}
+
+class PrototypeField {
++open(): void
+}
+
+together {
+ class SensorBlockField {
+ 	+ addSensorBlockView(block: SensorBlockView)
+ }
+
+ class TransformationBlockField {
+  + addTransformationBlockView(block: TransformationBlockView)
+ }
+
+ class RepresentationBlockField {
++ addRepresentationBlockView(block: RepresentationBlockView)
+ }
+}
+
+class SensorBlockView {
+ + addToConnectedOutBlocksViews(blockView: BuildingBlockView)
+
+
+class TransformationBlockView {
+ + addToConnectedInBlocksViews(blockView: BuildingBlockView)
+ + addToConnectedOutBlocksViews(blockView: BuildingBlockView)
+}
+class RepresentationBlockView {
+ + addToConnectedInBlocksViews(blockView: BuildingBlockView)
+ }
+class Button {
+-label: String
+-color: String
++buttonPressed(): void
+}
+
+
+interface DecoratorHandler {
++ decoratorPresssed():void
+}
+HelpDecorator ..|> DecoratorHandler
+
+SensorBlockView --> "*" BuildingBlockView : "out"
+TransformationBlockView -->  "*" BuildingBlockView : "out"
+TransformationBlockView -->  "*" BuildingBlockView : "in"
+RepresentationBlockView -->  "*" BuildingBlockView : "in"
+ note top of BuildingBlockView
+		Positions of ChannelDecorators and
+		layout of wires in between are not
+		part of ViewModel at this version.
+  	Thus those Gui-aspects are considered
+  	as implementation details and computed
+     automatically when gui screwed together
+		for now.
+	end note
+
+
+interface ButtonHandler {
++buttonPressed()
+}
+
+class ViewControllerFacade {
++updateBlockWasPlaced(id: int): void
++updateBlockWasRemoved(id: int): void
++startButtonWasPressed():void
++pauseButtonWasPressed():void
++resumeButtonWasPressed(): void
++resetButtonWasPressed():void
++saveDataButtonWasPressed(): void
++saveGraphButtonWasPressed(): void
++getHelp(id: int): void
++connection
+
+}
+
+}
+
+'------------------------------------------------------------------------
+'Layout Commands
+'------------------------------------------------------------------------
+hide kit.edu.freejdaq.gui -down-> kit.edu.freejdaq.model
+@enduml
