@@ -1,5 +1,11 @@
 @startuml
 
+
+class org.yaml.snakeyaml.Yaml {
+	load(input : InputStream) : Object
+	dump(data : Object, output : Writer) : void
+}
+
 package edu.kit.freejdaq.controller {
 
 	enum BlockType {
@@ -104,7 +110,7 @@ package edu.kit.freejdaq.controller {
 	}
 	
 	class ModelBuilder {
-		- yaml : org.yaml.snakeyaml.Yaml
+		- yamlPath : String
 		+ build() : void
 	}
 	
@@ -121,8 +127,10 @@ package edu.kit.freejdaq.controller {
 	
 	note right of ControllerFacadeView : provides a single interface for the User (through the View) to interact with the program
 	
-	Command <.down. ControllerFacadeView : < encapsulation of concrete implementations via Command pattern
-	Command <.down. ModelBuilder
+	ControllerFacadeView .down.> Command : encapsulation of concrete implementations via Command pattern >
+	ModelBuilder .down.> Command
+	ModelBuilder .up.> org.yaml.snakeyaml.Yaml
+
 }
 
 @enduml
