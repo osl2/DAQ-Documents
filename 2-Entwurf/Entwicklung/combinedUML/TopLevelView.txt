@@ -37,8 +37,8 @@ namespace View{
 
 Backend.BackendFacade -> Model.ModelFacade
 Model.ModelFacade -> Backend.BackendFacade
-Controller.ControllerFacade -> Model.ModelFacade
-Controller.ControllerFacade -up-> View.ViewFacade
+Controller.ControllerFacade -up-> Model.ModelFacade
+Controller.ControllerFacade -down-> View.ViewFacade
 View.ViewFacade -up-> Model.ModelFacade
 View.ViewFacade --up--> Controller.ControllerFacade
 @enduml
