@@ -237,6 +237,36 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 
 \clearpage
 \subsection{View}
+Das Paket View, stellt gemäß des MVC- Entwurfmusters die Darstellungen von Daten des Modells dar und realisiert Benutzerinteraktionen. 
+
+\subsubsection{MainWindow} 
+Die Klasse MainWindow stellt den Rahmen der Benutzeroberfläche dar.
+Da MainWindow, dass Entwurfsmuster Singleton verwendet, kann die Anwendung nur ein MainWindow besitzen soll.
+
+\subsubsection{ConfigurationField}
+Die Klasse KonfigurationField stellt das Konfigurationfeld dar, in welchem der Benutzer eine Messkonfiguration aufbauen kann.
+Konfigurationsbausteine, welche der Benutzer in das Konfigurationsfeld plaziert werden in einer Liste gespeichert. 
+Konfigurationsbausteine, welche der Benutzer aus dem Konfigurationsfeld entfernt, werden aus der Liste gelöscht
+Beim Plazieren der Konfigurationsbausteine in das Konfigurationsfeld wird dem Konfigurationsbaustein eine eindeutige Postition zugeteilt, welche in Form von x- und y-Koordinaten darsgestellt wird.
+
+\subsubsection{BuildingBlockView}
+Die Klasse BuildingBlockView ist die Überklasse der Darstellungen der Konfigurationsbausteine.
+Konfigurationsbausteine besitzen eine eindeutige ID, einen Namen, falls sie im Konfigurationsfeld platziert werden ihre Position anhand der Koordinaten x und y. Form und Farbe sind ebenfalls festegelegt. 
+
+\subsubsection{SensorBlockView}
+Die Klasse SensorBlockView stellt einen Sensorbaustein dar. 
+Sensorbausteine, welche in dem Konfigurationsfeld platziert werden, können mit anderen Bausteinen verbunden werden, was im Messlauf einen Datenfluss über die verbundenen Bausteine erlaubt. Sensorbausteine besitzen, im Gegensatz zu anderen Konfigurationsbausteinen nur Datenausgänge, über welche sie verbunden werden können.
+
+\subsubsection{TransformationBlockView}
+Die Klasse TransformationBlockView stellt einen Transformationsbaustein dar. Transformationsbausteine besitzen eine vordefinierte Funktion, welche die Messdaten verändern.
+
+\subsubsection{RepresentationBlockView}
+Die Klasse RepresentationBlockView stellt einen Darstellungbaustein dar, dieser bestimmt, wie die Messdaten visualisiert werden.
+- Er bestitzt nur Eingänge, aber keine Ausgänge
+
+\subsubsection{PrototypeField}
+Die Klasse PrototypeField ist die Über-Klasse zu SensorBlockField, TransformationBlockField und RepresentationBlockField. 
+Sie stellt eine Fläche dar, in welcher vordefinierte Konfigurationsbausteine dargestellt werden und der Benutzer sie mit dem Mauszeiger in das Konfigurationsfeld ziehen und damit positionieren kann.
 
 
 \clearpage
