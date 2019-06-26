@@ -9,14 +9,14 @@
  * PrototypeField <|-- TransformationBlockField
  * PrototypeField <|-- RepresentationBlockField
  * ConfigurationField "1" -- "0..*" BuildingBlockView
- * BuildingBlockView <|--  SensorBlockView
- * BuildingBlockView <|--  TransformationBlockView
- * BuildingBlockView <|--  RepresentationBlockView
+ * BuildingBlockView <|-up-  SensorBlockView
+ * BuildingBlockView <|-up-  TransformationBlockView
+ * BuildingBlockView <|-up-  RepresentationBlockView
  * SensorBlockField -- "0..*" SensorBlockView
  * TransformationBlockField -- "0..*" TransformationBlockView
  * RepresentationBlockField -- "0..*" RepresentationBlockView
  * ButtonField *-down- "0..*" Button
- * Button ..|> ButtonHandler
+ * Button .up.|> ButtonHandler
  * Button <|-- StartButton
  * Button <|-- PauseButton
  * Button <|-- ResumeButton
@@ -28,8 +28,8 @@
  * Button <|-- NewConfiguration
  * Button <|-- UndoButton
  * Button <|-- RedoButton
- * ConfigurationField -- DragAndDropHandler
- * BuildingBlockView -- "1" HelpDecorator
+ * ConfigurationField -up-> BlockDragAndDropHandler
+ * BuildingBlockView -down-> "1" HelpDecorator
  * 
  * class MainWindow <<singleton>> {
  * 
@@ -55,19 +55,24 @@
  * -yCor: double
  * -color: String
  * -shape: String
- * -numberOfInChannels: int
- * -numberOfOutChannels: int
  * +setNumberOfChannels(number : int): void
  * +setCoordinates(x : double, y : double): boolean
  * +getXCoordinate(): int
  * +getYCoordinate(): int
  * }
  * 
- * class DragAndDropHandler {
+ * interface BlockDragAndDropHandler {
  * +blockWasMoved(blockId : int, corX : double, corY : double)
- * +connectionWasMade(blockId1 : int, blockId2 : int)
  * }
+ *
+ * interface AddWireDragAndDropHandler {
+ *	+connectionAdded(fromChannelId: int, toChannelId: int)
+ *  }
  * 
+ * interface RemoveWireDragAndDropHandler {
+ *	+connectionRemoved(fromChannelId: int, toChannelId: int)
+ *  }
+ *
  * class PrototypeField {
  * +open(): void
  * }
@@ -82,7 +87,7 @@
 	 * }
 	 * 
 	 * class RepresentationBlockField {
-	 	+ addRepresentationBlockView(block: RepresentationBlockView)
+	 *	+ addRepresentationBlockView(block: RepresentationBlockView)
 	 * }
  * }
  * 
@@ -106,15 +111,10 @@
  * }
  * 
  * 
- * interface DecoratorHandler {
+ * interface HelpDecoratorHandler {
  *	+ decoratorPresssed():void
  * }
- * HelpDecorator ..|> DecoratorHandler 
- * 
- * SensorBlockView --> "*" BuildingBlockView : "out"
- * TransformationBlockView -->  "*" BuildingBlockView : "out"
- * TransformationBlockView -->  "*" BuildingBlockView : "in"
- * RepresentationBlockView -->  "*" BuildingBlockView : "in"
+ * HelpDecorator .up.|> HelpDecoratorHandler 
  *
  *  note top of BuildingBlockView 
  * 		Positions of ChannelDecorators and 
@@ -126,11 +126,40 @@
  * 		for now.   
  * 	end note
  * 
- 
+ *  note left of BlockDragAndDropHandler
+ *		This handler is used for adding 
+ 		and removing of blocks, as well as 
+ 		for changing position on ConfigurationField. 
+ *  end note 
+ *
+ * 
+ *
+ * 
+ *
  * interface ButtonHandler {
  * +buttonPressed()
  * }
  * 
+ * SensorBlockView --> "*" OutChannelDecorator 
+ * TransformationBlockView --> "*" InChannelDecorator 
+ * TransformationBlockView --> "*" OutChannelDecorator 
+ * RepresentationBlockView --> "*" InChannelDecorator
+ * InChannelDecorator --|> ChannelDecorator
+ * OutChannelDecorator --|> ChannelDecorator
+ * InChannelDecorator --> Wire
+ * OutChannelDecorator --> Wire
+ * ChannelDecorator ..|> AddWireDragAndDropHandler
+ * Wire ..|> RemoveWireDragAndDropHandler
+ *
+ *
+ * class ChannelDecorator {
+ * -id: int
+ * -color: String
+ * -shape: String
+ * +addWireToOtherDecorator(channelId: int)
+ * }
+ *
+ *
  * class ViewControllerFacade {
  * +updateBlockWasPlaced(id: int): void
  * +updateBlockWasRemoved(id: int): void
@@ -144,10 +173,8 @@
  * +connection 
  * 
  * }
- 
+ *
  * }
- 
-
  *
  * @enduml
  */
