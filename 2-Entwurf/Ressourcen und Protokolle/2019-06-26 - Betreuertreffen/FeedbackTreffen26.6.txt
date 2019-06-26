@@ -1,0 +1,65 @@
+Feedbacktreffen 26.6
+
+Allgemein:
+-Diagramm druckerfreundlich machen ? A0 ohne viel weiße Flächen
+-Viele Klassen nicht fertig
+-Multiplizäten fehlen 
+-Baustein-ID als String (z.B: 1835BS(Name der Yaml, ConfigDatei...)
+-Pakete zu groß (sind eher Module)
+
+Backend:
+
+Fehlend/Erweiterbar:
+
+ - Mehrere Sensoren:
+ - einzelnd ansteuerbar ?
+ - mehr Daten, als das Frontend anzeigen kann oder Verarbeitung nicht schnell genug
+  ? Cache oder Puffer für Daten
+  ? Vielleicht als Zwischenteil zwischen Backend und Model
+
+Tipps:
+
+     -     getYaml() / setYaml() sind keine wirklichen Getter und Setter
+            ? umbennen
+allgemein zu wenig Klassenvariablen
+Struktur umdrehen (logische Strukturierung des Datenstroms)
+Proxy-/ Adapter-Pattern
+Sensoren, über einzelne Systemprozesse ansprechen
+Welche Form des Messens unterstützen (Feste Konfiguration vs. Dynamische Veränderungen)
+Aufteilung in Technischer Teil und MeasurementServer
+
+
+Model:
+
+Abstrakte Fabrik/ Fabrikmethode für die Bausteine
+Attribute der Bausteine fehlen
+Was macht processValue()
+Interface zum Backend zur Datenübertragung 
+Gegenstück zum IvalueHandler vom Backend
+Gegenstück zum MeasurementRun vom Backend
+Einheitliche Namen 
+? Festlegen, ob Liste oder Array 
+state als Enum
+Businesslogic und Modell trennen?
+Funktionsparser bei Transformationen
+Exceptions
+
+View:
+
+Konfiguration in Yaml oder xml speichern
+Listner Strukturierung
+Interfaces
+Errorwindow 
+
+
+Controller:
+
+Action Listner
+Fassade-Methoden als boolean sinnvoll ?
+
+
+
+
+
+
+
