@@ -63,16 +63,25 @@ abstract class "BuildingBlock" as BB
 namespace TransformationLogic {
 	abstract class Transformation {
 		+setFunction(String inputFunction)
+		+{abstract} applyFunction(): Integer
 	}
 	class Function {
 		<<create>>Function(String inputFunction) : Function
 		+applyFunction(Integer data)
 	}
 	CustomizedTransformation -up-|> Transformation
-	PredefinedTransformation -up-|> Transformation
+	DataFlowTransformation -up-|> Transformation
 	LinearMapping -up-|> PredefinedTransformation
 	DependendOutputTransformation -up-|> PredefinedTransformation
 	Function "1" - "*" Transformation
+
+	class DataFlowTransformation {
+
+	}
+	note left of TransformationLogic.DataFlowTransformation
+	Changes the output according to configuration.
+	Does not influence the values of the data stream
+	end note
 }
 
 
@@ -81,25 +90,25 @@ BB <|- TransformationLogic.Transformation
 'Note: The manager aspect of this diagramm can be found, in more detail, at another place.
 'It stands here for a complete overview
 '----------------------------------------------------------------------------------------
-package kit.edu.freejdaq.configurationBlockManager {
-	abstract class ConfigurationBlockManager{
-		listOfBlocks : ConfigurationBlock[]
-		{abstract}+add(BuildingBlock block): boolean
-		{abstract}+remove(BuildingBlock block): boolean
-		{abstract}+showAllBocks(BuildingBlock block): boolean
-	}
-
-	class "RepresentationManager" as RM {
-
-
-	}
-
-	class "SensorManager" as SM {
-
-	}
-
-	ConfigurationBlockManager <|-down- TransformationManager
-}
+'package kit.edu.freejdaq.configurationBlockManager {
+'	abstract class ConfigurationBlockManager{
+'		listOfBlocks : ConfigurationBlock[]
+'		{abstract}+add(BuildingBlock block): boolean
+'		{abstract}+remove(BuildingBlock block): boolean
+'		{abstract}+showAllBocks(BuildingBlock block): boolean
+'	}
+'
+'	class "RepresentationManager" as RM {
+'
+'
+'	}
+'
+'	class "SensorManager" as SM {
+'
+'	}
+'
+'	ConfigurationBlockManager <|-down- TransformationManager
+'}
 
 TransformationManager "1" *-down- "n" TransformationLogic.Transformation
 
@@ -257,8 +266,8 @@ C ..|> VH
 
 CM "1" o-- "1..*" C
 
-ConfigurationBlockManager <|-- RM
-ConfigurationBlockManager <|-- SM
+'ConfigurationBlockManager <|-- RM
+'ConfigurationBlockManager <|-- SM
 SM "1" *-- "*" SensorLogic.AS
 MC "1" -- "*" MR
 PC "1" -- "*" BB
@@ -266,7 +275,7 @@ MC "1" -- "*" BB
 
 
 class YamlRepresentation {
-
+	<<create>>YamlRepresentation(BuildingBlock)
 }
 BB -left- YamlRepresentation
 
