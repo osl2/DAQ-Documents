@@ -1,0 +1,65 @@
+\babel@toc {ngerman}{}
+\contentsline {section}{\numberline {1}Produkt\IeC {\"u}bersicht}{4}{section.1}% 
+\contentsline {section}{\numberline {2}Zielbestimmung}{5}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}Eignung f\IeC {\"u}r den Unterricht}{5}{subsection.2.1}% 
+\contentsline {subsection}{\numberline {2.2}Begriffsdefinitionen}{6}{subsection.2.2}% 
+\contentsline {subsection}{\numberline {2.3}Entwurf von Messkonfigurationen}{7}{subsection.2.3}% 
+\contentsline {subsection}{\numberline {2.4}Handhabung von Bausteinprototypen}{7}{subsection.2.4}% 
+\contentsline {subsection}{\numberline {2.5}Gew\IeC {\"a}hrleisten von Persistenz}{8}{subsection.2.5}% 
+\contentsline {subsection}{\numberline {2.6}Bereitstellung vorgefertigter Teile}{8}{subsection.2.6}% 
+\contentsline {subsection}{\numberline {2.7}Handhabung von Messl\IeC {\"a}ufen}{9}{subsection.2.7}% 
+\contentsline {subsection}{\numberline {2.8}Benutzbarkeit der GUI}{9}{subsection.2.8}% 
+\contentsline {subsection}{\numberline {2.9}Abgrenzungskriterien}{10}{subsection.2.9}% 
+\contentsline {section}{\numberline {3}Produkteinsatz}{11}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Anwendungsbereiche}{11}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2}Zielgruppe}{11}{subsection.3.2}% 
+\contentsline {subsection}{\numberline {3.3}Betriebsbedingungen}{11}{subsection.3.3}% 
+\contentsline {section}{\numberline {4}Produktumgebung}{12}{section.4}% 
+\contentsline {subsection}{\numberline {4.1}Software}{12}{subsection.4.1}% 
+\contentsline {subsection}{\numberline {4.2}Hardware}{12}{subsection.4.2}% 
+\contentsline {subsection}{\numberline {4.3}PhyPiDAQ}{12}{subsection.4.3}% 
+\contentsline {section}{\numberline {5}Funktionale Anforderungen}{13}{section.5}% 
+\contentsline {subsection}{\numberline {5.1}GUI}{13}{subsection.5.1}% 
+\contentsline {subsubsection}{\numberline {5.1.1}Men\IeC {\"u}feld}{13}{subsubsection.5.1.1}% 
+\contentsline {subsubsection}{\numberline {5.1.2}Optional: Zus\IeC {\"a}tzliche Funktionen im Men\IeC {\"u}feld}{13}{subsubsection.5.1.2}% 
+\contentsline {subsubsection}{\numberline {5.1.3}Konfigurationsfeld}{14}{subsubsection.5.1.3}% 
+\contentsline {subsubsection}{\numberline {5.1.4}Darstellungsfenster}{14}{subsubsection.5.1.4}% 
+\contentsline {subsection}{\numberline {5.2}Konfigurationserstellung}{14}{subsection.5.2}% 
+\contentsline {subsubsection}{\numberline {5.2.1}Optional: Weiterentwicklung der Konfigurationserstellung}{15}{subsubsection.5.2.1}% 
+\contentsline {subsection}{\numberline {5.3}Messablauf}{15}{subsection.5.3}% 
+\contentsline {subsection}{\numberline {5.4}Fehlermeldungen}{16}{subsection.5.4}% 
+\contentsline {subsection}{\numberline {5.5}Bedienungshilfen}{16}{subsection.5.5}% 
+\contentsline {subsection}{\numberline {5.6}Sprache}{16}{subsection.5.6}% 
+\contentsline {subsubsection}{\numberline {5.6.1}Optional: Internationalisierung}{17}{subsubsection.5.6.1}% 
+\contentsline {subsection}{\numberline {5.7}Sonstiges}{17}{subsection.5.7}% 
+\contentsline {subsubsection}{\numberline {5.7.1}Optional: Sonstiges}{17}{subsubsection.5.7.1}% 
+\contentsline {section}{\numberline {6}Produktdaten}{18}{section.6}% 
+\contentsline {section}{\numberline {7}Nichtfunktionale Anforderungen}{19}{section.7}% 
+\contentsline {subsection}{\numberline {7.1}Qualit\IeC {\"a}tsanforderungen}{19}{subsection.7.1}% 
+\contentsline {subsection}{\numberline {7.2}Produktleistungen}{21}{subsection.7.2}% 
+\contentsline {subsection}{\numberline {7.3}Benutzbarkeit}{21}{subsection.7.3}% 
+\contentsline {subsection}{\numberline {7.4}Zuverl\IeC {\"a}ssigkeit und Robustheit}{22}{subsection.7.4}% 
+\contentsline {subsection}{\numberline {7.5}Sonstige}{22}{subsection.7.5}% 
+\contentsline {section}{\numberline {8}Globale Testf\IeC {\"a}lle und Testszenarien}{23}{section.8}% 
+\contentsline {subsection}{\numberline {8.1}Einf\IeC {\"u}hrung}{23}{subsection.8.1}% 
+\contentsline {subsection}{\numberline {8.2}Testf\IeC {\"a}lle zur Nutzung der Anwendung}{23}{subsection.8.2}% 
+\contentsline {subsection}{\numberline {8.3}Testf\IeC {\"a}lle zur Handhabung von Fehlern}{28}{subsection.8.3}% 
+\contentsline {section}{\numberline {9}Szenario mit Use-Case-Diagramm}{32}{section.9}% 
+\contentsline {section}{\numberline {10}Systemmodelle}{35}{section.10}% 
+\contentsline {section}{\numberline {11}Benutzungsoberfl\IeC {\"a}che}{39}{section.11}% 
+\contentsline {subsection}{\numberline {11.1}Ziel der Benutzeroberfl\IeC {\"a}che}{39}{subsection.11.1}% 
+\contentsline {subsection}{\numberline {11.2}Allgemeines}{39}{subsection.11.2}% 
+\contentsline {subsection}{\numberline {11.3}Eingabeger\IeC {\"a}te}{39}{subsection.11.3}% 
+\contentsline {subsection}{\numberline {11.4}\IeC {\"U}berblick}{39}{subsection.11.4}% 
+\contentsline {subsection}{\numberline {11.5}Element Beschreibungen}{41}{subsection.11.5}% 
+\contentsline {subsubsection}{\numberline {11.5.1}Systemmen\IeC {\"u}leiste}{41}{subsubsection.11.5.1}% 
+\contentsline {subsubsection}{\numberline {11.5.2}Auswahl}{41}{subsubsection.11.5.2}% 
+\contentsline {subsubsection}{\numberline {11.5.3}Konfigurationsfeld}{43}{subsubsection.11.5.3}% 
+\contentsline {subsection}{\numberline {11.6}Erweiterungsm\IeC {\"o}glichkeiten}{44}{subsection.11.6}% 
+\contentsline {subsubsection}{\numberline {11.6.1}Startbildschirm}{44}{subsubsection.11.6.1}% 
+\contentsline {subsubsection}{\numberline {11.6.2}Fehlermeldung}{44}{subsubsection.11.6.2}% 
+\contentsline {section}{\numberline {12}Zeit- und Ressourcenplanung}{45}{section.12}% 
+\contentsline {subsection}{\numberline {12.1}Projektphasen}{45}{subsection.12.1}% 
+\contentsline {subsection}{\numberline {12.2}Risikomanagement}{45}{subsection.12.2}% 
+\contentsline {subsection}{\numberline {12.3}Spezielle Anforderungen}{46}{subsection.12.3}% 
+\contentsline {section}{\numberline {13}Glossar}{47}{section.13}% 
