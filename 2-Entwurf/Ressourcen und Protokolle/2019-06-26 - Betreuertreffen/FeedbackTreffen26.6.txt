@@ -4,8 +4,8 @@ Allgemein:
 -Diagramm druckerfreundlich machen ? A0 ohne viel weiße Flächen
 -Viele Klassen nicht fertig
 -Multiplizäten fehlen 
--Baustein-ID als String (z.B: 1835BS(Name der Yaml, ConfigDatei...)
--Pakete zu groß (sind eher Module)´
+-Baustein-ID als String (z.B: DS18B20 oder 1835BS, findet sich als Name in Yaml-/ConfigDatei...)
+-Pakete zu groß (sind eher Module) --> Testbarkeit berücksichtigen
 -eventuell Master UML Diagramm als .svg exportieren, da besser skalierbar?
 
 
@@ -13,58 +13,76 @@ Backend:
 
 Fehlend/Erweiterbar:
 
- - Mehrere Sensoren:
- - einzelnd ansteuerbar ?
+ - Mehrere Sensoren: einzelnd ansteuerbar ?
  - mehr Daten, als das Frontend anzeigen kann oder Verarbeitung nicht schnell genug
-  ? Cache oder Puffer für Daten
-  ? Vielleicht als Zwischenteil zwischen Backend und Model
+  ? Cache oder Puffer für Daten (Vielleicht als Zwischenteil zwischen Backend und Model)
+ - Proxy-/ Adapter-Pattern
+ - reset()
+ - getYaml() / setYaml() sind keine wirklichen Getter und Setter - umbennen
+ 
 
 Tipps:
 
-     -     getYaml() / setYaml() sind keine wirklichen Getter und Setter
-            ? umbennen
-allgemein zu wenig Klassenvariablen
-Struktur umdrehen (logische Strukturierung des Datenstroms)
-Proxy-/ Adapter-Pattern
-Sensoren, über einzelne Systemprozesse ansprechen
+     -    
+allgemein zu wenig Instanz-/Klassenvariablen
+Lesbarkeit des Diagramms: teilweise Struktur umdrehen (einheitliche logische Strukturierung/Lesrichtung, beispielsweise gemäß Datenstrom)
+  --> Analog sollte sich das Entwurfsdokument ohne groß Fragen zu stellen von vorne nach hinten lesen lassen.
+Sensoren, über einzelne Systemprozesse ansprechen 
+  --> evtl. TaskListener/TaskInterface verwenden
 Welche Form des Messens unterstützen (Feste Konfiguration vs. Dynamische Veränderungen)
 Aufteilung in Technischer Teil und MeasurementServer
 
 
 Model:
 
-Abstrakte Fabrik/ Fabrikmethode für die Bausteine
+Abstrakte Fabrik/Fabrikmethode/Erbauer für die Bausteine
 Attribute der Bausteine fehlen
-Was macht processValue()
+--> z. B. nötige Attribute für Darstellungen im Framework, z.B. x-Label, y-Label für XY-Graph
+--> hier für Framework entscheiden und Attribute daran ausrichten
+Was macht processValue() welche Klasse nimmt Daten ab?
+  --> entlang Bausteinen einfach weiterreichen ist wohl problematisch!?
+  --> wie wird weitergereicht?
+  --> wie ist Verbindung zum Backend? 
+  --> Threadverwaltung?/Timing?/Blackbox-Koordination
+  --> entsprechende Fassaden/Sequenzdiagramme?
+  --> Mediator-Entwurfsmuster?
 Interface zum Backend zur Datenübertragung 
-Gegenstück zum IvalueHandler vom Backend
-Gegenstück zum MeasurementRun vom Backend
+Gegenstück zum IvalueHandlerl vom Backend (welche Klasse handelt das wie bzw. wann?)
+Gegenstück zum MeasurementRun vom Backend (welche Klasse handelt das wie bzw. wann?)
 Einheitliche Namen 
 ? Festlegen, ob Liste oder Array 
 state als Enum
 Businesslogic und Modell trennen?
 Funktionsparser bei Transformationen
+ -- > in Entwurfsdok: welche Funktionen sollen unterstützt werden? welche nicht?
+ -- > wie genau entsprechen irgenwelche Eingangsbenennungen irgendwelchen Formeln?
 Exceptions
-nötige Attribute für Darstellungen im Framwork, z.B. x-Label, y-Label für XY-Graph
+--> https://stackoverflow.com/questions/46275417/how-to-express-exceptions-in-the-method-declaration-in-uml-class-diagram
+"float" bei Updaterate überdenken.
+für Zeitstempelformat entscheiden.
 
 View:
 
 Konfiguration in Yaml oder xml speichern
-Listner Strukturierung
+Listener Strukturierung
 Interfaces
-Errorwindow 
+Errorwindow/Helpwindow
 
 
 Controller:
 
-Action Listner
-Fassade-Methoden als boolean sinnvoll ?
+Integegration in die Umgebung bzw. in einen "Rahmen" fehlt. 
+entsprechen evtl. Implementierungen von Action-Listener-Interface aus Gui-Framework
+Vererbungshierarchie sinnvoll?
+Fassade-Methoden alles void -- als boolean sinnvoll ? oder anders?
 
 Bemerkungen zum Entwurfsdokument:
--Funktionale Beschreibung von Klassen, Methoden und Attributen
+-Soll hauptsächlich Zusatzinfos zu den UML-Diagramm enthalten, Redundante Info minimal halten.
+-Funktionale Beschreibung von Klassen, Methoden und Attributen.
 -Leserichtung des Entwurfdokuments sollte einer natürlichen Reihenfolge zum Verständnis entsprechen
 -Entscheidung, ob wir die Messconfig während dem Messablauf veränderbar machen, begründen
--Sequenzendiagramme für fundamentale Usecases, die dann auch so exakt in das Klassendiagramm übertragen werden können
+-Sequenzendiagramme für fundamentale Usecases, die dann auch so exakt am Klassendiagramm ablesen lassen.
+- Sequenzdiagramme sollen typische Gesamtdurchläufe beschreiben. 
 
 
 
