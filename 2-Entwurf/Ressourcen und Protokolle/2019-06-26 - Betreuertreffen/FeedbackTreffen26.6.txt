@@ -2,11 +2,12 @@ Feedbacktreffen 26.6
 
 Allgemein:
 -Diagramm druckerfreundlich machen ? A0 ohne viel weiße Flächen
+
 -Viele Klassen nicht fertig
 -Multiplizäten fehlen 
--Baustein-ID als String (z.B: DS18B20 oder 1835BS, findet sich als Name in Yaml-/ConfigDatei...)
+-Sensor-ID als String (z.B: DS18B20 oder 1835BS, findet sich als Name in Yaml-/ConfigDatei...)
+ --> Strings auch für Transformationen und Darstellungen ?
 -Pakete zu groß (sind eher Module) --> Testbarkeit berücksichtigen
--eventuell Master UML Diagramm als .svg exportieren, da besser skalierbar?
 
 
 Backend:
@@ -63,7 +64,6 @@ für Zeitstempelformat entscheiden.
 
 View:
 
-Konfiguration in Yaml oder xml speichern
 Listener Strukturierung
 Interfaces
 Errorwindow/Helpwindow
@@ -71,7 +71,8 @@ Errorwindow/Helpwindow
 
 Controller:
 
-Integegration in die Umgebung bzw. in einen "Rahmen" fehlt. 
+Konfiguration in Yaml oder xml speichern
+Integration in die Umgebung bzw. in einen "Rahmen" fehlt. 
 entsprechen evtl. Implementierungen von Action-Listener-Interface aus Gui-Framework
 Vererbungshierarchie sinnvoll?
 Fassade-Methoden alles void -- als boolean sinnvoll ? oder anders?
