@@ -4,7 +4,7 @@
  package "GUI" {
 	 MainWindow "1"-- "1" ConfigurationField
 	 MainWindow "1"-- "1" PrototypeField
-	 MainWindow "1"-- "1" ButtonField
+	 
 	 PrototypeField <|-- SensorBlockField
 	 PrototypeField <|-- TransformationBlockField
 	 PrototypeField <|-- RepresentationBlockField
@@ -15,10 +15,13 @@
 	 SensorBlockField -- "0..*" SensorBlockView
 	 TransformationBlockField -- "0..*" TransformationBlockView
 	 RepresentationBlockField -- "0..*" RepresentationBlockView
+	 
+	 package "Button Layer" {
+	 MainWindow "1"-right- "1" ButtonField
 	 ButtonField-down- "0..*" Button
-	 Button .up.|> ButtonHandler
-	 Button <|-- StartButton
-	 Button <|-- PauseButton
+	 Button .left.|> ButtonHandler
+	 Button <|-up- StartButton
+	 Button <|-right- PauseButton
 	 Button <|-- ResumeButton
 	 Button <|-- ResetButton
 	 Button <|-- SaveDataButton
@@ -26,17 +29,25 @@
 	 Button <|-- SaveConfiguration
 	 Button <|-- LoadConfiguration
 	 Button <|-- NewConfiguration
-	 Button <|-- UndoButton
-	 Button <|-- RedoButton
+	 Button <|-right- UndoButton
+	 Button <|-right- RedoButton
+	 }
+	 package "Exception Layer" {
+	 MainWindow "1" -- ExceptionWindow
+	 ExceptionWindow <|-- FatalException
+	 ExceptionWindow <|-- ErrorMessage
+	 ExceptopnWindow <|-- NoticeMessage
+	 }
+	 
+	 
 	 ConfigurationField -up-> BlockDragAndDropHandler
 	 BuildingBlockView -down-> "1" HelpDecorator
+	 HelpDecorator .down.|> HelpDecoratorHandler 
  
 	 class MainWindow <<singleton>> {
 	 
 		 + static getInstance(): MainWindow
 		 +newConfiguration(): void
-		 +openConfiguration(): void
-		 +saveConfiguration(): boolean
 		 +exit(): void
 	 
 	 }
@@ -103,11 +114,15 @@
 	 class RepresentationBlockView {
 	 	+ addToConnectedInBlocksViews(blockView: BuildingBlockView)
 	 }
-	
+
 	 class Button {
 	 	-label: String
 	 	-color: String
 	 	+buttonPressed(): void
+	 }
+	 
+	 interface ButtonHandler {
+		 +buttonPressed()
 	 }
 	 
 	 
@@ -115,7 +130,6 @@
 		+ decoratorPresssed():void
 	 }
 	 
- 	HelpDecorator .up.|> HelpDecoratorHandler 
 
 	note top of BuildingBlockView 
 		Positions of ChannelDecorators and 
@@ -133,9 +147,7 @@
  		for changing position on ConfigurationField. 
   end note 
 
-	 interface ButtonHandler {
-		 +buttonPressed()
-	 }
+	 
  
 	 SensorBlockView --> "*" OutChannelDecorator 
 	 TransformationBlockView --> "*" InChannelDecorator 
