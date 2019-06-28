@@ -49,7 +49,7 @@
 	 }
  
 	 class BuildingBlockView {
-		 -id: int
+		 -id: String
 		 -name: String
 		 -xCor: double
 		 -yCor: double
