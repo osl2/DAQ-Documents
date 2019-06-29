@@ -1,0 +1,11 @@
+https://wiki.eclipse.org/Rich_Client_Platform
+
+https://wiki.eclipse.org/Rich_Client_Platform/FAQ
+
+https://wiki.eclipse.org/Rich_Client_Platform/FAQ#What_other_Eclipse_components_can_be_used_in_constructing_RCP_applications.3F
+
+https://www.eclipse.org/articles/Whitepaper-Platform-3.1/eclipse-platform-whitepaper.pdf
+
+https://www.vogella.com/tutorials/Eclipse4ContextUsage/article.html
+
+https://www.vogella.com/tutorials/EclipseRCP/article.html
