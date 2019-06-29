@@ -1,0 +1,136 @@
+
+@startuml
+
+
+
+	
+'------------------------------------------------------------------------
+'GeneralExample
+'------------------------------------------------------------------------
+
+'--- PickupPoint -----------------------------------
+
+class PickupPointForInterfaces {
+	+{static}getPickupPoint(initContainer: InitStuff): PickupPointForInterfaces
+	+getInterfaceOne(): IOne
+	+getInterfaceTwo(): ITwo
+}
+	
+
+'--- 1st Interface -----------------------------------
+
+PickupPointForInterfaces -up-> IOne
+interface IOne {
+	+executeSomething(): void
+	+executeSometingElse()(): void
+}
+
+'--- 1st implementing class -----------------------------------
+
+IOneImpl ..|> IONe
+class IOneImpl {
+	+executeSomething(): void
+	+executeSometingElse(): void
+	+anotherMethodOfAnotherInterface():void
+}
+	
+'--- 2nd Interface -----------------------------------
+
+PickupPointForInterfaces -up-> ITwo
+interface ITwo {
+	+executeSomethingAgain(): void
+	+executeSometingElseAgain()(): void
+}
+
+'--- 2nd implementing class -----------------------------------
+
+ITwoImpl ..|> ITwo
+class ITwoImpl {
+	+executeSomethingAgain(): void
+	+executeSometingElseAgain(): void
+	+anotherMethodOfAnotherInterfaceAgain():void
+}
+	
+		
+
+'--- InitData, integrated just by some dependency-relationship, results in import-statement at java ) 
+ 
+PickupPointForInterfaces ..> InitStuff
+class InitStuff{
+ 	+simpleDataForImplInit: int
+ 	+objForImplInit: Object
+	}	
+
+'------------------------------------------------------------------------
+'Beispiel FacadeOfModelToController - URL zur Whiteboard-_Skizze:
+https://cdn.discordapp.com/attachments/576476305454006297/593794781541433375/IMG_20190627_152718.jpg
+
+'------------------------------------------------------------------------
+	
+'------------------------------------------------------------------------
+'Weiteres konkretes Beispiel: Backend
+'------------------------------------------------------------------------
+
+'--- PickupPoint -----------------------------------
+
+class PickupPointForAgentsBasedOnSsh {
+	+{static}getPickupPointForAgentsBasedOnSsh(initData: InitDataForSsh): PickupPointForAgentsBasedOnSsh
+	+getIAccessToMeasurementRun(): IAccessToSensorInfo
+	+getIAccessToSensorInfo(): IAccessToSensorInfo
+}
+	
+
+'--- 1st Interface -----------------------------------
+
+PickupPointForAgentsBasedOnSsh -up-> IAccessToSensorInfo
+interface IAccessToSensorInfo {
+	+getIdsOfAvailableSensors(): String[]
+	+getYamlFile(sensorId: String): boolean
+	+setYamlFile(sensorId: String): boolean
+}
+
+'--- 1st implementing class -----------------------------------
+
+SensorInfoAgentForSsh ..|> IAccessToSensorInfo
+class SensorInfoAgentForSsh {
+	+SensorInfoAgentForSsh(foundation: CommunicationWithPi)
+	+getIdsOfAvailableSensors(): String[]
+	+getYamlFile(sensorId: String): boolean
+	+setYamlFile(sensorId: String): boolean
+	}
+	
+'--- 2nd Interface -----------------------------------
+
+PickupPointForAgentsBasedOnSsh -up-> IAccessToMeasurementRun
+interface IAccessToMeasurementRun{
+		+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
+		+pause(): boolean
+		+continue(): boolean
+		+stop(): boolean
+	}
+
+'--- 2nd implementing class -----------------------------------
+
+MeasurementRunAgentForSsh .down.|> IAccessToMeasurementRun	
+class MeasurementRunAgentForSsh {
+			+MeasurementRunAgentForSsh(foundation: CommunicationWithPi)
+			+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
+			+pause(): boolean
+			+continue(): boolean
+			+stop(): boolean
+			+receivePartOfResponse(response: String; finished: boolean)
+}
+		
+
+'--- InitData, integrated just by some dependency-relationship, results in import-statement at java ) 
+
+PickupPointForAgentsBasedOnSsh ..> InitDataForSsh	
+class InitDataForSsh {
+ 	+ ipAddressOfPi: String, 
+ 	+ port: int, 
+ 	+ username: String, 
+ 	+ password: String, 
+ 	+ pathToRemoteDir: String, 
+ 	+ pathToLocalDir: String
+	}		
+@enduml
