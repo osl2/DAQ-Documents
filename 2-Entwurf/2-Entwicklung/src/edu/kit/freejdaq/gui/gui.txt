@@ -211,6 +211,26 @@
 	 +popUp(): void
 	}
  }
+ 
+ 
+ package "FacadeModelViewController {
+ 
+ interface "ViewModelInterface" {
+ 
+ }
+ }
+ 
+ package "FacadeModelViewModel {
+ 
+ interface "DataInterface" {
+ 
+ }
+ 
+ interface "ExceptionInterface" {
+ 
+ }
+ }
+ 
 
  @enduml
 
