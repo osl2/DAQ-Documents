@@ -215,18 +215,36 @@
  
  package "FacadeModelViewController {
  
- interface "ViewModelInterface" {
  
+ 
+ interface "ViewControllerlnterface" {
+  + getViewModel(): List: <BuildingBlockViews>
+  + setViewModel(list: <BuildingBlockViews>): boolean
  }
  }
  
  package "FacadeModelViewModel {
  
- interface "DataInterface" {
+ PickUpPointModelView -up-> ViewModelInterface
+ PickUpPointModelView -up-> DataInterface
+ PickUpPointModelView -up-> ExceptionInterface
+ 
+ class PickUpPointModelView {
+ + getDataInterface(): DataInterface
+ + getExceptionInterface(): ExceptionInterface
+ }
+ 
+ interface ViewModelInterface {
+ + updateViewModel(...): ...
  
  }
  
- interface "ExceptionInterface" {
+ interface DataInterface {
+ + pushDataForVisualisation(...): void
+ }
+ 
+ interface ExceptionInterface {
+ + throwException(category: String, title: String, description: String): void 
  
  }
  }
