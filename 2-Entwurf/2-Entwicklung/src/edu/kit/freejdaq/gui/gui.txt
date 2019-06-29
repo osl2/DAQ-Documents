@@ -43,6 +43,7 @@
 	 ConfigurationField -up-> BlockDragAndDropHandler
 	 BuildingBlockView -down-> "1" HelpDecorator
 	 HelpDecorator .down.|> HelpDecoratorHandler 
+	 RepresentationBlockView .down.|> RepresentationBlockViewHandler
  
 	 class MainWindow <<singleton>> {
 	 
@@ -113,7 +114,24 @@
 	 }
 	
 	 class RepresentationBlockView {
+	 	- unit: String
+	 	- maxX: double
+	 	- maxY: double
 	 	+ addToConnectedInBlocksViews(blockView: BuildingBlockView)
+	 	+ getUnit(): String
+	 	+ setUnit(unit: String): void
+	 	+ getMaxX(): double
+	 	+ setMaxX(x: double): void
+	 	+ getMaxY(): double
+	 	+ setMaxY(y: double): void
+	 	
+	 }
+	 
+	 interface RepresentationBlockViewHandler {
+	  + unitSet(id: String, unit: double): void
+	  + maxXSet(id: String, x: double): void
+	  + maxYSet(id: String, y: double): void
+	 
 	 }
 
 	 class Button {
