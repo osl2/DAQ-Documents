@@ -3,14 +3,16 @@
 package edu.kit.freejdaq.controller.command {
 
 	class CommandManager {
-		+ doCmd(cmd : Command) : void
+		+ doCommand(cmd : Command) : void
 		+ undo() : void
+		+ redo() : void
 	}
 	
-	note left of CommandManager : doCmd(cmd : Command)\n    pastCommands.push(cmd)\n    cmd.execute()
-	note right of CommandManager : undo()\n    cmd = pastCommands.pop()\n    cmd.unExecute()
+	note top of CommandManager : doCommand(cmd : Command)\n    cmd.execute()\n    doneCommands.push(cmd)\n    undoneCommands.clear()
+	note left of CommandManager : undo()\n    cmd = doneCommands.pop()\n    cmd.unExecute()\n    undoneCommands.push(cmd)
+	note right of CommandManager : redo()\n    cmd = undoneCommands.pop()\n    cmd.execute()\n    doneCommands.push(cmd)
 	
-	CommandManager o-- Command : - pastCommands : Stack
+	CommandManager o-- Command : - doneCommands : Stack
 
 	interface Command {
 		+ execute() : void
