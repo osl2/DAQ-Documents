@@ -1,0 +1,39 @@
+@startuml
+
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+actor "User" as U
+
+participant ":IUserInterface" as UI
+box "View" #White
+participant ButtonHandler
+end box
+box "Controller" #White
+participant IButtonAction
+participant Command
+end box
+box "Model" #White
+participant ModelFacadeController
+participant MeasurementRun
+end box
+box "Backend" #White
+participant IAccesToMeasurementProcess
+end box
+
+
+U->UI: starte Messung
+UI-> ButtonHandler : StartButtonPressed()
+ButtonHandler -> IButtonAction : startPressed()
+IButtonAction -> Command: startRun.execute() 
+Command -> ModelFacadeController: startMeasurement()
+ModelFacadeController -> MeasurementRun: start()
+MeasurementRun -> IAccesToMeasurementProcess: start(sensorIds, listeners)
+MeasurementRun <-- IAccesToMeasurementProcess: true
+ModelFacadeController <-- MeasurementRun: true
+Command <-- ModelFacadeController: void
+IButtonAction <-- Command: void
+ButtonHandler <-- IButtonAction: void
+UI <-- ButtonHandler: void
+U <-- UI 
+@enduml
