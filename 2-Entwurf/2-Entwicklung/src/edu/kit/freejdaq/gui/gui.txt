@@ -34,9 +34,9 @@
 	 }
 	 package "Exception Layer" {
 	 MainWindow "1" -- ExceptionWindow
-	 ExceptionWindow <|-- FatalExceptionWindow
-	 ExceptionWindow <|-- ErrorMessageWindow
-	 ExceptionWindow <|-- NoticeMessageWindow
+	 ExceptionWindow <|-- BuildingBlockExceptionWindow
+	 ExceptionWindow <|-- ConnectionExceptionWindow
+	 ExceptionWindow <|-- GeneralExceptionWindow
 	 }
 	 
 	 
@@ -188,9 +188,11 @@
 		 +addWireToOtherDecorator(channelId: int)
 	 }
 
-	class ViewFacadeController {
-		+giveViewModel(): List<BuildingBlockView>
+	class Wire {
+	-color: String
+	+changeColor(color: String): void
 	}
+	
 	
 	class ExceptionWindow {
 	-title: String
@@ -199,15 +201,20 @@
 	+close(): void
 	}
 	
-	class FatalExceptionWindow {
+	class BuildingBlockExceptionWindow {
+	-id: String
 	+popUp(): void
+	+changeBlockColor(color: String): void
 	}
 	
-	class ErrorMessageWindow {
+	class ConnectionExceptionWindow {
+	-channelInId: int
+	-channelOutId: int
 	+popUp(): void
+	+changeWireColor(color: String): void
 	}
 	
-	class NoticeMessageWindow {
+	class GeneralExceptionWindow {
 	 +popUp(): void
 	}
  }
