@@ -10,18 +10,17 @@ package edu.kit.freejdaq.controller {
 
 	package edu.kit.freejdaq.controller.command {
 	
-	'	class Memento {
-	'		- state : Object
-	'		+ getState() : Object
-	'		+ setState(state : Object) : void
-	'	}
+		class CommandManager {
+			+ add(cmd : Command) : void
+			+ executeCommand(cmd : Command) : void
+		}
+		
+		CommandManager o-- Command : - commands : Queue
 
 		interface Command {
 			+ execute() : void
 			+ unExecute() : void
 		}
-		
-	'	Memento "1" -- "1" Command
 		
 		class AddBlockToConfigCommand {
 			- blockID : int
@@ -97,13 +96,6 @@ package edu.kit.freejdaq.controller {
 		Command <|.. ResumeRunCommand
 
 	}
-	
-	class ModelBuilder {
-		- yamlPath : String
-		+ build() : void
-	}
-		
-	ModelBuilder .down.> Command
 
 }
 
