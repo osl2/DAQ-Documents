@@ -1,107 +1,96 @@
 @startuml
 
-package edu.kit.freejdaq.controller {
+package edu.kit.freejdaq.controller.command {
 
-	enum BlockType {
-		SENSOR
-		TRANSFORMATION
-		REPRESENTATION
+	class CommandManager {
+		+ doCmd(cmd : Command) : void
+		+ undo() : void
 	}
-
-	package edu.kit.freejdaq.controller.command {
 	
-		class CommandManager {
-			+ do(cmd : Command) : void
-			+ undo() : void
-		}
-		
-		note left of CommandManager : do(cmd : Command)\n    pastCommands.push(cmd)\n    cmd.execute()
-		note right of CommandManager : undo()\n    cmd = pastCommands.pop()\n    cmd.unExecute()
-		
-		CommandManager o-- Command : - pastCommands : Stack
+	note left of CommandManager : doCmd(cmd : Command)\n    pastCommands.push(cmd)\n    cmd.execute()
+	note right of CommandManager : undo()\n    cmd = pastCommands.pop()\n    cmd.unExecute()
+	
+	CommandManager o-- Command : - pastCommands : Stack
 
-		interface Command {
-			+ execute() : void
-			+ unExecute() : void
-		}
-		
-		note right of Command : command parameters (e.g. blockID) are passed with the constructors
-		
-		class AddBlockToConfigCommand {
-			- blockID : int
-		}
-		
-		BlockType "1" <-- "*" AddBlockToConfigCommand : - blockType
-		
-		class ModifyBlockInConfigCommand {
-			- blockID : int
-		}
-		
-		class DeleteBlockFromConfigCommand {
-			- blockID : int
-		}
-		
-		class ShowHelpCommand {
-			- blockID : int
-		}
-		
-		class SaveConfigCommand {
-			- filePath : String
-		}
-		
-		class LoadConfigCommand {
-			- filePath : String
-		}
-		
-		class ResetConfigCommand {
-		}
-		
-		class CreateChannelConnectionCommand {
-			- startChannelID : int
-			- endChannelID : int
-		}
-		
-		class ModifyChannelConnectionCommand {
-			- oldStartChannelID : int
-			- oldEndChannelID : int
-			- newStartChannelID : int
-			- newEndChannelID : int
-		}
-		
-		class DeleteChannelConnectionCommand {
-			- startChannelID : int
-			- endChannelID : int
-		}
-		
-		class StartRunCommand {
-		}
-		
-		class StopRunCommand {
-		}
-		
-		class PauseRunCommand {
-		}
-		
-		class ResumeRunCommand {
-		}
-		
-		Command <|.. AddBlockToConfigCommand
-		Command <|.. DeleteBlockFromConfigCommand
-		Command <|.. ModifyBlockInConfigCommand
-		Command <|.. ShowHelpCommand
-		Command <|.. SaveConfigCommand
-		Command <|.. LoadConfigCommand
-		Command <|.. ResetConfigCommand
-		Command <|.. CreateChannelConnectionCommand
-		Command <|.. ModifyChannelConnectionCommand
-		Command <|.. DeleteChannelConnectionCommand
-		Command <|.. StartRunCommand
-		Command <|.. StopRunCommand
-		Command <|.. PauseRunCommand
-		Command <|.. ResumeRunCommand
-
+	interface Command {
+		+ execute() : void
+		+ unExecute() : void
 	}
+	
+	note right of Command : command parameters (e.g. blockID) are passed with the constructors
+	
+	class AddBlockToConfigCommand {
+		- blockID : int
+	}
+	
+	class ModifyBlockInConfigCommand {
+		- blockID : int
+	}
+	
+	class DeleteBlockFromConfigCommand {
+		- blockID : int
+	}
+	
+	class ShowHelpCommand {
+		- blockID : int
+	}
+	
+	class SaveConfigCommand {
+		- filePath : String
+	}
+	
+	class LoadConfigCommand {
+		- filePath : String
+	}
+	
+	class ResetConfigCommand {
+	}
+	
+	class CreateChannelConnectionCommand {
+		- startChannelID : int
+		- endChannelID : int
+	}
+	
+	class ModifyChannelConnectionCommand {
+		- oldStartChannelID : int
+		- oldEndChannelID : int
+		- newStartChannelID : int
+		- newEndChannelID : int
+	}
+	
+	class DeleteChannelConnectionCommand {
+		- startChannelID : int
+		- endChannelID : int
+	}
+	
+	class StartRunCommand {
+	}
+	
+	class StopRunCommand {
+	}
+	
+	class PauseRunCommand {
+	}
+	
+	class ResumeRunCommand {
+	}
+	
+	Command <|.. AddBlockToConfigCommand
+	Command <|.. DeleteBlockFromConfigCommand
+	Command <|.. ModifyBlockInConfigCommand
+	Command <|.. ShowHelpCommand
+	Command <|.. SaveConfigCommand
+	Command <|.. LoadConfigCommand
+	Command <|.. ResetConfigCommand
+	Command <|.. CreateChannelConnectionCommand
+	Command <|.. ModifyChannelConnectionCommand
+	Command <|.. DeleteChannelConnectionCommand
+	Command <|.. StartRunCommand
+	Command <|.. StopRunCommand
+	Command <|.. PauseRunCommand
+	Command <|.. ResumeRunCommand
 
 }
+
 
 @enduml
