@@ -61,12 +61,15 @@
 	 }
  
 	 class BuildingBlockView {
+	 
 		 -id: String
+		 -buildingBlock: BuildingBlock
 		 -name: String
 		 -xCor: double
 		 -yCor: double
 		 -color: String
 		 -shape: String
+		 +BuildingBlockView(id: String): BuildingBlockView
 		 +setNumberOfChannels(number : int): void
 		 +setCoordinates(x : double, y : double): boolean
 		 +getXCoordinate(): int
@@ -242,12 +245,13 @@
  }
  
  interface ViewModelInterface {
- + updateViewModel(...): ...
+ + update(): void
  
  }
  
  interface DataInterface {
  + pushDataForVisualisation(...): void
+ + pushGraphicalVisualisation(...):void
  }
  
  interface ExceptionInterface {
