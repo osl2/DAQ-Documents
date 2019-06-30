@@ -10,8 +10,11 @@
 package kit.edu.freejdaq.Model {
 
 
+
+
+
 class "MeasurementRun" as MR{
-	-state: String
+	
 	+start(): boolean
 	+pause(): boolean
 	+resume(): boolean
@@ -19,6 +22,13 @@ class "MeasurementRun" as MR{
 	+setUpdateRate(MeasurementConfiguration config): boolean
 
 }
+
+enum MesurementRunState{
+	INITIAL_STATE
+	RUNNING
+	PAUSED
+}
+MR -> MesurementRunState
 
 
 
@@ -107,9 +117,7 @@ BB <|- TransformationLogic.Transformation
 '
 '	}
 '
-'	class "SensorManager" as SM {
-'
-'	}
+'	
 '
 '	ConfigurationBlockManager <|-down- TransformationManager
 '}
@@ -260,9 +268,6 @@ BB <|-- SensorLogic.AS
 BB <|-- RepresentationLogic.AR
 
 
-RM "1" *-- "n" RepresentationLogic.AR
-
-
 
 CM "1" -- "1" BB
 
@@ -270,9 +275,8 @@ C ..|> VH
 
 CM "1" o-- "1..*" C
 
-'ConfigurationBlockManager <|-- RM
-'ConfigurationBlockManager <|-- SM
-SM "1" *-- "*" SensorLogic.AS
+
+
 MC "1" -- "*" MR
 PC "1" -- "*" BB
 MC "1" -- "*" BB
