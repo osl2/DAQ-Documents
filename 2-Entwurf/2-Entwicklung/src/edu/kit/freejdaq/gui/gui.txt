@@ -247,6 +247,7 @@
  class PickUpPointModelView {
  + getDataInterface(): DataInterface
  + getExceptionInterface(): ExceptionInterface
+ + getViewModelInterface(): ViewModelInterface
  }
  
  interface ViewModelInterface {
