@@ -1,0 +1,29 @@
+@startuml
+
+class org.yaml.snakeyaml.Yaml {
+	load(input : InputStream) : Object
+	dump(data : Object, output : Writer) : void
+}
+
+package edu.kit.freejdaq.fileservice {
+	
+	class YamlService {
+		+ {static} load(path : String) : Object
+		+ {static} save(path : String, data : Object) : void
+	}
+	
+	YamlService .down.> org.yaml.snakeyaml.Yaml
+	
+	class CsvService {
+		+ {static} load(path : String) : Object
+		+ {static} save(path : String, data : Object) : void
+	}
+	
+	class ImageService {
+		+ {static} load(path : String) : Object
+		+ {static} save(path : String, data : Object) : void
+	}
+
+}
+
+@enduml

@@ -1,11 +1,5 @@
 @startuml
 
-
-class org.yaml.snakeyaml.Yaml {
-	load(input : InputStream) : Object
-	dump(data : Object, output : Writer) : void
-}
-
 package edu.kit.freejdaq.controller {
 
 	enum BlockType {
@@ -15,97 +9,92 @@ package edu.kit.freejdaq.controller {
 	}
 
 	package edu.kit.freejdaq.controller.command {
+	
+	'	class Memento {
+	'		- state : Object
+	'		+ getState() : Object
+	'		+ setState(state : Object) : void
+	'	}
 
 		interface Command {
 			+ execute() : void
+			+ unExecute() : void
 		}
 		
-		class AddBlock {
+	'	Memento "1" -- "1" Command
+		
+		class AddBlockToConfigCommand {
 			- blockID : int
-			+ execute() : void
 		}
 		
-		BlockType "1" <-- "*" AddBlock : - blockType
+		BlockType "1" <-- "*" AddBlockToConfigCommand : - blockType
 		
-		class ModifyBlock {
+		class ModifyBlockInConfigCommand {
 			- blockID : int
-			+ execute() : void
 		}
 		
-		class DeleteBlock {
+		class DeleteBlockFromConfigCommand {
 			- blockID : int
-			+ execute() : void
 		}
 		
-		class ShowHelp {
+		class ShowHelpCommand {
 			- blockID : int
-			+ execute() : void
 		}
 		
-		class SaveConfig {
+		class SaveConfigCommand {
 			- filePath : String
-			+ execute() : void
 		}
 		
-		class LoadConfig {
+		class LoadConfigCommand {
 			- filePath : String
-			+ execute() : void
 		}
 		
-		class ResetConfig {
-			+ execute() : void
+		class ResetConfigCommand {
 		}
 		
-		class CreateChannelConnection {
+		class CreateChannelConnectionCommand {
 			- startChannelID : int
 			- endChannelID : int
-			+ execute() : void
 		}
 		
-		class ModifyChannelConnection {
+		class ModifyChannelConnectionCommand {
 			- oldStartChannelID : int
 			- oldEndChannelID : int
 			- newStartChannelID : int
 			- newEndChannelID : int
-			+ execute() : void
 		}
 		
-		class DeleteChannelConnection {
+		class DeleteChannelConnectionCommand {
 			- startChannelID : int
 			- endChannelID : int
-			+ execute() : void
 		}
 		
-		class StartRun {
-			+ execute() : void
+		class StartRunCommand {
 		}
 		
-		class StopRun {
-			+ execute() : void
+		class StopRunCommand {
 		}
 		
-		class PauseRun {
-			+ execute() : void
+		class PauseRunCommand {
 		}
 		
-		class ResumeRun {
-			+ execute() : void
+		class ResumeRunCommand {
 		}
 		
-		Command <|.. AddBlock
-		Command <|.. DeleteBlock
-		Command <|.. ModifyBlock
-		Command <|.. ShowHelp
-		Command <|.. SaveConfig
-		Command <|.. LoadConfig
-		Command <|.. ResetConfig
-		Command <|.. CreateChannelConnection
-		Command <|.. ModifyChannelConnection
-		Command <|.. DeleteChannelConnection
-		Command <|.. StartRun
-		Command <|.. StopRun
-		Command <|.. PauseRun
-		Command <|.. ResumeRun
+		Command <|.. AddBlockToConfigCommand
+		Command <|.. DeleteBlockFromConfigCommand
+		Command <|.. ModifyBlockInConfigCommand
+		Command <|.. ShowHelpCommand
+		Command <|.. SaveConfigCommand
+		Command <|.. LoadConfigCommand
+		Command <|.. ResetConfigCommand
+		Command <|.. CreateChannelConnectionCommand
+		Command <|.. ModifyChannelConnectionCommand
+		Command <|.. DeleteChannelConnectionCommand
+		Command <|.. StartRunCommand
+		Command <|.. StopRunCommand
+		Command <|.. PauseRunCommand
+		Command <|.. ResumeRunCommand
 
 	}
 	
@@ -113,23 +102,8 @@ package edu.kit.freejdaq.controller {
 		- yamlPath : String
 		+ build() : void
 	}
-	
-	class ControllerFacadeView {
-		+ blockPlaced(id : int) : void
-		+ blockRemoved(id : int) : void
-		+ startPressed() : void
-		+ stopPressed() : void
-		+ pausePressed() : void
-		+ resumePressed() : void
-		+ resetPressed() : void
-		+ getHelp() : void
-	}
-	
-	note right of ControllerFacadeView : provides a single interface for the User (through the View) to interact with the program
-	
-	ControllerFacadeView .down.> Command : encapsulation of concrete implementations via Command pattern >
+		
 	ModelBuilder .down.> Command
-	ModelBuilder .up.> org.yaml.snakeyaml.Yaml
 
 }
 
