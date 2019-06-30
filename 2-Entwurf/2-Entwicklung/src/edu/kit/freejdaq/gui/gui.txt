@@ -33,7 +33,7 @@
 	 Button <|-right- RedoButton
 	 }
 	 package "Exception Layer" {
-	 MainWindow "1" -- ExceptionWindow
+	 MainWindow "1" -left- ExceptionWindow
 	 ExceptionWindow <|-- BuildingBlockExceptionWindow
 	 ExceptionWindow <|-- ConnectionExceptionWindow
 	 ExceptionWindow <|-- GeneralExceptionWindow
@@ -44,12 +44,17 @@
 	 BuildingBlockView -down-> "1" HelpDecorator
 	 HelpDecorator .down.|> HelpDecoratorHandler 
 	 RepresentationBlockView .down.|> RepresentationBlockViewHandler
+	 MainWindow -down-o "1" HelpWindow
+	 MainWindow -down-o "1" OptionsWindow
  
 	 class MainWindow <<singleton>> {
+	 	
+	 	- colorScheme: String
+	 	- fontSize: int
 	 
-		 + static getInstance(): MainWindow
-		 +newConfiguration(): void
-		 +exit(): void
+		 + {static} getInstance(): MainWindow
+		 + newConfiguration(): void
+		 + exit(): void
 	 
 	 }
  
@@ -246,7 +251,6 @@
  
  interface ViewModelInterface {
  + update(): void
- 
  }
  
  interface DataInterface {
@@ -258,7 +262,18 @@
  + throwFatalException(title: String, description: String): void 
  + throwBuildingBlockException(id: String, title: String, description: String): void
  + throwConnectionException(id: int, title: String, description: String): void
+ }
  
+ class OptionsWindow {
+ 	+ changeColorScheme(newColorScheme: String): void
+ 	+ changeFontSize(newSize: int): void
+ 
+ }
+ 
+ class HelpWindow {
+ 	- description: String
+ 	+ openDescription(): void
+ 	
  }
  }
  
