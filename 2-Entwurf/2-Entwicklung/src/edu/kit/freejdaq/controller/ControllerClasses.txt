@@ -1,6 +1,6 @@
 @startuml
 
-package edu.kit.freejdaq.controller.command {
+package edu.kit.freejdaq.controller {
 
 	class CommandManager {
 		+ doCommand(cmd : Command) : void
