@@ -1,1 +1,23 @@
+@startuml
 
+class BuildingBlockDirectory {
+
+- map: HashMap<String: id, block: BuildingBlock>
+
++ addBuildingBlock(id: String, BuildingBlock): boolean
++ removeBuildingBlock(id: String): boolean
++ getBuildingBlock(id: String): BuildingBlock
++ getNumberOfOutChannel(id: String): int
++ getNumberOfOutChannel(id: String): int
++ setNumberOfInChannel(id: String, inChannel: int): void
++ setNumberOfOutChannel(id: String, outChannel: int): void
++ addConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
++ removeConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
+
+}
+
+
+
+
+
+@enduml
