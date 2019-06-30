@@ -8,17 +8,17 @@
 	 PrototypeField <|-- SensorBlockField
 	 PrototypeField <|-- TransformationBlockField
 	 PrototypeField <|-- RepresentationBlockField
-	 ConfigurationField "1" -- "0..*" BuildingBlockView
+	 ConfigurationField "1" -- "*" BuildingBlockView
 	 BuildingBlockView <|-up-  SensorBlockView
 	 BuildingBlockView <|-up-  TransformationBlockView
 	 BuildingBlockView <|-up-  RepresentationBlockView
-	 SensorBlockField -- "0..*" SensorBlockView
-	 TransformationBlockField -- "0..*" TransformationBlockView
-	 RepresentationBlockField -- "0..*" RepresentationBlockView
+	 SensorBlockField -- "*" SensorBlockView
+	 TransformationBlockField -- "*" TransformationBlockView
+	 RepresentationBlockField -- "*" RepresentationBlockView
 	 
 	 package "Button Layer" {
 	 MainWindow "1"-right- "1" ButtonField
-	 ButtonField-down- "0..*" Button
+	 ButtonField-down- "*" Button
 	 Button .left.|> ButtonHandler
 	 Button <|-up- StartButton
 	 Button <|-right- PauseButton
