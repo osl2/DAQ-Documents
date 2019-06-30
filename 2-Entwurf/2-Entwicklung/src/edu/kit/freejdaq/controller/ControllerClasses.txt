@@ -11,16 +11,21 @@ package edu.kit.freejdaq.controller {
 	package edu.kit.freejdaq.controller.command {
 	
 		class CommandManager {
-			+ add(cmd : Command) : void
-			+ executeCommand(cmd : Command) : void
+			+ do(cmd : Command) : void
+			+ undo() : void
 		}
 		
-		CommandManager o-- Command : - commands : Queue
+		note left of CommandManager : do(cmd : Command)\n    pastCommands.push(cmd)\n    cmd.execute()
+		note right of CommandManager : undo()\n    cmd = pastCommands.pop()\n    cmd.unExecute()
+		
+		CommandManager o-- Command : - pastCommands : Stack
 
 		interface Command {
 			+ execute() : void
 			+ unExecute() : void
 		}
+		
+		note right of Command : command parameters (e.g. blockID) are passed with the constructors
 		
 		class AddBlockToConfigCommand {
 			- blockID : int
