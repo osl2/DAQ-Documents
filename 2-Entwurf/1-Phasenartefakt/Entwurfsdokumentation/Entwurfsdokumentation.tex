@@ -276,6 +276,29 @@ Die Klasse RepresentationBlockView stellt einen Darstellungbaustein dar, dieser 
 Die Klasse PrototypeField ist die Über-Klasse zu SensorBlockField, TransformationBlockField und RepresentationBlockField. 
 Sie stellt eine Fläche dar, in welcher vordefinierte Konfigurationsbausteine dargestellt werden und der Benutzer sie mit dem Mauszeiger in das Konfigurationsfeld ziehen und damit positionieren kann.
 
+\subsubsection{Package ExceptionLayer}
+
+Fehlernachrichten sind ein wichtiger Teil der Anwendung, um dem Benutzer eine möglichst benutzerfreundliche Umgebung zu liefern und eine möglichst einfache und verständliche Bedienung zu ermöglichen. Damit der Benutzer aussagekräftige Fehlermeldungen erhält unterscheiden wir im Entwurf zwischen drei Typen von Fehlerarten aus verschiedenen Fehlerquellen.
+
+\paragraph{ExceptionWindow}
+
+Die Klasse ExceptionWindow stellt die Überklasse der drei verschiedenen Unterklassen dar und enthält die gemeinsamen Attribute, welche die konkreten Fehlermeldungen enthalten. Eine Fehlermeldung besitzt immer eine Titel, der wünschenswerter Weise bereits die Fehlermeldung aussagekräftig und kurz beschreibt. Die Beschreibung der Fehlermeldung wiederum liefert eine genauere und explizite Erklärung zur Fehlerquelle, Fehlerursache und möglicherweise ebenfalls zur Fehlerbehebung.
+Damit der Benutzer auf die Fehlernachricht aufmerksam wird, bewirkt die Methode popUp(), dass die Fehlernachricht zu sehen ist. Damit der Benutzer weiterarbeiten kann oder den Fehler beheben will kann die Fehlernachricht wieder geschlossen werden.
+
+\paragraph{BuildingBlockExceptionWindow}
+
+Die Klasse BuildingBlockExceptionWindow ist eine Konkretisierung der Überklasse ExceptionWindow und stellt eine Fehlernachricht im Bezug zu Konfigurationsbausteinen dar. Neben einem Titel und einer Beschreibung wird zur Erzeugung dieser Fehlernachricht die eindeutige ID des Konfigurationsbausteins benötigt. Dadurch erfährt der Benutzer sofort, bei welchem Konfigurationsbaustein ein Fehler aufgetreten ist. Die Methode popUp() aus der Überklasse wird hier überschrieben. Damit soll bewirkt werden, dass die Fehlermeldung als Pop-Up Nachricht direkt neben dem Konfigurationsbaustein im Konfigurationsfeld erscheint und somit dem Benutzer sofort die Fehlerquelle signalisiert. Ebenfalls wird zur Darstellung des Fehlers die Farbe des Konfigurationsbaustein im Konfigurationsfeld geändert, um dem Benutzer nochmal auf die Fehlerquelle hinzuweisen.
+
+\paragraph{ConnectionExceptionWindow}
+
+Die Klasse ConnectionExceptionWindow ist eine weitere Konkretisierung der Überklasse ExceptionWindow und stellt eine Fehlernachricht bei Verbindungen zwischen Konfigurationsbausteinen dar. Zur Identifizierung der Fehlerquelle wird neben Titel und Beschreibung ebenfalls die IDs der Ein- und Ausgangskanäle der Konfigurationsbaustein mit übergeben. Die Methode popUp() soll ebenfalls die Fehlernachricht in der Nähe der Fehlerquelle im Konfigurationsfeld plazieren. Ebenfalls wird die Farbe des Drahtes sinnvoll verändert um die Fehlerquelle zu signalisieren.
+
+\paragraph{GeneralExceptionWindow}
+
+Die Klasse GeneralExceptionWindow stellt neben den zwei konkreten Fehlermeldungen ConnectionExceptionWindow und BuildingBlockExceptionWindow eine allgemeinere Fehlernachricht dar. Diese werden zum Beispiel bei Messfehlern oder Fehler bei der Messkonfiguration ausgelöst. Diese Fehlernachrichten sollen sichtbar in der Mitte der Anwedung geöffnet werden, um dem Benutzer auf diesen Fehler hinzuweisen. 
+
+
+
 
 \clearpage
 \section{Sequenzdiagramme}
