@@ -941,5 +941,6 @@ namespace Directory {
 '------------------------------------------------------------------------
 'Structure adapting Commands
 '------------------------------------------------------------------------
-
+Backend -[hidden]down-> Model
+Controller -[hidden]up-> Model
 @enduml
