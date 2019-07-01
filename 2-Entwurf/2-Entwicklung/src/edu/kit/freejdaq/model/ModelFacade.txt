@@ -1,23 +1,21 @@
 @startuml
 package modelFacade {
-	class ModelFacadeView{
-		+giveFullModel()
-		+update()
+	
+	interface IMeasurementStreamListener {
+		-receiveData(measuredValue: int): void
+		-connectionTerminated(): void
 	}
 
-	class ModelFacadeBackend{
-		+recieveYAML(YAML sensorYAML)
-		+recieveData(int data)
-	}
 
-	class ModelFacadeController{
-		+getBuildingBlock(int iD)
-		+setChannelConnection(int firstChannelId, int secondChannelId)
-		+setId(int iD)
-		+startMeasurement()
-	}
+	note bottom of IBusinessLogic
+	 createModelFromYamlDom() 
+	 examines semantic validity 
+	 and returns an appropriate result 
+	 to the controller. 
+	end note
 
 	interface IBusinessLogic{
+	+createModelFromYamlDom(modelDom: YamlDom): String
 	+addBuildingBlock(id: String)
 	+removeBuildingBlock(id: String)
 	+addConnection(firstChannelId: String, secondChannelId: String)
