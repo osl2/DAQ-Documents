@@ -447,7 +447,7 @@ interface IMeasurementStreamListener {
 	
 	}
 
-		IMeasurementStreamListener <|.. Channel
+		IMeasurementStreamListener <|.. ChannelLogic.Channel
 		IBusinessLogic <|.. MeasurementConfiguration
 		IModelInformation <|.. MeasurementConfiguration
 		IMeasurementRun <|.. MeasurementRun
