@@ -24,6 +24,9 @@ package modelFacade {
 	+addBuildingBlock(id: String)
 	+removeBuildingBlock(id: String)
 	+addConnection(firstChannelId: String, secondChannelId: String)
+	+removeConnection(firstChannelId: String, secondChannelId: String)
+	+clonePrototyp(id: String)
+	+editPropertyOfPrototyp(key: String, value: Integer)
 	}
 }
 @enduml
