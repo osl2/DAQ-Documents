@@ -36,10 +36,10 @@ package kit.edu.freejdaq.Model {
 		-updateRate: float
 		-listOfAllChannels: <Channel>
 		-configurationAdjacencyList: configuration[]
-	    +addBlock(BuildingBlock block): boolean
-	    +removeBlock(Integer blockId): boolean
-	    +connectChannels(Integer sourceId, Integer targetId):boolean
-		+removeConnection(Integer firstId, Integer secondId): boolean
+	    +addBlock(block: BuildingBlock): boolean
+	    +removeBlock(blockId: Integer): boolean
+	    +connectChannels(sourceId: Integer , targetId: Integer):boolean
+		+removeConnection(firstId: Integer , secondId: Integer ): boolean
 	    +returnMeasurementConfiguration(): MeasurementConfiguration
 
 	}

@@ -16,5 +16,14 @@ package modelFacade {
 		+setId(int iD)
 		+startMeasurement()
 	}
+
+	class BusinessLogic{
+	+pause()
+	+start()
+	+reset()
+	+addBuildingBlock(id: String)
+	+removeBuildingBlock(id: String)
+	+addConnection(firstChannelId: String, secondChannelId: String)
+	}
 }
 @enduml
