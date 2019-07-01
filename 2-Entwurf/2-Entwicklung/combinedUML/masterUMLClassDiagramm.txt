@@ -137,7 +137,7 @@ namespace Model {
 
 
 
-	class "MeasurementRun" as MR{
+	class MeasurementRun {
 
 		+start(): boolean
 		+pause(): boolean
@@ -152,11 +152,11 @@ namespace Model {
 		RUNNING
 		PAUSED
 	}
-	MR -> MesurementRunState
+	MeasurementRun -> MesurementRunState
 
 
 
-	class "MeasurementConfiguration" as MC{
+	class MeasurementConfiguration{
 		-updateRate: float
 		-listOfAllChannels: <Channel>
 		-configurationAdjacencyList: configuration[]
@@ -167,19 +167,19 @@ namespace Model {
 	    +returnMeasurementConfiguration(): MeasurementConfiguration
 
 	}
-
-	ConnectionManager "1" -- "1" MC
+	MeasurementConfiguration "1" -- "*" MeasurementRun
+	ConnectionManager "1" -- "1" MeasurementConfiguration
 
 	'----------------------------------------------------------------------------------------
 	'PrototypCollection: List of all predefined and custom BuildingBlocks
 	'----------------------------------------------------------------------------------------
 
-	class "PrototypCollection" as PC{
+	class PrototypCollection{
 		 +returnCloneOfBlock(BuildingBlock: block)
 	}
 
 
-	abstract class "BuildingBlock" as BB
+	abstract class BuildingBlock
 	{
 
 	-id: int
@@ -191,7 +191,11 @@ namespace Model {
 
 
 	}
-
+	
+	
+	MeasurementConfiguration "1" -- "*" BuildingBlock
+	
+	PrototypCollection "1" -- "*" BuildingBlock
 
 
 	namespace TransformationLogic {
@@ -223,7 +227,7 @@ namespace Model {
 	}
 
 
-	BB <|- TransformationLogic.Transformation
+	BuildingBlock <|- TransformationLogic.Transformation
 	'----------------------------------------------------------------------------------------
 	'Note: The manager aspect of this diagramm can be found, in more detail, at another place.
 	'It stands here for a complete overview
@@ -236,7 +240,7 @@ namespace Model {
 	'		{abstract}+showAllBocks(BuildingBlock block): boolean
 	'	}
 	'
-	'	class "RepresentationManager" as RM {
+	'	class RepresentationManager {
 	'
 	'
 	'	}
@@ -251,97 +255,98 @@ namespace Model {
 
 	namespace RepresentationLogic {
 
-		abstract class "Representation" as AR{
+		abstract class Representation{
 
 			{abstract} processValue()
 
 
 			}
 
-		class "TableRespresentation" as TR {
+		class TableRespresentation {
 			processValue()
 
 		}
 
 
-		class "XYRepresentation" as XYR {
+		class XYRepresentation {
 			processValue()
 
 
 
 		}
 
-		note right of RepresentationLogic.XYR
-	  	use eclipse nebula
-	  	for display
+		note right of RepresentationLogic.XYRepresentation
+	  		use eclipse nebula
+	  		for display
 		end note
 
 
-		class "ChannelXvsTime" as XvT {
+		class ChannelXvsTime {
 			processValue()
 		}
 
-		class "ChannelXvsChannelY"  as XvY{
+		class ChannelXvsChannelY{
 			processValue()
 
 		}
 
-			class "NChannelvsTime"  as NvT{
+			class NChannelvsTime{
 			processValue()
 		}
-		XYR -up-|> AR
-		XvT -up-|> XYR
-		XvY -up-|> XYR
-		NvT -up-|> XYR
-		TR   -down-|> AR
+		XYRepresentation -up-|> Representation
+		ChannelXvsTime -up-|> XYRepresentation
+		ChannelXvsTime -up-|> XYRepresentation
+		NChannelvsTime -up-|> XYRepresentation
+		TableRespresentation   -down-|> Representation
 
 
 	}
-
+	BuildingBlock <|-- RepresentationLogic.Representation
+	
 	namespace SensorLogic {
 
-		abstract class "Sensor" as AS{
+		abstract class Sensor{
 			´{abstract} processValue()
 
 			}
-		 class "AnalogDigitalConverter" as ADC {
+		 class AnalogDigitalConverter {
 			processValue()
 		}
 
-		class "ADS1115" as ads1115 {
+		class ADS1115 {
 			processValue()
 		}
 
-		ADC -up-|> AS
-		ads1115 -up-|> ADC
+		AnalogDigitalConverter -up-|> Sensor
+		ADS1115 -up-|> AnalogDigitalConverter
 
 
-		class "Current/Power" as CP {
+		class CurrentPower {
 			processValue()
 		}
 
-		class "INA219" as ina219 {
+		class INA219 {
 			processValue()
 		}
 
-		CP -up-|> AS
-		ina219 -up-|> CP
+		CurrentPower -up-|> Sensor
+		INA219 -up-|> CurrentPower
 
-		class "SpectralSensor" as SpecSens {
+		class SpectralSensor {
 			processValue()
 		}
 
-		class "AS7262" as as7262 {
+		class AS7262 {
 			processValue()
 		}
 
-		SpecSens -up-|> AS
-		as7262 -up-|> SpecSens
+		SpecSens -up-|> Sensor
+		AS7262 -up-|> SpectralSensor
 
 	}
+	BuildingBlock <|-- SensorLogic.Sensor
 
-
-	class "Channel" as C {
+	class Channel {
 		-type: String
 		-channelId: Integer
 		-connectionPartnerId: Integer
@@ -349,67 +354,49 @@ namespace Model {
 		+setConnectionPartner(Integer id): boolean
 
 	}
+	Channel ..|> IValueHandler
+	
+	note top of Channel
+	  first part of channelId is
+	  the corresponding buildingBlockId
+	end note
 
 
-	class "ChannelManager" as CM {
+	class ChannelManager {
 		-numberOfElements: Integer
 		+getChannel(Integer id): Channel
 		+setChannel(Integer id): boolean
 		+addChannel(Channel channel): boolean
 		+removeChannel(Integer id): boolean
 	}
+	ChannelManager "1" -- "1" BuildingBlock
+	ChannelManager "1" o-- "1..*" Channel
 
-
-
-	interface "IValueHandler" as VH {
+	interface IValueHandler {
 
 		processValue()
 	}
-
-
-	class "HelpMessage" as HM{
-		- messageFileName : String
-		+ HelpMessage(msgFile : String)
-		+ displayMessage() : void
-	}
-	note right of HM : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
-
-	BB "*" --> "1" HM : < provides help/information about
-
-	note right of VH
+	note right of IValueHandler
 	  interface to provide
 	  Data to a channel
 	end note
 
+	class HelpMessage{
+		- messageFileName : String
+		+ HelpMessage(msgFile : String)
+		+ displayMessage() : void
+	}
+	note right of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
 
-	note top of C
-	  first part of channelId is
-	  the corresponding buildingBlockId
-	end note
+	BuildingBlock "*" --> "1" HelpMessage : < provides help/information about
 
-
-	BB <|-- SensorLogic.AS
-	BB <|-- RepresentationLogic.AR
-
-
-
-	CM "1" -- "1" BB
-
-	C ..|> VH
-
-	CM "1" o-- "1..*" C
-
-
-
-	MC "1" -- "*" MR
-	PC "1" -- "*" BB
-	MC "1" -- "*" BB
+	
 
 
 	class YamlRepresentation {
 		<<create>>YamlRepresentation(BuildingBlock)
 	}
-	BB -left- YamlRepresentation
+	BuildingBlock -left- YamlRepresentation
 
 	}
 	class ModelFacadeView{
@@ -418,14 +405,14 @@ namespace Model {
 		}
 
 
-	ModelFacadeView -- MC
+	ModelFacadeView -- MeasurementConfiguration
 
 
 		class ModelFacadeBackend{
 			+receiveYAML(YAML sensorYAML)
 			+receiveData(int data)
 		}
-
+		ModelFacadeBackend -- IValueHandler	
 
 
 
@@ -438,12 +425,11 @@ namespace Model {
 			+setBuildingBlockName(int iD): boolean
 			+startMeasurement()
 		}
+		ModelFacadeController -- BuildingBlock
+		ModelFacadeController -- MeasurementConfiguration
+		ModelFacadeController -- MeasurementRun
 
-
-	ModelFacadeController -- BB
-	ModelFacadeController -- MC
-	ModelFacadeController -- MR
-	ModelFacadeBackend -- VH
+	
 
 	package modelFacade {
 		class ModelFacadeView{
@@ -455,6 +441,7 @@ namespace Model {
 			+recieveYAML(YAML sensorYAML)
 			+recieveData(int data)
 		}
+		
 
 		class ModelFacadeController{
 			+getBuildingBlock(int iD)
@@ -463,6 +450,11 @@ namespace Model {
 			+startMeasurement()
 		}
 	}
+	
+	
+	
+	
+	
 }
 '------------------------------------------------------------------------
 'Controller
