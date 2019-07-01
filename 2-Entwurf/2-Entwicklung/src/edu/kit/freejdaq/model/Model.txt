@@ -14,7 +14,7 @@ package kit.edu.freejdaq.Model {
 
 
 class "MeasurementRun" as MR{
-	
+
 	+start(): boolean
 	+pause(): boolean
 	+resume(): boolean
@@ -117,7 +117,7 @@ BB <|- TransformationLogic.Transformation
 '
 '	}
 '
-'	
+'
 '
 '	ConfigurationBlockManager <|-down- TransformationManager
 '}

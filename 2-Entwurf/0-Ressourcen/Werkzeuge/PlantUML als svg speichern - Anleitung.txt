@@ -1,0 +1,9 @@
+-eventuell Master UML Diagramm als .svg exportieren, da besser skalierbar? 
+--> benötigte Option beim plantuml-Aufruf ist -tsvg
+getesteter funktionsfähiger Aufruf: 
+java -DPLANTUML_LIMIT_SIZE=8192 -jar pathToPlantuml.jar pathToPlantUmlFile -tsvg
+falls jemand mit bash arbeitet, ich habe jetzt einen Eintrag in meiner .bashrc
+plantuml() {
+    java -DPLANTUML_LIMIT_SIZE=8192 -jar /home/stefan/utilities/plantuml.jar "$1" -tsvg
+}
+dann kann ich einfach aufrufen: plantuml  pathToPlantUmlFile
