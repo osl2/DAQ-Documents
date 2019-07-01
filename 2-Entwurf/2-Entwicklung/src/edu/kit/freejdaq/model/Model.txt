@@ -43,7 +43,7 @@ package kit.edu.freejdaq.Model {
 
 	}
 	MeasurementConfiguration "1" -- "*" MeasurementRun
-	ConnectionManager "1" -- "1" MeasurementConfiguration
+	
 
 	'----------------------------------------------------------------------------------------
 	'PrototypCollection: List of all predefined and custom BuildingBlocks
@@ -222,6 +222,9 @@ package kit.edu.freejdaq.Model {
 	}
 	BuildingBlock <|-- SensorLogic.Sensor
 
+
+	namespace ChannelLogic {
+
 	class Channel {
 		-id: String
 		-value: int
@@ -269,14 +272,14 @@ package kit.edu.freejdaq.Model {
 		-varName: String
 		+forwardValue(): void
 	}
-	BuildingBlock "1" --> "*" InChannel
+	
 	InChannel --|> Channel
 	
 	class OutChannel{
 		-channelName: String
 		+forwardValue(): void
 	}
-	BuildingBlock "1" --> "*" OutChannel
+	
 	OutChannel --|> Channel
 	
 	note top of OutChannel
@@ -298,11 +301,18 @@ package kit.edu.freejdaq.Model {
 
 		processValue()
 	}
+	
 	note right of IValueHandler
 	  interface to provide
 	  Data to a channel
 	end note
 
+
+	}
+	
+	BuildingBlock "1" --> "*" ChannelLogic.InChannel
+	BuildingBlock "1" --> "*" ChannelLogic.OutChannel
+	
 	class HelpMessage{
 		- messageFileName : String
 		+ HelpMessage(msgFile : String)
@@ -321,38 +331,6 @@ package kit.edu.freejdaq.Model {
 	BuildingBlock -left- YamlRepresentation
 
 	}
-	class ModelFacadeView{
-			+giveFullModel()
-			+update()
-		}
-
-
-	ModelFacadeView -- MeasurementConfiguration
-
-
-		class ModelFacadeBackend{
-			+receiveYAML(YAML sensorYAML)
-			+receiveData(int data)
-		}
-		ModelFacadeBackend -- IValueHandler
-
-
-
-
-
-		class ModelFacadeController{
-			+addBuildingBlock(Integer id): BuildingBlock
-			+removeBuildingBlock(Integer id): boolean
-			+setChannelConnection(int firstChannelId, int secondChannelId)
-			+setBuildingBlockName(int iD): boolean
-			+startMeasurement()
-		}
-		ModelFacadeController -- BuildingBlock
-		ModelFacadeController -- MeasurementConfiguration
-		ModelFacadeController -- MeasurementRun
-
-
-	
 	
 		
 
@@ -433,6 +411,51 @@ namespace BuildingBlockBuilder {
 BuildingBlockBuilder.SensorBuilder ..> SensorLogic.Sensor
 BuildingBlockBuilder.TransformationBuilder ..> TransformationLogic.Transformation
 BuildingBlockBuilder.RepresentationBuilder ..> RepresentationLogic.Representation
+
+
+interface IMeasurementStreamListener {
+		-receiveData(measuredValue: int): void
+		-connectionTerminated(): void
+	}
+
+
+	note bottom of IBusinessLogic
+	 createModelFromYamlDom() 
+	 examines semantic validity 
+	 and returns an appropriate result 
+	 to the controller. 
+	end note
+
+	interface IBusinessLogic{
+	+createModelFromYamlDom(modelDom: YamlDom): String
+	+addBuildingBlock(id: String)
+	+removeBuildingBlock(id: String)
+	+addConnection(firstChannelId: String, secondChannelId: String)
+	+removeConnection(firstChannelId: String, secondChannelId: String)
+	+clonePrototyp(id: String)
+	+editPropertyOfPrototyp(key: String, value: Integer)
+	}
+
+	interface IModelInformation{
+	+getMeasurementConfig(): MeasurementConfiguration
+	+getPrototyp(): BuildingBlock
+	}
+	interface IMeasurementRun{
+	+pause()
+	+start()
+	+reset()
+	
+	}
+
+		IMeasurementStreamListener <|.. Channel
+		IBusinessLogic <|.. MeasurementConfiguration
+		IModelInformation <|.. MeasurementConfiguration
+		IMeasurementRun <|.. MeasurementRun
+		IBusinessLogic <|.. BuildingBlockBuilder.Director
+
+
+
+
 
 
 
