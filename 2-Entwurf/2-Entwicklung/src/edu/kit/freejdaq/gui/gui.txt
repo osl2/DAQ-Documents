@@ -7,13 +7,13 @@ class MainWindow <<singleton>> {
  - colorScheme: String
  - fontSize: int
  + {static} getInstance(): MainWindow
- + newConfiguration(): void
  + exit(): void
 }
 
 namespace Menues {
 
 class PrototypeField {
+		+ update(): void
 	 	+open(): void
 	 }
 	 
@@ -41,17 +41,21 @@ class PrototypeField {
 namespace Configuration {
 
 	 class ConfigurationField {
-		 -list: List<BuildingBlockView>
-		 +add(block : BuildingBlock): void
-		 +remove(block: BuildingBlock): void
-		 +getViewModel(): List<BuildingBlockView>
+		 -list: List<BuildingBlockView>		
+		 + update(): void
+		 + add(block : BuildingBlock): void
+		 + remove(block: BuildingBlock): void
+		 + open(): void		 
+		 + getViewModel(): List: <BuildingBlockViews>
+	 	 + setViewModel(list: <BuildingBlockViews>): boolean
+	 	 + getContentsOfRepresentationBlocks():BufferedImage[]
 	 }
 	 
 	 interface BlockDragAndDropHandler {
 	 	+blockWasMoved(blockId : String, corX : double, corY : double)
 	 }
 	 
-	 note left of BlockDragAndDropHandler
+	note left of BlockDragAndDropHandler
 		This handler is used for adding
 		and removing of blocks, as well as
  		for changing position on ConfigurationField.
@@ -95,6 +99,7 @@ namespace Configuration {
 	 	+ setMaxX(x: double): void
 	 	+ getMaxY(): double
 	 	+ setMaxY(y: double): void
+	 	+ getContentsOfRepresentationBlocks():BufferedImage
 
 	 }
 	 
@@ -134,12 +139,7 @@ namespace Configuration {
 		+changeColor(color: String): void
 	 }
 	 
- 
-	 
-	 
-	 
-	 
-	 ConfigurationField -up-> BlockDragAndDropHandler
+	 BlockDragAndDropHandler .down.|> ConfigurationField
 	 GUI.MainWindow "1"-- "1" ConfigurationField
 	 ConfigurationField "1" -- "*" BuildingBlockView
 	 BuildingBlockView <|--  SensorBlockView
@@ -200,29 +200,39 @@ namespace Button {
 	
 namespace Exception {
 
+
+	class ExceptionWindowManager{
+		+ showGeneralException(title: String, description: String): void
+	 	+ showBuildingBlockException(id: String, title: String, description: String): void
+	 	+ showConnectionException(id: int, title: String, description: String): void
+	 	+ closeAll(): void
+	 }
+
 	class ExceptionWindow {
-	-title: String
-	-description: String
-	+popUp(): void
-	+close(): void
+		-title: String
+		-description: String
+		+popUp(): void
+		+close(): void
 	}
 
 	class BuildingBlockExceptionWindow {
-	-id: String
-	+popUp(): void
-	+changeBlockColor(color: String): void
+		-id: String
+		+popUp(): void
+		+changeBlockColor(color: String): void
 	}
 
 	class ConnectionExceptionWindow {
-	-channelInId: int
-	-channelOutId: int
-	+popUp(): void
-	+changeWireColor(color: String): void
+		-channelInId: int
+		-channelOutId: int
+		+popUp(): void
+		+changeWireColor(color: String): void
 	}
 
 	class GeneralExceptionWindow {
-	 +popUp(): void
+	 	+popUp(): void
 	}
+	
+	 ExceptionWindowManager --> "*" ExceptionWindow
 	 GUI.MainWindow "1" -- ExceptionWindow
 	 ExceptionWindow <|-- BuildingBlockExceptionWindow
 	 ExceptionWindow <|-- ConnectionExceptionWindow
@@ -245,43 +255,57 @@ namespace HelpAndOption {
 	 GUI.MainWindow -down-o "1" OptionsWindow
 
 }
-}
-namespace FacadeModelView {
 
-class PickUpPointModelView {
- + getDataInterface(): DataInterface
- + getExceptionInterface(): ExceptionInterface
- + getViewModelInterface(): ViewModelInterface
+PickUpPointViewFacades -down-> "*" UpdateInterface
+PickUpPointViewFacades -down-> GraphicDataIolnterface
+PickUpPointViewFacades -down-> ExceptionInterface
+PickUpPointViewFacades -down-> MeasurementDataInterface
+
+class PickUpPointViewFacades {
+	 + getUpdateInterfaces(): UpdateInterface[]
+	 + getGraphicDataIolnterface(): GraphicDataIolnterface
+	 + getExceptionInterface(): ExceptionInterface
+	 + getMeasurementDataInterface(): DataInterface
  }
 
- interface ViewModelInterface {
- + update(): void
+ interface UpdateInterface {
+ 	+ update(): void
  }
 
- interface DataInterface {
- + pushDataForVisualisation(...): void
- + pushGraphicalVisualisation(...):void
- }
-
- interface ExceptionInterface {
- + throwFatalException(title: String, description: String): void
- + throwBuildingBlockException(id: String, title: String, description: String): void
- + throwConnectionException(id: int, title: String, description: String): void
+interface GraphicDataIolnterface {
+	  + getViewModel(): List: <BuildingBlockViews>
+	  + setViewModel(list: <BuildingBlockViews>): boolean
+	  + getContentsOfRepresentationBlocks():BufferedImage[]
  }
  
- PickUpPointModelView -up-> ViewModelInterface
- PickUpPointModelView -up-> DataInterface
- PickUpPointModelView -up-> ExceptionInterface
-
-}
-
-namespace FacadeControllerView {
-
-interface "ViewControllerlnterface" {
-  + getViewModel(): List: <BuildingBlockViews>
-  + setViewModel(list: <BuildingBlockViews>): boolean
+ interface ExceptionInterface {
+	 + showGeneralException(title: String, description: String): void
+	 + showBuildingBlockException(id: String, title: String, description: String): void
+	 + showConnectionException(id: int, title: String, description: String): void
  }
+
+ interface MeasurementDataInterface {
+ 	+ pushDataForVisualisation(...): void
+ }
+ 
+ note top of MeasurementDataInterface 
+  	No implementation for this functionality yet.
+ end note
+
+ 
+ GUI.Configuration.ConfigurationField -up-|> GraphicDataIolnterface
+ GUI.Exception.ExceptionWindowManager -up-|> ExceptionInterface
+ GUI.Configuration.ConfigurationField -up-|> UpdateInterface
+ GUI.Menues.PrototypeField -up-|> UpdateInterface
+
+
+
+
 }
+
+
+
+
 
 
 
