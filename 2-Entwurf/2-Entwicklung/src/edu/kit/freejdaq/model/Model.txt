@@ -33,14 +33,13 @@ package kit.edu.freejdaq.Model {
 
 
 	class MeasurementConfiguration{
+		-pathToFile: String
 		-updateRate: float
 		-listOfAllChannels: <Channel>
 		-configurationAdjacencyList: configuration[]
-	    +addBlock(block: BuildingBlock): boolean
-	    +removeBlock(blockId: Integer): boolean
-	    +connectChannels(sourceId: Integer , targetId: Integer):boolean
-		+removeConnection(firstId: Integer , secondId: Integer ): boolean
-	    +returnMeasurementConfiguration(): MeasurementConfiguration
+		+getPathToFile(): String
+		+addBlock(BuildingBlock block): boolean
+ 		+removeBlock(Integer blockId): boolean
 
 	}
 	MeasurementConfiguration "1" -- "*" MeasurementRun
@@ -58,12 +57,15 @@ package kit.edu.freejdaq.Model {
 	abstract class BuildingBlock
 	{
 
-		-id: int
+		-id: String
 		-name: String
-		-listOfChannels: <<Channel>>
+		-userInfo: String
 		+setId()
-		+ {abstract} processValue()
-		+ establishConnection(Integer ownSourceChannelId, Integer targetChannelId)
+		+addInChannel(id: String, name: String): void
+		+addOutChannel(id: String, name: String): void
+		+removeInChannel(id: String, name: String): void
+		+removeOutChannel(id: String, name: String): void
+
 
 
 	}
@@ -168,7 +170,7 @@ package kit.edu.freejdaq.Model {
 			processValue()
 		}
 		XYRepresentation -up-|> Representation
-		ChannelXvsTime -up-|> XYRepresentation
+		ChannelXvsChannelY -up-|> XYRepresentation
 		ChannelXvsTime -up-|> XYRepresentation
 		NChannelvsTime -up-|> XYRepresentation
 		TableRespresentation   -down-|> Representation
@@ -214,18 +216,22 @@ package kit.edu.freejdaq.Model {
 			processValue()
 		}
 
-		SpecSens -up-|> Sensor
+		SpectralSensor -up-|> Sensor
 		AS7262 -up-|> SpectralSensor
 
 	}
 	BuildingBlock <|-- SensorLogic.Sensor
 
 	class Channel {
-		-type: String
-		-channelId: Integer
-		-connectionPartnerId: Integer
-		+processValue()
-		+setConnectionPartner(Integer id): boolean
+		-id: String
+		-value: int
+		+ establishConnection(String targetChannelId)
+		+ receiveValue()
+		+ connect(): void
+		+ unconnect(): void
+		+ receiveValue(): void
+		+ eraseValue(): void
+		+ {abstract} forwardValue(): void
 
 	}
 	Channel ..|> IValueHandler
@@ -235,17 +241,59 @@ package kit.edu.freejdaq.Model {
 	  the corresponding buildingBlockId
 	end note
 
-
-	class ChannelManager {
-		-numberOfElements: Integer
-		+getChannel(Integer id): Channel
-		+setChannel(Integer id): boolean
-		+addChannel(Channel channel): boolean
-		+removeChannel(Integer id): boolean
+	abstract class ChannelState {
+		+ {abstract} establishConnection(String targetChannelId)
+		+ {abstract} receiveValue()
 	}
-	ChannelManager "1" -- "1" BuildingBlock
-	ChannelManager "1" o-- "1..*" Channel
+	Channel --> ChannelState
+	note right of ChannelState
+	  Schablonenmethode um Unterschiede zwischen
+	  In und Out Channeln zu überbrücken
+	end note
+	class Connected{
+		+ establishConnection(String targetChannelId)
+		+ receiveValue()
+	}
+	Connected --|> ChannelState
+	class UnConnected{
+		+ establishConnection(String targetChannelId)
+		+ receiveValue()
+	}
+	UnConnected --|> ChannelState
+	class ValueReady{
+		+ establishConnection(String targetChannelId)
+		+ receiveValue()
+	}
+	ValueReady --|> ChannelState
+	class InChannel{
+		-varName: String
+		+forwardValue(): void
+	}
+	BuildingBlock "1" --> "*" InChannel
+	InChannel --|> Channel
+	
+	class OutChannel{
+		-channelName: String
+		+forwardValue(): void
+	}
+	BuildingBlock "1" --> "*" OutChannel
+	OutChannel --|> Channel
+	
+	note top of OutChannel
+	  forwardValue wird bei 
+	  recieve Value aufgerufen. 
+	  Hier ausimplementiert.
+	end note
+	
+	note left of OutChannel
+	  channelName steht für Funktionsnamen
+	   bei Trafos und für 
+	   Channelname bei Sensoren
+	end note
 
+
+
+	
 	interface IValueHandler {
 
 		processValue()
@@ -303,11 +351,11 @@ package kit.edu.freejdaq.Model {
 		ModelFacadeController -- MeasurementConfiguration
 		ModelFacadeController -- MeasurementRun
 
-<<<<<<< HEAD
+
 	
 	
 		
-=======
+
 '---------------------------------------------------------
 'BuildingBlockBuilder
 '---------------------------------------------------------
@@ -384,3 +432,17 @@ namespace BuildingBlockBuilder {
 }
 
 @enduml
+
+
+old stuff
+class ChannelManager {
+		-numberOfElements: Integer
+		+getChannel(Integer id): Channel
+		+setChannel(Integer id): boolean
+		+addChannel(Channel channel): boolean
+		+removeChannel(Integer id): boolean
+	}
+	ChannelManager "1" -- "1" BuildingBlock
+	ChannelManager "1" o-- "1..*" Channel
+
+
