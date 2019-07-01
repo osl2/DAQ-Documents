@@ -28,5 +28,10 @@ package modelFacade {
 	+clonePrototyp(id: String)
 	+editPropertyOfPrototyp(key: String, value: Integer)
 	}
+
+	interface ModelInformation{
+	+getMeasurementConfig(): MeasurementConfiguration
+	+getPrototyp(): BuildingBlock
+	}
 }
 @enduml
