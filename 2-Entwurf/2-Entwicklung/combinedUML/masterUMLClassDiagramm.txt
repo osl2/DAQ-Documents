@@ -1,4 +1,19 @@
 @startuml
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 'Date of first creation: 01.07.2019
 '------------------------------------------------------------------------
 'Backend
@@ -1056,6 +1071,8 @@ namespace Directory {
 	+ removeConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
 	}
 }
+
+
 '------------------------------------------------------------------------
 'Global Lines
 '------------------------------------------------------------------------
@@ -1070,8 +1087,18 @@ namespace Directory {
 '------------------------------------------------------------------------
 'Structure adapting Commands
 '------------------------------------------------------------------------
-Backend -[hidden]down-> Model
-Controller -[hidden]up-> Model
+class hider{
+
+}
+hide hider
+
+Backend --------[hidden]up------------> hider
+Model --------[hidden]up-------> Backend
+Controller -------[hidden]up-------> Model
+GUI -------[hidden]up-------> Controller
+
+
+
 
 
 
