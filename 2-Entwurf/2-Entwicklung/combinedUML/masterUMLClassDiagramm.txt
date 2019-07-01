@@ -146,7 +146,7 @@ namespace Backend {
 'Model
 '------------------------------------------------------------------------
 namespace Model {
-	package kit.edu.freejdaq.Model {
+	package Core {
 
 
 
@@ -589,8 +589,8 @@ interface IMeasurementStreamListener {
 		IMeasurementStreamListener <|.. ChannelLogic.Channel
 		IBusinessLogic <|.. kit.edu.freejdaq.Model.MeasurementConfiguration
 		IModelInformation <|..  kit.edu.freejdaq.Model.MeasurementConfiguration
-		IMeasurementRun <|.. kit.edu.freejdaq.Model.MeasurementRun
-		IBusinessLogic <|.. BuildingBlockBuilder.Director
+		Model.IMeasurementRun <|... Model.Core.MeasurementRun
+		IBusinessLogic <|.. Director
 	
 	
 	
