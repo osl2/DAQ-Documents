@@ -157,18 +157,17 @@ namespace Model {
 
 
 	class MeasurementConfiguration{
+		-pathToFile: String
 		-updateRate: float
 		-listOfAllChannels: <Channel>
 		-configurationAdjacencyList: configuration[]
-	    +addBlock(BuildingBlock block): boolean
-	    +removeBlock(Integer blockId): boolean
-	    +connectChannels(Integer sourceId, Integer targetId):boolean
-		+removeConnection(Integer firstId, Integer secondId): boolean
-	    +returnMeasurementConfiguration(): MeasurementConfiguration
+		+getPathToFile(): String
+		+addBlock(BuildingBlock block): boolean
+ 		+removeBlock(Integer blockId): boolean
 
 	}
 	MeasurementConfiguration "1" -- "*" MeasurementRun
-	ConnectionManager "1" -- "1" MeasurementConfiguration
+	
 
 	'----------------------------------------------------------------------------------------
 	'PrototypCollection: List of all predefined and custom BuildingBlocks
@@ -182,19 +181,22 @@ namespace Model {
 	abstract class BuildingBlock
 	{
 
-	-id: int
+		-id: String
 		-name: String
-		-listOfChannels: <<Channel>>
+		-userInfo: String
 		+setId()
-		+ {abstract} processValue()
-		+ establishConnection(Integer ownSourceChannelId, Integer targetChannelId)
+		+addInChannel(id: String, name: String): void
+		+addOutChannel(id: String, name: String): void
+		+removeInChannel(id: String, name: String): void
+		+removeOutChannel(id: String, name: String): void
+
 
 
 	}
-	
-	
+
+
 	MeasurementConfiguration "1" -- "*" BuildingBlock
-	
+
 	PrototypCollection "1" -- "*" BuildingBlock
 
 
@@ -245,13 +247,7 @@ namespace Model {
 	'
 	'	}
 	'
-	'
-	'
-	'	ConfigurationBlockManager <|-down- TransformationManager
 	'}
-
-	TransformationManager "1" *-down- "n" TransformationLogic.Transformation
-
 
 	namespace RepresentationLogic {
 
@@ -270,7 +266,11 @@ namespace Model {
 
 		class XYRepresentation {
 			processValue()
-
+			traceName: String
+			title: String
+			xAxisName: String
+			yXisName: String
+			hasToolBar: boolean
 
 
 		}
@@ -294,7 +294,7 @@ namespace Model {
 			processValue()
 		}
 		XYRepresentation -up-|> Representation
-		ChannelXvsTime -up-|> XYRepresentation
+		ChannelXvsChannelY -up-|> XYRepresentation
 		ChannelXvsTime -up-|> XYRepresentation
 		NChannelvsTime -up-|> XYRepresentation
 		TableRespresentation   -down-|> Representation
@@ -302,7 +302,7 @@ namespace Model {
 
 	}
 	BuildingBlock <|-- RepresentationLogic.Representation
-	
+
 	namespace SensorLogic {
 
 		abstract class Sensor{
@@ -340,47 +340,103 @@ namespace Model {
 			processValue()
 		}
 
-		SpecSens -up-|> Sensor
+		SpectralSensor -up-|> Sensor
 		AS7262 -up-|> SpectralSensor
 
 	}
 	BuildingBlock <|-- SensorLogic.Sensor
 
+
+	namespace ChannelLogic {
+
 	class Channel {
-		-type: String
-		-channelId: Integer
-		-connectionPartnerId: Integer
-		+processValue()
-		+setConnectionPartner(Integer id): boolean
+		-id: String
+		-value: int
+		+ establishConnection(String targetChannelId)
+		+ receiveValue()
+		+ connect(): void
+		+ unConnect(): void
+		+ receiveValue(): void
+		+ eraseValue(): void
+		+ {abstract} forwardValue(): void
 
 	}
 	Channel ..|> IValueHandler
-	
+
 	note top of Channel
 	  first part of channelId is
 	  the corresponding buildingBlockId
 	end note
 
-
-	class ChannelManager {
-		-numberOfElements: Integer
-		+getChannel(Integer id): Channel
-		+setChannel(Integer id): boolean
-		+addChannel(Channel channel): boolean
-		+removeChannel(Integer id): boolean
+	abstract class ChannelState {
+		+ {abstract} establishConnection(String targetChannelId)
+		+ {abstract} receiveValue()
 	}
-	ChannelManager "1" -- "1" BuildingBlock
-	ChannelManager "1" o-- "1..*" Channel
+	Channel --> ChannelState
+	note right of ChannelState
+	  Schablonenmethode um Unterschiede zwischen
+	  In und Out Channeln zu überbrücken
+	end note
+	class Connected{
+		+ establishConnection(String targetChannelId)
+		+ receiveValue()
+	}
+	Connected --|> ChannelState
+	class UnConnected{
+		+ establishConnection(String targetChannelId)
+		+ receiveValue()
+	}
+	UnConnected --|> ChannelState
+	class ValueReady{
+		+ establishConnection(String targetChannelId)
+		+ receiveValue()
+	}
+	ValueReady --|> ChannelState
+	class InChannel{
+		-varName: String
+		+forwardValue(): void
+	}
+	
+	InChannel --|> Channel
+	
+	class OutChannel{
+		-channelName: String
+		+forwardValue(): void
+	}
+	
+	OutChannel --|> Channel
+	
+	note top of OutChannel
+	  forwardValue wird bei 
+	  receive Value aufgerufen. 
+	  Hier ausimplementiert.
+	end note
+	
+	note left of OutChannel
+	  channelName steht für Funktionsnamen
+	   bei Trafos und für 
+	   Channelname bei Sensoren
+	end note
 
+
+
+	
 	interface IValueHandler {
 
 		processValue()
 	}
+	
 	note right of IValueHandler
 	  interface to provide
 	  Data to a channel
 	end note
 
+
+	}
+	
+	BuildingBlock "1" --> "*" ChannelLogic.InChannel
+	BuildingBlock "1" --> "*" ChannelLogic.OutChannel
+	
 	class HelpMessage{
 		- messageFileName : String
 		+ HelpMessage(msgFile : String)
@@ -390,7 +446,7 @@ namespace Model {
 
 	BuildingBlock "*" --> "1" HelpMessage : < provides help/information about
 
-	
+
 
 
 	class YamlRepresentation {
@@ -399,57 +455,127 @@ namespace Model {
 	BuildingBlock -left- YamlRepresentation
 
 	}
-	class ModelFacadeView{
-			+giveFullModel()
-			+update()
-		}
-
-
-	ModelFacadeView -- MeasurementConfiguration
-
-
-		class ModelFacadeBackend{
-			+receiveYAML(YAML sensorYAML)
-			+receiveData(int data)
-		}
-		ModelFacadeBackend -- IValueHandler	
-
-
-
-
-
-		class ModelFacadeController{
-			+addBuildingBlock(Integer id): BuildingBlock
-			+removeBuildingBlock(Integer id): boolean
-			+setChannelConnection(int firstChannelId, int secondChannelId)
-			+setBuildingBlockName(int iD): boolean
-			+startMeasurement()
-		}
-		ModelFacadeController -- BuildingBlock
-		ModelFacadeController -- MeasurementConfiguration
-		ModelFacadeController -- MeasurementRun
-
 	
-
-	package modelFacade {
-		class ModelFacadeView{
-			+giveFullModel()
-			+update()
-		}
-
-		class ModelFacadeBackend{
-			+recieveYAML(YAML sensorYAML)
-			+recieveData(int data)
-		}
 		
 
-		class ModelFacadeController{
-			+getBuildingBlock(int iD)
-			+setChannelConnection(int firstChannelId, int secondChannelId)
-			+setId(int iD)
-			+startMeasurement()
-		}
+'---------------------------------------------------------
+'BuildingBlockBuilder
+'---------------------------------------------------------
+namespace BuildingBlockBuilder {
+	class Director {
+
+		+createSensorFromYaml(sensorFile: Yaml): Sensor
+		+constructXYRepresentation()
+		+constructNTimeRepresentation()
+		+constructDS18B20TemperatureSensor()
+		+constructBMPx80PressureSensor()
+		+constructINA219CurrentAndVoltageSensor()
+		+constructMMA8451Accelerometer()
+
+
+
 	}
+
+	class Builder {
+		-linkToYaml: String
+		+{abstract} fetchBuildingBlock(): BuildingBlock
+		+snakeYaml.load(): hashMap
+
+
+
+
+
+	}
+
+
+	class "java.util.HashMap<K,V>" as HM{
+
+
+	}
+
+	Builder "1" --> "1" HM
+
+
+	class SnakeYamlParser {
+		+<<static>>parseYamlFile(Yaml fileToBeParsed): hashMap
+
+	}
+
+	note right of SnakeYamlParser
+	  Already existing
+	  parser for yaml files.
+	end note
+
+
+	SnakeYamlParser "1" --> "1" HM
+
+	class SensorBuilder {
+		+fetchBuildingBlock(): BuildingBlock
+
+	}
+	class TransformationBuilder {
+		+fetchBuildingBlock(): BuildingBlock
+
+	}
+	class RepresentationBuilder {
+		+fetchBuildingBlock(): BuildingBlock
+
+	}
+
+	SensorBuilder -up-|> Builder
+	TransformationBuilder -up-|> Builder
+	RepresentationBuilder -up-|> Builder
+
+
+
+
+	Director "1" --> "0..*" Builder : Staff
+
+}
+BuildingBlockBuilder.SensorBuilder ..> SensorLogic.Sensor
+BuildingBlockBuilder.TransformationBuilder ..> TransformationLogic.Transformation
+BuildingBlockBuilder.RepresentationBuilder ..> RepresentationLogic.Representation
+
+
+interface IMeasurementStreamListener {
+		-receiveData(measuredValue: int): void
+		-connectionTerminated(): void
+	}
+
+
+	note bottom of IBusinessLogic
+	 createModelFromYamlDom() 
+	 examines semantic validity 
+	 and returns an appropriate result 
+	 to the controller. 
+	end note
+
+	interface IBusinessLogic{
+	+createModelFromYamlDom(modelDom: YamlDom): String
+	+addBuildingBlock(id: String)
+	+removeBuildingBlock(id: String)
+	+addConnection(firstChannelId: String, secondChannelId: String)
+	+removeConnection(firstChannelId: String, secondChannelId: String)
+	+clonePrototyp(id: String)
+	+editPropertyOfPrototyp(key: String, value: Integer)
+	}
+
+	interface IModelInformation{
+	+getMeasurementConfig(): MeasurementConfiguration
+	+getPrototyp(): BuildingBlock
+	}
+	interface IMeasurementRun{
+	+pause()
+	+start()
+	+reset()
+	
+	}
+
+		IMeasurementStreamListener <|.. ChannelLogic.Channel
+		IBusinessLogic <|.. MeasurementConfiguration
+		IModelInformation <|.. MeasurementConfiguration
+		IMeasurementRun <|.. MeasurementRun
+		IBusinessLogic <|.. BuildingBlockBuilder.Director
 	
 	
 	

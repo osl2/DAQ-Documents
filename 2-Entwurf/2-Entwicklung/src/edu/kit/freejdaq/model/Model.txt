@@ -475,3 +475,20 @@ class ChannelManager {
 	ChannelManager "1" o-- "1..*" Channel
 
 
+
+
+
+
+
+Brainstorming:
+
+NachIMeasurement
+
+
+
+
+
+
+
+
+
