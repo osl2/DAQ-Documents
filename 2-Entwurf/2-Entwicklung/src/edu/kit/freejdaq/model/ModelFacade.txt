@@ -17,10 +17,7 @@ package modelFacade {
 		+startMeasurement()
 	}
 
-	class BusinessLogic{
-	+pause()
-	+start()
-	+reset()
+	interface IBusinessLogic{
 	+addBuildingBlock(id: String)
 	+removeBuildingBlock(id: String)
 	+addConnection(firstChannelId: String, secondChannelId: String)
@@ -29,9 +26,18 @@ package modelFacade {
 	+editPropertyOfPrototyp(key: String, value: Integer)
 	}
 
-	interface ModelInformation{
+	interface IModelInformation{
 	+getMeasurementConfig(): MeasurementConfiguration
 	+getPrototyp(): BuildingBlock
 	}
+	interface IMeasurementRun{
+	+pause()
+	+start()
+	+reset()
+	
+	}
+	
+	
+	
 }
 @enduml
