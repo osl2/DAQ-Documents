@@ -532,9 +532,9 @@ namespace BuildingBlockBuilder {
 	Director "1" --> "0..*" Builder : Staff
 
 }
-BuildingBlockBuilder.SensorBuilder ..> SensorLogic.Sensor
-BuildingBlockBuilder.TransformationBuilder ..> TransformationLogic.Transformation
-BuildingBlockBuilder.RepresentationBuilder ..> RepresentationLogic.Representation
+Model.BuildingBlockBuilder.SensorBuilder ..> SensorLogic.Sensor
+Model.BuildingBlockBuilder.TransformationBuilder ..> TransformationLogic.Transformation
+Model.BuildingBlockBuilder.RepresentationBuilder ..> RepresentationLogic.Representation
 
 
 interface IMeasurementStreamListener {
@@ -1057,8 +1057,27 @@ namespace Directory {
 	}
 }
 '------------------------------------------------------------------------
+'Global Lines
+'------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+'------------------------------------------------------------------------
 'Structure adapting Commands
 '------------------------------------------------------------------------
 Backend -[hidden]down-> Model
 Controller -[hidden]up-> Model
+
+
+
+
+
+
+
+
 @enduml
