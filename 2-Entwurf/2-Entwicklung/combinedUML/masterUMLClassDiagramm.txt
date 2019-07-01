@@ -572,10 +572,10 @@ interface IMeasurementStreamListener {
 	}
 
 		IMeasurementStreamListener <|.. ChannelLogic.Channel
-		IBusinessLogic <|.. MeasurementConfiguration
-		IModelInformation <|.. MeasurementConfiguration
-		IMeasurementRun <|.. MeasurementRun
-		IBusinessLogic <|.. BuildingBlockBuilder.Director
+		IBusinessLogic <|.. Model.MeasurementConfiguration
+		IModelInformation <|.. Model.MeasurementConfiguration
+		IMeasurementRun <|.. Model.kit.edu.freejdaq.Model.MeasurementRun
+		IBusinessLogic <|.. Model.BuildingBlockBuilder.Director
 	
 	
 	
