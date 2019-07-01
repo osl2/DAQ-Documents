@@ -7,7 +7,7 @@
 
 
 
-package kit.edu.freejdaq.Model {
+namespace Core {
 
 
 
@@ -98,14 +98,14 @@ package kit.edu.freejdaq.Model {
 		class DataFlowTransformation {
 
 		}
-		note left of TransformationLogic.DataFlowTransformation
+		note left of  DataFlowTransformation
 		Changes the output according to configuration.
 		Does not influence the values of the data stream
 		end note
 	}
 
 
-	BuildingBlock <|- TransformationLogic.Transformation
+	BuildingBlock <|-  Model.Core.TransformationLogic.Transformation
 	'----------------------------------------------------------------------------------------
 	'Note: The manager aspect of this diagramm can be found, in more detail, at another place.
 	'It stands here for a complete overview
@@ -151,7 +151,7 @@ package kit.edu.freejdaq.Model {
 
 		}
 
-		note right of RepresentationLogic.XYRepresentation
+		note right of  Model.Core.RepresentationLogic.XYRepresentation
 	  		use eclipse nebula
 	  		for display
 		end note
@@ -177,7 +177,7 @@ package kit.edu.freejdaq.Model {
 
 
 	}
-	BuildingBlock <|-- RepresentationLogic.Representation
+	BuildingBlock <|--  Model.Core.RepresentationLogic.Representation
 
 	namespace SensorLogic {
 
@@ -220,7 +220,7 @@ package kit.edu.freejdaq.Model {
 		AS7262 -up-|> SpectralSensor
 
 	}
-	BuildingBlock <|-- SensorLogic.Sensor
+	BuildingBlock <|-- Model.Core.SensorLogic.Sensor
 
 
 	namespace ChannelLogic {
@@ -310,8 +310,8 @@ package kit.edu.freejdaq.Model {
 
 	}
 	
-	BuildingBlock "1" --> "*" ChannelLogic.InChannel
-	BuildingBlock "1" --> "*" ChannelLogic.OutChannel
+	BuildingBlock "1" --> "*" Model.Core.ChannelLogic.InChannel
+	BuildingBlock "1" --> "*" Model.Core.ChannelLogic.OutChannel
 	
 	class HelpMessage{
 		- messageFileName : String
@@ -408,9 +408,9 @@ namespace BuildingBlockBuilder {
 	Director "1" --> "0..*" Builder : Staff
 
 }
-BuildingBlockBuilder.SensorBuilder ..> SensorLogic.Sensor
-BuildingBlockBuilder.TransformationBuilder ..> TransformationLogic.Transformation
-BuildingBlockBuilder.RepresentationBuilder ..> RepresentationLogic.Representation
+Model.BuildingBlockBuilder.SensorBuilder ..> Model.Core.SensorLogic.Sensor
+Model.BuildingBlockBuilder.TransformationBuilder ..> Model.Core.TransformationLogic.Transformation
+Model.BuildingBlockBuilder.RepresentationBuilder ..> Model.Core.RepresentationLogic.Representation
 
 
 interface IMeasurementStreamListener {
@@ -447,17 +447,13 @@ interface IMeasurementStreamListener {
 	
 	}
 
-		IMeasurementStreamListener <|.. ChannelLogic.Channel
-		IBusinessLogic <|.. MeasurementConfiguration
-		IModelInformation <|.. MeasurementConfiguration
-		IMeasurementRun <|.. MeasurementRun
-		IBusinessLogic <|.. BuildingBlockBuilder.Director
-
-
-
-
-
-
+		Model.Core.ChannelLogic.Channel ..|> IMeasurementStreamListener
+		Model.Core.MeasurementConfiguration ..|> IBusinessLogic
+		Model.Core.MeasurementConfiguration ..|> IModelInformation
+		Model.Core.MeasurementRun ..|> IMeasurementRun
+		
+		Model.BuildingBlockBuilder.Director ..|> IBusinessLogic
+	
 
 
 @enduml
