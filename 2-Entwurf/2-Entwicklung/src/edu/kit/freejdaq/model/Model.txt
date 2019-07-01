@@ -228,7 +228,7 @@ package kit.edu.freejdaq.Model {
 		+ establishConnection(String targetChannelId)
 		+ receiveValue()
 		+ connect(): void
-		+ unconnect(): void
+		+ unConnect(): void
 		+ receiveValue(): void
 		+ eraseValue(): void
 		+ {abstract} forwardValue(): void
@@ -281,7 +281,7 @@ package kit.edu.freejdaq.Model {
 	
 	note top of OutChannel
 	  forwardValue wird bei 
-	  recieve Value aufgerufen. 
+	  receive Value aufgerufen. 
 	  Hier ausimplementiert.
 	end note
 	
@@ -379,7 +379,7 @@ namespace BuildingBlockBuilder {
 		+{abstract} fetchBuildingBlock(): BuildingBlock
 		+snakeYaml.load(): hashMap
 
->>>>>>> branch 'master' of https://github.com/osl2/DAQ-Documents
+
 
 
 
@@ -430,6 +430,12 @@ namespace BuildingBlockBuilder {
 	Director "1" --> "0..*" Builder : Staff
 
 }
+BuildingBlockBuilder.SensorBuilder ..> SensorLogic.Sensor
+BuildingBlockBuilder.TransformationBuilder ..> TransformationLogic.Transformation
+BuildingBlockBuilder.RepresentationBuilder ..> RepresentationLogic.Representation
+
+
+
 
 @enduml
 
