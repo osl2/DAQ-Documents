@@ -58,7 +58,7 @@ package kit.edu.freejdaq.Model {
 	abstract class BuildingBlock
 	{
 
-	-id: int
+		-id: int
 		-name: String
 		-listOfChannels: <<Channel>>
 		+setId()
@@ -146,7 +146,11 @@ package kit.edu.freejdaq.Model {
 
 		class XYRepresentation {
 			processValue()
-
+			traceName: String
+			title: String
+			xAxisName: String
+			yXisName: String
+			hasToolBar: boolean
 
 
 		}
@@ -307,7 +311,7 @@ package kit.edu.freejdaq.Model {
 
 	
 	
-
+		
 
 
 
