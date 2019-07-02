@@ -251,6 +251,13 @@ Das Paket View, stellt gemäß des MVC- Entwurfmusters die Darstellungen von Dat
 Die Klasse MainWindow stellt den Rahmen der Benutzeroberfläche dar. 
 Da MainWindow, dass Entwurfsmuster Singleton verwendet, kann die Anwendung nur ein MainWindow besitzen soll.
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/MainWindow.png}
+		\caption{Die Klasse MainWindow}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
 
 \newpage
 
@@ -407,8 +414,11 @@ Die Klasse ConnectionExceptionWindow ist eine weitere Konkretisierung der Überk
 
 Die Klasse GeneralExceptionWindow stellt neben den zwei konkreten Fehlermeldungen ConnectionExceptionWindow und BuildingBlockExceptionWindow eine allgemeinere Fehlernachricht dar. Diese werden zum Beispiel bei Messfehlern oder Fehler bei der Messkonfiguration ausgelöst. Diese Fehlernachrichten sollen sichtbar in der Mitte der Anwedung geöffnet werden, um dem Benutzer auf diesen Fehler hinzuweisen. 
 
+\clearpage
 
+\paragraph{ExceptionWindowManager}
 
+Die Klasse ExceptionWindowManager nimmt Fehlermeldungen entgegen und stößt die Visualisierung der jeweilig nach Fehlermeldung unterschiedlichen Fenster an. Der Klasse werden die für eine Fehlermeldung notwendigen Parameter Titel und  Beschreibung übergeben. Je nach Art der Fehlermeldung wird auch die Baustein- oder Verbindung-ID der Fehlerquelle übergeben.
 
 \clearpage
 \section{Sequenzdiagramme}
