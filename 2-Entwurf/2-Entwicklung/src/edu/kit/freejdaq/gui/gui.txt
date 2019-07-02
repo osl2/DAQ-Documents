@@ -22,7 +22,7 @@ class PrototypeField {
 	 }
 
 	 class TransformationBlockField {
-	  + addTransformationBlockView(block: TransformationBlockView)
+	  	+ addTransformationBlockView(block: TransformationBlockView)
 	 }
 
 	 class RepresentationBlockField {
