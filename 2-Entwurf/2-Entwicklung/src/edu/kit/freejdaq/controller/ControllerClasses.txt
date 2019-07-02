@@ -65,6 +65,8 @@ namespace Controller {
 		
 
 		class CommandManager {
+			- doneCommands : Stack<Command>
+			- undoneCommands : Stack<Command>
 			+ doCommand(cmd : Command) : void
 			+ undo() : void
 			+ redo() : void
@@ -74,7 +76,7 @@ namespace Controller {
 		note left of CommandManager : undo()\n    cmd = doneCommands.pop()\n    cmd.unExecute()\n    undoneCommands.push(cmd)
 		note right of CommandManager : redo()\n    cmd = undoneCommands.pop()\n    cmd.execute()\n    doneCommands.push(cmd)
 		
-		CommandManager o-- Command : - doneCommands : Stack
+		CommandManager o-- Command
 	
 		interface Command {
 			+ execute() : void
