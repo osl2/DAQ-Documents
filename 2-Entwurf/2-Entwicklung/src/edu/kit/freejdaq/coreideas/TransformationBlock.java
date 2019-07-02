@@ -1,4 +1,4 @@
-package edu.kit.easydaq.core;
+package edu.kit.freejdaq.coreideas;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package edu.kit.easydaq.measurementProcess;
+package edu.kit.freejdaq.model;
 
 /**
 
