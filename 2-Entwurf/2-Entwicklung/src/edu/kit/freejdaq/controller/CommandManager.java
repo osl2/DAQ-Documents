@@ -10,8 +10,8 @@ import java.util.Stack;
  */
 public class CommandManager {
 	
-	private Stack<Command> doneCommands;
-	private Stack<Command> undoneCommands;
+	private Stack<UndoableCommand> doneCommands;
+	private Stack<UndoableCommand> undoneCommands;
 	
 	/**
 	 * runs a specified command, adds it to the undo stack, and clears the redo stack
@@ -20,8 +20,10 @@ public class CommandManager {
 	 */
 	public void doCommand(Command cmd) throws FileNotFoundException {
 		cmd.execute();
-		doneCommands.push(cmd);
-		undoneCommands.clear();
+		if (cmd.isUndoable()) {
+			doneCommands.push((UndoableCommand) cmd);
+			undoneCommands.clear();
+		}
 	}
 	
 	/**
@@ -29,7 +31,7 @@ public class CommandManager {
 	 * @throws FileNotFoundException
 	 */
 	public void undo() throws FileNotFoundException {
-		Command cmd = doneCommands.pop();
+		UndoableCommand cmd = doneCommands.pop();
 		cmd.unExecute();
 		undoneCommands.push(cmd);
 	}
@@ -39,7 +41,7 @@ public class CommandManager {
 	 * @throws FileNotFoundException
 	 */
 	public void redo() throws FileNotFoundException {
-		Command cmd = undoneCommands.pop();
+		UndoableCommand cmd = undoneCommands.pop();
 		cmd.execute();
 		doneCommands.push(cmd);
 	}

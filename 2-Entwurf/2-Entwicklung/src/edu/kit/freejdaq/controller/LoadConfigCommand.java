@@ -9,7 +9,7 @@ import edu.kit.freejdaq.fileservice.YamlService;
  * @author Jan
  *
  */
-public class LoadConfigCommand implements Command {
+public class LoadConfigCommand implements BasicCommand {
 	
 	private String filePath;
 	
@@ -24,12 +24,6 @@ public class LoadConfigCommand implements Command {
 		
 		// work further with data/pass to model
 		
-	}
-
-	@Override
-	public void unExecute() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

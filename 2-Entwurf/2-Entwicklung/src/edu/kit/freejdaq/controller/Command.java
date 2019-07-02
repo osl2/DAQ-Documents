@@ -9,8 +9,8 @@ import java.io.FileNotFoundException;
  */
 public interface Command {
 	
-	public void execute() throws FileNotFoundException;
+	public boolean isUndoable();
 	
-	public void unExecute() throws FileNotFoundException;
+	public void execute() throws FileNotFoundException;
 	
 }
