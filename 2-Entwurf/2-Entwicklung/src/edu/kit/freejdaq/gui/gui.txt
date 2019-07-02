@@ -14,7 +14,7 @@ namespace Menues {
 
 class PrototypeField {
 		+ update(): void
-	 	+open(): void
+	 	+ open(): void
 	 }
 	 
 	 class SensorBlockField {
@@ -170,7 +170,7 @@ namespace Configuration {
 
 namespace Button {
 
-	 class Button {
+	 class Button <<abstract>> {
 	 	-label: String
 	 	-color: String
 	 	-image: Image
@@ -208,28 +208,28 @@ namespace Exception {
 	 	+ closeAll(): void
 	 }
 
-	class ExceptionWindow {
+	class ExceptionWindow <<abstract>> {
 		-title: String
 		-description: String
-		+popUp(): void
-		+close(): void
+		+ popUp(): void
+		+ close(): void
 	}
 
 	class BuildingBlockExceptionWindow {
-		-id: String
-		+popUp(): void
-		+changeBlockColor(color: String): void
+		- id: String
+		+ popUp(): void
+		+ changeBlockColor(color: String): void
 	}
 
 	class ConnectionExceptionWindow {
-		-channelInId: int
-		-channelOutId: int
-		+popUp(): void
-		+changeWireColor(color: String): void
+		- channelInId: int
+		- channelOutId: int
+		+ popUp(): void
+		+ changeWireColor(color: String): void
 	}
 
-	class GeneralExceptionWindow {
-	 	+popUp(): void
+	abstract class GeneralExceptionWindow {
+	 	+ popUp(): void
 	}
 	
 	 ExceptionWindowManager --> "*" ExceptionWindow
