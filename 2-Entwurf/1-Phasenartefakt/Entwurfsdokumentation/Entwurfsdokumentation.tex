@@ -251,8 +251,17 @@ Das Paket View, stellt gemäß des MVC- Entwurfmusters die Darstellungen von Dat
 Die Klasse MainWindow stellt den Rahmen der Benutzeroberfläche dar.
 Da MainWindow, dass Entwurfsmuster Singleton verwendet, kann die Anwendung nur ein MainWindow besitzen soll.
 
+\newpage
+
 \subsubsection{Menues}
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/MenuesNamespace.png}
+		\caption{Aufbau des Menü-Paket}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
 
 \paragraph{PrototypeField}
 Die Klasse PrototypeField ist die Über-Klasse zu SensorBlockField, TransformationBlockField und RepresentationBlockField. 
@@ -281,9 +290,20 @@ Die Klasse TransformationBlockView stellt einen Transformationsbaustein dar. Tra
 Die Klasse RepresentationBlockView stellt einen Darstellungbaustein dar, dieser bestimmt, wie die Messdaten visualisiert werden.
 - Er bestitzt nur Eingänge, aber keine Ausgänge
 
+
+\newpage 
+
 \subsubsection{Button}
 
 Knöpfe bieten dem Benutzer eine Anzahl von Funktion zur Bedienung der Anwendung an. Das Paket ButtonLayer enthält die unterschiedlichen Knöpfe, das Feld, in welchem die Knöpfe dargestellt werden und eine Annahmestelle für die Benutzerinteraktion.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/ButtonNamespace.png}
+		\caption{Aufbau des Button-Paketes}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
 
 \paragraph{ButtonField}
 
@@ -353,10 +373,19 @@ Die Klasse HelpWindow beschreibt das Hilfe-Fenster der Anwendung. Der Benutzer b
 
 Die Klasse OptionsWindow stellt das Einstellungen-Fenster der Anwendung dar. Der Benutzer soll hierbei das verwendete Farbschema ändern können, um die Bedienung der Anwendung trotz möglichen Farbschwächen zu ermöglichen. Ebenfalls soll die Schriftgröße der Textelemente verändert werden können, um Sehschwächen auszugleichen. 
 
+\newpage
 
 \subsubsection{Exception}
 
 Fehlernachrichten sind ein wichtiger Teil der Anwendung, um dem Benutzer eine möglichst benutzerfreundliche Umgebung zu liefern und eine möglichst einfache und verständliche Bedienung zu ermöglichen. Damit der Benutzer aussagekräftige Fehlermeldungen erhält unterscheiden wir im Entwurf zwischen drei Typen von Fehlerarten aus verschiedenen Fehlerquellen.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/ExceptionNamespace.png}
+		\caption{Aufbau des Exception-Paket}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
 
 \paragraph{ExceptionWindow}
 
