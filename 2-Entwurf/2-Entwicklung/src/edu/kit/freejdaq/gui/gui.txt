@@ -13,6 +13,7 @@ class MainWindow <<singleton>> {
 namespace Menues {
 
 class PrototypeField {
+		- list: <BuildingBlockView>
 		+ update(): void
 	 	+ open(): void
 	 }
