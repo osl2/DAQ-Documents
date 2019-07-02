@@ -253,7 +253,7 @@ Da MainWindow, dass Entwurfsmuster Singleton verwendet, kann die Anwendung nur e
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/MainWindow.png}
+		\includegraphics[width = 5cm]{Grafiken/MainWindow.png}
 		\caption{Die Klasse MainWindow}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -275,7 +275,13 @@ Menüs bieten dem Benutzer eine übersichtliche visuelle Zusammenfassung der Dar
 
 \paragraph{PrototypeField}
 Die Klasse PrototypeField ist die Über-Klasse zu SensorBlockField, TransformationBlockField und RepresentationBlockField. 
-Sie stellt eine Fläche dar, in welcher vordefinierte Konfigurationsbausteine dargestellt werden und der Benutzer sie mit dem Mauszeiger in das Konfigurationsfeld ziehen und damit positionieren kann.
+Sie stellt die Menüfläche dar, in welcher vordefinierte Konfigurationsbausteine dargestellt werden und der Benutzer sie mit dem Mauszeiger in das Konfigurationsfeld ziehen und damit positionieren kann.
+
+\paragraph{ButtonField}
+
+Die Klasse ButtonField stellt die Menüfläche dar, in welcher alle konkreten Knöpfe platziert sind und diese für den Benutzer verwendbar sind.
+
+\newpage
 
 \subsubsection{Configuration}
 
@@ -314,10 +320,6 @@ Knöpfe bieten dem Benutzer eine Anzahl von Funktion zur Bedienung der Anwendung
 		\label{Entwurf_Grob}
 	\end{center}
 \end{figure}
-
-\paragraph{ButtonField}
-
-Die Klasse ButtonField stellt das Feld dar, in in welchem die Buttons dargestellt werden. Es enthält also alle konkreten Knöpfe.
 
 \paragraph{Button}
 
@@ -374,6 +376,14 @@ Das Interface ButtonHandler registriert Benutzerinteraktionen auf der Benutzerob
 \subsubsection{OptionAndHelp}
 
 Das Paket OptionAndHelp soll dem Benutzer die Benutzung der Anwendung vereinfachen. Getrennt wurde das Paket in die Funktionsspezifische Klasse HelpWindow, welche dem Benutzer Hilfe zur Bedienung gibt und in die Klasse OptionsWindow, welche dem Benutzer Auswahlmöglichkeiten gibt, um eine möglichst Barrierefreie Benutzung zu ermöglichen.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/HelpAndOptionNamespace.png}
+		\caption{Aufbau des HelpAndOption-Paket}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
 
 \paragraph{HelpWindow}
 
