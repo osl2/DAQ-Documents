@@ -5,129 +5,129 @@
 'Backend
 '------------------------------------------------------------------------
 namespace Backend {
-	package edu.kit.freejdaq.backend {
-		SshToPi --|> CommunicationWithPi
-		WebSocketToPi  --|> CommunicationWithPi
-		UsbToPi --|> CommunicationWithPi
-		SshToPi -up-> NetworkConfiguration
-		WebSocketToPi -up-> NetworkConfiguration
+	SshToPi --|> CommunicationWithPi
+	WebSocketToPi  --|> CommunicationWithPi
+	UsbToPi --|> CommunicationWithPi
+	SshToPi -up-> NetworkConfiguration
+	WebSocketToPi -up-> NetworkConfiguration
 
-		class NetworkConfiguration {
-		   -port: int
-		   -ipAddressOfPi: String
-		}
+	class NetworkConfiguration {
+	   -port: int
+	   -ipAddressOfPi: String
+	}
 
-		abstract class CommunicationWithPi {
-			-busy: boolean
-			-pathToRemoteDir: String
-			-pathToLocalDir: String
-			+CommunicationWithPi(pathToRemoteDir: String, pathToLocalDir: String)
-		    +{abstract}executeCompleteCommandWithTimeout(command: String, timeOut: int): String[]
-		    +{abstract}copyFileFromPi(nameOfFile: String): boolean
-		    +{abstract}copyFileToPi(nameOfFile: String): boolean
-		    +{abstract}executeCommandContinuously(command: String, listeningAgent: ICommandResponseListener): void
-		    +{abstract}disconnect(): void
-		}
-		CommunicationWithPi --> "listeningProtocolAgent" ICommandResponseListener
+	abstract class CommunicationWithPi {
+		-busy: boolean
+		-pathToRemoteDir: String
+		-pathToLocalDir: String
+		+CommunicationWithPi(pathToRemoteDir: String, pathToLocalDir: String)
+	    +{abstract}executeCompleteCommandWithTimeout(command: String, timeOut: int): String[]
+	    +{abstract}copyFileFromPi(nameOfFile: String): boolean
+	    +{abstract}copyFileToPi(nameOfFile: String): boolean
+	    +{abstract}executeCommandContinuously(command: String, listeningAgent: ICommandResponseListener): void
+	    +{abstract}disconnect(): void
+	}
+	CommunicationWithPi --> "listeningProtocolAgent" ICommandResponseListener
 
-		interface ICommandResponseListener {
-			receivePartOfResponse(response: String; finished: boolean)
-		}
+	interface ICommandResponseListener {
+		receivePartOfResponse(response: String; finished: boolean)
+	}
 
-		 MeasurementRunAgentForSsh .up.|> ICommandResponseListener
+	 MeasurementRunAgentForSsh .up.|> ICommandResponseListener
 
-		note top of MeasurementRunAgentForSsh
-			To separate technical aspect of communication
-			from application specific aspect, this Agent
-			receives technical events and forwards them to
-			its registered application specific clients.
-		end note
+	note top of MeasurementRunAgentForSsh
+		To separate technical aspect of communication
+		from application specific aspect, this Agent
+		receives technical events and forwards them to
+		its registered application specific clients.
+	end note
 
-		class SshToPi {
-			-username: String
-			-password: String
-			+SshAndScpTo(username: String, password: String)
-			+executeCompleteCommandWithTimeout(command: String, timeOut: int): String[]
-		    +copyFileFromPi(nameOfFile: String): boolean
-		    +copyFileToPi(nameOfFile: String): boolean
-		    +executeCommandContinuously(command: String, listeningAgent: ICommandResponseListener): void
-		    +disconnect(): void
-		}
+	class SshToPi {
+		-username: String
+		-password: String
+		+SshAndScpTo(username: String, password: String)
+		+executeCompleteCommandWithTimeout(command: String, timeOut: int): String[]
+	    +copyFileFromPi(nameOfFile: String): boolean
+	    +copyFileToPi(nameOfFile: String): boolean
+	    +executeCommandContinuously(command: String, listeningAgent: ICommandResponseListener): void
+	    +disconnect(): void
+	}
 
-		interface IMeasurementStreamListener {
-			-receiveData(measuredValue: int): void
-			-connectionTerminated(): void
-		}
+	interface IMeasurementStreamListener {
+		-receiveData(measuredValue: int): void
+		-connectionTerminated(): void
+	}
 
-		MeasurementRunAgentForSsh -right-> CommunicationWithPi
-		SensorInfoAgentForSsh -up-> CommunicationWithPi
-		MeasurementRunAgentForSsh -left-> "*" IMeasurementStreamListener
+	MeasurementRunAgentForSsh -right-> CommunicationWithPi
+	SensorInfoAgentForSsh -up-> CommunicationWithPi
+	MeasurementRunAgentForSsh -left-> "*" IMeasurementStreamListener
 
-		interface IAccessToSensorInfo {
-			+getIdsOfAvailableSensors(): String[]
-			+getYamlFile(sensorId: String): boolean
-			+setYamlFile(sensorId: String): boolean
-		}
+	interface IAccessToSensorInfo {
+		+getIdsOfAvailableSensors(): String[]
+		+getYamlFile(sensorId: String): boolean
+		+setYamlFile(sensorId: String): boolean
+	}
 
-		SensorInfoAgentForSsh ..|> IAccessToSensorInfo
+	SensorInfoAgentForSsh ..|> IAccessToSensorInfo
 
 
-		interface IAccessToMeasurementRun{
+	interface IAccessToMeasurementRun{
+		+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
+		+pause(): boolean
+		+continue(): boolean
+		+stop(): boolean
+	}
+
+	enum MeasurementState {
+	  INITAL_STATE
+	  RUNNING
+	  PAUSED
+	}
+
+	MeasurementRunAgentForSsh .down.|> IAccessToMeasurementRun
+	MeasurementRunAgentForSsh -up-> MeasurementState
+
+	together {
+
+		class MeasurementRunAgentForSsh {
+			+MeasurementRunAgentForSsh(foundation: CommunicationWithPi)
 			+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
 			+pause(): boolean
 			+continue(): boolean
 			+stop(): boolean
+			+receivePartOfResponse(response: String; finished: boolean)
 		}
 
-		enum MeasurementState {
-		  INITAL_STATE
-		  RUNNING
-		  PAUSED
-		}
-
-		MeasurementRunAgentForSsh .down.|> IAccessToMeasurementRun
-		MeasurementRunAgentForSsh -up-> MeasurementState
-
-		together {
-
-			class MeasurementRunAgentForSsh {
-				+MeasurementRunAgentForSsh(foundation: CommunicationWithPi)
-				+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
-				+pause(): boolean
-				+continue(): boolean
-				+stop(): boolean
-				+receivePartOfResponse(response: String; finished: boolean)
-			}
-
-			class SensorInfoAgentForSsh {
-				+SensorInfoAgentForSsh(foundation: CommunicationWithPi)
-				+getIdsOfAvailableSensors(): String[]
-				+getYamlFile(sensorId: String): boolean
-				+setYamlFile(sensorId: String): boolean
-			}
-		}
-
-		PickupPointForAgentsBasedOnSsh -up-> IAccessToSensorInfo
-		PickupPointForAgentsBasedOnSsh -up-> IAccessToMeasurementRun
-		class PickupPointForAgentsBasedOnSsh {
-			+{static}getPickupPointForAgentsBasedOnSsh(initData: InitDataForSsh): PickupPointForAgentsBasedOnSsh
-			+getIAccessToMeasurementRun(): IAccessToSensorInfo
-			+getIAccessToSensorInfo(): IAccessToSensorInfo
-		}
-
-		PickupPointForAgentsBasedOnSsh ..> InitDataForSsh
-
-		class InitDataForSsh {
-		 	+ ipAddressOfPi: String,
-		 	+ port: int,
-		 	+ username: String,
-		 	+ password: String,
-		 	+ pathToRemoteDir: String,
-		 	+ pathToLocalDir: String
+		class SensorInfoAgentForSsh {
+			+SensorInfoAgentForSsh(foundation: CommunicationWithPi)
+			+getIdsOfAvailableSensors(): String[]
+			+getYamlFile(sensorId: String): boolean
+			+setYamlFile(sensorId: String): boolean
 		}
 	}
 
+	PickupPointForAgentsBasedOnSsh -up-> IAccessToSensorInfo
+	PickupPointForAgentsBasedOnSsh -up-> IAccessToMeasurementRun
+	class PickupPointForAgentsBasedOnSsh {
+		+{static}getPickupPointForAgentsBasedOnSsh(initData: InitDataForSsh): PickupPointForAgentsBasedOnSsh
+		+getIAccessToMeasurementRun(): IAccessToSensorInfo
+		+getIAccessToSensorInfo(): IAccessToSensorInfo
+	}
+
+	PickupPointForAgentsBasedOnSsh ..> InitDataForSsh
+
+	class InitDataForSsh {
+	 	+ ipAddressOfPi: String,
+	 	+ port: int,
+	 	+ username: String,
+	 	+ password: String,
+	 	+ pathToRemoteDir: String,
+	 	+ pathToLocalDir: String
+	}
+
+	IMeasurementStreamListener <|-- Cache.MRunActivityManagement
 }
+
 '------------------------------------------------------------------------
 'Model
 '------------------------------------------------------------------------
@@ -1269,6 +1269,9 @@ GUI.IConnectionAction <|.. Controller.Command_Pattern.View_Controller_Interface.
 ViewModelInterface ..|> Model.Core.MeasurementConfiguration
 ViewDirectoryInterface --|> Model.BuildingBlockDirectory
 
+'Cache to Backend
+
+Cache.IMeasurementStreamListener <|-- Cache.MRunActivityManagement
 
 '------------------------------------------------------------------------
 'Structure adapting Commands
