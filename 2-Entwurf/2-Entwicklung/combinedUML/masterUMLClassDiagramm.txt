@@ -1270,8 +1270,8 @@ GUI.FacadeControllerView.IConnectionAction <|.. Controller.View_Controller_Inter
 
 'Model to GUI
 
-ViewModelInterface ..|> Model.Core.MeasurementConfiguration
-ViewDirectoryInterface --|> Model.BuildingBlockDirectory
+GUI.FacadeModelView.ViewModelInterface ..|> Model.Core.MeasurementConfiguration
+GUI.FacadeModelView.ViewDirectoryInterface --|> Model.BuildingBlockDirectory
 
 'Cache to Backend
 
