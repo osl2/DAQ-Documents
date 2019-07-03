@@ -4,14 +4,17 @@ namespace Controller {
 
 	namespace Controller_Model_Interface {
 	
-		interface IBlockModel {
-			+ addBlock(id : String) :
-			+ removeBlock(id : String) :
+		interface IModelInformation {
+			+ addBuildingBlock(id : String) :
+			+ removeBuildingBlock(id : String) :
+			+ addConnection(firstChannelId : String, secondChannelId : String) :
+			+ removeConnection(firstChannelId : String, secondChannelId : String) :
 		}
 		
-		interface IConnectionModel {
-			+ addConnection(startid : int, endid : int) :
-			+ deleteConnection(startid : int, endid : int) :
+		interface IMeasurementRun {
+			+ start() :
+			+ pause() :
+			+ reset() :
 		}
 	
 	}
@@ -63,8 +66,20 @@ namespace Controller {
 		CommandManager <-- Controller.View_Controller_Interface.ConnectionAction
 		CommandManager <-- Controller.View_Controller_Interface.ButtonAction
 		
+		Controller.Controller_Model_Interface.IModelInformation <-down- AddBlockToConfigCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- ModifyBlockInConfigCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- RemoveBlockFromConfigCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- CreateChannelConnectionCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- ModifyChannelConnectionCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- DeleteChannelConnectionCommand
+		Controller.Controller_Model_Interface.IMeasurementRun <-down- StartRunCommand
+		Controller.Controller_Model_Interface.IMeasurementRun <-down- PauseRunCommand
+		Controller.Controller_Model_Interface.IMeasurementRun <-down- ResumeRunCommand
+		Controller.Controller_Model_Interface.IMeasurementRun <-down- StopRunCommand
+		
+		
 
-		class CommandManager {
+		class CommandManager <<Singleton>> {
 			- doneCommands : Stack<Command>
 			- undoneCommands : Stack<Command>
 			+ doCommand(cmd : Command) : void
@@ -86,19 +101,19 @@ namespace Controller {
 		note right of Command : command parameters (e.g. blockID) are passed with the constructors
 		
 		class AddBlockToConfigCommand {
-			- blockID : int
+			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
 		}
 		
 		class ModifyBlockInConfigCommand {
-			- blockID : int
+			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
 		}
 		
 		class RemoveBlockFromConfigCommand {
-			- blockID : int
+			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
 		}

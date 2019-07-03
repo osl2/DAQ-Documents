@@ -2,13 +2,17 @@
 
 class BuildingBlockDirectory {
 
-- map: HashMap<String: id, block: BuildingBlock>
-
-+ addBuildingBlock(id: String, BuildingBlock): boolean
-+ removeBuildingBlock(id: String): boolean
-+ getBuildingBlock(id: String): BuildingBlock
-+ addConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-+ removeConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
+- InitHashMap: HashMap<String: id, block: BuildingBlock>
+- ConfigHashMap: HashMap<int: id, block: BuildingBlock>
+--
++ addInitBuildingBlock(id: String, block: BuildingBlock): boolean
+..
++ addConfigBuildingBlock(id: int, block: BuildingBlock): boolean
++ removeConfigBuildingBlock(id: String): boolean
++ getInitBuildingBlock(id: String): BuildingBlock
++ getConfigBuildingBlock(id: int): BuildingBlock
++ addConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
++ removeConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
 }
 
 
