@@ -1,7 +1,7 @@
 @startuml
-
-class ModelActivityManagement {
-	+ ModelActivityManagement(initData: MRunInfo, listenerAtModel: MRunForward )
+namespace Cache {
+class MRunActivityManagement {
+	+ MRunActivityManagement(initData: MRunInfo, listenerAtModel: MRunForward )
 	- addBufferForOneSensorInChannel(SensorId: String)
 	- addTrigger(trigger: Trigger): void
 	..
@@ -24,6 +24,13 @@ class Timer {
 	+cancel(): void
 }
 
+class Cache{
+	+ addBufferForOneSensorInChannel(SensorId: String)
+	+ addPacket(timeStamp: long, value: double, inChannelId: String)
+	+ isCompletePackageSetAvailable(from: long, to: long): boolean
+	+ pollCompletePackageSet(from: long, to: long):  IdValuePair[]
+}
+
 class BufferForOneSensorInChannel {
 	-sensorInChannelId: Stirng
 	-buffer: Queue<SimpleValuePacket>
@@ -41,20 +48,40 @@ class SimpleValuePacket	{
 	+getTimeSpamp(): long
 }
 	
-ConnectionTerminated .up.|> Trigger
+class ConnectionTerminatedTrigger {
+	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+}
+
+class TimeoutTrigger {
+	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+}
+
+class ErrorCodeTrigger {
+	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+}
+
+class BufferForOneSensorInChannel {
+	BufferForOneSensorInChannel
+	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+}
+
+ConnectionTerminatedTrigger .up.|> Trigger
 TimeoutTrigger .up.|> Trigger
 ErrorCodeTrigger .up.|> Trigger
-DataSetComplete .up.|> Trigger
+DataSetCompleteTrigger .up.|> Trigger
 
-ModelActivityManagement ..|> IMeasurementStreamListener
-ModelActivityManagement ..|> TimerTask
+MRunActivityManagement ..|> IMeasurementStreamListener
+MRunActivityManagement ..|> TimerTask
 Timer --> "1" TimerTask
-ModelActivityManagement --> "*" BufferForOneSensorInChannel
+MRunActivityManagement --> Cache
+Cache --> "*" BufferForOneSensorInChannel
 BufferForOneSensorInChannel ..> SimpleValuePacket
-ModelActivityManagement --> "*" Trigger
+MRunActivityManagement --> "*" Trigger
+
+DataSetCompleteTrigger --> "*" BufferForOneSensorInChannel
 
 interface Trigger {
-	checkAndNotifyMRunManagement(mRunForward: MRunForward)
+	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
 }
 
 interface MRunForward {
@@ -81,4 +108,7 @@ interface TimerTask {
 	+run(): void
 }
 
+IMRunListener <|.. Model.MRunReaction
+IMRunInfo <|.. Model.ChannelLogic.MRunInfo
+}
 @enduml
