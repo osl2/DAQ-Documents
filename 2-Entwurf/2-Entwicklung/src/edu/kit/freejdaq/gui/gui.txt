@@ -307,8 +307,13 @@ namespace FacadeModelView {
 	+getViewModel(): <BuildingBlock>
 	}
 	
+	interface ViewDirectoryInterfacae {
+	+getBuildingBlock(id: String): BuildingBlock
+	+getConnection(id: int): BuildingBlock
+	}
+	
 	ViewModelInterface -down- GUI.Configuration.ConfigurationField
-
+	ViewDirectoryInterfacae -- GUI.Configuration.ConfigurationField
 }
 	
 }

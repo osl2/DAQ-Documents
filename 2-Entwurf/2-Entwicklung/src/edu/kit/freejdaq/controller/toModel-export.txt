@@ -1,0 +1,22 @@
+Verbindungen zwischen den Modulen:
+
+Controller.Controller_Model_Interface.IModelInformation <|.. Model.Core.MeasurementConfiguration
+Controller.Controller_Model_Interface.IMeasurementRun <|.. Model.Core.MeasurementRun
+
+Interfaces, welche im Model implementiert werden sollen (Code bereits im Controller vorhanden):
+
+interface IModelInformation {
+	+ addBuildingBlock(id : String) : boolean
+	+ removeBuildingBlock(id : String) : boolean
+	+ addConnection(firstChannelId : String, secondChannelId : String) : boolean
+	+ removeConnection(firstChannelId : String, secondChannelId : String) : boolean
+}
+
+interface IMeasurementRun {
+	+ start() : boolean
+	+ pause() : boolean
+	+ resume() : boolean
+	+ reset() : boolean
+}
+
+Boolean-Rückgaben dienen dem Feedback. true=erfolgreich, false=nicht erfolgreich.

@@ -5,6 +5,7 @@ Sinnhaftigkeit des einbindens wird bezweifelt, aber zur Übersicht wahrscheinlich
 
 
 ViewModelInterface ..|> Model.Core.MeasurementConfiguration
+ViewDirectoryInterface --|> Model.BuildingBlockDirectory
 
 
 
@@ -14,5 +15,11 @@ Das Interface:
 
 
 interface ViewModelInterface {
-	+getViewModel(): <BuildingBlock>
+	+ getViewModel(): <BuildingBlock>
+	+ update(): void
 	}
+	
+	interface ViewDirectoryInterface {
+	
+	+getBuildingBlock(id: String): BuildingBlock
+	+getConnection(id: int): BuildingBlock
