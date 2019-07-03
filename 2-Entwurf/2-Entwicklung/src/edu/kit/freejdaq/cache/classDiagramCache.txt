@@ -1,0 +1,84 @@
+@startuml
+
+class ModelActivityManagement {
+	+ ModelActivityManagement(initData: MRunInfo, listenerAtModel: MRunForward )
+	- addBufferForOneSensorInChannel(SensorId: String)
+	- addTrigger(trigger: Trigger): void
+	..
+	+ run(): void
+	- setCurrentTime(): void
+	- checkTriggers(): void
+	..
+	+ startRepeatedTimer(): void
+	+ stopRepeatedTimer(): void
+	..
+	+ receiveMDataSet(channelId: String, timeStamp: long, value: double): void
+	+ connectionTerminated(): void
+
+
+}
+
+class Timer {
+	-period: long
+	+schedule(timerTask: TimerTask, period: long)
+	+cancel(): void
+}
+
+class BufferForOneSensorInChannel {
+	-sensorInChannelId: Stirng
+	-buffer: Queue<SimpleValuePacket>
+
+	+getInChannelId(): String
+	+addPacket(timeStamp: long, value: double)
+	+getAllPacketsDuringTimespan(from: long, to: long): double[]
+}
+
+class SimpleValuePacket	{
+	-value: double
+	-timeStamp: long
+	+SimpleValuePacket(value: double, timeStamp: long)
+	+getValue(): double
+	+getTimeSpamp(): long
+}
+	
+ConnectionTerminated .up.|> Trigger
+TimeoutTrigger .up.|> Trigger
+ErrorCodeTrigger .up.|> Trigger
+DataSetComplete .up.|> Trigger
+
+ModelActivityManagement ..|> IMeasurementStreamListener
+ModelActivityManagement ..|> TimerTask
+Timer --> "1" TimerTask
+ModelActivityManagement --> "*" BufferForOneSensorInChannel
+BufferForOneSensorInChannel ..> SimpleValuePacket
+ModelActivityManagement --> "*" Trigger
+
+interface Trigger {
+	checkAndNotifyMRunManagement(mRunForward: MRunForward)
+}
+
+interface MRunForward {
+	+justWaiting():  void
+	+indicateError(inChannelId: String, errorCode: double)
+	+indicateTimeout(): void
+	+indicateConnectionTerminated(): void
+	+dispatchCompletePacketSet(completePacketSet: EnhancedValuePacket[])
+}
+
+interface MRunInfo {
+	+getAllInChannelIds(): String[]
+	+getErrorCodes(inChannelId: String): double[]
+	+getTimeoutOption(): long
+}
+
+interface IMeasurementStreamListener {
+	+ receiveDate(channelId: String, timeStamp: long, 
+	    value: double): void
+	+connectionTerminated(): void
+}
+
+interface TimerTask {
+	+run(): void
+}
+
+@enduml
