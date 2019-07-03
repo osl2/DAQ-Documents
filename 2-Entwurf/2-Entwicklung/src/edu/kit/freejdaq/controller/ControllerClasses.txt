@@ -13,6 +13,13 @@ namespace Controller {
 			+ addConnection(startid : int, endid : int) :
 			+ deleteConnection(startid : int, endid : int) :
 		}
+		
+		interface IRunModel {
+			+ startMeasurementRun() :
+			+ stopMeasurementRun() :
+			+ pauseMeasurementRun() :
+			+ resumeMeasurementRun() :
+		}
 	
 	}
 	
@@ -63,8 +70,20 @@ namespace Controller {
 		CommandManager <-- Controller.View_Controller_Interface.ConnectionAction
 		CommandManager <-- Controller.View_Controller_Interface.ButtonAction
 		
+		Controller.Controller_Model_Interface.IBlockModel <-down- AddBlockToConfigCommand
+		Controller.Controller_Model_Interface.IBlockModel <-down- ModifyBlockInConfigCommand
+		Controller.Controller_Model_Interface.IBlockModel <-down- RemoveBlockFromConfigCommand
+		Controller.Controller_Model_Interface.IConnectionModel <-down- CreateChannelConnectionCommand
+		Controller.Controller_Model_Interface.IConnectionModel <-down- ModifyChannelConnectionCommand
+		Controller.Controller_Model_Interface.IConnectionModel <-down- DeleteChannelConnectionCommand
+		Controller.Controller_Model_Interface.IRunModel <-down- StartRunCommand
+		Controller.Controller_Model_Interface.IRunModel <-down- PauseRunCommand
+		Controller.Controller_Model_Interface.IRunModel <-down- ResumeRunCommand
+		Controller.Controller_Model_Interface.IRunModel <-down- StopRunCommand
+		
+		
 
-		class CommandManager {
+		class CommandManager <<Singleton>> {
 			- doneCommands : Stack<Command>
 			- undoneCommands : Stack<Command>
 			+ doCommand(cmd : Command) : void
