@@ -1,8 +1,8 @@
 
 Die folgenden Interfaces habe ich zusammen mit den angegebenen Implementierungsbeziehungen in meinem Klassendiagramm drinne, und die zugehörigen Implementierungen sollten sich in dem Diagramm, das ich per toTARGETDIAGRAMM-export im Dateinamen angegeben habe, in genau dem angegebenen Namespace und genauso geschrieben wiederfinden:
 
-IMRunListener ..|> Model.MRunReaction
-IMRunInfo ..|> Model.ChannelLogic.MRunInfo
+IMRunListener <|.. Model.MRunReaction
+IMRunInfo <|.. Model.ChannelLogic.MRunInfo
 
 Die Methoden der Interfaces sind im folgenden aufgeführt und diese sollten sich (jeweils) in der zugehörigen Implementierung wiederfinden.
 
