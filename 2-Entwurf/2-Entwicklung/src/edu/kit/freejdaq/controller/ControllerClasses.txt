@@ -4,21 +4,17 @@ namespace Controller {
 
 	namespace Controller_Model_Interface {
 	
-		interface IBlockModel {
-			+ addBlock(id : String) :
-			+ removeBlock(id : String) :
+		interface IModelInformation {
+			+ addBuildingBlock(id : String) :
+			+ removeBuildingBlock(id : String) :
+			+ addConnection(firstChannelId : String, secondChannelId : String) :
+			+ removeConnection(firstChannelId : String, secondChannelId : String) :
 		}
 		
-		interface IConnectionModel {
-			+ addConnection(startid : int, endid : int) :
-			+ deleteConnection(startid : int, endid : int) :
-		}
-		
-		interface IRunModel {
-			+ startMeasurementRun() :
-			+ stopMeasurementRun() :
-			+ pauseMeasurementRun() :
-			+ resumeMeasurementRun() :
+		interface IMeasurementRun {
+			+ start() :
+			+ pause() :
+			+ reset() :
 		}
 	
 	}
@@ -70,16 +66,16 @@ namespace Controller {
 		CommandManager <-- Controller.View_Controller_Interface.ConnectionAction
 		CommandManager <-- Controller.View_Controller_Interface.ButtonAction
 		
-		Controller.Controller_Model_Interface.IBlockModel <-down- AddBlockToConfigCommand
-		Controller.Controller_Model_Interface.IBlockModel <-down- ModifyBlockInConfigCommand
-		Controller.Controller_Model_Interface.IBlockModel <-down- RemoveBlockFromConfigCommand
-		Controller.Controller_Model_Interface.IConnectionModel <-down- CreateChannelConnectionCommand
-		Controller.Controller_Model_Interface.IConnectionModel <-down- ModifyChannelConnectionCommand
-		Controller.Controller_Model_Interface.IConnectionModel <-down- DeleteChannelConnectionCommand
-		Controller.Controller_Model_Interface.IRunModel <-down- StartRunCommand
-		Controller.Controller_Model_Interface.IRunModel <-down- PauseRunCommand
-		Controller.Controller_Model_Interface.IRunModel <-down- ResumeRunCommand
-		Controller.Controller_Model_Interface.IRunModel <-down- StopRunCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- AddBlockToConfigCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- ModifyBlockInConfigCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- RemoveBlockFromConfigCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- CreateChannelConnectionCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- ModifyChannelConnectionCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- DeleteChannelConnectionCommand
+		Controller.Controller_Model_Interface.IMeasurementRun <-down- StartRunCommand
+		Controller.Controller_Model_Interface.IMeasurementRun <-down- PauseRunCommand
+		Controller.Controller_Model_Interface.IMeasurementRun <-down- ResumeRunCommand
+		Controller.Controller_Model_Interface.IMeasurementRun <-down- StopRunCommand
 		
 		
 
