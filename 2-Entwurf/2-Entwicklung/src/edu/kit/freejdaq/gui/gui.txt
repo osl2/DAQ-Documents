@@ -63,7 +63,7 @@ namespace Configuration {
   	end note
   	
 
-	 class BuildingBlockView {
+	 abstract class BuildingBlockView <<abstract>> {
 
 		 - id: String
 		 - buildingBlock: BuildingBlock
@@ -171,7 +171,7 @@ namespace Configuration {
 
 namespace Button {
 
-	 class Button <<abstract>> {
+	 abstract class Button {
 	 	-label: String
 	 	-color: String
 	 	-image: Image
@@ -209,7 +209,7 @@ namespace Exception {
 	 	+ closeAll(): void
 	 }
 
-	class ExceptionWindow <<abstract>> {
+	abstract class ExceptionWindow {
 		-title: String
 		-description: String
 		+ popUp(): void
