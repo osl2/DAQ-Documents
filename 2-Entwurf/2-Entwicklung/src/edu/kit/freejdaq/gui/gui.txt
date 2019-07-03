@@ -140,6 +140,8 @@ namespace Configuration {
 		+changeColor(color: String): void
 	 }
 	 
+	namespace BuildingBlockProperties {
+	
 	 class SensorBlockProperties {
 	 	- name: String
 	 	- InitId: String
@@ -185,8 +187,8 @@ namespace Configuration {
 	 	+ setUnit(unit: String): boolean
 	 	+ setMaxX(x: double): boolean
 	 	+ setMaxY(y: double): boolean
-	 
 	 }
+ }
 	 
 	 BlockDragAndDropHandler .down.|> ConfigurationField
 	 GUI.MainWindow "1"-- "1" ConfigurationField
@@ -213,6 +215,10 @@ namespace Configuration {
 	 GUI.Menues.SensorBlockField -- "*" SensorBlockView
 	 GUI.Menues.TransformationBlockField -- "*" TransformationBlockView
 	 GUI.Menues.RepresentationBlockField -- "*" RepresentationBlockView
+	 
+	 SensorBlockView --o "1" GUI.Configuration.BuildingBlockProperties.SensorBlockProperties
+	 TransformationBlockView --o "1" GUI.Configuration.BuildingBlockProperties.TransformationBlockProperties
+	 RepresentationBlockView --o "1" GUI.Configuration.BuildingBlockProperties.RepresentationBlockProperties
 	 
 }
 
