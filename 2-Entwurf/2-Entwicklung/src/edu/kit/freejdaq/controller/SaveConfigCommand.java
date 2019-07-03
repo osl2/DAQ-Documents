@@ -9,7 +9,7 @@ import edu.kit.freejdaq.fileservice.YamlService;
  * @author Jan
  *
  */
-public class SaveConfigCommand implements Command {
+public class SaveConfigCommand implements BasicCommand {
 	
 	private String filePath;
 	
@@ -23,12 +23,6 @@ public class SaveConfigCommand implements Command {
 		Object data = null; // must get data from model
 		
 		YamlService.save(filePath, data); // save data as YAML
-
-	}
-
-	@Override
-	public void unExecute() throws FileNotFoundException {
-		// TODO Auto-generated method stub
 
 	}
 

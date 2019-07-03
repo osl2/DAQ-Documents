@@ -5,7 +5,7 @@ package edu.kit.freejdaq.controller;
  * @author Jan
  *
  */
-public class AddBlockToConfigCommand implements Command {
+public class AddBlockToConfigCommand implements UndoableCommand {
 	
 	private int blockID;
 	

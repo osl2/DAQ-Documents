@@ -1,96 +1,183 @@
 @startuml
 
-package edu.kit.freejdaq.controller {
+namespace Controller {
 
-	class CommandManager {
-		+ doCommand(cmd : Command) : void
-		+ undo() : void
-		+ redo() : void
+	namespace Controller_Model_Interface {
+	
+		interface IBlockModel {
+			+ addBlock(id : String) :
+			+ removeBlock(id : String) :
+		}
+		
+		interface IConnectionModel {
+			+ addConnection(startid : int, endid : int) :
+			+ deleteConnection(startid : int, endid : int) :
+		}
+	
 	}
 	
-	note top of CommandManager : doCommand(cmd : Command)\n    cmd.execute()\n    doneCommands.push(cmd)\n    undoneCommands.clear()
-	note left of CommandManager : undo()\n    cmd = doneCommands.pop()\n    cmd.unExecute()\n    undoneCommands.push(cmd)
-	note right of CommandManager : redo()\n    cmd = undoneCommands.pop()\n    cmd.execute()\n    doneCommands.push(cmd)
+	namespace View_Controller_Interface {
 	
-	CommandManager o-- Command : - doneCommands : Stack
+		class ButtonAction < implements IButtonAction > {
+			+ startPressed() : 
+			+ pausePressed() :
+			+ resumePressed() :
+			+ resetPressed() : 
+			+ saveDataPressed() :
+			+ saveRepresentationPressed() :
+			+ saveConfigurationPressed() :
+			+ undoPressed() :
+			+ redoPressed() :
+		}
+	
+		class BlockAction < implements IBlockAction > {
+			+ blockPlaced(id : int) : boolean
+			+ blockMoved(id : int) : boolean
+			+ blockRemoved(id : int) : boolean
+		}
+	
+		class ConnectionAction < implements IConnectionAction > {
+			+ connectionAdded(channelId1 : int, channelId2 : int) : boolean
+			+ connectionRemoved(channelId1 : int, channelId2 : int) : void
+		}
+	
+	}
 
-	interface Command {
-		+ execute() : void
-		+ unExecute() : void
+	namespace Command_Pattern {
+	
+		AddBlockToConfigCommand <-- Controller.View_Controller_Interface.BlockAction
+		ModifyBlockInConfigCommand <-- Controller.View_Controller_Interface.BlockAction
+		RemoveBlockFromConfigCommand <-- Controller.View_Controller_Interface.BlockAction
+		CreateChannelConnectionCommand <-- Controller.View_Controller_Interface.ConnectionAction
+		ModifyChannelConnectionCommand <-- Controller.View_Controller_Interface.ConnectionAction
+		DeleteChannelConnectionCommand <-- Controller.View_Controller_Interface.ConnectionAction
+		StartRunCommand <-- Controller.View_Controller_Interface.ButtonAction
+		PauseRunCommand <-- Controller.View_Controller_Interface.ButtonAction
+		ResumeRunCommand <-- Controller.View_Controller_Interface.ButtonAction
+		StopRunCommand <-- Controller.View_Controller_Interface.ButtonAction
+		SaveConfigCommand <-- Controller.View_Controller_Interface.ButtonAction
+		LoadConfigCommand <-- Controller.View_Controller_Interface.ButtonAction
+		ResetConfigCommand <-- Controller.View_Controller_Interface.ButtonAction
+		
+		CommandManager <-- Controller.View_Controller_Interface.BlockAction
+		CommandManager <-- Controller.View_Controller_Interface.ConnectionAction
+		CommandManager <-- Controller.View_Controller_Interface.ButtonAction
+		
+
+		class CommandManager {
+			- doneCommands : Stack<Command>
+			- undoneCommands : Stack<Command>
+			+ doCommand(cmd : Command) : void
+			+ undo() : void
+			+ redo() : void
+		}
+		
+		note top of CommandManager : doCommand(cmd : Command)\n    cmd.execute()\n    doneCommands.push(cmd)\n    undoneCommands.clear()
+		note left of CommandManager : undo()\n    cmd = doneCommands.pop()\n    cmd.unExecute()\n    undoneCommands.push(cmd)
+		note right of CommandManager : redo()\n    cmd = undoneCommands.pop()\n    cmd.execute()\n    doneCommands.push(cmd)
+		
+		CommandManager o-- Command
+	
+		interface Command {
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		note right of Command : command parameters (e.g. blockID) are passed with the constructors
+		
+		class AddBlockToConfigCommand {
+			- blockID : int
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class ModifyBlockInConfigCommand {
+			- blockID : int
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class RemoveBlockFromConfigCommand {
+			- blockID : int
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class SaveConfigCommand {
+			- filePath : String
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class LoadConfigCommand {
+			- filePath : String
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class ResetConfigCommand {
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class CreateChannelConnectionCommand {
+			- startChannelID : int
+			- endChannelID : int
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class ModifyChannelConnectionCommand {
+			- oldStartChannelID : int
+			- oldEndChannelID : int
+			- newStartChannelID : int
+			- newEndChannelID : int
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class DeleteChannelConnectionCommand {
+			- startChannelID : int
+			- endChannelID : int
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class StartRunCommand {
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class StopRunCommand {
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class PauseRunCommand {
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class ResumeRunCommand {
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		Command <|.. AddBlockToConfigCommand
+		Command <|.. RemoveBlockFromConfigCommand
+		Command <|.. ModifyBlockInConfigCommand
+		Command <|.. SaveConfigCommand
+		Command <|.. LoadConfigCommand
+		Command <|.. ResetConfigCommand
+		Command <|.. CreateChannelConnectionCommand
+		Command <|.. ModifyChannelConnectionCommand
+		Command <|.. DeleteChannelConnectionCommand
+		Command <|.. StartRunCommand
+		Command <|.. StopRunCommand
+		Command <|.. PauseRunCommand
+		Command <|.. ResumeRunCommand
+
 	}
-	
-	note right of Command : command parameters (e.g. blockID) are passed with the constructors
-	
-	class AddBlockToConfigCommand {
-		- blockID : int
-	}
-	
-	class ModifyBlockInConfigCommand {
-		- blockID : int
-	}
-	
-	class DeleteBlockFromConfigCommand {
-		- blockID : int
-	}
-	
-	class ShowHelpCommand {
-		- blockID : int
-	}
-	
-	class SaveConfigCommand {
-		- filePath : String
-	}
-	
-	class LoadConfigCommand {
-		- filePath : String
-	}
-	
-	class ResetConfigCommand {
-	}
-	
-	class CreateChannelConnectionCommand {
-		- startChannelID : int
-		- endChannelID : int
-	}
-	
-	class ModifyChannelConnectionCommand {
-		- oldStartChannelID : int
-		- oldEndChannelID : int
-		- newStartChannelID : int
-		- newEndChannelID : int
-	}
-	
-	class DeleteChannelConnectionCommand {
-		- startChannelID : int
-		- endChannelID : int
-	}
-	
-	class StartRunCommand {
-	}
-	
-	class StopRunCommand {
-	}
-	
-	class PauseRunCommand {
-	}
-	
-	class ResumeRunCommand {
-	}
-	
-	Command <|.. AddBlockToConfigCommand
-	Command <|.. DeleteBlockFromConfigCommand
-	Command <|.. ModifyBlockInConfigCommand
-	Command <|.. ShowHelpCommand
-	Command <|.. SaveConfigCommand
-	Command <|.. LoadConfigCommand
-	Command <|.. ResetConfigCommand
-	Command <|.. CreateChannelConnectionCommand
-	Command <|.. ModifyChannelConnectionCommand
-	Command <|.. DeleteChannelConnectionCommand
-	Command <|.. StartRunCommand
-	Command <|.. StopRunCommand
-	Command <|.. PauseRunCommand
-	Command <|.. ResumeRunCommand
 
 }
 
