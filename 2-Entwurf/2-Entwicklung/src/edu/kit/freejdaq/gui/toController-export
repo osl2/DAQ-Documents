@@ -1,8 +1,8 @@
 Klassenimplementierung geschehen im Controller
 
-IButtonAction ..|> Controller.Command_Pattern.View_Controller_Interface.ButtonAction
-IBlockAction ..|> Controller.Command_Pattern.View_Controller_Interface.BlockAction
-IConnectionAction ..|> Controller.Command_Pattern.View_Controller_Interface.ConnectionAction
+IButtonAction <|.. Controller.Command_Pattern.View_Controller_Interface.ButtonAction
+IBlockAction <|.. Controller.Command_Pattern.View_Controller_Interface.BlockAction
+IConnectionAction <|.. Controller.Command_Pattern.View_Controller_Interface.ConnectionAction
 
 
 Interfaces, welche vom Controller angeboten werden und der View sie benutzt:
