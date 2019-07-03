@@ -220,21 +220,7 @@ namespace Core {
 			<<create>>Function(String inputFunction) : Function
 			+applyFunction(Integer data)
 		}
-		AdditionTransformation -up-|> Transformation
-		AverageTransformation -up-|> Transformation
-		MultiplicationTransformation -up-|> Transformation
-		DataFlowTransformation -up-|> Transformation
-		LinearMapping -up-|> DataFlowTransformation
-		DependendOutputTransformation -up-|> DataFlowTransformation
 		Function "1" - "*" Transformation
-
-		class DataFlowTransformation {
-
-		}
-		note left of  DataFlowTransformation
-		Changes the output according to configuration.
-		Does not influence the values of the data stream
-		end note
 	}
 
 
