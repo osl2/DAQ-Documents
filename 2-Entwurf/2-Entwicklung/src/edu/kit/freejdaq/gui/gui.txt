@@ -140,6 +140,54 @@ namespace Configuration {
 		+changeColor(color: String): void
 	 }
 	 
+	 class SensorBlockProperties {
+	 	- name: String
+	 	- InitId: String
+	 	- id: int
+	 	- color: String
+	 	- shape: String
+	 	- dimension: int
+	 	+ setName(name: String): boolean
+	 	+ setColor(color: String): boolean
+	 	+ setShape(shape: String): boolean
+	 	
+	 	
+	 }
+	 
+	 class TransformationBlockProperties {
+	 - name: String
+	 	- InitId: String
+	 	- id: int
+	 	- color: String
+	 	- shape: String
+	 	- function: String
+	 	+ setName(name: String): boolean
+	 	+ setColor(color: String): boolean
+	 	+ setShape(shape: String): boolean
+	 	+ setFunction(function: String): boolean
+	 	
+	 }
+	 
+	 class RepresentationBlockProperties {
+	 - name: String
+	 	- InitId: String
+	 	- id: int
+	 	- color: String
+	 	- shape: String
+	 	- unit: String
+	 	- type: String
+	 	- maxX: double
+	 	- maxY: double
+	 	- maxZ: double
+	 	+ setName(name: String): boolean
+	 	+ setColor(color: String): boolean
+	 	+ setShape(shape: String): boolean
+	 	+ setUnit(unit: String): boolean
+	 	+ setMaxX(x: double): boolean
+	 	+ setMaxY(y: double): boolean
+	 
+	 }
+	 
 	 BlockDragAndDropHandler .down.|> ConfigurationField
 	 GUI.MainWindow "1"-- "1" ConfigurationField
 	 ConfigurationField "1" -- "*" BuildingBlockView
@@ -315,6 +363,8 @@ namespace FacadeModelView {
 	ViewModelInterface -down- GUI.Configuration.ConfigurationField
 	ViewDirectoryInterfacae -- GUI.Configuration.ConfigurationField
 }
+ 
+  
 	
 }
 
