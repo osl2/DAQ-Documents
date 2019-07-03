@@ -301,9 +301,8 @@ Die Klasse RepresentationBlockField stellt die Menüfläche dar, in welcher alle
 \paragraph{ButtonField}
 Die Klasse ButtonField stellt die Menüfläche dar, in welcher alle konkreten Knöpfe platziert sind und diese für den Benutzer verwendbar sind.
 
-\newpage
-
 \subsubsection{Configuration}
+
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 14cm]{Grafiken/ConfigurationNamespace.png}
@@ -312,28 +311,32 @@ Die Klasse ButtonField stellt die Menüfläche dar, in welcher alle konkreten Kn
 	\end{center}
 \end{figure}
 
-\newpage
 
 \paragraph{ConfigurationField}
 Die Klasse KonfigurationField stellt das Konfigurationfeld dar, in welchem der Benutzer eine Messkonfiguration aufbauen kann.
-Konfigurationsbausteine, welche der Benutzer in das Konfigurationsfeld plaziert werden in einer Liste gespeichert. 
+Konfigurationsbausteine, welche der Benutzer in das Konfigurationsfeld platziert werden in einer Liste gespeichert. 
 Konfigurationsbausteine, welche der Benutzer aus dem Konfigurationsfeld entfernt, werden aus der Liste gelöscht
-Beim Plazieren der Konfigurationsbausteine in das Konfigurationsfeld wird dem Konfigurationsbaustein eine eindeutige Postition zugeteilt, welche in Form von x- und y-Koordinaten darsgestellt wird.
+Beim Platzieren der Konfigurationsbausteine in das Konfigurationsfeld wird dem Konfigurationsbaustein eine eindeutige Position zugeteilt, welche in Form von einer x-Koordinate und einer y-Koordinate dargestellt wird.
+Die Liste der Bausteine kann ebenfalls von außerhalb ausgelesen oder gesetzt werden, falls z.B die Anordnung der Bausteine und Verbindungen gespeichert oder gesetzt werden soll.
 
 \paragraph{BuildingBlockView}
 Die Klasse BuildingBlockView ist die Überklasse der Darstellungen der Konfigurationsbausteine.
-Konfigurationsbausteine besitzen eine eindeutige ID, einen Namen, falls sie im Konfigurationsfeld platziert werden ihre Position anhand der Koordinaten x und y. Form und Farbe sind ebenfalls festegelegt. 
+Konfigurationsbausteine besitzen eine eindeutige ID, einen Namen, falls sie im Konfigurationsfeld platziert werden ihre Position anhand der Koordinaten x und y. Form und Farbe sind ebenfalls festgelegt.  
+Bausteine werden über das Directory erzeugt, indem zu jedem im Directory gespeicherten Baustein eine Darstellung dieses Bausteins erzeugt wird. Name und ID bleiben bei Erzeugung des Bausteins gleich, jedoch wird der Baustein, um die visuellen Komponenten Koordinaten, Farbe, Form erweitert.
 
 \paragraph{SensorBlockView}
 Die Klasse SensorBlockView stellt einen Sensorbaustein dar. 
-Sensorbausteine, welche in dem Konfigurationsfeld platziert werden, können mit anderen Bausteinen verbunden werden, was im Messlauf einen Datenfluss über die verbundenen Bausteine erlaubt. Sensorbausteine besitzen, im Gegensatz zu anderen Konfigurationsbausteinen nur Datenausgänge, über welche sie verbunden werden können.
+Sensorbausteine, welche in dem Konfigurationsfeld platziert werden, können mit anderen Bausteinen verbunden werden, was im Messlauf einen Datenfluss über die verbundenen Bausteine erlaubt. Sensorbausteine besitzen, im Gegensatz zu anderen Konfigurationsbausteinen nur Datenausgänge, über welche sie verbunden werden können, da Sensoren, gemäß physikalischer 
+Repräsentation nur Datenausgänge besitzen.
 
 \paragraph{TransformationBlockView}
-Die Klasse TransformationBlockView stellt einen Transformationsbaustein dar. Transformationsbausteine besitzen eine vordefinierte Funktion, welche die Messdaten verändern.
+Die Klasse TransformationBlockView stellt einen Transformationsbaustein dar. Transformationsbausteine besitzen eine vordefinierte Funktion, welche die Messdaten nach der Funktion transformiert. Transformationbausteinen besitzen Eingänge, welche Daten von Sensorenbausteinen oder anderen Transformationenbausteine empfangen können. Ausgänge der Transformationsbausteine können nur an weitere Transformationsbausteine oder Darstellungsbausteine angebunden werden, um einen sinnvollen Datenfluss zu ermöglichen.
 
-\paragraph{RepresentationBlockView}
-Die Klasse RepresentationBlockView stellt einen Darstellungbaustein dar, dieser bestimmt, wie die Messdaten visualisiert werden.
-- Er bestitzt nur Eingänge, aber keine Ausgänge
+\paragraph{RepresentationBlockView} 
+
+Die Klasse RepresentationBlockView stellt einen Darstellungbaustein dar, dieser bestimmt, wie die Messdaten visualisiert werden. Um die Daten sinnvoll darstellen zu können, muss der Benutzer eine Einheit der Messdaten und Grenzwerte für die Darstellung eingeben. 
+Zur Speicherung der visuellen Darstellung der Daten muss ein Bild erstellt werden, welches zum Speichern weiter geleitet wird.
+Darstellungsbausteine besitzen nur Eingänge, da dargestellt Messdaten nicht mehr verarbeitet werden. 
 
 
 \newpage 
