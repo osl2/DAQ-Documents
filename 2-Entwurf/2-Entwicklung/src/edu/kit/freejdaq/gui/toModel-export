@@ -2,8 +2,6 @@ Bisheriges Interface zwischen Model und View, wahrscheinlich bereits veraltet un
 Sinnhaftigkeit des einbindens wird bezweifelt, aber zur Übersicht wahrscheinlich gut
 
 
-
-
 ViewModelInterface ..|> Model.Core.MeasurementConfiguration
 ViewDirectoryInterface --|> Model.BuildingBlockDirectory
 
@@ -18,8 +16,8 @@ interface ViewModelInterface {
 	+ getViewModel(): <BuildingBlock>
 	+ update(): void
 	}
-	
+
 	interface ViewDirectoryInterface {
-	
+
 	+getBuildingBlock(id: String): BuildingBlock
 	+getConnection(id: int): BuildingBlock
