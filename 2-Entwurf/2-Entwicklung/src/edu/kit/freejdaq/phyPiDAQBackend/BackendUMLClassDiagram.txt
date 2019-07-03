@@ -2,7 +2,7 @@
 '------------------------------------------------------------------------
 'Backend
 '------------------------------------------------------------------------
-package edu.kit.freejdaq.backend {
+namespace Backend {
 	SshToPi --|> CommunicationWithPi
 	WebSocketToPi  --|> CommunicationWithPi
 	UsbToPi --|> CommunicationWithPi
@@ -122,5 +122,7 @@ package edu.kit.freejdaq.backend {
 	 	+ pathToRemoteDir: String, 
 	 	+ pathToLocalDir: String
 	}
+
+	IMeasurementStreamListener <|-- Cache.MRunActivityManagement
 }
 @enduml

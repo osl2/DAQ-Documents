@@ -70,7 +70,6 @@ TimeoutTrigger .up.|> Trigger
 ErrorCodeTrigger .up.|> Trigger
 DataSetCompleteTrigger .up.|> Trigger
 
-MRunActivityManagement ..|> IMeasurementStreamListener
 MRunActivityManagement ..|> TimerTask
 Timer --> "1" TimerTask
 MRunActivityManagement --> Cache
@@ -96,12 +95,6 @@ interface MRunInfo {
 	+getAllInChannelIds(): String[]
 	+getErrorCodes(inChannelId: String): double[]
 	+getTimeoutOption(): long
-}
-
-interface IMeasurementStreamListener {
-	+ receiveDate(channelId: String, timeStamp: long, 
-	    value: double): void
-	+connectionTerminated(): void
 }
 
 interface TimerTask {
