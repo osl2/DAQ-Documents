@@ -1,19 +1,5 @@
 @startuml
 
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
 'Date of first creation: 01.07.2019
 '------------------------------------------------------------------------
 'Backend
@@ -182,7 +168,7 @@ namespace Model {
 
 	}
 	MeasurementConfiguration "1" -- "*" MeasurementRun
-	
+
 
 	'----------------------------------------------------------------------------------------
 	'PrototypCollection: List of all predefined and custom BuildingBlocks
@@ -411,36 +397,36 @@ namespace Model {
 		-varName: String
 		+forwardValue(): void
 	}
-	
+
 	InChannel --|> Channel
-	
+
 	class OutChannel{
 		-channelName: String
 		+forwardValue(): void
 	}
-	
+
 	OutChannel --|> Channel
-	
+
 	note top of OutChannel
-	  forwardValue wird bei 
-	  receive Value aufgerufen. 
+	  forwardValue wird bei
+	  receive Value aufgerufen.
 	  Hier ausimplementiert.
 	end note
-	
+
 	note left of OutChannel
 	  channelName steht für Funktionsnamen
-	   bei Trafos und für 
+	   bei Trafos und für
 	   Channelname bei Sensoren
 	end note
 
 
 
-	
+
 	interface IValueHandler {
 
 		processValue()
 	}
-	
+
 	note right of IValueHandler
 	  interface to provide
 	  Data to a channel
@@ -448,10 +434,10 @@ namespace Model {
 
 
 	}
-	
+
 	BuildingBlock "1" --> "*" Model.Core.ChannelLogic.InChannel
 	BuildingBlock "1" --> "*" Model.Core.ChannelLogic.OutChannel
-	
+
 	class HelpMessage{
 		- messageFileName : String
 		+ HelpMessage(msgFile : String)
@@ -470,8 +456,8 @@ namespace Model {
 	BuildingBlock -left- YamlRepresentation
 
 	}
-	
-		
+
+
 
 '---------------------------------------------------------
 'BuildingBlockBuilder
@@ -559,10 +545,10 @@ interface IMeasurementStreamListener {
 
 
 	note bottom of IBusinessLogic
-	 createModelFromYamlDom() 
-	 examines semantic validity 
-	 and returns an appropriate result 
-	 to the controller. 
+	 createModelFromYamlDom()
+	 examines semantic validity
+	 and returns an appropriate result
+	 to the controller.
 	end note
 
 	interface IBusinessLogic{
@@ -583,19 +569,19 @@ interface IMeasurementStreamListener {
 	+pause()
 	+start()
 	+reset()
-	
+
 	}
 
 		Model.Core.ChannelLogic.Channel ..|> IMeasurementStreamListener
 		Model.Core.MeasurementConfiguration ..|> IBusinessLogic
 		Model.Core.MeasurementConfiguration ..|> IModelInformation
 		Model.Core.MeasurementRun ..|> IMeasurementRun
-		
+
 		Model.BuildingBlockBuilder.Director ..|> IBusinessLogic
-	
-	
-	
-	
+
+
+
+
 }
 '------------------------------------------------------------------------
 'Controller
@@ -1091,15 +1077,5 @@ Backend --------[hidden]up------------> hider
 Model --------[hidden]up-------> Backend
 Controller -------[hidden]up-------> Model
 GUI -------[hidden]up-------> Controller
-
-
-
-
-
-
-
-
-
-
 
 @enduml
