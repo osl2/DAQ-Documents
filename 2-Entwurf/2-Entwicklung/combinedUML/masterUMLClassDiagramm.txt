@@ -538,20 +538,6 @@ Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.Core.Representation
 Model.BuildingBlockBuilder.TableRepresentationBuilder ..> Model.Core.RepresentationLogic.TableRepresentation
 
 
-interface IMeasurementStreamListener {
-		-receiveData(measuredValue: int): void
-		-connectionTerminated(): void
-	}
-
-Model.Core.MeasurementRun -- IMeasurementStreamListener
-
-
-
-
-
-
-
-
 	class BuildingBlockDirectory {
 
 		- InitHashMap: HashMap<String: id, block: BuildingBlock>
