@@ -1,0 +1,19 @@
+Bisheriges Interface zwischen Model und View, wahrscheinlich bereits veraltet und verfällt bald
+Sinnhaftigkeit des einbindens wird bezweifelt, aber zur Übersicht wahrscheinlich gut
+
+
+
+
+ViewModelInterface ..|> Model.Core.MeasurementConfiguration
+
+
+
+
+Das Interface:
+
+
+
+interface ViewModelInterface {
+	+ getViewModel(): <BuildingBlock>
+	+ update(): void
+	}

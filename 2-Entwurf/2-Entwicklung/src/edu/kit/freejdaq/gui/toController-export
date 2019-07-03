@@ -1,22 +1,11 @@
-Klassenimplementierung geschehen im Controller!
+Klassenimplementierung geschehen im Controller
 
-IButtonAction ..|> Controller.Command_Pattern.StartRunCommand
-IButtonAction ..|> Controller.Command_Pattern.PauseRunCommand
-IButtonAction ..|> Controller.Command_Pattern.ResumeRunCommand
-IButtonAction ..|> Controller.Command_Pattern.StopRunCommand
-IButtonAction ..|> Controller.Command_Pattern.ResetConfigCommand
-IButtonAction ..|> Controller.Command_Pattern.LoadConfigCommand
-IButtonAction ..|> Controller.Command_Pattern.SaveConfigCommand
-IButtonAction ..|> Controller.Command_Pattern.CommandManager
-IBlockAction ..|> Controller.Command_Pattern.AddBlockToConfigCommand
-IBlockAction ..|> Controller.Command_Pattern.RemoveBlockFromConfigCommand
-IBlockAction ..|> Controller.Command_Pattern.ModifyBlockInConfigCommand
-IConnectionAction ..|> Controller.Command_Pattern.CreateChannelConnectionCommand
-IConnectionAction ..|> Controller.Command_Pattern.ModifyChannelConnectionCommand
-IConnectionAction ..|> Controller.Command_Pattern.DeleteChannelConnectionCommand
+IButtonAction <|.. Controller.Command_Pattern.View_Controller_Interface.ButtonAction
+IBlockAction <|.. Controller.Command_Pattern.View_Controller_Interface.BlockAction
+IConnectionAction <|.. Controller.Command_Pattern.View_Controller_Interface.ConnectionAction
 
 
-Interfaces, welche vom Cache angeboten werden und der View sie benutzt:
+Interfaces, welche vom Controller angeboten werden und der View sie benutzt:
 
  interface IButtonAction {
  	+ startPressed(): boolean 
