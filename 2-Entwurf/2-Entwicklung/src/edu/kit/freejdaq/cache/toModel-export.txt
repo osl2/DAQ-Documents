@@ -1,10 +1,10 @@
 
-Hier deklariere ich, dass ich die folgenden Interfaces in meinem Klassendiagramm drinne hab, und die Implementierungen sollten sich in einem anderen Diagramm, das ich per toTARGETDIAGRAMM-export im Dateinamen angegeben habe, in genau dem angegebenen Namespace und genauso geschrieben wiederfinden:
+Die folgenden Interfaces sind in meinem Klassendiagramm drinne, und die zugehörigen Implementierungen sollten sich in dem Diagramm, das ich per toTARGETDIAGRAMM-export im Dateinamen angegeben habe, in genau dem angegebenen Namespace und genauso geschrieben wiederfinden:
 
 IMRunListener ..|> Model.MRunReaction
 IMRunInfo ..|> Model.ChannelLogic.MRunInfo
 
-Die Methoden der beiden Interfaces sind im folgenden aufgeführt und diese sollten sich (jeweils) in der zugehörigen Implementierung wiederfinden.
+Die Methoden der Interfaces sind im folgenden aufgeführt und diese sollten sich (jeweils) in der zugehörigen Implementierung wiederfinden.
 
 interface IMRunListener {
 	+justWaiting():  void
