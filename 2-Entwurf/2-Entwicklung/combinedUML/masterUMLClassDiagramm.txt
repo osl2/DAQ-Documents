@@ -801,286 +801,322 @@ namespace Controller {
 'GUI
 '------------------------------------------------------------------------
 namespace GUI {
-	package "edu.kit.freejdaq.gui" {
-		 MainWindow "1"-- "1" ConfigurationField
-		 MainWindow "1"-- "1" PrototypeField
 
-		 PrototypeField <|-- SensorBlockField
-		 PrototypeField <|-- TransformationBlockField
-		 PrototypeField <|-- RepresentationBlockField
-		 ConfigurationField "1" -- "*" BuildingBlockView
-		 BuildingBlockView <|-up-  SensorBlockView
-		 BuildingBlockView <|-up-  TransformationBlockView
-		 BuildingBlockView <|-up-  RepresentationBlockView
-		 SensorBlockField -- "*" SensorBlockView
-		 TransformationBlockField -- "*" TransformationBlockView
-		 RepresentationBlockField -- "*" RepresentationBlockView
+class MainWindow <<singleton>> {
+ - colorScheme: String
+ - fontSize: int
+ + {static} getInstance(): MainWindow
+ + exit(): void
+}
 
-		 package "ButtonLayer" {
-		 MainWindow "1"-right- "1" ButtonField
-		 ButtonField-down- "*" Button
-		 Button .left.|> ButtonHandler
-		 Button <|-up- StartButton
-		 Button <|-right- PauseButton
-		 Button <|-- ResumeButton
-		 Button <|-- ResetButton
-		 Button <|-- SaveDataButton
-		 Button <|-- SaveRepresentationButton
-		 Button <|-- SaveConfiguration
-		 Button <|-- LoadConfiguration
-		 Button <|-- NewConfiguration
-		 Button <|-right- UndoButton
-		 Button <|-right- RedoButton
-		 }
-		 package "ExceptionLayer" {
-		 MainWindow "1" -left- ExceptionWindow
-		 ExceptionWindow <|-- BuildingBlockExceptionWindow
-		 ExceptionWindow <|-- ConnectionExceptionWindow
-		 ExceptionWindow <|-- GeneralExceptionWindow
-		 }
+namespace Menues {
 
-
-		 ConfigurationField -up-> BlockDragAndDropHandler
-		 BuildingBlockView -down-> "1" HelpDecorator
-		 HelpDecorator .down.|> HelpDecoratorHandler
-		 RepresentationBlockView .down.|> RepresentationBlockViewHandler
-		 MainWindow -down-o "1" HelpWindow
-		 MainWindow -down-o "1" OptionsWindow
-
-		 class MainWindow <<singleton>> {
-
-		 	- colorScheme: String
-		 	- fontSize: int
-
-			 + {static} getInstance(): MainWindow
-			 + newConfiguration(): void
-			 + exit(): void
-
-		 }
-
-		 class ConfigurationField {
-			 -list: List<BuildingBlockView>
-			 +add(block : BuildingBlock): void
-			 +remove(block: BuildingBlock): void
-			 +getViewModel(): List<BuildingBlockView>
-		 }
-
-		 class BuildingBlockView {
-
-			 -id: String
-			 -buildingBlock: BuildingBlock
-			 -name: String
-			 -xCor: double
-			 -yCor: double
-			 -color: String
-			 -shape: String
-			 +BuildingBlockView(id: String): BuildingBlockView
-			 +setNumberOfChannels(number : int): void
-			 +setCoordinates(x : double, y : double): boolean
-			 +getXCoordinate(): int
-			 +getYCoordinate(): int
-			 +changeColor(color: String): void
-		 }
-
-		 interface BlockDragAndDropHandler {
-		 	+blockWasMoved(blockId : String, corX : double, corY : double)
-		 }
-
-		 interface AddWireDragAndDropHandler {
-			+connectionAdded(fromChannelId: int, toChannelId: int)
-		 }
-
-		 interface RemoveWireDragAndDropHandler {
-			+connectionRemoved(fromChannelId: int, toChannelId: int)
-		  }
-
-		 class PrototypeField {
-		 	+open(): void
-		 }
-
-	 together {
-		 class SensorBlockField {
-		 	+ addSensorBlockView(block: SensorBlockView)
-		 }
-
-		 class TransformationBlockField {
-		  + addTransformationBlockView(block: TransformationBlockView)
-		 }
-
-		 class RepresentationBlockField {
-			+ addRepresentationBlockView(block: RepresentationBlockView)
-		 }
+class PrototypeField {
+		- list: <BuildingBlockView>
+		+ update(): void
+	 	+ open(): void
 	 }
 
-		 class SensorBlockView {
-		  	+ addToConnectedOutBlocksViews(blockView: BuildingBlockView)
-		 }
+	 class SensorBlockField {
+	 	+ addSensorBlockView(block: SensorBlockView): void
+	 }
 
-		 class TransformationBlockView {
-			  + addToConnectedInBlocksViews(blockView: BuildingBlockView)
-			  + addToConnectedOutBlocksViews(blockView: BuildingBlockView)
-		 }
+	 class TransformationBlockField {
+	  	+ addTransformationBlockView(block: TransformationBlockView): void
+	 }
 
-		 class RepresentationBlockView {
-		 	- unit: String
-		 	- maxX: double
-		 	- maxY: double
-		 	+ addToConnectedInBlocksViews(blockView: BuildingBlockView)
-		 	+ getUnit(): String
-		 	+ setUnit(unit: String): void
-		 	+ getMaxX(): double
-		 	+ setMaxX(x: double): void
-		 	+ getMaxY(): double
-		 	+ setMaxY(y: double): void
-
-		 }
-
-		 interface RepresentationBlockViewHandler {
-		  + unitSet(id: String, unit: double): void
-		  + maxXSet(id: String, x: double): void
-		  + maxYSet(id: String, y: double): void
-
-		 }
-
-		 class Button {
-		 	-label: String
-		 	-color: String
-		 	-image: Image
-		 	+buttonPressed(): void
-		 }
-
-		 interface ButtonHandler {
-			 +buttonPressed()
-		 }
-
-
-		 interface HelpDecoratorHandler {
-			+ decoratorPresssed():void
-		 }
-
-
-		note top of BuildingBlockView
-			Positions of ChannelDecorators and
-			layout of wires in between are not
-			part of ViewModel at this version.
-			Thus those Gui-aspects are considered
-			as implementation details and computed
-			automatically when gui screwed together
-			for now.
-		end note
-
-	  note left of BlockDragAndDropHandler
-			This handler is used for adding
-			and removing of blocks, as well as
-	 		for changing position on ConfigurationField.
-	  end note
-
-
-
-		 SensorBlockView --> "*" OutChannelDecorator
-		 TransformationBlockView --> "*" InChannelDecorator
-		 TransformationBlockView --> "*" OutChannelDecorator
-		 RepresentationBlockView --> "*" InChannelDecorator
-		 InChannelDecorator --|> ChannelDecorator
-		 OutChannelDecorator --|> ChannelDecorator
-		 InChannelDecorator --> Wire
-		 OutChannelDecorator --> Wire
-		 ChannelDecorator ..|> AddWireDragAndDropHandler
-		 Wire ..|> RemoveWireDragAndDropHandler
-
-
-		 class ChannelDecorator {
-			 -id: int
-			 -color: String
-			 -shape: String
-			 +addWireToOtherDecorator(channelId: int)
-		 }
-
-		class Wire {
-		-color: String
-		+changeColor(color: String): void
-		}
-
-
-		class ExceptionWindow {
-		-title: String
-		-description: String
-		+popUp(): void
-		+close(): void
-		}
-
-		class BuildingBlockExceptionWindow {
-		-id: String
-		+popUp(): void
-		+changeBlockColor(color: String): void
-		}
-
-		class ConnectionExceptionWindow {
-		-channelInId: int
-		-channelOutId: int
-		+popUp(): void
-		+changeWireColor(color: String): void
-		}
-
-		class GeneralExceptionWindow {
-		 +popUp(): void
-		}
+	 class RepresentationBlockField {
+		+ addRepresentationBlockView(block: RepresentationBlockView): void
 	 }
 
 
-	 package "FacadeModelViewController {
-
-
-
-	 interface "ViewControllerlnterface" {
-	  + getViewModel(): List: <BuildingBlockViews>
-	  + setViewModel(list: <BuildingBlockViews>): boolean
-	 }
-	 }
-
-	 package "FacadeModelViewModel {
-
-	 PickUpPointModelView -up-> ViewModelInterface
-	 PickUpPointModelView -up-> DataInterface
-	 PickUpPointModelView -up-> ExceptionInterface
-
-	 class PickUpPointModelView {
-	 + getDataInterface(): DataInterface
-	 + getExceptionInterface(): ExceptionInterface
-	 + getViewModelInterface(): ViewModelInterface
-	 }
-
-	 interface ViewModelInterface {
-	 + update(): void
-	 }
-
-	 interface DataInterface {
-	 + pushDataForVisualisation(...): void
-	 + pushGraphicalVisualisation(...):void
-	 }
-
-	 interface ExceptionInterface {
-	 + throwFatalException(title: String, description: String): void
-	 + throwBuildingBlockException(id: String, title: String, description: String): void
-	 + throwConnectionException(id: int, title: String, description: String): void
-	 }
-
-	 class OptionsWindow {
-	 	+ changeColorScheme(newColorScheme: String): void
-	 	+ changeFontSize(newSize: int): void
-
-	 }
-
-	 class HelpWindow {
-	 	- description: String
-	 	+ openDescription(): void
-
-	 }
-	 }
-
-
+	GUI.MainWindow "1"-- "1" ButtonField
+	GUI.MainWindow "1"-- "1" GUI.Menues.PrototypeField
+	PrototypeField <|-- SensorBlockField
+	PrototypeField <|-- TransformationBlockField
+	PrototypeField <|-- RepresentationBlockField
 
 }
+
+namespace Configuration {
+
+	 class ConfigurationField {
+		 - list: List<BuildingBlockView>
+		 + update(): void
+		 + add(block : BuildingBlock): void
+		 + remove(block: BuildingBlock): void
+		 + open(): void
+		 + getViewModel(): List: <BuildingBlockViews>
+	 	 + setViewModel(list: <BuildingBlockViews>): boolean
+	 	 + getContentsOfRepresentationBlocks():BufferedImage[]
+	 }
+
+	 interface BlockDragAndDropHandler {
+	 	+blockWasMoved(blockId : String, corX : double, corY : double)
+	 }
+
+	note left of BlockDragAndDropHandler
+		This handler is used for adding
+		and removing of blocks, as well as
+ 		for changing position on ConfigurationField.
+  	end note
+
+
+	 abstract class BuildingBlockView <<abstract>> {
+
+		 - id: String
+		 - buildingBlock: BuildingBlock
+		 - name: String
+		 - xCor: double
+		 - yCor: double
+		 - color: String
+		 - shape: String
+		 + BuildingBlockView(id: String): BuildingBlockView
+		 + setNumberOfChannels(number : int): void
+		 + setCoordinates(x : double, y : double): boolean
+		 + getXCoordinate(): int
+		 + getYCoordinate(): int
+		 + changeColor(color: String): void
+	 }
+
+	 class SensorBlockView {
+	  	+ addToConnectedOutBlocksViews(blockView: BuildingBlockView)
+	 }
+
+	 class TransformationBlockView {
+		  + addToConnectedInBlocksViews(blockView: BuildingBlockView)
+		  + addToConnectedOutBlocksViews(blockView: BuildingBlockView)
+	 }
+
+	 class RepresentationBlockView {
+	 	- unit: String
+	 	- maxX: double
+	 	- maxY: double
+	 	+ addToConnectedInBlocksViews(blockView: BuildingBlockView)
+	 	+ getUnit(): String
+	 	+ setUnit(unit: String): void
+	 	+ getMaxX(): double
+	 	+ setMaxX(x: double): void
+	 	+ getMaxY(): double
+	 	+ setMaxY(y: double): void
+	 	+ getContentsOfRepresentationBlocks():BufferedImage
+
+	 }
+
+	 interface HelpDecoratorHandler {
+		+ decoratorPresssed():void
+	 }
+
+	 interface RepresentationBlockViewHandler {
+	  + unitSet(id: String, unit: double): void
+	  + maxXSet(id: String, x: double): void
+	  + maxYSet(id: String, y: double): void
+
+	 }
+	 interface AddWireDragAndDropHandler {
+		+connectionAdded(fromChannelId: int, toChannelId: int)
+	 }
+
+	interface RemoveWireDragAndDropHandler {
+		+connectionRemoved(fromChannelId: int, toChannelId: int)
+	 }
+
+	class ChannelDecorator {
+		 -id: int
+		 -color: String
+		 -shape: String
+		 +addWireToOtherDecorator(channelId: int): void
+	 }
+
+	class OutChannelDecorator{
+	}
+
+	class InChannelDecorator{
+	}
+
+	class Wire {
+		-color: String
+		+changeColor(color: String): void
+	 }
+
+	 BlockDragAndDropHandler .down.|> ConfigurationField
+	 GUI.MainWindow "1"-- "1" ConfigurationField
+	 ConfigurationField "1" -- "*" BuildingBlockView
+	 BuildingBlockView <|--  SensorBlockView
+	 BuildingBlockView <|--  TransformationBlockView
+	 BuildingBlockView <|--  RepresentationBlockView
+	 RepresentationBlockView .down.|> RepresentationBlockViewHandler
+	 BuildingBlockView -right-> "1" HelpDecorator
+	 HelpDecorator .up.|> HelpDecoratorHandler
+
+	 InChannelDecorator --|> ChannelDecorator
+	 OutChannelDecorator --|> ChannelDecorator
+	 InChannelDecorator --> Wire
+	 OutChannelDecorator --> Wire
+	 ChannelDecorator .down.|> AddWireDragAndDropHandler
+	 Wire .down.|> RemoveWireDragAndDropHandler
+
+	 SensorBlockView --> "*" OutChannelDecorator
+	 TransformationBlockView --> "*" InChannelDecorator
+	 TransformationBlockView --> "*" OutChannelDecorator
+	 RepresentationBlockView --> "*" InChannelDecorator
+
+	 GUI.Menues.SensorBlockField -- "*" SensorBlockView
+	 GUI.Menues.TransformationBlockField -- "*" TransformationBlockView
+	 GUI.Menues.RepresentationBlockField -- "*" RepresentationBlockView
+
+}
+
+
+namespace Button {
+
+	 abstract class Button {
+	 	-label: String
+	 	-color: String
+	 	-image: Image
+	 	+buttonPressed(): void
+	 }
+
+	 interface ButtonHandler {
+		 +buttonPressed(): void
+	 }
+
+	 GUI.Menues.ButtonField -down- "*" Button
+	 	Button .up.|> ButtonHandler
+	 	Button <|-left- StartButton
+	 	Button <|-right- PauseButton
+	 	Button <|-left- ResumeButton
+	 	Button <|-- ResetButton
+	 	Button <|-- SaveDataButton
+	 	Button <|-- SaveRepresentationButton
+	 	Button <|-- SaveConfiguration
+	 	Button <|-- LoadConfiguration
+	 	Button <|-- NewConfiguration
+	 	Button <|-right- UndoButton
+	 	Button <|-right- RedoButton
+
+
+	}
+
+namespace Exception {
+
+
+	class ExceptionWindowManager{
+		+ showGeneralException(title: String, description: String): void
+	 	+ showBuildingBlockException(id: String, title: String, description: String): void
+	 	+ showConnectionException(id: int, title: String, description: String): void
+	 	+ closeAll(): void
+	 }
+
+	abstract class ExceptionWindow {
+		-title: String
+		-description: String
+		+ popUp(): void
+		+ close(): void
+	}
+
+	class BuildingBlockExceptionWindow {
+		- id: String
+		+ popUp(): void
+		+ changeBlockColor(color: String): void
+	}
+
+	class ConnectionExceptionWindow {
+		- channelInId: int
+		- channelOutId: int
+		+ popUp(): void
+		+ changeWireColor(color: String): void
+	}
+
+	abstract class GeneralExceptionWindow {
+	 	+ popUp(): void
+	}
+
+	 ExceptionWindowManager --> "*" ExceptionWindow
+	 GUI.MainWindow "1" -- ExceptionWindow
+	 ExceptionWindow <|-- BuildingBlockExceptionWindow
+	 ExceptionWindow <|-- ConnectionExceptionWindow
+	 ExceptionWindow <|-- GeneralExceptionWindow
+}
+
+namespace HelpAndOption {
+
+ class OptionsWindow {
+ 	+ changeColorScheme(newColorScheme: String): void
+ 	+ changeFontSize(newSize: int): void
+}
+
+ class HelpWindow {
+ 	- description: String
+ 	+ openDescription(): void
+
+ }
+	 GUI.MainWindow -down-o "1" HelpWindow
+	 GUI.MainWindow -down-o "1" OptionsWindow
+
+}
+
+ namespace FacadeControllerView {
+
+ class PickUpPointControllerView {
+	 + get IButtonAction(): IButtonAction
+	 + get IBlockAction(): iBlockAction
+	 + get IConnectionAction(): IConnectionAction
+ 	}
+
+ interface IButtonAction {
+ 	+ startPressed(): boolean
+ 	+ pausePressed(): boolean
+	+ resumePressed(): boolean
+ 	+ resetPressed(): boolean
+ 	+ saveDataPressed(): boolean
+ 	+ saveRepresentationPressed(): boolean
+ 	+ saveConfigurationPressed(): boolean
+ 	+ undoPressed(): void
+ 	+ redoPressed(): void
+	}
+
+ interface IBlockAction {
+ 	+ blockPlaced(id: String, xCor: double, yCor: double): boolean
+ 	+ blockMoved(id String, xCor: double, yCor: double): boolean
+ 	+ blockRemoved(id: String): boolean
+	}
+
+ interface IConnectionAction {
+
+ 	+ connectionAdded(channelId1: int, channelId2: int): boolean
+ 	+ connectionRemoved(channelId1: int, channelId2: int): void
+ 	+ blockAndChannelsRemoved(id: String): void
+	}
+
+ 		PickUpPointControllerView -up-> IButtonAction
+ 		PickUpPointControllerView -up-> IBlockAction
+ 		PickUpPointControllerView -up-> IConnectionAction
+
+ 	PickUpPointControllerView -- GUI.Button.ButtonHandler
+ 	PickUpPointControllerView -- GUI.Configuration.BlockDragAndDropHandler
+ 	PickUpPointControllerView -- GUI.Configuration.AddWireDragAndDropHandler
+ 	PickUpPointControllerView -- GUI.Configuration.RemoveWireDragAndDropHandler
+
+	}
+
+namespace FacadeModelView {
+
+	interface ViewModelInterface {
+	+getViewModel(): <BuildingBlock>
+	}
+
+	interface ViewDirectoryInterfacae {
+	+getBuildingBlock(id: String): BuildingBlock
+	+getConnection(id: int): BuildingBlock
+	}
+
+	ViewModelInterface -down- GUI.Configuration.ConfigurationField
+	ViewDirectoryInterfacae -- GUI.Configuration.ConfigurationField
+}
+
+}
+
 '------------------------------------------------------------------------
 'FileService
 '------------------------------------------------------------------------
