@@ -1269,8 +1269,8 @@ interface TimerTask {
 
 'Model to Cache
 
-Cache.IMRunListener <|.. Model.MRunReaction
-Cache.IMRunInfo <|.. Model.Core.ChannelLogic.MRunInfo
+Cache.MRunListener <|.. Model.MRunReaction
+Cache.MRunInfo <|.. Model.Core.ChannelLogic.MRunInfo
 
 'Model to Controller
 
