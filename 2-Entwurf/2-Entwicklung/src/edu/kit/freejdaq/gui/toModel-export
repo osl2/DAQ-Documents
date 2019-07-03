@@ -14,5 +14,6 @@ Das Interface:
 
 
 interface ViewModelInterface {
-	+getViewModel(): <BuildingBlock>
+	+ getViewModel(): <BuildingBlock>
+	+ update(): void
 	}
