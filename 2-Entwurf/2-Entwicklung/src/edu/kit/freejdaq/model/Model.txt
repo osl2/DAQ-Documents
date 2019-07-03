@@ -417,18 +417,66 @@ interface IMeasurementStreamListener {
 		-receiveData(measuredValue: int): void
 		-connectionTerminated(): void
 	}
-	
-	note bottom of IBusinessLogic
-	 createModelFromYamlDom() 
-	 examines semantic validity 
-	 and returns an appropriate result 
-	 to the controller. 
-	end note
 
-	interface IBusinessLogic{
+Model.Core.MeasurementRun -- IMeasurementStreamListener
+	
+	
+	
+
+	
+	
+	
+	
+	class BuildingBlockDirectory {
+
+		- map: HashMap<String: id, block: BuildingBlock>
+		
+		+ initialize():boolean
+		+ addBuildingBlock(id: String, BuildingBlock): boolean
+		+ removeBuildingBlock(id: String): boolean
+		+ getBuildingBlock(id: String): BuildingBlock
+		+ addConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
+		+ removeConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
+	}
+
+Model.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director		
+Model.Core.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director				
+
+
+
+
+
+
+
+
+
+class Model.MRunReaction {
+	+justWaiting():  void
+	+indicateError(inChannelId: String, errorCode: double)
+	+indicateTimeout(): void
+	+indicateConnectionTerminated(): void
+	+dispatchCompletePacketSet(completePacketSet: EnhancedValuePacket[])
+}
+
+
+MRunReaction "1" -- "1" Model.Core.MeasurementRun
+Model.Core.MeasurementConfiguration "1" -- "1" Model.Core.ChannelLogic.MRunInfo
+
+		
+	
+
+}
+@enduml
+
+old interfaces to 
+
+
+
+
+interface IBuisnessLogic{
 		+createModelFromYamlDom(modelDom: YamlDom): String
 	}
-	Model.Core.MeasurementConfiguration ..|> IBusinessLogic
+	Model.Core.MeasurementConfiguration ..|> IBuisnessLogic
 	
 	interface IModelInformation{
 		+getMeasurementConfig(): MeasurementConfiguration
@@ -456,100 +504,15 @@ interface IMeasurementStreamListener {
 		+reset()
 	}
 	Model.Core.MeasurementRun ..|> IMeasurementRun
-	
-	
-	
-	class BuildingBlockDirectory {
-
-		- map: HashMap<String: id, block: BuildingBlock>
-		
-		+ initialize():boolean
-		+ addBuildingBlock(id: String, BuildingBlock): boolean
-		+ removeBuildingBlock(id: String): boolean
-		+ getBuildingBlock(id: String): BuildingBlock
-		+ addConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-		+ removeConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-	}
-
-Model.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director		
-Model.Core.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director				
-
-		
-
-
-PickUpPointViewFacades --> "*" UpdateInterface
-PickUpPointViewFacades -left-> GraphicDataIolnterface
-PickUpPointViewFacades --> ExceptionInterface
-PickUpPointViewFacades --> MeasurementDataInterface
-
-class PickUpPointViewFacades {
-	 + getUpdateInterfaces(): UpdateInterface[]
-	 + getGraphicDataIolnterface(): GraphicDataIolnterface
-	 + getExceptionInterface(): ExceptionInterface
-	 + getMeasurementDataInterface(): DataInterface
- }
-
- interface UpdateInterface {
- 	+ update(): void
- }
-
-interface GraphicDataIolnterface {
-	  + getViewModel(): List: <BuildingBlockViews>
-	  + setViewModel(list: <BuildingBlockViews>): boolean
-	  + getContentsOfRepresentationBlocks(): BufferedImage[]
- }
- 
- interface ExceptionInterface {
-	 + showGeneralException(title: String, description: String): void
-	 + showBuildingBlockException(id: String, title: String, description: String): void
-	 + showConnectionException(id: int, title: String, description: String): void
- }
-
- interface MeasurementDataInterface {
- 	+ pushDataForVisualisation(...): void
- }
- 
- note top of MeasurementDataInterface 
-  	No implementation for this functionality yet.
- end note
-
- 
- GUI.Configuration.ConfigurationField .up.|> GraphicDataIolnterface
- GUI.Exception.ExceptionWindowManager .up.|> ExceptionInterface
- GUI.Configuration.ConfigurationField .up.|> UpdateInterface
- GUI.Menues.PrototypeField .up.|> UpdateInterface
 
 
 
-
-class Model.MRunReaction {
-	+justWaiting():  void
-	+indicateError(inChannelId: String, errorCode: double)
-	+indicateTimeout(): void
-	+indicateConnectionTerminated(): void
-	+dispatchCompletePacketSet(completePacketSet: EnhancedValuePacket[])
-}
-
-
-MRunReaction "1" -- "1" Model.Core.MeasurementRun
-Model.Core.MeasurementConfiguration "1" -- "1" Model.Core.ChannelLogic.MRunInfo
-
-		
-	
-
-}
-@enduml
-
-to do implementation
-
-
-
-
-
-
-
-
-
+note bottom of IBuisnessLogic
+	 createModelFromYamlDom() 
+	 examines semantic validity 
+	 and returns an appropriate result 
+	 to the controller. 
+	end note
 
 
 
