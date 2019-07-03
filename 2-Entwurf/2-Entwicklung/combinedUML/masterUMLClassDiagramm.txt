@@ -125,7 +125,6 @@ namespace Backend {
 	 	+ pathToLocalDir: String
 	}
 
-	IMeasurementStreamListener <|-- Cache.MRunActivityManagement
 }
 
 '------------------------------------------------------------------------
@@ -1269,7 +1268,7 @@ interface TimerTask {
 
 'Model to Cache
 
-Cache.MRunListener <|.. Model.MRunReaction
+Cache.MRunForward <|.. Model.MRunReaction
 Cache.MRunInfo <|.. Model.Core.ChannelLogic.MRunInfo
 
 'Model to Controller
