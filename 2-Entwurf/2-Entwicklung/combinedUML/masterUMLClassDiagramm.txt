@@ -132,7 +132,8 @@ namespace Backend {
 'Model
 '------------------------------------------------------------------------
 namespace Model {
-	namespace Core {
+
+namespace Core {
 
 
 
@@ -163,8 +164,14 @@ namespace Model {
 		-listOfAllChannels: <Channel>
 		-configurationAdjacencyList: configuration[]
 		+getPathToFile(): String
-		+addBlock(BuildingBlock block): boolean
- 		+removeBlock(Integer blockId): boolean
+
+ 		+getMeasurementConfig(): MeasurementConfiguration
+ 		+addBuildingBlock(id: String)
+		+removeBuildingBlock(id: String)
+		+addConnection(firstChannelId: String, secondChannelId: String)
+		+removeConnection(firstChannelId: String, secondChannelId: String)
+
+ 		+createModelFromYamlDom(modelDom: YamlDom): String
 
 	}
 	MeasurementConfiguration "1" -- "*" MeasurementRun
@@ -175,7 +182,9 @@ namespace Model {
 	'----------------------------------------------------------------------------------------
 
 	class PrototypCollection{
+		 +clonePrototyp(id: String)
 		 +returnCloneOfBlock(BuildingBlock: block)
+		 +editPropertyOfPrototyp(key: String, value: Integer)
 	}
 
 
@@ -280,24 +289,7 @@ namespace Model {
 	  		use eclipse nebula
 	  		for display
 		end note
-
-
-		class ChannelXvsTime {
-			processValue()
-		}
-
-		class ChannelXvsChannelY{
-			processValue()
-
-		}
-
-			class NChannelvsTime{
-			processValue()
-		}
 		XYRepresentation -up-|> Representation
-		ChannelXvsChannelY -up-|> XYRepresentation
-		ChannelXvsTime -up-|> XYRepresentation
-		NChannelvsTime -up-|> XYRepresentation
 		TableRespresentation   -down-|> Representation
 
 
@@ -310,40 +302,15 @@ namespace Model {
 			´{abstract} processValue()
 
 			}
-		 class AnalogDigitalConverter {
-			processValue()
-		}
 
-		class ADS1115 {
-			processValue()
-		}
-
-		AnalogDigitalConverter -up-|> Sensor
-		ADS1115 -up-|> AnalogDigitalConverter
-
-
-		class CurrentPower {
-			processValue()
-		}
-
-		class INA219 {
-			processValue()
-		}
-
-		CurrentPower -up-|> Sensor
-		INA219 -up-|> CurrentPower
-
-		class SpectralSensor {
-			processValue()
-		}
-
-		class AS7262 {
-			processValue()
-		}
-
-		SpectralSensor -up-|> Sensor
-		AS7262 -up-|> SpectralSensor
-
+		 class PhysicalSensor{
+		 	processValue()
+		 }
+		 class VirtualSensor{
+		 	processValue()
+		 }
+		 VirtualSensor --|> Sensor
+		 PhysicalSensor --|> Sensor
 	}
 	BuildingBlock <|-- Model.Core.SensorLogic.Sensor
 
@@ -405,8 +372,16 @@ namespace Model {
 		+forwardValue(): void
 	}
 
-	OutChannel --|> Channel
+	class MRunInfo {
+	+getAllInChannelIds(): String[]
+	+getErrorCodes(inChannelId: String): double[]
+	+getTimeoutOption(): long
+	}
 
+
+
+	OutChannel --|> Channel
+	OutChannel "1" -- "1" InChannel
 	note top of OutChannel
 	  forwardValue wird bei
 	  receive Value aufgerufen.
@@ -481,11 +456,6 @@ namespace BuildingBlockBuilder {
 		-linkToYaml: String
 		+{abstract} fetchBuildingBlock(): BuildingBlock
 		+snakeYaml.load(): hashMap
-
-
-
-
-
 	}
 
 
@@ -512,8 +482,19 @@ namespace BuildingBlockBuilder {
 
 	class SensorBuilder {
 		+fetchBuildingBlock(): BuildingBlock
+	}
+
+	class PhysicalSensorBuilder {
+		+fetchBuildingBlock(): BuildingBlock
+		+addSensorProducerName(yaml Yaml): void
 
 	}
+
+	class VirtualSensorBuilder {
+		+fetchBuildingBlock(): BuildingBlock
+	}
+
+
 	class TransformationBuilder {
 		+fetchBuildingBlock(): BuildingBlock
 
@@ -522,12 +503,28 @@ namespace BuildingBlockBuilder {
 		+fetchBuildingBlock(): BuildingBlock
 
 	}
+	class XYRepresentationBuilder {
+		+fetchBuildingBlock(): BuildingBlock
 
-	SensorBuilder -up-|> Builder
+	}
+	class TableRepresentationBuilder {
+		+fetchBuildingBlock(): BuildingBlock
+
+	}
+
+
+
+
+
+
+
+	PhysicalSensorBuilder -up-|> SensorBuilder
+	VirtualSensorBuilder -up-|> SensorBuilder
 	TransformationBuilder -up-|> Builder
 	RepresentationBuilder -up-|> Builder
-
-
+	SensorBuilder -up-|> Builder
+	TableRepresentationBuilder -up-|> RepresentationBuilder
+	XYRepresentationBuilder -up-|> RepresentationBuilder
 
 
 	Director "1" --> "0..*" Builder : Staff
@@ -536,6 +533,10 @@ namespace BuildingBlockBuilder {
 Model.BuildingBlockBuilder.SensorBuilder ..> Model.Core.SensorLogic.Sensor
 Model.BuildingBlockBuilder.TransformationBuilder ..> Model.Core.TransformationLogic.Transformation
 Model.BuildingBlockBuilder.RepresentationBuilder ..> Model.Core.RepresentationLogic.Representation
+Model.BuildingBlockBuilder.VirtualSensorBuilder ..> Model.Core.SensorLogic.VirtualSensor
+Model.BuildingBlockBuilder.PhysicalSensorBuilder ..> Model.Core.SensorLogic.PhysicalSensor
+Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.Core.RepresentationLogic.XYRepresentation
+Model.BuildingBlockBuilder.TableRepresentationBuilder ..> Model.Core.RepresentationLogic.TableRepresentation
 
 
 interface IMeasurementStreamListener {
@@ -543,46 +544,55 @@ interface IMeasurementStreamListener {
 		-connectionTerminated(): void
 	}
 
+Model.Core.MeasurementRun -- IMeasurementStreamListener
 
-	note bottom of IBusinessLogic
-	 createModelFromYamlDom()
-	 examines semantic validity
-	 and returns an appropriate result
-	 to the controller.
-	end note
 
-	interface IBusinessLogic{
-	+createModelFromYamlDom(modelDom: YamlDom): String
-	+addBuildingBlock(id: String)
-	+removeBuildingBlock(id: String)
-	+addConnection(firstChannelId: String, secondChannelId: String)
-	+removeConnection(firstChannelId: String, secondChannelId: String)
-	+clonePrototyp(id: String)
-	+editPropertyOfPrototyp(key: String, value: Integer)
+
+
+
+
+
+
+	class BuildingBlockDirectory {
+
+		- map: HashMap<String: id, block: BuildingBlock>
+
+		+ initialize():boolean
+		+ addBuildingBlock(id: String, BuildingBlock): boolean
+		+ removeBuildingBlock(id: String): boolean
+		+ getBuildingBlock(id: String): BuildingBlock
+		+ addConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
+		+ removeConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
 	}
 
-	interface IModelInformation{
-	+getMeasurementConfig(): MeasurementConfiguration
-	+getPrototyp(): BuildingBlock
-	}
-	interface IMeasurementRun{
-	+pause()
-	+start()
-	+reset()
+Model.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
+Model.Core.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
 
-	}
 
-		Model.Core.ChannelLogic.Channel ..|> IMeasurementStreamListener
-		Model.Core.MeasurementConfiguration ..|> IBusinessLogic
-		Model.Core.MeasurementConfiguration ..|> IModelInformation
-		Model.Core.MeasurementRun ..|> IMeasurementRun
 
-		Model.BuildingBlockBuilder.Director ..|> IBusinessLogic
+
+
+
+
+
+
+class Model.MRunReaction {
+	+justWaiting():  void
+	+indicateError(inChannelId: String, errorCode: double)
+	+indicateTimeout(): void
+	+indicateConnectionTerminated(): void
+	+dispatchCompletePacketSet(completePacketSet: EnhancedValuePacket[])
+}
+
+
+MRunReaction "1" -- "1" Model.Core.MeasurementRun
+Model.Core.MeasurementConfiguration "1" -- "1" Model.Core.ChannelLogic.MRunInfo
 
 
 
 
 }
+
 '------------------------------------------------------------------------
 'Controller
 '------------------------------------------------------------------------
