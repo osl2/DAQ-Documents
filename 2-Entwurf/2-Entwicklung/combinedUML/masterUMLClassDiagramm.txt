@@ -1260,8 +1260,7 @@ interface TimerTask {
 	+run(): void
 }
 
-IMRunListener <|.. Model.MRunReaction
-MRunInfo <|.. Model.Core.ChannelLogic.MRunInfo
+
 }
 
 '------------------------------------------------------------------------
@@ -1291,7 +1290,7 @@ ViewDirectoryInterface --|> Model.BuildingBlockDirectory
 
 'Cache to Backend
 
-Cache.IMeasurementStreamListener <|-- Cache.MRunActivityManagement
+Backend.IMeasurementStreamListener <|.. Cache.MRunActivityManagement
 
 '------------------------------------------------------------------------
 'Structure adapting Commands
