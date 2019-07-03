@@ -555,15 +555,18 @@ Model.Core.MeasurementRun -- IMeasurementStreamListener
 
 	class BuildingBlockDirectory {
 
-		- map: HashMap<String: id, block: BuildingBlock>
-
-		+ initialize():boolean
-		+ addBuildingBlock(id: String, BuildingBlock): boolean
-		+ removeBuildingBlock(id: String): boolean
-		+ getBuildingBlock(id: String): BuildingBlock
-		+ addConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-		+ removeConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-	}
+		- InitHashMap: HashMap<String: id, block: BuildingBlock>
+		- ConfigHashMap: HashMap<int: id, block: BuildingBlock>
+		--
+		+ addInitBuildingBlock(id: String, block: BuildingBlock): boolean
+		..
+		+ addConfigBuildingBlock(id: int, block: BuildingBlock): boolean
+		+ removeConfigBuildingBlock(id: String): boolean
+		+ getInitBuildingBlock(id: String): BuildingBlock
+		+ getConfigBuildingBlock(id: int): BuildingBlock
+		+ addConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
+		+ removeConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
+		}
 
 Model.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
 Model.Core.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
@@ -1150,25 +1153,6 @@ namespace FileService {
 	note bottom of PngService : for representation graphs
 
 }
-'------------------------------------------------------------------------
-'Directory
-'------------------------------------------------------------------------
-namespace Directory {
-	class BuildingBlockDirectory {
-
-		- InitHashMap: HashMap<String: id, block: BuildingBlock>
-		- ConfigHashMap: HashMap<int: id, block: BuildingBlock>
-		--
-		+ addInitBuildingBlock(id: String, block: BuildingBlock): boolean
-		..
-		+ addConfigBuildingBlock(id: int, block: BuildingBlock): boolean
-		+ removeConfigBuildingBlock(id: String): boolean
-		+ getInitBuildingBlock(id: String): BuildingBlock
-		+ getConfigBuildingBlock(id: int): BuildingBlock
-		+ addConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-		+ removeConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-		}
-}
 
 '------------------------------------------------------------------------
 'Cache
@@ -1277,7 +1261,7 @@ interface TimerTask {
 }
 
 IMRunListener <|.. Model.MRunReaction
-IMRunInfo <|.. Model.ChannelLogic.MRunInfo
+MRunInfo <|.. Model.Core.ChannelLogic.MRunInfo
 }
 
 '------------------------------------------------------------------------
@@ -1287,7 +1271,7 @@ IMRunInfo <|.. Model.ChannelLogic.MRunInfo
 'Model to Cache
 
 Cache.IMRunListener <|.. Model.MRunReaction
-Cache.IMRunInfo <|.. Model.ChannelLogic.MRunInfo
+Cache.IMRunInfo <|.. Model.Core.ChannelLogic.MRunInfo
 
 'Model to Controller
 
@@ -1296,9 +1280,9 @@ Controller.Controller_Model_Interface.IMeasurementRun <|.. Model.Core.Measuremen
 
 'Controller to GUI
 
-GUI.IButtonAction <|.. Controller.Command_Pattern.View_Controller_Interface.ButtonAction
-GUI.IBlockAction <|.. Controller.Command_Pattern.View_Controller_Interface.BlockAction
-GUI.IConnectionAction <|.. Controller.Command_Pattern.View_Controller_Interface.ConnectionAction
+GUI.FacadeControllerView.IButtonAction <|.. Controller.View_Controller_Interface.ButtonAction
+GUI.FacadeControllerView.IBlockAction <|.. Controller.View_Controller_Interface.BlockAction
+GUI.FacadeControllerView.IConnectionAction <|.. Controller.View_Controller_Interface.ConnectionAction
 
 'Model to GUI
 
