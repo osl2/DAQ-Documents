@@ -101,19 +101,19 @@ namespace Controller {
 		note right of Command : command parameters (e.g. blockID) are passed with the constructors
 		
 		class AddBlockToConfigCommand {
-			- blockID : int
+			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
 		}
 		
 		class ModifyBlockInConfigCommand {
-			- blockID : int
+			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
 		}
 		
 		class RemoveBlockFromConfigCommand {
-			- blockID : int
+			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
 		}
