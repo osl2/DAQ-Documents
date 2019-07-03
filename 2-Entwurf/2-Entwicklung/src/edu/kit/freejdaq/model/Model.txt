@@ -5,7 +5,7 @@
 
 
 
-
+namespace Model {
 
 namespace Core {
 
@@ -38,8 +38,14 @@ namespace Core {
 		-listOfAllChannels: <Channel>
 		-configurationAdjacencyList: configuration[]
 		+getPathToFile(): String
-		+addBlock(BuildingBlock block): boolean
- 		+removeBlock(Integer blockId): boolean
+		
+ 		+getMeasurementConfig(): MeasurementConfiguration
+ 		+addBuildingBlock(id: String)
+		+removeBuildingBlock(id: String)
+		+addConnection(firstChannelId: String, secondChannelId: String)
+		+removeConnection(firstChannelId: String, secondChannelId: String)
+ 		
+ 		+createModelFromYamlDom(modelDom: YamlDom): String
 
 	}
 	MeasurementConfiguration "1" -- "*" MeasurementRun
@@ -50,7 +56,9 @@ namespace Core {
 	'----------------------------------------------------------------------------------------
 
 	class PrototypCollection{
+		 +clonePrototyp(id: String)
 		 +returnCloneOfBlock(BuildingBlock: block)
+		 +editPropertyOfPrototyp(key: String, value: Integer)
 	}
 
 
@@ -417,8 +425,7 @@ interface IMeasurementStreamListener {
 		-receiveData(measuredValue: int): void
 		-connectionTerminated(): void
 	}
-
-
+	
 	note bottom of IBusinessLogic
 	 createModelFromYamlDom() 
 	 examines semantic validity 
@@ -427,35 +434,56 @@ interface IMeasurementStreamListener {
 	end note
 
 	interface IBusinessLogic{
-	+createModelFromYamlDom(modelDom: YamlDom): String
-	+addBuildingBlock(id: String)
-	+removeBuildingBlock(id: String)
-	+addConnection(firstChannelId: String, secondChannelId: String)
-	+removeConnection(firstChannelId: String, secondChannelId: String)
-	+clonePrototyp(id: String)
-	+editPropertyOfPrototyp(key: String, value: Integer)
+		+createModelFromYamlDom(modelDom: YamlDom): String
 	}
-
+	Model.Core.MeasurementConfiguration ..|> IBusinessLogic
+	
 	interface IModelInformation{
-	+getMeasurementConfig(): MeasurementConfiguration
-	+getPrototyp(): BuildingBlock
-	}
-	interface IMeasurementRun{
-	+pause()
-	+start()
-	+reset()
+		+getMeasurementConfig(): MeasurementConfiguration
+		+addBuildingBlock(id: String)
+		+removeBuildingBlock(id: String)
+		+addConnection(firstChannelId: String, secondChannelId: String)
+		+removeConnection(firstChannelId: String, secondChannelId: String)
 	
 	}
-
-		Model.Core.ChannelLogic.Channel ..|> IMeasurementStreamListener
-		Model.Core.MeasurementConfiguration ..|> IBusinessLogic
-		Model.Core.MeasurementConfiguration ..|> IModelInformation
-		Model.Core.MeasurementRun ..|> IMeasurementRun
+	Model.Core.MeasurementConfiguration ..|> IModelInformation
+	
+	interface IPrototypCollection {
+		+getPrototyp(): BuildingBlock
+		+clonePrototyp(id: String)
+		+editPropertyOfPrototyp(key: String, value: Integer)
+	}
+	Model.Core.PrototypCollection ..|> IPrototypCollection
+	
 		
-		Model.BuildingBlockBuilder.Director ..|> IBusinessLogic
+	
+	
+	interface IMeasurementRun{
+		+pause()
+		+start()
+		+reset()
+	}
+	Model.Core.MeasurementRun ..|> IMeasurementRun
+	
+	
+	
+	class BuildingBlockDirectory {
+
+		- map: HashMap<String: id, block: BuildingBlock>
+		
+		+ addBuildingBlock(id: String, BuildingBlock): boolean
+		+ removeBuildingBlock(id: String): boolean
+		+ getBuildingBlock(id: String): BuildingBlock
+		+ addConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
+		+ removeConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
+	}
+
+		
+		
+		
 	
 
-
+}
 @enduml
 
 
