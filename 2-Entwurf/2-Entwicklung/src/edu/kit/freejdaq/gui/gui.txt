@@ -310,7 +310,9 @@ namespace HelpAndOption {
  	+ blockPlaced(id: String, xCor: double, yCor: double): boolean
  	+ blockMoved(id String, xCor: double, yCor: double): boolean
  	+ blockRemoved(id: String): boolean
- 	+ editBuildingBlockProperties(properties: BuildingBlockProperties): boolean
+ 	+ editBuildingBlockProperties(id: String, properties: BuildingBlockProperties): boolean
+ 	+ cloneBuildingBlock(id: String): boolean
+ 	+ makePrototyp(id: String): boolean
 	}
  
  interface IConnectionAction {
