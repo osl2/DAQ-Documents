@@ -8,8 +8,10 @@ namespace FileService {
 	}
 	
 	class YamlService {
+		+ {static} saveAs(path : String, data : Object) : void
 		+ {static} load(path : String) : Object
 		+ {static} save(path : String, data : Object) : void
+		+ {static} delete(path : String, data : Object) : void
 	}
 	
 	note bottom of YamlService : for sensors, transformations, configs (?)

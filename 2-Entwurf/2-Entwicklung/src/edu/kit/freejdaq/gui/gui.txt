@@ -78,6 +78,8 @@ namespace Configuration {
 		 + getXCoordinate(): int
 		 + getYCoordinate(): int
 		 + changeColor(color: String): void
+		 + delete(): void
+		 + exportAsPrototype(): void
 	 }
 	 
 	 class SensorBlockView {
@@ -312,7 +314,7 @@ namespace HelpAndOption {
  	+ blockRemoved(id: String): boolean
  	+ editBuildingBlockProperties(id: String, properties: BuildingBlockProperties): boolean
  	+ cloneBuildingBlock(id: String): boolean
- 	+ makePrototyp(id: String): boolean
+ 	+ exportPrototyp(id: String): boolean
 	}
  
  interface IConnectionAction {
