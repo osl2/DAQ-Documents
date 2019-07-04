@@ -10,6 +10,8 @@ interface IModelInformation {
 	+ removeBuildingBlock(id : String) : boolean
 	+ addConnection(firstChannelId : String, secondChannelId : String) : boolean
 	+ removeConnection(firstChannelId : String, secondChannelId : String) : boolean
+	+ saveConfig(path : String) : boolean
+	+ loadConfig(path : String) : boolean
 }
 
 interface IMeasurementRun {

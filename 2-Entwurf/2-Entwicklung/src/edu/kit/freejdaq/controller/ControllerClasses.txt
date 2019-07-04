@@ -9,6 +9,8 @@ namespace Controller {
 			+ removeBuildingBlock(id : String) : boolean
 			+ addConnection(firstChannelId : String, secondChannelId : String) : boolean
 			+ removeConnection(firstChannelId : String, secondChannelId : String) : boolean
+			+ saveConfig(path : String) : boolean
+			+ loadConfig(path : String) : boolean
 		}
 		
 		interface IMeasurementRun {
@@ -39,6 +41,9 @@ namespace Controller {
 		 	+ blockPlaced(id: String, xCor: double, yCor: double): boolean
 		 	+ blockMoved(id String, xCor: double, yCor: double): boolean
 			+ blockRemoved(id : int) : boolean
+		 	+ editBuildingBlockProperties(id : String, properties : BuildingBlockProperties) : boolean
+		 	+ cloneBuildingBlock(id : String) : boolean
+		 	+ exportPrototype(id : String) : boolean
 		}
 	
 		class ConnectionAction < implements IConnectionAction > {
@@ -54,6 +59,9 @@ namespace Controller {
 		AddBlockToConfigCommand <-- Controller.View_Controller_Interface.BlockAction
 		ModifyBlockInConfigCommand <-- Controller.View_Controller_Interface.BlockAction
 		RemoveBlockFromConfigCommand <-- Controller.View_Controller_Interface.BlockAction
+		EditBlockPropertiesCommand <-- Controller.View_Controller_Interface.BlockAction
+		CloneBlockCommand <-- Controller.View_Controller_Interface.BlockAction
+		ExportBlockPrototypeCommand <-- Controller.View_Controller_Interface.BlockAction
 		CreateChannelConnectionCommand <-- Controller.View_Controller_Interface.ConnectionAction
 		ModifyChannelConnectionCommand <-- Controller.View_Controller_Interface.ConnectionAction
 		DeleteChannelConnectionCommand <-- Controller.View_Controller_Interface.ConnectionAction
@@ -63,7 +71,6 @@ namespace Controller {
 		StopRunCommand <-- Controller.View_Controller_Interface.ButtonAction
 		SaveConfigCommand <-- Controller.View_Controller_Interface.ButtonAction
 		LoadConfigCommand <-- Controller.View_Controller_Interface.ButtonAction
-		ResetConfigCommand <-- Controller.View_Controller_Interface.ButtonAction
 		
 		CommandManager <-- Controller.View_Controller_Interface.BlockAction
 		CommandManager <-- Controller.View_Controller_Interface.ConnectionAction
@@ -72,9 +79,14 @@ namespace Controller {
 		Controller.Controller_Model_Interface.IModelInformation <-down- AddBlockToConfigCommand
 		Controller.Controller_Model_Interface.IModelInformation <-down- ModifyBlockInConfigCommand
 		Controller.Controller_Model_Interface.IModelInformation <-down- RemoveBlockFromConfigCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- EditBlockPropertiesCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- CloneBlockCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- ExportBlockPrototypeCommand
 		Controller.Controller_Model_Interface.IModelInformation <-down- CreateChannelConnectionCommand
 		Controller.Controller_Model_Interface.IModelInformation <-down- ModifyChannelConnectionCommand
 		Controller.Controller_Model_Interface.IModelInformation <-down- DeleteChannelConnectionCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- SaveConfigCommand
+		Controller.Controller_Model_Interface.IModelInformation <-down- LoadConfigCommand
 		Controller.Controller_Model_Interface.IMeasurementRun <-down- StartRunCommand
 		Controller.Controller_Model_Interface.IMeasurementRun <-down- PauseRunCommand
 		Controller.Controller_Model_Interface.IMeasurementRun <-down- ResumeRunCommand
@@ -116,6 +128,25 @@ namespace Controller {
 		}
 		
 		class RemoveBlockFromConfigCommand {
+			- blockID : String
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class EditBlockPropertiesCommand {
+			- blockID : String
+			- properties : BuildingBlockProperties
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class CloneBlockCommand {
+			- blockID : String
+			+ execute() : void
+			+ unExecute() : void
+		}
+		
+		class ExportBlockPrototypeCommand {
 			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
@@ -184,6 +215,9 @@ namespace Controller {
 		Command <|.. AddBlockToConfigCommand
 		Command <|.. RemoveBlockFromConfigCommand
 		Command <|.. ModifyBlockInConfigCommand
+		Command <|.. EditBlockPropertiesCommand
+		Command <|.. CloneBlockCommand
+		Command <|.. ExportBlockPrototypeCommand
 		Command <|.. SaveConfigCommand
 		Command <|.. LoadConfigCommand
 		Command <|.. ResetConfigCommand

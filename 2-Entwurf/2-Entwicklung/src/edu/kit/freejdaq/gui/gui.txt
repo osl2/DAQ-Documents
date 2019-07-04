@@ -314,7 +314,7 @@ namespace HelpAndOption {
  	+ blockRemoved(id: String): boolean
  	+ editBuildingBlockProperties(id: String, properties: BuildingBlockProperties): boolean
  	+ cloneBuildingBlock(id: String): boolean
- 	+ exportPrototyp(id: String): boolean
+ 	+ exportPrototype(id: String): boolean
 	}
  
  interface IConnectionAction {
