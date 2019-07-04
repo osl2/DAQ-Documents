@@ -3,11 +3,34 @@
 'Backend
 '------------------------------------------------------------------------
 namespace Backend {
-	SshToPi --|> CommunicationWithPi
-	WebSocketToPi  --|> CommunicationWithPi
-	UsbToPi --|> CommunicationWithPi
+
+	PickPointForAgentsBasedOnSsh -up-> IAccessToSensorInfo
+	PickPointForAgentsBasedOnSsh -up-> IAccessToMeasurementRun
+	PickPointForAgentsBasedOnSsh .up.> InitDataForSsh
+
+	MeasurementRunAgentForSsh --> "*" IMStreamListener
+
+	SensorInfoAgentForSsh .right.|> IAccessToSensorInfo
+	MeasurementRunAgentForSsh .right.|> IAccessToMeasurementRun
+
+	SshToPi -up-|> CommunicationWithPi
+	WebSocketToPi  -right-|> CommunicationWithPi
+	UsbToPi -right-|> CommunicationWithPi
+
 	SshToPi -up-> NetworkConfiguration
-	WebSocketToPi -up-> NetworkConfiguration
+	WebSocketToPi -down-> NetworkConfiguration
+
+	CommunicationWithPi --> ICommandResponseListener
+	MeasurementRunAgentForSsh ..|> ICommandResponseListener
+
+	MeasurementRunAgentForSsh -left-> CommunicationWithPi
+	SensorInfoAgentForSsh -down-> CommunicationWithPi
+
+	MeasurementRunAgentForSsh --> MeasurementState
+
+
+	IMStreamListener  ..|> Cache.MStreamListener
+
 
 	class NetworkConfiguration {
 	   -port: int
@@ -25,20 +48,15 @@ namespace Backend {
 	    +{abstract}executeCommandContinuously(command: String, listeningAgent: ICommandResponseListener): void
 	    +{abstract}disconnect(): void
 	}
-	CommunicationWithPi --> "listeningProtocolAgent" ICommandResponseListener
+	
 
 	interface ICommandResponseListener {
 		receivePartOfResponse(response: String; finished: boolean)
 	}
 
-	 MeasurementRunAgentForSsh .up.|> ICommandResponseListener
+	
 
-	note top of MeasurementRunAgentForSsh
-		To separate technical aspect of communication 
-		from application specific aspect, this Agent
-		receives technical events and forwards them to
-		its registered application specific clients. 
-	end note
+	
 
 	class SshToPi {
 		-username: String
@@ -51,14 +69,13 @@ namespace Backend {
 	    +disconnect(): void
 	}
 
-	interface IMeasurementStreamListener {
-		-receiveData(measuredValue: int): void
-		-connectionTerminated(): void
+	
+	interface IMStreamListener {
+		+ receiveMDataSet(channelId: String, timeStamp: long, value: double): void
+		+ connectionTerminated(): void
 	}
 
-	MeasurementRunAgentForSsh -right-> CommunicationWithPi
-	SensorInfoAgentForSsh -up-> CommunicationWithPi
-	MeasurementRunAgentForSsh -left-> "*" IMeasurementStreamListener
+
 
 	interface IAccessToSensorInfo {
 		+getIdsOfAvailableSensors(): String[]
@@ -66,11 +83,10 @@ namespace Backend {
 		+setYamlFile(sensorId: String): boolean
 	}
 
-	SensorInfoAgentForSsh ..|> IAccessToSensorInfo
 
 
 	interface IAccessToMeasurementRun{
-		+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
+		+start(sensorIDs: string[], dataListeners: IMStreamListener[]): boolean
 		+pause(): boolean
 		+continue(): boolean
 		+stop(): boolean
@@ -82,14 +98,10 @@ namespace Backend {
 	  PAUSED
 	}
 
-	MeasurementRunAgentForSsh .down.|> IAccessToMeasurementRun
-	MeasurementRunAgentForSsh -up-> MeasurementState
-
-	together {
 
 		class MeasurementRunAgentForSsh {
 			+MeasurementRunAgentForSsh(foundation: CommunicationWithPi)
-			+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
+			+start(sensorIDs: string[], dataListeners: IMStreamListener[}): boolean
 			+pause(): boolean
 			+continue(): boolean
 			+stop(): boolean
@@ -102,17 +114,15 @@ namespace Backend {
 			+getYamlFile(sensorId: String): boolean
 			+setYamlFile(sensorId: String): boolean
 		}
-	}
 
-	PickupPointForAgentsBasedOnSsh -up-> IAccessToSensorInfo
-	PickupPointForAgentsBasedOnSsh -up-> IAccessToMeasurementRun
-	class PickupPointForAgentsBasedOnSsh {
-		+{static}getPickupPointForAgentsBasedOnSsh(initData: InitDataForSsh): PickupPointForAgentsBasedOnSsh
+
+
+	class PickPointForAgentsBasedOnSsh {
+		+{static}getPickPointForAgentsBasedOnSsh(initData: InitDataForSsh): PickPointForAgentsBasedOnSsh
 		+getIAccessToMeasurementRun(): IAccessToSensorInfo
 		+getIAccessToSensorInfo(): IAccessToSensorInfo
 	}
 	
-	PickupPointForAgentsBasedOnSsh ..> InitDataForSsh
 	
 	class InitDataForSsh {
 	 	+ ipAddressOfPi: String, 
@@ -123,6 +133,12 @@ namespace Backend {
 	 	+ pathToLocalDir: String
 	}
 
-	IMeasurementStreamListener <|-- Cache.MRunActivityManagement
+	note bottom of MeasurementRunAgentForSsh
+		To separate technical aspect of communication 
+		from application specific aspect, this Agent
+		receives technical events and forwards them to
+		its registered application specific clients. 
+	end note
+
 }
 @enduml

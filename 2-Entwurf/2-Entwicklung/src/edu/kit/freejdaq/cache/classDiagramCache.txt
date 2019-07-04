@@ -1,89 +1,98 @@
 @startuml
 namespace Cache {
-class MRunActivityManagement {
-	+ MRunActivityManagement(initData: MRunInfo, listenerAtModel: MRunForward )
+
+class MStreamListener {
+	+ receiveMDataSet(channelId: String, timeStamp: long, value: double): void
+	+ connectionTerminated(): void
+}
+
+
+class MRunTiming {
+	+ MRunTiming(initData: MRunInfo, listenerAtModel: MRunListener )
 	- addBufferForOneSensorInChannel(SensorId: String)
-	- addTrigger(trigger: Trigger): void
+	- addAction(action: CheckAndNotifyAction): void
 	..
 	+ run(): void
 	- setCurrentTime(): void
-	- checkTriggers(): void
+	- checkActions(): void
 	..
 	+ startRepeatedTimer(): void
 	+ stopRepeatedTimer(): void
-	..
-	+ receiveMDataSet(channelId: String, timeStamp: long, value: double): void
-	+ connectionTerminated(): void
-
-
 }
 
 class Timer {
 	-period: long
 	+schedule(timerTask: TimerTask, period: long)
-	+cancel(): void
+	+cancel(): boolean
 }
 
 class Cache{
 	+ addBufferForOneSensorInChannel(SensorId: String)
-	+ addPacket(timeStamp: long, value: double, inChannelId: String)
+	+ receiveMDataSet(channelId: String, timeStamp: long, value: double): void
 	+ isCompletePackageSetAvailable(from: long, to: long): boolean
 	+ pollCompletePackageSet(from: long, to: long):  IdValuePair[]
 }
 
 class BufferForOneSensorInChannel {
-	-sensorInChannelId: Stirng
-	-buffer: Queue<SimpleValuePacket>
-
+	-sensorInChannelId: String
+	-buffer: Queue<TimestampValuePair>
 	+getInChannelId(): String
 	+addPacket(timeStamp: long, value: double)
 	+getAllPacketsDuringTimespan(from: long, to: long): double[]
 }
 
-class SimpleValuePacket	{
+class TimestampValuePair	{
 	-value: double
 	-timeStamp: long
-	+SimpleValuePacket(value: double, timeStamp: long)
+	+TimestampValuePair(value: double, timeStamp: long)
 	+getValue(): double
 	+getTimeSpamp(): long
 }
 	
-class ConnectionTerminatedTrigger {
-	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+class ConnectionTerminatedAction {
+	-
+	+ connectionTerminated(): void
+	+ checkAndNotify(mRunForward: MRunForward)
 }
 
-class TimeoutTrigger {
-	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+class TimeoutAction {
+	-lastCompleteDatasetTimestamp: long
+	+checkAndNotify(mRunForward: MRunForward)
 }
 
-class ErrorCodeTrigger {
-	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+class ErrorCodeAction {
+	+checkAndNotify(mRunForward: MRunForward)
 }
 
-class BufferForOneSensorInChannel {
-	BufferForOneSensorInChannel
-	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+class DataSetCompleteAction {
+	+checkAndNotify(mRunForward: MRunForward)
 }
 
-ConnectionTerminatedTrigger .up.|> Trigger
-TimeoutTrigger .up.|> Trigger
-ErrorCodeTrigger .up.|> Trigger
-DataSetCompleteTrigger .up.|> Trigger
+MStreamListener --> ConnectionTerminatedAction
+MStreamListener --> Cache
+ConnectionTerminatedAction .up.|> CheckAndNotifyAction
+TimeoutAction .up.|> CheckAndNotifyAction
+ErrorCodeAction .up.|> CheckAndNotifyAction
+DataSetCompleteAction .up.|> CheckAndNotifyAction
 
-MRunActivityManagement ..|> TimerTask
-Timer --> "1" TimerTask
-MRunActivityManagement --> Cache
+MRunTiming -right-> Timer
+MRunTiming .right.|> TimerTask
+Timer -down-> "1" TimerTask
+MRunTiming --> Cache
 Cache --> "*" BufferForOneSensorInChannel
-BufferForOneSensorInChannel ..> SimpleValuePacket
-MRunActivityManagement --> "*" Trigger
+BufferForOneSensorInChannel .right.> TimestampValuePair
+MRunTiming --> "*" CheckAndNotifyAction
 
-DataSetCompleteTrigger --> "*" BufferForOneSensorInChannel
+DataSetCompleteAction --> "*" Cache
 
-interface Trigger {
-	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+MRunTiming --> "*" IMRunListener
+MRunTiming ..> IMRunInfo
+
+interface CheckAndNotifyAction {
+	+checkAndNotify(mRunForward: MRunForward)
 }
 
-interface MRunForward {
+interface IMRunListener {
 	+justWaiting():  void
 	+indicateError(inChannelId: String, errorCode: double)
 	+indicateTimeout(): void
@@ -91,7 +100,7 @@ interface MRunForward {
 	+dispatchCompletePacketSet(completePacketSet: EnhancedValuePacket[])
 }
 
-interface MRunInfo {
+interface IMRunInfo {
 	+getAllInChannelIds(): String[]
 	+getErrorCodes(inChannelId: String): double[]
 	+getTimeoutOption(): long
@@ -102,6 +111,7 @@ interface TimerTask {
 }
 
 IMRunListener <|.. Model.MRunReaction
-IMRunInfo <|.. Model.ChannelLogic.MRunInfo
+IMRunInfo <|.. Model.MRunInfo
+
 }
 @enduml
