@@ -320,9 +320,9 @@ Der Aufbau des Controllers setzt das Entwurfsmuster \textit{Kommando} (\textit{C
 
 \item Die Klasse \textit{CommandManager} erfüllt die Rolle des \textit{Aufrufers} (\textit{Invoker}). Der CommandManager verfügt außerdem über einen \textit{Undo-} und einen \textit{Redo-Stack} mit der Funktion, bereits ausgeführte Befehle rückgängig zu machen (bzw. rückgängig gemachte Aktionen wiederherzustellen).
 \item Die Schnittstelle \textit{Command} erfüllt die Rolle eines \textit{Befehls} im abstrakten Sinne.
-\item Die Klassen, welche \textit{Command} implementieren, erfüllen die Rolle der konkreten \textit{Befehle}.
+\item Die Klassen, welche \textit{Command} implementieren, erfüllen die Rolle der \textit{konkreten Befehle}.
 \item Die Rolle des (bzw. der) \textit{Klienten} wird durch die Klassen \textit{ButtonAction}, \textit{BlockAction}, bzw. \textit{ConnectionAction} erfüllt. Diese bilden die Schnittstelle, über welche das \textit{View}-Modul auf den Controller zugreift.
-\item Die Rolle der \textit{Empfänger} wird durch die Schnittstelle zum \textit{Model}-Modul erfüllt.
+\item Die Rolle der \textit{Empfänger} wird durch die Schnittstelle(n) zum \textit{Model}-Modul erfüllt.
 
 \end{itemize}
 

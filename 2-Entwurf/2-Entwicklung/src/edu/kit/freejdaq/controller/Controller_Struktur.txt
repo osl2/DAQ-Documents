@@ -1,0 +1,44 @@
+@startuml
+
+namespace Controller {
+	
+	interface IModelInformation < implemented by Model > {
+		+ addBuildingBlock(id : String) : boolean
+	}
+	
+	class BlockAction < implements IBlockAction > {
+		+ blockPlaced(id: String) : boolean
+	}
+
+	class CommandManager <<Singleton>> {
+		- doneCommands : Stack<Command>
+		- undoneCommands : Stack<Command>
+		+ doCommand(cmd : Command) : void
+		+ undo() : void
+		+ redo() : void
+	}
+
+	interface Command {
+		+ execute() : void
+		+ unExecute() : void
+	}
+
+	class AddBlockToConfigCommand {
+		- blockID : String
+		+ execute() : void
+		+ unExecute() : void
+	}
+
+	CommandManager o-- Command
+
+	Command <|.. AddBlockToConfigCommand
+	
+	BlockAction -right-> CommandManager : instructs to run commands
+	BlockAction .down.> AddBlockToConfigCommand : <<create>>
+	
+	IModelInformation <-right- AddBlockToConfigCommand
+
+}
+
+
+@enduml
