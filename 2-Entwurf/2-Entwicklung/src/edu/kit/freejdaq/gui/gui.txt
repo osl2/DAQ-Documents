@@ -334,9 +334,6 @@ namespace HelpAndOption {
 	
 namespace FacadeModelView {
 
-	interface ViewModelInterface {
-	+getViewModel(): <BuildingBlock>
-	}
 	
 	interface ViewDirectoryInterfacae {
 	+getInitBuildingBlock(id: String): BuildingBlock
