@@ -14,8 +14,8 @@ class BuildingBlockDirectory {
 + getConfigBuildingBlock(id: int): BuildingBlock
 + getFullInitBlock(): HashMap<InitId: String, block: BuildingBlock>
 + getFullConfigBlock(): HashMap<ConfigId: int, block: BuildingBlock>
-+ addConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-+ removeConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
++ addConfigConnection(bbId1: String, chId1: int, chId2: int, bbId2: String): boolean
++ removeConfigConnection(bbId1: String, chId1: int, chId2: int, bbId2: String): boolean
 + setUpdate(bool: boolean): boolean
 + checkUpdate(): boolean
 }
