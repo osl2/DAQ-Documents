@@ -35,8 +35,8 @@ class PrototypeField {
 	 }
 	
 	
-	GUI.MainWindow "1"-- "1" ButtonField
-	GUI.MainWindow "1"-- "1" GUI.Menues.PrototypeField
+	GUI.MainWindow "1" *-- "1" ButtonField
+	GUI.MainWindow "1" *-- "1" GUI.Menues.PrototypeField
 	PrototypeField <|-- SensorBlockField
 	PrototypeField <|-- TransformationBlockField
 	PrototypeField <|-- RepresentationBlockField
@@ -67,18 +67,16 @@ namespace Configuration {
 
 	 abstract class BuildingBlockView <<abstract>> {
 
-		 - id: String
 		 - buildingBlock: BuildingBlock
+		 - id: String
 		 - name: String
 		 - xCor: double
 		 - yCor: double
 		 - color: String
 		 - shape: String
-		 + BuildingBlockView(id: String): BuildingBlockView
 		 + setCoordinates(x : double, y : double): boolean
 		 + getXCoordinate(): int
 		 + getYCoordinate(): int
-		 + changeColor(color: String): void
 		 + delete(): void
 		 + exportAsPrototype(): void
 	 }
@@ -94,6 +92,7 @@ namespace Configuration {
 
 	 class RepresentationBlockView {
 	 	+ addToConnectedInBlocksViews(blockView: BuildingBlockView)
+	 	+ visualiseShell(): void 
 	 	+ getContentsOfRepresentationBlocks():BufferedImage
 
 	 }
@@ -172,12 +171,12 @@ namespace Configuration {
  }
 	 
 	 BlockDragAndDropHandler .down.|> ConfigurationField
-	 GUI.MainWindow "1"-- "1" ConfigurationField
+	 GUI.MainWindow "1" *-- "1" ConfigurationField
 	 ConfigurationField "1" -- "*" BuildingBlockView
 	 BuildingBlockView <|--  SensorBlockView
 	 BuildingBlockView <|--  TransformationBlockView
 	 BuildingBlockView <|--  RepresentationBlockView
-	 BuildingBlockView -right-> "1" HelpDecorator
+	 BuildingBlockView <-right- "1" HelpDecorator
 	 HelpDecorator .up.|> HelpDecoratorHandler
 	 	 
 	 InChannelDecorator --|> ChannelDecorator
@@ -297,8 +296,8 @@ namespace HelpAndOption {
  	+ fontSizeChanged(ize: int): void
  }
  
-	 GUI.MainWindow -down-o "1" HelpWindow
-	 GUI.MainWindow -down-o "1" OptionsWindow
+	 GUI.MainWindow *-down- "1" HelpWindow
+	 GUI.MainWindow *-down- "1" OptionsWindow
 	 HelpWindow <|.up. HelpWindowHandler
 	 OptionsWindow <|.up. OptionsWindowHandler
 
@@ -363,8 +362,8 @@ namespace FacadeModelView {
 	+checkForUpdate(): boolean
 	}
 	
-	ViewDirectoryInterface -- GUI.Configuration.ConfigurationField
-	ViewDirectoryInterface -- GUI.Menues.PrototypeField
+	ViewDirectoryInterface <|.. GUI.Configuration.ConfigurationField
+	ViewDirectoryInterface <|.. GUI.Menues.PrototypeField
 }
  
   
