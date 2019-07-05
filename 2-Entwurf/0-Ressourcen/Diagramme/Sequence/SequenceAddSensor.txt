@@ -8,8 +8,8 @@ actor "User" as U
 participant ":IUserInterface" as UI
 
 box "View" #White
-participant ":DragAndDropHandler" as DADH
-participant ":ConfigurationField" as CF
+participant ":BlockDragAndDropHandler" as DADH
+
 end box
 
 box "Controller" #White
@@ -23,9 +23,9 @@ end box
 
 U -> UI: drag and drop Sensor S1
 UI -> DADH : blockWasMoved(idOfS1, xS1, yS1)
-DADH -> CF : add(S1)
 
-CF -> CFV:  BlockPlaced(idOfS1, xCor, yCor)
+
+DADH -> CFV:  BlockPlaced(idOfS1, xCor, yCor)
 CFV -> AddBlock: execute()
 
 AddBlock -> ModelFacadeController: addBuildingBlock(idOfS1)
