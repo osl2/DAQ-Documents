@@ -54,17 +54,6 @@ namespace Model {
 	MeasurementConfiguration "1" -- "*" MeasurementRun
 
 
-	'----------------------------------------------------------------------------------------
-	'PrototypCollection: List of all predefined and custom BuildingBlocks
-	'----------------------------------------------------------------------------------------
-
-	class PrototypCollection{
-		 +clonePrototyp(id: String)
-		 +returnCloneOfBlock(BuildingBlock: block)
-		 +editPropertyOfPrototyp(key: String, value: Integer)
-	}
-
-
 	abstract class BuildingBlock
 	{
 
@@ -85,7 +74,7 @@ namespace Model {
 
 	MeasurementConfiguration "1" -- "*" BuildingBlock
 
-	PrototypCollection "1" -- "*" BuildingBlock
+	
 
 
 	namespace TransformationLogic {
@@ -132,7 +121,7 @@ namespace Model {
 
 			}
 
-		class TableRespresentation {
+		class "TableRespresentation" as TR{
 			processValue()
 
 		}
@@ -149,12 +138,12 @@ namespace Model {
 
 		}
 
-		note right of  Model.RepresentationLogic.XYRepresentation
+		note bottom of  Model.RepresentationLogic.XYRepresentation
 	  		use eclipse nebula
 	  		for display
 		end note
-		XYRepresentation -up-|> Representation
-		TableRespresentation   -down-|> Representation
+		XYRepresentation --|> Representation
+		TR   --|> Representation
 
 
 	}
@@ -246,7 +235,7 @@ namespace Model {
 
 	OutChannel --|> Channel
 	OutChannel "1" -- "1" InChannel
-	note top of OutChannel
+	note right of OutChannel
 	  forwardValue wird bei
 	  receive Value aufgerufen.
 	  Hier ausimplementiert.
@@ -282,7 +271,7 @@ namespace Model {
 		+ HelpMessage(msgFile : String)
 		+ displayMessage() : void
 	}
-	note right of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
+	note bottom of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
 
 	BuildingBlock "*" --> "1" HelpMessage : < provides help/information about
 
@@ -396,13 +385,16 @@ namespace BuildingBlockBuilder {
 	Director "1" --> "0..*" Builder : Staff
 
 }
+
+
+Model.BuildingBlockBuilder.TableRepresentationBuilder ..> Model.RepresentationLogic.TR
 Model.BuildingBlockBuilder.SensorBuilder ..> Model.SensorLogic.Sensor
 Model.BuildingBlockBuilder.TransformationBuilder ..> Model.TransformationLogic.Transformation
 Model.BuildingBlockBuilder.RepresentationBuilder ..> Model.RepresentationLogic.Representation
 Model.BuildingBlockBuilder.VirtualSensorBuilder ..> Model.SensorLogic.VirtualSensor
 Model.BuildingBlockBuilder.PhysicalSensorBuilder ..> Model.SensorLogic.PhysicalSensor
 Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.RepresentationLogic.XYRepresentation
-Model.BuildingBlockBuilder.TableRepresentationBuilder ..> Model.RepresentationLogic.TableRepresentation
+
 
 
 	class BuildingBlockDirectory {
@@ -435,7 +427,7 @@ class PickUpPointViewFacades {
 
  interface UpdateInterface {
  	+ updateConfig(): void
- 
+ }
 Model.UpdateInterface -- Model.BuildingBlockBuilder.Director
 
  interface GraphicDataIolnterface {
@@ -460,7 +452,7 @@ PickUpPointViewFacades --> "*" UpdateInterface
 PickUpPointViewFacades --> GraphicDataIolnterface
 PickUpPointViewFacades --> ExceptionInterface
 PickUpPointViewFacades --> MeasurementDataInterface
-
+GraphicDataIolnterface --> Model.RepresentationLogic.XYRepresentation
 
 
 
@@ -478,6 +470,18 @@ class Model.MRunReaction {
 MRunReaction  --  Model.MeasurementRun
 Model.MeasurementRun  --  Model.ChannelLogic.MRunInfo
 Model.MeasurementConfiguration  -->  Model.BuildingBlockDirectory
+
+
+
+class hidd {
+
+}
+hide Model.hidd
+
+
+Model.BuildingBlockDirectory -up[hidden]- Model.hidd
+Model.BuildingBlockBuilder -up[hidden]- Model.BuildingBlockDirectory
+Model.ChannelLogic -up[hidden]--------- Model.BuildingBlockBuilder
 
 
 
@@ -504,46 +508,7 @@ old interfaces to
 
 
 
-interface IBuisnessLogic{
-		+createModelFromYamlDom(modelDom: YamlDom): String
-	}
-	Model.Core.MeasurementConfiguration ..|> IBuisnessLogic
-	
-	interface IModelInformation{
-		+getMeasurementConfig(): MeasurementConfiguration
-		+addBuildingBlock(id: String)
-		+removeBuildingBlock(id: String)
-		+addConnection(firstChannelId: String, secondChannelId: String)
-		+removeConnection(firstChannelId: String, secondChannelId: String)
-	
-	}
-	Model.Core.MeasurementConfiguration ..|> IModelInformation
-	
-	interface IPrototypCollection {
-		+getPrototyp(): BuildingBlock
-		+clonePrototyp(id: String)
-		+editPropertyOfPrototyp(key: String, value: Integer)
-	}
-	Model.Core.PrototypCollection ..|> IPrototypCollection
-	
-		
-	
-	
-	interface IMeasurementRun{
-		+pause()
-		+start()
-		+reset()
-	}
-	Model.Core.MeasurementRun ..|> IMeasurementRun
 
-
-
-note bottom of IBuisnessLogic
-	 createModelFromYamlDom() 
-	 examines semantic validity 
-	 and returns an appropriate result 
-	 to the controller. 
-	end note
 
 
 

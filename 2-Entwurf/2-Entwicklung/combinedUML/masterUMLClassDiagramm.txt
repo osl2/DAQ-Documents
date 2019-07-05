@@ -145,6 +145,7 @@ namespace Model {
 		+resume(): boolean
 		+reset(): boolean
 		+setUpdateRate(MeasurementConfiguration config): boolean
+		-checkSensorInChannelStates(): boolean
 
 	}
 
@@ -160,10 +161,12 @@ namespace Model {
 	class MeasurementConfiguration{
 		-pathToFile: String
 		-updateRate: float
+		-createConfigId( id: String): Integer
+		-cloneInitBlock(is: String): BuildingBlock
 		-listOfAllChannels: <Channel>
 		-configurationAdjacencyList: configuration[]
 		+getPathToFile(): String
-
+		-checkForCycle(): boolean
  		+getMeasurementConfig(): MeasurementConfiguration
  		+addBuildingBlock(id: String)
 		+removeBuildingBlock(id: String)
@@ -176,21 +179,11 @@ namespace Model {
 	MeasurementConfiguration "1" -- "*" MeasurementRun
 
 
-	'----------------------------------------------------------------------------------------
-	'PrototypCollection: List of all predefined and custom BuildingBlocks
-	'----------------------------------------------------------------------------------------
-
-	class PrototypCollection{
-		 +clonePrototyp(id: String)
-		 +returnCloneOfBlock(BuildingBlock: block)
-		 +editPropertyOfPrototyp(key: String, value: Integer)
-	}
-
-
 	abstract class BuildingBlock
 	{
 
-		-id: String
+		-initId: String
+		-configId: int
 		-name: String
 		-userInfo: String
 		+setId()
@@ -206,7 +199,7 @@ namespace Model {
 
 	MeasurementConfiguration "1" -- "*" BuildingBlock
 
-	PrototypCollection "1" -- "*" BuildingBlock
+	
 
 
 	namespace TransformationLogic {
@@ -253,7 +246,7 @@ namespace Model {
 
 			}
 
-		class TableRespresentation {
+		class "TableRespresentation" as TR{
 			processValue()
 
 		}
@@ -270,12 +263,12 @@ namespace Model {
 
 		}
 
-		note right of  Model.RepresentationLogic.XYRepresentation
+		note bottom of  Model.RepresentationLogic.XYRepresentation
 	  		use eclipse nebula
 	  		for display
 		end note
-		XYRepresentation -up-|> Representation
-		TableRespresentation   -down-|> Representation
+		XYRepresentation --|> Representation
+		TR   --|> Representation
 
 
 	}
@@ -367,7 +360,7 @@ namespace Model {
 
 	OutChannel --|> Channel
 	OutChannel "1" -- "1" InChannel
-	note top of OutChannel
+	note right of OutChannel
 	  forwardValue wird bei
 	  receive Value aufgerufen.
 	  Hier ausimplementiert.
@@ -403,7 +396,7 @@ namespace Model {
 		+ HelpMessage(msgFile : String)
 		+ displayMessage() : void
 	}
-	note right of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
+	note bottom of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
 
 	BuildingBlock "*" --> "1" HelpMessage : < provides help/information about
 
@@ -517,13 +510,16 @@ namespace BuildingBlockBuilder {
 	Director "1" --> "0..*" Builder : Staff
 
 }
+
+
+Model.BuildingBlockBuilder.TableRepresentationBuilder ..> Model.RepresentationLogic.TR
 Model.BuildingBlockBuilder.SensorBuilder ..> Model.SensorLogic.Sensor
 Model.BuildingBlockBuilder.TransformationBuilder ..> Model.TransformationLogic.Transformation
 Model.BuildingBlockBuilder.RepresentationBuilder ..> Model.RepresentationLogic.Representation
 Model.BuildingBlockBuilder.VirtualSensorBuilder ..> Model.SensorLogic.VirtualSensor
 Model.BuildingBlockBuilder.PhysicalSensorBuilder ..> Model.SensorLogic.PhysicalSensor
 Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.RepresentationLogic.XYRepresentation
-Model.BuildingBlockBuilder.TableRepresentationBuilder ..> Model.RepresentationLogic.TableRepresentation
+
 
 
 	class BuildingBlockDirectory {
@@ -545,10 +541,7 @@ Model.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
 Model.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
 
 
-PickUpPointViewFacades --> "*" UpdateInterface
-PickUpPointViewFacades -left-> GraphicDataIolnterface
-PickUpPointViewFacades --> ExceptionInterface
-PickUpPointViewFacades --> MeasurementDataInterface
+
 
 class PickUpPointViewFacades {
 	 + getUpdateInterfaces(): UpdateInterface[]
@@ -560,8 +553,9 @@ class PickUpPointViewFacades {
  interface UpdateInterface {
  	+ updateConfig(): void
  }
+Model.UpdateInterface -- Model.BuildingBlockBuilder.Director
 
-interface GraphicDataIolnterface {
+ interface GraphicDataIolnterface {
 	  + getContentsOfRepresentationBlocks(): BufferedImage[]
  }
  
@@ -572,15 +566,18 @@ interface GraphicDataIolnterface {
  }
 
 Model.ExceptionInterface -- Model.MeasurementConfiguration 
-Model.ExceptionInterface -- MeasurementRun
+Model.ExceptionInterface -- Model.MeasurementRun
 
  interface MeasurementDataInterface {
  	+ pushShellForVisualisation(..): void
  }
 Model.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
 
-
-
+PickUpPointViewFacades --> "*" UpdateInterface
+PickUpPointViewFacades --> GraphicDataIolnterface
+PickUpPointViewFacades --> ExceptionInterface
+PickUpPointViewFacades --> MeasurementDataInterface
+GraphicDataIolnterface --> Model.RepresentationLogic.XYRepresentation
 
 
 
@@ -595,9 +592,21 @@ class Model.MRunReaction {
 }
 
 
-MRunReaction "1" -- "1" Model.MeasurementRun
-Model.MeasurementConfiguration "1" -- "1" Model.ChannelLogic.MRunInfo
+MRunReaction  --  Model.MeasurementRun
+Model.MeasurementRun  --  Model.ChannelLogic.MRunInfo
 Model.MeasurementConfiguration  -->  Model.BuildingBlockDirectory
+
+
+
+class hidd {
+
+}
+hide Model.hidd
+
+
+Model.BuildingBlockDirectory -up[hidden]- Model.hidd
+Model.BuildingBlockBuilder -up[hidden]- Model.BuildingBlockDirectory
+Model.ChannelLogic -up[hidden]--------- Model.BuildingBlockBuilder
 
 
 
