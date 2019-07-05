@@ -390,7 +390,10 @@ Menüs bieten dem Benutzer eine übersichtliche visuelle Zusammenfassung der Dar
 
 \paragraph{PrototypeField}
 Die Klasse PrototypeField ist die Über-Klasse zu SensorBlockField, TransformationBlockField und RepresentationBlockField. 
-Sie stellt die Menüfläche dar, in welcher vordefinierte Konfigurationsbausteine dargestellt werden und der Benutzer sie mit dem Mauszeiger in das Konfigurationsfeld ziehen und damit positionieren kann.
+Sie stellt die Menüfläche dar, in welcher vordefinierte Konfigurationsbausteine je nach Kategorie dargestellt werden und der Benutzer sie mit dem Mauszeiger in das Konfigurationsfeld ziehen und damit positionieren kann.
+
+\paragraph{FieldHandler}
+Das Interface FieldHandler nimmt Benutzereingaben entgegen, in diesem Fall werden das Öffnen der Menüflächen registiert und an das Feld weitergeleitet.
 
 \paragraph{SensorBlockField}
 Die Klasse SensorBlockField stellt die Menüfläche dar, in welcher alle Sensorbausteine angezeigt werden.
@@ -437,7 +440,7 @@ Die Klasse TransformationBlockView stellt einen Transformationsbaustein dar. Tra
 
 \paragraph{RepresentationBlockView} 
 
-Die Klasse RepresentationBlockView stellt einen Darstellungbaustein dar, dieser bestimmt, wie die Messdaten visualisiert werden. Um die Daten sinnvoll darstellen zu können, muss der Benutzer eine Einheit der Messdaten und Grenzwerte für die Darstellung eingeben. 
+Die Klasse RepresentationBlockView stellt einen Darstellungbaustein dar, dieser bestimmt, wie die Messdaten visualisiert werden. Dafür bekommt der Repräsentationsbaustein die visuelle Darstellung in dem Darstellungsgerüst (z.B: Graph, Tabelle) mit den dargestellten Messdaten.
 Zur Speicherung der visuellen Darstellung der Daten muss ein Bild erstellt werden, welches zum Speichern weiter geleitet wird.
 Darstellungsbausteine besitzen nur Eingänge, da dargestellt Messdaten nicht mehr verarbeitet werden. 
 
@@ -471,6 +474,18 @@ Transformationsbausteine besitzen neben den Standart-Eigenschaften noch eine vor
 \paragraph{RepresentationBlockProperties}
 
 Da Repräsentatonsbausteine die visuelle Repräsentation beschreiben besitzen diese für die Darstellung notwendige Eigenschaften, wie Einheit, Maximalwerte der Achsen und Art der Darstellung. Um den Benutzer die Möglichkeit zu geben die Darstellung auf die Messwerte anzupassen, lassen sich Einheit und Maximalwerte vom Benutzer einstellen.
+
+\paragraph{BuildingBlockPropertiesHandler}
+
+Damit der Benutzer Attribute der Konfigurationsbausteine ändern kann, bietet der BuildingBlockPropertiesHandler Methoden an, um die gemeinsamen Attribute, wie Name, Farbe, Form, Größe zu verändern. Das heißt, er nimmt diese Benutzereingaben entgegen.
+
+\paragraph{TransBlockPropertiesHandler}
+
+Da der Benutzer bei einem Transformationsbaustein nur die Funktion verändern kann nimmt dieser Handler ebenfalls nur eine Benutzereingabe für eine Funktion entgegen und setzt diese in den Transformationsbaustein-Eigenschaften.
+
+\paragraph{ReprBlockPropertiesHandler}
+
+Bei Representationsbaustein-Eigenschaften ist der Benutzer in der Lage Einheit und Grenzwerte zu setzten. Daher nimmt der Handler diese Benutzer eingaben entgegen.
 
 
 \newpage

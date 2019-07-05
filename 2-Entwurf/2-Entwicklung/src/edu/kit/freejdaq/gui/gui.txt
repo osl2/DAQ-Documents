@@ -188,7 +188,7 @@ namespace Configuration {
 	 BuildingBlockProperties <|-- RepresentationBlockProperties
 	 BuildingBlockProperties .left.|> BuildingBlockPropertiesHandler
 	 TransformationBlockProperties ..|> TransBlockPropertiesHandler
-	 RepresentationBlockProperties --|> ReprBlockPropertiesHandler
+	 RepresentationBlockProperties ..|> ReprBlockPropertiesHandler
  }
 	 
 	 BlockDragAndDropHandler .down.|> ConfigurationField
