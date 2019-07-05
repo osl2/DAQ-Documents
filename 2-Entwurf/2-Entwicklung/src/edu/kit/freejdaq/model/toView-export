@@ -2,10 +2,10 @@
 Die Implementierung:
 
 
- GUI.Configuration.RepresentationBlockView -up-|> GraphicDataIolnterface
- GUI.Exception.ExceptionWindowManager -up-|> ExceptionInterface
- GUI.Configuration.ConfigurationField -up-|> UpdateInterface
- GUI.Menues.PrototypeField -up-|> UpdateInterface
+ GUI.Configuration.RepresentationBlockView --|> Model.GraphicDataIolnterface
+ GUI.Exception.ExceptionWindowManager --|> Model.ExceptionInterface
+ GUI.Configuration.ConfigurationField --|> Model.UpdateInterface
+ GUI.Menues.PrototypeField --|> Model.UpdateInterface
  
  Die Interfaces mit Verbindungen zum PickUpPointen
  
