@@ -19,15 +19,19 @@ class PrototypeField {
 	 }
 	 
 	 class SensorBlockField {
-	 	+ addSensorBlockView(block: SensorBlockView): void
+	 	+ addSensorBlockView(block: SensorBlock): void
 	 }
 
 	 class TransformationBlockField {
-	  	+ addTransformationBlockView(block: TransformationBlockView): void
+	  	+ addTransformationBlockView(block: TransformationBlock): void
 	 }
 
 	 class RepresentationBlockField {
-		+ addRepresentationBlockView(block: RepresentationBlockView): void
+		+ addRepresentationBlockView(block: RepresentationBlock): void
+	 }
+	 
+	 interface FieldHandler {
+	 	+ field WasOpened(): void
 	 }
 	
 	
@@ -36,6 +40,7 @@ class PrototypeField {
 	PrototypeField <|-- SensorBlockField
 	PrototypeField <|-- TransformationBlockField
 	PrototypeField <|-- RepresentationBlockField
+	PrototypeField .right.|> FieldHandler
 
 }
 
@@ -44,8 +49,8 @@ namespace Configuration {
 	 class ConfigurationField {
 		 - list: List<BuildingBlockView>		
 		 + update(): void
-		 + add(block : BuildingBlockView): void
-		 + remove(block: BuildingBlockView): void
+		 + add(block : BuildingBlock): void
+		 + remove(block: BuildingBlock: void
 		 + open(): void			
 	 	 }
 	 
@@ -281,8 +286,21 @@ namespace HelpAndOption {
  	+ openDescription(): void
 
  }
+ 
+ interface HelpWindowHandler {
+ 	+ helpOpened(): void
+ }
+ 
+ interface OptionsWindowHandler {
+ 	+ optionsOpened(): void
+ 	+ colorChanged(color: String): void
+ 	+ fontSizeChanged(ize: int): void
+ }
+ 
 	 GUI.MainWindow -down-o "1" HelpWindow
 	 GUI.MainWindow -down-o "1" OptionsWindow
+	 HelpWindow <|.up. HelpWindowHandler
+	 OptionsWindow <|.up. OptionsWindowHandler
 
 }
 
@@ -336,7 +354,7 @@ namespace HelpAndOption {
 namespace FacadeModelView {
 
 	
-	interface ViewDirectoryInterfacae {
+	interface ViewDirectoryInterface {
 	+getInitBuildingBlock(id: String): BuildingBlock
 	+getConfigBuildingBlock(id: int): BuildingBlock
 	+getFullInitBlock(): HashMap<InitId: String, block: BuildingBlock>
@@ -345,7 +363,8 @@ namespace FacadeModelView {
 	+checkForUpdate(): boolean
 	}
 	
-	ViewDirectoryInterfacae -- GUI.Configuration.ConfigurationField
+	ViewDirectoryInterface -- GUI.Configuration.ConfigurationField
+	ViewDirectoryInterface -- GUI.Menues.PrototypeField
 }
  
   
