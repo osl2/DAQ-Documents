@@ -1,8 +1,8 @@
-@startuml
+
 Die Implementierung:
 
 
- GUI.Configuration.ConfigurationField -up-|> GraphicDataIolnterface
+ GUI.Configuration.RepresentationBlockView -up-|> GraphicDataIolnterface
  GUI.Exception.ExceptionWindowManager -up-|> ExceptionInterface
  GUI.Configuration.ConfigurationField -up-|> UpdateInterface
  GUI.Menues.PrototypeField -up-|> UpdateInterface
@@ -40,10 +40,6 @@ interface GraphicDataIolnterface {
  	+ pushShellForVisualisation(..): void
  }
  
- note top of MeasurementDataInterface 
-  	No implementation for this functionality yet.
- end note
 
  
 
-@enduml
