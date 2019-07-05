@@ -138,20 +138,32 @@ namespace Configuration {
 	 	- color: String
 	 	- shape: String
 	 	- size: double
-	 	+ open(): boolean
 	 	+ setName(name: String): boolean
 	 	+ setColor(color: String): boolean
 	 	+ setShape(shape: String): boolean
 	 	+ setSize(size: double): boolean
 	}
 	
+	interface BuildingBlockPropertiesHandler {
+		+ openProperties(): boolean
+		+ nameSet(name: String): void
+		+ colorSet(color: String): void
+		+ shapeSet(shape: String): void
+		+ sizeSet(size: double): void
+	}
+	
 	 class SensorBlockProperties {
 	 	- dimension: int
 	 }
 	 
+	 
 	 class TransformationBlockProperties {
 	 	- function: String
 	 	+ setFunction(function: String): boolean
+	 }
+	 
+	 interface TransBlockPropertiesHandler {
+	 	+ functionSet(function: String): void
 	 }
 	 
 	 class RepresentationBlockProperties {
@@ -165,9 +177,18 @@ namespace Configuration {
 	 	+ setMaxY(y: double): boolean
 	 }
 	 
+	 interface ReprBlockPropertiesHandler {
+	 	+ unitWasSet(unit: String): void
+	 	+ maxXSet(x: double): void
+	 	+ maxYSet(y: double): void
+	 }
+	 
 	 BuildingBlockProperties <|-- SensorBlockProperties
 	 BuildingBlockProperties <|-- TransformationBlockProperties
 	 BuildingBlockProperties <|-- RepresentationBlockProperties
+	 BuildingBlockProperties .left.|> BuildingBlockPropertiesHandler
+	 TransformationBlockProperties ..|> TransBlockPropertiesHandler
+	 RepresentationBlockProperties --|> ReprBlockPropertiesHandler
  }
 	 
 	 BlockDragAndDropHandler .down.|> ConfigurationField
