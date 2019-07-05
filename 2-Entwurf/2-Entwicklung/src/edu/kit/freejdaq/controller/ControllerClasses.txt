@@ -102,7 +102,7 @@ namespace Controller {
 			+ redo() : void
 		}
 		
-		note top of CommandManager : doCommand(cmd : Command)\n    cmd.execute()\n    doneCommands.push(cmd)\n    undoneCommands.clear()
+		note top of CommandManager : doCommand(cmd : Command)\n    cmd.execute()\n    if (cmd.isUndoable()())\n        doneCommands.push(cmd)\n    undoneCommands.clear()
 		note left of CommandManager : undo()\n    cmd = doneCommands.pop()\n    cmd.unExecute()\n    undoneCommands.push(cmd)
 		note right of CommandManager : redo()\n    cmd = undoneCommands.pop()\n    cmd.execute()\n    doneCommands.push(cmd)
 		
@@ -111,6 +111,7 @@ namespace Controller {
 		interface Command {
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		note right of Command : command parameters (e.g. blockID) are passed with the constructors
@@ -119,18 +120,21 @@ namespace Controller {
 			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class ModifyBlockInConfigCommand {
 			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class RemoveBlockFromConfigCommand {
 			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class EditBlockPropertiesCommand {
@@ -138,35 +142,41 @@ namespace Controller {
 			- properties : BuildingBlockProperties
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class CloneBlockCommand {
 			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class ExportBlockPrototypeCommand {
 			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class SaveConfigCommand {
 			- filePath : String
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class LoadConfigCommand {
 			- filePath : String
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class ResetConfigCommand {
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class CreateChannelConnectionCommand {
@@ -174,6 +184,7 @@ namespace Controller {
 			- endChannelID : int
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class ModifyChannelConnectionCommand {
@@ -183,6 +194,7 @@ namespace Controller {
 			- newEndChannelID : int
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class DeleteChannelConnectionCommand {
@@ -190,26 +202,31 @@ namespace Controller {
 			- endChannelID : int
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class StartRunCommand {
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class StopRunCommand {
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class PauseRunCommand {
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		class ResumeRunCommand {
 			+ execute() : void
 			+ unExecute() : void
+			+ isUndoable() : boolean
 		}
 		
 		Command <|.. AddBlockToConfigCommand

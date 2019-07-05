@@ -328,7 +328,35 @@ Der Aufbau des Controllers setzt das Entwurfsmuster \textit{Kommando} (\textit{C
 
 \subsubsection{CommandManager}
 
-Der CommandManager verfügt außerdem über einen \textit{Undo-} und einen \textit{Redo-Stack} mit der Funktion, bereits ausgeführte Befehle rückgängig zu machen (bzw. rückgängig gemachte Aktionen wiederherzustellen).
+Die Klasse CommandManager hat die Funktion, die Ausführung konkreter Befehle zu veranlassen. Der CommandManager ist als \textit{Singleton} definiert um sicherzustellen, dass von allen Klienten auf dieselbe Instanz zugreifen.
+
+Anhand eines \textit{Undo-} und eines \textit{Redo-Stacks} bietet der CommandManager außerdem die Möglichkeit an, bereits ausgeführte Befehle rückgängig zu machen (bzw. rückgängig gemachte Aktionen wiederherzustellen). Nicht alle Befehle können rückgängig gemacht werden.
+
+\subsubsection{Command bzw. konkrete Befehle}
+
+Die Schnittstelle Command und die konkreten Klassen, welche Command implementieren, sind die Befehle des Controllers. Jeder konkrete Befehl kapselt eine genau definierte Funktionalität.
+
+Bestimmte Befehle können durch \textit{unExecute()} rückgängig gemacht werden. In diesen Fällen wird durch \textit{isUndoable()} immer \textit{true} zurückgegeben.
+
+Andere Befehle können nicht rückgängig gemacht werden. Dann ist die Methode \textit{unExecute()} leer und \textit{isUndoable()} gibt \textit{false} zurück.
+
+\paragraph{AddBlockToConfigCommand}
+
+\paragraph{ModifyBlockInConfigCommand}
+
+\paragraph{RemoveBlockFromConfigCommand}
+
+\subsubsection{Schnittstelle zum View}
+
+\paragraph{BlockAction}
+
+\paragraph{ButtonAction}
+
+\paragraph{ConnectionAction}
+
+\subsubsection{Schnittstelle zum Model}
+
+
 
 \clearpage
 \subsection{View}

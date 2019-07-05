@@ -1,0 +1,87 @@
+@startuml
+
+participant ButtonAction
+participant BlockAction
+participant CommandManager
+participant AddBlockToConfigCommand
+participant IModelInformation
+
+== Add Block ==
+
+'
+' GUI Start
+'
+BlockAction --> AddBlockToConfigCommand : <<create>> cmd = AddBlockToConfigCommand(id)
+activate AddBlockToConfigCommand
+BlockAction -> CommandManager : runCommand(cmd)
+activate CommandManager
+CommandManager -> AddBlockToConfigCommand : cmd.execute()
+AddBlockToConfigCommand -> IModelInformation : addBuildingBlock(id)
+activate IModelInformation
+'
+' Model
+'
+AddBlockToConfigCommand <-- IModelInformation
+deactivate IModelInformation
+CommandManager <-- AddBlockToConfigCommand
+deactivate AddBlockToConfigCommand
+CommandManager -> CommandManager : doneCommands.push(cmd)
+BlockAction <-- CommandManager
+deactivate CommandManager
+'
+' GUI End
+'
+
+== Undo ==
+
+'
+' GUI Start
+'
+ButtonAction -> CommandManager : undo()
+activate CommandManager
+CommandManager -> CommandManager : cmd = doneCommands.pop()
+CommandManager -> AddBlockToConfigCommand : cmd.unExecute()
+activate AddBlockToConfigCommand
+AddBlockToConfigCommand -> IModelInformation : removeBuildingBlock(id)
+activate IModelInformation
+'
+' Model
+'
+AddBlockToConfigCommand <-- IModelInformation
+deactivate IModelInformation
+CommandManager <-- AddBlockToConfigCommand
+deactivate AddBlockToConfigCommand
+CommandManager -> CommandManager : undoneCommands.push(cmd)
+ButtonAction <-- CommandManager
+deactivate CommandManager
+'
+' GUI End
+'
+
+== Redo ==
+
+'
+' GUI Start
+'
+ButtonAction -> CommandManager : redo()
+activate CommandManager
+CommandManager -> CommandManager : cmd = undoneCommands.pop()
+CommandManager -> AddBlockToConfigCommand : cmd.execute()
+activate AddBlockToConfigCommand
+AddBlockToConfigCommand -> IModelInformation : addBuildingBlock(id)
+activate IModelInformation
+'
+' Model
+'
+AddBlockToConfigCommand <-- IModelInformation
+deactivate IModelInformation
+CommandManager <-- AddBlockToConfigCommand
+deactivate AddBlockToConfigCommand
+CommandManager -> CommandManager : doneCommands.push(cmd)
+ButtonAction <-- CommandManager
+deactivate CommandManager
+'
+' GUI End
+'
+
+@enduml
