@@ -412,6 +412,37 @@ Darstellungsbausteine besitzen nur Eingänge, da dargestellt Messdaten nicht meh
 
 \newpage 
 
+\subsubsection{BuildingBlockProperties}
+
+Damit Benutzer Informationen über einzelne Bausteine bekommt, welche ihm das Benutzen der Anwendung erleichtern würden, wie auch eine tiefere Einsicht über die Funktionsweise bietet, stellt jeder Baustein ein eigenes "Eigenschaften-Menü" bereit, in welchem dem Benutzer die wichtigsten Eigenschaften zu sehen bekommt.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/BuildingBlockPropertiesNamespace.png}
+		\caption{Aufbau des BuildingBlockProperties-Paket}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
+\paragraph{BuildingBlockProperties}
+
+Die abstrakte Klasse BuildingBlockProperties stellt alle Eigenschaften der konkreten Bausteine dar, welche alle Arten von Bausteinen (Sensor, Transformation, Darstellung) gemeinsam haben. Dazu gehören der Name,  Initialisierungs-ID, eindeutige Konfigurations-ID, Farbe, Form und Größe. Da einzelne Eigenschaften unveränderlich sein sollen, wie die IDs lassen sich nur Name, Farbe, Form und Größe verändern.
+
+\paragraph{SensorBlockProperties}
+
+Neben den gemeinsamen Eigenschaften besitzt die Unterklasse SensorBlockProperties ebenfalls das Attribut der Dimension, welches darstellt über wie viele Kanäle dieser Sensor Messdaten liefert. Da dieses Attribut für Sensoren unveränderlich ist, kann diese ebenfalls vom Benutzer nicht verändert werden.
+
+\paragraph{TransformationBlockProperties}
+
+Transformationsbausteine besitzen neben den Standart-Eigenschaften noch eine vordefinierte Funktion für jeden Transformationsbaustein. Um dem Benutzer zu erlauben neue Transformationsbausteine zu definieren ist die Funktion veränderbar.
+
+\paragraph{RepresentationBlockProperties}
+
+Da Repräsentatonsbausteine die visuelle Repräsentation beschreiben besitzen diese für die Darstellung notwendige Eigenschaften, wie Einheit, Maximalwerte der Achsen und Art der Darstellung. Um den Benutzer die Möglichkeit zu geben die Darstellung auf die Messwerte anzupassen, lassen sich Einheit und Maximalwerte vom Benutzer einstellen.
+
+
+\newpage
+
 \subsubsection{Button}
 
 Knöpfe bieten dem Benutzer eine Anzahl von Funktion zur Bedienung der Anwendung an. Das Paket ButtonLayer enthält die unterschiedlichen Knöpfe, das Feld, in welchem die Knöpfe dargestellt werden und eine Annahmestelle für die Benutzerinteraktion.
@@ -419,7 +450,7 @@ Knöpfe bieten dem Benutzer eine Anzahl von Funktion zur Bedienung der Anwendung
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 14cm]{Grafiken/ButtonNamespace.png}
-		\caption{Aufbau des Button-Paketes}
+		\caption{Aufbau des Button-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
 \end{figure}

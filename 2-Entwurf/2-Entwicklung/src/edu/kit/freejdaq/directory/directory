@@ -2,6 +2,7 @@
 
 class BuildingBlockDirectory {
 
+- isUpdated: boolean
 - InitHashMap: HashMap<String: id, block: BuildingBlock>
 - ConfigHashMap: HashMap<int: id, block: BuildingBlock>
 --
@@ -11,10 +12,12 @@ class BuildingBlockDirectory {
 + removeConfigBuildingBlock(id: String): boolean
 + getInitBuildingBlock(id: String): BuildingBlock
 + getConfigBuildingBlock(id: int): BuildingBlock
-+getFullInitBlock(): HashMap<InitId: String, block: BuildingBlock>
-	+getFullConfigBlock(): HashMap<ConfigId: int, block: BuildingBlock>
++ getFullInitBlock(): HashMap<InitId: String, block: BuildingBlock>
++ getFullConfigBlock(): HashMap<ConfigId: int, block: BuildingBlock>
 + addConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
 + removeConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
++ setUpdate(bool: boolean): boolean
++ checkUpdate(): boolean
 }
 
 

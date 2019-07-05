@@ -70,7 +70,6 @@ namespace Configuration {
 		 - color: String
 		 - shape: String
 		 + BuildingBlockView(id: String): BuildingBlockView
-		 + setNumberOfChannels(number : int): void
 		 + setCoordinates(x : double, y : double): boolean
 		 + getXCoordinate(): int
 		 + getYCoordinate(): int
@@ -134,10 +133,12 @@ namespace Configuration {
 	 	- id: int
 	 	- color: String
 	 	- shape: String
+	 	- size: double
 	 	+ open(): boolean
 	 	+ setName(name: String): boolean
 	 	+ setColor(color: String): boolean
 	 	+ setShape(shape: String): boolean
+	 	+ setSize(size: double): boolean
 	}
 	
 	 class SensorBlockProperties {
@@ -343,7 +344,6 @@ namespace FacadeModelView {
 	+getConnection(id: int): BuildingBlock
 	}
 	
-	ViewModelInterface -down- GUI.Configuration.ConfigurationField
 	ViewDirectoryInterfacae -- GUI.Configuration.ConfigurationField
 }
  
