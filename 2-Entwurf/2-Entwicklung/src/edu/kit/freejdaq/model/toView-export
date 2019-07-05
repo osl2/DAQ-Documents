@@ -1,4 +1,15 @@
-@startuml
+
+Die Implementierung:
+
+
+ GUI.Configuration.RepresentationBlockView --|> Model.GraphicDataIolnterface
+ GUI.Exception.ExceptionWindowManager --|> Model.ExceptionInterface
+ GUI.Configuration.ConfigurationField --|> Model.UpdateInterface
+ GUI.Menues.PrototypeField --|> Model.UpdateInterface
+ 
+ Die Interfaces mit Verbindungen zum PickUpPointen
+ 
+ 
 PickUpPointViewFacades --> "*" UpdateInterface
 PickUpPointViewFacades -left-> GraphicDataIolnterface
 PickUpPointViewFacades --> ExceptionInterface
@@ -12,12 +23,10 @@ class PickUpPointViewFacades {
  }
 
  interface UpdateInterface {
- 	+ update(): void
+ 	+ updateConfig(): void
  }
 
 interface GraphicDataIolnterface {
-	  + getViewModel(): List: <BuildingBlockViews>
-	  + setViewModel(list: <BuildingBlockViews>): boolean
 	  + getContentsOfRepresentationBlocks(): BufferedImage[]
  }
  
@@ -28,17 +37,9 @@ interface GraphicDataIolnterface {
  }
 
  interface MeasurementDataInterface {
- 	+ pushDataForVisualisation(...): void
+ 	+ pushShellForVisualisation(..): void
  }
  
- note top of MeasurementDataInterface 
-  	No implementation for this functionality yet.
- end note
 
  
- GUI.Configuration.ConfigurationField -up-|> GraphicDataIolnterface
- GUI.Exception.ExceptionWindowManager -up-|> ExceptionInterface
- GUI.Configuration.ConfigurationField -up-|> UpdateInterface
- GUI.Menues.PrototypeField -up-|> UpdateInterface
- 
-@enduml
+
