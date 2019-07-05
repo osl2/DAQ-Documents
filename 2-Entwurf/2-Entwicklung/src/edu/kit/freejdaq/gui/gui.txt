@@ -44,13 +44,10 @@ namespace Configuration {
 	 class ConfigurationField {
 		 - list: List<BuildingBlockView>		
 		 + update(): void
-		 + add(block : BuildingBlock): void
-		 + remove(block: BuildingBlock): void
-		 + open(): void		 
-		 + getViewModel(): List: <BuildingBlockViews>
-	 	 + setViewModel(list: <BuildingBlockViews>): boolean
-	 	 + getContentsOfRepresentationBlocks():BufferedImage[]
-	 }
+		 + add(block : BuildingBlockView): void
+		 + remove(block: BuildingBlockView): void
+		 + open(): void			
+	 	 }
 	 
 	 interface BlockDragAndDropHandler {
 	 	+blockWasMoved(blockId : String, corX : double, corY : double)
@@ -342,7 +339,10 @@ namespace FacadeModelView {
 	}
 	
 	interface ViewDirectoryInterfacae {
-	+getBuildingBlock(id: String): BuildingBlock
+	+getInitBuildingBlock(id: String): BuildingBlock
+	+getConfigBuildingBlock(id: int): BuildingBlock
+	+getFullInitBlock(): HashMap<InitId: String, block: BuildingBlock>
+	+getFullConfigBlock(): HashMap<ConfigId: int, block: BuildingBlock>
 	+getConnection(id: int): BuildingBlock
 	}
 	
