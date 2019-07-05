@@ -1263,6 +1263,10 @@ GUI.FacadeModelView.ViewDirectoryInterface --|> Model.BuildingBlockDirectory
 
 Backend.IMeasurementStreamListener <|.. Cache.MRunActivityManagement
 
+'Model to Backend
+Backend.IAccesToMeasurementRun <-- Model.MeasurementRun
+
+
 '------------------------------------------------------------------------
 'Structure adapting Commands
 '------------------------------------------------------------------------

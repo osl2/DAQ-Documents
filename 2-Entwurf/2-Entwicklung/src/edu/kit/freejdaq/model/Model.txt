@@ -38,18 +38,18 @@ namespace Core {
 		-listOfAllChannels: <Channel>
 		-configurationAdjacencyList: configuration[]
 		+getPathToFile(): String
-		
+
  		+getMeasurementConfig(): MeasurementConfiguration
  		+addBuildingBlock(id: String)
 		+removeBuildingBlock(id: String)
 		+addConnection(firstChannelId: String, secondChannelId: String)
 		+removeConnection(firstChannelId: String, secondChannelId: String)
- 		
+
  		+createModelFromYamlDom(modelDom: YamlDom): String
 
 	}
 	MeasurementConfiguration "1" -- "*" MeasurementRun
-	
+
 
 	'----------------------------------------------------------------------------------------
 	'PrototypCollection: List of all predefined and custom BuildingBlocks
@@ -95,21 +95,7 @@ namespace Core {
 			<<create>>Function(String inputFunction) : Function
 			+applyFunction(Integer data)
 		}
-		AdditionTransformation -up-|> Transformation
-		AverageTransformation -up-|> Transformation
-		MultiplicationTransformation -up-|> Transformation
-		DataFlowTransformation -up-|> Transformation
-		LinearMapping -up-|> DataFlowTransformation
-		DependendOutputTransformation -up-|> DataFlowTransformation
 		Function "1" - "*" Transformation
-
-		class DataFlowTransformation {
-
-		}
-		note left of  DataFlowTransformation
-		Changes the output according to configuration.
-		Does not influence the values of the data stream
-		end note
 	}
 
 
@@ -176,7 +162,7 @@ namespace Core {
 			´{abstract} processValue()
 
 			}
-		 
+
 		 class PhysicalSensor{
 		 	processValue()
 		 }
@@ -187,7 +173,7 @@ namespace Core {
 		 PhysicalSensor --|> Sensor
 	}
 	BuildingBlock <|-- Model.Core.SensorLogic.Sensor
-	
+
 
 	namespace ChannelLogic {
 
@@ -238,44 +224,44 @@ namespace Core {
 		-varName: String
 		+forwardValue(): void
 	}
-	
+
 	InChannel --|> Channel
-	
+
 	class OutChannel{
 		-channelName: String
 		+forwardValue(): void
 	}
-	
+
 	class MRunInfo {
 	+getAllInChannelIds(): String[]
 	+getErrorCodes(inChannelId: String): double[]
 	+getTimeoutOption(): long
-	}	
-	
-	
-	
+	}
+
+
+
 	OutChannel --|> Channel
 	OutChannel "1" -- "1" InChannel
 	note top of OutChannel
-	  forwardValue wird bei 
-	  receive Value aufgerufen. 
+	  forwardValue wird bei
+	  receive Value aufgerufen.
 	  Hier ausimplementiert.
 	end note
-	
+
 	note left of OutChannel
 	  channelName steht für Funktionsnamen
-	   bei Trafos und für 
+	   bei Trafos und für
 	   Channelname bei Sensoren
 	end note
 
 
 
-	
+
 	interface IValueHandler {
 
 		processValue()
 	}
-	
+
 	note right of IValueHandler
 	  interface to provide
 	  Data to a channel
@@ -283,10 +269,10 @@ namespace Core {
 
 
 	}
-	
+
 	BuildingBlock "1" --> "*" Model.Core.ChannelLogic.InChannel
 	BuildingBlock "1" --> "*" Model.Core.ChannelLogic.OutChannel
-	
+
 	class HelpMessage{
 		- messageFileName : String
 		+ HelpMessage(msgFile : String)
@@ -305,8 +291,8 @@ namespace Core {
 	BuildingBlock -left- YamlRepresentation
 
 	}
-	
-		
+
+
 
 '---------------------------------------------------------
 'BuildingBlockBuilder
@@ -357,18 +343,18 @@ namespace BuildingBlockBuilder {
 	class SensorBuilder {
 		+fetchBuildingBlock(): BuildingBlock
 	}
-	
+
 	class PhysicalSensorBuilder {
 		+fetchBuildingBlock(): BuildingBlock
 		+addSensorProducerName(yaml Yaml): void
 
 	}
-	
+
 	class VirtualSensorBuilder {
 		+fetchBuildingBlock(): BuildingBlock
 	}
-	
-	
+
+
 	class TransformationBuilder {
 		+fetchBuildingBlock(): BuildingBlock
 
@@ -385,12 +371,12 @@ namespace BuildingBlockBuilder {
 		+fetchBuildingBlock(): BuildingBlock
 
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 
 	PhysicalSensorBuilder -up-|> SensorBuilder
 	VirtualSensorBuilder -up-|> SensorBuilder
@@ -413,34 +399,23 @@ Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.Core.Representation
 Model.BuildingBlockBuilder.TableRepresentationBuilder ..> Model.Core.RepresentationLogic.TableRepresentation
 
 
-interface IMeasurementStreamListener {
-		-receiveData(measuredValue: int): void
-		-connectionTerminated(): void
-	}
-
-Model.Core.MeasurementRun -- IMeasurementStreamListener
-	
-	
-	
-
-	
-	
-	
-	
 	class BuildingBlockDirectory {
 
-		- map: HashMap<String: id, block: BuildingBlock>
-		
-		+ initialize():boolean
-		+ addBuildingBlock(id: String, BuildingBlock): boolean
-		+ removeBuildingBlock(id: String): boolean
-		+ getBuildingBlock(id: String): BuildingBlock
-		+ addConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-		+ removeConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-	}
+		- InitHashMap: HashMap<String: id, block: BuildingBlock>
+		- ConfigHashMap: HashMap<int: id, block: BuildingBlock>
+		--
+		+ addInitBuildingBlock(id: String, block: BuildingBlock): boolean
+		..
+		+ addConfigBuildingBlock(id: int, block: BuildingBlock): boolean
+		+ removeConfigBuildingBlock(id: String): boolean
+		+ getInitBuildingBlock(id: String): BuildingBlock
+		+ getConfigBuildingBlock(id: int): BuildingBlock
+		+ addConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
+		+ removeConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
+		}
 
-Model.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director		
-Model.Core.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director				
+Model.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
+Model.Core.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
 
 
 
@@ -462,8 +437,8 @@ class Model.MRunReaction {
 MRunReaction "1" -- "1" Model.Core.MeasurementRun
 Model.Core.MeasurementConfiguration "1" -- "1" Model.Core.ChannelLogic.MRunInfo
 
-		
-	
+
+
 
 }
 @enduml
