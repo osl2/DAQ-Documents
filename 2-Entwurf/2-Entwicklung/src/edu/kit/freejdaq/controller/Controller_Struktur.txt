@@ -21,12 +21,14 @@ namespace Controller {
 	interface Command {
 		+ execute() : void
 		+ unExecute() : void
+		+ isUndoable() : boolean
 	}
 
 	class AddBlockToConfigCommand {
 		- blockID : String
 		+ execute() : void
 		+ unExecute() : void
+		+ isUndoable() : boolean
 	}
 
 	CommandManager o-- Command
