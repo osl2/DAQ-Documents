@@ -57,7 +57,7 @@ namespace Controller {
 	namespace Command_Pattern {
 	
 		AddBlockToConfigCommand <-- Controller.View_Controller_Interface.BlockAction
-		ModifyBlockInConfigCommand <-- Controller.View_Controller_Interface.BlockAction
+	'	ModifyBlockInConfigCommand <-- Controller.View_Controller_Interface.BlockAction
 		RemoveBlockFromConfigCommand <-- Controller.View_Controller_Interface.BlockAction
 		EditBlockPropertiesCommand <-- Controller.View_Controller_Interface.BlockAction
 		CloneBlockCommand <-- Controller.View_Controller_Interface.BlockAction
@@ -77,7 +77,7 @@ namespace Controller {
 		CommandManager <-- Controller.View_Controller_Interface.ButtonAction
 		
 		Controller.Controller_Model_Interface.IModelInformation <-down- AddBlockToConfigCommand
-		Controller.Controller_Model_Interface.IModelInformation <-down- ModifyBlockInConfigCommand
+	'	Controller.Controller_Model_Interface.IModelInformation <-down- ModifyBlockInConfigCommand
 		Controller.Controller_Model_Interface.IModelInformation <-down- RemoveBlockFromConfigCommand
 		Controller.Controller_Model_Interface.IModelInformation <-down- EditBlockPropertiesCommand
 		Controller.Controller_Model_Interface.IModelInformation <-down- CloneBlockCommand
@@ -123,12 +123,12 @@ namespace Controller {
 			+ isUndoable() : boolean
 		}
 		
-		class ModifyBlockInConfigCommand {
-			- blockID : String
-			+ execute() : void
-			+ unExecute() : void
-			+ isUndoable() : boolean
-		}
+	'	class ModifyBlockInConfigCommand {
+	'		- blockID : String
+	'		+ execute() : void
+	'		+ unExecute() : void
+	'		+ isUndoable() : boolean
+	'	}
 		
 		class RemoveBlockFromConfigCommand {
 			- blockID : String
@@ -231,7 +231,7 @@ namespace Controller {
 		
 		Command <|.. AddBlockToConfigCommand
 		Command <|.. RemoveBlockFromConfigCommand
-		Command <|.. ModifyBlockInConfigCommand
+	'	Command <|.. ModifyBlockInConfigCommand
 		Command <|.. EditBlockPropertiesCommand
 		Command <|.. CloneBlockCommand
 		Command <|.. ExportBlockPrototypeCommand

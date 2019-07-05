@@ -328,13 +328,13 @@ Der Aufbau des Controllers setzt das Entwurfsmuster \textit{Kommando} (\textit{C
 
 \subsubsection{CommandManager}
 
-Die Klasse CommandManager hat die Funktion, die Ausführung konkreter Befehle zu veranlassen. Der CommandManager ist als \textit{Singleton} definiert um sicherzustellen, dass von allen Klienten auf dieselbe Instanz zugreifen.
+Die Klasse CommandManager hat die Funktion, die Ausführung konkreter Befehle zu veranlassen. Der CommandManager ist als \textit{Singleton} definiert um sicherzustellen, dass von allen Klienten auf dieselbe Instanz zugegriffen wird.
 
 Anhand eines \textit{Undo-} und eines \textit{Redo-Stacks} bietet der CommandManager außerdem die Möglichkeit an, bereits ausgeführte Befehle rückgängig zu machen (bzw. rückgängig gemachte Aktionen wiederherzustellen). Nicht alle Befehle können rückgängig gemacht werden.
 
 \subsubsection{Command bzw. konkrete Befehle}
 
-Die Schnittstelle Command und die konkreten Klassen, welche Command implementieren, sind die Befehle des Controllers. Jeder konkrete Befehl kapselt eine genau definierte Funktionalität.
+Die Schnittstelle Command und die konkreten Klassen, welche die Schnittstelle implementieren, sind die Befehle des Controllers. Jeder konkrete Befehl kapselt eine genau definierte Funktionalität. Weitere Befehle können problemlos hinzugefügt werden, ohne bestehende Klassen verändern zu müssen.
 
 Bestimmte Befehle können durch \textit{unExecute()} rückgängig gemacht werden. In diesen Fällen wird durch \textit{isUndoable()} immer \textit{true} zurückgegeben.
 
@@ -342,19 +342,71 @@ Andere Befehle können nicht rückgängig gemacht werden. Dann ist die Methode \
 
 \paragraph{AddBlockToConfigCommand}
 
-\paragraph{ModifyBlockInConfigCommand}
+Dieser Befehl fügt einen gegebenen Baustein zum Konfigurationsfeld hinzu.
 
 \paragraph{RemoveBlockFromConfigCommand}
 
-\subsubsection{Schnittstelle zum View}
+Dieser Befehl entfernt einen Baustein aus dem Konfigurationsfeld.
 
-\paragraph{BlockAction}
+\paragraph{EditBlockPropertiesCommand}
 
-\paragraph{ButtonAction}
+Dieser Befehl verändert die Eigenschaften eines Bausteins.
 
-\paragraph{ConnectionAction}
+\paragraph{CreateChannelConnectionCommand}
 
-\subsubsection{Schnittstelle zum Model}
+Dieser Befehl erstellt eine Verbindung zwischen zwei gegebenen Kanälen (welche wiederum zu Bausteinen gehören).
+
+\paragraph{ModifyChannelConnectionCommand}
+
+Dieser Befehl verändert Start- und/oder Endpunkt einer Verbindung zwischen zwei Kanälen.
+
+\paragraph{DeleteChannelConnectionCommand}
+
+Dieser Befehl löscht eine Verbindung zwischen zwei Kanälen.
+
+\paragraph{StartRunCommand}
+
+Dieser Befehl startet einen Messlauf.
+
+\paragraph{StopRunCommand}
+
+Dieser Befehl beendet einen aktiven Messlauf.
+
+\paragraph{PauseRunCommand}
+
+Dieser Befehl pausiert einen aktiven Messlauf.
+
+\paragraph{ResumeRunCommand}
+
+Dieser Befehl setzt einen pausierten Messlauf fort.
+
+\paragraph{SaveConfigCommand}
+
+Dieser Befehl speichert die aktuelle Messkonfiguration an einem übergebenen Dateipfad.
+
+\paragraph{LoadConfigCommand}
+
+Dieser Befehl lädt eine Messkonfiguration von einem angegebenen Pfad.
+
+\paragraph{ResetConfigCommand}
+
+Dieser Befehl entfernt alle Elemente aus dem Konfigurationsfeld. (Verwendung optional.)
+
+\paragraph{XXX}
+
+Dieser Befehl XXXXXX
+
+\subsubsection{Verbindung zum View}
+
+Durch das View-Modul werden mehrere Schnittstellen definiert.
+
+\paragraph{BlockAction} Die Klasse BlockAction implementiert die Schnittstelle IBlockAction des Views.
+
+\paragraph{ButtonAction} Die Klasse ButtonAction implementiert die Schnittstelle IButtonAction des Views.
+
+\paragraph{ConnectionAction} Die Klasse ConnectionAction implementiert die Schnittstelle IConnectionAction des Views.
+
+\subsubsection{Verbindung zum Model}
 
 
 
