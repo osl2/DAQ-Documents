@@ -7,7 +7,7 @@
 
 namespace Model {
 
-namespace Core {
+
 
 
 
@@ -99,7 +99,7 @@ namespace Core {
 	}
 
 
-	BuildingBlock <|-  Model.Core.TransformationLogic.Transformation
+	BuildingBlock <|-  Model.TransformationLogic.Transformation
 	'----------------------------------------------------------------------------------------
 	'Note: The manager aspect of this diagramm can be found, in more detail, at another place.
 	'It stands here for a complete overview
@@ -145,7 +145,7 @@ namespace Core {
 
 		}
 
-		note right of  Model.Core.RepresentationLogic.XYRepresentation
+		note right of  Model.RepresentationLogic.XYRepresentation
 	  		use eclipse nebula
 	  		for display
 		end note
@@ -154,7 +154,7 @@ namespace Core {
 
 
 	}
-	BuildingBlock <|--  Model.Core.RepresentationLogic.Representation
+	BuildingBlock <|--  Model.RepresentationLogic.Representation
 
 	namespace SensorLogic {
 
@@ -172,7 +172,7 @@ namespace Core {
 		 VirtualSensor --|> Sensor
 		 PhysicalSensor --|> Sensor
 	}
-	BuildingBlock <|-- Model.Core.SensorLogic.Sensor
+	BuildingBlock <|-- Model.SensorLogic.Sensor
 
 
 	namespace ChannelLogic {
@@ -270,8 +270,8 @@ namespace Core {
 
 	}
 
-	BuildingBlock "1" --> "*" Model.Core.ChannelLogic.InChannel
-	BuildingBlock "1" --> "*" Model.Core.ChannelLogic.OutChannel
+	BuildingBlock "1" --> "*" Model.ChannelLogic.InChannel
+	BuildingBlock "1" --> "*" Model.ChannelLogic.OutChannel
 
 	class HelpMessage{
 		- messageFileName : String
@@ -290,7 +290,7 @@ namespace Core {
 	}
 	BuildingBlock -left- YamlRepresentation
 
-	}
+	
 
 
 
@@ -377,12 +377,14 @@ namespace BuildingBlockBuilder {
 
 
 
-
+	SensorBuilder -up-|> Builder
 	PhysicalSensorBuilder -up-|> SensorBuilder
 	VirtualSensorBuilder -up-|> SensorBuilder
+	
 	TransformationBuilder -up-|> Builder
 	RepresentationBuilder -up-|> Builder
-	SensorBuilder -up-|> Builder
+	
+	
 	TableRepresentationBuilder -up-|> RepresentationBuilder
 	XYRepresentationBuilder -up-|> RepresentationBuilder
 
@@ -390,13 +392,13 @@ namespace BuildingBlockBuilder {
 	Director "1" --> "0..*" Builder : Staff
 
 }
-Model.BuildingBlockBuilder.SensorBuilder ..> Model.Core.SensorLogic.Sensor
-Model.BuildingBlockBuilder.TransformationBuilder ..> Model.Core.TransformationLogic.Transformation
-Model.BuildingBlockBuilder.RepresentationBuilder ..> Model.Core.RepresentationLogic.Representation
-Model.BuildingBlockBuilder.VirtualSensorBuilder ..> Model.Core.SensorLogic.VirtualSensor
-Model.BuildingBlockBuilder.PhysicalSensorBuilder ..> Model.Core.SensorLogic.PhysicalSensor
-Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.Core.RepresentationLogic.XYRepresentation
-Model.BuildingBlockBuilder.TableRepresentationBuilder ..> Model.Core.RepresentationLogic.TableRepresentation
+Model.BuildingBlockBuilder.SensorBuilder ..> Model.SensorLogic.Sensor
+Model.BuildingBlockBuilder.TransformationBuilder ..> Model.TransformationLogic.Transformation
+Model.BuildingBlockBuilder.RepresentationBuilder ..> Model.RepresentationLogic.Representation
+Model.BuildingBlockBuilder.VirtualSensorBuilder ..> Model.SensorLogic.VirtualSensor
+Model.BuildingBlockBuilder.PhysicalSensorBuilder ..> Model.SensorLogic.PhysicalSensor
+Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.RepresentationLogic.XYRepresentation
+Model.BuildingBlockBuilder.TableRepresentationBuilder ..> Model.RepresentationLogic.TableRepresentation
 
 
 	class BuildingBlockDirectory {
@@ -415,8 +417,42 @@ Model.BuildingBlockBuilder.TableRepresentationBuilder ..> Model.Core.Representat
 		}
 
 Model.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
-Model.Core.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
+Model.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
 
+
+PickUpPointViewFacades --> "*" UpdateInterface
+PickUpPointViewFacades -left-> GraphicDataIolnterface
+PickUpPointViewFacades --> ExceptionInterface
+PickUpPointViewFacades --> MeasurementDataInterface
+
+class PickUpPointViewFacades {
+	 + getUpdateInterfaces(): UpdateInterface[]
+	 + getGraphicDataIolnterface(): GraphicDataIolnterface
+	 + getExceptionInterface(): ExceptionInterface
+	 + getMeasurementDataInterface(): DataInterface
+ }
+
+ interface UpdateInterface {
+ 	+ updateConfig(): void
+ }
+
+interface GraphicDataIolnterface {
+	  + getContentsOfRepresentationBlocks(): BufferedImage[]
+ }
+ 
+ interface ExceptionInterface {
+	 + showGeneralException(title: String, description: String): void
+	 + showBuildingBlockException(id: String, title: String, description: String): void
+	 + showConnectionException(id: int, title: String, description: String): void
+ }
+
+Model.ExceptionInterface -- Model.MeasurementConfiguration 
+Model.ExceptionInterface -- MeasurementRun
+
+ interface MeasurementDataInterface {
+ 	+ pushShellForVisualisation(..): void
+ }
+Model.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
 
 
 
@@ -434,14 +470,29 @@ class Model.MRunReaction {
 }
 
 
-MRunReaction "1" -- "1" Model.Core.MeasurementRun
-Model.Core.MeasurementConfiguration "1" -- "1" Model.Core.ChannelLogic.MRunInfo
-
+MRunReaction "1" -- "1" Model.MeasurementRun
+Model.MeasurementConfiguration "1" -- "1" Model.ChannelLogic.MRunInfo
+Model.MeasurementConfiguration  -->  Model.BuildingBlockDirectory
 
 
 
 }
 @enduml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 old interfaces to 
 
