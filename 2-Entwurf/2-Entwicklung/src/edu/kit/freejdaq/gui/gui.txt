@@ -342,6 +342,7 @@ namespace FacadeModelView {
 	+getFullInitBlock(): HashMap<InitId: String, block: BuildingBlock>
 	+getFullConfigBlock(): HashMap<ConfigId: int, block: BuildingBlock>
 	+getConnection(id: int): BuildingBlock
+	+checkForUpdate(): boolean
 	}
 	
 	ViewDirectoryInterfacae -- GUI.Configuration.ConfigurationField
