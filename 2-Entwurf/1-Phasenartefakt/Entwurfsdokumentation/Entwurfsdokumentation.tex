@@ -607,11 +607,27 @@ Die Klasse ConnectionExceptionWindow ist eine weitere Konkretisierung der Überk
 
 Die Klasse GeneralExceptionWindow stellt neben den zwei konkreten Fehlermeldungen ConnectionExceptionWindow und BuildingBlockExceptionWindow eine allgemeinere Fehlernachricht dar. Diese werden zum Beispiel bei Messfehlern oder Fehler bei der Messkonfiguration ausgelöst. Diese Fehlernachrichten sollen sichtbar in der Mitte der Anwedung geöffnet werden, um dem Benutzer auf diesen Fehler hinzuweisen. 
 
-\clearpage
-
 \paragraph{ExceptionWindowManager}
 
 Die Klasse ExceptionWindowManager nimmt Fehlermeldungen entgegen und stößt die Visualisierung der jeweilig nach Fehlermeldung unterschiedlichen Fenster an. Der Klasse werden die für eine Fehlermeldung notwendigen Parameter Titel und  Beschreibung übergeben. Je nach Art der Fehlermeldung wird auch die Baustein- oder Verbindung-ID der Fehlerquelle übergeben.
+
+\subsubsection {FacadeModelView}
+
+Das Paket FacadeModelView enthält das Interface, welches das Model anbietet und vom View verwendet wird. Da durch das Directory eine Art Zwischenschicht zwischen Model und View darstellt ersetzt die Fassade zum Directory eine unübersichtliche Fassade zu dem Model. 
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 12 cm]{Grafiken/FacadeModelViewNamespace.png}
+		\caption{Aufbau des FacadeModelView-Paket}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
+\paragraph{ViewDirectoryInterface}
+
+Das Interface ViewDirectoryInterface bietet wichtige Funktionen an, um Änderungen am Model in die GUI zu übertragen. 
+Bei dem Starten der Anwendung werden alle über das Backend übertragenen Bausteine durch das Model in das Directory geladen. Um alle Bausteine in die GUI zu laden gibt die Methode getFullInitBlock() die gesamte Hash-Map, welche die Konfigurationsbausteinen enthält zurück um daraus die Prototypenmenüs zu erstellen. Um einzelne Bausteine mit bestmmter aus dem Directory zu laden gibt es die Methoden getInitBuildingBlock() und getConfigBuildingBlock(). Um eine gespeicherte Verbindung zu bekommen gibt es die Methode getConnection(chId1: int, chId2: int), welche zwei ChannelDecorater-IDs mit übergibt und die Verbindung zurückgibt.
+Damit das View bei Benachrichtigung über ein Update des Models überprüfen kann, ob das Directory Änderungen enthält gibt es die Methode checkForUpdates(), welche einen Wahrheitswert zurückgibt, welcher eine Aussage über die Änderungen am Directory enthält.
 
 \clearpage
 \section{Sequenzdiagramme}
