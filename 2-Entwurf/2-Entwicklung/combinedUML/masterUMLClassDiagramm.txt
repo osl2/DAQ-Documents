@@ -1292,6 +1292,13 @@ GUI.FacadeControllerView.IConnectionAction <|.. Controller.View_Controller_Inter
 
 'Model to GUI
 
+
+GUI.Configuration.RepresentationBlockView --|> Model.GraphicDataIolnterface
+GUI.Exception.ExceptionWindowManager --|> Model.ExceptionInterface
+GUI.Configuration.ConfigurationField --|> Model.UpdateInterface
+GUI.Menues.PrototypeField --|> Model.UpdateInterface
+
+
 GUI.FacadeModelView.ViewModelInterface ..|> Model.MeasurementConfiguration
 GUI.FacadeModelView.ViewDirectoryInterface --|> Model.BuildingBlockDirectory
 

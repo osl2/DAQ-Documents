@@ -20,6 +20,7 @@ namespace Model {
 		+resume(): boolean
 		+reset(): boolean
 		+setUpdateRate(MeasurementConfiguration config): boolean
+		-checkSensorInChannelStates(): boolean
 
 	}
 
@@ -35,10 +36,12 @@ namespace Model {
 	class MeasurementConfiguration{
 		-pathToFile: String
 		-updateRate: float
+		-createConfigId( id: String): Integer
+		-cloneInitBlock(is: String): BuildingBlock
 		-listOfAllChannels: <Channel>
 		-configurationAdjacencyList: configuration[]
 		+getPathToFile(): String
-
+		-checkForCycle(): boolean
  		+getMeasurementConfig(): MeasurementConfiguration
  		+addBuildingBlock(id: String)
 		+removeBuildingBlock(id: String)
@@ -65,7 +68,8 @@ namespace Model {
 	abstract class BuildingBlock
 	{
 
-		-id: String
+		-initId: String
+		-configId: int
 		-name: String
 		-userInfo: String
 		+setId()
@@ -420,10 +424,7 @@ Model.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
 Model.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
 
 
-PickUpPointViewFacades --> "*" UpdateInterface
-PickUpPointViewFacades -left-> GraphicDataIolnterface
-PickUpPointViewFacades --> ExceptionInterface
-PickUpPointViewFacades --> MeasurementDataInterface
+
 
 class PickUpPointViewFacades {
 	 + getUpdateInterfaces(): UpdateInterface[]
@@ -434,9 +435,10 @@ class PickUpPointViewFacades {
 
  interface UpdateInterface {
  	+ updateConfig(): void
- }
+ 
+Model.UpdateInterface -- Model.BuildingBlockBuilder.Director
 
-interface GraphicDataIolnterface {
+ interface GraphicDataIolnterface {
 	  + getContentsOfRepresentationBlocks(): BufferedImage[]
  }
  
@@ -447,14 +449,17 @@ interface GraphicDataIolnterface {
  }
 
 Model.ExceptionInterface -- Model.MeasurementConfiguration 
-Model.ExceptionInterface -- MeasurementRun
+Model.ExceptionInterface -- Model.MeasurementRun
 
  interface MeasurementDataInterface {
  	+ pushShellForVisualisation(..): void
  }
 Model.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
 
-
+PickUpPointViewFacades --> "*" UpdateInterface
+PickUpPointViewFacades --> GraphicDataIolnterface
+PickUpPointViewFacades --> ExceptionInterface
+PickUpPointViewFacades --> MeasurementDataInterface
 
 
 
@@ -470,8 +475,8 @@ class Model.MRunReaction {
 }
 
 
-MRunReaction "1" -- "1" Model.MeasurementRun
-Model.MeasurementConfiguration "1" -- "1" Model.ChannelLogic.MRunInfo
+MRunReaction  --  Model.MeasurementRun
+Model.MeasurementRun  --  Model.ChannelLogic.MRunInfo
 Model.MeasurementConfiguration  -->  Model.BuildingBlockDirectory
 
 
