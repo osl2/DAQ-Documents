@@ -1,13 +1,13 @@
 @startuml
 
-participant BlockDragAndDropHandler
-participant UndoButton
-participant RedoButton
-participant ButtonAction
-participant BlockAction
-participant CommandManager
-participant AddBlockToConfigCommand
-participant MeasurementConfiguration
+participant ": BlockDragAndDropHandler" as BlockDragAndDropHandler
+participant ": UndoButton" as UndoButton
+participant ": RedoButton" as RedoButton
+participant ": ButtonAction" as ButtonAction
+participant ": BlockAction" as BlockAction
+participant ": CommandManager" as CommandManager
+participant "cmd : AddBlockToConfigCommand" as AddBlockToConfigCommand
+participant ": MeasurementConfiguration" as MeasurementConfiguration
 
 activate BlockDragAndDropHandler
 activate UndoButton
@@ -22,11 +22,11 @@ activate BlockAction
 '
 ' GUI Start
 '
-BlockAction --> AddBlockToConfigCommand : <<create>> cmd = AddBlockToConfigCommand(id)
+BlockAction --> AddBlockToConfigCommand : <<create>> AddBlockToConfigCommand(id)
 activate AddBlockToConfigCommand
 BlockAction -> CommandManager : runCommand(cmd)
 activate CommandManager
-CommandManager -> AddBlockToConfigCommand : cmd.execute()
+CommandManager -> AddBlockToConfigCommand : execute()
 '
 ' Model Start
 '
