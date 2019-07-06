@@ -1603,7 +1603,6 @@ GUI.Configuration.ConfigurationField --|> Model.FacadeControllerView.UpdateInter
 GUI.Menues.PrototypeField --|> Model.FacadeControllerView.UpdateInterface
 
 
-GUI.FacadeModelView.ViewModelInterface ..|> Model.Core.MeasurementConfiguration
 GUI.FacadeModelView.ViewDirectoryInterface --|> Model.Core.BuildingBlockDirectory
 
 'Cache to Backend
