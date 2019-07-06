@@ -3,15 +3,24 @@
 'Date of first creation: 01.07.2019
 
 '------------------------------------------------------------------------
+'Global Settings
+'------------------------------------------------------------------------
+
+scale 0.1
+skinparam dpi 300
+skinparam defaultFontSize 22
+
+'------------------------------------------------------------------------
 'StartUp
 '------------------------------------------------------------------------
 namespace Initialization {
 	class Main {
-		+main(args: String[])
+		+main(args: String[]): void
 	}
-	Main -> Backend.SshToPi
-	Main -> Model.ModelManager
-	Main -> GUI.MainWindow
+	Main ----------> Backend.SshToPi: creates >
+	Main ----------> Model.ModelManager: creates >
+	Main ----------> GUI.MainWindow: creates >
+
 }
 
 '------------------------------------------------------------------------
