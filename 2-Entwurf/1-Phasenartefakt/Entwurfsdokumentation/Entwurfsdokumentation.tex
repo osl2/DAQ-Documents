@@ -653,6 +653,8 @@ Die Klasse CommandManager hat die Funktion, die Ausführung konkreter Befehle zu
 
 Anhand eines \textit{Undo-} und eines \textit{Redo-Stacks} bietet der CommandManager außerdem die Möglichkeit an, bereits ausgeführte Befehle rückgängig zu machen (bzw. rückgängig gemachte Aktionen wiederherzustellen). Nicht alle Befehle können rückgängig gemacht werden.
 
+Die Verwendung des Command-Musters ermöglicht zudem Erweiterungsmöglichkeiten wie beispielsweise eine Warteschlange für Befehle. Falls nötig können derartige Erweiterungen umgesetzt werden, ohne Programmcode außerhalb des Entwurfsmusters verändern zu müssen.
+
 \subsubsection{Command bzw. konkrete Befehle}
 
 Die Schnittstelle Command und die konkreten Klassen, welche die Schnittstelle implementieren, sind die Befehle des Controllers. Jeder konkrete Befehl kapselt eine genau definierte Funktionalität. Weitere Befehle können problemlos hinzugefügt werden, ohne bestehende Klassen verändern zu müssen.
@@ -763,7 +765,7 @@ Dieser Befehl entfernt alle Elemente aus dem Konfigurationsfeld. (Verwendung opt
 	\end{center}
 \end{figure}
 
-Durch das View-Modul werden mehrere Schnittstellen definiert.
+Durch das View-Modul werden mehrere Schnittstellen definiert, anhand derer die View-Klassen die Ausführung von Befehlen veranlassen können. (Abschnitt 2.4.9)
 
 \paragraph{BlockAction} Die Klasse BlockAction implementiert die Schnittstelle IBlockAction des Views.
 
@@ -781,7 +783,7 @@ Durch das View-Modul werden mehrere Schnittstellen definiert.
 	\end{center}
 \end{figure}
 
-Es werden Schnittstellen vorgegeben, die durch das Model-Modul implementiert werden.
+Es werden Schnittstellen vorgegeben, die durch das Model-Modul implementiert werden. Ihre Methoden erlauben es den Klassen des Controllers, gezielt auf Funktionalität des Models zuzugreifen.
 
 \paragraph{IModelInformation}
 
