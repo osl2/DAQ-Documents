@@ -34,12 +34,11 @@ namespace Model {
 
 
 	class MeasurementConfiguration{
+		+MeasurementConfiguration(pathToFile: String, updateRate: double)
 		-pathToFile: String
-		-updateRate: float
-		-createConfigId( id: String): Integer
-		-cloneInitBlock(is: String): BuildingBlock
-		-listOfAllChannels: <Channel>
-		-configurationAdjacencyList: configuration[]
+		-updateRate: double
+		-createConfigId( id: String): long
+		-cloneInitBlock(id: String): BuildingBlock
 		+getPathToFile(): String
 		-checkForCycle(): boolean
  		+getMeasurementConfig(): MeasurementConfiguration
@@ -58,7 +57,7 @@ namespace Model {
 	{
 
 		-initId: String
-		-configId: int
+		-configId: long
 		-name: String
 		-userInfo: String
 		+setId()
@@ -82,53 +81,38 @@ namespace Model {
 			+<<create>> Transformation()
 			+<<create>> Transformation(Yaml inputTransformationYaml)
 			+setFunction(String inputFunction)
-			+{abstract} applyFunction(): Integer
+			+{abstract} applyFunction(packet: TimeSpampValuePair): void
+			{abstract} processValue(packet: TimeSpampValuePair): boolean
 		}
 		class Function {
 			<<create>>Function(String inputFunction) : Function
-			+applyFunction(Integer data)
+			+applyFunction(packet: TimeSpampValuePair): void
+			
 		}
 		Function "1" - "*" Transformation
 	}
 
 
 	BuildingBlock <|-  Model.TransformationLogic.Transformation
-	'----------------------------------------------------------------------------------------
-	'Note: The manager aspect of this diagramm can be found, in more detail, at another place.
-	'It stands here for a complete overview
-	'----------------------------------------------------------------------------------------
-	'package kit.edu.freejdaq.configurationBlockManager {
-	'	abstract class ConfigurationBlockManager{
-	'		listOfBlocks : ConfigurationBlock[]
-	'		{abstract}+add(BuildingBlock block): boolean
-	'		{abstract}+remove(BuildingBlock block): boolean
-	'		{abstract}+showAllBocks(BuildingBlock block): boolean
-	'	}
-	'
-	'	class RepresentationManager {
-	'
-	'
-	'	}
-	'
-	'}
+	
 
 	namespace RepresentationLogic {
 
 		abstract class Representation{
 
-			{abstract} processValue()
+			{abstract} processValue(packet: TimeSpampValuePair): boolean
 
 
 			}
 
 		class "TableRespresentation" as TR{
-			processValue()
+			processValue(packet: TimeSpampValuePair): boolean
 
 		}
 
 
 		class XYRepresentation {
-			processValue()
+			processValue(packet: TimeSpampValuePair): boolean
 			traceName: String
 			title: String
 			xAxisName: String
@@ -152,15 +136,15 @@ namespace Model {
 	namespace SensorLogic {
 
 		abstract class Sensor{
-			´{abstract} processValue()
+			{abstract} processValue(packet: TimeSpampValuePair): boolean
 
 			}
 
 		 class PhysicalSensor{
-		 	processValue()
+		 	processValue(packet: TimeSpampValuePair): boolean
 		 }
 		 class VirtualSensor{
-		 	processValue()
+		 	processValue(packet: TimeSpampValuePair): boolean
 		 }
 		 VirtualSensor --|> Sensor
 		 PhysicalSensor --|> Sensor
@@ -172,8 +156,8 @@ namespace Model {
 
 	class Channel {
 		-id: String
-		-value: int
-		+ establishConnection(String targetChannelId)
+		-value: long
+		+ establishConnection(targetChannelId: String)
 		+ receiveValue()
 		+ connect(): void
 		+ unConnect(): void
@@ -182,7 +166,7 @@ namespace Model {
 		+ {abstract} forwardValue(): void
 
 	}
-	Channel ..|> IValueHandler
+	
 
 	note top of Channel
 	  first part of channelId is
@@ -190,7 +174,7 @@ namespace Model {
 	end note
 
 	abstract class ChannelState {
-		+ {abstract} establishConnection(String targetChannelId)
+		+ {abstract} establishConnection(targetChannelId: String)
 		+ {abstract} receiveValue()
 	}
 	Channel --> ChannelState
@@ -199,17 +183,17 @@ namespace Model {
 	  In und Out Channeln zu überbrücken
 	end note
 	class Connected{
-		+ establishConnection(String targetChannelId)
+		+ establishConnection(targetChannelId: String)
 		+ receiveValue()
 	}
 	Connected --|> ChannelState
 	class UnConnected{
-		+ establishConnection(String targetChannelId)
+		+ establishConnection(targetChannelId: String)
 		+ receiveValue()
 	}
 	UnConnected --|> ChannelState
 	class ValueReady{
-		+ establishConnection(String targetChannelId)
+		+ establishConnection(targetChannelId: String)
 		+ receiveValue()
 	}
 	ValueReady --|> ChannelState
@@ -248,17 +232,7 @@ namespace Model {
 	end note
 
 
-
-
-	interface IValueHandler {
-
-		processValue()
-	}
-
-	note right of IValueHandler
-	  interface to provide
-	  Data to a channel
-	end note
+	
 
 
 	}
@@ -279,7 +253,7 @@ namespace Model {
 
 
 	class YamlRepresentation {
-		<<create>>YamlRepresentation(BuildingBlock)
+		<<create>>YamlRepresentation(block: BuildingBlock)
 	}
 	BuildingBlock -left- YamlRepresentation
 
@@ -300,7 +274,7 @@ namespace BuildingBlockBuilder {
 		+constructBMPx80PressureSensor()
 		+constructINA219CurrentAndVoltageSensor()
 		+constructMMA8451Accelerometer()
-
+		+constructTransformation()
 
 
 	}
@@ -399,17 +373,17 @@ Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.RepresentationLogic
 
 	class BuildingBlockDirectory {
 
-		- InitHashMap: HashMap<String: id, block: BuildingBlock>
-		- ConfigHashMap: HashMap<int: id, block: BuildingBlock>
+		- InitHashMap: HashMap<id: String, block: BuildingBlock>
+		- ConfigHashMap: HashMap<id: long, block: BuildingBlock>
 		--
 		+ addInitBuildingBlock(id: String, block: BuildingBlock): boolean
 		..
-		+ addConfigBuildingBlock(id: int, block: BuildingBlock): boolean
+		+ addConfigBuildingBlock(id: long, block: BuildingBlock): boolean
 		+ removeConfigBuildingBlock(id: String): boolean
 		+ getInitBuildingBlock(id: String): BuildingBlock
-		+ getConfigBuildingBlock(id: int): BuildingBlock
-		+ addConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-		+ removeConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
+		+ getConfigBuildingBlock(id: long): BuildingBlock
+		+ addConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
+		+ removeConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
 		}
 
 Model.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
@@ -437,7 +411,7 @@ Model.UpdateInterface -- Model.BuildingBlockBuilder.Director
  interface ExceptionInterface {
 	 + showGeneralException(title: String, description: String): void
 	 + showBuildingBlockException(id: String, title: String, description: String): void
-	 + showConnectionException(id: int, title: String, description: String): void
+	 + showConnectionException(id: long, title: String, description: String): void
  }
 
 Model.ExceptionInterface -- Model.MeasurementConfiguration 
