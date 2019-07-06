@@ -2,21 +2,25 @@
 namespace Cache {
 
 class MStreamListener {
+	+ MStreamListener(cache: Cache)
+	+ addConnectinTerminatedAction(action: ConnectionTerminatedAction)
 	+ receiveMDataSet(channelId: String, timeStamp: long, value: double): void
-	+ connectionTerminated(): void
+	+ connectionTerminated(channelId: String): void
 }
 
 
 class MRunTiming {
 	- replayTimePointer: long
-	- period: long
+	- endFlag: boolean
+	--
 	+ MRunTiming(initData: MRunInfo)
 	- createCache(): Cache
 	- addBufferForOneSensorInChannel(SensorId: String)
 	- addCheckAndNotifyAction(action: CheckAndNotifyAction): void
-	+ getMStreamListener(): MStremListener
+	+ getMStreamListener(): MStreamListener
 	..
 	+ addMRunListener(listener: IMRunListener)
+	+ removeMRunListener(listener: IMRunListener)
 	+ startRepeatedTimer(): void
 	+ stopRepeatedTimer(): void
 	..
@@ -33,17 +37,19 @@ class Timer {
 
 class Cache{
 	+ addBufferForOneSensorInChannel(SensorId: String)
-	+ receiveMDataSet(channelId: String, timeStamp: long, value: double): void
-	+ isCompletePackageSetAvailable(from: long, to: long): boolean
-	+ pollCompletePackageSet(from: long, to: long):  IdValuePair[]
+	+ receiveMSet(channelId: String, timeStamp: long, value: double): void
+	+ isDataForAllInChannelsAvailable(from: long, to: long): boolean
+	+ pollDataForAllInChannels(from: long, to: long):  MSet[]
+	+ getErrorsOfOneChannel(codesToCheck: ErrorCodesForInChannel): MSet[]
+	+ removeDataBeforeTimepointer(to: long): void
 }
 
 class BufferForOneSensorInChannel {
 	-sensorInChannelId: String
 	-buffer: Queue<TimestampValuePair>
 	+getInChannelId(): String
-	+addPacket(timeStamp: long, value: double)
-	+getAllPacketsDuringTimespan(from: long, to: long): double[]
+	+addPacket(packet: TimestampValuePair)
+	+getAllPacketsDuringTimespan(from: long, to: long): TimestampValuePair[]
 }
 
 class TimestampValuePair	{
@@ -55,33 +61,35 @@ class TimestampValuePair	{
 }
 	
 class ConnectionTerminatedAction {
-	-
-	+ connectionTerminated(): void
-	+ checkAndNotify(replayTimepointer: long, mRunForward: MRunForward): long
+	+ ConnectionTerminatedAction(allSensorIds: String[])
+	+ raiseConnectionTerminatedFlag(channelId: String): void
+	+ checkAndNotify(meansForAction: MeansForAction): long
 }
 
 class TimeoutAction {
-	- numberToleratedPeriods: int
-	- 
-	+ TimeoutAction(numberToleratedPeriods: int)
-	+ checkAndNotify(replayTimepointer: long, mRunForward: MRunForward): long
+	- period: long
+	- numberOfToleratedLatencyPeriods: int
+	+ TimeoutAction(period: long, numberToleratedLatencyPeriods: int)
+	+ checkAndNotify(meansForAction: MeansForAction): long
 }
 
 class ErrorCodeAction {
-
+	+ErrorCodeAction()
 	+addCodes(sensorInChannelId: String, codes: double[])
-	+checkAndNotify(replayTimepointer: long, mRunForward: MRunForward): long
+	+checkAndNotify(meansForAction: MeansForAction): long
 }
 
 class DataSetCompleteAction {
-	+checkAndNotify(replayTimepointer: long, mRunForward: MRunForward): long
+	-period: long
+	DataSetCompleteAction(period: long)
+	+checkAndNotify(meansForAction: MeansForAction): long
 }
 
-class EnhancedValuePacket {
+class MSet {
 	-sensorInChannelId: String
 	-value: double
 	-timeStamp: long
-	+TimestampValuePair(sensorInChannelId: String, value: double, timeStamp: long)
+	+MSet(sensorInChannelId: String, value: double, timeStamp: long)
 	+getSensorInChannelId(): String
 	+getValue(): double
 	+getTimeSpamp(): long
@@ -91,7 +99,29 @@ class ErrorCodesForInChannel {
 	sensorInChannelId: String
 	errorCodes: double[]
 }
-MStreamListener --> ConnectionTerminatedAction
+
+class MeansForAction {
+	replayTimepointer: long, 
+	cache: Cache, 
+	mRunForward: IMRunListener
+	MeansForAction(cache: Cache, mRunForward: IMRunListener)
+	setReplayTimepointer(replayTimepointer: long)
+}
+
+class ChannelConnectionStatus {	
+	sensorInChannelId: String
+	connected: boolean
+	ChannelConnectionStatus(sensorInChannelId: String)
+	getsensorInChannelId(): String
+	setConnected(connected: boolean)
+	isConnected(): boolean
+}
+
+MRunTiming .left.> MeansForAction
+CheckAndNotifyAction .up.> MeansForAction
+ 
+
+MStreamListener --> "*" ConnectionTerminatedAction
 MStreamListener --> Cache
 ConnectionTerminatedAction .up.|> CheckAndNotifyAction
 TimeoutAction .up.|> CheckAndNotifyAction
@@ -102,21 +132,23 @@ MRunTiming -right-> Timer
 MRunTiming .right.|> TimerTask
 Timer -down-> "1" TimerTask
 MRunTiming ..> MStreamListener
-Cache .right.> EnhancedValuePacket
-Cache --> "*" BufferForOneSensorInChannel
+Cache .up.> MSet
+Cache -down-> "*" BufferForOneSensorInChannel
+Cache ..> ErrorCodesForInChannel     
 
 BufferForOneSensorInChannel .right.> TimestampValuePair
 MRunTiming --> "*" CheckAndNotifyAction
 
-DataSetCompleteAction --> Cache
-ErrorCodeAction --> Cache
-ErrorCodeAction -down-> "*" ErrorCodesForInChannel
+MRunTiming -down-> Cache
+
+ErrorCodeAction --> "*" ErrorCodesForInChannel
 
 MRunTiming --> "*" IMRunListener
 MRunTiming ..> IMRunInfo
+ConnectionTerminatedAction --> "*" ChannelConnectionStatus
 
 interface CheckAndNotifyAction {
-	+checkAndNotify(replayTimepointer: long, mRunForward: MRunForward): long
+	+checkAndNotify(replayTimepointer: long, cache: Cache, mRunForward: IMRunListener): long
 }
 
 interface IMRunListener {
@@ -124,7 +156,7 @@ interface IMRunListener {
 	+indicateError(inChannelId: String, errorCode: double)
 	+indicateTimeout(): void
 	+indicateConnectionTerminated(): void
-	+dispatchCompletePacketSet(completePacketSet: EnhancedValuePacket[])
+	+dispatchCompletePacketSet(completePacketSet: MSet[])
 }
 
 interface IMRunInfo {
