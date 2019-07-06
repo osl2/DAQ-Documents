@@ -17,10 +17,10 @@ namespace Initialization {
 	class Main {
 		+main(args: String[]): void
 	}
-	Main ----------> Backend.SshToPi: creates >
-	Main ----------> Model.ModelManager: creates >
-	Main ----------> GUI.MainWindow: creates >
-
+	Main ------------------> Backend.SshToPi: creates >
+	Main ------------------> Model.ModelManager: creates >
+	Main -------------------> GUI.MainWindow: creates >
+	'Main --------------------> Controller.Command_Pattern.CommandManager: creates >
 }
 
 '------------------------------------------------------------------------
@@ -1369,14 +1369,71 @@ Model.ModelManager --> FileService.YamlService
 '------------------------------------------------------------------------
 'Structure adapting Commands
 '------------------------------------------------------------------------
-class hider{
+class hiderModelGUI
+class hiderModelController
+class hiderModelCache
+class hiderModelBackend
 
-}
-hide hider
+class hiderBackendInitialization
 
-Backend --------[hidden]up------------> hider
-Model --------[hidden]up-------> Backend
-Controller -------[hidden]up-------> Model
-GUI -------[hidden]up-------> Controller
+class hiderInitializationGUI
+
+class hiderGUIFileService
+
+class hiderFileServiceController
+
+hide hiderModelGUI
+hide hiderModelController
+hide hiderModelCache
+hide hiderModelBackend
+hide hiderBackendInitialization
+hide hiderInitializationGUI
+hide hiderGUIFileService
+hide hiderFileServiceController
+
+Model ---[hidden]up---> hiderModelGUI
+Model ---[hidden]right---> hiderModelController
+Model ---[hidden]down---> hiderModelCache
+Model ---[hidden]left---> hiderModelBackend
+
+Backend ---[hidden]up---> hiderBackendInitialization
+Initialization ---[hidden]up---> hiderBackendInitialization
+
+Initialization ---[hidden]right---> hiderInitializationGUI
+GUI ---[hidden]left---> hiderInitializationGUI
+
+GUI ---[hidden]right---> hiderGUIFileService
+FileService ---[hidden]left---> hiderGUIFileService
+
+FileService ---[hidden]down---> hiderFileServiceController
+Controller ---[hidden]up---> hiderFileServiceController
+
+
+'Model -------[hidden]up-------> GUI
+'Model -------[hidden]right-------> Controller
+'Model -------[hidden]down-------> Cache
+'Model -------[hidden]left-------> Backend
+
+'Controller -------[hidden]up-------> FileService
+'Controller -------[hidden]left-------> Model
+'Controller -------[hidden]down-------> Cache
+
+'FileService -------[hidden]down-------> Controller
+'FileService -------[hidden]left-------> GUI
+
+'GUI -------[hidden]left-------> Initialization
+'GUI -------[hidden]right-------> FileService
+'GUI -------[hidden]down-------> Model
+
+'Initialization -------[hidden]right-------> GUI
+'Initialization -------[hidden]down-------> Backend
+
+'Backend -------[hidden]up-------> Initialization
+'Backend -------[hidden]down-------> Cache
+'Backend -------[hidden]right-------> Model
+
+'Cache -------[hidden]up-------> Model
+'Cache -------[hidden]up-------> Backend
+'Cache -------[hidden]up-------> Controller
 
 @enduml
