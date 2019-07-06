@@ -59,7 +59,9 @@ namespace Backend {
 	}
 
 	class PickPointForAgentsBasedOnSsh {
+		-{static}onlyInstance: PickPointForAgentsBasedOnSsh
 		+{static}getPickPointForAgentsBasedOnSsh(initData: InitDataForSsh): PickPointForAgentsBasedOnSsh
+		+PickupPointForAgentsBasedOnSsh(sensorInfoAgent: IAccessToSensorInfo, mRunAgent: IAccessToMRun)
 		+getIAccessToMRun(): IAccessToSensorInfo
 		+getIAccessToSensorInfo(): IAccessToSensorInfo
 	}
