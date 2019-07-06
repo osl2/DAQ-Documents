@@ -37,7 +37,7 @@ namespace Model {
 		-checkForCycle(): boolean
  		+getMeasurementConfig(): MeasurementConfiguration
  		+addBuildingBlock(id: String)
-		+removeBuildingBlock(id: String)
+		+removeBuildingBlock(initId: String, configId: long)
 		+addConnection(firstChannelId: String, secondChannelId: String)
 		+removeConnection(firstChannelId: String, secondChannelId: String)
 
@@ -54,7 +54,7 @@ namespace Model {
 		-configId: long
 		-name: String
 		-userInfo: String
-		+setId()
+		+setconfigId(configId):boolean
 		+addInChannel(id: String, name: String): void
 		+addOutChannel(id: String, name: String): void
 		+removeInChannel(id: String, name: String): void
@@ -144,7 +144,7 @@ namespace Model {
 			traceName: String
 			title: String
 			xAxisName: String
-			yXisName: String
+			yAXisName: String
 			hasToolBar: boolean
 
 
@@ -186,10 +186,9 @@ namespace Model {
 		-id: String
 		-value: long
 		+ establishConnection(targetChannelId: String)
-		+ receiveValue()
+		+ receiveValue():void
 		+ connect(): void
 		+ unConnect(): void
-		+ receiveValue(): void
 		+ eraseValue(): void
 		+ {abstract} forwardValue(): void
 
@@ -405,11 +404,10 @@ PickUpPointViewFacades --> MeasurementDataInterface
 
 
 }
-Model.FacadeControllerView.UpdateInterface -- Model.BuildingBlockBuilder.Director
-Model.FacadeControllerView.GraphicDataIolnterface --> Model.RepresentationLogic.XYRepresentation
-Model.FacadeControllerView.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
-Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementConfiguration 
-Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementRun
+Model.FacadeControllerView.PickUpPointViewFacades -- Model.BuildingBlockBuilder.Director
+Model.FacadeControllerView.PickUpPointViewFacades -- Model.RepresentationLogic.XYRepresentation
+Model.FacadeControllerView.PickUpPointViewFacades -- Model.Core.MeasurementConfiguration 
+Model.FacadeControllerView.PickUpPointViewFacades -- Model.Core.MeasurementRun
 
 
 class Model.MRunReaction {
