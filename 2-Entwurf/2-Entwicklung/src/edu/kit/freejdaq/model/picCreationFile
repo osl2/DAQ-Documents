@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @startuml
 
 
@@ -110,4 +111,118 @@
 
 	
 
+=======
+@startuml
+
+
+
+	namespace Core {
+
+	class MeasurementRun {
+
+		+start(): boolean
+		+pause(): boolean
+		+resume(): boolean
+		+reset(): boolean
+		+setUpdateRate(MeasurementConfiguration config): boolean
+		-checkSensorInChannelStates(): boolean
+
+	}
+
+	enum MesurementRunState{
+		INITIAL_STATE
+		RUNNING
+		PAUSED
+	}
+	MeasurementRun -> MesurementRunState
+
+
+
+	class MeasurementConfiguration{
+		+MeasurementConfiguration(pathToFile: String, updateRate: double)
+		-pathToFile: String
+		-updateRate: double
+		-createConfigId( id: String): long
+		-cloneInitBlock(id: String): BuildingBlock
+		+getPathToFile(): String
+		-checkForCycle(): boolean
+ 		+getMeasurementConfig(): MeasurementConfiguration
+ 		+addBuildingBlock(id: String)
+		+removeBuildingBlock(id: String)
+		+addConnection(firstChannelId: String, secondChannelId: String)
+		+removeConnection(firstChannelId: String, secondChannelId: String)
+
+ 		+createModelFromYamlDom(modelDom: YamlDom): String
+
+	}
+	MeasurementConfiguration "1" -left- "*" MeasurementRun
+
+
+	abstract class BuildingBlock
+	{
+
+		-initId: String
+		-configId: long
+		-name: String
+		-userInfo: String
+		+setId()
+		+addInChannel(id: String, name: String): void
+		+addOutChannel(id: String, name: String): void
+		+removeInChannel(id: String, name: String): void
+		+removeOutChannel(id: String, name: String): void
+
+
+
+	}
+
+
+	MeasurementConfiguration "1" -- "*" BuildingBlock
+
+	class HelpMessage{
+		- messageFileName : String
+		+ HelpMessage(msgFile : String)
+		+ displayMessage() : void
+	}
+	note left of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
+
+	BuildingBlock "*" --> "1" HelpMessage : < provides help/information about
+
+
+
+
+	class YamlRepresentation {
+		<<create>>YamlRepresentation(block: BuildingBlock)
+	}
+	BuildingBlock -left- YamlRepresentation
+	
+	class BuildingBlockDirectory {
+
+		- InitHashMap: HashMap<id: String, block: BuildingBlock>
+		- ConfigHashMap: HashMap<id: long, block: BuildingBlock>
+		--
+		+ addInitBuildingBlock(id: String, block: BuildingBlock): boolean
+		..
+		+ addConfigBuildingBlock(id: long, block: BuildingBlock): boolean
+		+ removeConfigBuildingBlock(id: String): boolean
+		+ getInitBuildingBlock(id: String): BuildingBlock
+		+ getConfigBuildingBlock(id: long): BuildingBlock
+		+ addConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
+		+ removeConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
+		}
+	MeasurementConfiguration  --> BuildingBlockDirectory
+}
+
+
+	
+	
+
+	
+
+
+	
+
+
+	
+
+>>>>>>> 785458ae9c6ebd93514c1cac65cb79c91bd71b99
 @enduml
