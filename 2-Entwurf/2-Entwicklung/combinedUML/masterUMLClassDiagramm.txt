@@ -188,7 +188,7 @@ namespace Model {
 		-checkForCycle(): boolean
  		+getMeasurementConfig(): MeasurementConfiguration
  		+addBuildingBlock(id: String)
-		+removeBuildingBlock(id: String)
+		+removeBuildingBlock(initId: String, configId: long)
 		+addConnection(firstChannelId: String, secondChannelId: String)
 		+removeConnection(firstChannelId: String, secondChannelId: String)
 
