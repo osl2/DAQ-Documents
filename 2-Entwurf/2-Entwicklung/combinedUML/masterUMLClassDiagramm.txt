@@ -227,7 +227,7 @@ namespace Model {
 		+ addConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
 		+ removeConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
 		}
-	
+	MeasurementConfiguration  --> BuildingBlockDirectory
 }
 
 
@@ -365,13 +365,6 @@ namespace Model {
 		-channelName: String
 		+forwardValue(): void
 	}
-
-	class MRunInfo {
-	+getAllInChannelIds(): String[]
-	+getErrorCodes(inChannelId: String): double[]
-	+getTimeoutOption(): long
-	}
-
 
 
 	OutChannel --|> Channel
@@ -518,7 +511,7 @@ class PickUpPointViewFacades {
  interface UpdateInterface {
  	+ updateConfig(): void
  }
-Model.FacadeControllerView.UpdateInterface -- Model.BuildingBlockBuilder.Director
+
 
  interface GraphicDataIolnterface {
 	  + getContentsOfRepresentationBlocks(): BufferedImage[]
@@ -530,22 +523,22 @@ Model.FacadeControllerView.UpdateInterface -- Model.BuildingBlockBuilder.Directo
 	 + showConnectionException(id: long, title: String, description: String): void
  }
 
-Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementConfiguration 
-Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementRun
-
  interface MeasurementDataInterface {
  	+ pushShellForVisualisation(..): void
  }
-Model.FacadeControllerView.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
 
 PickUpPointViewFacades --> "*" UpdateInterface
 PickUpPointViewFacades --> GraphicDataIolnterface
 PickUpPointViewFacades --> ExceptionInterface
 PickUpPointViewFacades --> MeasurementDataInterface
-GraphicDataIolnterface --> Model.RepresentationLogic.XYRepresentation
+
 
 }
-
+Model.FacadeControllerView.UpdateInterface -- Model.BuildingBlockBuilder.Director
+Model.FacadeControllerView.GraphicDataIolnterface --> Model.RepresentationLogic.XYRepresentation
+Model.FacadeControllerView.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
+Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementConfiguration 
+Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementRun
 
 
 class Model.MRunReaction {
@@ -556,10 +549,17 @@ class Model.MRunReaction {
 	+dispatchCompletePacketSet(completePacketSet: EnhancedValuePacket[])
 }
 
+class MRunInfo {
+	+getAllInChannelIds(): String[]
+	+getErrorCodes(inChannelId: String): double[]
+	+getTimeoutOption(): long
+	}
+
+
 
 MRunReaction  --  Model.Core.MeasurementRun
-Model.Core.MeasurementRun  --  Model.ChannelLogic.MRunInfo
-Model.Core.MeasurementConfiguration  -->  Model.Core.BuildingBlockDirectory
+Model.Core.MeasurementRun  --  Model.MRunInfo
+
 
 
 
@@ -1294,7 +1294,7 @@ interface TimerTask {
 'Model to Cache
 
 Cache.MRunForward <|.. Model.MRunReaction
-Cache.MRunInfo <|.. Model.ChannelLogic.MRunInfo
+Cache.MRunInfo <|.. Model.MRunInfo
 
 'Model to Controller
 

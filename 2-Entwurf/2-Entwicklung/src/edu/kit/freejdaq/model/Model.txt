@@ -237,13 +237,6 @@ namespace Model {
 		+forwardValue(): void
 	}
 
-	class MRunInfo {
-	+getAllInChannelIds(): String[]
-	+getErrorCodes(inChannelId: String): double[]
-	+getTimeoutOption(): long
-	}
-
-
 
 	OutChannel --|> Channel
 	OutChannel "1" -- "1" InChannel
@@ -427,9 +420,16 @@ class Model.MRunReaction {
 	+dispatchCompletePacketSet(completePacketSet: EnhancedValuePacket[])
 }
 
+class MRunInfo {
+	+getAllInChannelIds(): String[]
+	+getErrorCodes(inChannelId: String): double[]
+	+getTimeoutOption(): long
+	}
+
+
 
 MRunReaction  --  Model.Core.MeasurementRun
-Model.Core.MeasurementRun  --  Model.ChannelLogic.MRunInfo
+Model.Core.MeasurementRun  --  Model.MRunInfo
 
 
 
