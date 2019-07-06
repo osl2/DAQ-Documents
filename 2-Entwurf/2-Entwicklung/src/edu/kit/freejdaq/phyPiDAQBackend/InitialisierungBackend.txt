@@ -1,0 +1,19 @@
+@startuml
+
+":Model" --> PickupPointAgentsSsh: getPickupPointAgentsSsh(initData)
+PickupPointAgentsSsh --> ":SshCommandFactory": new SshCommandFactory(initData)
+":SshCommandFactory" --> PickupPointAgentsSsh: :SshCommandFactory
+PickupPointAgentsSsh --> ":SensorInfoAgent": new SensorInfoAgent(:SshCommandFactory)
+":SensorInfoAgent" --> PickupPointAgentsSsh: :SensorInfoAgent
+PickupPointAgentsSsh --> ":MRunAgent": new MRunAgent(:SshCommandFactory)
+":MRunAgent" --> PickupPointAgentsSsh: :MRunAgent
+PickupPointAgentsSsh --> ":PickupPointAgentsSsh": new PickupPointAgentsSsh(:SensorInfoAgent, :MRunAgent)
+":PickupPointAgentsSsh" --> PickupPointAgentsSsh: :PickupPointAgentsSsh
+PickupPointAgentsSsh -->> ":Model": :PickupPointAgentsSsh
+
+":Model" --> ":PickupPointAgentsSsh": getIAccessToSensorInfo()
+":PickupPointAgentsSsh" --> ":Model": :SensorInfoAgent
+":Model" --> ":PickupPointAgentsSsh": getIAccessToSensorInfo()
+":PickupPointAgentsSsh" --> ":Model": :MRunAgent
+
+@enduml
