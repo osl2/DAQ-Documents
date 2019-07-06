@@ -1369,44 +1369,7 @@ Model.ModelManager --> FileService.YamlService
 '------------------------------------------------------------------------
 'Structure adapting Commands
 '------------------------------------------------------------------------
-class hiderModelGUI
-class hiderModelController
-class hiderModelCache
-class hiderModelBackend
 
-class hiderBackendInitialization
-
-class hiderInitializationGUI
-
-class hiderGUIFileService
-
-class hiderFileServiceController
-
-hide hiderModelGUI
-hide hiderModelController
-hide hiderModelCache
-hide hiderModelBackend
-hide hiderBackendInitialization
-hide hiderInitializationGUI
-hide hiderGUIFileService
-hide hiderFileServiceController
-
-hiderModelGUI ------[hidden]dowm------> Model
-hiderModelController ------[hidden]left------> Model
-hiderModelCache ------[hidden]up------> Model
-hiderModelBackend ------[hidden]right------> Model
-
-hiderBackendInitialization ------[hidden]down------> Backend
-hiderBackendInitialization ------[hidden]up------> Initialization
-
-hiderInitializationGUI ------[hidden]left------> Initialization
-hiderInitializationGUI ------[hidden]right------> GUI
-
-hiderGUIFileService ------[hidden]left------> GUI
-hiderGUIFileService ------[hidden]right------> FileService
-
-hiderFileServiceController ------[hidden]up------> FileService
-hiderFileServiceController ------[hidden]down------> Controller
 
 
 'Model -------[hidden]up-------> GUI
