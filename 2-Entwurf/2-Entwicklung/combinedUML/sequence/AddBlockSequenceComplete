@@ -83,11 +83,11 @@ deactivate BlockDragAndDropHandler
 ConfigurationField -> ViewDirectoryInterface: checkForUpdate()
 ViewDirectoryInterface -> BuildingBlockDirectory: checkUpdate()
 BuildingBlockDirectory --> ViewDirectoryInterface: True
-ViewDirectoryInterface -> ConfigurationField: True
+ViewDirectoryInterface --> ConfigurationField: True
 ConfigurationField -> ViewDirectoryInterface: getConfigBuildingBlock(configIdOfB1)
 ViewDirectoryInterface -> BuildingBlockDirectory: getConfigBuildingBlock(configIdOfB1)
 BuildingBlockDirectory --> ViewDirectoryInterface: B1
-ViewDirectoryInterface -> ConfigurationField: B1
+ViewDirectoryInterface --> ConfigurationField: B1
 ConfigurationField -> ConfigurationField: add(B1)
 
 ConfigurationField -> BuildingBlockView: <<create>>
