@@ -26,78 +26,36 @@ namespace Initialization {
 '------------------------------------------------------------------------
 'Backend
 '------------------------------------------------------------------------
+
+namespace Cache {
+		class MStreamListener{
+		}
+
+		class MRunTiming {
+		}
+	}
+
 namespace Backend {
-	SshToPi --|> CommunicationWithPi
-	WebSocketToPi  --|> CommunicationWithPi
-	UsbToPi --|> CommunicationWithPi
-	SshToPi -up-> NetworkConfiguration
-	WebSocketToPi -up-> NetworkConfiguration
 
-	class NetworkConfiguration {
-	   -port: int
-	   -ipAddressOfPi: String
-	}
 
-	abstract class CommunicationWithPi {
-		-busy: boolean
-		-pathToRemoteDir: String
-		-pathToLocalDir: String
-		+CommunicationWithPi(pathToRemoteDir: String, pathToLocalDir: String)
-	    +{abstract}executeCompleteCommandWithTimeout(command: String, timeOut: int): String[]
-	    +{abstract}copyFileFromPi(nameOfFile: String): boolean
-	    +{abstract}copyFileToPi(nameOfFile: String): boolean
-	    +{abstract}executeCommandContinuously(command: String, listeningAgent: ICommandResponseListener): void
-	    +{abstract}disconnect(): void
-	}
-	CommunicationWithPi --> "listeningProtocolAgent" ICommandResponseListener
 
-	interface ICommandResponseListener {
-		receivePartOfResponse(response: String; finished: boolean)
-	}
+	IMStreamListener  .left.|> Cache.MStreamListener
+	MRunAgent -left-> Cache.MRunTiming
 
-	 MeasurementRunAgentForSsh .up.|> ICommandResponseListener
-
-	note top of MeasurementRunAgentForSsh
-		To separate technical aspect of communication
-		from application specific aspect, this Agent
-		receives technical events and forwards them to
-		its registered application specific clients.
-	end note
-
-	class SshToPi {
-		-username: String
-		-password: String
-		+SshAndScpTo(username: String, password: String)
-		+executeCompleteCommandWithTimeout(command: String, timeOut: int): String[]
-	    +copyFileFromPi(nameOfFile: String): boolean
-	    +copyFileToPi(nameOfFile: String): boolean
-	    +executeCommandContinuously(command: String, listeningAgent: ICommandResponseListener): void
-	    +disconnect(): void
-	}
-
-	interface IMeasurementStreamListener {
-		-receiveData(measuredValue: int): void
-		-connectionTerminated(): void
-	}
-
-	MeasurementRunAgentForSsh -right-> CommunicationWithPi
-	SensorInfoAgentForSsh -up-> CommunicationWithPi
-	MeasurementRunAgentForSsh -left-> "*" IMeasurementStreamListener
 
 	interface IAccessToSensorInfo {
 		+getIdsOfAvailableSensors(): String[]
-		+getYamlFile(sensorId: String): boolean
-		+setYamlFile(sensorId: String): boolean
+		+copyYamlFileFromPi(sensorId: String): boolean
+		+copyYamlFileToPi(sensorId: String): boolean
 	}
 
-	SensorInfoAgentForSsh ..|> IAccessToSensorInfo
 
 
-	interface IAccessToMeasurementRun{
-		+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
+	interface IAccessToMRun{
+		+start(sensorIDs: string[], dataListeners: IMStreamListener[]): boolean
 		+pause(): boolean
-		+continue(): boolean
-		+stop(): boolean
+		+resume(): boolean
+		+reset(): boolean
 	}
 
 	enum MeasurementState {
@@ -106,37 +64,30 @@ namespace Backend {
 	  PAUSED
 	}
 
-	MeasurementRunAgentForSsh .down.|> IAccessToMeasurementRun
-	MeasurementRunAgentForSsh -up-> MeasurementState
 
-	together {
-
-		class MeasurementRunAgentForSsh {
-			+MeasurementRunAgentForSsh(foundation: CommunicationWithPi)
-			+start(sensorIDs: string[], listeners: IMeasurementStreamListener[]): boolean
-			+pause(): boolean
-			+continue(): boolean
-			+stop(): boolean
-			+receivePartOfResponse(response: String; finished: boolean)
-		}
-
-		class SensorInfoAgentForSsh {
-			+SensorInfoAgentForSsh(foundation: CommunicationWithPi)
-			+getIdsOfAvailableSensors(): String[]
-			+getYamlFile(sensorId: String): boolean
-			+setYamlFile(sensorId: String): boolean
-		}
+	class MRunAgent {
+		+MRunAgent(commandFactory: CommandFactory, mRunTiming: MRunTiming)
+		+start(mRunInfo: IMRunInfo, dataListeners: IMStreamListener[]): boolean
+		+pause(): boolean
+		+resume(): boolean
+		+reset(): boolean
 	}
 
-	PickupPointForAgentsBasedOnSsh -up-> IAccessToSensorInfo
-	PickupPointForAgentsBasedOnSsh -up-> IAccessToMeasurementRun
-	class PickupPointForAgentsBasedOnSsh {
-		+{static}getPickupPointForAgentsBasedOnSsh(initData: InitDataForSsh): PickupPointForAgentsBasedOnSsh
-		+getIAccessToMeasurementRun(): IAccessToSensorInfo
+
+
+	class SensorInfoAgent {
+		+SensorInfoAgent(commandFactory: CommandFactory)
+		+fetchIdsOfAvailableSensors(): String[]
+		+copyYamlFileFromPi(sensorId: String): boolean
+		+copyYamlFileToPi(sensorId: String): boolean
+	}
+
+	class PickPointForAgentsBasedOnSsh {
+		+{static}getPickPointForAgentsBasedOnSsh(initData: InitDataForSsh): PickPointForAgentsBasedOnSsh
+		+getIAccessToMRun(): IAccessToSensorInfo
 		+getIAccessToSensorInfo(): IAccessToSensorInfo
 	}
 
-	PickupPointForAgentsBasedOnSsh ..> InitDataForSsh
 
 	class InitDataForSsh {
 	 	+ ipAddressOfPi: String,
@@ -146,6 +97,236 @@ namespace Backend {
 	 	+ pathToRemoteDir: String,
 	 	+ pathToLocalDir: String
 	}
+
+	interface IMStreamListener {
+		+ receiveMDataSet(channelId: String, timeStamp: long, value: double): void
+		+ connectionTerminated(): void
+	}
+
+
+	namespace CommandFactory {
+
+		abstract class ComToPi {
+			-idOfSensorInChannelOrSensorInfoTask: String
+			-pathToRemoteDir: String
+			-pathToLocalDir: String
+			+ComToPi(id: String, pathToRemoteDir: String, pathToLocalDir: String)
+   		    +{abstract}fetchSensorIds(timeOut: int): String[]
+		    +{abstract}copyFileFromPi(nameOfFile: String): boolean
+		    +{abstract}copyFileToPi(nameOfFile: String): boolean
+		    +{abstract}startMRunAtPi(inChannelId: String): void
+		    +{abstract}readLine(): String
+		}
+
+		class SshToPi {
+			-port: int
+		     	-ipAddressOfPi: String
+			-username: String
+			-password: String
+			+SshAndScpTo(initData: initDataForSsh)
+			+fetchSensorIds(timeOut: int): String[]
+			+copyFileFromPi(nameOfFile: String): boolean
+			+copyFileToPi(nameOfFile: String): boolean
+			+startMRunAtPi(inChannelId: String): void
+			+readLine(): String
+		}
+
+
+
+
+		interface CommandFactory{
+			+ createGetSensorIds(timeout: int): CommandGetSensorIds
+			+ createCopyFromPi(nameOfFile: String, timeout: int): CommandCopyFromPi
+			+ createCopyToPi(nameOfFile: String, timeout, int): CommandCopyToPi
+			+ createMRunThread(inChannelId: String, listener: IMStreamListener): MRunThread
+			- createMRunAtPi(inChannelId: String, listener: IMStreamListener): CommandMRunAtPi
+		}
+
+
+
+		class SshCommandFactory {
+			-initDataForSsh: InitDataForSsh
+			+ SshCommandFactory(initData: InitDataForSsh)
+			+ createGetSensorIds(timeout: int): CommandGetSensorIds
+			+ createCopyFromPi(nameOfFile: String, timeout: int): CommandCopyFromPi
+			+ createCopyToPi(nameOfFile: String, timeout, int): CommandCopyToPi
+			+ createMRunThread(inChannelId: String, listener: IMStreamListener): MRunThread
+			- createMRunAtPi(inChannelId: String, listener: IMStreamListener): CommandMRunAtPi
+		}
+
+
+
+		class CommandGetSensorIds {
+			-timeout: int
+			+CommandGetSensorIds(comInstance: ComToPi, timeout: int)
+			+{abstract}executeLocal(): String[]
+		}
+
+		class SshCommandGetSensorIds {
+			+CommandGetSensorIds(sshInstance: SshToPi, timeout: int)
+			+executeLocal(): String[]
+		}
+
+
+
+		class CommandCopyFromPi {
+			-nameOfFile: String
+			-timeout: int
+			+CommandCopyFromPi(comInstance: ComToPi, nameOfFile: String, timeout: int)
+			+{abstract}executeLocal(): boolean
+		}
+
+		class SshCommandCopyFromPi {
+			+CommandCopyFromPi(sshInstance: SshToPi, nameOfFile: String, timeout: int)
+			+executeLocal(): boolean
+		}
+
+
+
+		class CommandCopyToPi {
+			-nameOfFile: String
+			-timeout: int
+			+CommandCopyToPi(comInstance: ComToPi, nameOfFile: String, timeout: int)
+			+{abstract}executeLocal(): boolean
+		}
+
+		class SshCommandCopyToPi {
+			+CommandCopyToPi(sshInstance: SshToPi, nameOfFile: String, timeout: int)
+			+executeLocal(): boolean
+		}
+
+
+
+		class CommandMRunAtPi {
+			-inChannelId: String
+			-resetFlag: boolean
+			-pauseFlag: boolean
+			+CommandMRunAtPi(comInstance: ComToPi, inChannelId: String, listener: IMStreamListener)
+			+raisePauseFlag():
+			+raiseResetFlag(): void
+			+run():void
+			+{abstract}executeLocal(): void
+		}
+
+
+		class SshCommandMRunAtPi {
+			+SshCommandMRunAtPi(sshInstance: SshToPi, inChannelId: String, listener: IMStreamListener)
+			+executeLocal(): void
+		}
+
+
+
+
+		class SystemProcessCommandLine {
+			+ SystemProcessCommandLine()
+			- anotherLocalSystemProcess: Runtime
+			- standardOutput: BufferedReader
+			- standardInput: Writer
+			+ execute(commandToExecute: String): int
+			+ getStdOutput(): BufferedReader
+			+ getStdInput(): Writer
+	}
+
+		interface BufferedReader {
+			readLine(): String
+		}
+
+		interface Writer {
+			write(text: String)
+		}
+
+
+
+		class MRunThread {
+			+MRunThread(runnable: CommandMRunAtPi)
+			+start(): void
+			+pause(): void
+			+resume(): void
+			+reset(): void
+		}
+
+		class Thread {
+			+ Thread(runnable: Runnable)
+			+ start(): void
+			+ resume(): void
+			+ stop(): void
+			..
+			+ {static} currentThread(): Thread
+			+ pause(): void
+		}
+
+
+
+
+		interface Runnable {
+			+run(): void
+		}
+
+		CommandMRunAtPi -left-> "listener" Backend.IMStreamListener
+
+
+		MRunThread --> 	Thread
+		MRunThread --> CommandMRunAtPi
+		CommandMRunAtPi ..|> Runnable
+		Thread --> Runnable
+
+		SshCommandFactory ..|> CommandFactory
+
+
+		SshCommandGetSensorIds --|> CommandGetSensorIds
+		SshCommandCopyFromPi  --|> CommandCopyFromPi
+		SshCommandCopyToPi  --|> CommandCopyToPi
+		SshCommandMRunAtPi  --|> CommandMRunAtPi
+
+		SshToPi --|> ComToPi
+
+		CommandGetSensorIds --> ComToPi
+		CommandCopyFromPi--> ComToPi
+		CommandCopyToPi --> ComToPi
+		CommandMRunAtPi--> ComToPi
+
+
+
+		SshCommandFactory ..> SshToPi
+		SshCommandFactory ..> SshCommandGetSensorIds
+		SshCommandFactory ..> SshCommandCopyFromPi
+		SshCommandFactory ..> SshCommandCopyToPi
+		SshCommandFactory ..> SshCommandMRunAtPi
+
+		SshToPi --> SystemProcessCommandLine
+
+		SystemProcessCommandLine ..> BufferedReader
+		SystemProcessCommandLine ..> Writer
+
+		SshToPi ..> BufferedReader
+		SshToPi ..> Writer
+
+
+		note bottom of CommandMRunAtPi
+			To separate technical aspect of communication
+			from application specific aspect, the executeLocal
+			receives Pi's textual answers as whole lines,
+			interprets/parses them, and forwards them to
+			its application-specific-listener(s).
+		end note
+
+	}
+
+	SensorInfoAgent --> Backend.CommandFactory.CommandFactory
+	MRunAgent --> "*" Backend.CommandFactory.MRunThread
+	MRunAgent --> Backend.CommandFactory.CommandFactory
+
+
+	MRunAgent --> MeasurementState
+	PickPointForAgentsBasedOnSsh ..> InitDataForSsh
+	PickPointForAgentsBasedOnSsh --> IAccessToSensorInfo
+	PickPointForAgentsBasedOnSsh --> IAccessToMRun
+	SensorInfoAgent ..|> IAccessToSensorInfo
+	MRunAgent ..|> IAccessToMRun
+
+
+
+
 
 }
 
@@ -234,21 +415,27 @@ namespace Model {
 		<<create>>YamlRepresentation(block: BuildingBlock)
 	}
 	BuildingBlock -left- YamlRepresentation
-	
+
 	class BuildingBlockDirectory {
 
-		- InitHashMap: HashMap<id: String, block: BuildingBlock>
-		- ConfigHashMap: HashMap<id: long, block: BuildingBlock>
-		--
-		+ addInitBuildingBlock(id: String, block: BuildingBlock): boolean
-		..
-		+ addConfigBuildingBlock(id: long, block: BuildingBlock): boolean
-		+ removeConfigBuildingBlock(id: String): boolean
-		+ getInitBuildingBlock(id: String): BuildingBlock
-		+ getConfigBuildingBlock(id: long): BuildingBlock
-		+ addConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
-		+ removeConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
-		}
+- isUpdated: boolean
+- InitHashMap: HashMap<String: id, block: BuildingBlock>
+- ConfigHashMap: HashMap<int: id, block: BuildingBlock>
+--
++ addInitBuildingBlock(id: String, block: BuildingBlock): boolean
+..
++ addConfigBuildingBlock(id: int, block: BuildingBlock): boolean
++ removeConfigBuildingBlock(id: String): boolean
++ getInitBuildingBlock(id: String): BuildingBlock
++ getConfigBuildingBlock(id: int): BuildingBlock
++ getFullInitBlock(): HashMap<InitId: String, block: BuildingBlock>
++ getFullConfigBlock(): HashMap<ConfigId: int, block: BuildingBlock>
++ addConfigConnection(bbId1: String, chId1: int, chId2: int, bbId2: String): boolean
++ removeConfigConnection(bbId1: String, chId1: int, chId2: int, bbId2: String): boolean
++ getConnection(chId1: int, chId2: int): boolean
++ setUpdate(bool: boolean): boolean
++ checkUpdate(): boolean
+}
 	MeasurementConfiguration  --> BuildingBlockDirectory
 }
 
@@ -266,14 +453,14 @@ namespace Model {
 		class Function {
 			<<create>>Function(String inputFunction) : Function
 			+applyFunction(packet: TimeSpampValuePair): void
-			
+
 		}
 		Function "1" - "*" Transformation
 	}
 
 
 	Model.Core.BuildingBlock <|-  Model.TransformationLogic.Transformation
-	
+
 
 	namespace RepresentationLogic {
 
@@ -344,7 +531,7 @@ namespace Model {
 		+ {abstract} forwardValue(): void
 
 	}
-	
+
 
 	note top of Channel
 	  first part of channelId is
@@ -406,9 +593,9 @@ namespace Model {
 Model.Core.BuildingBlock "1" --> "*" Model.ChannelLogic.InChannel
 Model.Core.BuildingBlock "1" --> "*" Model.ChannelLogic.OutChannel
 
-	
 
-	
+
+
 
 
 
@@ -492,11 +679,11 @@ namespace BuildingBlockBuilder {
 	SensorBuilder -up-|> Builder
 	PhysicalSensorBuilder -up-|> SensorBuilder
 	VirtualSensorBuilder -up-|> SensorBuilder
-	
+
 	TransformationBuilder -up-|> Builder
 	RepresentationBuilder -up-|> Builder
-	
-	
+
+
 	TableRepresentationBuilder -up-|> RepresentationBuilder
 	XYRepresentationBuilder -up-|> RepresentationBuilder
 
@@ -517,7 +704,7 @@ Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.RepresentationLogic
 Model.Core.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
 Model.Core.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
 
-	
+
 
 
 namespace FacadeControllerView {
@@ -537,7 +724,7 @@ class PickUpPointViewFacades {
  interface GraphicDataIolnterface {
 	  + getContentsOfRepresentationBlocks(): BufferedImage[]
  }
- 
+
  interface ExceptionInterface {
 	 + showGeneralException(title: String, description: String): void
 	 + showBuildingBlockException(id: String, title: String, description: String): void
@@ -557,7 +744,7 @@ PickUpPointViewFacades --> MeasurementDataInterface
 }
 Model.FacadeControllerView.PickUpPointViewFacades -- Model.BuildingBlockBuilder.Director
 Model.FacadeControllerView.PickUpPointViewFacades -- Model.RepresentationLogic.XYRepresentation
-Model.FacadeControllerView.PickUpPointViewFacades -- Model.Core.MeasurementConfiguration 
+Model.FacadeControllerView.PickUpPointViewFacades -- Model.Core.MeasurementConfiguration
 Model.FacadeControllerView.PickUpPointViewFacades -- Model.Core.MeasurementRun
 
 
@@ -872,23 +1059,28 @@ class PrototypeField {
 	 }
 
 	 class SensorBlockField {
-	 	+ addSensorBlockView(block: SensorBlockView): void
+	 	+ addSensorBlockView(block: SensorBlock): void
 	 }
 
 	 class TransformationBlockField {
-	  	+ addTransformationBlockView(block: TransformationBlockView): void
+	  	+ addTransformationBlockView(block: TransformationBlock): void
 	 }
 
 	 class RepresentationBlockField {
-		+ addRepresentationBlockView(block: RepresentationBlockView): void
+		+ addRepresentationBlockView(block: RepresentationBlock): void
+	 }
+
+	 interface FieldHandler {
+	 	+ field WasOpened(): void
 	 }
 
 
-	GUI.MainWindow "1"-- "1" ButtonField
-	GUI.MainWindow "1"-- "1" GUI.Menues.PrototypeField
+	GUI.MainWindow "1" *-- "1" ButtonField
+	GUI.MainWindow "1" *-- "1" GUI.Menues.PrototypeField
 	PrototypeField <|-- SensorBlockField
 	PrototypeField <|-- TransformationBlockField
 	PrototypeField <|-- RepresentationBlockField
+	PrototypeField .right.|> FieldHandler
 
 }
 
@@ -898,15 +1090,12 @@ namespace Configuration {
 		 - list: List<BuildingBlockView>
 		 + update(): void
 		 + add(block : BuildingBlock): void
-		 + remove(block: BuildingBlock): void
+		 + remove(block: BuildingBlock: void
 		 + open(): void
-		 + getViewModel(): List: <BuildingBlockViews>
-	 	 + setViewModel(list: <BuildingBlockViews>): boolean
-	 	 + getContentsOfRepresentationBlocks():BufferedImage[]
-	 }
+	 	 }
 
 	 interface BlockDragAndDropHandler {
-	 	+blockWasMoved(blockId : String, corX : double, corY : double)
+	 	+blockWasMoved(InitId : String, ConfigId: int, corX : double, corY : double)
 	 }
 
 	note left of BlockDragAndDropHandler
@@ -918,19 +1107,18 @@ namespace Configuration {
 
 	 abstract class BuildingBlockView <<abstract>> {
 
-		 - id: String
 		 - buildingBlock: BuildingBlock
+		 - id: String
 		 - name: String
 		 - xCor: double
 		 - yCor: double
 		 - color: String
 		 - shape: String
-		 + BuildingBlockView(id: String): BuildingBlockView
-		 + setNumberOfChannels(number : int): void
 		 + setCoordinates(x : double, y : double): boolean
 		 + getXCoordinate(): int
 		 + getYCoordinate(): int
-		 + changeColor(color: String): void
+		 + delete(): void
+		 + exportAsPrototype(): void
 	 }
 
 	 class SensorBlockView {
@@ -943,16 +1131,8 @@ namespace Configuration {
 	 }
 
 	 class RepresentationBlockView {
-	 	- unit: String
-	 	- maxX: double
-	 	- maxY: double
 	 	+ addToConnectedInBlocksViews(blockView: BuildingBlockView)
-	 	+ getUnit(): String
-	 	+ setUnit(unit: String): void
-	 	+ getMaxX(): double
-	 	+ setMaxX(x: double): void
-	 	+ getMaxY(): double
-	 	+ setMaxY(y: double): void
+	 	+ visualiseShell(): void
 	 	+ getContentsOfRepresentationBlocks():BufferedImage
 
 	 }
@@ -961,12 +1141,8 @@ namespace Configuration {
 		+ decoratorPresssed():void
 	 }
 
-	 interface RepresentationBlockViewHandler {
-	  + unitSet(id: String, unit: double): void
-	  + maxXSet(id: String, x: double): void
-	  + maxYSet(id: String, y: double): void
 
-	 }
+
 	 interface AddWireDragAndDropHandler {
 		+connectionAdded(fromChannelId: int, toChannelId: int)
 	 }
@@ -993,14 +1169,75 @@ namespace Configuration {
 		+changeColor(color: String): void
 	 }
 
+	namespace BuildingBlockProperties {
+
+	abstract class BuildingBlockProperties {
+		- name: String
+	 	- InitId: String
+	 	- id: int
+	 	- color: String
+	 	- shape: String
+	 	- size: double
+	 	+ setName(name: String): boolean
+	 	+ setColor(color: String): boolean
+	 	+ setShape(shape: String): boolean
+	 	+ setSize(size: double): boolean
+	}
+
+	interface BuildingBlockPropertiesHandler {
+		+ openProperties(): boolean
+		+ nameSet(name: String): void
+		+ colorSet(color: String): void
+		+ shapeSet(shape: String): void
+		+ sizeSet(size: double): void
+	}
+
+	 class SensorBlockProperties {
+	 	- dimension: int
+	 }
+
+
+	 class TransformationBlockProperties {
+	 	- function: String
+	 	+ setFunction(function: String): boolean
+	 }
+
+	 interface TransBlockPropertiesHandler {
+	 	+ functionSet(function: String): void
+	 }
+
+	 class RepresentationBlockProperties {
+	 	- unit: String
+	 	- type: String
+	 	- maxX: double
+	 	- maxY: double
+	 	- maxZ: double
+	 	+ setUnit(unit: String): boolean
+	 	+ setMaxX(x: double): boolean
+	 	+ setMaxY(y: double): boolean
+	 }
+
+	 interface ReprBlockPropertiesHandler {
+	 	+ unitWasSet(unit: String): void
+	 	+ maxXSet(x: double): void
+	 	+ maxYSet(y: double): void
+	 }
+
+	 BuildingBlockProperties <|-- SensorBlockProperties
+	 BuildingBlockProperties <|-- TransformationBlockProperties
+	 BuildingBlockProperties <|-- RepresentationBlockProperties
+	 BuildingBlockProperties .left.|> BuildingBlockPropertiesHandler
+	 TransformationBlockProperties ..|> TransBlockPropertiesHandler
+	 RepresentationBlockProperties ..|> ReprBlockPropertiesHandler
+ }
+
 	 BlockDragAndDropHandler .down.|> ConfigurationField
-	 GUI.MainWindow "1"-- "1" ConfigurationField
+	 GUI.MainWindow "1" *-- "1" ConfigurationField
 	 ConfigurationField "1" -- "*" BuildingBlockView
 	 BuildingBlockView <|--  SensorBlockView
 	 BuildingBlockView <|--  TransformationBlockView
 	 BuildingBlockView <|--  RepresentationBlockView
-	 RepresentationBlockView .down.|> RepresentationBlockViewHandler
-	 BuildingBlockView -right-> "1" HelpDecorator
+	 BuildingBlockView <-right- "1" HelpDecorator
 	 HelpDecorator .up.|> HelpDecoratorHandler
 
 	 InChannelDecorator --|> ChannelDecorator
@@ -1018,6 +1255,10 @@ namespace Configuration {
 	 GUI.Menues.SensorBlockField -- "*" SensorBlockView
 	 GUI.Menues.TransformationBlockField -- "*" TransformationBlockView
 	 GUI.Menues.RepresentationBlockField -- "*" RepresentationBlockView
+
+	 SensorBlockView --o "1" GUI.Configuration.BuildingBlockProperties.SensorBlockProperties
+	 TransformationBlockView --o "1" GUI.Configuration.BuildingBlockProperties.TransformationBlockProperties
+	 RepresentationBlockView --o "1" GUI.Configuration.BuildingBlockProperties.RepresentationBlockProperties
 
 }
 
@@ -1105,8 +1346,21 @@ namespace HelpAndOption {
  	+ openDescription(): void
 
  }
-	 GUI.MainWindow -down-o "1" HelpWindow
-	 GUI.MainWindow -down-o "1" OptionsWindow
+
+ interface HelpWindowHandler {
+ 	+ helpOpened(): void
+ }
+
+ interface OptionsWindowHandler {
+ 	+ optionsOpened(): void
+ 	+ colorChanged(color: String): void
+ 	+ fontSizeChanged(ize: int): void
+ }
+
+	 GUI.MainWindow *-down- "1" HelpWindow
+	 GUI.MainWindow *-down- "1" OptionsWindow
+	 HelpWindow .up.|> HelpWindowHandler
+	 OptionsWindow .up.|> OptionsWindowHandler
 
 }
 
@@ -1131,16 +1385,19 @@ namespace HelpAndOption {
 	}
 
  interface IBlockAction {
- 	+ blockPlaced(id: String, xCor: double, yCor: double): boolean
- 	+ blockMoved(id String, xCor: double, yCor: double): boolean
- 	+ blockRemoved(id: String): boolean
+ 	+ blockPlaced(initId: String, xCor: double, yCor: double): boolean
+ 	+ blockMoved(configId: int, xCor: double, yCor: double): boolean
+ 	+ blockRemoved(id: int): boolean
+ 	+ editBuildingBlockProperties(configId: int, properties: BuildingBlockProperties): boolean
+ 	+ cloneBuildingBlock(configId: int): boolean
+ 	+ exportPrototype(configId: int): boolean
 	}
 
  interface IConnectionAction {
 
  	+ connectionAdded(channelId1: int, channelId2: int): boolean
  	+ connectionRemoved(channelId1: int, channelId2: int): void
- 	+ blockAndChannelsRemoved(id: String): void
+ 	+ blockAndChannelsRemoved(configId: int): void
 	}
 
  		PickUpPointControllerView -up-> IButtonAction
@@ -1156,18 +1413,21 @@ namespace HelpAndOption {
 
 namespace FacadeModelView {
 
-	interface ViewModelInterface {
-	+getViewModel(): <BuildingBlock>
+
+	interface ViewDirectoryInterface {
+	+getInitBuildingBlock(id: String): BuildingBlock
+	+getConfigBuildingBlock(id: int): BuildingBlock
+	+getFullInitBlock(): HashMap<InitId: String, block: BuildingBlock>
+	+getFullConfigBlock(): HashMap<ConfigId: int, block: BuildingBlock>
+	+getConnection(chId1: int, chId2: int): boolean
+	+checkForUpdate(): boolean
 	}
 
-	interface ViewDirectoryInterfacae {
-	+getBuildingBlock(id: String): BuildingBlock
-	+getConnection(id: int): BuildingBlock
-	}
-
-	ViewModelInterface -down- GUI.Configuration.ConfigurationField
-	ViewDirectoryInterfacae -- GUI.Configuration.ConfigurationField
+	ViewDirectoryInterface <|.. GUI.Configuration.ConfigurationField
+	ViewDirectoryInterface <|.. GUI.Menues.PrototypeField
 }
+
+
 
 }
 
