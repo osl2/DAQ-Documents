@@ -242,6 +242,11 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 	\end{center}
 \end{figure}
 
+Die Struktur des Pakets Core ist in Abbildung \ref{ModelCore} zu sehen.
+TODO
+
+
+
 \paragraph{BuildingBlockDirectory}
 
 \begin{figure}[htbp]
@@ -251,7 +256,8 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 		\label{BuildingBlockDirectory}
 	\end{center}
 \end{figure}
-
+Die Klasse BuildingBlockDirectory ist in Abbildung \ref{BuildingBlockDirectory} zu sehen.
+TODO
 
 
 \paragraph{MeasurementConfiguration}
@@ -262,7 +268,8 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 		\label{MeasurementConfiguration}
 	\end{center}
 \end{figure}
-
+Die Klasse MeasurementConfiguration ist in Abbildung \ref{MeasurementConfiguration} zu sehen.
+TODO
 
 \paragraph{MeasurementRun}
 \begin{figure}[htbp]
@@ -272,6 +279,9 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 		\label{MeasurementRun}
 	\end{center}
 \end{figure}
+Die Klasse MeasurementRun ist in Abbildung \ref{MeasurementRun} zu sehen.
+TODO
+
 \subsubsection{BuildingBlock}
 \begin{figure}[htbp]
 	\begin{center}
@@ -281,10 +291,37 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 	\end{center}
 \end{figure}
 
+Die abstrakte Klasse BuildingBlock ist in Abbildung \ref{BuildingBlock} zu sehen. Sie stellt im Model einen BuildingBlock dar und speichert die nötigen Daten als folgende Attribute:
+\begin{itemize}
+
+\item Das Attribut initId speichert als einen String eine eindeutige ID zur Unterscheidung von BuildingBlockPrototypen.
+\item Das Attribut configId dient als eindeutige ID zur Unterscheidung von BuildingBlockInstanzen innerhalb einer Messkonfiguration, da auch mehrere BuildingBlocks eines Typs innerhalb einer Messkonfiguration auftreten können und unterschieden werden müssen.
+\item Das Attribut name speichert den Namen einen BuildingBlocks als String dar. 
+\item Das Attribut userInfo ?? TODO
+\end{itemize}
+Ein BuildingBlock hat eine beliebige Menge an In- und OutChannels, deren Anzahl durch die folgenden vier Methoden verwaltet kann:
+
+\begin{itemize}
+
+\item Die Methode \textit{addInChannel} fügt dem BuildingBlock einen InChannel hinzu.
+\item Die Methode \textit{removeInChannel} entfernt einen bestimmen InChannel von dem BuildingBlock.
+\item Die Methode \textit{addOutChannel} fügt dem BuildingBlock einen OutChannel hinzu.
+\item Die Methode \textit{removeOutChannel} entfernt einen bestimmen OutChannel von dem BuildingBlock.
+\item textit{setId} TODO
+\end{itemize}
+
+
+
+
+
 \paragraph{YamlRepresentation}
 
-\paragraph{HelpMessage}
+TODO
 
+\paragraph{HelpMessage}
+Die Klasse HelpMessage enthält einen Konstruktor HelpMessage, der ein entsprechendes HelpMessage-Objekt erstellt.
+Ein HelpMessage-Objekt speichert zu einem zugehörigen BuildingBlock einen Tooltip mit Informationen über den entsprechenden BuildingBlock. Die Verbindung zu der Datei, die die Informationen enthält, ist als Attribut messageFileName gespeichert. Die Methode
+\textit{displayMessage} ermöglicht es, die Informationen anzuzeigen.
 
 
 
@@ -300,9 +337,22 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 
 Die Klasse MRunReaction ist in Abbildung \ref{mRunReaction} zu sehen. Sie implementiert das Interface MRunForward, welches im Cache-Modul zu finden ist. MRunReaction dient als Verbindung zwischen Cache und Modul. Der Datenfluss vom Cache zu den Sensorbausteinen im Model wird durch die folgenden fünf Methoden verwaltet.
  
-Die Methode justWaiting signalisiert dem Modul, dass eine Verbindung besteht, aber kein Datenfluss stattfindet. Durch die Methode indicateError dient dazu, dem Model das Auftreten eines Fehlers zu signalisieren. Dabei wird als Parameter ein Fehlercode und die ID des betroffenen Eingangschannels beigefügt. 
-Durch die Methode timeOut wird eine außerplanmäßige Unterbrechung einer Verbindung signalisiert. Durch die Methode connectionTerminated wird hingegen das planmäßige Schließen einer Verbindung signalisiert. 
-Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaketen, so dass jeder Eingangschannel jedes Sensors in der Messkonfiguration ein Packet erhält. Ein Datenpaket besteht hier aus Wert, Zielchannel und Zeitstempel.
+Die Methode \textit{justWaiting} signalisiert dem Modul, dass eine Verbindung besteht, aber kein Datenfluss stattfindet. Durch die Methode \textit{indicateError} dient dazu, dem Model das Auftreten eines Fehlers zu signalisieren. Dabei wird als Parameter ein Fehlercode und die ID des betroffenen Eingangschannels beigefügt. 
+Durch die Methode \textit{timeOut} wird eine außerplanmäßige Unterbrechung einer Verbindung signalisiert. Durch die Methode \textit{connectionTerminated} wird hingegen das planmäßige Schließen einer Verbindung signalisiert. 
+Die Methode \textit{dispatchCompletePacketSet} übergibt dem Model ein Set aus Datenpaketen, so dass jeder Eingangschannel jedes Sensors in der Messkonfiguration ein Packet erhält. Ein Datenpaket besteht hier aus Wert, Zielchannel und Zeitstempel.
+
+\subsubsection{MRunInfo}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/MRunInfo.png}
+		\caption{Darstellung der Klasse MRunInfo}
+		\label{MRunInfo}
+	\end{center}
+\end{figure}
+
+Die Klasse MRunInfo ist in Abbildung \ref{MRunInfo} zu sehen.
+
 
 
 
@@ -316,6 +366,9 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 		\label{FacadeViewModel}
 	\end{center}
 \end{figure}
+
+Die Struktur des Pakets FacadeViewModel ist in Abbildung \ref{FacadeViewModel} zu sehen.
+TODO
 
 \paragraph{PickUpPointViewFacades}
 \paragraph{MeasurementDataInterface}
@@ -334,6 +387,11 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 		\label{SensorLogic}
 	\end{center}
 \end{figure}
+
+Die Struktur des Pakets SensorLogic ist in Abbildung \ref{SensorLogic} zu sehen.
+TODO
+
+
 \paragraph{Sensor}
 \paragraph{VirtualSensor}
 \paragraph{PhysicalSensor}
@@ -349,6 +407,13 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 	\end{center}
 \end{figure}
 
+Die Struktur des Pakets TransformationLogic ist in Abbildung \ref{TransformationLogic} zu sehen.
+TODO
+\paragraph{Transformation}
+\paragraph{Function}
+
+
+
 \subsubsection{RepresentationLogic}
 \begin{figure}[htbp]
 	\begin{center}
@@ -357,6 +422,8 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 		\label{RepresentationLogic}
 	\end{center}
 \end{figure}
+Die Struktur des Pakets RepresentationLogic ist in Abbildung \ref{RepresentationLogic} zu sehen.
+TODO
 
 \paragraph{Representation}
 \paragraph{TableRepresentation}
@@ -373,6 +440,10 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 	\end{center}
 \end{figure}
 
+Die Struktur des Pakets ChannelLogic ist in Abbildung \ref{ChannelLogic} zu sehen.
+TODO
+
+
 \paragraph{Channel}
 \paragraph{InChannel}
 \paragraph{OutChannel}
@@ -380,7 +451,7 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 \paragraph{Connected}
 \paragraph{UnConnected}
 \paragraph{ValueReady}
-\paragraph{MRunInfo}
+
 
 \subsubsection{BuildingBlockBuilder}
 \begin{figure}[htbp]
@@ -414,8 +485,7 @@ TODO Begründe warum Erbauer und kein anderes.
 		\label{Director}
 	\end{center}
 \end{figure}
-
-Die Klasse Director bietet eine Reihe an \textit{construct...} Methoden an, mit denen konkrete BuildingBlocks erstellt werden können. Der resultierende BuildingBlock wird dann in einer HashMap im BuildingBlockDirectory abgelegt. Dabei kann die Auswahl an Methoden durch neue Methoden erweitert werden, um neue Arten von Blöcken erbauen zu können. Dabei muss auch jeweils ein neuer konkreter Erbauer implementiert werden. In erster Linie hat der Director die Aufgabe, beim Start der Anwendung die angebotenen Prototypen zu erstellen und im BuildingBlockDirectory zu speichern. 
+Die Klasse Director ist in Abbildung \ref{Director} zu sehen. Sie bietet eine Reihe an \textit{construct...} Methoden an, mit denen konkrete BuildingBlocks erstellt werden können. Der resultierende BuildingBlock wird dann in einer HashMap im BuildingBlockDirectory abgelegt. Dabei kann die Auswahl an Methoden durch neue Methoden erweitert werden, um neue Arten von Blöcken erbauen zu können. Dabei muss auch jeweils ein neuer konkreter Erbauer implementiert werden. In erster Linie hat der Director die Aufgabe, beim Start der Anwendung die angebotenen Prototypen zu erstellen und im BuildingBlockDirectory zu speichern. 
 
 \paragraph{Builder}
 Die Klasse Builder ist die Oberklasse aller konkreten Builder. Sie hat als Attribut eine Verbindung zu einer Yaml-Datei. Mit Hilfe dieser Yaml-Datei kann ein entsprechender BuildingBlock erstellt werden. Die Yaml-Datei wird durch die Methode \textit{snakeYaml.load} geladen, welche durch das externe Paket SnakeYamlParser angeboten wird. Die abstrakte Methode \textit{fetchBuildingBlock} gibt die Signatur für die konkreten Erbauer vor. In den konkreten Erbauern kann der Director durch diese Methode einen entsprechenden BuildingBlock anfordern und als Rückgabewert erhalten, sobald er erbaut wurde. 
