@@ -389,7 +389,7 @@ class PickUpPointViewFacades {
  interface UpdateInterface {
  	+ updateConfig(): void
  }
-Model.FacadeControllerView.UpdateInterface -- Model.BuildingBlockBuilder.Director
+
 
  interface GraphicDataIolnterface {
 	  + getContentsOfRepresentationBlocks(): BufferedImage[]
@@ -401,22 +401,22 @@ Model.FacadeControllerView.UpdateInterface -- Model.BuildingBlockBuilder.Directo
 	 + showConnectionException(id: long, title: String, description: String): void
  }
 
-Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementConfiguration 
-Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementRun
-
  interface MeasurementDataInterface {
  	+ pushShellForVisualisation(..): void
  }
-Model.FacadeControllerView.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
 
 PickUpPointViewFacades --> "*" UpdateInterface
 PickUpPointViewFacades --> GraphicDataIolnterface
 PickUpPointViewFacades --> ExceptionInterface
 PickUpPointViewFacades --> MeasurementDataInterface
-GraphicDataIolnterface --> Model.RepresentationLogic.XYRepresentation
+
 
 }
-
+Model.FacadeControllerView.UpdateInterface -- Model.BuildingBlockBuilder.Director
+Model.FacadeControllerView.GraphicDataIolnterface --> Model.RepresentationLogic.XYRepresentation
+Model.FacadeControllerView.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
+Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementConfiguration 
+Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementRun
 
 
 class Model.MRunReaction {
