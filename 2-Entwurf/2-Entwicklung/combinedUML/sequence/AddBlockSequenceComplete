@@ -13,8 +13,8 @@ participant ": UpdateInterface" as UpdateInterface
 participant ": ConfigurationField" as ConfigurationField
 
 
-
 participant "B1: BuildingBlock" as BuildingBlock
+participant "V1: BuildingBlockView" as BuildingBlockView
 activate BlockDragAndDropHandler
 
 ' Add Bloc
@@ -78,5 +78,18 @@ deactivate CommandManager
 BlockDragAndDropHandler <-- BlockAction
 deactivate BlockAction
 deactivate BlockDragAndDropHandler
+
+ConfigurationField -> BuildingBlockDirectory: checkForUpdate()
+BuildingBlockDirectory --> ConfigurationField: True
+
+ConfigurationField -> BuildingBlockDirectory: getConfigBuildingBlock(configIdOfB1)
+BuildingBlockDirectory --> ConfigurationField: B1
+
+ConfigurationField -> ConfigurationField: add(B1)
+
+ConfigurationField -> BuildingBlockView: <<create>>
+BuildingBlockView --> ConfigurationField
+
+ConfigurationField --> ConfigurationField
 
 @enduml
