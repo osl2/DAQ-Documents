@@ -231,6 +231,30 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 \clearpage
 \subsection{Model}
 
+Das Modul Model stellt den Model-Teil des MVC-Entwurfsmusters da und ist für die Erstellung und Verwaltung der Datenstrukturen der Anwendung verantwortlich. Außerdem verarbeitet sie die Sensordaten so, dass diese in Graphen und Tabellen angezeigt werden können. Das Modul besteht dem Modulmanager, den Paketen Core, BuildingBlockBuilder, Sensor-, Transformation-, Representation- und ChannelLogic und diverser Fassaden.
+
+\subsubsection{ModelManager}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8cm]{Grafiken/ModelManager.png}
+		\caption{Darstellung der Klasse ModelManager}
+		\label{ModelManager}
+	\end{center}
+\end{figure}
+Die Klasse ModelManager ist in Abbildung \ref{ModelManager} zu sehen. Sie hat die Aufgabe das Modul Model zu initialisieren. Dazu werden die folgenden sechs Methoden benutzt: 
+\begin{itemize}
+
+\item Die Methode \textit{initializeModel} initialisiert das Modul Model. Dabei nutzt sie vor allem die fünf anderen privaten Methoden.
+\item Die private Methode \textit{createNewMeasurementConfiguration} erstellt eine neue leere Messkonfiguration für den Startbildschirm. 
+\item Die private Methode \textit{createTransformationPrototypesFromYaml} lässt den Director des BuildingBlockBuilder-Pakets alle von der Anwendung angebotenen Transformationsprototypen erbauen und fügt diese dann dem BuildingBlockDirectory hinzu.
+\item Die private Methode \textit{createRepresentationPrototypesFromYaml} lässt den Director des BuildingBlockBuilder-Pakets alle von der Anwendung angebotenen Darstellungsprototypen erbauen und fügt diese dann dem BuildingBlockDirectory hinzu.
+\item Die private Methode \textit{fetchSensorPrototypesFromBackend} holt die Yaml-Dateien von dem Backend und lässt den Director des BuildingBlockBuilder-Pakets alle von der Anwendung angebotenen Sensorprototypen erbauen und fügt diese dann dem BuildingBlockDirectory hinzu.
+\item Die private Methode \textit{pushNetworkConfigToBackend} liefert dem Backend die nötigen Netzwerkinformationen um mit dem RaspberryPi zu kommunizieren.
+
+\end{itemize}
+
+
 
 \subsubsection{Core}
 
@@ -242,10 +266,8 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 	\end{center}
 \end{figure}
 
-Die Struktur des Pakets Core ist in Abbildung \ref{ModelCore} zu sehen.
-TODO
-
-
+Die Struktur des Pakets Core ist in Abbildung \ref{ModelCore} zu sehen. Das Paket Core beinhaltet zentrale Klassen die für die Funktionalität des Models wichtig sind. 
+TODO Mediator Messconfig??
 
 \paragraph{BuildingBlockDirectory}
 
@@ -257,8 +279,18 @@ TODO
 	\end{center}
 \end{figure}
 Die Klasse BuildingBlockDirectory ist in Abbildung \ref{BuildingBlockDirectory} zu sehen.
-TODO
+Das erste Attribut der Klasse ist InitHashMap. Sie dient zur Speicherung einer HashMap, die von allen Bausteinen einer Messkonfiguration die initId speichert und zuordnet. Als zweites Attribut ist ConfigHashMap. Sie dient zur Speicherung einer HashMap, die von verfügbaren Prototypbausteinen die configId speichert und zuordnet.
+Zur Verwaltung der Hashmaps sind folgende Methoden vorhanden:
+\begin{itemize}
 
+\item Die Methode \textit{addInitBuildingBlock} fügt der InitHashmap einen Bausteinprototypen hinzu.
+\item Die Methode \textit{addConfigBuildingBlock} fügt der ConfigHashmap einen Baustein hinzu.
+\item Die Methode \textit{removeConfigBuildingBlock} entfernt von der ConfigHashmap einen Baustein.
+\item Die Methode \textit{getInitBuildingBlock} gewährt den Zugriff auf einen bestimmen Baustein der Messkonfiguration.
+\item Die Methode \textit{getConfigBuildingBlock} gewährt den Zugriff auf einen bestimmen Bausteinprototypen.
+\item Die Methode \textit{addConfigConnection} fügt eine Verbindung zwischen zwei Bausteinen einer Messkonfiguration hinzu.
+\item Die Methode \textit{removeConfigConnection} entfernt eine Verbindung zwischen zwei Bausteinen einer Messkonfiguration.
+\end{itemize}
 
 \paragraph{MeasurementConfiguration}
 \begin{figure}[htbp]
@@ -351,10 +383,19 @@ Die Methode \textit{dispatchCompletePacketSet} übergibt dem Model ein Set aus D
 	\end{center}
 \end{figure}
 
+
+
 Die Klasse MRunInfo ist in Abbildung \ref{MRunInfo} zu sehen.
+Sie implementiert das Interface MRunInfo vom Cache-Modul. Sie dient dazu, Informationen über den Datenfluss zu erhalten. Diese Informationen werden durch die drei folgenden Methoden erhalten:
+ 
+\begin{itemize}
+
+\item Die Methode \textit{getAllInChannelIds} übergibt dem Model alle Ids von aktiven Kanälen.
+\item Die Methode \textit{getErrorCodes} übergibt dem Model die ErrorCodes der Kanäle. 
+\item Die Methode \textit{getTimeoutOption} übergibt dem Model die Optionen für TimeOuts.
 
 
-
+\end{itemize}
 
 
 \subsubsection{FacadeViewModel}
@@ -367,15 +408,19 @@ Die Klasse MRunInfo ist in Abbildung \ref{MRunInfo} zu sehen.
 	\end{center}
 \end{figure}
 
-Die Struktur des Pakets FacadeViewModel ist in Abbildung \ref{FacadeViewModel} zu sehen.
-TODO
+Die Struktur des Pakets FacadeViewModel ist in Abbildung \ref{FacadeViewModel} zu sehen. Das Paket FacadeViewModel stellt die Schnittstelle dar, die vom View angeboten und vom Model benutzt wird. Die Facade ist intern in vier Interfaces aufgeteilt um den nutzenden Klassen nur die benötigten Methoden zu übergeben. Die Interfaces sind über die PickUp-Klasse mit dem Modul verbunden.
+
 
 \paragraph{PickUpPointViewFacades}
+Die Klasse PickUpPointViewFacades stellt die Schnittstelle zwischen den Interfaces und dem Model dar und kapselt diese von einander. Durch ihre Methoden wird das entsprechende geforderte Interface zurückgegeben, dessen Methoden dann verwendet werden können.
 \paragraph{MeasurementDataInterface}
+Das Interface MeasurementDataInterface ermöglicht es dem Model, durch die Methode \textit{pushShellForVisualisation}, dem View einen XY-Graphen als Shell zu übergeben, der dann in der GUI dargestellt werden soll.
 \paragraph{ExceptionInterface}
+Das Interface ExceptionInterface ermöglicht es dem Model, dem View eine Exception zu übergeben. Durch die Methoden \textit{showGeneralException}, \textit{showBuildingBlockException} und \textit{showConnectionException} kann die Art der Exception konkretisiert werden.
 \paragraph{UpdateInterface}
+Das Interface UpdateInterface ermöglicht es dem Model der View durch die Methode \textit{updateConfig} die Veränderungen der Messkonfiguration zu signalisieren.
 \paragraph{GraphicDataIolnterface}
-
+TODO ??
 
 
 
@@ -388,13 +433,18 @@ TODO
 	\end{center}
 \end{figure}
 
-Die Struktur des Pakets SensorLogic ist in Abbildung \ref{SensorLogic} zu sehen.
-TODO
+Die Struktur des Pakets SensorLogic ist in Abbildung \ref{SensorLogic} zu sehen. Das Paket speichert die Datenstrukturen von verschiedenen Arten von Sensorbausteinen. Dabei wird zwischen physischen Sensoren und virtuellen Sensoren unterschieden.
 
 
-\paragraph{Sensor}
+
+\paragraph{Sensor} Die abstrakte Klasse Sensor dient als Oberklasse aller Sensorbausteine im Model und gibt die Signatur der Methode \textit{processValue} als abstrakte Methode vor.
+
+
 \paragraph{VirtualSensor}
+Die Klasse VirtualSensor stellt einen Sensorblock dar, der Daten aus einen Datei liest. Dabei enthält die Datei Messwerte aus vergangenen Messläufen oder maschinell erzeugte Daten. Die Methode \textit{processValue} verarbeitet Daten, die über die Eingangskanäle eintreffen.
+
 \paragraph{PhysicalSensor}
+Die Klasse PhysicalSensor stellt einen Sensorblock dar, der Daten aus einem realen Sensor über das Backend erhält.  Die Methode \textit{processValue} verarbeitet Daten, die über die Eingangskanäle eintreffen.
 
 \subsubsection{TransformationLogic}
 \paragraph{Transformation}
@@ -407,11 +457,13 @@ TODO
 	\end{center}
 \end{figure}
 
-Die Struktur des Pakets TransformationLogic ist in Abbildung \ref{TransformationLogic} zu sehen.
-TODO
-\paragraph{Transformation}
-\paragraph{Function}
+Die Struktur des Pakets TransformationLogic ist in Abbildung \ref{TransformationLogic} zu sehen. Das Paket dient zur Repräsentation einer Transformation innerhalb des Models.
 
+
+\paragraph{Transformation}
+TODO
+\paragraph{Function}
+TODO
 
 
 \subsubsection{RepresentationLogic}
@@ -422,13 +474,27 @@ TODO
 		\label{RepresentationLogic}
 	\end{center}
 \end{figure}
-Die Struktur des Pakets RepresentationLogic ist in Abbildung \ref{RepresentationLogic} zu sehen.
-TODO
+Die Struktur des Pakets RepresentationLogic ist in Abbildung \ref{RepresentationLogic} zu sehen. Das Paket dient zur Repräsentation einer Darstellung innerhalb des Models. Dabei wird zwischen Graphen und Tabellen unterschieden.
 
 \paragraph{Representation}
-\paragraph{TableRepresentation}
-\paragraph{XYRepresentation}
+Die abstrakte Klasse Sensor dient als Oberklasse aller Darstellungsbausteine im Model und gibt die Signatur der Methode \textit{processValue} als abstrakte Methode vor.
 
+\paragraph{TableRepresentation}
+Die Klasse TableRepresentation stellt im Model eine Darstellung von Daten durch eine Tabelle dar. Die Methode \textit{processValue} verarbeitet die eintreffenden Daten.
+\paragraph{XYRepresentation}
+Die Klasse XYRepresentation stellt im Model eine Darstellung von Daten durch einen Graph dar. Ein XYGraph die folgenden Attribute:
+
+\begin{itemize}
+
+\item Das Attribut traceName speichert den Namen des Traces.
+\item Das Attribut title speichert den Titel des Graphen.
+\item Das Attribut xAxisName speichtert den Namen der X-Achse.
+\item Das Attribut yAXisName speichtert den Namen der Y-Achse.
+\item Das Attribut hasToolBar gibt an, ob der Graph eine interaktive Toolbar anbietet.
+
+\end{itemize}
+
+Die Methode \textit{processValue} verarbeitet die eintreffenden Daten und erstellt mit Hilfe der externen Library Eclipse Nebula einen Graphen.
 
 \subsubsection{ChannelLogic}
 
@@ -440,18 +506,56 @@ TODO
 	\end{center}
 \end{figure}
 
-Die Struktur des Pakets ChannelLogic ist in Abbildung \ref{ChannelLogic} zu sehen.
-TODO
+Die Struktur des Pakets ChannelLogic ist in Abbildung \ref{ChannelLogic} zu sehen. Die Klasse repräsentiert die Datenstruktur eines Kanals. Dabei wird das Entwurfsmuster Zustand mit folgenden Rollen verwendet:
+\begin{itemize}
 
+\item Die Rolle der Clients wird durch die Klasse Channel erfüllt.
+\item Die Rolle des Zustandes wird von der abstrakten Klasse ChannelState erfüllt.
+\item Das Rolle des konkreten Zustandes wird durch die Klassen Connected, UnConnected und ValueReady erfüllt.
+
+\end{itemize}
+
+Das Entwurfsmuster ermöglicht es, die Anzahl der Zustände bei Bedarf zu erweitern.
 
 \paragraph{Channel}
-\paragraph{InChannel}
-\paragraph{OutChannel}
-\paragraph{ChannelState}
-\paragraph{Connected}
-\paragraph{UnConnected}
-\paragraph{ValueReady}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8cm]{Grafiken/Channel.png}
+		\caption{Darstellung der Klasse Channel}
+		\label{Channel}
+	\end{center}
+\end{figure}
+Die Klasse Channel ist in Abbildung \ref{Channel} zu sehen.
+Die Klasse Channel dient als Repräsentation eines Kanals im Model. Ein Kanal als Attribute eine eindeutige Id und einen Wert. Der Wert ist ein konkreter Wert eines Messlaufs und wird im Channel temporär zwischengespeichert.
+Ein Kanal hat die Aufgabe Daten zu empfangen und wieder zu versenden. Außerdem dient er als Ausgangspunkt einer Verbindung unter verschiedenen Bausteinen. Um die Verbindung und den Datenfluss zu verwalten, hat ein Kanal folgende Methoden:
 
+\begin{itemize}
+
+\item Die Methode \textit{establishConnection} ermöglicht es dem Kanal eine Verbindung mit einem anderen Kanal einzugehen. Dabei ist nur eine Verbindung zwischen einem Eingangs- und einem Ausgangskanal möglich.
+\item Die Methode \textit{receiveValue} ermöglicht es dem Kanal einen Wert zu empfangen.
+\item Die Methode \textit{connect} wechselt den Zustand eines Kanals zu: vebundenen.
+\item Die Methode \textit{unConnect} wechselt den Zustand eines Kanals zu: nicht vebundenen.
+\item Die Methode \textit{eraseValue} löscht den Wert, der im Channel gespeichert ist.
+\item Die abstrakte Methode \textit{forwardValue} dient dazu einen erhaltenen Wert weiter zu versenden. Die Implementierung der Methode ist in den Unterklassen zu finden.
+
+\end{itemize}
+
+
+\paragraph{InChannel}
+Die Klasse InChannel ist eine Unterklasse von Channel und dient als Datenstruktur eines Eingangskanals im Model. Ein InChannel hat das zusätzliche Attribut varName, TODO
+Die Methode \textit{forwardValue} wird hier implementiert.
+\paragraph{OutChannel}
+Die Klasse InChannel ist eine Unterklasse von Channel und dient als Datenstruktur eines Ausgangskanals im Model. TODO channelName
+Die Methode \textit{forwardValue} wird hier implementiert.
+\paragraph{ChannelState}
+Die abstrakte Klasse ChannelState gibt als abstrakter Zustand die Signaturen der Methoden für der konkreten Zustände vor. Außerdem werden Unterschiede zwischen In- und OutChannel der Methoden \textit{establishConnection} und \textit{receiveValue} durch eine Schablonenmethode  überbrückt.
+
+\paragraph{Connected}
+Die Klasse Connected repräsentiert den verbundenen Zustand eines Kanals. 
+\paragraph{UnConnected}
+Die Klasse UnConnected repräsentiert den unverbundenen Zustand eines Kanals. 
+\paragraph{ValueReady}
+Die Klasse ValueReady repräsentiert einen "bin bereit"-Zustand des Kanal. Damit wird signalisiert, dass der Channel einen Wert erfolgreich empfangen hat und weiter versenden kann.
 
 \subsubsection{BuildingBlockBuilder}
 \begin{figure}[htbp]
@@ -472,8 +576,8 @@ Der Aufbau des Pakets BuildingBlockBuilder, zu sehen in Abbildung \ref{BuildingB
 \item Die Rollen der \textit{Produkte} werden in den Paketen \hyperlink{SensorLogic}{SensorLogic}, \hyperlink{TransformationLogic}{TransformationLogic} und \hyperlink{RepresentationLogic}{RepresentationLogic} als entsprechende Bausteine erfüllt.
 
 \end{itemize} 
-TODO Begründe warum Erbauer und kein anderes.
 
+TODO Begründe warum Erbauer und kein anderes.
 
 
 
@@ -548,6 +652,8 @@ Der Aufbau des Controllers setzt das Entwurfsmuster \textit{Kommando} (\textit{C
 Die Klasse CommandManager hat die Funktion, die Ausführung konkreter Befehle zu veranlassen. Der CommandManager ist als \textit{Singleton} definiert um sicherzustellen, dass von allen Klienten auf dieselbe Instanz zugegriffen wird.
 
 Anhand eines \textit{Undo-} und eines \textit{Redo-Stacks} bietet der CommandManager außerdem die Möglichkeit an, bereits ausgeführte Befehle rückgängig zu machen (bzw. rückgängig gemachte Aktionen wiederherzustellen). Nicht alle Befehle können rückgängig gemacht werden.
+
+Die Verwendung des Command-Musters ermöglicht zudem Erweiterungsmöglichkeiten wie beispielsweise eine Warteschlange für Befehle. Falls nötig können derartige Erweiterungen umgesetzt werden, ohne Programmcode außerhalb des Entwurfsmusters verändern zu müssen.
 
 \subsubsection{Command bzw. konkrete Befehle}
 
@@ -659,7 +765,7 @@ Dieser Befehl entfernt alle Elemente aus dem Konfigurationsfeld. (Verwendung opt
 	\end{center}
 \end{figure}
 
-Durch das View-Modul werden mehrere Schnittstellen definiert.
+Durch das View-Modul werden mehrere Schnittstellen definiert, anhand derer die View-Klassen die Ausführung von Befehlen veranlassen können. (Abschnitt 2.4.9)
 
 \paragraph{BlockAction} Die Klasse BlockAction implementiert die Schnittstelle IBlockAction des Views.
 
@@ -677,7 +783,7 @@ Durch das View-Modul werden mehrere Schnittstellen definiert.
 	\end{center}
 \end{figure}
 
-Es werden Schnittstellen vorgegeben, die durch das Model-Modul implementiert werden.
+Es werden Schnittstellen vorgegeben, die durch das Model-Modul implementiert werden. Ihre Methoden erlauben es den Klassen des Controllers, gezielt auf Funktionalität des Models zuzugreifen.
 
 \paragraph{IModelInformation}
 
