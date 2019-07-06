@@ -1370,6 +1370,70 @@ Model.ModelManager --> FileService.YamlService
 'Structure adapting Commands
 '------------------------------------------------------------------------
 
+Backend.InitDataForSsh -[hidden]down- Cache.MRunActivityManagement
+GUI.Configuration.AddWireDragAndDropHandler ---[hidden]up--- Model.FacadeControllerView.PickUpPointViewFacades
+Model.FacadeControllerView.PickUpPointViewFacades -[hidden]up- GUI.Configuration.AddWireDragAndDropHandler
+GUI.FacadeControllerView.IButtonAction -[hidden]up- Controller.View_Controller_Interface.IMeasurementRun
+
+class hiderone {
+
+}
+
+class hidertwo {
+
+}
+
+hide hiderone
+hide hidertwo
+
+Controller -[hidden]down- hiderone
+hiderone -[hidden]down- GUI
+
+GUI -[hidden]down- hidertwo
+hidertwo -[hidden]down- Model
+
+
+'class hiderModelGUI
+'class hiderModelController
+'class hiderModelCache
+'class hiderModelBackend
+
+'class hiderBackendInitialization
+
+'class hiderInitializationGUI
+
+'class hiderGUIFileService
+
+'class hiderFileServiceController
+
+'class hiderBackendCache
+
+'hide hiderModelGUI
+'hide hiderModelController
+'hide hiderModelCache
+'hide hiderModelBackend
+'hide hiderBackendInitialization
+'hide hiderInitializationGUI
+'hide hiderGUIFileService
+'hide hiderFileServiceController
+
+'hiderModelGUI ------[hidden]down------> Model
+'hiderModelController ------[hidden]left------> Model
+'hiderModelCache ------[hidden]up------> Model
+'hiderModelBackend ------[hidden]right------> Model
+
+'hiderBackendInitialization ------[hidden]down------> Backend
+'hiderBackendInitialization ------[hidden]up------> Initialization
+
+'hiderInitializationGUI ------[hidden]left------> Initialization
+'hiderInitializationGUI ------[hidden]right------> GUI
+
+'hiderGUIFileService ------[hidden]left------> GUI
+'hiderGUIFileService ------[hidden]right------> FileService
+
+'hiderFileServiceController ------[hidden]up------> FileService
+'hiderFileServiceController ------[hidden]down------> Controller
+
 
 
 'Model -------[hidden]up-------> GUI
