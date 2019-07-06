@@ -98,7 +98,7 @@ namespace Model {
 		+ addConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
 		+ removeConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
 		}
-	
+	MeasurementConfiguration  --> BuildingBlockDirectory
 }
 
 
@@ -430,7 +430,7 @@ class Model.MRunReaction {
 
 MRunReaction  --  Model.Core.MeasurementRun
 Model.Core.MeasurementRun  --  Model.ChannelLogic.MRunInfo
-Model.Core.MeasurementConfiguration  -->  Model.Core.BuildingBlockDirectory
+
 
 
 
