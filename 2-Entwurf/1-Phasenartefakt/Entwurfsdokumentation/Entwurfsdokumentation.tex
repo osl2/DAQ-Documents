@@ -391,6 +391,20 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 	\end{center}
 \end{figure}
 
+Der Aufbau des Pakets BuildingBlockBuilder, zu sehen in Abbildung \ref{BuildingBlockBuilder}, setzt das Enwurfsmuster Erbauer um. Die Rollen sind dabei folgendermaßen umgesetzt:
+\begin{itemize}
+
+\item Die Klasse \textit{Director} erfüllt die Rolle des \textit{Direktors}.
+\item Die Klasse \textit{Builder} erfüllt die Rolle eines \textit{Erbauers}.
+\item Die Klassen \textit{SensorBuilder},\textit{TransformationBuilder}, \textit{RepresentationBuilder},
+\textit{VirtualSensorBuilder},\textit{PhysicalSensorBuilder},\textit{XYRepresentationBuilder} und \textit{TableRepresentationBuilder}  erfüllen die Rolle der \textit{konkreten Erbauer}.
+\item Die Rollen der \textit{Produkte} werden in den Paketen \hyperlink{SensorLogic}{SensorLogic}, \hyperlink{TransformationLogic}{TransformationLogic} und \hyperlink{RepresentationLogic}{RepresentationLogic} als entsprechende Bausteine erfüllt.
+
+\end{itemize} 
+TODO Begründe warum Erbauer und kein anderes.
+
+
+
 
 \paragraph{Director}
 \begin{figure}[htbp]
@@ -401,18 +415,32 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 	\end{center}
 \end{figure}
 
+Die Klasse Director bietet eine Reihe an \textit{construct...} Methoden an, mit denen konkrete BuildingBlocks erstellt werden können. Der resultierende BuildingBlock wird dann in einer HashMap im BuildingBlockDirectory abgelegt. Dabei kann die Auswahl an Methoden durch neue Methoden erweitert werden, um neue Arten von Blöcken erbauen zu können. Dabei muss auch jeweils ein neuer konkreter Erbauer implementiert werden. In erster Linie hat der Director die Aufgabe, beim Start der Anwendung die angebotenen Prototypen zu erstellen und im BuildingBlockDirectory zu speichern. 
 
 \paragraph{Builder}
-\paragraph{SensorBuilder}
-\paragraph{VirtualBuilder}
-\paragraph{PhysicalBuilder}
-\paragraph{TransformationBuilder}
-\paragraph{RepresenstationBuilder}
-\paragraph{TableRepresenstationBuilder}
-\paragraph{XYRepresenstationBuilder}
-\paragraph{java.util.HashMap<K,V>}
-\paragraph{SnakeYamlParser}
+Die Klasse Builder ist die Oberklasse aller konkreten Builder. Sie hat als Attribut eine Verbindung zu einer Yaml-Datei. Mit Hilfe dieser Yaml-Datei kann ein entsprechender BuildingBlock erstellt werden. Die Yaml-Datei wird durch die Methode \textit{snakeYaml.load} geladen, welche durch das externe Paket SnakeYamlParser angeboten wird. Die abstrakte Methode \textit{fetchBuildingBlock} gibt die Signatur für die konkreten Erbauer vor. In den konkreten Erbauern kann der Director durch diese Methode einen entsprechenden BuildingBlock anfordern und als Rückgabewert erhalten, sobald er erbaut wurde. 
 
+\paragraph{SensorBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen TransformationsBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei wird als Attribut von der Oberklasse Builder geerbt.
+
+
+\paragraph{VirtualSensorBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen VirtualsensorBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei ist als geerbtes Attribut vorhanden.
+\paragraph{PhysicalSensorBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen PhysicalSensorBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei ist als geerbtes Attribut vorhanden. Der PhysicalSensorBuilder fügt dem Sensorblock durch die Methode \textit{addSensorProducerName} zusätzlich noch den Werknamen des Sensors hinzu.
+\paragraph{TransformationBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen TransformationsBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei wird als Attribut von der Oberklasse Builder geerbt.
+
+\paragraph{RepresenstationBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen RepresentationBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei wird als Attribut von der Oberklasse Builder geerbt.
+\paragraph{TableRepresenstationBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen TableRepresentationBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei wird als Attribut von der Oberklasse Builder geerbt.
+\paragraph{XYRepresenstationBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen XYRepresentationBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei wird als Attribut von der Oberklasse Builder geerbt.
+\paragraph{java.util.HashMap<K,V>}
+TODO
+\paragraph{SnakeYamlParser}
+Diese Klasse stellt ein externes Paket dar, welches den SnakeYamlParser implementiert.
 
 \clearpage
 \subsection{Controller}
