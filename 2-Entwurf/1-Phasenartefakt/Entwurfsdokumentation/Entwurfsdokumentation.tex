@@ -242,6 +242,11 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 	\end{center}
 \end{figure}
 
+Die Struktur des Pakets Core ist in Abbildung \ref{ModelCore} zu sehen.
+TODO
+
+
+
 \paragraph{BuildingBlockDirectory}
 
 \begin{figure}[htbp]
@@ -251,7 +256,8 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 		\label{BuildingBlockDirectory}
 	\end{center}
 \end{figure}
-
+Die Klasse BuildingBlockDirectory ist in Abbildung \ref{BuildingBlockDirectory} zu sehen.
+TODO
 
 
 \paragraph{MeasurementConfiguration}
@@ -262,7 +268,8 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 		\label{MeasurementConfiguration}
 	\end{center}
 \end{figure}
-
+Die Klasse MeasurementConfiguration ist in Abbildung \ref{MeasurementConfiguration} zu sehen.
+TODO
 
 \paragraph{MeasurementRun}
 \begin{figure}[htbp]
@@ -272,6 +279,9 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 		\label{MeasurementRun}
 	\end{center}
 \end{figure}
+Die Klasse MeasurementRun ist in Abbildung \ref{MeasurementRun} zu sehen.
+TODO
+
 \subsubsection{BuildingBlock}
 \begin{figure}[htbp]
 	\begin{center}
@@ -281,10 +291,37 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 	\end{center}
 \end{figure}
 
+Die abstrakte Klasse BuildingBlock ist in Abbildung \ref{BuildingBlock} zu sehen. Sie stellt im Model einen BuildingBlock dar und speichert die nötigen Daten als folgende Attribute:
+\begin{itemize}
+
+\item Das Attribut initId speichert als einen String eine eindeutige ID zur Unterscheidung von BuildingBlockPrototypen.
+\item Das Attribut configId dient als eindeutige ID zur Unterscheidung von BuildingBlockInstanzen innerhalb einer Messkonfiguration, da auch mehrere BuildingBlocks eines Typs innerhalb einer Messkonfiguration auftreten können und unterschieden werden müssen.
+\item Das Attribut name speichert den Namen einen BuildingBlocks als String dar. 
+\item Das Attribut userInfo ?? TODO
+\end{itemize}
+Ein BuildingBlock hat eine beliebige Menge an In- und OutChannels, deren Anzahl durch die folgenden vier Methoden verwaltet kann:
+
+\begin{itemize}
+
+\item Die Methode \textit{addInChannel} fügt dem BuildingBlock einen InChannel hinzu.
+\item Die Methode \textit{removeInChannel} entfernt einen bestimmen InChannel von dem BuildingBlock.
+\item Die Methode \textit{addOutChannel} fügt dem BuildingBlock einen OutChannel hinzu.
+\item Die Methode \textit{removeOutChannel} entfernt einen bestimmen OutChannel von dem BuildingBlock.
+\item textit{setId} TODO
+\end{itemize}
+
+
+
+
+
 \paragraph{YamlRepresentation}
 
-\paragraph{HelpMessage}
+TODO
 
+\paragraph{HelpMessage}
+Die Klasse HelpMessage enthält einen Konstruktor HelpMessage, der ein entsprechendes HelpMessage-Objekt erstellt.
+Ein HelpMessage-Objekt speichert zu einem zugehörigen BuildingBlock einen Tooltip mit Informationen über den entsprechenden BuildingBlock. Die Verbindung zu der Datei, die die Informationen enthält, ist als Attribut messageFileName gespeichert. Die Methode
+\textit{displayMessage} ermöglicht es, die Informationen anzuzeigen.
 
 
 
@@ -300,9 +337,22 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 
 Die Klasse MRunReaction ist in Abbildung \ref{mRunReaction} zu sehen. Sie implementiert das Interface MRunForward, welches im Cache-Modul zu finden ist. MRunReaction dient als Verbindung zwischen Cache und Modul. Der Datenfluss vom Cache zu den Sensorbausteinen im Model wird durch die folgenden fünf Methoden verwaltet.
  
-Die Methode justWaiting signalisiert dem Modul, dass eine Verbindung besteht, aber kein Datenfluss stattfindet. Durch die Methode indicateError dient dazu, dem Model das Auftreten eines Fehlers zu signalisieren. Dabei wird als Parameter ein Fehlercode und die ID des betroffenen Eingangschannels beigefügt. 
-Durch die Methode timeOut wird eine außerplanmäßige Unterbrechung einer Verbindung signalisiert. Durch die Methode connectionTerminated wird hingegen das planmäßige Schließen einer Verbindung signalisiert. 
-Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaketen, so dass jeder Eingangschannel jedes Sensors in der Messkonfiguration ein Packet erhält. Ein Datenpaket besteht hier aus Wert, Zielchannel und Zeitstempel.
+Die Methode \textit{justWaiting} signalisiert dem Modul, dass eine Verbindung besteht, aber kein Datenfluss stattfindet. Durch die Methode \textit{indicateError} dient dazu, dem Model das Auftreten eines Fehlers zu signalisieren. Dabei wird als Parameter ein Fehlercode und die ID des betroffenen Eingangschannels beigefügt. 
+Durch die Methode \textit{timeOut} wird eine außerplanmäßige Unterbrechung einer Verbindung signalisiert. Durch die Methode \textit{connectionTerminated} wird hingegen das planmäßige Schließen einer Verbindung signalisiert. 
+Die Methode \textit{dispatchCompletePacketSet} übergibt dem Model ein Set aus Datenpaketen, so dass jeder Eingangschannel jedes Sensors in der Messkonfiguration ein Packet erhält. Ein Datenpaket besteht hier aus Wert, Zielchannel und Zeitstempel.
+
+\subsubsection{MRunInfo}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/MRunInfo.png}
+		\caption{Darstellung der Klasse MRunInfo}
+		\label{MRunInfo}
+	\end{center}
+\end{figure}
+
+Die Klasse MRunInfo ist in Abbildung \ref{MRunInfo} zu sehen.
+
 
 
 
@@ -316,6 +366,9 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 		\label{FacadeViewModel}
 	\end{center}
 \end{figure}
+
+Die Struktur des Pakets FacadeViewModel ist in Abbildung \ref{FacadeViewModel} zu sehen.
+TODO
 
 \paragraph{PickUpPointViewFacades}
 \paragraph{MeasurementDataInterface}
@@ -334,6 +387,11 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 		\label{SensorLogic}
 	\end{center}
 \end{figure}
+
+Die Struktur des Pakets SensorLogic ist in Abbildung \ref{SensorLogic} zu sehen.
+TODO
+
+
 \paragraph{Sensor}
 \paragraph{VirtualSensor}
 \paragraph{PhysicalSensor}
@@ -349,6 +407,13 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 	\end{center}
 \end{figure}
 
+Die Struktur des Pakets TransformationLogic ist in Abbildung \ref{TransformationLogic} zu sehen.
+TODO
+\paragraph{Transformation}
+\paragraph{Function}
+
+
+
 \subsubsection{RepresentationLogic}
 \begin{figure}[htbp]
 	\begin{center}
@@ -357,6 +422,8 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 		\label{RepresentationLogic}
 	\end{center}
 \end{figure}
+Die Struktur des Pakets RepresentationLogic ist in Abbildung \ref{RepresentationLogic} zu sehen.
+TODO
 
 \paragraph{Representation}
 \paragraph{TableRepresentation}
@@ -373,6 +440,10 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 	\end{center}
 \end{figure}
 
+Die Struktur des Pakets ChannelLogic ist in Abbildung \ref{ChannelLogic} zu sehen.
+TODO
+
+
 \paragraph{Channel}
 \paragraph{InChannel}
 \paragraph{OutChannel}
@@ -380,7 +451,7 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 \paragraph{Connected}
 \paragraph{UnConnected}
 \paragraph{ValueReady}
-\paragraph{MRunInfo}
+
 
 \subsubsection{BuildingBlockBuilder}
 \begin{figure}[htbp]
@@ -414,8 +485,7 @@ TODO Begründe warum Erbauer und kein anderes.
 		\label{Director}
 	\end{center}
 \end{figure}
-
-Die Klasse Director bietet eine Reihe an \textit{construct...} Methoden an, mit denen konkrete BuildingBlocks erstellt werden können. Der resultierende BuildingBlock wird dann in einer HashMap im BuildingBlockDirectory abgelegt. Dabei kann die Auswahl an Methoden durch neue Methoden erweitert werden, um neue Arten von Blöcken erbauen zu können. Dabei muss auch jeweils ein neuer konkreter Erbauer implementiert werden. In erster Linie hat der Director die Aufgabe, beim Start der Anwendung die angebotenen Prototypen zu erstellen und im BuildingBlockDirectory zu speichern. 
+Die Klasse Director ist in Abbildung \ref{Director} zu sehen. Sie bietet eine Reihe an \textit{construct...} Methoden an, mit denen konkrete BuildingBlocks erstellt werden können. Der resultierende BuildingBlock wird dann in einer HashMap im BuildingBlockDirectory abgelegt. Dabei kann die Auswahl an Methoden durch neue Methoden erweitert werden, um neue Arten von Blöcken erbauen zu können. Dabei muss auch jeweils ein neuer konkreter Erbauer implementiert werden. In erster Linie hat der Director die Aufgabe, beim Start der Anwendung die angebotenen Prototypen zu erstellen und im BuildingBlockDirectory zu speichern. 
 
 \paragraph{Builder}
 Die Klasse Builder ist die Oberklasse aller konkreten Builder. Sie hat als Attribut eine Verbindung zu einer Yaml-Datei. Mit Hilfe dieser Yaml-Datei kann ein entsprechender BuildingBlock erstellt werden. Die Yaml-Datei wird durch die Methode \textit{snakeYaml.load} geladen, welche durch das externe Paket SnakeYamlParser angeboten wird. Die abstrakte Methode \textit{fetchBuildingBlock} gibt die Signatur für die konkreten Erbauer vor. In den konkreten Erbauern kann der Director durch diese Methode einen entsprechenden BuildingBlock anfordern und als Rückgabewert erhalten, sobald er erbaut wurde. 
@@ -449,7 +519,7 @@ Diese Klasse stellt ein externes Paket dar, welches den SnakeYamlParser implemen
 	\begin{center}
 		\includegraphics[width = 14cm]{Grafiken/Controller_Struktur.png}
 		\caption{Die Struktur des Controllers (Ausschnitt)}
-		\label{Entwurf_Grob}
+		\label{Controller_Struktur}
 	\end{center}
 \end{figure}
 
@@ -467,6 +537,14 @@ Der Aufbau des Controllers setzt das Entwurfsmuster \textit{Kommando} (\textit{C
 
 \subsubsection{CommandManager}
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 6cm]{Grafiken/CommandManager.png}
+		\caption{Die Klasse CommandManager}
+		\label{CommandManager}
+	\end{center}
+\end{figure}
+
 Die Klasse CommandManager hat die Funktion, die Ausführung konkreter Befehle zu veranlassen. Der CommandManager ist als \textit{Singleton} definiert um sicherzustellen, dass von allen Klienten auf dieselbe Instanz zugegriffen wird.
 
 Anhand eines \textit{Undo-} und eines \textit{Redo-Stacks} bietet der CommandManager außerdem die Möglichkeit an, bereits ausgeführte Befehle rückgängig zu machen (bzw. rückgängig gemachte Aktionen wiederherzustellen). Nicht alle Befehle können rückgängig gemacht werden.
@@ -479,13 +557,21 @@ Bestimmte Befehle können durch \textit{unExecute()} rückgängig gemacht werden
 
 Andere Befehle können nicht rückgängig gemacht werden. Dann ist die Methode \textit{unExecute()} leer und \textit{isUndoable()} gibt \textit{false} zurück.
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/Commands1.png}
+		\caption{Baustein-Befehle}
+		\label{Commands1}
+	\end{center}
+\end{figure}
+
 \paragraph{AddBlockToConfigCommand}
 
-Dieser Befehl fügt einen gegebenen Baustein zum Konfigurationsfeld hinzu.
+Dieser Befehl fügt einen gegebenen Baustein zum Konfigurationsfeld hinzu und kann rückgängig gemacht werden.
 
 \paragraph{RemoveBlockFromConfigCommand}
 
-Dieser Befehl entfernt einen Baustein aus dem Konfigurationsfeld.
+Dieser Befehl entfernt einen Baustein aus dem Konfigurationsfeld und kann rückgängig gemacht werden.
 
 \paragraph{EditBlockPropertiesCommand}
 
@@ -499,17 +585,33 @@ Dieser Befehl klont einen bestehenden Bausteinprototyp.
 
 Dieser Befehl exportiert einen Bausteinprototypen als Datei.
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 10cm]{Grafiken/Commands2.png}
+		\caption{Verbindungs-Befehle}
+		\label{Commands2}
+	\end{center}
+\end{figure}
+
 \paragraph{CreateChannelConnectionCommand}
 
-Dieser Befehl erstellt eine Verbindung zwischen zwei gegebenen Kanälen (welche wiederum zu Bausteinen gehören).
+Dieser Befehl erstellt eine Verbindung zwischen zwei gegebenen Kanälen (welche wiederum zu Bausteinen gehören) und kann rückgängig gemacht werden.
 
 \paragraph{ModifyChannelConnectionCommand}
 
-Dieser Befehl verändert Start- und/oder Endpunkt einer Verbindung zwischen zwei Kanälen.
+Dieser Befehl verändert Start- und/oder Endpunkt einer Verbindung zwischen zwei Kanälen und kann rückgängig gemacht werden.
 
 \paragraph{DeleteChannelConnectionCommand}
 
-Dieser Befehl löscht eine Verbindung zwischen zwei Kanälen.
+Dieser Befehl löscht eine Verbindung zwischen zwei Kanälen und kann rückgängig gemacht werden.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafiken/Commands3.png}
+		\caption{Messlauf-Befehle}
+		\label{Commands3}
+	\end{center}
+\end{figure}
 
 \paragraph{StartRunCommand}
 
@@ -527,6 +629,14 @@ Dieser Befehl pausiert einen aktiven Messlauf.
 
 Dieser Befehl setzt einen pausierten Messlauf fort.
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 10cm]{Grafiken/Commands4.png}
+		\caption{Messkonfigurations-Befehle}
+		\label{Commands4}
+	\end{center}
+\end{figure}
+
 \paragraph{SaveConfigCommand}
 
 Dieser Befehl speichert die aktuelle Messkonfiguration an einem übergebenen Dateipfad.
@@ -541,6 +651,14 @@ Dieser Befehl entfernt alle Elemente aus dem Konfigurationsfeld. (Verwendung opt
 
 \subsubsection{Verbindung zum View}
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/View_Controller_Interface.png}
+		\caption{Schnittstellenimplementierung View zu Controller}
+		\label{View_Controller_Interface}
+	\end{center}
+\end{figure}
+
 Durch das View-Modul werden mehrere Schnittstellen definiert.
 
 \paragraph{BlockAction} Die Klasse BlockAction implementiert die Schnittstelle IBlockAction des Views.
@@ -551,6 +669,14 @@ Durch das View-Modul werden mehrere Schnittstellen definiert.
 
 \subsubsection{Verbindung zum Model}
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/Controller_Model_Interface.png}
+		\caption{Schnittstelle Controller zu Model}
+		\label{Controller_Model_Interface}
+	\end{center}
+\end{figure}
+
 Es werden Schnittstellen vorgegeben, die durch das Model-Modul implementiert werden.
 
 \paragraph{IModelInformation}
@@ -559,7 +685,7 @@ Diese Schnittstelle stellt Methoden zur Verfügung, anhand derer die Messkonfigu
 
 \paragraph{IMeasurementRun}
 
-Diese Schnittstelle stellt Methoden zur Verfügung, anhand derer ein Messlauf gestartet, angehalten und fortgeführt werden kann.
+Diese Schnittstelle stellt Methoden zur Verfügung, anhand derer ein Messlauf gestartet, beendet, angehalten und fortgeführt werden kann.
 
 \clearpage
 \subsection{View}
@@ -572,7 +698,7 @@ Bei Schließen des MainWindow wird ebenso die gesamte Anwendung beendet.
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 5cm]{Grafiken/MainWindow.png}
+		\includegraphics[width = 5cm]{Grafiken/View/MainWindow.png}
 		\caption{Die Klasse MainWindow}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -586,7 +712,7 @@ Menüs bieten dem Benutzer eine übersichtliche visuelle Zusammenfassung der Dar
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/MenuesNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/MenuesNamespace.png}
 		\caption{Aufbau des Menü-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -613,16 +739,17 @@ Die Klasse ButtonField stellt die Menüfläche dar, in welcher alle konkreten Kn
 
 \subsubsection{Configuration}
 
+
+\paragraph{ConfigurationField}
+
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/ConfigurationNamespace.png}
-		\caption{Aufbau des Konfigurations Paket}
+		\includegraphics[width = 7cm]{Grafiken/View/ConfigurationField.png}
+		\caption{Aufbau des Konfigurationsfeld}
 		\label{Entwurf_Grob}
 	\end{center}
 \end{figure}
 
-
-\paragraph{ConfigurationField}
 Die Klasse KonfigurationField stellt das Konfigurationfeld dar, in welchem der Benutzer eine Messkonfiguration aufbauen kann.
 Konfigurationsbausteine, welche der Benutzer in das Konfigurationsfeld platziert werden in einer Liste gespeichert. 
 Konfigurationsbausteine, welche der Benutzer aus dem Konfigurationsfeld entfernt, werden aus der Liste gelöscht
@@ -630,20 +757,55 @@ Beim Platzieren der Konfigurationsbausteine in das Konfigurationsfeld wird dem K
 Die Liste der Bausteine kann ebenfalls von außerhalb ausgelesen oder gesetzt werden, falls z.B die Anordnung der Bausteine und Verbindungen gespeichert oder gesetzt werden soll.
 
 \paragraph{BuildingBlockView}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/View/BuildingBlockView.png}
+		\caption{Aufbau des BuildingBlockView}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
 Die Klasse BuildingBlockView ist die Überklasse der Darstellungen der Konfigurationsbausteine.
 Bausteine werden über das Directory erzeugt, indem zu jedem im Directory gespeicherten Baustein eine Darstellung dieses Bausteins erzeugt wird. Name und InitId bleiben bei Erzeugung des Bausteins gleich, jedoch wird der Baustein, um die visuellen Komponenten Koordinaten, Farbe, Form und Größe erweitert.
 Konfigurationsbausteine besitzen eine eindeutige Initialisierungs-ID, darunter versteht man die ID, welche der Baustein beim Erstellen durch das Model bekommt. Jede konkrete Instanz dieses Baustein besitzt diese Initialsierungs-ID (InitId). Wenn ein Baustein mehrfach durch den Benutzer in das Konfigurationsfeld gezogen wird, könnte dies dazu führen, dass diese Initialisierungs-ID nicht mehr eindeutig für diesen Baustein wäre. Deswegen besitzt jeder im Konfigurationsfeld platzierte Baustein eine Konfigurations-ID. Diese ID ist eindeutig für diesen Baustein und somit ist dieser Baustein unterscheidbar von weiteren Bausteinen gleichem Prototyps. Ebenfalls besitzt ein Baustein einen Namen und falls sie im Konfigurationsfeld platziert werden ihre Position anhand der Koordinaten x und y. Form, Farbe und Größe sind ebenfalls festgelegt.  
-Bausteine werden über das Directory erzeugt, indem zu jedem im Directory gespeicherten Baustein eine Darstellung dieses Bausteins erzeugt wird. Name und ID bleiben bei Erzeugung des Bausteins gleich, jedoch wird der Baustein, um die visuellen Komponenten Koordinaten, Farbe, Form erweitert.
+Bausteine werden über das Directory erzeugt, indem zu jedem im Directory gespeicherten Baustein eine Darstellung dieses Bausteins erzeugt wird. Name und InitId bleiben bei Erzeugung des Bausteins gleich, jedoch wird der Baustein, um die visuellen Komponenten Koordinaten, Farbe, Form erweitert.
 
 \paragraph{SensorBlockView}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/View/SensorBlockView.png}
+		\caption{Aufbau des SensorBlockView}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
 Die Klasse SensorBlockView stellt einen Sensorbaustein dar. 
 Sensorbausteine, welche in dem Konfigurationsfeld platziert werden, können mit anderen Bausteinen verbunden werden, was im Messlauf einen Datenfluss über die verbundenen Bausteine erlaubt. Sensorbausteine besitzen, im Gegensatz zu anderen Konfigurationsbausteinen nur Datenausgänge, über welche sie verbunden werden können, da Sensoren, gemäß physikalischer 
 Repräsentation nur Datenausgänge besitzen.
 
 \paragraph{TransformationBlockView}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/View/TransformationBlockView.png}
+		\caption{Aufbau des TransformationBlockView}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
 Die Klasse TransformationBlockView stellt einen Transformationsbaustein dar. Transformationsbausteine besitzen eine vordefinierte Funktion, welche die Messdaten nach der Funktion transformiert. Transformationbausteinen besitzen Eingänge, welche Daten von Sensorenbausteinen oder anderen Transformationenbausteine empfangen können. Ausgänge der Transformationsbausteine können nur an weitere Transformationsbausteine oder Darstellungsbausteine angebunden werden, um einen sinnvollen Datenfluss zu ermöglichen.
 
 \paragraph{RepresentationBlockView} 
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/View/RepresentationBlockView.png}
+		\caption{Aufbau des RepresentationBlockView}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
 
 Die Klasse RepresentationBlockView stellt einen Darstellungbaustein dar, dieser bestimmt, wie die Messdaten visualisiert werden. Dafür bekommt der Repräsentationsbaustein die visuelle Darstellung in dem Darstellungsgerüst (z.B: Graph, Tabelle) mit den dargestellten Messdaten.
 Zur Speicherung der visuellen Darstellung der Daten muss ein Bild erstellt werden, welches zum Speichern weiter geleitet wird.
@@ -651,17 +813,32 @@ Darstellungsbausteine besitzen nur Eingänge, da dargestellt Messdaten nicht meh
 
 \paragraph{IDragAndDropHandler}
 
+Über das Interface IDragAndDropHandler wird der Anwendung mitgeteilt, dass ein Konfigurationsbaustein durch Drag-and-Drop in der GUI bewegt wurde. Es wird übergeben, um welchen eindeutigen Konfigurationsbaustein es sich handelt, indem bei Konfigurationsbausteinen, welche zuvor nicht im Konfigurationsfeld platziert die Initialisierungs-ID übergeben wird. Bei Konfigurationsbausteinen, welche bereits im Konfigurationsfeld liegen und nicht mehr durch die Initialisierungs-ID eindeutig unterscheidbar sind, wird die Konfigurations-ID übergeben. Ebenfalls wird die Position auf welche der Konfigurationsbaustein gesetzt wurde durch die x- und y- Koordinaten mitübergeben.
+
 \paragraph{HelpDecorator}
+
+Jeder Konfigurationsbaustein besitzt eine kurze Beschreibung seiner Art und Funktionalität. Diese Beschreibung wird über das Fenster HelpDecorater dem Benutzer dargestellt.
 
 \paragraph{HelpDecoratorHandler}
 
+Das Interface HelpDecoraterHandler wird von der Klasse HelpDecorater implementiert und registriert wenn der Benutzer den HelpDecorater öffnen will, in dem er darauf drückt.
+
 \paragraph{ChannelDecorator}
+
+Die Klasse ChannelDecorater stellt die Überklasse zu den Klassen InChannelDecorator und OutChannelDecorator dar. 
+Ein ChannelDecorater ist ein Objekt, welches durch Konfigurationsbausteine instanziiert werden. Ein ChannelDecorater stellt die Schnittstelle zu anderen ChannelDecorater dar, um zwei Bausteine miteinander zu verbinden. Dies geschiet durch die Methode addWireToOtherDecorator. Um diese ChannelDecorater eindeutig unterscheiden zu können besitzten diese eine eindeutige ID. Zur visuellen Repräsentation der Ein- und Ausgänge besitzen diese eine Farbe und Form.
 
 \paragraph{InChannelDecorator}
 
+Die Klasse InChannelDecorator erbt von der Klasse ChannelDecorater und stellt einen Kanaleingang eines Konfigurationsbausteins dar. Über einen Kanaleingang können nur Messdaten in den Konfigurationsbaustein reinkommen und werden ja nach Bausteinart verarbeitet. 
+
 \paragraph{OutChannelDecorator}
 
+Die Klasse OutChannelDecorator ist ebenfalls eine Unterklasse der Klasse ChannelDecorator und stellt einen Kanalausgang eines Konfigurationsbaustein dar. Über diese Kanalausgänge werden Messdaten aus einem Sensor oder bereits bearbeitete Messdaten an den nächsten Konfigurationsblock weitergebe.
+
 \paragraph{Wire}
+
+Die Klasse Wire stellt die visuelle Darstellung einer Verbindung zwischen einem InChannelDecorator und einem OutChannelDecorator dar. Jede Verbindung besitzt eine Farbe, welche sich z.B in einem Fehlerfall ändern kann, um den Benutzer auf den Fehler bei dieser Verbindung aufmerksam zu machen.
 
 \paragraph{AddWireDragAndDropHandler}
 
@@ -676,7 +853,7 @@ Damit Benutzer Informationen über einzelne Bausteine bekommt, welche ihm das Be
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/BuildingBlockPropertiesNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/BuildingBlockPropertiesNamespace.png}
 		\caption{Aufbau des BuildingBlockProperties-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -684,7 +861,28 @@ Damit Benutzer Informationen über einzelne Bausteine bekommt, welche ihm das Be
 
 \paragraph{BuildingBlockProperties}
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/View/BuildingBlockProperties.png}
+		\caption{Aufbau der BuildingBlockProperties}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
+
 Die abstrakte Klasse BuildingBlockProperties stellt alle Eigenschaften der konkreten Bausteine dar, welche alle Arten von Bausteinen (Sensor, Transformation, Darstellung) gemeinsam haben. Dazu gehören der Name,  Initialisierungs-ID, eindeutige Konfigurations-ID, Farbe, Form und Größe. Da einzelne Eigenschaften unveränderlich sein sollen, wie die IDs lassen sich nur Name, Farbe, Form und Größe verändern.
+
+\paragraph{BuildingBlockPropertiesHandler}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/View/BuildingBlockPropertiesHandler.png}
+		\caption{Aufbau des BuildingBlockPropertiesHandler}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
+Das Interface BuildingBlockPropertiesHandler wird von der Klasse BuildingBlockProperties implementiert und lässt den Benutzer durch mehrere Methoden das Eigenschaften-Fenster öffnen und Attribute der Baustein-Eigenschaften verändern. Bei allen Darstellungen von Konfigurationsbausteinen lässt sich der Name, Farbe, Form und Größe verändern.
 
 \paragraph{SensorBlockProperties}
 
@@ -694,21 +892,17 @@ Neben den gemeinsamen Eigenschaften besitzt die Unterklasse SensorBlockPropertie
 
 Transformationsbausteine besitzen neben den Standart-Eigenschaften noch eine vordefinierte Funktion für jeden Transformationsbaustein. Um dem Benutzer zu erlauben neue Transformationsbausteine zu definieren ist die Funktion veränderbar.
 
-\paragraph{RepresentationBlockProperties}
-
-Da Repräsentatonsbausteine die visuelle Repräsentation beschreiben besitzen diese für die Darstellung notwendige Eigenschaften, wie Einheit, Maximalwerte der Achsen und Art der Darstellung. Um den Benutzer die Möglichkeit zu geben die Darstellung auf die Messwerte anzupassen, lassen sich Einheit und Maximalwerte vom Benutzer einstellen.
-
-\paragraph{BuildingBlockPropertiesHandler}
-
-Damit der Benutzer Attribute der Konfigurationsbausteine ändern kann, bietet der BuildingBlockPropertiesHandler Methoden an, um die gemeinsamen Attribute, wie Name, Farbe, Form, Größe zu verändern. Das heißt, er nimmt diese Benutzereingaben entgegen.
-
 \paragraph{TransBlockPropertiesHandler}
 
 Da der Benutzer bei einem Transformationsbaustein nur die Funktion verändern kann nimmt dieser Handler ebenfalls nur eine Benutzereingabe für eine Funktion entgegen und setzt diese in den Transformationsbaustein-Eigenschaften.
 
+\paragraph{RepresentationBlockProperties}
+
+Da Repräsentatonsbausteine die visuelle Repräsentation beschreiben besitzen diese für die Darstellung notwendige Eigenschaften, wie Einheit, Maximalwerte der Achsen und Art der Darstellung. Um den Benutzer die Möglichkeit zu geben die Darstellung auf die Messwerte anzupassen, lassen sich Einheit und Maximalwerte vom Benutzer einstellen.
+
 \paragraph{ReprBlockPropertiesHandler}
 
-Bei Representationsbaustein-Eigenschaften ist der Benutzer in der Lage Einheit und Grenzwerte zu setzten. Daher nimmt der Handler diese Benutzer eingaben entgegen.
+Bei Repräsentationsbaustein-Eigenschaften ist der Benutzer in der Lage Einheit und Grenzwerte zu setzten. Daher nimmt der Handler diese Benutzer eingaben entgegen.
 
 
 \newpage
@@ -719,7 +913,7 @@ Knöpfe bieten dem Benutzer eine Anzahl von Funktion zur Bedienung der Anwendung
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/ButtonNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/ButtonNamespace.png}
 		\caption{Aufbau des Button-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -783,7 +977,7 @@ Das Paket OptionAndHelp soll dem Benutzer die Benutzung der Anwendung vereinfach
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/HelpAndOptionNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/HelpAndOptionNamespace.png}
 		\caption{Aufbau des HelpAndOption-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -797,6 +991,14 @@ Die Klasse HelpWindow beschreibt das Hilfe-Fenster der Anwendung. Der Benutzer b
 
 Die Klasse OptionsWindow stellt das Einstellungen-Fenster der Anwendung dar. Der Benutzer soll hierbei das verwendete Farbschema ändern können, um die Bedienung der Anwendung trotz möglichen Farbschwächen zu ermöglichen. Ebenfalls soll die Schriftgröße der Textelemente verändert werden können, um Sehschwächen auszugleichen. 
 
+\paragraph{HelpWindowHandler}
+
+Das Interface HelpWindowHandler, welches von der Klasse HelpWindow implementiert wird, liefert die Benutzereingabe im Falle des Drückens des Hilfe-Knopfes an die Anwendung weiter. Beim Drücken des Hilfe-Knopfes soll die Hilfe sofort erscheinen.
+
+\paragraph{OptionsWindowHandler}
+
+Das Interface OptionsWindowHandler, welches von der Klasse OptionsWindow implementiert wird, erkennt die Benutzereingabe im Falle des Drückens des "Einstellungen" oder "Optionen"- Knopf. In dem geöffneten Fenster kann der Benutzer dann das Farbschema und die Schriftgröße anpassen.
+
 \newpage
 
 \subsubsection{Exception}
@@ -805,7 +1007,7 @@ Fehlernachrichten sind ein wichtiger Teil der Anwendung, um dem Benutzer eine m�
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/ExceptionNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/ExceptionNamespace.png}
 		\caption{Aufbau des Exception-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -838,7 +1040,7 @@ Das Paket FacadeModelView enthält das Interface, welches das Model anbietet und
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 12 cm]{Grafiken/FacadeModelViewNamespace.png}
+		\includegraphics[width = 12 cm]{Grafiken/View/FacadeModelViewNamespace.png}
 		\caption{Aufbau des FacadeModelView-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -856,7 +1058,7 @@ Das Paket FacadeControllerView stellt die Schnittstelle dar, welche der Controll
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14 cm]{Grafiken/FacadeControllerViewNamespace.png}
+		\includegraphics[width = 14 cm]{Grafiken/View/FacadeControllerViewNamespace.png}
 		\caption{Aufbau des FacadeControllerView-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
