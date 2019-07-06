@@ -2,12 +2,21 @@
 '------------------------------------------------------------------------
 'Backend
 '------------------------------------------------------------------------
+
+namespace Cache {
+		class MStreamListener{
+		}
+
+		class MRunTiming {
+		}
+	}
+
 namespace Backend {
 
 
-
 	
-
+	IMStreamListener  .left.|> Cache.MStreamListener
+	MRunAgent -left-> Cache.MRunTiming
 
 
 	interface IAccessToSensorInfo {
@@ -33,7 +42,7 @@ namespace Backend {
 
 
 	class MRunAgent {
-		+MRunAgent(commandFactory: CommandFactory)
+		+MRunAgent(commandFactory: CommandFactory, mRunTiming: MRunTiming)
 		+start(mRunInfo: IMRunInfo, dataListeners: IMStreamListener[]): boolean
 		+pause(): boolean
 		+resume(): boolean
@@ -290,8 +299,7 @@ namespace Backend {
 	PickPointForAgentsBasedOnSsh --> IAccessToMRun
 	SensorInfoAgent ..|> IAccessToSensorInfo	
 	MRunAgent ..|> IAccessToMRun
-	IMStreamListener  ..|> Cache.MStreamListener
-	
+
 
 
 

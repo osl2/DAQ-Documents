@@ -117,7 +117,7 @@ class ChannelConnectionStatus {
 	isConnected(): boolean
 }
 
-MRunTiming .left.> MeansForAction
+MRunTiming .right.> MeansForAction
 CheckAndNotifyAction .up.> MeansForAction
  
 
@@ -128,15 +128,15 @@ TimeoutAction .up.|> CheckAndNotifyAction
 ErrorCodeAction .up.|> CheckAndNotifyAction
 DataSetCompleteAction .up.|> CheckAndNotifyAction
 
-MRunTiming -right-> Timer
-MRunTiming .right.|> TimerTask
+MRunTiming -left-> Timer
+MRunTiming .left.|> TimerTask
 Timer -down-> "1" TimerTask
 MRunTiming ..> MStreamListener
 Cache .up.> MSet
 Cache -down-> "*" BufferForOneSensorInChannel
 Cache ..> ErrorCodesForInChannel     
 
-BufferForOneSensorInChannel .right.> TimestampValuePair
+BufferForOneSensorInChannel .left.> TimestampValuePair
 MRunTiming --> "*" CheckAndNotifyAction
 
 MRunTiming -down-> Cache
@@ -172,6 +172,7 @@ interface TimerTask {
 
 IMRunListener <|.. Model.MRunReaction
 IMRunInfo <|.. Model.MRunInfo
+
 
 }
 @enduml
