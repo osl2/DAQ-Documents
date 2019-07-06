@@ -6,8 +6,6 @@
 'Global Settings
 '------------------------------------------------------------------------
 
-scale 0.1
-skinparam dpi 300
 skinparam defaultFontSize 22
 
 '------------------------------------------------------------------------
@@ -1611,27 +1609,27 @@ Model.ModelManager --> FileService.YamlService
 'Structure adapting Commands
 '------------------------------------------------------------------------
 
-Backend.InitDataForSsh -[hidden]down- Cache.MRunActivityManagement
-GUI.Configuration.AddWireDragAndDropHandler ---[hidden]up--- Model.FacadeControllerView.PickUpPointViewFacades
-Model.FacadeControllerView.PickUpPointViewFacades -[hidden]up- GUI.Configuration.AddWireDragAndDropHandler
-GUI.FacadeControllerView.IButtonAction -[hidden]up- Controller.View_Controller_Interface.IMeasurementRun
+'Backend.InitDataForSsh -[hidden]down- Cache.MRunActivityManagement
+'GUI.Configuration.AddWireDragAndDropHandler ---[hidden]up--- Model.FacadeControllerView.PickUpPointViewFacades
+'Model.FacadeControllerView.PickUpPointViewFacades -[hidden]up- GUI.Configuration.AddWireDragAndDropHandler
+'GUI.FacadeControllerView.IButtonAction -[hidden]up- Controller.View_Controller_Interface.IMeasurementRun
 
-class hiderone {
+'class hiderone {
 
-}
+'}
 
-class hidertwo {
+'class hidertwo {
 
-}
+'}
 
-hide hiderone
-hide hidertwo
+'hide hiderone
+'hide hidertwo
 
-Controller -[hidden]down- hiderone
-hiderone -[hidden]down- GUI
+'Controller -[hidden]down- hiderone
+'hiderone -[hidden]down- GUI
 
-GUI -[hidden]down- hidertwo
-hidertwo -[hidden]down- Model
+'GUI -[hidden]down- hidertwo
+'hidertwo -[hidden]down- Model
 
 
 'class hiderModelGUI
