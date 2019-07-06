@@ -1344,15 +1344,15 @@ GUI.Menues.PrototypeField --|> Model.FacadeControllerView.UpdateInterface
 
 
 GUI.FacadeModelView.ViewModelInterface ..|> Model.Core.MeasurementConfiguration
-GUI.FacadeModelView.ViewDirectoryInterface --|> Model.BuildingBlockDirectory
+GUI.FacadeModelView.ViewDirectoryInterface --|> Model.Core.BuildingBlockDirectory
 
 'Cache to Backend
 
 Backend.IMeasurementStreamListener <|.. Cache.MRunActivityManagement
 
 'Model to Backend
-Backend.IAccesToMeasurementRun <-- Model.MeasurementRun
-Backend.IAccesToSensorInfo <-- Model.ModelManager
+Backend.IAccessToMeasurementRun <-- Model.Core.MeasurementRun
+Backend.IAccessToSensorInfo <-- Model.Core.ModelManager
 Model.ModelManager --> FileService.YamlService
 
 '------------------------------------------------------------------------
