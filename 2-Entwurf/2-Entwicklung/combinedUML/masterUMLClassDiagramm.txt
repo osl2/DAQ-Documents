@@ -1391,22 +1391,22 @@ hide hiderInitializationGUI
 hide hiderGUIFileService
 hide hiderFileServiceController
 
-Model ---[hidden]up---> hiderModelGUI
-Model ---[hidden]right---> hiderModelController
-Model ---[hidden]down---> hiderModelCache
-Model ---[hidden]left---> hiderModelBackend
+hiderModelGUI ------[hidden]dowm------> Model
+hiderModelController ------[hidden]left------> Model
+hiderModelCache ------[hidden]up------> Model
+hiderModelBackend ------[hidden]right------> Model
 
-Backend ---[hidden]up---> hiderBackendInitialization
-Initialization ---[hidden]up---> hiderBackendInitialization
+hiderBackendInitialization ------[hidden]down------> Backend
+hiderBackendInitialization ------[hidden]up------> Initialization
 
-Initialization ---[hidden]right---> hiderInitializationGUI
-GUI ---[hidden]left---> hiderInitializationGUI
+hiderInitializationGUI ------[hidden]left------> Initialization
+hiderInitializationGUI ------[hidden]right------> GUI
 
-GUI ---[hidden]right---> hiderGUIFileService
-FileService ---[hidden]left---> hiderGUIFileService
+hiderGUIFileService ------[hidden]left------> GUI
+hiderGUIFileService ------[hidden]right------> FileService
 
-FileService ---[hidden]down---> hiderFileServiceController
-Controller ---[hidden]up---> hiderFileServiceController
+hiderFileServiceController ------[hidden]up------> FileService
+hiderFileServiceController ------[hidden]down------> Controller
 
 
 'Model -------[hidden]up-------> GUI
