@@ -8,8 +8,8 @@ Interfaces, welche im Model implementiert werden sollen (Code bereits im Control
 interface IModelInformation {
 	+ addBuildingBlock(id : String) : boolean
 	+ removeBuildingBlock(id : String) : boolean
-	+ addConnection(firstChannelId : String, secondChannelId : String) : boolean
-	+ removeConnection(firstChannelId : String, secondChannelId : String) : boolean
+	+ addConnection(firstChannelId : int, secondChannelId : int) : boolean
+	+ removeConnection(firstChannelId : int, secondChannelId : int) : boolean
 	+ saveConfig(path : String) : boolean
 	+ loadConfig(path : String) : boolean
 }

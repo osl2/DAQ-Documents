@@ -1,0 +1,134 @@
+@startuml
+
+participant ": BlockDragAndDropHandler" as BlockDragAndDropHandler
+participant ": UndoButton" as UndoButton
+participant ": RedoButton" as RedoButton
+participant ": ButtonAction" as ButtonAction
+participant ": BlockAction" as BlockAction
+participant ": CommandManager" as CommandManager
+participant "cmd : AddBlockToConfigCommand" as AddBlockToConfigCommand
+participant ": MeasurementConfiguration" as MeasurementConfiguration
+
+activate BlockDragAndDropHandler
+activate UndoButton
+activate RedoButton
+
+== Add Block ==
+
+BlockDragAndDropHandler -> BlockDragAndDropHandler : blockWasMoved(id, x, y)
+activate BlockDragAndDropHandler
+BlockDragAndDropHandler -> BlockAction : blockPlaced(id, x, y)
+activate BlockAction
+'
+' GUI Start
+'
+BlockAction --> AddBlockToConfigCommand : <<create>> AddBlockToConfigCommand(id)
+activate AddBlockToConfigCommand
+BlockAction -> CommandManager : runCommand(cmd)
+activate CommandManager
+CommandManager -> AddBlockToConfigCommand : execute()
+'
+' Model Start
+'
+AddBlockToConfigCommand -> MeasurementConfiguration : addBuildingBlock(id)
+activate MeasurementConfiguration
+
+AddBlockToConfigCommand <-- MeasurementConfiguration
+deactivate MeasurementConfiguration
+'
+' Model End
+'
+CommandManager <-- AddBlockToConfigCommand
+CommandManager -> AddBlockToConfigCommand : isUndoable()
+activate CommandManager
+CommandManager <-- AddBlockToConfigCommand : true
+deactivate AddBlockToConfigCommand
+CommandManager -> CommandManager : doneCommands.push(cmd)
+deactivate CommandManager
+BlockAction <-- CommandManager
+deactivate CommandManager
+'
+' GUI End
+'
+BlockDragAndDropHandler <-- BlockAction
+deactivate BlockAction
+deactivate BlockDragAndDropHandler
+
+== Undo ==
+
+UndoButton -> UndoButton : buttonPressed()
+activate UndoButton
+UndoButton -> ButtonAction
+activate ButtonAction
+'
+' GUI Start
+'
+ButtonAction -> CommandManager : undo()
+activate CommandManager
+CommandManager -> CommandManager : cmd = doneCommands.pop()
+CommandManager -> AddBlockToConfigCommand : unExecute()
+activate AddBlockToConfigCommand
+'
+' Model Start
+'
+AddBlockToConfigCommand -> MeasurementConfiguration : removeBuildingBlock(id)
+activate MeasurementConfiguration
+AddBlockToConfigCommand <-- MeasurementConfiguration
+deactivate MeasurementConfiguration
+'
+' Model End
+'
+CommandManager <-- AddBlockToConfigCommand
+deactivate AddBlockToConfigCommand
+CommandManager -> CommandManager : undoneCommands.push(cmd)
+ButtonAction <-- CommandManager
+deactivate CommandManager
+'
+' GUI End
+'
+UndoButton <-- ButtonAction
+deactivate ButtonAction
+deactivate UndoButton
+
+== Redo ==
+
+RedoButton -> RedoButton : buttonPressed()
+activate RedoButton
+RedoButton -> ButtonAction
+activate ButtonAction
+'
+' GUI Start
+'
+ButtonAction -> CommandManager : redo()
+activate CommandManager
+CommandManager -> CommandManager : cmd = undoneCommands.pop()
+CommandManager -> AddBlockToConfigCommand : execute()
+activate AddBlockToConfigCommand
+'
+' Model Start
+'
+AddBlockToConfigCommand -> MeasurementConfiguration : addBuildingBlock(id)
+activate MeasurementConfiguration
+
+AddBlockToConfigCommand <-- MeasurementConfiguration
+deactivate MeasurementConfiguration
+'
+' Model End
+'
+CommandManager <-- AddBlockToConfigCommand
+deactivate AddBlockToConfigCommand
+CommandManager -> CommandManager : doneCommands.push(cmd)
+ButtonAction <-- CommandManager
+deactivate CommandManager
+'
+' GUI End
+'
+RedoButton <-- ButtonAction
+deactivate ButtonAction
+deactivate RedoButton
+
+deactivate UndoButton
+deactivate RedoButton
+deactivate BlockDragAndDropHandler
+
+@enduml

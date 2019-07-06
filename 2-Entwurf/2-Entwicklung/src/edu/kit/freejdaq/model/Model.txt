@@ -1,17 +1,11 @@
 @startuml
 
 
-
-
-
-
 namespace Model {
 
 
 
-
-
-
+ namespace Core {
 
 	class MeasurementRun {
 
@@ -20,6 +14,7 @@ namespace Model {
 		+resume(): boolean
 		+reset(): boolean
 		+setUpdateRate(MeasurementConfiguration config): boolean
+		-checkSensorInChannelStates(): boolean
 
 	}
 
@@ -33,12 +28,13 @@ namespace Model {
 
 
 	class MeasurementConfiguration{
+		+MeasurementConfiguration(pathToFile: String, updateRate: double)
 		-pathToFile: String
-		-updateRate: float
-		-listOfAllChannels: <Channel>
-		-configurationAdjacencyList: configuration[]
+		-updateRate: double
+		-createConfigId( id: String): long
+		-cloneInitBlock(id: String): BuildingBlock
 		+getPathToFile(): String
-
+		-checkForCycle(): boolean
  		+getMeasurementConfig(): MeasurementConfiguration
  		+addBuildingBlock(id: String)
 		+removeBuildingBlock(id: String)
@@ -48,24 +44,14 @@ namespace Model {
  		+createModelFromYamlDom(modelDom: YamlDom): String
 
 	}
-	MeasurementConfiguration "1" -- "*" MeasurementRun
-
-
-	'----------------------------------------------------------------------------------------
-	'PrototypCollection: List of all predefined and custom BuildingBlocks
-	'----------------------------------------------------------------------------------------
-
-	class PrototypCollection{
-		 +clonePrototyp(id: String)
-		 +returnCloneOfBlock(BuildingBlock: block)
-		 +editPropertyOfPrototyp(key: String, value: Integer)
-	}
+	MeasurementConfiguration "1" -left- "*" MeasurementRun
 
 
 	abstract class BuildingBlock
 	{
 
-		-id: String
+		-initId: String
+		-configId: long
 		-name: String
 		-userInfo: String
 		+setId()
@@ -81,7 +67,41 @@ namespace Model {
 
 	MeasurementConfiguration "1" -- "*" BuildingBlock
 
-	PrototypCollection "1" -- "*" BuildingBlock
+	class HelpMessage{
+		- messageFileName : String
+		+ HelpMessage(msgFile : String)
+		+ displayMessage() : void
+	}
+	note left of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
+
+	BuildingBlock "*" --> "1" HelpMessage : < provides help/information about
+
+
+
+
+	class YamlRepresentation {
+		<<create>>YamlRepresentation(block: BuildingBlock)
+	}
+	BuildingBlock -left- YamlRepresentation
+	
+	class BuildingBlockDirectory {
+
+		- InitHashMap: HashMap<id: String, block: BuildingBlock>
+		- ConfigHashMap: HashMap<id: long, block: BuildingBlock>
+		--
+		+ addInitBuildingBlock(id: String, block: BuildingBlock): boolean
+		..
+		+ addConfigBuildingBlock(id: long, block: BuildingBlock): boolean
+		+ removeConfigBuildingBlock(id: String): boolean
+		+ getInitBuildingBlock(id: String): BuildingBlock
+		+ getConfigBuildingBlock(id: long): BuildingBlock
+		+ addConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
+		+ removeConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
+		}
+	MeasurementConfiguration  --> BuildingBlockDirectory
+}
+
+
 
 
 	namespace TransformationLogic {
@@ -89,53 +109,38 @@ namespace Model {
 			+<<create>> Transformation()
 			+<<create>> Transformation(Yaml inputTransformationYaml)
 			+setFunction(String inputFunction)
-			+{abstract} applyFunction(): Integer
+			+{abstract} applyFunction(packet: TimeSpampValuePair): void
+			{abstract} processValue(packet: TimeSpampValuePair): boolean
 		}
 		class Function {
 			<<create>>Function(String inputFunction) : Function
-			+applyFunction(Integer data)
+			+applyFunction(packet: TimeSpampValuePair): void
+			
 		}
 		Function "1" - "*" Transformation
 	}
 
 
-	BuildingBlock <|-  Model.TransformationLogic.Transformation
-	'----------------------------------------------------------------------------------------
-	'Note: The manager aspect of this diagramm can be found, in more detail, at another place.
-	'It stands here for a complete overview
-	'----------------------------------------------------------------------------------------
-	'package kit.edu.freejdaq.configurationBlockManager {
-	'	abstract class ConfigurationBlockManager{
-	'		listOfBlocks : ConfigurationBlock[]
-	'		{abstract}+add(BuildingBlock block): boolean
-	'		{abstract}+remove(BuildingBlock block): boolean
-	'		{abstract}+showAllBocks(BuildingBlock block): boolean
-	'	}
-	'
-	'	class RepresentationManager {
-	'
-	'
-	'	}
-	'
-	'}
+	Model.Core.BuildingBlock <|-  Model.TransformationLogic.Transformation
+	
 
 	namespace RepresentationLogic {
 
 		abstract class Representation{
 
-			{abstract} processValue()
+			{abstract} processValue(packet: TimeSpampValuePair): boolean
 
 
 			}
 
-		class TableRespresentation {
-			processValue()
+		class "TableRespresentation" as TR{
+			processValue(packet: TimeSpampValuePair): boolean
 
 		}
 
 
 		class XYRepresentation {
-			processValue()
+			processValue(packet: TimeSpampValuePair): boolean
 			traceName: String
 			title: String
 			xAxisName: String
@@ -145,42 +150,42 @@ namespace Model {
 
 		}
 
-		note right of  Model.RepresentationLogic.XYRepresentation
+		note bottom of  Model.RepresentationLogic.XYRepresentation
 	  		use eclipse nebula
 	  		for display
 		end note
-		XYRepresentation -up-|> Representation
-		TableRespresentation   -down-|> Representation
+		XYRepresentation --|> Representation
+		TR   --|> Representation
 
 
 	}
-	BuildingBlock <|--  Model.RepresentationLogic.Representation
+	Model.Core.BuildingBlock <|--  Model.RepresentationLogic.Representation
 
 	namespace SensorLogic {
 
 		abstract class Sensor{
-			´{abstract} processValue()
+			{abstract} processValue(packet: TimeSpampValuePair): boolean
 
 			}
 
 		 class PhysicalSensor{
-		 	processValue()
+		 	processValue(packet: TimeSpampValuePair): boolean
 		 }
 		 class VirtualSensor{
-		 	processValue()
+		 	processValue(packet: TimeSpampValuePair): boolean
 		 }
 		 VirtualSensor --|> Sensor
 		 PhysicalSensor --|> Sensor
 	}
-	BuildingBlock <|-- Model.SensorLogic.Sensor
+	Model.Core.BuildingBlock <|-- Model.SensorLogic.Sensor
 
 
 	namespace ChannelLogic {
 
 	class Channel {
 		-id: String
-		-value: int
-		+ establishConnection(String targetChannelId)
+		-value: long
+		+ establishConnection(targetChannelId: String)
 		+ receiveValue()
 		+ connect(): void
 		+ unConnect(): void
@@ -189,7 +194,7 @@ namespace Model {
 		+ {abstract} forwardValue(): void
 
 	}
-	Channel ..|> IValueHandler
+	
 
 	note top of Channel
 	  first part of channelId is
@@ -197,7 +202,7 @@ namespace Model {
 	end note
 
 	abstract class ChannelState {
-		+ {abstract} establishConnection(String targetChannelId)
+		+ {abstract} establishConnection(targetChannelId: String)
 		+ {abstract} receiveValue()
 	}
 	Channel --> ChannelState
@@ -206,17 +211,17 @@ namespace Model {
 	  In und Out Channeln zu überbrücken
 	end note
 	class Connected{
-		+ establishConnection(String targetChannelId)
+		+ establishConnection(targetChannelId: String)
 		+ receiveValue()
 	}
 	Connected --|> ChannelState
 	class UnConnected{
-		+ establishConnection(String targetChannelId)
+		+ establishConnection(targetChannelId: String)
 		+ receiveValue()
 	}
 	UnConnected --|> ChannelState
 	class ValueReady{
-		+ establishConnection(String targetChannelId)
+		+ establishConnection(targetChannelId: String)
 		+ receiveValue()
 	}
 	ValueReady --|> ChannelState
@@ -232,17 +237,10 @@ namespace Model {
 		+forwardValue(): void
 	}
 
-	class MRunInfo {
-	+getAllInChannelIds(): String[]
-	+getErrorCodes(inChannelId: String): double[]
-	+getTimeoutOption(): long
-	}
-
-
 
 	OutChannel --|> Channel
 	OutChannel "1" -- "1" InChannel
-	note top of OutChannel
+	note right of OutChannel
 	  forwardValue wird bei
 	  receive Value aufgerufen.
 	  Hier ausimplementiert.
@@ -253,42 +251,12 @@ namespace Model {
 	   bei Trafos und für
 	   Channelname bei Sensoren
 	end note
+}
 
+Model.Core.BuildingBlock "1" --> "*" Model.ChannelLogic.InChannel
+Model.Core.BuildingBlock "1" --> "*" Model.ChannelLogic.OutChannel
 
-
-
-	interface IValueHandler {
-
-		processValue()
-	}
-
-	note right of IValueHandler
-	  interface to provide
-	  Data to a channel
-	end note
-
-
-	}
-
-	BuildingBlock "1" --> "*" Model.ChannelLogic.InChannel
-	BuildingBlock "1" --> "*" Model.ChannelLogic.OutChannel
-
-	class HelpMessage{
-		- messageFileName : String
-		+ HelpMessage(msgFile : String)
-		+ displayMessage() : void
-	}
-	note right of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
-
-	BuildingBlock "*" --> "1" HelpMessage : < provides help/information about
-
-
-
-
-	class YamlRepresentation {
-		<<create>>YamlRepresentation(BuildingBlock)
-	}
-	BuildingBlock -left- YamlRepresentation
+	
 
 	
 
@@ -307,7 +275,7 @@ namespace BuildingBlockBuilder {
 		+constructBMPx80PressureSensor()
 		+constructINA219CurrentAndVoltageSensor()
 		+constructMMA8451Accelerometer()
-
+		+constructTransformation()
 
 
 	}
@@ -371,12 +339,6 @@ namespace BuildingBlockBuilder {
 		+fetchBuildingBlock(): BuildingBlock
 
 	}
-
-
-
-
-
-
 	SensorBuilder -up-|> Builder
 	PhysicalSensorBuilder -up-|> SensorBuilder
 	VirtualSensorBuilder -up-|> SensorBuilder
@@ -392,38 +354,23 @@ namespace BuildingBlockBuilder {
 	Director "1" --> "0..*" Builder : Staff
 
 }
+
+
+Model.BuildingBlockBuilder.TableRepresentationBuilder ..> Model.RepresentationLogic.TR
 Model.BuildingBlockBuilder.SensorBuilder ..> Model.SensorLogic.Sensor
 Model.BuildingBlockBuilder.TransformationBuilder ..> Model.TransformationLogic.Transformation
 Model.BuildingBlockBuilder.RepresentationBuilder ..> Model.RepresentationLogic.Representation
 Model.BuildingBlockBuilder.VirtualSensorBuilder ..> Model.SensorLogic.VirtualSensor
 Model.BuildingBlockBuilder.PhysicalSensorBuilder ..> Model.SensorLogic.PhysicalSensor
 Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.RepresentationLogic.XYRepresentation
-Model.BuildingBlockBuilder.TableRepresentationBuilder ..> Model.RepresentationLogic.TableRepresentation
+
+Model.Core.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
+Model.Core.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
+
+	
 
 
-	class BuildingBlockDirectory {
-
-		- InitHashMap: HashMap<String: id, block: BuildingBlock>
-		- ConfigHashMap: HashMap<int: id, block: BuildingBlock>
-		--
-		+ addInitBuildingBlock(id: String, block: BuildingBlock): boolean
-		..
-		+ addConfigBuildingBlock(id: int, block: BuildingBlock): boolean
-		+ removeConfigBuildingBlock(id: String): boolean
-		+ getInitBuildingBlock(id: String): BuildingBlock
-		+ getConfigBuildingBlock(id: int): BuildingBlock
-		+ addConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-		+ removeConfigConnection(bbId1: String, cId1: int, cId2: int, bbId2: String): boolean
-		}
-
-Model.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
-Model.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
-
-
-PickUpPointViewFacades --> "*" UpdateInterface
-PickUpPointViewFacades -left-> GraphicDataIolnterface
-PickUpPointViewFacades --> ExceptionInterface
-PickUpPointViewFacades --> MeasurementDataInterface
+namespace FacadeControllerView {
 
 class PickUpPointViewFacades {
 	 + getUpdateInterfaces(): UpdateInterface[]
@@ -436,29 +383,33 @@ class PickUpPointViewFacades {
  	+ updateConfig(): void
  }
 
-interface GraphicDataIolnterface {
+
+ interface GraphicDataIolnterface {
 	  + getContentsOfRepresentationBlocks(): BufferedImage[]
  }
  
  interface ExceptionInterface {
 	 + showGeneralException(title: String, description: String): void
 	 + showBuildingBlockException(id: String, title: String, description: String): void
-	 + showConnectionException(id: int, title: String, description: String): void
+	 + showConnectionException(id: long, title: String, description: String): void
  }
-
-Model.ExceptionInterface -- Model.MeasurementConfiguration 
-Model.ExceptionInterface -- MeasurementRun
 
  interface MeasurementDataInterface {
  	+ pushShellForVisualisation(..): void
  }
-Model.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
+
+PickUpPointViewFacades --> "*" UpdateInterface
+PickUpPointViewFacades --> GraphicDataIolnterface
+PickUpPointViewFacades --> ExceptionInterface
+PickUpPointViewFacades --> MeasurementDataInterface
 
 
-
-
-
-
+}
+Model.FacadeControllerView.UpdateInterface -- Model.BuildingBlockBuilder.Director
+Model.FacadeControllerView.GraphicDataIolnterface --> Model.RepresentationLogic.XYRepresentation
+Model.FacadeControllerView.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
+Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementConfiguration 
+Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementRun
 
 
 class Model.MRunReaction {
@@ -469,18 +420,44 @@ class Model.MRunReaction {
 	+dispatchCompletePacketSet(completePacketSet: EnhancedValuePacket[])
 }
 
+class MRunInfo {
+	+getAllInChannelIds(): String[]
+	+getErrorCodes(inChannelId: String): double[]
+	+getTimeoutOption(): long
+	}
 
-MRunReaction "1" -- "1" Model.MeasurementRun
-Model.MeasurementConfiguration "1" -- "1" Model.ChannelLogic.MRunInfo
-Model.MeasurementConfiguration  -->  Model.BuildingBlockDirectory
 
+
+MRunReaction  --  Model.Core.MeasurementRun
+Model.Core.MeasurementRun  --  Model.MRunInfo
+
+
+class ModelManager {
+		+initializeModel():boolean
+		-createNewMeasurementConfiguration():MeasurementConfiguration
+		-createTransformationPrototypesFromYaml():boolean
+		-createRepresentationPrototypesFromYaml():boolean
+		-fetchSensorPrototypesFromBackedn():boolean
+		-pushNetworkConfigToBackend(path: String):boolean
+	}
+
+Model.ModelManager "1" -- "1" Model.BuildingBlockBuilder.Director: uses >
+Model.ModelManager "1" -- "1" Model.Core.MeasurementConfiguration : creates >
 
 
 }
 @enduml
 
 
+class hidd {
 
+}
+hide Model.hidd
+
+
+Model.Core.BuildingBlockDirectory -up[hidden]- Model.hidd
+Model.BuildingBlockBuilder -up[hidden]- Model.Core.BuildingBlockDirectory
+Model.ChannelLogic -up[hidden]--------- Model.BuildingBlockBuilder
 
 
 
@@ -499,46 +476,7 @@ old interfaces to
 
 
 
-interface IBuisnessLogic{
-		+createModelFromYamlDom(modelDom: YamlDom): String
-	}
-	Model.Core.MeasurementConfiguration ..|> IBuisnessLogic
-	
-	interface IModelInformation{
-		+getMeasurementConfig(): MeasurementConfiguration
-		+addBuildingBlock(id: String)
-		+removeBuildingBlock(id: String)
-		+addConnection(firstChannelId: String, secondChannelId: String)
-		+removeConnection(firstChannelId: String, secondChannelId: String)
-	
-	}
-	Model.Core.MeasurementConfiguration ..|> IModelInformation
-	
-	interface IPrototypCollection {
-		+getPrototyp(): BuildingBlock
-		+clonePrototyp(id: String)
-		+editPropertyOfPrototyp(key: String, value: Integer)
-	}
-	Model.Core.PrototypCollection ..|> IPrototypCollection
-	
-		
-	
-	
-	interface IMeasurementRun{
-		+pause()
-		+start()
-		+reset()
-	}
-	Model.Core.MeasurementRun ..|> IMeasurementRun
 
-
-
-note bottom of IBuisnessLogic
-	 createModelFromYamlDom() 
-	 examines semantic validity 
-	 and returns an appropriate result 
-	 to the controller. 
-	end note
 
 
 

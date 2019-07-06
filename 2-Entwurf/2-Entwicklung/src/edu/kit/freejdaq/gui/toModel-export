@@ -17,7 +17,7 @@ Die Interfaces:
 	+getConfigBuildingBlock(id: int): BuildingBlock
 	+getFullInitBlock(): HashMap<InitId: String, block: BuildingBlock>
 	+getFullConfigBlock(): HashMap<ConfigId: int, block: BuildingBlock>
-	+getConnection(id: int): BuildingBlock
+	+getConnection(chId1: int, chId2: int): boolean
 	+checkForUpdate(): boolean
 	
 	}
