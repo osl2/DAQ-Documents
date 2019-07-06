@@ -801,7 +801,7 @@ Repräsentation nur Datenausgänge besitzen.
 	\end{center}
 \end{figure}
 
-Die Klasse TransformationBlockView stellt einen Transformationsbaustein dar. Transformationsbausteine besitzen eine vordefinierte Funktion, welche die Messdaten nach der Funktion transformiert. Transformationbausteinen besitzen Eingänge, welche Daten von Sensorenbausteinen oder anderen Transformationenbausteine empfangen können. Ausgänge der Transformationsbausteine können nur an weitere Transformationsbausteine oder Darstellungsbausteine angebunden werden, um einen sinnvollen Datenfluss zu ermöglichen.
+Die Klasse TransformationBlockView ist die visuelle Darstellung einer Transformation dar. Transformationsbausteine besitzen eine vordefinierte Funktion, welche die Messdaten nach der Funktion transformiert. Transformationbausteinen besitzen Eingänge, welche Daten von Sensorenbausteinen oder anderen Transformationenbausteinen empfangen können. Ausgänge der Transformationsbausteine können nur an weitere Transformationsbausteine oder Darstellungsbausteine angebunden werden, um einen sinnvollen Datenfluss zu ermöglichen. 
 
 \paragraph{RepresentationBlockView} 
 
@@ -815,7 +815,7 @@ Die Klasse TransformationBlockView stellt einen Transformationsbaustein dar. Tra
 
 Die Klasse RepresentationBlockView stellt einen Darstellungbaustein dar, dieser bestimmt, wie die Messdaten visualisiert werden. Dafür bekommt der Repräsentationsbaustein die visuelle Darstellung in dem Darstellungsgerüst (z.B: Graph, Tabelle) mit den dargestellten Messdaten.
 Zur Speicherung der visuellen Darstellung der Daten muss ein Bild erstellt werden, welches zum Speichern weiter geleitet wird.
-Darstellungsbausteine besitzen nur Eingänge, da dargestellt Messdaten nicht mehr verarbeitet werden. 
+Darstellungsbausteine besitzen nur Eingänge, da visualisierte Messdaten nicht mehr verarbeitet werden. 
 
 \clearpage
 
@@ -1041,7 +1041,7 @@ Das Interface ButtonHandler registriert Benutzerinteraktionen auf der Benutzerob
 	\end{center}
 \end{figure}
 
-Das Paket OptionAndHelp soll dem Benutzer die Benutzung der Anwendung vereinfachen. Getrennt wurde das Paket in die Funktionsspezifische Klasse HelpWindow, welche dem Benutzer Hilfe zur Bedienung gibt und in die Klasse OptionsWindow, welche dem Benutzer Auswahlmöglichkeiten gibt, um eine möglichst Barrierefreie Benutzung zu ermöglichen.
+Das Paket OptionAndHelp soll dem Benutzer die Benutzung der Anwendung vereinfachen. Getrennt wurde das Paket in die Funktionsspezifische Klasse HelpWindow, welche dem Benutzer Hilfe zur Bedienung gibt und in die Klasse OptionsWindow, welche dem Benutzer Einstellungsmöglichkeiten gibt, um eine möglichst barrierefreie Benutzung zu ermöglichen.
 
 \paragraph{HelpWindow}
 
@@ -1163,8 +1163,6 @@ Das Interface IButtonAction liefert eine Schnittstelle für alle Knopf-Aktionen.
 \paragraph{IBlockAction}
 
 Das Interface IBlockAction liefert eine Schnittstelle für alle Benutzerinteraktionen mit einem Konfigurationsbaustein. Diese gibt das Interface weiter an den Controller, in dem das Interface implementiert ist. Die Methode blockPlaced gibt hierbei weiter, wenn ein Konfigurationsbaustein aus einem dem Prototypen Menüs auf das Konfigurationsfeld per Drag-and-Drap platziert wurde. Hierbei wird die Prototyp-spezifische ID mitgegeben und die Koordinaten, welche die Position des Bausteins eindeutig bestimmen. Die Methode blockMoved wird dann benutzt, wenn ein Konfigurationsbaustein innerhalb des Konfigurationsfeldes die Position ändert. Wenn der Benutzer einen Konfigurationsbaustein aus dem Konfiguratonsfeld entfernt wird dies über die Methode blockRemoved mit Übergabe der eindeutigen ID an den Controller überliefert. Wenn der Benutzer die Eigenschaften eines Bausteinprototyps ändert wird dies über die Methode editBuildingBlockProperties mit der eindeutigen ID und den neuen Eigenschaften übergeben. Wenn ein Baustein geklont oder exportiert werden soll, wird dies mit der Übergabe der eindeutigen ID an den Controller übergeben.
-
-
 
 \begin{figure}[htbp]
 	\begin{center}
