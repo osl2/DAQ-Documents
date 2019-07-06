@@ -79,7 +79,7 @@ namespace Model {
 
 
 	class YamlRepresentation {
-		<<create>>YamlRepresentation(block: BuildingBlock)
+		{static} makeYamlRepresentation(block: BuildingBlock): YAML
 	}
 	BuildingBlock -left- YamlRepresentation
 	
@@ -109,7 +109,7 @@ namespace Model {
 			+<<create>> Transformation(Yaml inputTransformationYaml)
 			+setFunction(String inputFunction)
 			+{abstract} applyFunction(packet: TimeSpampValuePair): void
-			{abstract} processValue(packet: TimeSpampValuePair): boolean
+			processValue(packet: TimeSpampValuePair): boolean
 		}
 		class Function {
 			<<create>>Function(String inputFunction) : Function
@@ -382,9 +382,6 @@ class PickUpPointViewFacades {
  }
 
 
- interface GraphicDataIolnterface {
-	  + getContentsOfRepresentationBlocks(): BufferedImage[]
- }
  
  interface ExceptionInterface {
 	 + showGeneralException(title: String, description: String): void
@@ -397,7 +394,6 @@ class PickUpPointViewFacades {
  }
 
 PickUpPointViewFacades --> "*" UpdateInterface
-PickUpPointViewFacades --> GraphicDataIolnterface
 PickUpPointViewFacades --> ExceptionInterface
 PickUpPointViewFacades --> MeasurementDataInterface
 

@@ -411,7 +411,7 @@ namespace Model {
 
 
 	class YamlRepresentation {
-		{static} YamlRepresentation(block: BuildingBlock): YAML
+		{static} makeYamlRepresentation(block: BuildingBlock): YAML
 	}
 	BuildingBlock -left- YamlRepresentation
 
@@ -720,10 +720,6 @@ class PickUpPointViewFacades {
  }
 
 
- interface GraphicDataIolnterface {
-	  + getContentsOfRepresentationBlocks(): BufferedImage[]
- }
-
  interface ExceptionInterface {
 	 + showGeneralException(title: String, description: String): void
 	 + showBuildingBlockException(id: String, title: String, description: String): void
@@ -735,7 +731,6 @@ class PickUpPointViewFacades {
  }
 
 PickUpPointViewFacades --> "*" UpdateInterface
-PickUpPointViewFacades --> GraphicDataIolnterface
 PickUpPointViewFacades --> ExceptionInterface
 PickUpPointViewFacades --> MeasurementDataInterface
 
@@ -1596,7 +1591,6 @@ GUI.FacadeControllerView.IConnectionAction <|.. Controller.View_Controller_Inter
 'Model to GUI
 
 
-GUI.Configuration.RepresentationBlockView --|> Model.FacadeControllerView.GraphicDataIolnterface
 GUI.Exception.ExceptionWindowManager --|> Model.FacadeControllerView.ExceptionInterface
 GUI.Configuration.ConfigurationField --|> Model.FacadeControllerView.UpdateInterface
 GUI.Menues.PrototypeField --|> Model.FacadeControllerView.UpdateInterface
