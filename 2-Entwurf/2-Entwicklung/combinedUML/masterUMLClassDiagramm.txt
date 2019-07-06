@@ -6,8 +6,7 @@
 'Global Settings
 '------------------------------------------------------------------------
 
-scale 0.1
-skinparam dpi 300
+scale 0.04
 skinparam defaultFontSize 22
 
 '------------------------------------------------------------------------
@@ -385,7 +384,6 @@ namespace Model {
 		-initId: String
 		-configId: long
 		-name: String
-		-userInfo: String
 		+setconfigId(configId):boolean
 		+addInChannel(id: String, name: String): void
 		+addOutChannel(id: String, name: String): void
@@ -412,7 +410,7 @@ namespace Model {
 
 
 	class YamlRepresentation {
-		{static} YamlRepresentation(block: BuildingBlock): YAML
+		{static} makeYamlRepresentation(block: BuildingBlock): YAML
 	}
 	BuildingBlock -left- YamlRepresentation
 
@@ -721,10 +719,6 @@ class PickUpPointViewFacades {
  }
 
 
- interface GraphicDataIolnterface {
-	  + getContentsOfRepresentationBlocks(): BufferedImage[]
- }
-
  interface ExceptionInterface {
 	 + showGeneralException(title: String, description: String): void
 	 + showBuildingBlockException(id: String, title: String, description: String): void
@@ -736,7 +730,6 @@ class PickUpPointViewFacades {
  }
 
 PickUpPointViewFacades --> "*" UpdateInterface
-PickUpPointViewFacades --> GraphicDataIolnterface
 PickUpPointViewFacades --> ExceptionInterface
 PickUpPointViewFacades --> MeasurementDataInterface
 
@@ -1597,7 +1590,6 @@ GUI.FacadeControllerView.IConnectionAction <|.. Controller.View_Controller_Inter
 'Model to GUI
 
 
-GUI.Configuration.RepresentationBlockView --|> Model.FacadeControllerView.GraphicDataIolnterface
 GUI.Exception.ExceptionWindowManager --|> Model.FacadeControllerView.ExceptionInterface
 GUI.Configuration.ConfigurationField --|> Model.FacadeControllerView.UpdateInterface
 GUI.Menues.PrototypeField --|> Model.FacadeControllerView.UpdateInterface
@@ -1618,27 +1610,27 @@ Model.ModelManager --> FileService.YamlService
 'Structure adapting Commands
 '------------------------------------------------------------------------
 
-Backend.InitDataForSsh -[hidden]down- Cache.MRunActivityManagement
-GUI.Configuration.AddWireDragAndDropHandler ---[hidden]up--- Model.FacadeControllerView.PickUpPointViewFacades
-Model.FacadeControllerView.PickUpPointViewFacades -[hidden]up- GUI.Configuration.AddWireDragAndDropHandler
-GUI.FacadeControllerView.IButtonAction -[hidden]up- Controller.View_Controller_Interface.IMeasurementRun
+'Backend.InitDataForSsh -[hidden]down- Cache.MRunActivityManagement
+'GUI.Configuration.AddWireDragAndDropHandler ---[hidden]up--- Model.FacadeControllerView.PickUpPointViewFacades
+'Model.FacadeControllerView.PickUpPointViewFacades -[hidden]up- GUI.Configuration.AddWireDragAndDropHandler
+'GUI.FacadeControllerView.IButtonAction -[hidden]up- Controller.View_Controller_Interface.IMeasurementRun
 
-class hiderone {
+'class hiderone {
 
-}
+'}
 
-class hidertwo {
+'class hidertwo {
 
-}
+'}
 
-hide hiderone
-hide hidertwo
+'hide hiderone
+'hide hidertwo
 
-Controller -[hidden]down- hiderone
-hiderone -[hidden]down- GUI
+'Controller -[hidden]down- hiderone
+'hiderone -[hidden]down- GUI
 
-GUI -[hidden]down- hidertwo
-hidertwo -[hidden]down- Model
+'GUI -[hidden]down- hidertwo
+'hidertwo -[hidden]down- Model
 
 
 'class hiderModelGUI
