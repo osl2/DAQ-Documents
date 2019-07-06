@@ -825,13 +825,20 @@ Das Interface HelpDecoraterHandler wird von der Klasse HelpDecorater implementie
 
 \paragraph{ChannelDecorator}
 
-
+Die Klasse ChannelDecorater stellt die Überklasse zu den Klassen InChannelDecorator und OutChannelDecorator dar. 
+Ein ChannelDecorater ist ein Objekt, welches durch Konfigurationsbausteine instanziiert werden. Ein ChannelDecorater stellt die Schnittstelle zu anderen ChannelDecorater dar, um zwei Bausteine miteinander zu verbinden. Dies geschiet durch die Methode addWireToOtherDecorator. Um diese ChannelDecorater eindeutig unterscheiden zu können besitzten diese eine eindeutige ID. Zur visuellen Repräsentation der Ein- und Ausgänge besitzen diese eine Farbe und Form.
 
 \paragraph{InChannelDecorator}
 
+Die Klasse InChannelDecorator erbt von der Klasse ChannelDecorater und stellt einen Kanaleingang eines Konfigurationsbausteins dar. Über einen Kanaleingang können nur Messdaten in den Konfigurationsbaustein reinkommen und werden ja nach Bausteinart verarbeitet. 
+
 \paragraph{OutChannelDecorator}
 
+Die Klasse OutChannelDecorator ist ebenfalls eine Unterklasse der Klasse ChannelDecorator und stellt einen Kanalausgang eines Konfigurationsbaustein dar. Über diese Kanalausgänge werden Messdaten aus einem Sensor oder bereits bearbeitete Messdaten an den nächsten Konfigurationsblock weitergebe.
+
 \paragraph{Wire}
+
+Die Klasse Wire stellt die visuelle Darstellung einer Verbindung zwischen einem InChannelDecorator und einem OutChannelDecorator dar. Jede Verbindung besitzt eine Farbe, welche sich z.B in einem Fehlerfall ändern kann, um den Benutzer auf den Fehler bei dieser Verbindung aufmerksam zu machen.
 
 \paragraph{AddWireDragAndDropHandler}
 
