@@ -267,7 +267,7 @@ Die Klasse ModelManager ist in Abbildung \ref{ModelManager} zu sehen. Sie hat di
 \end{figure}
 
 Die Struktur des Pakets Core ist in Abbildung \ref{ModelCore} zu sehen. Das Paket Core beinhaltet zentrale Klassen die für die Funktionalität des Models wichtig sind. 
-TODO Mediator Messconfig??
+
 
 \paragraph{BuildingBlockDirectory}
 
@@ -279,7 +279,7 @@ TODO Mediator Messconfig??
 	\end{center}
 \end{figure}
 Die Klasse BuildingBlockDirectory ist in Abbildung \ref{BuildingBlockDirectory} zu sehen.
-Das erste Attribut der Klasse ist InitHashMap. Sie dient zur Speicherung einer HashMap, die von allen Bausteinen einer Messkonfiguration die initId speichert und zuordnet. Als zweites Attribut ist ConfigHashMap. Sie dient zur Speicherung einer HashMap, die von verfügbaren Prototypbausteinen die configId speichert und zuordnet.
+Das erste Attribut der Klasse ist InitHashMap. Sie dient zur Speicherung einer HashMap, die von allen Bausteinen einer Messkonfiguration die initId speichert und zuordnet. Als zweites Attribut ist ConfigHashMap. Sie dient zur Speicherung einer HashMap, die von verfügbaren Prototypbausteinen die configId speichert und zuordnet. Das letzte Attribut isUpdated gibt an, ob d
 Zur Verwaltung der Hashmaps sind folgende Methoden vorhanden:
 \begin{itemize}
 
@@ -288,8 +288,16 @@ Zur Verwaltung der Hashmaps sind folgende Methoden vorhanden:
 \item Die Methode \textit{removeConfigBuildingBlock} entfernt von der ConfigHashmap einen Baustein.
 \item Die Methode \textit{getInitBuildingBlock} gewährt den Zugriff auf einen bestimmen Baustein der Messkonfiguration.
 \item Die Methode \textit{getConfigBuildingBlock} gewährt den Zugriff auf einen bestimmen Bausteinprototypen.
+\item Die Methode \textit{getFullInitBlock} gibt die Hashmap aller Bausteinprototypen als Rückgabewert zurück.
+\item Die Methode \textit{getFullConfigBlock} gibt die Hashmap aller Bausteine der aktuellen Messkonfiguration als Rückgabewert zurück.
+
 \item Die Methode \textit{addConfigConnection} fügt eine Verbindung zwischen zwei Bausteinen einer Messkonfiguration hinzu.
 \item Die Methode \textit{removeConfigConnection} entfernt eine Verbindung zwischen zwei Bausteinen einer Messkonfiguration.
+\item Die Methode \textit{getConnection} gibt an, ob zwei Kanäle verbunden sind.
+
+
+\item Die Methode \textit{checkUpdate} prüft, ob ein der BuildingBlockDirectory aktuell ist.
+\item Die Methode \textit{setUpdate} stellt den Status des BuildingBlockDirectory ein.
 \end{itemize}
 
 \paragraph{MeasurementConfiguration}
@@ -300,8 +308,25 @@ Zur Verwaltung der Hashmaps sind folgende Methoden vorhanden:
 		\label{MeasurementConfiguration}
 	\end{center}
 \end{figure}
-Die Klasse MeasurementConfiguration ist in Abbildung \ref{MeasurementConfiguration} zu sehen.
-TODO
+Die Klasse MeasurementConfiguration ist in Abbildung \ref{MeasurementConfiguration} zu sehen. Eine MeasurementConfiguration kann durch den Konstruktor MeasurementConfiguration erstellt werden. Sie hat dabei als erstes Attribut pathToFile einen Pfad zu dem Speicherort und als zweites Attribut updateRate. UpdateRate speichert den globalen Takt, mit der die Messkonfiguration einen Satz von Daten verarbeitet. Eine Instanz einer MeasurementConfiguration stellt im Model eine komplette Messkonfiguration dar. Diese wird durch die folgenden Methoden verwaltet:
+
+\begin{itemize}
+
+\item Die private Methode \textit{createConfigId} erstellt zu einem Bausteinprototypen eine ConfigId, um Instanzen des selben Bausteinprototypen unterscheiden zu können.
+\item Die private Methode \textit{cloneInitBlock} erstellt eine Kopie eines Bausteinprototypen, gibt ihm eine neue ungenutzte configId und gibt diesen Block als Rückgabewert zurück.
+\item Die Methode \textit{getPathToFile} liefert den Pfad zur Datei des Messkonfiguration.
+\item Die private Methode \textit{checkForCycle} prüft die Messkonfiguration auf Zyklen.
+\item Die Methode \textit{getMeasurementConfig} liefert eine Messkonfiguration.
+\item Die Methode \textit{addBuildingBlock} fügt der Messkonfiguration einen Bausteinprototypen hinzu. Diese ist öffentlich verfügbar und greift auf die private Methode \textit{cloneInitBlock} zurück.
+\item Die Methode \textit{removeBuildingBlock} entfernt einen Baustein von der Messkonfiguration, der durch die initId und die configId eindeutig bestimmt werden kann.
+\item Die Methode \textit{addConnection} fügt eine Verbindung zwischen zwei Kanälen hinzu.
+\item Die Methode \textit{removeConnection} entfernt eine Verbindung zwischen zwei Kanälen.
+\item Die Methode \textit{createModelFromYamlDom} erstellt eine Messkonfiguration aus einer Datei.
+
+\end{itemize}
+
+
+
 
 \paragraph{MeasurementRun}
 \begin{figure}[htbp]
@@ -311,8 +336,20 @@ TODO
 		\label{MeasurementRun}
 	\end{center}
 \end{figure}
-Die Klasse MeasurementRun ist in Abbildung \ref{MeasurementRun} zu sehen.
-TODO
+Die Klasse MeasurementRun ist in Abbildung \ref{MeasurementRun} zu sehen. Ein MeasurementRun repräsentiert im Model einen Versuchslauf. Zu dessen Verwaltung gibt es folgende Methoden:
+
+
+\begin{itemize}
+
+\item Die Methode \textit{start} startet den Messlauf.
+\item Die Methode \textit{pause} pausiert den Messlauf.
+\item Die Methode \textit{resume} lässt den Messlauf fortfahren.
+\item Die Methode \textit{reset} setzt die Fortschritte eines Messlaufs zurück und löscht alle bisher verarbeiteten Daten.
+\item Die Methode \textit{setUpdateRate} überschreibt die Updaterate der zugehörigen Messkonfiguration. 
+\item Die private Methode \textit{checkSensorInChannelStates} prüft den Status alles Eingangskanäle der Sensorbausteine. 
+
+\end{itemize}
+
 
 \subsubsection{BuildingBlock}
 \begin{figure}[htbp]
@@ -329,9 +366,8 @@ Die abstrakte Klasse BuildingBlock ist in Abbildung \ref{BuildingBlock} zu sehen
 \item Das Attribut initId speichert als einen String eine eindeutige ID zur Unterscheidung von BuildingBlockPrototypen.
 \item Das Attribut configId dient als eindeutige ID zur Unterscheidung von BuildingBlockInstanzen innerhalb einer Messkonfiguration, da auch mehrere BuildingBlocks eines Typs innerhalb einer Messkonfiguration auftreten können und unterschieden werden müssen.
 \item Das Attribut name speichert den Namen einen BuildingBlocks als String dar. 
-\item Das Attribut userInfo ?? TODO
 \end{itemize}
-Ein BuildingBlock hat eine beliebige Menge an In- und OutChannels, deren Anzahl durch die folgenden vier Methoden verwaltet kann:
+Ein BuildingBlock hat eine beliebige Menge an In- und OutChannels, deren Anzahl durch die folgenden Methoden verwaltet kann:
 
 \begin{itemize}
 
@@ -339,7 +375,7 @@ Ein BuildingBlock hat eine beliebige Menge an In- und OutChannels, deren Anzahl 
 \item Die Methode \textit{removeInChannel} entfernt einen bestimmen InChannel von dem BuildingBlock.
 \item Die Methode \textit{addOutChannel} fügt dem BuildingBlock einen OutChannel hinzu.
 \item Die Methode \textit{removeOutChannel} entfernt einen bestimmen OutChannel von dem BuildingBlock.
-\item textit{setId} TODO
+\item Die Methode \textit{setConfigId} setzt die ConfigId des Bausteins, um ihn von anderen Instanzen des selben Bausteinprototyps unterscheiden zu können. 
 \end{itemize}
 
 
@@ -348,7 +384,8 @@ Ein BuildingBlock hat eine beliebige Menge an In- und OutChannels, deren Anzahl 
 
 \paragraph{YamlRepresentation}
 
-TODO
+Die Klasse YamlRepresentation erstellt aus einem Baustein eine Yaml-Datei. Dabei wird die Methode \textit{makeYamlRepresentation} benutzt.
+
 
 \paragraph{HelpMessage}
 Die Klasse HelpMessage enthält einen Konstruktor HelpMessage, der ein entsprechendes HelpMessage-Objekt erstellt.
@@ -408,7 +445,7 @@ Sie implementiert das Interface MRunInfo vom Cache-Modul. Sie dient dazu, Inform
 	\end{center}
 \end{figure}
 
-Die Struktur des Pakets FacadeViewModel ist in Abbildung \ref{FacadeViewModel} zu sehen. Das Paket FacadeViewModel stellt die Schnittstelle dar, die vom View angeboten und vom Model benutzt wird. Die Facade ist intern in vier Interfaces aufgeteilt um den nutzenden Klassen nur die benötigten Methoden zu übergeben. Die Interfaces sind über die PickUp-Klasse mit dem Modul verbunden.
+Die Struktur des Pakets FacadeViewModel ist in Abbildung \ref{FacadeViewModel} zu sehen. Das Paket FacadeViewModel stellt die Schnittstelle dar, die vom View angeboten und vom Model benutzt wird. Die Facade ist intern in drei Interfaces aufgeteilt um den nutzenden Klassen nur die benötigten Methoden zu übergeben. Die Interfaces sind über die PickUp-Klasse mit dem Modul verbunden.
 
 
 \paragraph{PickUpPointViewFacades}
@@ -419,8 +456,7 @@ Das Interface MeasurementDataInterface ermöglicht es dem Model, durch die Metho
 Das Interface ExceptionInterface ermöglicht es dem Model, dem View eine Exception zu übergeben. Durch die Methoden \textit{showGeneralException}, \textit{showBuildingBlockException} und \textit{showConnectionException} kann die Art der Exception konkretisiert werden.
 \paragraph{UpdateInterface}
 Das Interface UpdateInterface ermöglicht es dem Model der View durch die Methode \textit{updateConfig} die Veränderungen der Messkonfiguration zu signalisieren.
-\paragraph{GraphicDataIolnterface}
-TODO ??
+
 
 
 
@@ -457,13 +493,28 @@ Die Klasse PhysicalSensor stellt einen Sensorblock dar, der Daten aus einem real
 	\end{center}
 \end{figure}
 
-Die Struktur des Pakets TransformationLogic ist in Abbildung \ref{TransformationLogic} zu sehen. Das Paket dient zur Repräsentation einer Transformation innerhalb des Models.
+Die Struktur des Pakets TransformationLogic ist in Abbildung \ref{TransformationLogic} zu sehen. Das Paket dient zur Repräsentation einer Transformation innerhalb des Models. Jeder Transformation hat genau eine Funktion, die sie auf die Daten aus Paketen anwendet.
 
 
 \paragraph{Transformation}
-TODO
+
+Die Klasse Transformation hat zwei Konstruktoren. Ein Konstruktor erstellt eine Transformation aus einer Yaml-Datei. Der andere erstellt eine generische Transformation, die keine Yaml-Datei benötigt. Um Funktionalität der Transformation zu verwalten, werden folgende Methoden implementiert:
+
+\begin{itemize}
+
+\item Die Methode \textit{setFunction} setzt die Funktion, die die Transformation haben soll.
+\item Die abstrakte Methode \textit{applyFunction} gibt die Signatur an. Die Methode wird dann in der Klasse Function implementiert.
+\item Die Methode \textit{processValue} verarbeitet ein Paket, indem es die Funktion der Transformation auf den Wert des Pakets anwendet.
+
+
+\end{itemize}
+
 \paragraph{Function}
-TODO
+
+Die Klasse Function hat einen Konstruktor zu Erstellung einer Funktion aus einem String. Diese Funktion wird dann durch die Methode \textit{applyFunction} auf die Daten von Paketen angewendet.
+
+
+
 
 
 \subsubsection{RepresentationLogic}
@@ -542,10 +593,10 @@ Ein Kanal hat die Aufgabe Daten zu empfangen und wieder zu versenden. Außerdem 
 
 
 \paragraph{InChannel}
-Die Klasse InChannel ist eine Unterklasse von Channel und dient als Datenstruktur eines Eingangskanals im Model. Ein InChannel hat das zusätzliche Attribut varName, TODO
+Die Klasse InChannel ist eine Unterklasse von Channel und dient als Datenstruktur eines Eingangskanals im Model. Ein InChannel hat das zusätzliche Attribut varName, das den Namen des Eingangskanal speichert.
 Die Methode \textit{forwardValue} wird hier implementiert.
 \paragraph{OutChannel}
-Die Klasse InChannel ist eine Unterklasse von Channel und dient als Datenstruktur eines Ausgangskanals im Model. TODO channelName
+Die Klasse InChannel ist eine Unterklasse von Channel und dient als Datenstruktur eines Ausgangskanals im Model. Das zusätzliche Attribut channelName speichert den Namen den Ausgangskanals. Im Falle eines Ausgangskanal eines Sensorbausteins handelt es sich um Namen, der in der Yaml-Datei steht. Im Falle eines Ausgangskanals einer Transformation, wird hier der Name der Funktion gespeichert.
 Die Methode \textit{forwardValue} wird hier implementiert.
 \paragraph{ChannelState}
 Die abstrakte Klasse ChannelState gibt als abstrakter Zustand die Signaturen der Methoden für der konkreten Zustände vor. Außerdem werden Unterschiede zwischen In- und OutChannel der Methoden \textit{establishConnection} und \textit{receiveValue} durch eine Schablonenmethode  überbrückt.
@@ -576,10 +627,7 @@ Der Aufbau des Pakets BuildingBlockBuilder, zu sehen in Abbildung \ref{BuildingB
 \item Die Rollen der \textit{Produkte} werden in den Paketen \hyperlink{SensorLogic}{SensorLogic}, \hyperlink{TransformationLogic}{TransformationLogic} und \hyperlink{RepresentationLogic}{RepresentationLogic} als entsprechende Bausteine erfüllt.
 
 \end{itemize} 
-
-TODO Begründe warum Erbauer und kein anderes.
-
-
+Hier wurde bewusst das Erbauer Entwurfsmuster ausgewählt, da es leicht erweitern lässt, in dem man eine Methode im Director und einen konkreten Erbauer hinzufügt. Wir haben uns gegen die abstrakte Fabrik entschieden, da sich diese schwerer erweitern lässt.
 
 \paragraph{Director}
 \begin{figure}[htbp]
@@ -611,8 +659,8 @@ Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fet
 Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen TableRepresentationBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei wird als Attribut von der Oberklasse Builder geerbt.
 \paragraph{XYRepresenstationBuilder}
 Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen XYRepresentationBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei wird als Attribut von der Oberklasse Builder geerbt.
-\paragraph{java.util.HashMap<K,V>}
-TODO
+\paragraph{java.util.HashMap}
+Die Klasse repräsentiert die Struktur des Datentyps, der durch die Klasse SnakeYamlParser verwendet wird.
 \paragraph{SnakeYamlParser}
 Diese Klasse stellt ein externes Paket dar, welches den SnakeYamlParser implementiert.
 
