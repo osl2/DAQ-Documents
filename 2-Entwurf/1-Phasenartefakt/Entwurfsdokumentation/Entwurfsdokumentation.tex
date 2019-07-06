@@ -769,7 +769,7 @@ Die Liste der Bausteine kann ebenfalls von außerhalb ausgelesen oder gesetzt we
 Die Klasse BuildingBlockView ist die Überklasse der Darstellungen der Konfigurationsbausteine.
 Bausteine werden über das Directory erzeugt, indem zu jedem im Directory gespeicherten Baustein eine Darstellung dieses Bausteins erzeugt wird. Name und InitId bleiben bei Erzeugung des Bausteins gleich, jedoch wird der Baustein, um die visuellen Komponenten Koordinaten, Farbe, Form und Größe erweitert.
 Konfigurationsbausteine besitzen eine eindeutige Initialisierungs-ID, darunter versteht man die ID, welche der Baustein beim Erstellen durch das Model bekommt. Jede konkrete Instanz dieses Baustein besitzt diese Initialsierungs-ID (InitId). Wenn ein Baustein mehrfach durch den Benutzer in das Konfigurationsfeld gezogen wird, könnte dies dazu führen, dass diese Initialisierungs-ID nicht mehr eindeutig für diesen Baustein wäre. Deswegen besitzt jeder im Konfigurationsfeld platzierte Baustein eine Konfigurations-ID. Diese ID ist eindeutig für diesen Baustein und somit ist dieser Baustein unterscheidbar von weiteren Bausteinen gleichem Prototyps. Ebenfalls besitzt ein Baustein einen Namen und falls sie im Konfigurationsfeld platziert werden ihre Position anhand der Koordinaten x und y. Form, Farbe und Größe sind ebenfalls festgelegt.  
-Bausteine werden über das Directory erzeugt, indem zu jedem im Directory gespeicherten Baustein eine Darstellung dieses Bausteins erzeugt wird. Name und ID bleiben bei Erzeugung des Bausteins gleich, jedoch wird der Baustein, um die visuellen Komponenten Koordinaten, Farbe, Form erweitert.
+Bausteine werden über das Directory erzeugt, indem zu jedem im Directory gespeicherten Baustein eine Darstellung dieses Bausteins erzeugt wird. Name und InitId bleiben bei Erzeugung des Bausteins gleich, jedoch wird der Baustein, um die visuellen Komponenten Koordinaten, Farbe, Form erweitert.
 
 \paragraph{SensorBlockView}
 
@@ -812,6 +812,8 @@ Zur Speicherung der visuellen Darstellung der Daten muss ein Bild erstellt werde
 Darstellungsbausteine besitzen nur Eingänge, da dargestellt Messdaten nicht mehr verarbeitet werden. 
 
 \paragraph{IDragAndDropHandler}
+
+Über das Interface IDragAndDropHandler wird der Anwendung mitgeteilt, dass ein Konfigurationsbaustein durch Drag-and-Drop in der GUI bewegt wurde. Es wird übergeben, um welchen eindeutigen Konfigurationsbaustein es sich handelt, indem bei Konfigurationsbausteinen, welche zuvor nicht im Konfigurationsfeld platziert die Initialisierungs-ID übergeben wird. Bei Konfigurationsbausteinen, welche bereits im Konfigurationsfeld liegen und nicht mehr durch die Initialisierungs-ID eindeutig unterscheidbar sind, wird die Konfigurations-ID übergeben. Ebenfalls wird die Position auf welche der Konfigurationsbaustein gesetzt wurde durch die x- und y- Koordinaten mitübergeben.
 
 \paragraph{HelpDecorator}
 
@@ -859,6 +861,15 @@ Die abstrakte Klasse BuildingBlockProperties stellt alle Eigenschaften der konkr
 
 \paragraph{BuildingBlockPropertiesHandler}
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/View/BuildingBlockPropertiesHandler.png}
+		\caption{Aufbau des BuildingBlockPropertiesHandler}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
+Das Interface BuildingBlockPropertiesHandler wird von der Klasse BuildingBlockProperties implementiert und lässt den Benutzer durch mehrere Methoden das Eigenschaften-Fenster öffnen und Attribute der Baustein-Eigenschaften verändern. Bei allen Darstellungen von Konfigurationsbausteinen lässt sich der Name, Farbe, Form und Größe verändern.
 
 \paragraph{SensorBlockProperties}
 
@@ -868,21 +879,17 @@ Neben den gemeinsamen Eigenschaften besitzt die Unterklasse SensorBlockPropertie
 
 Transformationsbausteine besitzen neben den Standart-Eigenschaften noch eine vordefinierte Funktion für jeden Transformationsbaustein. Um dem Benutzer zu erlauben neue Transformationsbausteine zu definieren ist die Funktion veränderbar.
 
-\paragraph{RepresentationBlockProperties}
-
-Da Repräsentatonsbausteine die visuelle Repräsentation beschreiben besitzen diese für die Darstellung notwendige Eigenschaften, wie Einheit, Maximalwerte der Achsen und Art der Darstellung. Um den Benutzer die Möglichkeit zu geben die Darstellung auf die Messwerte anzupassen, lassen sich Einheit und Maximalwerte vom Benutzer einstellen.
-
-\paragraph{BuildingBlockPropertiesHandler}
-
-Damit der Benutzer Attribute der Konfigurationsbausteine ändern kann, bietet der BuildingBlockPropertiesHandler Methoden an, um die gemeinsamen Attribute, wie Name, Farbe, Form, Größe zu verändern. Das heißt, er nimmt diese Benutzereingaben entgegen.
-
 \paragraph{TransBlockPropertiesHandler}
 
 Da der Benutzer bei einem Transformationsbaustein nur die Funktion verändern kann nimmt dieser Handler ebenfalls nur eine Benutzereingabe für eine Funktion entgegen und setzt diese in den Transformationsbaustein-Eigenschaften.
 
+\paragraph{RepresentationBlockProperties}
+
+Da Repräsentatonsbausteine die visuelle Repräsentation beschreiben besitzen diese für die Darstellung notwendige Eigenschaften, wie Einheit, Maximalwerte der Achsen und Art der Darstellung. Um den Benutzer die Möglichkeit zu geben die Darstellung auf die Messwerte anzupassen, lassen sich Einheit und Maximalwerte vom Benutzer einstellen.
+
 \paragraph{ReprBlockPropertiesHandler}
 
-Bei Representationsbaustein-Eigenschaften ist der Benutzer in der Lage Einheit und Grenzwerte zu setzten. Daher nimmt der Handler diese Benutzer eingaben entgegen.
+Bei Repräsentationsbaustein-Eigenschaften ist der Benutzer in der Lage Einheit und Grenzwerte zu setzten. Daher nimmt der Handler diese Benutzer eingaben entgegen.
 
 
 \newpage

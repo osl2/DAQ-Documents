@@ -55,7 +55,7 @@ namespace Configuration {
 	 	 }
 	 
 	 interface BlockDragAndDropHandler {
-	 	+blockWasMoved(blockId : String, corX : double, corY : double)
+	 	+blockWasMoved(InitId : String, ConfigId: int, corX : double, corY : double)
 	 }
 	 
 	note left of BlockDragAndDropHandler
