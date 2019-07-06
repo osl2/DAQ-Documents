@@ -232,45 +232,147 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 \subsection{Model}
 
 
+\subsubsection{Core}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 16cm]{Grafiken/ModelCore.png}
+		\caption{Aufbau des Pakets Core}
+		\label{ModelCore}
+	\end{center}
+\end{figure}
+
+\paragraph{BuildingBlockDirectory}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8cm]{Grafiken/BuildingBlockDirectory.png}
+		\caption{Darstellung der Klasse BuildingBlockDirectory}
+		\label{BuildingBlockDirectory}
+	\end{center}
+\end{figure}
+
+
+
+\paragraph{MeasurementConfiguration}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8cm]{Grafiken/MeasurementConfiguration.png}
+		\caption{Darstellung der Klasse MeasurementConfiguration}
+		\label{MeasurementConfiguration}
+	\end{center}
+\end{figure}
+
+
+\paragraph{MeasurementRun}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8cm]{Grafiken/MeasurementRun.png}
+		\caption{Darstellung der Klasse MeasurementRun}
+		\label{MeasurementRun}
+	\end{center}
+\end{figure}
+\subsubsection{BuildingBlock}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/BuildingBlock.png}
+		\caption{Darstellung der Klasse BuildingBlock}
+		\label{BuildingBlock}
+	\end{center}
+\end{figure}
+
+\paragraph{YamlRepresentation}
+
+\paragraph{HelpMessage}
+
+
+
+
 \subsubsection{MRunReaction}
 
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 8cm]{Grafiken/MRunReaction.png}
 		\caption{Darstellung der Klasse MRunReaction}
-		\label{mRunReaction}
+		\label{MRunReaction}
 	\end{center}
 \end{figure}
 
-Die Klasse MRunReaction ist in Abbildung \ref{mRunReaction} zu sehen. Sie implementiert das Interface MRunForward, welches im Cache-Modul zu finden ist. MRunReaction dient als Verbindung zwischen Cache und Modul. Durch ihre fünf Methoden wird der Datenfluss vom Cache zu den Sensorbausteinen im Model verwaltet. 
+Die Klasse MRunReaction ist in Abbildung \ref{mRunReaction} zu sehen. Sie implementiert das Interface MRunForward, welches im Cache-Modul zu finden ist. MRunReaction dient als Verbindung zwischen Cache und Modul. Der Datenfluss vom Cache zu den Sensorbausteinen im Model wird durch die folgenden fünf Methoden verwaltet.
+ 
 Die Methode justWaiting signalisiert dem Modul, dass eine Verbindung besteht, aber kein Datenfluss stattfindet. Durch die Methode indicateError dient dazu, dem Model das Auftreten eines Fehlers zu signalisieren. Dabei wird als Parameter ein Fehlercode und die ID des betroffenen Eingangschannels beigefügt. 
 Durch die Methode timeOut wird eine außerplanmäßige Unterbrechung einer Verbindung signalisiert. Durch die Methode connectionTerminated wird hingegen das planmäßige Schließen einer Verbindung signalisiert. 
 Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaketen, so dass jeder Eingangschannel jedes Sensors in der Messkonfiguration ein Packet erhält. Ein Datenpaket besteht hier aus Wert, Zielchannel und Zeitstempel.
 
-\subsubsection{BuildingBlockDirectory}
 
-\subsubsection{Core}
-\paragraph{MeasurementConfiguration}
-\paragraph{MeasurementRun}
 
-\paragraph{BuildingBlock}
-\paragraph{YamlRepresentation}
-\paragraph{PrototypCollection}
-\paragraph{HelpMessage}
-\subsubsection{Core.SensorLogic}
+
+\subsubsection{FacadeViewModel}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 16cm]{Grafiken/FacadeViewModel.png}
+		\caption{Aufbau des Pakets FacadeViewModel}
+		\label{FacadeViewModel}
+	\end{center}
+\end{figure}
+
+\paragraph{PickUpPointViewFacades}
+\paragraph{MeasurementDataInterface}
+\paragraph{ExceptionInterface}
+\paragraph{UpdateInterface}
+\paragraph{GraphicDataIolnterface}
+
+
+
+
+\subsubsection{SensorLogic}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafiken/SensorLogic.png}
+		\caption{Aufbau des Pakets SensorLogic}
+		\label{SensorLogic}
+	\end{center}
+\end{figure}
 \paragraph{Sensor}
 \paragraph{VirtualSensor}
 \paragraph{PhysicalSensor}
-\subsubsection{Core.TransformationLogic}
-\subsubsection{Transformation}
-\subsubsection{Function}
 
+\subsubsection{TransformationLogic}
+\paragraph{Transformation}
+\paragraph{Function}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafiken/TransformationLogic.png}
+		\caption{Aufbau des Pakets TransformationLogic}
+		\label{TransformationLogic}
+	\end{center}
+\end{figure}
 
-\subsubsection{Core.RepresentationLogic}
+\subsubsection{RepresentationLogic}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafiken/RepresentationLogic.png}
+		\caption{Aufbau des Pakets RepresentationLogic}
+		\label{RepresentationLogic}
+	\end{center}
+\end{figure}
+
 \paragraph{Representation}
 \paragraph{TableRepresentation}
 \paragraph{XYRepresentation}
-\subsubsection{Core.ChannelLogic}
+
+
+\subsubsection{ChannelLogic}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 16cm]{Grafiken/ChannelLogic.png}
+		\caption{Aufbau des Pakets ChannelLogic}
+		\label{ChannelLogic}
+	\end{center}
+\end{figure}
+
 \paragraph{Channel}
 \paragraph{InChannel}
 \paragraph{OutChannel}
@@ -281,16 +383,25 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 \paragraph{MRunInfo}
 
 \subsubsection{BuildingBlockBuilder}
-
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 16cm]{Grafiken/BuildingBlockBuilder.png}
-		\caption{Darstellung des BuildingBlockBuilder}
-		\label{buildingBlockBuilder}
+		\caption{Aufbau des Pakets BuildingBlockBuilder}
+		\label{BuildingBlockBuilder}
 	\end{center}
 \end{figure}
 
+
 \paragraph{Director}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/Director.png}
+		\caption{Darstellung der Klasse Director}
+		\label{Director}
+	\end{center}
+\end{figure}
+
+
 \paragraph{Builder}
 \paragraph{SensorBuilder}
 \paragraph{VirtualBuilder}
