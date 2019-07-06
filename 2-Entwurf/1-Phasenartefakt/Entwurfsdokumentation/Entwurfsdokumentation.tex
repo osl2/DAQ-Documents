@@ -352,6 +352,14 @@ Dieser Befehl entfernt einen Baustein aus dem Konfigurationsfeld.
 
 Dieser Befehl verändert die Eigenschaften eines Bausteins.
 
+\paragraph{CloneBlockCommand}
+
+Dieser Befehl klont einen bestehenden Bausteinprototyp.
+
+\paragraph{ExportBlockPrototypeCommand}
+
+Dieser Befehl exportiert einen Bausteinprototypen als Datei.
+
 \paragraph{CreateChannelConnectionCommand}
 
 Dieser Befehl erstellt eine Verbindung zwischen zwei gegebenen Kanälen (welche wiederum zu Bausteinen gehören).
@@ -392,10 +400,6 @@ Dieser Befehl lädt eine Messkonfiguration von einem angegebenen Pfad.
 
 Dieser Befehl entfernt alle Elemente aus dem Konfigurationsfeld. (Verwendung optional.)
 
-\paragraph{XXX}
-
-Dieser Befehl XXXXXX
-
 \subsubsection{Verbindung zum View}
 
 Durch das View-Modul werden mehrere Schnittstellen definiert.
@@ -408,7 +412,15 @@ Durch das View-Modul werden mehrere Schnittstellen definiert.
 
 \subsubsection{Verbindung zum Model}
 
+Es werden Schnittstellen vorgegeben, die durch das Model-Modul implementiert werden.
 
+\paragraph{IModelInformation}
+
+Diese Schnittstelle stellt Methoden zur Verfügung, anhand derer die Messkonfiguration und darin enthaltene Bausteine verändert werden können.
+
+\paragraph{IMeasurementRun}
+
+Diese Schnittstelle stellt Methoden zur Verfügung, anhand derer ein Messlauf gestartet, angehalten und fortgeführt werden kann.
 
 \clearpage
 \subsection{View}
