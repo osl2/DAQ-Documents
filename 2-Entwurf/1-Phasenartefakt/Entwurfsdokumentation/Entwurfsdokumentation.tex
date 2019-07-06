@@ -707,7 +707,9 @@ Die Verwendung des Command-Musters ermöglicht zudem Erweiterungsmöglichkeiten 
 
 Die Schnittstelle Command und die konkreten Klassen, welche die Schnittstelle implementieren, sind die Befehle des Controllers. Jeder konkrete Befehl kapselt eine genau definierte Funktionalität. Weitere Befehle können problemlos hinzugefügt werden, ohne bestehende Klassen verändern zu müssen.
 
-Bestimmte Befehle können durch \textit{unExecute()} rückgängig gemacht werden. In diesen Fällen wird durch \textit{isUndoable()} immer \textit{true} zurückgegeben.
+Beim konstruieren eines Befehlobjektes können gegebenenfalls Parameter übergeben werden, beispielsweise eine eindeutige \textit{Block-ID} für Bausteine. Durch Aufrufen der \textit{execute()}-Methode wird der jeweilige Befehl ausgeführt.
+
+Bestimmte Befehle können durch \textit{unExecute()} rückgängig gemacht werden. In diesen Fällen wird von \textit{isUndoable()} immer \textit{true} zurückgegeben.
 
 Andere Befehle können nicht rückgängig gemacht werden. Dann ist die Methode \textit{unExecute()} leer und \textit{isUndoable()} gibt \textit{false} zurück.
 
