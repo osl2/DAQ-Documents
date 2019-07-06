@@ -1,13 +1,19 @@
 @startuml
 
+collections GUI
 participant ButtonAction
 participant BlockAction
 participant CommandManager
 participant AddBlockToConfigCommand
 participant IModelInformation
+collections Model
+
+activate GUI
 
 == Add Block ==
 
+GUI -> BlockAction
+activate BlockAction
 '
 ' GUI Start
 '
@@ -18,22 +24,34 @@ activate CommandManager
 CommandManager -> AddBlockToConfigCommand : cmd.execute()
 AddBlockToConfigCommand -> IModelInformation : addBuildingBlock(id)
 activate IModelInformation
+IModelInformation -> Model
+activate Model
 '
 ' Model
 '
+IModelInformation <-- Model
+deactivate Model
 AddBlockToConfigCommand <-- IModelInformation
 deactivate IModelInformation
 CommandManager <-- AddBlockToConfigCommand
+CommandManager -> AddBlockToConfigCommand : isUndoable()
+activate CommandManager
+CommandManager <-- AddBlockToConfigCommand : true
 deactivate AddBlockToConfigCommand
 CommandManager -> CommandManager : doneCommands.push(cmd)
+deactivate CommandManager
 BlockAction <-- CommandManager
 deactivate CommandManager
 '
 ' GUI End
 '
+GUI <-- BlockAction
+deactivate BlockAction
 
 == Undo ==
 
+GUI -> ButtonAction
+activate ButtonAction
 '
 ' GUI Start
 '
@@ -44,9 +62,13 @@ CommandManager -> AddBlockToConfigCommand : cmd.unExecute()
 activate AddBlockToConfigCommand
 AddBlockToConfigCommand -> IModelInformation : removeBuildingBlock(id)
 activate IModelInformation
+IModelInformation -> Model
+activate Model
 '
 ' Model
 '
+IModelInformation <-- Model
+deactivate Model
 AddBlockToConfigCommand <-- IModelInformation
 deactivate IModelInformation
 CommandManager <-- AddBlockToConfigCommand
@@ -57,9 +79,13 @@ deactivate CommandManager
 '
 ' GUI End
 '
+GUI <-- ButtonAction
+deactivate ButtonAction
 
 == Redo ==
 
+GUI -> ButtonAction
+activate ButtonAction
 '
 ' GUI Start
 '
@@ -70,9 +96,13 @@ CommandManager -> AddBlockToConfigCommand : cmd.execute()
 activate AddBlockToConfigCommand
 AddBlockToConfigCommand -> IModelInformation : addBuildingBlock(id)
 activate IModelInformation
+IModelInformation -> Model
+activate Model
 '
 ' Model
 '
+IModelInformation <-- Model
+deactivate Model
 AddBlockToConfigCommand <-- IModelInformation
 deactivate IModelInformation
 CommandManager <-- AddBlockToConfigCommand
@@ -83,5 +113,9 @@ deactivate CommandManager
 '
 ' GUI End
 '
+GUI <-- ButtonAction
+deactivate ButtonAction
+
+deactivate GUI
 
 @enduml
