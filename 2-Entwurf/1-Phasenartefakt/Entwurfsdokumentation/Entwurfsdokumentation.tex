@@ -1064,18 +1064,18 @@ Da der Benutzer bei einem Transformationsbaustein nur die Funktion verändern ka
 
 \paragraph{RepresentationBlockProperties}
 
-Da Repräsentatonsbausteine die visuelle Repräsentation beschreiben besitzen diese für die Darstellung notwendige Eigenschaften, wie Einheit, Maximalwerte der Achsen und Art der Darstellung. Um den Benutzer die Möglichkeit zu geben die Darstellung auf die Messwerte anzupassen, lassen sich Einheit und Maximalwerte vom Benutzer einstellen.
+Da Repräsentatonsbausteine die visuelle Repräsentation beschreiben, besitzen diese für die Darstellung notwendige Eigenschaften, wie Einheit, Maximalwerte der Achsen und Art der Darstellung. Um den Benutzer die Möglichkeit zu geben die Darstellung auf die Messwerte anzupassen, lassen sich Einheit und Maximalwerte vom Benutzer einstellen, was über das Interface ReprBlockPropertiesHandler möglich ist.
 
 \paragraph{ReprBlockPropertiesHandler}
 
-Bei Repräsentationsbaustein-Eigenschaften ist der Benutzer in der Lage Einheit und Grenzwerte zu setzten. Daher nimmt der Handler diese Benutzer eingaben entgegen.
+Bei Repräsentationsbaustein-Eigenschaften ist der Benutzer in der Lage Einheit und Maximalwerte zu setzten. Daher nimmt der das Interface ReprBlockPropertiesHandler diese Benutzer eingaben entgegen und liefert diese weiter.
 
 
 \newpage
 
 \subsubsection{Button}
 
-Knöpfe bieten dem Benutzer eine Anzahl von Funktion zur Bedienung der Anwendung an. Das Paket ButtonLayer enthält die unterschiedlichen Knöpfe, das Feld, in welchem die Knöpfe dargestellt werden und eine Annahmestelle für die Benutzerinteraktion.
+Knöpfe bieten dem Benutzer eine Anzahl von Funktion zur Bedienung der Anwendung an. Das Paket ButtonLayer enthält die konkreten Knöpfe, das Feld, in welchem die Knöpfe dargestellt werden und ein Interface für Benutzerinteraktionen.
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -1091,19 +1091,19 @@ Die Klasse Button ist die Überklasse zu den konkreten Knöpfen. Jeder Knopf ent
 
 \paragraph{StartButton}
 
-Die Klasse StartButton erbt von der Überklasse Button und stellt den Knopf dar, welcher bei Betätigung den Messlauf starten soll.
+Die Klasse StartButton erbt von der Überklasse Button und stellt den Knopf dar, welcher bei Betätigung des Knopfes durch den Benutzer den Messlauf starten soll.
 
 \paragraph{PauseButton}
 
-Die Klasse PauseButton ist eine weitere Konkretisierung von Button und stellt den Knopf dar, welcher einen Messlauf pausiert.
+Die Klasse PauseButton ist eine weitere Konkretisierung von Button und stellt den Knopf dar, welcher bei Betätigung durch den Benutzer einen Messlauf pausiert.
 
 \paragraph{ResumeButton}
 
-Die Klasse ResumeButton stellt den Knopf dar, welcher einen Messlauf fortsetzt.
+Die Klasse ResumeButton stellt den Knopf dar, welcher einen Messlauf fortsetzt, wenn der Benutzer diesen betätigt.
 
 \paragraph{ResetButton}
 
-Die Klasse ResetButton stellt den Knopf dar, welcher bei Betätigung den Messlauf auf den Ausgangszustand zurücksetzt.
+Die Klasse ResetButton stellt den Knopf dar, welcher bei Betätigung durch den Benutzer den Messlauf auf den Ausgangszustand zurücksetzt.
 
 \paragraph{SaveDataButton}
 
@@ -1155,11 +1155,11 @@ Die Klasse HelpWindow beschreibt das Hilfe-Fenster der Anwendung. Der Benutzer b
 
 \paragraph{OptionsWindow}
 
-Die Klasse OptionsWindow stellt das Einstellungen-Fenster der Anwendung dar. Der Benutzer soll hierbei das verwendete Farbschema ändern können, um die Bedienung der Anwendung trotz möglichen Farbschwächen zu ermöglichen. Ebenfalls soll die Schriftgröße der Textelemente verändert werden können, um Sehschwächen auszugleichen. 
+Die Klasse OptionsWindow stellt das Einstellungen-Fenster der Anwendung dar. Der Benutzer soll hierbei das verwendete Farbschema ändern können, um die Bedienung der Anwendung trotz möglichen Farbschwächen zu ermöglichen. Ebenfalls soll die Schriftgröße der Textelemente verändert werden können, um Sehschwächen auszugleichen und die Bedienbarkeit der Anwendung zu erhöhen. 
 
 \paragraph{HelpWindowHandler}
 
-Das Interface HelpWindowHandler, welches von der Klasse HelpWindow implementiert wird, liefert die Benutzereingabe im Falle des Drückens des Hilfe-Knopfes an die Anwendung weiter. Beim Drücken des Hilfe-Knopfes soll die Hilfe sofort erscheinen.
+Das Interface HelpWindowHandler, welches von der Klasse HelpWindow implementiert wird, liefert die Benutzereingabe im Falle des Drückens des Hilfe-Knopfes an die Anwendung weiter. Beim Drücken des Hilfe-Knopfes soll das Hilfefenster sofort erscheinen.
 
 \paragraph{OptionsWindowHandler}
 
@@ -1210,7 +1210,7 @@ Die Klasse ExceptionWindowManager nimmt Fehlermeldungen entgegen und stößt die
 	\end{center}
 \end{figure}
 
-Das Paket FacadeModelView enthält das Interface, welches das Model anbietet und vom View verwendet wird. Da durch das Directory eine Art Zwischenschicht zwischen Model und View darstellt ersetzt die Fassade zum Directory eine unübersichtliche Fassade zu dem Model. 
+Das Paket FacadeModelView enthält das Interface, welches das Model anbietet und vom View verwendet wird. Da durch das Directory eine Art Zwischenschicht zwischen Model und View darstellt wird ersetzt die Fassade zum Directory eine unübersichtliche Fassade zu dem Model. 
 
 \paragraph{ViewDirectoryInterface}
 
@@ -1230,7 +1230,7 @@ Damit das View bei Benachrichtigung über ein Update des Models überprüfen kan
 	\end{center}
 \end{figure}
 
-Das Paket FacadeControllerView stellt die Schnittstelle dar, welche der Controller anbietet und vom View benutzt wird. Zur Übersicht ist die Fassade intern in 3 Interfaces aufgeteilt, welche jeweils Funktionen eines Objektes darstellen (Button, Block, Connection). Eine PickUp-Klasse stellt die Anbindung zum View dar und Kapselt die Interfaces.
+Das Paket FacadeControllerView stellt die Schnittstelle dar, welche der Controller anbietet und vom View benutzt wird. Zur Übersicht ist die Fassade intern in 3 Interfaces aufgeteilt, welche jeweils Funktionen eines Objektes darstellen (Button, Block, Connection). Eine PickUp-Klasse stellt die Anbindung zum View dar und kapselt die Interfaces.
 
 \begin{figure}[htbp]
 	\begin{center}
