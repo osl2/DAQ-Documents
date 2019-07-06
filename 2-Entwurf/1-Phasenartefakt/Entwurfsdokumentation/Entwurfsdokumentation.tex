@@ -519,7 +519,7 @@ Diese Klasse stellt ein externes Paket dar, welches den SnakeYamlParser implemen
 	\begin{center}
 		\includegraphics[width = 14cm]{Grafiken/Controller_Struktur.png}
 		\caption{Die Struktur des Controllers (Ausschnitt)}
-		\label{Entwurf_Grob}
+		\label{Controller_Struktur}
 	\end{center}
 \end{figure}
 
@@ -537,6 +537,14 @@ Der Aufbau des Controllers setzt das Entwurfsmuster \textit{Kommando} (\textit{C
 
 \subsubsection{CommandManager}
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 6cm]{Grafiken/CommandManager.png}
+		\caption{Die Klasse CommandManager}
+		\label{CommandManager}
+	\end{center}
+\end{figure}
+
 Die Klasse CommandManager hat die Funktion, die Ausführung konkreter Befehle zu veranlassen. Der CommandManager ist als \textit{Singleton} definiert um sicherzustellen, dass von allen Klienten auf dieselbe Instanz zugegriffen wird.
 
 Anhand eines \textit{Undo-} und eines \textit{Redo-Stacks} bietet der CommandManager außerdem die Möglichkeit an, bereits ausgeführte Befehle rückgängig zu machen (bzw. rückgängig gemachte Aktionen wiederherzustellen). Nicht alle Befehle können rückgängig gemacht werden.
@@ -548,6 +556,14 @@ Die Schnittstelle Command und die konkreten Klassen, welche die Schnittstelle im
 Bestimmte Befehle können durch \textit{unExecute()} rückgängig gemacht werden. In diesen Fällen wird durch \textit{isUndoable()} immer \textit{true} zurückgegeben.
 
 Andere Befehle können nicht rückgängig gemacht werden. Dann ist die Methode \textit{unExecute()} leer und \textit{isUndoable()} gibt \textit{false} zurück.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/Commands1.png}
+		\caption{Baustein-Befehle}
+		\label{Commands1}
+	\end{center}
+\end{figure}
 
 \paragraph{AddBlockToConfigCommand}
 
@@ -569,6 +585,14 @@ Dieser Befehl klont einen bestehenden Bausteinprototyp.
 
 Dieser Befehl exportiert einen Bausteinprototypen als Datei.
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 10cm]{Grafiken/Commands2.png}
+		\caption{Verbindungs-Befehle}
+		\label{Commands2}
+	\end{center}
+\end{figure}
+
 \paragraph{CreateChannelConnectionCommand}
 
 Dieser Befehl erstellt eine Verbindung zwischen zwei gegebenen Kanälen (welche wiederum zu Bausteinen gehören).
@@ -580,6 +604,14 @@ Dieser Befehl verändert Start- und/oder Endpunkt einer Verbindung zwischen zwei
 \paragraph{DeleteChannelConnectionCommand}
 
 Dieser Befehl löscht eine Verbindung zwischen zwei Kanälen.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafiken/Commands3.png}
+		\caption{Messlauf-Befehle}
+		\label{Commands3}
+	\end{center}
+\end{figure}
 
 \paragraph{StartRunCommand}
 
@@ -597,6 +629,14 @@ Dieser Befehl pausiert einen aktiven Messlauf.
 
 Dieser Befehl setzt einen pausierten Messlauf fort.
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 10cm]{Grafiken/Commands4.png}
+		\caption{Messkonfigurations-Befehle}
+		\label{Commands4}
+	\end{center}
+\end{figure}
+
 \paragraph{SaveConfigCommand}
 
 Dieser Befehl speichert die aktuelle Messkonfiguration an einem übergebenen Dateipfad.
@@ -611,6 +651,14 @@ Dieser Befehl entfernt alle Elemente aus dem Konfigurationsfeld. (Verwendung opt
 
 \subsubsection{Verbindung zum View}
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/View_Controller_Interface.png}
+		\caption{Schnittstellenimplementierung View zu Controller}
+		\label{View_Controller_Interface}
+	\end{center}
+\end{figure}
+
 Durch das View-Modul werden mehrere Schnittstellen definiert.
 
 \paragraph{BlockAction} Die Klasse BlockAction implementiert die Schnittstelle IBlockAction des Views.
@@ -621,6 +669,14 @@ Durch das View-Modul werden mehrere Schnittstellen definiert.
 
 \subsubsection{Verbindung zum Model}
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/Controller_Model_Interface.png}
+		\caption{Schnittstelle Controller zu Model}
+		\label{Controller_Model_Interface}
+	\end{center}
+\end{figure}
+
 Es werden Schnittstellen vorgegeben, die durch das Model-Modul implementiert werden.
 
 \paragraph{IModelInformation}
@@ -629,7 +685,7 @@ Diese Schnittstelle stellt Methoden zur Verfügung, anhand derer die Messkonfigu
 
 \paragraph{IMeasurementRun}
 
-Diese Schnittstelle stellt Methoden zur Verfügung, anhand derer ein Messlauf gestartet, angehalten und fortgeführt werden kann.
+Diese Schnittstelle stellt Methoden zur Verfügung, anhand derer ein Messlauf gestartet, beendet, angehalten und fortgeführt werden kann.
 
 \clearpage
 \subsection{View}
