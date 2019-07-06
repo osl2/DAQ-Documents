@@ -1,18 +1,23 @@
 @startuml
 
-collections GUI
+participant BlockDragAndDropHandler
+participant UndoButton
+participant RedoButton
 participant ButtonAction
 participant BlockAction
 participant CommandManager
 participant AddBlockToConfigCommand
-participant IModelInformation
-collections Model
+participant MeasurementConfiguration
 
-activate GUI
+activate BlockDragAndDropHandler
+activate UndoButton
+activate RedoButton
 
 == Add Block ==
 
-GUI -> BlockAction
+BlockDragAndDropHandler -> BlockDragAndDropHandler : blockWasMoved(id, x, y)
+activate BlockDragAndDropHandler
+BlockDragAndDropHandler -> BlockAction : blockPlaced(id, x, y)
 activate BlockAction
 '
 ' GUI Start
@@ -22,17 +27,17 @@ activate AddBlockToConfigCommand
 BlockAction -> CommandManager : runCommand(cmd)
 activate CommandManager
 CommandManager -> AddBlockToConfigCommand : cmd.execute()
-AddBlockToConfigCommand -> IModelInformation : addBuildingBlock(id)
-activate IModelInformation
-IModelInformation -> Model
-activate Model
 '
-' Model
+' Model Start
 '
-IModelInformation <-- Model
-deactivate Model
-AddBlockToConfigCommand <-- IModelInformation
-deactivate IModelInformation
+AddBlockToConfigCommand -> MeasurementConfiguration : addBuildingBlock(id)
+activate MeasurementConfiguration
+
+AddBlockToConfigCommand <-- MeasurementConfiguration
+deactivate MeasurementConfiguration
+'
+' Model End
+'
 CommandManager <-- AddBlockToConfigCommand
 CommandManager -> AddBlockToConfigCommand : isUndoable()
 activate CommandManager
@@ -45,12 +50,15 @@ deactivate CommandManager
 '
 ' GUI End
 '
-GUI <-- BlockAction
+BlockDragAndDropHandler <-- BlockAction
 deactivate BlockAction
+deactivate BlockDragAndDropHandler
 
 == Undo ==
 
-GUI -> ButtonAction
+UndoButton -> UndoButton : buttonPressed()
+activate UndoButton
+UndoButton -> ButtonAction
 activate ButtonAction
 '
 ' GUI Start
@@ -60,17 +68,16 @@ activate CommandManager
 CommandManager -> CommandManager : cmd = doneCommands.pop()
 CommandManager -> AddBlockToConfigCommand : cmd.unExecute()
 activate AddBlockToConfigCommand
-AddBlockToConfigCommand -> IModelInformation : removeBuildingBlock(id)
-activate IModelInformation
-IModelInformation -> Model
-activate Model
 '
-' Model
+' Model Start
 '
-IModelInformation <-- Model
-deactivate Model
-AddBlockToConfigCommand <-- IModelInformation
-deactivate IModelInformation
+AddBlockToConfigCommand -> MeasurementConfiguration : removeBuildingBlock(id)
+activate MeasurementConfiguration
+AddBlockToConfigCommand <-- MeasurementConfiguration
+deactivate MeasurementConfiguration
+'
+' Model End
+'
 CommandManager <-- AddBlockToConfigCommand
 deactivate AddBlockToConfigCommand
 CommandManager -> CommandManager : undoneCommands.push(cmd)
@@ -79,12 +86,15 @@ deactivate CommandManager
 '
 ' GUI End
 '
-GUI <-- ButtonAction
+UndoButton <-- ButtonAction
 deactivate ButtonAction
+deactivate UndoButton
 
 == Redo ==
 
-GUI -> ButtonAction
+RedoButton -> RedoButton : buttonPressed()
+activate RedoButton
+RedoButton -> ButtonAction
 activate ButtonAction
 '
 ' GUI Start
@@ -94,17 +104,17 @@ activate CommandManager
 CommandManager -> CommandManager : cmd = undoneCommands.pop()
 CommandManager -> AddBlockToConfigCommand : cmd.execute()
 activate AddBlockToConfigCommand
-AddBlockToConfigCommand -> IModelInformation : addBuildingBlock(id)
-activate IModelInformation
-IModelInformation -> Model
-activate Model
 '
-' Model
+' Model Start
 '
-IModelInformation <-- Model
-deactivate Model
-AddBlockToConfigCommand <-- IModelInformation
-deactivate IModelInformation
+AddBlockToConfigCommand -> MeasurementConfiguration : addBuildingBlock(id)
+activate MeasurementConfiguration
+
+AddBlockToConfigCommand <-- MeasurementConfiguration
+deactivate MeasurementConfiguration
+'
+' Model End
+'
 CommandManager <-- AddBlockToConfigCommand
 deactivate AddBlockToConfigCommand
 CommandManager -> CommandManager : doneCommands.push(cmd)
@@ -113,9 +123,12 @@ deactivate CommandManager
 '
 ' GUI End
 '
-GUI <-- ButtonAction
+RedoButton <-- ButtonAction
 deactivate ButtonAction
+deactivate RedoButton
 
-deactivate GUI
+deactivate UndoButton
+deactivate RedoButton
+deactivate BlockDragAndDropHandler
 
 @enduml
