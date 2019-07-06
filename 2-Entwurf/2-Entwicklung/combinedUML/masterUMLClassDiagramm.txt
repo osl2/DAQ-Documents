@@ -412,7 +412,7 @@ namespace Model {
 
 
 	class YamlRepresentation {
-		<<create>>YamlRepresentation(block: BuildingBlock)
+		{static} YamlRepresentation(block: BuildingBlock): YAML
 	}
 	BuildingBlock -left- YamlRepresentation
 
