@@ -232,45 +232,147 @@ Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufb
 \subsection{Model}
 
 
+\subsubsection{Core}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 16cm]{Grafiken/ModelCore.png}
+		\caption{Aufbau des Pakets Core}
+		\label{ModelCore}
+	\end{center}
+\end{figure}
+
+\paragraph{BuildingBlockDirectory}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8cm]{Grafiken/BuildingBlockDirectory.png}
+		\caption{Darstellung der Klasse BuildingBlockDirectory}
+		\label{BuildingBlockDirectory}
+	\end{center}
+\end{figure}
+
+
+
+\paragraph{MeasurementConfiguration}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8cm]{Grafiken/MeasurementConfiguration.png}
+		\caption{Darstellung der Klasse MeasurementConfiguration}
+		\label{MeasurementConfiguration}
+	\end{center}
+\end{figure}
+
+
+\paragraph{MeasurementRun}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8cm]{Grafiken/MeasurementRun.png}
+		\caption{Darstellung der Klasse MeasurementRun}
+		\label{MeasurementRun}
+	\end{center}
+\end{figure}
+\subsubsection{BuildingBlock}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/BuildingBlock.png}
+		\caption{Darstellung der Klasse BuildingBlock}
+		\label{BuildingBlock}
+	\end{center}
+\end{figure}
+
+\paragraph{YamlRepresentation}
+
+\paragraph{HelpMessage}
+
+
+
+
 \subsubsection{MRunReaction}
 
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 8cm]{Grafiken/MRunReaction.png}
 		\caption{Darstellung der Klasse MRunReaction}
-		\label{mRunReaction}
+		\label{MRunReaction}
 	\end{center}
 \end{figure}
 
-Die Klasse MRunReaction ist in Abbildung \ref{mRunReaction} zu sehen. Sie implementiert das Interface MRunForward, welches im Cache-Modul zu finden ist. MRunReaction dient als Verbindung zwischen Cache und Modul. Durch ihre fünf Methoden wird der Datenfluss vom Cache zu den Sensorbausteinen im Model verwaltet. 
+Die Klasse MRunReaction ist in Abbildung \ref{mRunReaction} zu sehen. Sie implementiert das Interface MRunForward, welches im Cache-Modul zu finden ist. MRunReaction dient als Verbindung zwischen Cache und Modul. Der Datenfluss vom Cache zu den Sensorbausteinen im Model wird durch die folgenden fünf Methoden verwaltet.
+ 
 Die Methode justWaiting signalisiert dem Modul, dass eine Verbindung besteht, aber kein Datenfluss stattfindet. Durch die Methode indicateError dient dazu, dem Model das Auftreten eines Fehlers zu signalisieren. Dabei wird als Parameter ein Fehlercode und die ID des betroffenen Eingangschannels beigefügt. 
 Durch die Methode timeOut wird eine außerplanmäßige Unterbrechung einer Verbindung signalisiert. Durch die Methode connectionTerminated wird hingegen das planmäßige Schließen einer Verbindung signalisiert. 
 Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaketen, so dass jeder Eingangschannel jedes Sensors in der Messkonfiguration ein Packet erhält. Ein Datenpaket besteht hier aus Wert, Zielchannel und Zeitstempel.
 
-\subsubsection{BuildingBlockDirectory}
 
-\subsubsection{Core}
-\paragraph{MeasurementConfiguration}
-\paragraph{MeasurementRun}
 
-\paragraph{BuildingBlock}
-\paragraph{YamlRepresentation}
-\paragraph{PrototypCollection}
-\paragraph{HelpMessage}
-\subsubsection{Core.SensorLogic}
+
+\subsubsection{FacadeViewModel}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 16cm]{Grafiken/FacadeViewModel.png}
+		\caption{Aufbau des Pakets FacadeViewModel}
+		\label{FacadeViewModel}
+	\end{center}
+\end{figure}
+
+\paragraph{PickUpPointViewFacades}
+\paragraph{MeasurementDataInterface}
+\paragraph{ExceptionInterface}
+\paragraph{UpdateInterface}
+\paragraph{GraphicDataIolnterface}
+
+
+
+
+\subsubsection{SensorLogic}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafiken/SensorLogic.png}
+		\caption{Aufbau des Pakets SensorLogic}
+		\label{SensorLogic}
+	\end{center}
+\end{figure}
 \paragraph{Sensor}
 \paragraph{VirtualSensor}
 \paragraph{PhysicalSensor}
-\subsubsection{Core.TransformationLogic}
-\subsubsection{Transformation}
-\subsubsection{Function}
 
+\subsubsection{TransformationLogic}
+\paragraph{Transformation}
+\paragraph{Function}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafiken/TransformationLogic.png}
+		\caption{Aufbau des Pakets TransformationLogic}
+		\label{TransformationLogic}
+	\end{center}
+\end{figure}
 
-\subsubsection{Core.RepresentationLogic}
+\subsubsection{RepresentationLogic}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafiken/RepresentationLogic.png}
+		\caption{Aufbau des Pakets RepresentationLogic}
+		\label{RepresentationLogic}
+	\end{center}
+\end{figure}
+
 \paragraph{Representation}
 \paragraph{TableRepresentation}
 \paragraph{XYRepresentation}
-\subsubsection{Core.ChannelLogic}
+
+
+\subsubsection{ChannelLogic}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 16cm]{Grafiken/ChannelLogic.png}
+		\caption{Aufbau des Pakets ChannelLogic}
+		\label{ChannelLogic}
+	\end{center}
+\end{figure}
+
 \paragraph{Channel}
 \paragraph{InChannel}
 \paragraph{OutChannel}
@@ -281,27 +383,64 @@ Die Methode dispatchCompletePacketSet übergibt dem Model ein Set aus Datenpaket
 \paragraph{MRunInfo}
 
 \subsubsection{BuildingBlockBuilder}
-
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 16cm]{Grafiken/BuildingBlockBuilder.png}
-		\caption{Darstellung des BuildingBlockBuilder}
-		\label{buildingBlockBuilder}
+		\caption{Aufbau des Pakets BuildingBlockBuilder}
+		\label{BuildingBlockBuilder}
 	\end{center}
 \end{figure}
 
-\paragraph{Director}
-\paragraph{Builder}
-\paragraph{SensorBuilder}
-\paragraph{VirtualBuilder}
-\paragraph{PhysicalBuilder}
-\paragraph{TransformationBuilder}
-\paragraph{RepresenstationBuilder}
-\paragraph{TableRepresenstationBuilder}
-\paragraph{XYRepresenstationBuilder}
-\paragraph{java.util.HashMap<K,V>}
-\paragraph{SnakeYamlParser}
+Der Aufbau des Pakets BuildingBlockBuilder, zu sehen in Abbildung \ref{BuildingBlockBuilder}, setzt das Enwurfsmuster Erbauer um. Die Rollen sind dabei folgendermaßen umgesetzt:
+\begin{itemize}
 
+\item Die Klasse \textit{Director} erfüllt die Rolle des \textit{Direktors}.
+\item Die Klasse \textit{Builder} erfüllt die Rolle eines \textit{Erbauers}.
+\item Die Klassen \textit{SensorBuilder},\textit{TransformationBuilder}, \textit{RepresentationBuilder},
+\textit{VirtualSensorBuilder},\textit{PhysicalSensorBuilder},\textit{XYRepresentationBuilder} und \textit{TableRepresentationBuilder}  erfüllen die Rolle der \textit{konkreten Erbauer}.
+\item Die Rollen der \textit{Produkte} werden in den Paketen \hyperlink{SensorLogic}{SensorLogic}, \hyperlink{TransformationLogic}{TransformationLogic} und \hyperlink{RepresentationLogic}{RepresentationLogic} als entsprechende Bausteine erfüllt.
+
+\end{itemize} 
+TODO Begründe warum Erbauer und kein anderes.
+
+
+
+
+\paragraph{Director}
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/Director.png}
+		\caption{Darstellung der Klasse Director}
+		\label{Director}
+	\end{center}
+\end{figure}
+
+Die Klasse Director bietet eine Reihe an \textit{construct...} Methoden an, mit denen konkrete BuildingBlocks erstellt werden können. Der resultierende BuildingBlock wird dann in einer HashMap im BuildingBlockDirectory abgelegt. Dabei kann die Auswahl an Methoden durch neue Methoden erweitert werden, um neue Arten von Blöcken erbauen zu können. Dabei muss auch jeweils ein neuer konkreter Erbauer implementiert werden. In erster Linie hat der Director die Aufgabe, beim Start der Anwendung die angebotenen Prototypen zu erstellen und im BuildingBlockDirectory zu speichern. 
+
+\paragraph{Builder}
+Die Klasse Builder ist die Oberklasse aller konkreten Builder. Sie hat als Attribut eine Verbindung zu einer Yaml-Datei. Mit Hilfe dieser Yaml-Datei kann ein entsprechender BuildingBlock erstellt werden. Die Yaml-Datei wird durch die Methode \textit{snakeYaml.load} geladen, welche durch das externe Paket SnakeYamlParser angeboten wird. Die abstrakte Methode \textit{fetchBuildingBlock} gibt die Signatur für die konkreten Erbauer vor. In den konkreten Erbauern kann der Director durch diese Methode einen entsprechenden BuildingBlock anfordern und als Rückgabewert erhalten, sobald er erbaut wurde. 
+
+\paragraph{SensorBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen TransformationsBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei wird als Attribut von der Oberklasse Builder geerbt.
+
+
+\paragraph{VirtualSensorBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen VirtualsensorBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei ist als geerbtes Attribut vorhanden.
+\paragraph{PhysicalSensorBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen PhysicalSensorBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei ist als geerbtes Attribut vorhanden. Der PhysicalSensorBuilder fügt dem Sensorblock durch die Methode \textit{addSensorProducerName} zusätzlich noch den Werknamen des Sensors hinzu.
+\paragraph{TransformationBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen TransformationsBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei wird als Attribut von der Oberklasse Builder geerbt.
+
+\paragraph{RepresenstationBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen RepresentationBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei wird als Attribut von der Oberklasse Builder geerbt.
+\paragraph{TableRepresenstationBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen TableRepresentationBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei wird als Attribut von der Oberklasse Builder geerbt.
+\paragraph{XYRepresenstationBuilder}
+Die Klasse erstellt als konkreter Erbauer durch Aufrufen der Methode \textit{fetchBuildingBlock} aus einer Yaml-Datei einen XYRepresentationBlock und gibt ihn als Rückgabewert zurück. Die Verbindung zu der entsprechenden Yaml-Datei wird als Attribut von der Oberklasse Builder geerbt.
+\paragraph{java.util.HashMap<K,V>}
+TODO
+\paragraph{SnakeYamlParser}
+Diese Klasse stellt ein externes Paket dar, welches den SnakeYamlParser implementiert.
 
 \clearpage
 \subsection{Controller}
