@@ -1,0 +1,45 @@
+@startuml
+
+actor "N: Nutzer" as N
+participant "S: StartUp File" as S
+participant "M: Main" as M
+participant "M: Main" as M
+
+
+N -> S: start Program
+activate S
+
+S -> M: run main()
+activate M
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+M -> N: StartUp complete
+@enduml
