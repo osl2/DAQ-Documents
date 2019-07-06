@@ -698,7 +698,7 @@ Bei Schließen des MainWindow wird ebenso die gesamte Anwendung beendet.
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 5cm]{Grafiken/MainWindow.png}
+		\includegraphics[width = 5cm]{Grafiken/View/MainWindow.png}
 		\caption{Die Klasse MainWindow}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -712,7 +712,7 @@ Menüs bieten dem Benutzer eine übersichtliche visuelle Zusammenfassung der Dar
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/MenuesNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/MenuesNamespace.png}
 		\caption{Aufbau des Menü-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -741,7 +741,7 @@ Die Klasse ButtonField stellt die Menüfläche dar, in welcher alle konkreten Kn
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/ConfigurationNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/ConfigurationNamespace.png}
 		\caption{Aufbau des Konfigurations Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -749,6 +749,15 @@ Die Klasse ButtonField stellt die Menüfläche dar, in welcher alle konkreten Kn
 
 
 \paragraph{ConfigurationField}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/View/ConfigurationField.png}
+		\caption{Aufbau des Konfigurationsfeld}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
 Die Klasse KonfigurationField stellt das Konfigurationfeld dar, in welchem der Benutzer eine Messkonfiguration aufbauen kann.
 Konfigurationsbausteine, welche der Benutzer in das Konfigurationsfeld platziert werden in einer Liste gespeichert. 
 Konfigurationsbausteine, welche der Benutzer aus dem Konfigurationsfeld entfernt, werden aus der Liste gelöscht
@@ -756,20 +765,55 @@ Beim Platzieren der Konfigurationsbausteine in das Konfigurationsfeld wird dem K
 Die Liste der Bausteine kann ebenfalls von außerhalb ausgelesen oder gesetzt werden, falls z.B die Anordnung der Bausteine und Verbindungen gespeichert oder gesetzt werden soll.
 
 \paragraph{BuildingBlockView}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/View/BuildingBlockView.png}
+		\caption{Aufbau des BuildingBlockView}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
 Die Klasse BuildingBlockView ist die Überklasse der Darstellungen der Konfigurationsbausteine.
 Bausteine werden über das Directory erzeugt, indem zu jedem im Directory gespeicherten Baustein eine Darstellung dieses Bausteins erzeugt wird. Name und InitId bleiben bei Erzeugung des Bausteins gleich, jedoch wird der Baustein, um die visuellen Komponenten Koordinaten, Farbe, Form und Größe erweitert.
 Konfigurationsbausteine besitzen eine eindeutige Initialisierungs-ID, darunter versteht man die ID, welche der Baustein beim Erstellen durch das Model bekommt. Jede konkrete Instanz dieses Baustein besitzt diese Initialsierungs-ID (InitId). Wenn ein Baustein mehrfach durch den Benutzer in das Konfigurationsfeld gezogen wird, könnte dies dazu führen, dass diese Initialisierungs-ID nicht mehr eindeutig für diesen Baustein wäre. Deswegen besitzt jeder im Konfigurationsfeld platzierte Baustein eine Konfigurations-ID. Diese ID ist eindeutig für diesen Baustein und somit ist dieser Baustein unterscheidbar von weiteren Bausteinen gleichem Prototyps. Ebenfalls besitzt ein Baustein einen Namen und falls sie im Konfigurationsfeld platziert werden ihre Position anhand der Koordinaten x und y. Form, Farbe und Größe sind ebenfalls festgelegt.  
 Bausteine werden über das Directory erzeugt, indem zu jedem im Directory gespeicherten Baustein eine Darstellung dieses Bausteins erzeugt wird. Name und ID bleiben bei Erzeugung des Bausteins gleich, jedoch wird der Baustein, um die visuellen Komponenten Koordinaten, Farbe, Form erweitert.
 
 \paragraph{SensorBlockView}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/View/SensorBlockView.png}
+		\caption{Aufbau des SensorBlockView}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
 Die Klasse SensorBlockView stellt einen Sensorbaustein dar. 
 Sensorbausteine, welche in dem Konfigurationsfeld platziert werden, können mit anderen Bausteinen verbunden werden, was im Messlauf einen Datenfluss über die verbundenen Bausteine erlaubt. Sensorbausteine besitzen, im Gegensatz zu anderen Konfigurationsbausteinen nur Datenausgänge, über welche sie verbunden werden können, da Sensoren, gemäß physikalischer 
 Repräsentation nur Datenausgänge besitzen.
 
 \paragraph{TransformationBlockView}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/View/TransformationBlockView.png}
+		\caption{Aufbau des TransformationBlockView}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
 Die Klasse TransformationBlockView stellt einen Transformationsbaustein dar. Transformationsbausteine besitzen eine vordefinierte Funktion, welche die Messdaten nach der Funktion transformiert. Transformationbausteinen besitzen Eingänge, welche Daten von Sensorenbausteinen oder anderen Transformationenbausteine empfangen können. Ausgänge der Transformationsbausteine können nur an weitere Transformationsbausteine oder Darstellungsbausteine angebunden werden, um einen sinnvollen Datenfluss zu ermöglichen.
 
 \paragraph{RepresentationBlockView} 
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 7cm]{Grafiken/View/RepresentationBlockView.png}
+		\caption{Aufbau des RepresentationBlockView}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
 
 Die Klasse RepresentationBlockView stellt einen Darstellungbaustein dar, dieser bestimmt, wie die Messdaten visualisiert werden. Dafür bekommt der Repräsentationsbaustein die visuelle Darstellung in dem Darstellungsgerüst (z.B: Graph, Tabelle) mit den dargestellten Messdaten.
 Zur Speicherung der visuellen Darstellung der Daten muss ein Bild erstellt werden, welches zum Speichern weiter geleitet wird.
@@ -802,7 +846,7 @@ Damit Benutzer Informationen über einzelne Bausteine bekommt, welche ihm das Be
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/BuildingBlockPropertiesNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/BuildingBlockPropertiesNamespace.png}
 		\caption{Aufbau des BuildingBlockProperties-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -810,7 +854,19 @@ Damit Benutzer Informationen über einzelne Bausteine bekommt, welche ihm das Be
 
 \paragraph{BuildingBlockProperties}
 
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/View/BuildingBlockProperties.png}
+		\caption{Aufbau der BuildingBlockProperties}
+		\label{Entwurf_Grob}
+	\end{center}
+\end{figure}
+
+
 Die abstrakte Klasse BuildingBlockProperties stellt alle Eigenschaften der konkreten Bausteine dar, welche alle Arten von Bausteinen (Sensor, Transformation, Darstellung) gemeinsam haben. Dazu gehören der Name,  Initialisierungs-ID, eindeutige Konfigurations-ID, Farbe, Form und Größe. Da einzelne Eigenschaften unveränderlich sein sollen, wie die IDs lassen sich nur Name, Farbe, Form und Größe verändern.
+
+\paragraph{BuildingBlockPropertiesHandler}
+
 
 \paragraph{SensorBlockProperties}
 
@@ -845,7 +901,7 @@ Knöpfe bieten dem Benutzer eine Anzahl von Funktion zur Bedienung der Anwendung
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/ButtonNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/ButtonNamespace.png}
 		\caption{Aufbau des Button-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -909,7 +965,7 @@ Das Paket OptionAndHelp soll dem Benutzer die Benutzung der Anwendung vereinfach
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/HelpAndOptionNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/HelpAndOptionNamespace.png}
 		\caption{Aufbau des HelpAndOption-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -931,7 +987,7 @@ Fehlernachrichten sind ein wichtiger Teil der Anwendung, um dem Benutzer eine m�
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/ExceptionNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/ExceptionNamespace.png}
 		\caption{Aufbau des Exception-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -964,7 +1020,7 @@ Das Paket FacadeModelView enthält das Interface, welches das Model anbietet und
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 12 cm]{Grafiken/FacadeModelViewNamespace.png}
+		\includegraphics[width = 12 cm]{Grafiken/View/FacadeModelViewNamespace.png}
 		\caption{Aufbau des FacadeModelView-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -982,7 +1038,7 @@ Das Paket FacadeControllerView stellt die Schnittstelle dar, welche der Controll
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14 cm]{Grafiken/FacadeControllerViewNamespace.png}
+		\includegraphics[width = 14 cm]{Grafiken/View/FacadeControllerViewNamespace.png}
 		\caption{Aufbau des FacadeControllerView-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
