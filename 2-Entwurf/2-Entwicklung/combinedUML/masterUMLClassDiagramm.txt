@@ -234,7 +234,7 @@ namespace Model {
 		<<create>>YamlRepresentation(block: BuildingBlock)
 	}
 	BuildingBlock -left- YamlRepresentation
-
+	
 	class BuildingBlockDirectory {
 
 		- InitHashMap: HashMap<id: String, block: BuildingBlock>
@@ -266,14 +266,14 @@ namespace Model {
 		class Function {
 			<<create>>Function(String inputFunction) : Function
 			+applyFunction(packet: TimeSpampValuePair): void
-
+			
 		}
 		Function "1" - "*" Transformation
 	}
 
 
 	Model.Core.BuildingBlock <|-  Model.TransformationLogic.Transformation
-
+	
 
 	namespace RepresentationLogic {
 
@@ -295,7 +295,7 @@ namespace Model {
 			traceName: String
 			title: String
 			xAxisName: String
-			yXisName: String
+			yAXisName: String
 			hasToolBar: boolean
 
 
@@ -337,15 +337,14 @@ namespace Model {
 		-id: String
 		-value: long
 		+ establishConnection(targetChannelId: String)
-		+ receiveValue()
+		+ receiveValue():void
 		+ connect(): void
 		+ unConnect(): void
-		+ receiveValue(): void
 		+ eraseValue(): void
 		+ {abstract} forwardValue(): void
 
 	}
-
+	
 
 	note top of Channel
 	  first part of channelId is
@@ -407,9 +406,9 @@ namespace Model {
 Model.Core.BuildingBlock "1" --> "*" Model.ChannelLogic.InChannel
 Model.Core.BuildingBlock "1" --> "*" Model.ChannelLogic.OutChannel
 
+	
 
-
-
+	
 
 
 
@@ -493,11 +492,11 @@ namespace BuildingBlockBuilder {
 	SensorBuilder -up-|> Builder
 	PhysicalSensorBuilder -up-|> SensorBuilder
 	VirtualSensorBuilder -up-|> SensorBuilder
-
+	
 	TransformationBuilder -up-|> Builder
 	RepresentationBuilder -up-|> Builder
-
-
+	
+	
 	TableRepresentationBuilder -up-|> RepresentationBuilder
 	XYRepresentationBuilder -up-|> RepresentationBuilder
 
@@ -518,7 +517,7 @@ Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.RepresentationLogic
 Model.Core.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
 Model.Core.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
 
-
+	
 
 
 namespace FacadeControllerView {
@@ -538,7 +537,7 @@ class PickUpPointViewFacades {
  interface GraphicDataIolnterface {
 	  + getContentsOfRepresentationBlocks(): BufferedImage[]
  }
-
+ 
  interface ExceptionInterface {
 	 + showGeneralException(title: String, description: String): void
 	 + showBuildingBlockException(id: String, title: String, description: String): void
@@ -556,11 +555,10 @@ PickUpPointViewFacades --> MeasurementDataInterface
 
 
 }
-Model.FacadeControllerView.UpdateInterface -- Model.BuildingBlockBuilder.Director
-Model.FacadeControllerView.GraphicDataIolnterface --> Model.RepresentationLogic.XYRepresentation
-Model.FacadeControllerView.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
-Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementConfiguration
-Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementRun
+Model.FacadeControllerView.PickUpPointViewFacades -- Model.BuildingBlockBuilder.Director
+Model.FacadeControllerView.PickUpPointViewFacades -- Model.RepresentationLogic.XYRepresentation
+Model.FacadeControllerView.PickUpPointViewFacades -- Model.Core.MeasurementConfiguration 
+Model.FacadeControllerView.PickUpPointViewFacades -- Model.Core.MeasurementRun
 
 
 class Model.MRunReaction {
@@ -594,15 +592,6 @@ class ModelManager {
 
 Model.ModelManager "1" -- "1" Model.BuildingBlockBuilder.Director: uses >
 Model.ModelManager "1" -- "1" Model.Core.MeasurementConfiguration : creates >
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -1,0 +1,13 @@
+
+@startuml
+
+
+class ModelManager {
+		+initializeModel():boolean
+		-createNewMeasurementConfiguration():MeasurementConfiguration
+		-createTransformationPrototypesFromYaml():boolean
+		-createRepresentationPrototypesFromYaml():boolean
+		-fetchSensorPrototypesFromBackedn():boolean
+		-pushNetworkConfigToBackend(path: String):boolean
+	}
+	@enduml
