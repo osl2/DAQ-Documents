@@ -1,6 +1,28 @@
 @startuml
 
 'Date of first creation: 01.07.2019
+
+'------------------------------------------------------------------------
+'Global Settings
+'------------------------------------------------------------------------
+
+scale 0.1
+skinparam dpi 300
+skinparam defaultFontSize 22
+
+'------------------------------------------------------------------------
+'StartUp
+'------------------------------------------------------------------------
+namespace Initialization {
+	class Main {
+		+main(args: String[]): void
+	}
+	Main ----------> Backend.SshToPi: creates >
+	Main ----------> Model.ModelManager: creates >
+	Main ----------> GUI.MainWindow: creates >
+
+}
+
 '------------------------------------------------------------------------
 'Backend
 '------------------------------------------------------------------------
@@ -212,7 +234,7 @@ namespace Model {
 		<<create>>YamlRepresentation(block: BuildingBlock)
 	}
 	BuildingBlock -left- YamlRepresentation
-	
+
 	class BuildingBlockDirectory {
 
 		- InitHashMap: HashMap<id: String, block: BuildingBlock>
@@ -244,14 +266,14 @@ namespace Model {
 		class Function {
 			<<create>>Function(String inputFunction) : Function
 			+applyFunction(packet: TimeSpampValuePair): void
-			
+
 		}
 		Function "1" - "*" Transformation
 	}
 
 
 	Model.Core.BuildingBlock <|-  Model.TransformationLogic.Transformation
-	
+
 
 	namespace RepresentationLogic {
 
@@ -323,7 +345,7 @@ namespace Model {
 		+ {abstract} forwardValue(): void
 
 	}
-	
+
 
 	note top of Channel
 	  first part of channelId is
@@ -385,9 +407,9 @@ namespace Model {
 Model.Core.BuildingBlock "1" --> "*" Model.ChannelLogic.InChannel
 Model.Core.BuildingBlock "1" --> "*" Model.ChannelLogic.OutChannel
 
-	
 
-	
+
+
 
 
 
@@ -471,11 +493,11 @@ namespace BuildingBlockBuilder {
 	SensorBuilder -up-|> Builder
 	PhysicalSensorBuilder -up-|> SensorBuilder
 	VirtualSensorBuilder -up-|> SensorBuilder
-	
+
 	TransformationBuilder -up-|> Builder
 	RepresentationBuilder -up-|> Builder
-	
-	
+
+
 	TableRepresentationBuilder -up-|> RepresentationBuilder
 	XYRepresentationBuilder -up-|> RepresentationBuilder
 
@@ -496,7 +518,7 @@ Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.RepresentationLogic
 Model.Core.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
 Model.Core.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
 
-	
+
 
 
 namespace FacadeControllerView {
@@ -516,7 +538,7 @@ class PickUpPointViewFacades {
  interface GraphicDataIolnterface {
 	  + getContentsOfRepresentationBlocks(): BufferedImage[]
  }
- 
+
  interface ExceptionInterface {
 	 + showGeneralException(title: String, description: String): void
 	 + showBuildingBlockException(id: String, title: String, description: String): void
@@ -537,7 +559,7 @@ PickUpPointViewFacades --> MeasurementDataInterface
 Model.FacadeControllerView.UpdateInterface -- Model.BuildingBlockBuilder.Director
 Model.FacadeControllerView.GraphicDataIolnterface --> Model.RepresentationLogic.XYRepresentation
 Model.FacadeControllerView.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
-Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementConfiguration 
+Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementConfiguration
 Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementRun
 
 
@@ -592,7 +614,7 @@ Model.ModelManager "1" -- "1" Model.Core.MeasurementConfiguration : creates >
 namespace Controller {
 
 	namespace Controller_Model_Interface {
-	
+
 		interface IModelInformation {
 			+ addBuildingBlock(id : String) : boolean
 			+ removeBuildingBlock(id : String) : boolean
@@ -601,18 +623,18 @@ namespace Controller {
 			+ saveConfig(path : String) : boolean
 			+ loadConfig(path : String) : boolean
 		}
-		
+
 		interface IMeasurementRun {
 			+ start() : boolean
 			+ pause() : boolean
 			+ resume() : boolean
 			+ reset() : boolean
 		}
-	
+
 	}
-	
+
 	namespace View_Controller_Interface {
-	
+
 		class ButtonAction < implements IButtonAction > {
 			+ startPressed() : boolean
 			+ pausePressed() : boolean
@@ -625,7 +647,7 @@ namespace Controller {
 			+ undoPressed() : void
 			+ redoPressed() : void
 		}
-	
+
 		class BlockAction < implements IBlockAction > {
 		 	+ blockPlaced(id: String, xCor: double, yCor: double): boolean
 		 	+ blockMoved(id String, xCor: double, yCor: double): boolean
@@ -634,17 +656,17 @@ namespace Controller {
 		 	+ cloneBuildingBlock(id : String) : boolean
 		 	+ exportPrototype(id : String) : boolean
 		}
-	
+
 		class ConnectionAction < implements IConnectionAction > {
 			+ connectionAdded(channelId1 : int, channelId2 : int) : boolean
 			+ connectionRemoved(channelId1 : int, channelId2 : int) : void
  			+ blockAndChannelsRemoved(id: String): void
 		}
-	
+
 	}
 
 	namespace Command_Pattern {
-	
+
 		AddBlockToConfigCommand <-- Controller.View_Controller_Interface.BlockAction
 	'	ModifyBlockInConfigCommand <-- Controller.View_Controller_Interface.BlockAction
 		RemoveBlockFromConfigCommand <-- Controller.View_Controller_Interface.BlockAction
@@ -660,11 +682,11 @@ namespace Controller {
 		StopRunCommand <-- Controller.View_Controller_Interface.ButtonAction
 		SaveConfigCommand <-- Controller.View_Controller_Interface.ButtonAction
 		LoadConfigCommand <-- Controller.View_Controller_Interface.ButtonAction
-		
+
 		CommandManager <-- Controller.View_Controller_Interface.BlockAction
 		CommandManager <-- Controller.View_Controller_Interface.ConnectionAction
 		CommandManager <-- Controller.View_Controller_Interface.ButtonAction
-		
+
 		Controller.Controller_Model_Interface.IModelInformation <-down- AddBlockToConfigCommand
 	'	Controller.Controller_Model_Interface.IModelInformation <-down- ModifyBlockInConfigCommand
 		Controller.Controller_Model_Interface.IModelInformation <-down- RemoveBlockFromConfigCommand
@@ -680,8 +702,8 @@ namespace Controller {
 		Controller.Controller_Model_Interface.IMeasurementRun <-down- PauseRunCommand
 		Controller.Controller_Model_Interface.IMeasurementRun <-down- ResumeRunCommand
 		Controller.Controller_Model_Interface.IMeasurementRun <-down- StopRunCommand
-		
-		
+
+
 
 		class CommandManager <<Singleton>> {
 			- doneCommands : Stack<Command>
@@ -690,42 +712,42 @@ namespace Controller {
 			+ undo() : void
 			+ redo() : void
 		}
-		
+
 		note top of CommandManager : doCommand(cmd : Command)\n    cmd.execute()\n    if (cmd.isUndoable()())\n        doneCommands.push(cmd)\n    undoneCommands.clear()
 		note left of CommandManager : undo()\n    cmd = doneCommands.pop()\n    cmd.unExecute()\n    undoneCommands.push(cmd)
 		note right of CommandManager : redo()\n    cmd = undoneCommands.pop()\n    cmd.execute()\n    doneCommands.push(cmd)
-		
+
 		CommandManager o-- Command
-	
+
 		interface Command {
 			+ execute() : void
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		note right of Command : command parameters (e.g. blockID) are passed with the constructors
-		
+
 		class AddBlockToConfigCommand {
 			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 	'	class ModifyBlockInConfigCommand {
 	'		- blockID : String
 	'		+ execute() : void
 	'		+ unExecute() : void
 	'		+ isUndoable() : boolean
 	'	}
-		
+
 		class RemoveBlockFromConfigCommand {
 			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class EditBlockPropertiesCommand {
 			- blockID : String
 			- properties : BuildingBlockProperties
@@ -733,41 +755,41 @@ namespace Controller {
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class CloneBlockCommand {
 			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class ExportBlockPrototypeCommand {
 			- blockID : String
 			+ execute() : void
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class SaveConfigCommand {
 			- filePath : String
 			+ execute() : void
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class LoadConfigCommand {
 			- filePath : String
 			+ execute() : void
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class ResetConfigCommand {
 			+ execute() : void
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class CreateChannelConnectionCommand {
 			- startChannelID : int
 			- endChannelID : int
@@ -775,7 +797,7 @@ namespace Controller {
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class ModifyChannelConnectionCommand {
 			- oldStartChannelID : int
 			- oldEndChannelID : int
@@ -785,7 +807,7 @@ namespace Controller {
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class DeleteChannelConnectionCommand {
 			- startChannelID : int
 			- endChannelID : int
@@ -793,31 +815,31 @@ namespace Controller {
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class StartRunCommand {
 			+ execute() : void
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class StopRunCommand {
 			+ execute() : void
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class PauseRunCommand {
 			+ execute() : void
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		class ResumeRunCommand {
 			+ execute() : void
 			+ unExecute() : void
 			+ isUndoable() : boolean
 		}
-		
+
 		Command <|.. AddBlockToConfigCommand
 		Command <|.. RemoveBlockFromConfigCommand
 	'	Command <|.. ModifyBlockInConfigCommand
