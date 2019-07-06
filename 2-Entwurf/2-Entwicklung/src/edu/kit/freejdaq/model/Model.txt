@@ -1,17 +1,11 @@
 @startuml
 
 
-
-
-
-
 namespace Model {
 
 
 
-
-
-
+ namespace Core {
 
 	class MeasurementRun {
 
@@ -50,7 +44,7 @@ namespace Model {
  		+createModelFromYamlDom(modelDom: YamlDom): String
 
 	}
-	MeasurementConfiguration "1" -- "*" MeasurementRun
+	MeasurementConfiguration "1" -left- "*" MeasurementRun
 
 
 	abstract class BuildingBlock
@@ -73,7 +67,41 @@ namespace Model {
 
 	MeasurementConfiguration "1" -- "*" BuildingBlock
 
+	class HelpMessage{
+		- messageFileName : String
+		+ HelpMessage(msgFile : String)
+		+ displayMessage() : void
+	}
+	note left of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
+
+	BuildingBlock "*" --> "1" HelpMessage : < provides help/information about
+
+
+
+
+	class YamlRepresentation {
+		<<create>>YamlRepresentation(block: BuildingBlock)
+	}
+	BuildingBlock -left- YamlRepresentation
 	
+	class BuildingBlockDirectory {
+
+		- InitHashMap: HashMap<id: String, block: BuildingBlock>
+		- ConfigHashMap: HashMap<id: long, block: BuildingBlock>
+		--
+		+ addInitBuildingBlock(id: String, block: BuildingBlock): boolean
+		..
+		+ addConfigBuildingBlock(id: long, block: BuildingBlock): boolean
+		+ removeConfigBuildingBlock(id: String): boolean
+		+ getInitBuildingBlock(id: String): BuildingBlock
+		+ getConfigBuildingBlock(id: long): BuildingBlock
+		+ addConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
+		+ removeConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
+		}
+	
+}
+
+
 
 
 	namespace TransformationLogic {
@@ -93,7 +121,7 @@ namespace Model {
 	}
 
 
-	BuildingBlock <|-  Model.TransformationLogic.Transformation
+	Model.Core.BuildingBlock <|-  Model.TransformationLogic.Transformation
 	
 
 	namespace RepresentationLogic {
@@ -131,7 +159,7 @@ namespace Model {
 
 
 	}
-	BuildingBlock <|--  Model.RepresentationLogic.Representation
+	Model.Core.BuildingBlock <|--  Model.RepresentationLogic.Representation
 
 	namespace SensorLogic {
 
@@ -149,7 +177,7 @@ namespace Model {
 		 VirtualSensor --|> Sensor
 		 PhysicalSensor --|> Sensor
 	}
-	BuildingBlock <|-- Model.SensorLogic.Sensor
+	Model.Core.BuildingBlock <|-- Model.SensorLogic.Sensor
 
 
 	namespace ChannelLogic {
@@ -230,32 +258,12 @@ namespace Model {
 	   bei Trafos und für
 	   Channelname bei Sensoren
 	end note
+}
 
+Model.Core.BuildingBlock "1" --> "*" Model.ChannelLogic.InChannel
+Model.Core.BuildingBlock "1" --> "*" Model.ChannelLogic.OutChannel
 
 	
-
-
-	}
-
-	BuildingBlock "1" --> "*" Model.ChannelLogic.InChannel
-	BuildingBlock "1" --> "*" Model.ChannelLogic.OutChannel
-
-	class HelpMessage{
-		- messageFileName : String
-		+ HelpMessage(msgFile : String)
-		+ displayMessage() : void
-	}
-	note bottom of HelpMessage : "messageFileName" leads to [html/markdown/?] \nfile containing message text, \nwhich can be displayed by the application \n(e.g. in swt browser widget)
-
-	BuildingBlock "*" --> "1" HelpMessage : < provides help/information about
-
-
-
-
-	class YamlRepresentation {
-		<<create>>YamlRepresentation(block: BuildingBlock)
-	}
-	BuildingBlock -left- YamlRepresentation
 
 	
 
@@ -338,12 +346,6 @@ namespace BuildingBlockBuilder {
 		+fetchBuildingBlock(): BuildingBlock
 
 	}
-
-
-
-
-
-
 	SensorBuilder -up-|> Builder
 	PhysicalSensorBuilder -up-|> SensorBuilder
 	VirtualSensorBuilder -up-|> SensorBuilder
@@ -369,28 +371,13 @@ Model.BuildingBlockBuilder.VirtualSensorBuilder ..> Model.SensorLogic.VirtualSen
 Model.BuildingBlockBuilder.PhysicalSensorBuilder ..> Model.SensorLogic.PhysicalSensor
 Model.BuildingBlockBuilder.XYRepresentationBuilder ..> Model.RepresentationLogic.XYRepresentation
 
+Model.Core.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
+Model.Core.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
+
+	
 
 
-	class BuildingBlockDirectory {
-
-		- InitHashMap: HashMap<id: String, block: BuildingBlock>
-		- ConfigHashMap: HashMap<id: long, block: BuildingBlock>
-		--
-		+ addInitBuildingBlock(id: String, block: BuildingBlock): boolean
-		..
-		+ addConfigBuildingBlock(id: long, block: BuildingBlock): boolean
-		+ removeConfigBuildingBlock(id: String): boolean
-		+ getInitBuildingBlock(id: String): BuildingBlock
-		+ getConfigBuildingBlock(id: long): BuildingBlock
-		+ addConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
-		+ removeConfigConnection(bbId1: String, cId1: long, cId2: long, bbId2: String): boolean
-		}
-
-Model.BuildingBlockDirectory "1" --> "1" Model.BuildingBlockBuilder.Director
-Model.MeasurementConfiguration "1" --> "1" Model.BuildingBlockBuilder.Director
-
-
-
+namespace FacadeControllerView {
 
 class PickUpPointViewFacades {
 	 + getUpdateInterfaces(): UpdateInterface[]
@@ -402,7 +389,7 @@ class PickUpPointViewFacades {
  interface UpdateInterface {
  	+ updateConfig(): void
  }
-Model.UpdateInterface -- Model.BuildingBlockBuilder.Director
+Model.FacadeControllerView.UpdateInterface -- Model.BuildingBlockBuilder.Director
 
  interface GraphicDataIolnterface {
 	  + getContentsOfRepresentationBlocks(): BufferedImage[]
@@ -414,13 +401,13 @@ Model.UpdateInterface -- Model.BuildingBlockBuilder.Director
 	 + showConnectionException(id: long, title: String, description: String): void
  }
 
-Model.ExceptionInterface -- Model.MeasurementConfiguration 
-Model.ExceptionInterface -- Model.MeasurementRun
+Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementConfiguration 
+Model.FacadeControllerView.ExceptionInterface -- Model.Core.MeasurementRun
 
  interface MeasurementDataInterface {
  	+ pushShellForVisualisation(..): void
  }
-Model.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
+Model.FacadeControllerView.MeasurementDataInterface -- Model.RepresentationLogic.XYRepresentation
 
 PickUpPointViewFacades --> "*" UpdateInterface
 PickUpPointViewFacades --> GraphicDataIolnterface
@@ -428,7 +415,7 @@ PickUpPointViewFacades --> ExceptionInterface
 PickUpPointViewFacades --> MeasurementDataInterface
 GraphicDataIolnterface --> Model.RepresentationLogic.XYRepresentation
 
-
+}
 
 
 
@@ -441,10 +428,18 @@ class Model.MRunReaction {
 }
 
 
-MRunReaction  --  Model.MeasurementRun
-Model.MeasurementRun  --  Model.ChannelLogic.MRunInfo
-Model.MeasurementConfiguration  -->  Model.BuildingBlockDirectory
+MRunReaction  --  Model.Core.MeasurementRun
+Model.Core.MeasurementRun  --  Model.ChannelLogic.MRunInfo
+Model.Core.MeasurementConfiguration  -->  Model.Core.BuildingBlockDirectory
 
+
+
+
+
+
+
+}
+@enduml
 
 
 class hidd {
@@ -453,17 +448,9 @@ class hidd {
 hide Model.hidd
 
 
-Model.BuildingBlockDirectory -up[hidden]- Model.hidd
-Model.BuildingBlockBuilder -up[hidden]- Model.BuildingBlockDirectory
+Model.Core.BuildingBlockDirectory -up[hidden]- Model.hidd
+Model.BuildingBlockBuilder -up[hidden]- Model.Core.BuildingBlockDirectory
 Model.ChannelLogic -up[hidden]--------- Model.BuildingBlockBuilder
-
-
-
-}
-@enduml
-
-
-
 
 
 

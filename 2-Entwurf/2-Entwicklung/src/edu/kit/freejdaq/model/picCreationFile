@@ -1,0 +1,25 @@
+@startuml
+
+
+
+	class MRunReaction {
+	+justWaiting():  void
+	+indicateError(inChannelId: String, errorCode: double)
+	+indicateTimeout(): void
+	+indicateConnectionTerminated(): void
+	+dispatchCompletePacketSet(completePacketSet: EnhancedValuePacket[])
+}
+
+
+	
+	
+
+	
+
+
+	
+
+
+	
+
+@enduml
