@@ -739,14 +739,6 @@ Die Klasse ButtonField stellt die Menüfläche dar, in welcher alle konkreten Kn
 
 \subsubsection{Configuration}
 
-\begin{figure}[htbp]
-	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/View/ConfigurationNamespace.png}
-		\caption{Aufbau des Konfigurations Paket}
-		\label{Entwurf_Grob}
-	\end{center}
-\end{figure}
-
 
 \paragraph{ConfigurationField}
 
@@ -978,6 +970,14 @@ Die Klasse HelpWindow beschreibt das Hilfe-Fenster der Anwendung. Der Benutzer b
 \paragraph{OptionsWindow}
 
 Die Klasse OptionsWindow stellt das Einstellungen-Fenster der Anwendung dar. Der Benutzer soll hierbei das verwendete Farbschema ändern können, um die Bedienung der Anwendung trotz möglichen Farbschwächen zu ermöglichen. Ebenfalls soll die Schriftgröße der Textelemente verändert werden können, um Sehschwächen auszugleichen. 
+
+\paragraph{HelpWindowHandler}
+
+Das Interface HelpWindowHandler, welches von der Klasse HelpWindow implementiert wird, liefert die Benutzereingabe im Falle des Drückens des Hilfe-Knopfes an die Anwendung weiter. Beim Drücken des Hilfe-Knopfes soll die Hilfe sofort erscheinen.
+
+\paragraph{OptionsWindowHandler}
+
+Das Interface OptionsWindowHandler, welches von der Klasse OptionsWindow implementiert wird, erkennt die Benutzereingabe im Falle des Drückens des "Einstellungen" oder "Optionen"- Knopf. In dem geöffneten Fenster kann der Benutzer dann das Farbschema und die Schriftgröße anpassen.
 
 \newpage
 

@@ -319,8 +319,8 @@ namespace HelpAndOption {
  
 	 GUI.MainWindow *-down- "1" HelpWindow
 	 GUI.MainWindow *-down- "1" OptionsWindow
-	 HelpWindow <|.up. HelpWindowHandler
-	 OptionsWindow <|.up. OptionsWindowHandler
+	 HelpWindow .up.|> HelpWindowHandler
+	 OptionsWindow .up.|> OptionsWindowHandler
 
 }
 
