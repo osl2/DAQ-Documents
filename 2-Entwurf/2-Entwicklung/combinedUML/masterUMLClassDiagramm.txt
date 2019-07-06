@@ -385,7 +385,6 @@ namespace Model {
 		-initId: String
 		-configId: long
 		-name: String
-		-userInfo: String
 		+setconfigId(configId):boolean
 		+addInChannel(id: String, name: String): void
 		+addOutChannel(id: String, name: String): void
