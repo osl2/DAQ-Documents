@@ -432,10 +432,17 @@ MRunReaction  --  Model.Core.MeasurementRun
 Model.Core.MeasurementRun  --  Model.MRunInfo
 
 
+class ModelManager {
+		+initializeModel():boolean
+		-createNewMeasurementConfiguration():MeasurementConfiguration
+		-createTransformationPrototypesFromYaml():boolean
+		-createRepresentationPrototypesFromYaml():boolean
+		-fetchSensorPrototypesFromBackedn():boolean
+		-pushNetworkConfigToBackend(path: String):boolean
+	}
 
-
-
-
+Model.ModelManager "1" -- "1" Model.BuildingBlockBuilder.Director: uses >
+Model.ModelManager "1" -- "1" Model.Core.MeasurementConfiguration : creates >
 
 
 }
