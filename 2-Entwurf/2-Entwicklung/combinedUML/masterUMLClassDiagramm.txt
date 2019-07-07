@@ -1653,7 +1653,6 @@ GUI.FacadeControllerView.IConnectionAction <|.. Controller.View_Controller_Inter
 
 'Model to GUI
 
-
 GUI.Exception.ExceptionWindowManager --|> Model.FacadeControllerView.ExceptionInterface
 GUI.Configuration.ConfigurationField --|> Model.FacadeControllerView.UpdateInterface
 GUI.Menues.PrototypeField --|> Model.FacadeControllerView.UpdateInterface
@@ -1666,6 +1665,7 @@ GUI.FacadeModelView.ViewDirectoryInterface --|> Model.Core.BuildingBlockDirector
 'Model to Backend
 Backend.IAccessToMRun <-- Model.Core.MeasurementRun
 Backend.IAccessToSensorInfo <-- Model.Core.ModelManager
+
 Model.ModelManager --> FileService.YamlService
 
 '------------------------------------------------------------------------

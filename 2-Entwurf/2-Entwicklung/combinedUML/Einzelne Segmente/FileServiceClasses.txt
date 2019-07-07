@@ -1,0 +1,39 @@
+@startuml
+scale 0.04
+skinparam defaultFontSize 22
+
+
+namespace FileService {
+
+	class org.yaml.snakeyaml.Yaml {
+		load(input : InputStream) : Object
+		dump(data : Object, output : Writer) : void
+	}
+	
+	class YamlService {
+		+ {static} saveAs(path : String, data : Object) : void
+		+ {static} load(path : String) : Object
+		+ {static} save(path : String, data : Object) : void
+		+ {static} delete(path : String, data : Object) : void
+	}
+	
+	note bottom of YamlService : for sensors, transformations, configs (?)
+	
+	YamlService .up.> org.yaml.snakeyaml.Yaml
+	
+	class CsvService {
+		+ {static} load(path : String) : Object
+		+ {static} save(path : String, data : Object) : void
+	}
+	
+	note bottom of CsvService : for measurement results (tables)
+	
+	class PngService {
+		+ {static} save(path : String, data : Object) : void
+	}
+	
+	note bottom of PngService : for representation graphs
+
+}
+
+@enduml
