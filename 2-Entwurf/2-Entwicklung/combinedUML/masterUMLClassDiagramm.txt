@@ -16,7 +16,7 @@ namespace Initialization {
 	class Main {
 		+main(args: String[]): void
 	}
-	Main ------------------> Backend.SshToPi: creates >
+	Main ------------------> Backend.PickPointForAgentsBasedOnSsh: creates >
 	Main ------------------> Model.ModelManager: creates >
 	Main -------------------> GUI.MainWindow: creates >
 	'Main --------------------> Controller.Command_Pattern.CommandManager: creates >
@@ -25,14 +25,6 @@ namespace Initialization {
 '------------------------------------------------------------------------
 'Backend
 '------------------------------------------------------------------------
-
-namespace Cache {
-		class MStreamListener{
-		}
-
-		class MRunTiming {
-		}
-	}
 
 namespace Backend {
 
@@ -76,13 +68,15 @@ namespace Backend {
 
 	class SensorInfoAgent {
 		+SensorInfoAgent(commandFactory: CommandFactory)
-		+fetchIdsOfAvailableSensors(): String[]
-		+copyYamlFileFromPi(sensorId: String): boolean
-		+copyYamlFileToPi(sensorId: String): boolean
+		+fetchIdsOfAvailableSensors(timeout: int): String[]
+		+copyYamlFileFromPi(timeout: int, sensorId: String): boolean
+		+copyYamlFileToPi(timeout: int, sensorId: String): boolean
 	}
 
 	class PickPointForAgentsBasedOnSsh {
+		-{static}onlyInstance: PickPointForAgentsBasedOnSsh
 		+{static}getPickPointForAgentsBasedOnSsh(initData: InitDataForSsh): PickPointForAgentsBasedOnSsh
+		+PickupPointForAgentsBasedOnSsh(sensorInfoAgent: IAccessToSensorInfo, mRunAgent: IAccessToMRun)
 		+getIAccessToMRun(): IAccessToSensorInfo
 		+getIAccessToSensorInfo(): IAccessToSensorInfo
 	}
@@ -111,8 +105,8 @@ namespace Backend {
 			-pathToLocalDir: String
 			+ComToPi(id: String, pathToRemoteDir: String, pathToLocalDir: String)
    		    +{abstract}fetchSensorIds(timeOut: int): String[]
-		    +{abstract}copyFileFromPi(nameOfFile: String): boolean
-		    +{abstract}copyFileToPi(nameOfFile: String): boolean
+		    +{abstract}copyFileFromPi(nameOfFile: String, timeout: int): boolean
+		    +{abstract}copyFileToPi(nameOfFile: String, timeout: int): boolean
 		    +{abstract}startMRunAtPi(inChannelId: String): void
 		    +{abstract}readLine(): String
 		}
@@ -322,8 +316,6 @@ namespace Backend {
 	PickPointForAgentsBasedOnSsh --> IAccessToMRun
 	SensorInfoAgent ..|> IAccessToSensorInfo
 	MRunAgent ..|> IAccessToMRun
-
-
 
 
 
@@ -758,7 +750,7 @@ class MRunInfo {
 
 
 MRunReaction  --  Model.Core.MeasurementRun
-Model.Core.MeasurementRun  --  Model.MRunInfo
+Model.Core.MeasurementRun  --  Model.IMRunInfo
 
 
 class ModelManager {
@@ -1463,106 +1455,178 @@ namespace FileService {
 '------------------------------------------------------------------------
 
 namespace Cache {
-class MRunActivityManagement {
-	+ MRunActivityManagement(initData: MRunInfo, listenerAtModel: MRunForward )
+
+class MStreamListener {
+	+ MStreamListener(cache: Cache)
+	+ addConnectinTerminatedAction(action: ConnectionTerminatedAction)
+	+ receiveMDataSet(channelId: String, timeStamp: long, value: double): void
+	+ connectionTerminated(channelId: String): void
+}
+
+
+class MRunTiming {
+	- replayTimePointer: long
+	- endFlag: boolean
+	--
+	+ MRunTiming(initData: MRunInfo)
+	- createCache(): Cache
 	- addBufferForOneSensorInChannel(SensorId: String)
-	- addTrigger(trigger: Trigger): void
+	- addCheckAndNotifyAction(action: CheckAndNotifyAction): void
+	+ getMStreamListener(): MStreamListener
 	..
-	+ run(): void
-	- setCurrentTime(): void
-	- checkTriggers(): void
-	..
+	+ addMRunListener(listener: IMRunListener)
+	+ removeMRunListener(listener: IMRunListener)
 	+ startRepeatedTimer(): void
 	+ stopRepeatedTimer(): void
 	..
-	+ receiveMDataSet(channelId: String, timeStamp: long, value: double): void
-	+ connectionTerminated(): void
-
-
+	+ run(): void
+	- setCurrentTime(): void
+	- checkActions(): void
 }
 
 class Timer {
 	-period: long
 	+schedule(timerTask: TimerTask, period: long)
-	+cancel(): void
+	+cancel(): boolean
 }
 
 class Cache{
 	+ addBufferForOneSensorInChannel(SensorId: String)
-	+ addPacket(timeStamp: long, value: double, inChannelId: String)
-	+ isCompletePackageSetAvailable(from: long, to: long): boolean
-	+ pollCompletePackageSet(from: long, to: long):  IdValuePair[]
+	+ receiveMSet(channelId: String, timeStamp: long, value: double): void
+	+ isDataForAllInChannelsAvailable(from: long, to: long): boolean
+	+ pollDataForAllInChannels(from: long, to: long):  MSet[]
+	+ getErrorsOfOneChannel(codesToCheck: ErrorCodesForInChannel): MSet[]
+	+ removeDataBeforeTimepointer(to: long): void
 }
 
 class BufferForOneSensorInChannel {
-	-sensorInChannelId: Stirng
-	-buffer: Queue<SimpleValuePacket>
-
+	-sensorInChannelId: String
+	-buffer: Queue<TimestampValuePair>
 	+getInChannelId(): String
-	+addPacket(timeStamp: long, value: double)
-	+getAllPacketsDuringTimespan(from: long, to: long): double[]
+	+addPacket(packet: TimestampValuePair)
+	+getAllPacketsDuringTimespan(from: long, to: long): TimestampValuePair[]
 }
 
-class SimpleValuePacket	{
+class TimestampValuePair	{
 	-value: double
 	-timeStamp: long
-	+SimpleValuePacket(value: double, timeStamp: long)
+	+TimestampValuePair(value: double, timeStamp: long)
 	+getValue(): double
 	+getTimeSpamp(): long
 }
 
-class ConnectionTerminatedTrigger {
-	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+class ConnectionTerminatedAction {
+	+ ConnectionTerminatedAction(allSensorIds: String[])
+	+ raiseConnectionTerminatedFlag(channelId: String): void
+	+ checkAndNotify(meansForAction: MeansForAction): long
 }
 
-class TimeoutTrigger {
-	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+class TimeoutAction {
+	- period: long
+	- numberOfToleratedLatencyPeriods: int
+	+ TimeoutAction(period: long, numberToleratedLatencyPeriods: int)
+	+ checkAndNotify(meansForAction: MeansForAction): long
 }
 
-class ErrorCodeTrigger {
-	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+class ErrorCodeAction {
+	+ErrorCodeAction()
+	+addCodes(sensorInChannelId: String, codes: double[])
+	+checkAndNotify(meansForAction: MeansForAction): long
 }
 
-class BufferForOneSensorInChannel {
-	BufferForOneSensorInChannel
-	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+class DataSetCompleteAction {
+	-period: long
+	DataSetCompleteAction(period: long)
+	+checkAndNotify(meansForAction: MeansForAction): long
 }
 
-ConnectionTerminatedTrigger .up.|> Trigger
-TimeoutTrigger .up.|> Trigger
-ErrorCodeTrigger .up.|> Trigger
-DataSetCompleteTrigger .up.|> Trigger
-
-MRunActivityManagement ..|> TimerTask
-Timer --> "1" TimerTask
-MRunActivityManagement --> Cache
-Cache --> "*" BufferForOneSensorInChannel
-BufferForOneSensorInChannel ..> SimpleValuePacket
-MRunActivityManagement --> "*" Trigger
-
-DataSetCompleteTrigger --> "*" BufferForOneSensorInChannel
-
-interface Trigger {
-	+checkAndNotifyMRunManagement(mRunForward: MRunForward)
+class MSet {
+	-sensorInChannelId: String
+	-value: double
+	-timeStamp: long
+	+MSet(sensorInChannelId: String, value: double, timeStamp: long)
+	+getSensorInChannelId(): String
+	+getValue(): double
+	+getTimeSpamp(): long
 }
 
-interface MRunForward {
+class ErrorCodesForInChannel {
+	sensorInChannelId: String
+	errorCodes: double[]
+}
+
+class MeansForAction {
+	replayTimepointer: long,
+	cache: Cache,
+	mRunForward: IMRunListener
+	MeansForAction(cache: Cache, mRunForward: IMRunListener)
+	setReplayTimepointer(replayTimepointer: long)
+}
+
+class ChannelConnectionStatus {
+	sensorInChannelId: String
+	connected: boolean
+	ChannelConnectionStatus(sensorInChannelId: String)
+	getsensorInChannelId(): String
+	setConnected(connected: boolean)
+	isConnected(): boolean
+}
+
+MRunTiming .right.> MeansForAction
+CheckAndNotifyAction .up.> MeansForAction
+
+
+MStreamListener --> "*" ConnectionTerminatedAction
+MStreamListener --> Cache
+ConnectionTerminatedAction .up.|> CheckAndNotifyAction
+TimeoutAction .up.|> CheckAndNotifyAction
+ErrorCodeAction .up.|> CheckAndNotifyAction
+DataSetCompleteAction .up.|> CheckAndNotifyAction
+
+MRunTiming -left-> Timer
+MRunTiming .left.|> TimerTask
+Timer -down-> "1" TimerTask
+MRunTiming ..> MStreamListener
+Cache .up.> MSet
+Cache -down-> "*" BufferForOneSensorInChannel
+Cache ..> ErrorCodesForInChannel
+
+BufferForOneSensorInChannel .left.> TimestampValuePair
+MRunTiming --> "*" CheckAndNotifyAction
+
+MRunTiming -down-> Cache
+
+ErrorCodeAction --> "*" ErrorCodesForInChannel
+
+MRunTiming --> "*" IMRunListener
+MRunTiming ..> IMRunInfo
+ConnectionTerminatedAction --> "*" ChannelConnectionStatus
+
+interface CheckAndNotifyAction {
+	+checkAndNotify(replayTimepointer: long, cache: Cache, mRunForward: IMRunListener): long
+}
+
+interface IMRunListener {
 	+justWaiting():  void
 	+indicateError(inChannelId: String, errorCode: double)
 	+indicateTimeout(): void
 	+indicateConnectionTerminated(): void
-	+dispatchCompletePacketSet(completePacketSet: EnhancedValuePacket[])
+	+dispatchCompletePacketSet(completePacketSet: MSet[])
 }
 
-interface MRunInfo {
+interface IMRunInfo {
 	+getAllInChannelIds(): String[]
 	+getErrorCodes(inChannelId: String): double[]
+	+getPeriod(): long
 	+getTimeoutOption(): long
 }
 
 interface TimerTask {
 	+run(): void
 }
+
+IMRunListener <|.. Model.MRunReaction
+IMRunInfo <|.. Model.MRunInfo
 
 
 }
@@ -1589,7 +1653,6 @@ GUI.FacadeControllerView.IConnectionAction <|.. Controller.View_Controller_Inter
 
 'Model to GUI
 
-
 GUI.Exception.ExceptionWindowManager --|> Model.FacadeControllerView.ExceptionInterface
 GUI.Configuration.ConfigurationField --|> Model.FacadeControllerView.UpdateInterface
 GUI.Menues.PrototypeField --|> Model.FacadeControllerView.UpdateInterface
@@ -1599,11 +1662,10 @@ GUI.FacadeModelView.ViewDirectoryInterface --|> Model.Core.BuildingBlockDirector
 
 'Cache to Backend
 
-Backend.IMeasurementStreamListener <|.. Cache.MRunActivityManagement
-
 'Model to Backend
-Backend.IAccessToMeasurementRun <-- Model.Core.MeasurementRun
+Backend.IAccessToMRun <-- Model.Core.MeasurementRun
 Backend.IAccessToSensorInfo <-- Model.Core.ModelManager
+
 Model.ModelManager --> FileService.YamlService
 
 '------------------------------------------------------------------------

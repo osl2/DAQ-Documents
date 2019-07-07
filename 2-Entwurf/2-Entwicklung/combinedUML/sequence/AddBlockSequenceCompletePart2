@@ -1,0 +1,69 @@
+@startuml
+
+
+participant ": MeasurementConfiguration" as MeasurementConfiguration
+
+participant ": BuildingBlockDirectory" as BuildingBlockDirectory
+participant ": PickUpPointViewFacades" as PickUpPointViewFacades
+
+participant ": UpdateInterface" as UpdateInterface
+participant ": ViewDirectoryInterface" as ViewDirectoryInterface
+participant ": ConfigurationField" as ConfigurationField
+
+
+
+participant "V1: BuildingBlockView" as BuildingBlockView
+participant "B1: BuildingBlock" as BuildingBlock
+
+activate BuildingBlockDirectory
+activate PickUpPointViewFacades
+activate ConfigurationField
+
+
+MeasurementConfiguration -> MeasurementConfiguration : cloneInitBlock(id)
+MeasurementConfiguration -> BuildingBlockDirectory : getConfigBuildingBlock(id)
+activate BuildingBlock
+MeasurementConfiguration <-- BuildingBlockDirectory: B1
+MeasurementConfiguration <-- MeasurementConfiguration
+MeasurementConfiguration -> MeasurementConfiguration: createConfigId(id)
+activate MeasurementConfiguration
+MeasurementConfiguration <-- MeasurementConfiguration: configIdOfB1
+deactivate MeasurementConfiguration
+MeasurementConfiguration -> BuildingBlock: setConfigId(configIdOfB1)
+MeasurementConfiguration <-- BuildingBlock: True
+MeasurementConfiguration -> BuildingBlockDirectory: getConnection(id)
+MeasurementConfiguration <-- BuildingBlockDirectory: True
+MeasurementConfiguration -> BuildingBlockDirectory: setUpdate(True)
+MeasurementConfiguration <-- BuildingBlockDirectory: True
+MeasurementConfiguration ->PickUpPointViewFacades: getUpdateInterfaces()
+
+MeasurementConfiguration <-- PickUpPointViewFacades
+MeasurementConfiguration -> UpdateInterface: updateConfig()
+activate UpdateInterface
+UpdateInterface -> ConfigurationField: update()
+
+
+
+
+
+UpdateInterface <-- ConfigurationField
+MeasurementConfiguration <-- UpdateInterface
+
+
+ConfigurationField -> ViewDirectoryInterface: checkForUpdate()
+activate ViewDirectoryInterface
+ViewDirectoryInterface -> BuildingBlockDirectory: checkUpdate()
+BuildingBlockDirectory --> ViewDirectoryInterface: True
+ViewDirectoryInterface --> ConfigurationField: True
+ConfigurationField -> ViewDirectoryInterface: getConfigBuildingBlock(configIdOfB1)
+ViewDirectoryInterface -> BuildingBlockDirectory: getConfigBuildingBlock(configIdOfB1)
+BuildingBlockDirectory --> ViewDirectoryInterface: B1
+ViewDirectoryInterface --> ConfigurationField: B1
+ConfigurationField -> ConfigurationField: add(B1)
+
+ConfigurationField -> BuildingBlockView: <<create>>
+activate BuildingBlockView
+BuildingBlockView --> ConfigurationField: V1
+
+
+@enduml

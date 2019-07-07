@@ -5,18 +5,12 @@ participant ": ButtonAction" as ButtonAction
 participant ": BlockAction" as BlockAction
 participant ": CommandManager" as CommandManager
 participant "cmd : AddBlockToConfigCommand" as AddBlockToConfigCommand
+participant ": IModelInformation" as IModelInformation
 participant ": MeasurementConfiguration" as MeasurementConfiguration
-participant ": BuildingBlockDirectory" as BuildingBlockDirectory
-participant ": PickUpPointViewFacades" as PickUpPointViewFacades
-
-participant ": UpdateInterface" as UpdateInterface
-participant ": ViewDirectoryInterface" as ViewDirectoryInterface
-participant ": ConfigurationField" as ConfigurationField
 
 
-participant "B1: BuildingBlock" as BuildingBlock
-participant "V1: BuildingBlockView" as BuildingBlockView
 activate BlockDragAndDropHandler
+
 
 ' Add Bloc
 
@@ -35,31 +29,14 @@ CommandManager -> AddBlockToConfigCommand : execute()
 '
 ' Model Start
 '
-AddBlockToConfigCommand -> MeasurementConfiguration : addBuildingBlock(id)
+
+
+AddBlockToConfigCommand -> IModelInformation: addBuildingBlock(id)
+IModelInformation -> MeasurementConfiguration : addBuildingBlock(id)
 activate MeasurementConfiguration
-MeasurementConfiguration -> MeasurementConfiguration : cloneInitBlock(id)
-MeasurementConfiguration -> BuildingBlockDirectory : getConfigBuildingBlock(id)
-activate BuildingBlock
-MeasurementConfiguration <-- BuildingBlockDirectory: B1
-MeasurementConfiguration <-- MeasurementConfiguration
-MeasurementConfiguration -> MeasurementConfiguration: createConfigId(id)
-MeasurementConfiguration <-- MeasurementConfiguration: configIdOfB1
-MeasurementConfiguration -> BuildingBlockDirectory: addConfigBuildingBlock(configIdOfB1, B1)
-MeasurementConfiguration <-- BuildingBlockDirectory: True
-MeasurementConfiguration -> BuildingBlockDirectory: setUpdate(True)
-MeasurementConfiguration <-- BuildingBlockDirectory: True
-MeasurementConfiguration ->PickUpPointViewFacades: getUpdateInterfaces()
-MeasurementConfiguration <-- PickUpPointViewFacades
-MeasurementConfiguration -> UpdateInterface: updateConfig()
-UpdateInterface -> ConfigurationField: update()
 
-
-
-
-
-UpdateInterface <-- ConfigurationField
-MeasurementConfiguration <-- UpdateInterface
-AddBlockToConfigCommand <-- MeasurementConfiguration
+IModelInformation <-- MeasurementConfiguration
+AddBlockToConfigCommand <-- IModelInformation
 deactivate MeasurementConfiguration
 '
 ' Model End
@@ -80,18 +57,7 @@ BlockDragAndDropHandler <-- BlockAction
 deactivate BlockAction
 deactivate BlockDragAndDropHandler
 
-ConfigurationField -> ViewDirectoryInterface: checkForUpdate()
-ViewDirectoryInterface -> BuildingBlockDirectory: checkUpdate()
-BuildingBlockDirectory --> ViewDirectoryInterface: True
-ViewDirectoryInterface --> ConfigurationField: True
-ConfigurationField -> ViewDirectoryInterface: getConfigBuildingBlock(configIdOfB1)
-ViewDirectoryInterface -> BuildingBlockDirectory: getConfigBuildingBlock(configIdOfB1)
-BuildingBlockDirectory --> ViewDirectoryInterface: B1
-ViewDirectoryInterface --> ConfigurationField: B1
-ConfigurationField -> ConfigurationField: add(B1)
 
-ConfigurationField -> BuildingBlockView: <<create>>
-BuildingBlockView --> ConfigurationField: V1
 
 
 @enduml

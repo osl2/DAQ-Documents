@@ -1,0 +1,305 @@
+@startuml
+
+scale 0.04
+skinparam defaultFontSize 22
+'------------------------------------------------------------------------
+'Backend
+'------------------------------------------------------------------------
+
+namespace Backend {
+
+
+	
+	IMStreamListener  .left.|> Cache.MStreamListener
+	MRunAgent -left-> Cache.MRunTiming
+
+
+	interface IAccessToSensorInfo {
+		+getIdsOfAvailableSensors(): String[]
+		+copyYamlFileFromPi(sensorId: String): boolean
+		+copyYamlFileToPi(sensorId: String): boolean
+	}
+
+
+
+	interface IAccessToMRun{
+		+start(sensorIDs: string[], dataListeners: IMStreamListener[]): boolean
+		+pause(): boolean
+		+resume(): boolean
+		+reset(): boolean
+	}
+
+	enum MeasurementState {
+	  INITAL_STATE
+	  RUNNING
+	  PAUSED
+	}
+
+
+	class MRunAgent {
+		+MRunAgent(commandFactory: CommandFactory, mRunTiming: MRunTiming)
+		+start(mRunInfo: IMRunInfo, dataListeners: IMStreamListener[]): boolean
+		+pause(): boolean
+		+resume(): boolean
+		+reset(): boolean
+	}
+
+
+
+	class SensorInfoAgent {
+		+SensorInfoAgent(commandFactory: CommandFactory)
+		+fetchIdsOfAvailableSensors(timeout: int): String[]
+		+copyYamlFileFromPi(timeout: int, sensorId: String): boolean
+		+copyYamlFileToPi(timeout: int, sensorId: String): boolean
+	}
+
+	class PickPointForAgentsBasedOnSsh {
+		-{static}onlyInstance: PickPointForAgentsBasedOnSsh
+		+{static}getPickPointForAgentsBasedOnSsh(initData: InitDataForSsh): PickPointForAgentsBasedOnSsh
+		+PickupPointForAgentsBasedOnSsh(sensorInfoAgent: IAccessToSensorInfo, mRunAgent: IAccessToMRun)
+		+getIAccessToMRun(): IAccessToSensorInfo
+		+getIAccessToSensorInfo(): IAccessToSensorInfo
+	}
+	
+	
+	class InitDataForSsh {
+	 	+ ipAddressOfPi: String, 
+	 	+ port: int, 
+	 	+ username: String, 
+	 	+ password: String, 
+	 	+ pathToRemoteDir: String, 
+	 	+ pathToLocalDir: String
+	}
+
+	interface IMStreamListener {
+		+ receiveMDataSet(channelId: String, timeStamp: long, value: double): void
+		+ connectionTerminated(): void
+	}
+
+
+	namespace CommandFactory {
+
+		abstract class ComToPi {
+			-idOfSensorInChannelOrSensorInfoTask: String
+			-pathToRemoteDir: String
+			-pathToLocalDir: String
+			+ComToPi(id: String, pathToRemoteDir: String, pathToLocalDir: String)
+   		    +{abstract}fetchSensorIds(timeOut: int): String[]
+		    +{abstract}copyFileFromPi(nameOfFile: String, timeout: int): boolean
+		    +{abstract}copyFileToPi(nameOfFile: String, timeout: int): boolean
+		    +{abstract}startMRunAtPi(inChannelId: String): void
+		    +{abstract}readLine(): String
+		}
+
+		class SshToPi {
+			-port: int
+		     	-ipAddressOfPi: String
+			-username: String
+			-password: String
+			+SshAndScpTo(initData: initDataForSsh)			
+			+fetchSensorIds(timeOut: int): String[]
+			+copyFileFromPi(nameOfFile: String): boolean
+			+copyFileToPi(nameOfFile: String): boolean
+			+startMRunAtPi(inChannelId: String): void
+			+readLine(): String
+		}
+
+		
+		
+
+		interface CommandFactory{
+			+ createGetSensorIds(timeout: int): CommandGetSensorIds
+			+ createCopyFromPi(nameOfFile: String, timeout: int): CommandCopyFromPi
+			+ createCopyToPi(nameOfFile: String, timeout, int): CommandCopyToPi
+			+ createMRunThread(inChannelId: String, listener: IMStreamListener): MRunThread
+			- createMRunAtPi(inChannelId: String, listener: IMStreamListener): CommandMRunAtPi
+		}
+		
+		
+		
+		class SshCommandFactory {
+			-initDataForSsh: InitDataForSsh
+			+ SshCommandFactory(initData: InitDataForSsh)
+			+ createGetSensorIds(timeout: int): CommandGetSensorIds
+			+ createCopyFromPi(nameOfFile: String, timeout: int): CommandCopyFromPi
+			+ createCopyToPi(nameOfFile: String, timeout, int): CommandCopyToPi
+			+ createMRunThread(inChannelId: String, listener: IMStreamListener): MRunThread
+			- createMRunAtPi(inChannelId: String, listener: IMStreamListener): CommandMRunAtPi
+		}
+
+		
+		
+		class CommandGetSensorIds {
+			-timeout: int
+			+CommandGetSensorIds(comInstance: ComToPi, timeout: int)
+			+{abstract}executeLocal(): String[]
+		}
+
+		class SshCommandGetSensorIds {
+			+CommandGetSensorIds(sshInstance: SshToPi, timeout: int)
+			+executeLocal(): String[]
+		}
+
+		
+		
+		class CommandCopyFromPi {
+			-nameOfFile: String
+			-timeout: int
+			+CommandCopyFromPi(comInstance: ComToPi, nameOfFile: String, timeout: int)	
+			+{abstract}executeLocal(): boolean
+		}
+
+		class SshCommandCopyFromPi {
+			+CommandCopyFromPi(sshInstance: SshToPi, nameOfFile: String, timeout: int)		
+			+executeLocal(): boolean
+		}
+
+		
+
+		class CommandCopyToPi {
+			-nameOfFile: String
+			-timeout: int
+			+CommandCopyToPi(comInstance: ComToPi, nameOfFile: String, timeout: int)
+			+{abstract}executeLocal(): boolean
+		}
+
+		class SshCommandCopyToPi {
+			+CommandCopyToPi(sshInstance: SshToPi, nameOfFile: String, timeout: int)
+			+executeLocal(): boolean
+		}
+
+		
+
+		class CommandMRunAtPi {
+			-inChannelId: String
+			-resetFlag: boolean
+			-pauseFlag: boolean		
+			+CommandMRunAtPi(comInstance: ComToPi, inChannelId: String, listener: IMStreamListener)
+			+raisePauseFlag():
+			+raiseResetFlag(): void	
+			+run():void
+			+{abstract}executeLocal(): void
+		}
+
+		
+		class SshCommandMRunAtPi {				
+			+SshCommandMRunAtPi(sshInstance: SshToPi, inChannelId: String, listener: IMStreamListener)		
+			+executeLocal(): void
+		}
+		
+
+		
+
+		class SystemProcessCommandLine {
+			+ SystemProcessCommandLine()
+			- anotherLocalSystemProcess: Runtime
+			- standardOutput: BufferedReader
+			- standardInput: Writer
+			+ execute(commandToExecute: String): int
+			+ getStdOutput(): BufferedReader
+			+ getStdInput(): Writer
+	}
+
+		interface BufferedReader {
+			readLine(): String
+		}
+
+		interface Writer {
+			write(text: String)
+		}
+	
+		
+
+		class MRunThread {
+			+MRunThread(runnable: CommandMRunAtPi)
+			+start(): void
+			+pause(): void
+			+resume(): void
+			+reset(): void
+		}
+
+		class Thread {				
+			+ Thread(runnable: Runnable)
+			+ start(): void
+			+ resume(): void
+			+ stop(): void
+			..
+			+ {static} currentThread(): Thread
+			+ pause(): void
+		}
+		
+
+		
+
+		interface Runnable {
+			+run(): void
+		}
+
+		CommandMRunAtPi -left-> "listener" Backend.IMStreamListener		
+
+
+		MRunThread --> 	Thread	
+		MRunThread --> CommandMRunAtPi
+		CommandMRunAtPi ..|> Runnable
+		Thread --> Runnable
+
+		SshCommandFactory ..|> CommandFactory 
+
+
+		SshCommandGetSensorIds --|> CommandGetSensorIds
+		SshCommandCopyFromPi  --|> CommandCopyFromPi
+		SshCommandCopyToPi  --|> CommandCopyToPi
+		SshCommandMRunAtPi  --|> CommandMRunAtPi
+	
+		SshToPi --|> ComToPi
+
+		CommandGetSensorIds --> ComToPi		
+		CommandCopyFromPi--> ComToPi		
+		CommandCopyToPi --> ComToPi
+		CommandMRunAtPi--> ComToPi
+			
+
+
+		SshCommandFactory ..> SshToPi
+		SshCommandFactory ..> SshCommandGetSensorIds
+		SshCommandFactory ..> SshCommandCopyFromPi
+		SshCommandFactory ..> SshCommandCopyToPi
+		SshCommandFactory ..> SshCommandMRunAtPi
+
+		SshToPi --> SystemProcessCommandLine
+
+		SystemProcessCommandLine ..> BufferedReader
+		SystemProcessCommandLine ..> Writer
+
+		SshToPi ..> BufferedReader
+		SshToPi ..> Writer
+
+		
+		note bottom of CommandMRunAtPi
+			To separate technical aspect of communication 
+			from application specific aspect, the executeLocal
+			receives Pi's textual answers as whole lines, 
+			interprets/parses them, and forwards them to
+			its application-specific-listener(s). 
+		end note
+
+	}	
+
+	SensorInfoAgent --> Backend.CommandFactory.CommandFactory
+	MRunAgent --> "*" Backend.CommandFactory.MRunThread
+	MRunAgent --> Backend.CommandFactory.CommandFactory
+
+	
+	MRunAgent --> MeasurementState
+	PickPointForAgentsBasedOnSsh ..> InitDataForSsh
+	PickPointForAgentsBasedOnSsh --> IAccessToSensorInfo
+	PickPointForAgentsBasedOnSsh --> IAccessToMRun
+	SensorInfoAgent ..|> IAccessToSensorInfo	
+	MRunAgent ..|> IAccessToMRun
+
+
+
+
+
+}
+@enduml

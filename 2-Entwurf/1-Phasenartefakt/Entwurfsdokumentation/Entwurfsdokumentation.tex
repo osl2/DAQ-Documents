@@ -7,6 +7,7 @@
 \usepackage{hyperref}				% Hyperlinks
 \usepackage[nonumberlist]{glossaries}		% Glossar
 \usepackage{amsmath}
+\usepackage{pdfpages}				% PDF einbinden
 
 % Hurenkinder und Schusterjungen verhindern
 \clubpenalty10000
@@ -194,7 +195,7 @@
 
 \subject{Entwurfsdokumentation}
 \title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
-\subtitle{Version 0.0.0}
+\subtitle{Version 1.0.0}
 \author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
 \date{\today}
 
@@ -222,9 +223,10 @@ Durch diesen grundlegenden Aufbau wird die Software in vier unabhängige Kompone
 
 \clearpage
 \section{Klassenbeschreibung}
-Im folgenden sollen alle Klassen mit ihren Funktion beschrieben werden. Der Aufbau orientiert sich dabei an der in \ref{einleitung} aufgeführten Struktur.
 
-\clearpage
+Diese Kapitel gibt einen Einblick über den Aufbau und die Funktionalität der Pakete und Klassen unseres Entwurfes. Aufgeteilt haben wir das Kapitel in die 4 Teilbereiche Backend, Model, Controller und View. Diese Unterkapitel sind jeweils wieder nach Entwurfspaketen unterteilt, welche eine bestimmte Funktionalität darstellen. In diesen Paketen werden alle enthaltenen Klassen beschrieben und ihre Funktion erläutert.
+
+
 \subsection{Backend}
 
 
@@ -1377,6 +1379,30 @@ In Abbildung \ref{AddBlockSequence} ist das Szenario "AddBlockSequence" zu sehen
 Im dritten Teil soll die UnDo-Action des zweiten Teiles rückgängig gemacht werden. Dazu wird als Ausgangspunkt der ReDo-Knopf in der GUI gedrückt. Dadurch wird der CommandManager Controller über das Interface ButtonAction angeleitet, den ReDo-Command durchzuführen. Dieser führt den Befehl durch und fügt den Block wieder dem Model hinzu.
 
 
+\subsection{Füge Verbindung hinzu}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 9cm]{Grafiken/AddConQuerPart1.png}
+		\caption{Das Hinzufügen einer Verbindung zwischen zwei Kanälen, Part1}
+		\label{SeqAddConP1}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 11cm]{Grafiken/AddConQuerPart2.png}
+		\caption{Das Hinzufügen einer Verbindung zwischen zwei Kanälen, Part2}
+		\label{SeqAddConP2}
+	\end{center}
+\end{figure}
+
+In den Abbildung \ref{SeqAddConP1}  und \ref{SeqAddConP2} ist das Szenario "`Füge Verbindung hinzu"' zu sehen. Als Ausgangspunkt registriert der AddWireDragAndDropHandler der GUI, dass eine Verbindung zwischen zwei ChannelDecoratern im Konfigurationsfeld hinzu gefügt wurde.
+
+Die GUI benachrichtigt den Controller über das Interface IConnectionAction, dass eine Verbindung platziert wurde. Der Controller erstellt einen entsprechenden Command und lässt die Änderung am Model durchführen. Dazu greift er über die Schnittstelle IModelInformation auf die Messkonfiguration im Model zu, um eine Verbindung zu setzten. Die Messkonfiguration setzt dann die Verbindung in der Messkonfiguration und updatet danach den BuildingBlockDirectory entsprechend. Dann wird dem Konfigurationsfeld GUI über die Schnittstelle UpdateInterface signalisiert, dass die Messkonfiguration verändert wurde. Dieses prüft nach, was sich im BuildingBlockDirectory verändert hat und holt sich dann das Update. Sobald das Update im Konfigurationsfeld der GUI angekommen ist, wird der Wire im Konfigurationsfeld zwischen den beiden ChannelDecoratern gesetzt.
+
+
 \clearpage
 \section{Änderungen am Pflichtenheft}
 
@@ -1389,21 +1415,9 @@ Dazu gehören das Wunschkriterium Wunsch-Kriterium 3, welches Spiele zum Erlerne
 Ebenfalls haben wir Wunsch-Kriterium 5, welches die Funktion darstellt eine Darstellung von visualisierten Messdaten auszudrucken nicht direkt in die Anwendung implementiert. 
 Wunsch-Kriterium 6 wurde ebenfalls nicht in den Entwurf miteinbezogen, jedoch wäre, je nach verwendeter Software zur Implementierung der graphischen Benutzeroberfläche eine solche Änderung der Sprache möglich, jedoch haben wir uns aus zeitlichen und organisatorischen Gründen dagegen entschieden, den Mehraufwand dafür in Kauf zu nehmen.
 
-
-\clearpage
-\section{Formale Spezifikationen von Kernkomponenten}
-
-\clearpage
-\section{Weitere UML Diagramme}
-
-
-\clearpage
 \section{Anhang}
 
-
-\clearpage
-\subsection{Vollständiges Klassendiagramm}
-
+\includepdf{Grafiken/Implementierungsplan.pdf}
 
 \clearpage
 \section{Glossar}\label{glossar}

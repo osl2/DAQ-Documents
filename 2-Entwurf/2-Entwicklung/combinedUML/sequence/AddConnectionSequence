@@ -1,0 +1,100 @@
+@startuml
+
+
+participant ": AddWireDragAndDropHandler" as AddWireDragAndDropHandler
+participant ": IConnectionAction" as IConnectionAction
+participant ": CommandManager" as CommandManager
+participant "cmd : CreateChannelConnectionCommand" as CreateChannelConnectionCommand
+participant ": IModelInformation" as IModelInformation
+participant ": MeasurementConfiguration" as MeasurementConfiguration
+participant ": BuildingBlockDirectory" as BuildingBlockDirectory
+participant ": PickUpPointViewFacades" as PickUpPointViewFacades
+participant ": UpdateInterface" as UpdateInterface
+
+activate ConfigurationField
+activate PickUpPointViewFacades
+activate BuildingBlockDirectory
+' Add Bloc
+
+AddWireDragAndDropHandler -> AddWireDragAndDropHandler : connectionAdded(fromChanId, toChanId)
+activate AddWireDragAndDropHandler
+AddWireDragAndDropHandler -> IConnectionAction : connectionAdded(fromChanId, toChanId)
+activate IConnectionAction
+'
+' GUI Start
+'
+IConnectionAction --> CreateChannelConnectionCommand : <<create>> CreateChannelConnectionCommand(id)
+activate CreateChannelConnectionCommand
+IConnectionAction -> CommandManager : runCommand(cmd)
+activate CommandManager
+CommandManager -> CreateChannelConnectionCommand : execute()
+'
+' Model Start
+'
+
+
+CreateChannelConnectionCommand -> IModelInformation: addConnection(fromChanId, toChanId)
+activate IModelInformation
+IModelInformation -> MeasurementConfiguration : addConnection(fromChanId, toChanId)
+activate MeasurementConfiguration
+MeasurementConfiguration -> MeasurementConfiguration: addConnection(fromChanId, toChanId)
+activate MeasurementConfiguration
+MeasurementConfiguration -> BuildingBlockDirectory: addConfigConnection(block1, fromChanId, toChanId, block2)
+MeasurementConfiguration <-- BuildingBlockDirectory: True
+
+MeasurementConfiguration -> BuildingBlockDirectory: setUpdate(True)
+MeasurementConfiguration <-- BuildingBlockDirectory: True
+MeasurementConfiguration ->PickUpPointViewFacades: getUpdateInterfaces()
+
+MeasurementConfiguration <-- PickUpPointViewFacades
+MeasurementConfiguration -> UpdateInterface: updateConfig()
+activate UpdateInterface
+
+UpdateInterface -> ConfigurationField: update()
+
+
+
+
+
+UpdateInterface <-- ConfigurationField
+MeasurementConfiguration <-- UpdateInterface
+
+
+MeasurementConfiguration <-- MeasurementConfiguration
+
+
+IModelInformation <-- MeasurementConfiguration
+deactivate MeasurementConfiguration
+CreateChannelConnectionCommand <-- IModelInformation
+deactivate IModelInformation
+deactivate MeasurementConfiguration
+'
+' Model End
+'
+CommandManager <-- CreateChannelConnectionCommand
+CommandManager -> CreateChannelConnectionCommand : isUndoable()
+activate CommandManager
+CommandManager <-- CreateChannelConnectionCommand : true
+deactivate CreateChannelConnectionCommand
+CommandManager -> CommandManager : doneCommands.push(cmd)
+deactivate CommandManager
+IConnectionAction <-- CommandManager
+deactivate CommandManager
+'
+' GUI End
+'
+AddWireDragAndDropHandler <-- IConnectionAction
+deactivate IConnectionAction
+deactivate AddWireDragAndDropHandler
+
+ConfigurationField -> ViewDirectoryInterface: checkForUpdate()
+activate ViewDirectoryInterface
+ViewDirectoryInterface -> BuildingBlockDirectory: checkUpdate()
+BuildingBlockDirectory --> ViewDirectoryInterface: True
+ViewDirectoryInterface --> ConfigurationField: True
+ConfigurationField -> ViewDirectoryInterface: getConnection(fromChanId, toChanId)
+ViewDirectoryInterface -> BuildingBlockDirectory: getConnection(fromChanId, toChanId)
+ViewDirectoryInterface <-- BuildingBlockDirectory: True
+
+
+@enduml
