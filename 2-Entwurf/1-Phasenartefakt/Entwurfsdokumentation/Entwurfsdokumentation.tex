@@ -1338,15 +1338,43 @@ Falls der Benutzer einen Konfigurationsbaustein entfernt, welcher bereits mit we
 \clearpage
 \section{Sequenzdiagramme}
 
+
+
+\subsection{Block hinzufügen komplett}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 16cm]{Grafiken/SeqAddBPart1.png}
+		\caption{Das Hinzufügen eines Bausteins zur Messkonfiguration und dessen Darstellung in der GUI, Part1}
+		\label{SeqAddBPart1}
+	\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 16cm]{Grafiken/SeqAddBPart2.png}
+		\caption{Das Hinzufügen eines Bausteins zur Messkonfiguration und dessen Darstellung in der GUI.}
+		\label{SeqAddBPart2}
+	\end{center}
+\end{figure}
+
+
+
+In den Abbildungen \ref{SeqAddBPart1} und \ref{SeqAddBPart2} ist das Szenario "`Block hinzufügen komplett zu sehen"'. Als Ausgangspunkt registriert der DragAndDropHandler der GUI, dass ein Block an die entsprechende Stelle im Konfigurationsfeld platziert wurde. Die GUI benachrichtigt den Controller über das Interface BlockAction, dass ein Block platziert wurde. Der Controller erstellt einen entsprechenden Command und lässt die Änderung am Model durchführen. Dazu greift er über die Schnittstelle IModelInformation auf die Messkonfiguration im Model zu, um einen Block hinzu zufügen. Die Messkonfiguration im Model führt einige Methoden aus, um sich eine Kopie des angeforderten Bausteinprototyps von dem BuildingBlockDirectory zu holen. Außerdem wird dem Block eine ConfigId beigefügt. Danach wird er der ConfigHashMap des BuildingBlockDirectory hinzugefügt. Dann wird dem Konfigurationsfeld GUI über die Schnittstelle UpdateInterface signalisiert, dass die Messkonfiguration verändert wurde. Dieses prüft nach, was sich im BuildingBlockDirectory verändert hat und holt sich dann das Update. Sobald das Update im Konfigurationsfeld der GUI angekommen ist, wird das Feld mit dem entsprechenden BlockView geupdatet.
+
 \subsection{Block hinzufügen, undo, redo}
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 15cm]{Grafiken/AddBlockSequence.png}
+		\includegraphics[width = 16cm]{Grafiken/AddBlockSequence.png}
 		\caption{Das Hinzufügen eines Bausteins zur Messkonfiguration, außerdem das rückgängig machen und wiederherstellen dieser Aktion.}
 		\label{AddBlockSequence}
 	\end{center}
 \end{figure}
+
+In Abbildung \ref{AddBlockSequence} ist das Szenario "AddBlockSequence" zu sehen. Dabei wird hier vor allem auf den undo und redo Aspekt eingegangen. Der Ablauf des oberen Teils ähnelt stark dem Ablauf des vorherigen Sequenzdiagramms und wird nicht noch mal wiederholt. Im zweiten Teil wird als Ausgangspunkt der UnDo-Knopf in der GUI gedrückt. Dadurch wird der CommandManager Controller über das Interface ButtonAction angeleitet, den UnDo-Command durchzuführen. Dieser führt den Befehl durch und entfernt den Block wieder aus dem Model.
+
+Im dritten Teil soll die UnDo-Action des zweiten Teiles rückgängig gemacht werden. Dazu wird als Ausgangspunkt der ReDo-Knopf in der GUI gedrückt. Dadurch wird der CommandManager Controller über das Interface ButtonAction angeleitet, den ReDo-Command durchzuführen. Dieser führt den Befehl durch und fügt den Block wieder dem Model hinzu.
 
 
 \clearpage
