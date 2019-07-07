@@ -8,7 +8,6 @@
 	"cmd1:SshCommandMRunAtPi" --> "ssh1:SshToPi": readLine() 
 	"ssh1:SshToPi" -->> "cmd1:SshCommandMRunAtPi": "Timestamp: 13680, Value: 460"	
 	"cmd1:SshCommandMRunAtPi" --> ":MStreamListener": receiveMDataSet("InCh1, 13680, 460)
-	":MStreamListener" --> ":Cache": 
 == and concurrently Thread 2 ==
 
 	"cmd2:SshCommandMRunAtPi" --> "ssh2:SshToPi": startMRunAtPi("InCh2")

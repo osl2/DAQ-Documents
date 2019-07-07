@@ -12,7 +12,7 @@ note over ":MRunReaction": This sequence diagram use "sameMRunInfo"\nto referenc
 
 ":MRunAgent" --> ":MRunTiming": new MRunTiming(sameMRunInfo)
 note right
-	An intersection\nof including and included\nis advantageous  here.
+	An intersection of including and included is advantageous  here.
 end note
 
 ref over ":MRunAgent"

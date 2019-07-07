@@ -16,9 +16,9 @@ box "Three Threads in Cache\n\n"
 ":MRunTiming" --> ":MeansForAction": setReplayTimepointer(12000)
 ":MRunTiming" --> ":DataSetCompleteAction": checkAndNotify(":MeansForAction")
 ":DataSetCompleteAction" --> ":Cache": isDataForAllInChannelsAvailable(12000, currentTime)
-":Cache" --> ":DataSetCompleteAction": true
+":Cache" -->> ":DataSetCompleteAction": true
 ":DataSetCompleteAction" --> ":Cache": pollDataForAllInChannels(12000, currentTime)
 ":Cache" -->> ":DataSetCompleteAction": [{id: "InCh1", time: 13680, value: 460}, {id: "InCh2", time: 13579, value: 12}]
 ":DataSetCompleteAction" --> ":MRunReaction": dispatchCompletePacketSet(sameMSetAgain)
-":DataSetCompleteAction" --> ":MRunTiming": 14000
+":DataSetCompleteAction" -->> ":MRunTiming": 14000
 @enduml
