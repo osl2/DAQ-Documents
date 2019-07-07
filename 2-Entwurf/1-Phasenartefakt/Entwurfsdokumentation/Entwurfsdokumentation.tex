@@ -229,6 +229,41 @@ Diese Kapitel gibt einen Einblick über den Aufbau und die Funktionalität der P
 
 \subsection{Backend}
 
+Das Back-End ist verantwortlich für den Datenaustausch mit dem Raspberry Pi. Dieser soll zur Erfüllung der folgenden Aufgaben dienen:
+
+Es soll ermittelt werden können, welche Sensoren er unterstützt, d. h. welche Sensoren bei der Erstellung von Messkonfigurationen verwendet werden können, und alle notwendigen Infos über diese Sensoren einholen können. Der SensorInfoAgent bringt dies in Erfahrung und bietet seine Dienste über die Schnittstelle IAccessToSensorInfo an.
+
+Nach Erstellung einer Messkonfiguration kann eine Instanz der Klasse MRunAgent zugehörige Messdaten anfordern und einen Messlauf steuern. Dessen Dienste bietet das Backend über das Interface IAccessToMRun an.
+
+Für das Softwareprojekt soll lediglich eine Anbindung per Netzwerk und SSH realisiert werden, jedoch wurde bei der Ausarbeitung des Entwurfs eine Erweiterbarkeit für andere Kommunikationsschnittstellen zum Raspberry Pi angestrebt. 
+
+Der PickupPoint soll im globalen Kontext einen einheitlichen Zugriffspunkt auf die Funktionalität des Backends anbieten und hat so gesehen die Aufgabe eines Mediators.
+
+Des Weiteren sollen die von mehreren Sensoren asynchron eintreffenden Messdaten einer koordnierten Verarbeitung zugeführt werden können. Hierbei spielen das Interface MStreamListener eine maßgebliche Rolle, die rohen Messdaten (inklusive Fehlercodes) an den Cache weiterleitet und Verbindungsabbrüche meldet. 
+
+Um die anwendungsspezifischen Kommunikationsaufgaben kümmern sich die folgenden Klassen:
+
+\begin{itemize}
+	
+\item SshCommandGetSensorIds benutzt SSH und ermittelt die Informationen, die zum Darstellen der Sensorprototypen benötigt werden.
+
+\item SshCommandCopyFromPi benutzt SCP und lädt zusätzliche Meta-Informationen zu einem Sensor in Form einer YAML-Datei nach. 
+
+\item SshCommandCopyToPi benutzt SCP und kopiert die in einer Messkonfiguration veränderte Bausteininformationen, wie beispielsweise veränderte Abtastrate oder Messbereich, auf den Raspberry Pi.
+
+\item SshCommandMRunAtPi startet ein Mess-Skript zu und liefert kontinuierlich Messdaten von einem Sensor bzw. von einem Kanal eines Sensors. 
+
+\item Alle SSH-spezifischen Implementierungen greifen auf die Funktionalität der Klasse SshToPi zu, die nicht nur mit SCP, sondern auch mit SCP umzugehen weiß. SshToPi greift wiederum auf die Funktionalität der Klasse SystemProcessCommandLine zurück. 
+
+\end{itemize}
+
+Um eine Erweiterbarkeit für andere Kommunikationsschnittstellen zum Backend sicherzustellen, benutzen aufrufende Klassen diese Klassen nicht direkt, sondern verwenden Interfaces, und zur Erzeugung der Klassen wird eine "abstrakte Fabrik" eingesetzt. 
+
+Jeder Sensor bzw. Kanal eines Sensors hat eine eigene Instanz von SshCommandMRunAtPi in einem eigenen Thread, und erzeugt ein eigener Strom von Messdaten. Die Nebenläufigkeit wird durch den MRunAgent ins Leben gerufen, und die Messdaten werden in einer einheitlichen Instanz von MStreamListener im Cache zusammengeführt. 
+
+Der Cache sorgt in äquidistanten Zeitschlitzen dafür, dass die zusammengehörenden Messdaten aller Sensorkanäle einer Messkonfiguration gebündelt an eine Instanz, die IMRunListener implementiert, weitergeleitet werden. 
+
+Des Weiteren kann der Cache adäquat reagieren, falls im ein oder anderen Messdatenstrom ErrorCodes auftauchen, und diese Information weiterleiten. Auch bei Verbindungsabbrüchen oder im Falle eines Time-Outs wird die Instanz von IMRunListener benachrichtigt. 
 
 \clearpage
 \subsection{Model}
@@ -275,7 +310,7 @@ Die Struktur des Pakets Core ist in Abbildung \ref{ModelCore} zu sehen. Das Pake
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 8cm]{Grafiken/BuildingBlockDirectory.png}
+		\includegraphics[width = 8cm]{Grafiken/BuildingBlockDirectory.PNG}
 		\caption{Darstellung der Klasse BuildingBlockDirectory}
 		\label{BuildingBlockDirectory}
 	\end{center}
@@ -400,7 +435,7 @@ Ein HelpMessage-Objekt speichert zu einem zugehörigen BuildingBlock einen Toolt
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 8cm]{Grafiken/MRunReaction.png}
+		\includegraphics[width = 8cm]{Grafiken/MRunReaction.PNG}
 		\caption{Darstellung der Klasse MRunReaction}
 		\label{MRunReaction}
 	\end{center}
@@ -553,7 +588,7 @@ Die Methode \textit{processValue} verarbeitet die eintreffenden Daten und erstel
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 16cm]{Grafiken/ChannelLogic.png}
+		\includegraphics[width = 16cm]{Grafiken/ChannelLogic.PNG}
 		\caption{Aufbau des Pakets ChannelLogic}
 		\label{ChannelLogic}
 	\end{center}
@@ -613,7 +648,7 @@ Die Klasse ValueReady repräsentiert einen "bin bereit"-Zustand des Kanal. Damit
 \subsubsection{BuildingBlockBuilder}
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 16cm]{Grafiken/BuildingBlockBuilder.png}
+		\includegraphics[width = 16cm]{Grafiken/BuildingBlockBuilder.PNG}
 		\caption{Aufbau des Pakets BuildingBlockBuilder}
 		\label{BuildingBlockBuilder}
 	\end{center}
@@ -853,7 +888,7 @@ Das Paket View, stellt gemäß des MVC- Entwurfmusters die Darstellungen des Mod
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 5cm]{Grafiken/View/MainWindow.png}
+		\includegraphics[width = 5cm]{Grafiken/View/MainWindow.PNG}
 		\caption{Die Klasse MainWindow}
 		\label{MainWindow}
 	\end{center}
@@ -869,7 +904,7 @@ Bei Schließen des MainWindow wird ebenso die gesamte Anwendung beendet.
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/View/MenuesNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/MenuesNamespace.PNG}
 		\caption{Aufbau des Menü-Paket}
 		\label{Menues}
 	\end{center}
@@ -904,7 +939,7 @@ Die Klasse ButtonField stellt die Menüfläche dar, in welcher alle konkreten Kn
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 6cm]{Grafiken/View/ConfigurationField.png}
+		\includegraphics[width = 6cm]{Grafiken/View/ConfigurationField.PNG}
 		\caption{Aufbau des Konfigurationsfeld}
 		\label{Konfigurationsfeld}
 	\end{center}
@@ -920,7 +955,7 @@ Die Liste der Bausteine kann ebenfalls von außerhalb ausgelesen oder gesetzt we
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 7cm]{Grafiken/View/BuildingBlockView.png}
+		\includegraphics[width = 7cm]{Grafiken/View/BuildingBlockView.PNG}
 		\caption{Aufbau des BuildingBlockView}
 		\label{BuildingBlockView}
 	\end{center}
@@ -937,7 +972,7 @@ Bausteine werden über das Directory erzeugt, indem zu jedem im Directory gespei
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 7cm]{Grafiken/View/SensorBlockView.png}
+		\includegraphics[width = 7cm]{Grafiken/View/SensorBlockView.PNG}
 		\caption{Aufbau des SensorBlockView}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -953,7 +988,7 @@ Repräsentation nur Datenausgänge besitzen.
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 7cm]{Grafiken/View/TransformationBlockView.png}
+		\includegraphics[width = 7cm]{Grafiken/View/TransformationBlockView.PNG}
 		\caption{Aufbau des TransformationBlockView}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -965,7 +1000,7 @@ Die Klasse TransformationBlockView ist die visuelle Darstellung einer Transforma
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 9cm]{Grafiken/View/RepresentationBlockView.png}
+		\includegraphics[width = 9cm]{Grafiken/View/RepresentationBlockView.PNG}
 		\caption{Aufbau des RepresentationBlockView}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -979,7 +1014,7 @@ Darstellungsbausteine besitzen nur Eingänge, da visualisierte Messdaten nicht m
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 9cm]{Grafiken/View/BlockDragAndDropHandler.png}
+		\includegraphics[width = 9cm]{Grafiken/View/BlockDragAndDropHandler.PNG}
 		\caption{Aufbau des BlockDragAndDropHandler}
 		\label{BlockDragAndDropHandler}
 	\end{center}
@@ -991,7 +1026,7 @@ Darstellungsbausteine besitzen nur Eingänge, da visualisierte Messdaten nicht m
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 5cm]{Grafiken/View/HelpDecorator.png}
+		\includegraphics[width = 5cm]{Grafiken/View/HelpDecorator.PNG}
 		\caption{Klasse HelpDecorator mit Interface HelpDecoratorHandler}
 		\label{Help}
 	\end{center}
@@ -1007,7 +1042,7 @@ Das Interface HelpDecoraterHandler, zu sehen in Abbildung \ref{Help} wird von de
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 13cm]{Grafiken/View/ChannelDecorator.png}
+		\includegraphics[width = 13cm]{Grafiken/View/ChannelDecorator.PNG}
 		\caption{Aufbau der ChannelDecorator-Logik}
 		\label{ChannelDecorator}
 	\end{center}
@@ -1044,7 +1079,7 @@ Um eine Verbindung zu entfernen gibt das Interface RemoveWireDragAndDropHandler 
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/View/BuildingBlockPropertiesNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/BuildingBlockPropertiesNamespace.PNG}
 		\caption{Aufbau des BuildingBlockProperties-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -1056,7 +1091,7 @@ Damit Benutzer Informationen über einzelne Bausteine bekommt, welche ihm das Be
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 6cm]{Grafiken/View/BuildingBlockProperties.png}
+		\includegraphics[width = 6cm]{Grafiken/View/BuildingBlockProperties.PNG}
 		\caption{Aufbau der BuildingBlockProperties}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -1070,7 +1105,7 @@ Die abstrakte Klasse BuildingBlockProperties stellt alle Eigenschaften der konkr
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 7cm]{Grafiken/View/BuildingBlockPropertiesHandler.png}
+		\includegraphics[width = 7cm]{Grafiken/View/BuildingBlockPropertiesHandler.PNG}
 		\caption{Aufbau des BuildingBlockPropertiesHandler}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -1080,7 +1115,7 @@ Das Interface BuildingBlockPropertiesHandler wird von der Klasse BuildingBlockPr
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 7cm]{Grafiken/View/SensorBlockProperties.png}
+		\includegraphics[width = 7cm]{Grafiken/View/SensorBlockProperties.PNG}
 		\caption{Klasse SensorBlockProperties}
 		\label{SensorBlockProperties}
 	\end{center}
@@ -1092,7 +1127,7 @@ Neben den gemeinsamen Eigenschaften besitzt die Unterklasse SensorBlockPropertie
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 7cm]{Grafiken/View/TransformationBlockProperties.png}
+		\includegraphics[width = 7cm]{Grafiken/View/TransformationBlockProperties.PNG}
 		\caption{Aufbau der Klasse TransformationBlockProperties und dem Interface TransBlockPropertiesHandler}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -1108,7 +1143,7 @@ Da der Benutzer bei einem Transformationsbaustein nur die Funktion verändern ka
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 7cm]{Grafiken/View/RepresentationBlockProperties.png}
+		\includegraphics[width = 7cm]{Grafiken/View/RepresentationBlockProperties.PNG}
 		\caption{Aufbau der Klasse RepresentationBlockProperties und Interface ReprBlockPropertiesHandler}
 		\label{RepresentationBlockProperties}
 	\end{center}
@@ -1131,7 +1166,7 @@ Knöpfe bieten dem Benutzer eine Anzahl von Funktion zur Bedienung der Anwendung
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/View/ButtonNamespace.png}
+PNG
 		\caption{Aufbau des Button-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -1193,7 +1228,7 @@ Das Interface ButtonHandler registriert Benutzerinteraktionen auf der Benutzerob
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/View/HelpAndOptionNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/HelpAndOptionNamespace.PNG}
 		\caption{Aufbau des HelpAndOption-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -1223,7 +1258,7 @@ Das Interface OptionsWindowHandler, welches von der Klasse OptionsWindow impleme
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14cm]{Grafiken/View/ExceptionNamespace.png}
+		\includegraphics[width = 14cm]{Grafiken/View/ExceptionNamespace.PNG}
 		\caption{Aufbau des Exception-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -1256,7 +1291,7 @@ Die Klasse ExceptionWindowManager nimmt Fehlermeldungen entgegen und stößt die
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 12 cm]{Grafiken/View/FacadeModelViewNamespace.png}
+		\includegraphics[width = 12 cm]{Grafiken/View/FacadeModelViewNamespace.PNG}
 		\caption{Aufbau des FacadeModelView-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -1276,7 +1311,7 @@ Damit das View bei Benachrichtigung über ein Update des Models überprüfen kan
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 14 cm]{Grafiken/View/FacadeControllerViewNamespace.png}
+		\includegraphics[width = 14 cm]{Grafiken/View/FacadeControllerViewNamespace.PNG}
 		\caption{Aufbau des FacadeControllerView-Paket}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -1286,7 +1321,7 @@ Das Paket FacadeControllerView stellt die Schnittstelle dar, welche der Controll
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 8 cm]{Grafiken/View/PickUpPoint.png}
+		\includegraphics[width = 8 cm]{Grafiken/View/PickUpPoint.PNG}
 		\caption{Die Klasse PickUpPointControllerView}
 		\label{PickUpPointControllerView}
 	\end{center}
@@ -1300,7 +1335,7 @@ Die Klasse PickUpPointControllerView stellt die Schnittstelle zwischen den Inter
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 7 cm]{Grafiken/View/IButtonAction.png}
+		\includegraphics[width = 7 cm]{Grafiken/View/IButtonAction.PNG}
 		\caption{Das Interface IButtonAction}
 		\label{Entwurf_Grob}
 	\end{center}
@@ -1312,7 +1347,7 @@ Das Interface IButtonAction liefert eine Schnittstelle für alle Knopf-Aktionen.
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 10 cm]{Grafiken/View/IBlockAction.png}
+PNG
 		\caption{Das Interface IBlockAction}
 		\label{IBlockAction}
 	\end{center}
@@ -1324,7 +1359,7 @@ Das Interface IBlockAction liefert eine Schnittstelle für alle Benutzerinterakt
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width = 9 cm]{Grafiken/View/IConnectionAction.png}
+		\includegraphics[width = 9 cm]{Grafiken/View/IConnectionAction.PNG}
 		\caption{Das Interface IConnectionAction}
 		\label{IConnectionAction}
 	\end{center}
