@@ -68,13 +68,15 @@ namespace Backend {
 
 	class SensorInfoAgent {
 		+SensorInfoAgent(commandFactory: CommandFactory)
-		+fetchIdsOfAvailableSensors(): String[]
-		+copyYamlFileFromPi(sensorId: String): boolean
-		+copyYamlFileToPi(sensorId: String): boolean
+		+fetchIdsOfAvailableSensors(timeout: int): String[]
+		+copyYamlFileFromPi(timeout: int, sensorId: String): boolean
+		+copyYamlFileToPi(timeout: int, sensorId: String): boolean
 	}
 
 	class PickPointForAgentsBasedOnSsh {
+		-{static}onlyInstance: PickPointForAgentsBasedOnSsh
 		+{static}getPickPointForAgentsBasedOnSsh(initData: InitDataForSsh): PickPointForAgentsBasedOnSsh
+		+PickupPointForAgentsBasedOnSsh(sensorInfoAgent: IAccessToSensorInfo, mRunAgent: IAccessToMRun)
 		+getIAccessToMRun(): IAccessToSensorInfo
 		+getIAccessToSensorInfo(): IAccessToSensorInfo
 	}
@@ -103,8 +105,8 @@ namespace Backend {
 			-pathToLocalDir: String
 			+ComToPi(id: String, pathToRemoteDir: String, pathToLocalDir: String)
    		    +{abstract}fetchSensorIds(timeOut: int): String[]
-		    +{abstract}copyFileFromPi(nameOfFile: String): boolean
-		    +{abstract}copyFileToPi(nameOfFile: String): boolean
+		    +{abstract}copyFileFromPi(nameOfFile: String, timeout: int): boolean
+		    +{abstract}copyFileToPi(nameOfFile: String, timeout: int): boolean
 		    +{abstract}startMRunAtPi(inChannelId: String): void
 		    +{abstract}readLine(): String
 		}
@@ -314,8 +316,6 @@ namespace Backend {
 	PickPointForAgentsBasedOnSsh --> IAccessToMRun
 	SensorInfoAgent ..|> IAccessToSensorInfo
 	MRunAgent ..|> IAccessToMRun
-
-
 
 
 
