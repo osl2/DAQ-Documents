@@ -1,0 +1,29 @@
+@startuml
+== Thread 1 ==
+	"cmd1:SshCommandMRunAtPi" --> "ssh1:SshToPi": startMRunAtPi("InCh1")
+	"ssh1:SshToPi" --> "cmdLine1:SystemProcessCommandLine": new SystemProcessCommandLine()
+	"cmdLine1:SystemProcessCommandLine" -->> "ssh1:SshToPi": cmdLine1
+	"ssh1:SshToPi" --> "cmdLine1:SystemProcessCommandLine": execute("/home/pi/phypidaq/scripts/InCh1.py")
+	 note over "ssh1:SshToPi": "cmd1:CommandMRunAtPi": readLn() at SshToPi uses\nstdOutput:BufferedReader from SystemProcessCommandLine"\n to read all raw measurement data from Stdout.
+	"cmd1:SshCommandMRunAtPi" --> "ssh1:SshToPi": readLine() 
+	"ssh1:SshToPi" -->> "cmd1:SshCommandMRunAtPi": "Timestamp: 13680, Value: 460"	
+	"cmd1:SshCommandMRunAtPi" --> ":MStreamListener": receiveMDataSet("InCh1, 13680, 460)
+	":MStreamListener" --> ":Cache": 
+== and concurrently Thread 2 ==
+
+	"cmd2:SshCommandMRunAtPi" --> "ssh2:SshToPi": startMRunAtPi("InCh2")
+	"ssh2:SshToPi" --> "cmdLine2:SystemProcessCommandLine": new SystemProcessCommandLine()
+	"cmdLine2:SystemProcessCommandLine" -->> "ssh2:SshToPi": cmdLine2
+	"ssh2:SshToPi" --> "cmdLine2:SystemProcessCommandLine": execute("/home/pi/phypidaq/scripts/InCh1.py")
+	 note over "ssh2:SshToPi": "cmd2:SshCommandMRunAtPi": readLn() at SshToPi uses\nstdOutput:BufferedReader from SystemProcessCommandLine"\n to read all raw measurement data from Stdout.
+	"cmd2:SshCommandMRunAtPi" --> "ssh2:SshToPi": readLine() 
+	"ssh2:SshToPi" -->> "cmd2:SshCommandMRunAtPi": "Timestamp: 13579, Value: 12"
+	"cmd2:SshCommandMRunAtPi" --> ":MStreamListener": receiveMDataSet("InCh2, 13579, 12)
+== In the Cache module finally Thread1 and Thread2 meet the cache's TimerTaskThread.\nThis third part of this diagram shows all three threads together. ==
+
+ref over ":Timer"
+	Three Threads in Cache
+end ref
+
+
+@enduml

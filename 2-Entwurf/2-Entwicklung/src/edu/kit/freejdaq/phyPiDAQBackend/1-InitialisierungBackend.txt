@@ -1,6 +1,6 @@
 @startuml
 
-":Model" --> PickupPointAgentsSsh: getPickupPointAgentsSsh({"192.168.0.1", 22, "pi", "53cr37", "/home/pi/phypidaq/yamls", "home/user123"}
+":Model" --> PickupPointAgentsSsh: getPickupPointAgentsSsh({"192.168.0.1", 22, "pi", "53cr37", "/home/pi/phypidaq/", "home/user123"}
 note right: This sequence diagram and the following sequence diagrams use "sameInitData" to reference this array. 
 opt only singleton instance of PickupPoint does not exist so far  
 	PickupPointAgentsSsh --> ":SshCommandFactory": new SshCommandFactory(sameInitData)

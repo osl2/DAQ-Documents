@@ -1,0 +1,59 @@
+@startuml
+
+
+
+":Model" --> ":MRunReaction": new MRunReaction()
+":MRunReaction" -->> ":Model": ":MRunReaction"
+":Model" --> ":MRunInfo": new MRunInfo(["InCh1", "InCh2"],\n{"InCh1": [-1.0, -2.0], "InCh2": [-999.0, 999.0]},\n1000, 8000)
+":MRunInfo" -->> ":Model": ":MRunInfo"
+note over ":MRunReaction": This sequence diagram use "sameMRunInfo"\nto reference this data structure. 
+":Model" --> ":MRunAgent": start(sameMRunInfo,  [ :MRunReaction]) 
+
+
+":MRunAgent" --> ":MRunTiming": new MRunTiming(sameMRunInfo)
+note right
+	An intersection\nof including and included\nis advantageous  here.
+end note
+
+ref over ":MRunAgent"
+	Initialization of MRunTiming
+end ref
+":MRunTiming" -->> ":MRunAgent": :MRunTiming
+":MRunAgent" --> ":MRunTiming": getMStreamListener()
+":MRunTiming" -->> ":MRunAgent": :MStreamListener
+
+loop  not only for "InCh1", but the same for "InCh2" too
+	":MRunAgent" --> ":SshCommandFactory": createMRunThread("InCh1", :MStreamListener)
+	":SshCommandFactory" --> ":SshToPi": new SshToPi(sameInitData)
+	":SshToPi" -->> ":SshCommandFactory": ssh1:SshToPi
+	":SshCommandFactory" --> ":SshCommandMRunAtPi": new SshCommandMRunAtPi(:SshToPi, "InCh1", :MStreamListener)
+	":SshCommandMRunAtPi" -->> ":SshCommandFactory": runnable1:SshCommandMRunAtPi
+	":SshCommandFactory" --> ":MRunThread": new MRunThread(:SshCommandMRunAtPi)
+	":MRunThread" -->> ":SshCommandFactory": thread1:MRunThread
+	":SshCommandFactory" -->> ":MRunAgent": thread1:MRunThread
+end
+
+loop  not only for "InCh1", but the same for "InCh2" too
+	":MRunAgent" --> "thread1:MRunThread": start()
+	":MRunThread" -->> ":MRunAgent"
+end
+	":MRunAgent" --> ":MRunTiming": addMRunListener(:MRunReaction)
+	":MRunAgent" --> ":MRunTiming": startRepeatedTimer()
+	":MRunTiming" --> ":TimerTask": new TimerTask(self, 1000)
+	":TimerTask" --> ":MRunTiming": ":TimerTask"
+	":MRunTiming" --> ":MRunAgent": void
+	":MRunAgent" -->> ":Model": true
+note right
+	  MRunAgent returns true, because its MeasurementState was INITIAL_STATE at the beginning of this sequence diagram.
+	  Now it is changed to RUNNING. (If it would have been RUNNING at the beginning already, MRunAgent's start method
+	  would have returned false immediately, and the state wouldn't have changed.
+	  State management is considered private and a matter of implementation. 
+end note
+
+
+
+
+
+
+
+@enduml

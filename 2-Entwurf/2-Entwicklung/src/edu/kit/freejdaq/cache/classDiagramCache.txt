@@ -3,7 +3,7 @@ namespace Cache {
 
 class MStreamListener {
 	+ MStreamListener(cache: Cache)
-	+ addConnectinTerminatedAction(action: ConnectionTerminatedAction)
+	+ addConnectionTerminatedAction(action: ConnectionTerminatedAction)
 	+ receiveMDataSet(channelId: String, timeStamp: long, value: double): void
 	+ connectionTerminated(channelId: String): void
 }
@@ -17,6 +17,7 @@ class MRunTiming {
 	- createCache(): Cache
 	- addBufferForOneSensorInChannel(SensorId: String)
 	- addCheckAndNotifyAction(action: CheckAndNotifyAction): void
+	+ setMStreamListener(MStreamListener): void
 	+ getMStreamListener(): MStreamListener
 	..
 	+ addMRunListener(listener: IMRunListener)
@@ -25,13 +26,11 @@ class MRunTiming {
 	+ stopRepeatedTimer(): void
 	..
 	+ run(): void
-	- setCurrentTime(): void
-	- checkActions(): void
 }
 
-class Timer {
+class Timer {	
 	-period: long
-	+schedule(timerTask: TimerTask, period: long)
+	+Timer(timerTask: TimerTask, period: long)
 	+cancel(): boolean
 }
 
@@ -61,7 +60,8 @@ class TimestampValuePair	{
 }
 	
 class ConnectionTerminatedAction {
-	+ ConnectionTerminatedAction(allSensorIds: String[])
+	+ ConnectionTerminatedAction(inChannelIds: String[])
+	-addChannelConnectionStatus(inChannelId: String)
 	+ raiseConnectionTerminatedFlag(channelId: String): void
 	+ checkAndNotify(meansForAction: MeansForAction): long
 }
@@ -75,7 +75,7 @@ class TimeoutAction {
 
 class ErrorCodeAction {
 	+ErrorCodeAction()
-	+addCodes(sensorInChannelId: String, codes: double[])
+	+addCodes(sensorInChannelId: String, codes: double[]):void
 	+checkAndNotify(meansForAction: MeansForAction): long
 }
 
@@ -101,11 +101,12 @@ class ErrorCodesForInChannel {
 }
 
 class MeansForAction {
-	replayTimepointer: long, 
-	cache: Cache, 
-	mRunForward: IMRunListener
+	+replayTimepointer: long, 
+	+cache: Cache, 
+	+mRunForward: IMRunListener
 	MeansForAction(cache: Cache, mRunForward: IMRunListener)
 	setReplayTimepointer(replayTimepointer: long)
+
 }
 
 class ChannelConnectionStatus {	
@@ -128,10 +129,10 @@ TimeoutAction .up.|> CheckAndNotifyAction
 ErrorCodeAction .up.|> CheckAndNotifyAction
 DataSetCompleteAction .up.|> CheckAndNotifyAction
 
-MRunTiming -left-> Timer
-MRunTiming .left.|> TimerTask
-Timer -down-> "1" TimerTask
-MRunTiming ..> MStreamListener
+MRunTiming --> Timer
+MRunTiming ..|> TimerTask
+Timer --> "1" TimerTask
+MRunTiming --> MStreamListener
 Cache .up.> MSet
 Cache -down-> "*" BufferForOneSensorInChannel
 Cache ..> ErrorCodesForInChannel     

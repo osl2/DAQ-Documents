@@ -1,0 +1,26 @@
+@startuml
+
+box "Initialization of MRunTiming\n\n"
+
+
+":MRunAgent" --> ":MRunTiming": new MRunTiming(sameMRunInfo)
+":MRunTiming" --> ":MRunTiming": createCache()
+":MRunTiming" --> ":Cache": addBufferForOneSensorInChannel("InCh1")
+":MRunTiming" --> ":Cache": addBufferForOneSensorInChannel("InCh2")
+":MRunTiming" --> ":MRunTiming": addCheckAndNotifyAction(new DataSetCompleteAction(1000))
+":MRunTiming" --> ":MRunTiming": addCheckAndNotifyAction(new TimeoutAction(1000, 8000/1000))
+":MRunTiming" --> ":ErrorCodeAction": new ErrorCodeAction()
+":ErrorCodeAction" -->> ":MRunTiming": :ErrorCodeAction
+":MRunTiming" --> ":ErrorCodeAction": addCodes("InCh1", [-1.0, -2.0])
+":MRunTiming" --> ":ErrorCodeAction": addCodes("InCh2", [-999.0, 999.0])
+":MRunTiming" --> ":ConnectionTerminatedAction": new ConnectionTerminatedAction(["InCh1", "InCh2"])
+":ConnectionTerminatedAction" --> ":ConnectionTerminatedAction": addChannelConnectionStatus("InCh1")
+":ConnectionTerminatedAction" --> ":ConnectionTerminatedAction": addChannelConnectionStatus("InCh2")
+":ConnectionTerminatedAction" -->> ":MRunTiming": :ConnectionTerminatedAction
+":MRunTiming" --> ":MRunTiming": addCheckAndNotifyAction(:ConnectionTerminatedAction)
+":MRunTiming" --> ":MStreamListener": new MStreamListener(:Cache)
+":MStreamListener" -->> ":MRunTiming": :MStreamListener
+":MRunTiming" --> ":MStreamListener": addConnectionTerminatedAction(ConnectionTerminatedAction)
+":MRunTiming" --> ":MRunTiming": setMStreamListener(:MStreamListener)
+":MRunTiming" -->> ":MRunAgent": :MRunTiming
+@enduml

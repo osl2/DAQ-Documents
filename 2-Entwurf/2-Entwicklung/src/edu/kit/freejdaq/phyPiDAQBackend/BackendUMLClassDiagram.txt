@@ -28,7 +28,7 @@ namespace Backend {
 
 
 	interface IAccessToMRun{
-		+start(sensorIDs: string[], dataListeners: IMStreamListener[]): boolean
+		+start(mRunInfo: IMRunInfo): boolean
 		+pause(): boolean
 		+resume(): boolean
 		+reset(): boolean
@@ -42,8 +42,8 @@ namespace Backend {
 
 
 	class MRunAgent {
-		+MRunAgent(commandFactory: CommandFactory, mRunTiming: MRunTiming)
-		+start(mRunInfo: IMRunInfo, dataListeners: IMStreamListener[]): boolean
+		+MRunAgent(commandFactory: CommandFactory)
+		+start(mRunInfo: IMRunInfo, mRunListener: MRunListener): boolean
 		+pause(): boolean
 		+resume(): boolean
 		+reset(): boolean
@@ -116,8 +116,7 @@ namespace Backend {
 			+ createGetSensorIds(timeout: int): CommandGetSensorIds
 			+ createCopyFromPi(nameOfFile: String, timeout: int): CommandCopyFromPi
 			+ createCopyToPi(nameOfFile: String, timeout, int): CommandCopyToPi
-			+ createMRunThread(inChannelId: String, listener: IMStreamListener): MRunThread
-			- createMRunAtPi(inChannelId: String, listener: IMStreamListener): CommandMRunAtPi
+			+ createMRunThread(inChannelId: String, listener: IMStreamListener): MRunThread		
 		}
 		
 		
@@ -128,8 +127,7 @@ namespace Backend {
 			+ createGetSensorIds(timeout: int): CommandGetSensorIds
 			+ createCopyFromPi(nameOfFile: String, timeout: int): CommandCopyFromPi
 			+ createCopyToPi(nameOfFile: String, timeout, int): CommandCopyToPi
-			+ createMRunThread(inChannelId: String, listener: IMStreamListener): MRunThread
-			- createMRunAtPi(inChannelId: String, listener: IMStreamListener): CommandMRunAtPi
+			+ createMRunThread(inChannelId: String, listener: IMStreamListener): MRunThread		
 		}
 
 		
