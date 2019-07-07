@@ -1378,6 +1378,30 @@ In Abbildung \ref{AddBlockSequence} ist das Szenario "AddBlockSequence" zu sehen
 Im dritten Teil soll die UnDo-Action des zweiten Teiles rückgängig gemacht werden. Dazu wird als Ausgangspunkt der ReDo-Knopf in der GUI gedrückt. Dadurch wird der CommandManager Controller über das Interface ButtonAction angeleitet, den ReDo-Command durchzuführen. Dieser führt den Befehl durch und fügt den Block wieder dem Model hinzu.
 
 
+\subsection{Füge Verbindung hinzu}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 9cm]{Grafiken/AddConQuerPart1.png}
+		\caption{Das Hinzufügen einer Verbindung zwischen zwei Kanälen, Part1}
+		\label{SeqAddConP1}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 11cm]{Grafiken/AddConQuerPart2.png}
+		\caption{Das Hinzufügen einer Verbindung zwischen zwei Kanälen, Part2}
+		\label{SeqAddConP2}
+	\end{center}
+\end{figure}
+
+In den Abbildung \ref{SeqAddConP1}  und \ref{SeqAddConP2} ist das Szenario "`Füge Verbindung hinzu"' zu sehen. Als Ausgangspunkt registriert der AddWireDragAndDropHandler der GUI, dass eine Verbindung zwischen zwei ChannelDecoratern im Konfigurationsfeld hinzu gefügt wurde.
+
+Die GUI benachrichtigt den Controller über das Interface IConnectionAction, dass eine Verbindung platziert wurde. Der Controller erstellt einen entsprechenden Command und lässt die Änderung am Model durchführen. Dazu greift er über die Schnittstelle IModelInformation auf die Messkonfiguration im Model zu, um eine Verbindung zu setzten. Die Messkonfiguration setzt dann die Verbindung in der Messkonfiguration und updatet danach den BuildingBlockDirectory entsprechend. Dann wird dem Konfigurationsfeld GUI über die Schnittstelle UpdateInterface signalisiert, dass die Messkonfiguration verändert wurde. Dieses prüft nach, was sich im BuildingBlockDirectory verändert hat und holt sich dann das Update. Sobald das Update im Konfigurationsfeld der GUI angekommen ist, wird der Wire im Konfigurationsfeld zwischen den beiden ChannelDecoratern gesetzt.
+
+
 \clearpage
 \section{Änderungen am Pflichtenheft}
 
