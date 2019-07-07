@@ -1,0 +1,31 @@
+@startuml
+
+":Model" --> ":SensorInfoAgent": fetchIdsOfAvailableSensors(6)
+":SensorInfoAgent" --> ":SshCommandFactory": createGetSensorIds(6)
+":SshCommandFactory" --> ":SshToPi": new SshToPi(sameInitData)
+":SshToPi" -->> ":SshCommandFactory": ":SshToPi" 
+":SshCommandFactory" --> ":SshCommandGetSensorIds": new SshCommandGetSensorIds(:SshToPi, 6)
+":SshCommandGetSensorIds" -->> ":SshCommandFactory": :SshCommandGetSensorIds
+":SshCommandFactory" -->> ":SensorInfoAgent": :SshCommandGetSensorIds
+":SensorInfoAgent" --> ":SshCommandGetSensorIds": executeLocal()
+":SshCommandGetSensorIds" --> ":SshToPi": fetchSensorIds(6)
+":SshToPi" --> ":SystemProcessCommandLine": new SystemProcessCommandLine()
+":SystemProcessCommandLine" --> ":SshToPi": ":SystemProcessCommandLine" 
+":SshToPi" --> ":SystemProcessCommandLine": execute("sshpass -p '53cr37' ssh -p 22 -o ConnectTimeout=6 pi@192.168.0.1 'ls /home/pi/phypidaq/yamls'")
+
+note over ":SshToPi": ":SshCommandGetSensorIds": readLn() at SshToPi uses stdOutput:BufferedReader from SystemProcessCommandLine" to read all yaml-filenames from Stdout.
+":SshCommandGetSensorIds" --> ":SshToPi": readLine() 
+":SshToPi" -->> ":SshCommandGetSensorIds": "MAX31855.yaml"
+":SshCommandGetSensorIds" --> ":SshToPi": readLine() 
+":SshToPi" -->> ":SshCommandGetSensorIds": "ADS1115.yaml"
+":SshCommandGetSensorIds" --> ":SshToPi": readLine() 
+":SshToPi" -->> ":SshCommandGetSensorIds": "VL53Lx.yaml"
+note  over ":SshToPi": Stdout finished.
+":SystemProcessCommandLine" -->> ":SshToPi": 0
+":SshToPi" -->> ":SshCommandGetSensorIds": {"MAX31855", "ADS1115", "VL53Lx"}
+":SshCommandGetSensorIds" -->> ":SensorInfoAgent": {"MAX31855", "ADS1115", "VL53Lx"}
+":SensorInfoAgent" -->> ":Model": {"MAX31855", "ADS1115", "VL53Lx"}
+
+@enduml
+
+
