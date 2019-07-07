@@ -1352,6 +1352,15 @@ Falls der Benutzer einen Konfigurationsbaustein entfernt, welcher bereits mit we
 \clearpage
 \section{Änderungen am Pflichtenheft}
 
+Durch unsere Entscheidungen im Entwurfsdokument bekommt der Benutzer Hilfe für die Verwendung der Anwendung und soll durch Informationen und Hilfestellungen zu einzelnen Bausteinen in der Lage sein eine korrekte Messkonfiguration aufzubauen.
+Falls der Benutzer trotzdem eine nicht verwendbare Messkonfiguration aufbaut, wird er bei Starten der Messung durch eine Fehlermeldung darauf hingewiesen.
+Daraus folgt, dass Soll-Kriterium 13 aus dem Pflichtenheft nicht vollständig erfüllt ist, da die Anwendung keine Warnungen vor falschen Benutzereingaben vorsieht, sondern nur reaktionär Fehlermeldungen auf Fehlverhalten ausgibt.
+
+Ebenfalls haben wir uns entschieden, um eine zu starke Belastung der Teammitglieder während der Implementierung und eine falsche Prioritätensetzung zu vermeiden Wunschkriterien, welche nicht für die Funktionalität der Anwendung und zur einfacheren Implementieren beitragen nicht in den Entwurf miteinzubeziehen. 
+Dazu gehören das Wunschkriterium Wunsch-Kriterium 3, welches Spiele zum Erlernen von grundlegenden Messtechniken vorsah. Da der Entwurf dieses Feature, wie auch die Implementierung in unserer Software sehr Zeit intensiv wäre. Für zukünftige Weiterentwicklung der Anwendung wäre so ein Feature jedoch sehr interessant und sollte deswegen nicht verworfen werden.
+Ebenfalls haben wir Wunsch-Kriterium 5, welches die Funktion darstellt eine Darstellung von visualisierten Messdaten auszudrucken nicht direkt in die Anwendung implementiert. 
+Wunsch-Kriterium 6 wurde ebenfalls nicht in den Entwurf miteinbezogen, jedoch wäre, je nach verwendeter Software zur Implementierung der graphischen Benutzeroberfläche eine solche Änderung der Sprache möglich, jedoch haben wir uns aus zeitlichen und organisatorischen Gründen dagegen entschieden, den Mehraufwand dafür in Kauf zu nehmen.
+
 
 \clearpage
 \section{Formale Spezifikationen von Kernkomponenten}
