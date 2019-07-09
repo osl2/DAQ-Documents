@@ -1,0 +1,15 @@
+@startuml
+
+skinparam defaultFontSize 22
+
+namespace Initialization {
+	class Main {
+		+main(args: String[]): void
+	}
+	Main ------------------> Backend.PickPointForAgentsBasedOnSsh: creates >
+	Main ------------------> Model.ModelManager: creates >
+	Main -------------------> GUI.MainWindow: creates >
+	'Main --------------------> Controller.Command_Pattern.CommandManager: creates >
+}
+
+@enduml
