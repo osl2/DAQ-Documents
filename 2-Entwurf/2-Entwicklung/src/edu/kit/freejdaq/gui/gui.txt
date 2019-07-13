@@ -386,7 +386,23 @@ namespace FacadeModelView {
 	ViewDirectoryInterface <|.. GUI.Configuration.ConfigurationField
 	ViewDirectoryInterface <|.. GUI.Menues.PrototypeField
 }
- 
+  
+  interface Runnable{
+  +run()
+  }
+  
+  class Thread {
+  + thread(runnable: Runnable)
+  + start()
+  + stop()
+  + resume() 
+  ..
+  + currentThread(): Thread
+  
+  }
+  
+  Thread ..|> Runnable
+  GUI.MainWindow <|-- Thread
   
 	
 }
