@@ -1,0 +1,9 @@
+
+
+HelpDecoratorHandler: 
+decoratorPressed() wuerde mouseHover nicht abdecken. --> activated() ist allgemeiner
+
+public HashMap getFullInitBlock();
+public HashMap getFullConfigBlock();
+--> interne tatsächliche Datenstruktur sollte hoechstwahrscheinlich private und austauschbar sein,
+ohne dass man Funktionssignatur ändern muss, oder? Geheimnisprinzip!
