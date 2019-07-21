@@ -10,7 +10,9 @@ class MStreamListener {
 
 
 class MRunTiming {
-	- replayTimePointer: long
+	- timestampOfFirstAllComplete: long
+	- period: long
+	- counter: int
 	- endFlag: boolean
 	--
 	+ MRunTiming(initData: MRunInfo)
@@ -44,8 +46,10 @@ class Cache{
 }
 
 class BufferForOneSensorInChannel {
+ 	+BufferForOneSensorInChannel(sensorInChannelId: String)
 	-sensorInChannelId: String
 	-buffer: Queue<TimestampValuePair>
+	+BufferForOneSensorInChannel(sensorInChannelId: String)
 	+getInChannelId(): String
 	+addPacket(packet: TimestampValuePair)
 	+getAllPacketsDuringTimespan(from: long, to: long): TimestampValuePair[]
@@ -101,11 +105,12 @@ class ErrorCodesForInChannel {
 }
 
 class MeansForAction {
-	+replayTimepointer: long, 
-	+cache: Cache, 
+	+pitimestampOfFirstAllComplete: long
+	+localtimestampOfFirstAllComplete: long
+	+cache: Cache
 	+mRunForward: IMRunListener
 	MeansForAction(cache: Cache, mRunForward: IMRunListener)
-	setReplayTimepointer(replayTimepointer: long)
+	setPitimestampOfFirstAllComplete(pitimestampOfFirstAllComplete: long)
 
 }
 
@@ -149,7 +154,7 @@ MRunTiming ..> IMRunInfo
 ConnectionTerminatedAction --> "*" ChannelConnectionStatus
 
 interface CheckAndNotifyAction {
-	+checkAndNotify(replayTimepointer: long, cache: Cache, mRunForward: IMRunListener): long
+	+checkAndNotify(meansForAction: MeansForAction): long
 }
 
 interface IMRunListener {

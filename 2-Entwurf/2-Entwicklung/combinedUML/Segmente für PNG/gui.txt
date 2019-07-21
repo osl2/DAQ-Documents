@@ -315,7 +315,7 @@ namespace HelpAndOption {
  interface OptionsWindowHandler {
  	+ optionsOpened(): void
  	+ colorChanged(color: String): void
- 	+ fontSizeChanged(ize: int): void
+ 	+ fontSizeChanged(size: int): void
  }
  
 	 GUI.MainWindow *-down- "1" HelpWindow
