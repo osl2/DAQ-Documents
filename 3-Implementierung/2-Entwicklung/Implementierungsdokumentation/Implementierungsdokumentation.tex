@@ -1,0 +1,239 @@
+\documentclass[parskip=full]{scrartcl}
+
+\usepackage[utf8]{inputenc}			% Umlaute, Sonderzeichen
+\usepackage[ngerman]{babel}			% deutsche Sprache
+\usepackage{enumitem}				% Listen
+\usepackage{graphicx}				% Grafiken
+\usepackage{hyperref}				% Hyperlinks
+\usepackage[nonumberlist]{glossaries}		% Glossar
+\usepackage{amsmath}
+\usepackage{pdfpages}				% PDF einbinden
+
+% Hurenkinder und Schusterjungen verhindern
+\clubpenalty10000
+\widowpenalty10000
+\displaywidowpenalty=10000
+
+\DeclareRobustCommand{\glossfirstformat}[1]{\textit{#1}}	% der erste Verweis im Dokument auf ...
+\renewcommand*{\glsdisplayfirst}[4]{\glossfirstformat{#1#4}}	% ... einen Glossarbegriff wird kursiv markiert
+
+% Kriterien sollen nicht kursiv erscheinen
+\makeatletter
+\renewcommand{\@begintheorem}[2]{\trivlist
+	\item[\hskip \labelsep{\bfseries #1\ #2}]}
+\makeatother
+
+
+\makenoidxglossaries
+
+\newglossaryentry{RasPi}{
+	name=Raspberry Pi,
+	plural=Raspberry Pis,
+	description={Der Raspberry Pi ist ein Einplatinencomputer. In diesem Projekt dient der Raspberry Pi als Hardwareplattform, um Messwerte aus angeschlossenen Sensoren auszulesen}
+}
+
+\newglossaryentry{PhyPiDAQ}{
+	name=PhyPiDAQ,
+	description={PhyPiDAQ ist ein Framework zur Erfassung und Analyse von Messwerten mit einem Raspberry Pi. Siehe auch Abschnitt 4.3 ,,PhyPiDAQ`` sowie \url{https://github.com/GuenterQuast/PhyPiDAQ}}
+}
+
+\newglossaryentry{Science Labs}{
+	name=Science Labs,
+	description={Ein Science Lab ist ein Arbeitsplatz, welcher Schülern ermöglicht, wissenschaftliche Forschungen unter kontrollierten Bedingungen durchzuführen} 
+}
+
+\newglossaryentry{opensource}{
+	name=Open Source,
+	description={Software, deren Quelltext öffentlich eingesehen eingesehen werden kann, wird als ,,Open Source`` bzw. ,,quelloffen`` bezeichnet} 
+}
+
+\newglossaryentry{osl2}{
+	name=OSL\textsuperscript{2},
+	description={Open-Source-Lehrsoftware-Labor, siehe \url{https://formal.iti.kit.edu/projects/oslsl/?lang=de}}
+}
+
+\newglossaryentry{dragdrop}{
+	name=Drag and Drop,
+	description={Methode, um mit grafischen Benutzeroberflächen zu interagieren. Dabei wird ein Objekt erst mit der Maus festgehalten und an einen anderen Ort gezogen. Durch das Lösen der Maustaste wird das Objekt platziert}
+}
+
+\newglossaryentry{click}{
+	name=Click,
+	description={Betätigen der linken Maustaste}
+}
+
+\newglossaryentry{transformation}{
+	name=Transformation,
+	plural={Transformationen},
+	description={Bausteine vom Typ Transformation haben einen oder mehrere Eingänge sowie einen oder mehrere Ausgänge. Für jeden Ausgang kann  ein Transformationsbaustein eine Vorschrift zur Berechnung eines Ausgangswertes aus einem Satz von Eingangswerten beinhalten. Eine Berechnungsvorschrift soll durch eine mathematische bzw. logische Funktionen oder durch eine programmtechnisch definierte Verarbeitung definiert werden können}
+}
+
+\newglossaryentry{konfigdata}{
+	name=Konfigurationsdatei,
+	plural=Konfigurationsdateien,
+	description={Können das Messverhalten anpassen, beispielsweise die Anzahl der Messungen pro Zeiteinheit. Für jeden Sensor gibt es eine eigene Konfigurationsdatei}
+}
+
+\newglossaryentry{sensor}{
+	name=Sensor,
+	plural={Sensoren},
+	description={Der Begriff ,,Sensor`` bezeichnet ein technisches Bauteil, welches physikalische Größen misst und analoge oder digitale Messwerte liefert. In unserer Anwendung werden Sensoren abstrakt als grafische Bausteine eines Messkonfiguration präsentiert. Ein solcher (logischer) Sensorbaustein muss alle Informationen referenzieren können, die zum Ansprechen eines tatsächlichen Sensors benötigt werden. Da ein Messgerät Ausgänge bzw. Messkanäle haben kann, muss ein Sensorbaustein mindestens einen oder auch mehrere Ausgänge haben. Eingänge besitzt ein Sensorbaustein nicht}
+}
+
+\newglossaryentry{messdaten}{
+	name=Messdaten,
+	description={Daten, welche die Anwendung von einem Sensor (über PhyPiDAQ-Schnittstelle) oder direkt aus einer Datei erhält}
+}
+
+\newglossaryentry{darstellung}{
+	name=Darstellung,
+	plural={Darstellungen},
+	description={Bausteine vom Typ Darstellung haben einen oder mehrere Eingänge. Ein Darstellungsbaustein soll definieren können, wie ein Satz von Eingangswerten die Erstellung bzw. Aktualisierung einer Darstellung beeinflusst. Ausgänge besitzt ein Darstellungsbaustein nicht}
+}
+
+\newglossaryentry{python3}{
+	name=Python 3,
+	description={Python ist eine Skriptsprache, die auf dem Raspberry Pi als Standardsprache zur Programmierung vorgesehen ist. Python wurde zur Implementierung von PhyPiDAQ verwendet}
+}
+
+\newglossaryentry{JVM}{
+	name={Java Virtual Machine},
+	description={Die Java Virtual Machine (JVM) ist eine Plattform für die Ausführung von Java-Software, die von der Firma Oracle für alle gängigen Betriebssysteme bereitgestellt wird}
+}
+
+\newglossaryentry{DSGVO}{
+	name=DSGVO,
+	first={Datenschutz-Grundverordnung (DSGVO)},
+	description ={Datenschutz-Grundverordnung der Europäischen Union vom 25. Mai 2018}
+}
+
+\newglossaryentry{Musskriterien}{
+	name=Musskriterien,
+	description ={Werden zusammen mit Soll- und Wunschkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung höchste Priorität. 
+	Dass ein Musskriterium in den nachfolgenden Projektphasen nicht umgesetzt wird, ist nur dann zulässig, falls unerwartet unausweichliche Probleme bei der Umsetzung auftreten. 
+	In diesem Fall ist es erforderlich, dass diese Probleme sehr genau dokumentiert werden}
+}
+
+\newglossaryentry{Sollkriterien}{
+	name=Sollkriterien,
+	description ={Werden zusammen mit Muss- und Wunschkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung mittlere Priorität. 
+	Falls ein Sollkriterium umgesetzt werden kann, dann muss es nach Möglichkeit auch realisiert werden. 
+	Falls ein Sollkriterium in den nachfolgenden Projektphasen nicht umgesetzt werden kann, so muss dies dokumentiert und begründet werden}
+}
+
+\newglossaryentry{Wunschkriterien}{
+	name=Wunschkriterien,
+	description ={Werden zusammen mit Muss- und Sollkriterien bei der Abnahme eines Softwareprodukts überprüft und haben während der Entwicklung eine niedrige Priorität. 
+	Je nach Resourcenlage können sie nach Bearbeitung aller Muss- und Kannkriterien umgesetzt werden. 
+	Falls ein Wunschkriterium nicht umgesetzt wird, so muss dies nicht begründet werden}
+}
+
+\newglossaryentry{Abgrenzungskriterien}{
+	name=Abgrenzungskriterien,
+	description ={Abgrenzungskriterien beschreiben Aspekte, die explizit nicht umgesetzt werden sollen.}
+}
+
+\newglossaryentry{BenOber}{
+	name=Benutzeroberfläche,
+	description = {Steht für die Oberfläche, die der Benutzer verwendet um die Anwendung zu bedienen}
+}
+
+\newglossaryentry{UI}{
+	name=UI,
+	description={engl. User Interface; siehe: Benutzeroberfläche}
+}
+
+\newglossaryentry{GrafBenOber}{
+	name=grafische Benutzeroberfläche,
+	description = {Eine Benutzungsschnittstelle, die eine Anwendung durch Fenster, grafische Symbole, Menüs und Mauszeiger bedienbar macht}
+}
+
+\newglossaryentry{GUI}{
+	name=GUI,
+	description={engl. Graphical User Interface; siehe: Grafische Benutzeroberfläche},
+}
+
+\newglossaryentry{Konfigurationsbaustein}{
+	name=Konfigurationsbaustein,
+	plural=Konfigurationsbausteine,
+	description ={Teil einer Messkonfiguration, der eine Teilaufgabe bestimmten Typs erfüllen kann. Es gibt Sensorbausteine, Konfigurationsbausteine und Darstellungsbausteine. Liegt am Ausgang eines Bausteins ein Wert an, so kann dieser an den Eingang eines nachgelagerten Bausteins weitergeleitet werden}
+}
+
+\newglossaryentry{Benutzerkonfiguration}{
+	name =Messkonfiguration,
+	plural=Messkonfigurationen,
+	description ={Gerichteter zyklenfreier Graph mit Knoten vom Typ Sensor, Transformation oder Darstellung. Hierbei ist zu beachten, dass Sensoren keine Eingangskanten und Darstellungen keine Ausgangskanten haben dürfen}
+}
+
+\newglossaryentry{Bausteinprototyp}{
+	name=Bausteinprototyp,
+	plural=Bausteinprototypen,
+	description={Baustein, von dem eine Kopie angelegt wird, wenn der Benutzer ein neues Baustein-Exemplar einem Entwurf hinzufügen möchte}
+}
+
+\newglossaryentry{Messlauf}{
+	name=Messlauf,
+	plural=Messläufe,
+	description={Zeitabschnitt, in dem zu definierten Zeitpunkten an allen Bausteinen eines Entwurfs sukzessive die Werte an allen Ausgängen und Eingängen bestimmt werden}
+}
+
+\newglossaryentry{Stand-Alone-Kommunikation}{
+	name={Stand-Alone-Kommunikation},
+	description={Bezeichnet im Kontext unseres Software-Projekt die systeminterne Kommunikation innerhalb eines Betriebssystems, beispielsweise per Inter-Prozess-Kommunikation (IPC)}
+	}
+
+
+\newglossaryentry{Local-Loop}{
+	name={Local-Loop},
+	description={Bezeichnet einen virtuellen Netzwerkadapter, der Pakete, die durch ihn verschickt werden, unmittelbar danach auch wieder empfängt.}
+}
+
+\newglossaryentry{Model-View-Controller}{
+	name={Model-View-Controller},
+	description={Architekturmuster, dass die Software in die drei Komponenten: Model, View und Controller unterteilt. Dadurch sollen die einzelnen Komponenten unabhängig von einander verändert werden können.}
+}
+
+\subject{Implementierungsdokumentation}
+\title{Visuelle Programmiersprache für den Physikunterricht zur Datenerfassung auf einem Raspberry Pi}
+\subtitle{Version 1.0.0}
+\author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+
+\clearpage
+\tableofcontents 					% generate pdf twice to update
+
+\clearpage
+\section{Ziel der Entwurfsdokumentation} \label{einleitung}
+
+\section{Geänderte Bereiche} \label{Bereiche}
+
+\subsection{Backend} \label{Backend}
+
+\subsection{Cache} \label{Cache}
+
+\subsection{Model} \label{Model}
+
+\subsection{GUI} \label{GUI}
+
+\subsection{Controller} \label{Controller}
+
+\subsection{Fileservice} \label{Fileservice}
+
+
+\section{Anhang}
+
+\includepdf{Grafiken/Implementierungsplan.pdf}
+
+\clearpage
+\section{Glossar}\label{glossar}
+
+\renewcommand*{\glossarysection}[2][]{}	% prevents double glossary section heading
+\printnoidxglossaries				% generate pdf twice when adding new entries
+
+
+\end{document}\grid
