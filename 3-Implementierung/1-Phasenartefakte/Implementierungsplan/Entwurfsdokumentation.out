@@ -1,0 +1,16 @@
+\BOOKMARK [1][-]{section.1}{Ausarbeitungsstand der Abnahmekriterien}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Entwurf von Messkonfigurationen}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Handhabung von Bausteinprototypen}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Gew\344hrleisten von Persistenz}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Bereitstellung vorgefertigter Teile}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.5}{Handhabung von Messl\344ufen}{section.1}% 6
+\BOOKMARK [2][-]{subsection.1.6}{Benutzbarkeit der GUI}{section.1}% 7
+\BOOKMARK [2][-]{subsection.1.7}{Abgrenzungskriterien}{section.1}% 8
+\BOOKMARK [1][-]{section.2}{Umsetzung der Entwurfsstrukturen}{}% 9
+\BOOKMARK [2][-]{subsection.2.1}{Model}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.2}{GUI}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.3}{Controller}{section.2}% 12
+\BOOKMARK [2][-]{subsection.2.4}{Backend}{section.2}% 13
+\BOOKMARK [2][-]{subsection.2.5}{Cache}{section.2}% 14
+\BOOKMARK [2][-]{subsection.2.6}{File-Service}{section.2}% 15
+\BOOKMARK [1][-]{section.3}{Abweichungen im Implementierungsablauf}{}% 16
