@@ -334,6 +334,19 @@ Statt dessen wurden folgende Klassen hinzugefügt:
 
 und die Methode constructBuildingBlock zum Director und zu jedem Bearbeitern die Methode processKvPair hinzugefügt. Dabei unterscheiden sich die Methoden der einzelnen Bearbeitern zwar nicht im Namen, aber in ihrer Funktion. Jeder Bearbeiter leitet entweder die Anfrage weiter oder erstellt einen Blocktyp und gibt ihn zurück. 
 
+\subsubsection{Auswirkungen des Fallbacks auf das Model}
+Nach der Hälfte der Implementierungszeit haben wir uns entschlossen die graphische Drag- and Drop-Funktion aufzugeben, um einen funktionierenden Prototypen entwickeln zu können, der einen Datenfluss zwischen allen Modulen der Anwendung realisiert. Wir haben die graphische Benutzeroberfläche stark vereinfacht und die Bearbeitung der Messkonfiguration erfolgt nun textuell. Dadurch sind viele Klassen und Methoden im Model nicht mehr notwendig oder wurden für die neuen Funtionen angepasst. Die Benutzbarkeit und Benutzerfreundlichkeit wird durch den Fallback zwar reduziert, aber ein funktionierender Prototyp hatte mehr Priorität.
+
+
+Das Entwurfspaket model.channellogic hat nun in der Implementierung den Namen model.channel. Die Klassen Channelstate, Connected, UnConnected und Value Ready des Entwurfs haben keine Funktion mehr und werden daher verworfen. Dadurch sind auch die entprechenden Methoden connect, unconnect, receiveValue, eraseValue in der Klasse Channel verworfen worden. Außerdem wurde die Klasse Channel abstract gemacht. Die Methode establishConnection wurde je einmal für jede Kanalart in den Unterklassen implementiert. Dadurch kann der Versuch, eine Verbindung zwischen zwei gleichen Kanaltypen zu erstellen, verhindert werden. 
+
+
+Die Entwurfspakete model.sensorLogic, model.transformationLogic und model.representationLogicwurden zu den Implementierungpakten model.sensor, model.transformation und model.representation umbenannt. In den drei Paketen wurden alle Entwurfsklassen beibehalten. Allerdings haben die Klassen VirtualSensor, PhysicalSensor, TableRepresentation und XYRepresentation keine Funktion, außer um möglichen zukünftigen Bausteinen eine Grundlage zur erweiterten Kategorisierung zu bieten. Diese vier Klassen haben ihre explizite Methode processValue verloren, da sich diese von Implementierung der jeweiligen Oberklasse nicht unterscheidet. Außerdem sind die drei Klassen Sensor, Transformation und Representation in der Implementierung nicht mehr abstrakt. Alle Bausteinklassen haben außerdem einen Copy-Constructor erhalten um tiefe Kopien anlegen zu können.
+
+Die Klasse Function aus dem Paket model.transformation hat ihre Methode applyFunction verloren und erstellt nun nur noch die benötigte Funktion aus den Daten der .yaml Datei. Die Funktionen der Methode applyFunction wurde in die Methode processValue der Klasse Transformation eingefügt, so dass der reinkommende Wert schneller verarbeitet und weiter gesendet werden kann.
+
+Die Methode processValue aller Bausteine verarbeitet nun keine Pakete mehr sondern nur noch deren Werte.
+
 \subsection{GUI}
 
 
