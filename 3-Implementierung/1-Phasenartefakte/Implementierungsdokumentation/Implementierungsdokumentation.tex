@@ -358,6 +358,28 @@ und die Methode constructBuildingBlock zum Director und zu jedem Bearbeitern die
 
 \subsection{Backend}
 
+\subsubsection{SSH-Verbindung}
+
+Für die Kommunikation mit dem Raspberry Pi wird eine SSH-Verbindung verwendet. So können über das lokale Netzwerk Phython-Skripte auf dem Raspberry Pi ausgeführt und Dateien kopiert werden.
+
+Die SSH-Verbindung ist mithilfe der Bibliothek \textit{SSHJ}\footnote{\url{https://github.com/hierynomus/sshj}} implementiert. Infolge diesesr diese Technologieentscheidung sind folgende Klassen überflüssig geworden: \verb:SystemProcessCommandLine:, \verb:SshCommandGetSensorIds:, \verb:SshCommandCopyFromPi:, \verb:SshCommandCopyToPi:.
+
+Die Aufgaben dieser Klassen werden stattdessen durch ihre vorgesehenen Oberklassen (\verb:CommandGetSensorIds:, \verb:CommandCopyFromi:, \verb:CommandCopyTo:) und direkt durch \verb:SshToPi: erfüllt.
+
+Nach außen ist der Zugriff auf das Backend über die Schnittstellen \verb:IAccessToSensorInfo: und \verb:IAccessToMeasurementRun: und die implementierenden Klassen \verb:SensorInfoAgent: und \verb:MRunAgent:, sowie die Klasse \verb:PickupPointForBackendAgents: möglich. Diese wurden wie im Entwurf vorgesehen umgesetzt.
+
+\subsubsection{Simulierte Verbindung}
+
+Anstelle einer echten SSH-Verbindung kann das Backend auch simuliert werden. Dazu wurden die Klassen \verb:ComToFile: und \verb:FileCommandFactory: eingeführt. Es können dadurch Messdaten aus einer zuvor erstellten Datei ausgelesen werden.
+
+Die Simulation des Backends ist nur eingeschränkt funktionstüchtig, da die Verbindung mit einem echten Gerät in der Entwicklung eine deutlich höhere Priorität hatte.
+
+\subsubsection{Nebenläufigkeit}
+
+Das Auslesen von Daten läuft parallelisiert ab. Dabei wird für jeden Sensor ein eigener Thread aufgebaut. (Nicht, wie im Entwurf angedeutet, für jeden Kanal.)
+
+Jeder dieser Threads verwendet eine Instanz der Klasse \verb:MeasurementRunnable:, welche die Klassen \verb:CommandMRun: und \verb:SshCommandMRun: aus dem Entwurf ersetzt. Über diese \textit{Runnables} wird der Messlauf gesteuert (unter anderem pausiert und angehalten). Die Klasse \verb:MRunThread: ist dabei überflüssig geworden.
+
 \subsection{Cache}
 
 \subsection{File-Service}
