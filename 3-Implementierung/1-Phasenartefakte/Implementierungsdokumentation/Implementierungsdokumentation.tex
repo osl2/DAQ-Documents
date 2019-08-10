@@ -287,6 +287,10 @@ In aller Regel lassen sich abstrakte Entwurfsinhalte während der Implementierun
 
 \subsection{Model}
 
+\subsubsection{Model Initialisierung}
+Der Modelmanager initialisiert das Model anhand eines Pfades zu den Bausteinprototypdateien. Die privaten Methoden des Entwurfs createNewMeasurementConfiguration, createTransformationPrototypesFromYaml, createRepresentationPrototypesFromYaml, fetchSensorPrototypesFromBackedn und pushNetworkConfigToBackend wurden an anderer Stelle oder gar nicht implementiert, da ihre Funktionalität an dieser Stelle oder überhaupt nicht gebraucht wurden.
+
+
 \subsubsection{Ersetzen des Entwurfsmuster Erbauer durch eine Zuständigkeitskette}
 Das Paket "`Model.BuildingBlockBuilder"' im Entwurf wurde durch das Paket "`model.block"' ersetzt. Das dort verwendete Entwurfsmuster Erbauer erfüllte nicht die notwendige Anforderung, dass der Benutzter leicht eigene Versionen von Bausteinen in die Anwendung einfügen konnte. Darum wurde der Erbauer durch eine Zuständigkeitskette ersetzt. Hier gibt es keine Methode für jeden Baustein im Director, sondern es gibt nur eine Anzahl von Bearbeitern, die einen Block eines Types erstellen. Wenn also der Benutzter eine eigene Transformation erstellen will, kann er die .yaml Datei einer bereits vorhandenen Transformation kopieren und einige Parameter (außer Typ und subtyp) verändern. Die resultierende Transformation wird dann von der Anwendung als eine erkannt und kann dann auch dort verwendet werden.
 Dadurch entfallen alle folgenden Klassen des Entwurfs:
@@ -334,18 +338,26 @@ Statt dessen wurden folgende Klassen hinzugefügt:
 
 und die Methode constructBuildingBlock zum Director und zu jedem Bearbeitern die Methode processKvPair hinzugefügt. Dabei unterscheiden sich die Methoden der einzelnen Bearbeitern zwar nicht im Namen, aber in ihrer Funktion. Jeder Bearbeiter leitet entweder die Anfrage weiter oder erstellt einen Blocktyp und gibt ihn zurück. 
 
-\subsubsection{Auswirkungen des Fallbacks auf das Model}
+\subsubsection{Auswirkungen des Fallbacks auf die Bausteinklassen}
 Nach der Hälfte der Implementierungszeit haben wir uns entschlossen die graphische Drag- and Drop-Funktion aufzugeben, um einen funktionierenden Prototypen entwickeln zu können, der einen Datenfluss zwischen allen Modulen der Anwendung realisiert. Wir haben die graphische Benutzeroberfläche stark vereinfacht und die Bearbeitung der Messkonfiguration erfolgt nun textuell. Dadurch sind viele Klassen und Methoden im Model nicht mehr notwendig oder wurden für die neuen Funtionen angepasst. Die Benutzbarkeit und Benutzerfreundlichkeit wird durch den Fallback zwar reduziert, aber ein funktionierender Prototyp hatte mehr Priorität.
 
 
-Das Entwurfspaket model.channellogic hat nun in der Implementierung den Namen model.channel. Die Klassen Channelstate, Connected, UnConnected und Value Ready des Entwurfs haben keine Funktion mehr und werden daher verworfen. Dadurch sind auch die entprechenden Methoden connect, unconnect, receiveValue, eraseValue in der Klasse Channel verworfen worden. Außerdem wurde die Klasse Channel abstract gemacht. Die Methode establishConnection wurde je einmal für jede Kanalart in den Unterklassen implementiert. Dadurch kann der Versuch, eine Verbindung zwischen zwei gleichen Kanaltypen zu erstellen, verhindert werden. 
-
+Die Klasse BuidingBlock aus dem Paket model.core ist nun nicht mehr abstrakt. Sie hat außerdem die Methode processValue erhalten um die Benutzung unspezifizierter Bausteine zu erkennen. Außerdem sind die Klassen helpMessage und yamlRepresentation, die eine Assoziation zu der Klasse BuildingBlock haben nicht implementiert. Die yaml Repräsentation wird durch den Fileservice realisiert.
 
 Die Entwurfspakete model.sensorLogic, model.transformationLogic und model.representationLogicwurden zu den Implementierungpakten model.sensor, model.transformation und model.representation umbenannt. In den drei Paketen wurden alle Entwurfsklassen beibehalten. Allerdings haben die Klassen VirtualSensor, PhysicalSensor, TableRepresentation und XYRepresentation keine Funktion, außer um möglichen zukünftigen Bausteinen eine Grundlage zur erweiterten Kategorisierung zu bieten. Diese vier Klassen haben ihre explizite Methode processValue verloren, da sich diese von Implementierung der jeweiligen Oberklasse nicht unterscheidet. Außerdem sind die drei Klassen Sensor, Transformation und Representation in der Implementierung nicht mehr abstrakt. Alle Bausteinklassen haben außerdem einen Copy-Constructor erhalten um tiefe Kopien anlegen zu können.
 
 Die Klasse Function aus dem Paket model.transformation hat ihre Methode applyFunction verloren und erstellt nun nur noch die benötigte Funktion aus den Daten der .yaml Datei. Die Funktionen der Methode applyFunction wurde in die Methode processValue der Klasse Transformation eingefügt, so dass der reinkommende Wert schneller verarbeitet und weiter gesendet werden kann.
 
 Die Methode processValue aller Bausteine verarbeitet nun keine Pakete mehr sondern nur noch deren Werte.
+
+Das Entwurfspaket model.channellogic hat nun in der Implementierung den Namen model.channel. Die Klassen Channelstate, Connected, UnConnected und Value Ready des Entwurfs haben keine Funktion mehr und werden daher verworfen. Dadurch sind auch die entprechenden Methoden connect, unconnect, receiveValue, eraseValue in der Klasse Channel verworfen worden. Außerdem wurde die Klasse Channel abstract gemacht. Die Methode establishConnection wurde je einmal für jede Kanalart in den Unterklassen implementiert. Dadurch kann der Versuch, eine Verbindung zwischen zwei gleichen Kanaltypen zu erstellen, verhindert werden. 
+
+
+\subsubsection{Model Kommunikation mit anderen Modulen}
+Unsere Annahmen im Entwurf, welches Modul was von wem braucht, waren nicht alle korrekt. Darum wurden Schnittstellen und Implementierungen von Schnittstellen um nötige Methoden erweitert und um unnötige Methoden reduziert.
+
+
+\subsubsection{Model Messlauf}
 
 
 
