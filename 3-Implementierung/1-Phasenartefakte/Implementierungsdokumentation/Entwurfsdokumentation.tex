@@ -218,7 +218,17 @@ Im Folgenden werden die Muss-, Soll- und Wunschkriterien aus dem Pflichtenheft h
 Falls das Softwareprodukt ein Musskriterium nicht wie im Pflichtenheft beschrieben aufweist, so führt dieses Dokument detailliert die Ursachen und Gründe hierfür auf. Falls das Softwareprodukt ein Sollkriterium nicht wie im Pflichtenheft beschrieben aufweist, so beschreibt dieses Dokument zwar nicht in jedem Detail, aber hinreichend informativ die Ursachen und Gründe hierfür. Nicht umgesetzte Wunschkriterien werden lediglich benannt, aber nicht hinterfragt. 
 
 \subsection{Entwurf von Messkonfigurationen}
+Es fand ein Fallback statt. Die Messkonfigurationen werden nicht wie gewünscht graphisch durch ein Drag- and Drop Feld erstellt, sondern müssen textuell eingegeben werden. Dadurch verändert sich auch die Betrachtung, wie und ob die folgenden Kriterien überhaupt erfüllt werden können.
 
+\begin{description}
+\item{MK 1} Das Musskriterium "`Hinzufügen eines Bausteins aus dem Prototypen-Feld zu der Messkonfiguration"' ist TODO
+\item{MK 2} Das Musskriterium "`Anpassen von wichtigen funktionalen Bausteineigenschaften"' ist TODO
+\item{MK 3} Das Musskriterium "`Löschen eines Bausteins aus der Messkonfiguration"' ist erfüllt, da der Benutzer die Textuelle Repräsentation eines Bausteins aus der Messkonfiguration entfernen kann.
+\item{MK 4} Das Musskriterium "`Erstellen einer Verbindung"' ist umgesetzt. Der Benutzer kann ein Kanaltupel der Liste an Verbindungen hinzufügen und somit eine Verbindung der Messkonfiguration hinzu fügen. 
+\item{MK 5} Das Musskriterium "`Löschen einer Verbindung"' ist erfüllt. Der Benutzer kann eine Verbindung aus der Liste der Verbindungen löschen, in dem er das entsprechende Kanaltupel löscht.
+\item{SK 1} Das Sollkriterium "`Undo-Redo-Funktion"' ist nicht umgesetzt. Die Messkonfiguration wird textuell erstellt und der Editor unterstützt keine Undo-Redo-Funktion. 
+\item{WK 1} Das Wunschkriterium "`Hinzufügen, Bearbeiten und Löschen von ergänzender Informationen zu der Messkonfiguration durch den Benutzer"' ist nicht umgesetzt.
+\end{description}
 \subsection{Handhabung von Bausteinprototypen}
 
 \subsection{Gewährleisten von Persistenz}
