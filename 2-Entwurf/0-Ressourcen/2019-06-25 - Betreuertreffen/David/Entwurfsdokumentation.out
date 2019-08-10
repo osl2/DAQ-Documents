@@ -1,0 +1,26 @@
+\BOOKMARK [1][-]{section.1}{Ziel der Entwurfsdokumentation}{}% 1
+\BOOKMARK [1][-]{section.2}{Ablaufkommunikation}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Klassen\374bersicht}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Klassendokumentation}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Bereitstellung vorgefertigter Teile}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Handhabung von Messl\344ufen}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Benutzbarkeit der GUI}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.6}{Abgrenzungskriterien}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{Konfigurationsfeld}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{Klassen\374bersicht}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{Klassendokumentation}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.3}{Sequenzdiagramme}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{Bausteinprototypen}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{Sensoren}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.2}{Transformationen}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.3}{Darstellungen}{section.4}% 16
+\BOOKMARK [1][-]{section.5}{Messlauf}{}% 17
+\BOOKMARK [2][-]{subsection.5.1}{Klassen\374bersicht}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.2}{Klassendokumentation}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.3}{Sequenzdiagramme}{section.5}% 20
+\BOOKMARK [1][-]{section.6}{Hilfe / Einstellungen}{}% 21
+\BOOKMARK [2][-]{subsection.6.1}{Ziel}{section.6}% 22
+\BOOKMARK [2][-]{subsection.6.2}{Klassen\374bersicht}{section.6}% 23
+\BOOKMARK [2][-]{subsection.6.3}{Klassendokumentation}{section.6}% 24
+\BOOKMARK [2][-]{subsection.6.4}{Sequenzdiagramme}{section.6}% 25
+\BOOKMARK [1][-]{section.7}{Glossar}{}% 26

@@ -1,0 +1,27 @@
+\babel@toc {ngerman}{}
+\contentsline {section}{\numberline {1}Ziel der Entwurfsdokumentation}{3}{section.1}
+\contentsline {section}{\numberline {2}Ablaufkommunikation}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Klassen\IeC {\"u}bersicht}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Klassendokumentation}{4}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Bereitstellung vorgefertigter Teile}{4}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Handhabung von Messl\IeC {\"a}ufen}{4}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Benutzbarkeit der GUI}{4}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Abgrenzungskriterien}{4}{subsection.2.6}
+\contentsline {section}{\numberline {3}Konfigurationsfeld}{5}{section.3}
+\contentsline {subsection}{\numberline {3.1}Klassen\IeC {\"u}bersicht}{5}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Klassendokumentation}{5}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Sequenzdiagramme}{5}{subsection.3.3}
+\contentsline {section}{\numberline {4}Bausteinprototypen}{6}{section.4}
+\contentsline {subsection}{\numberline {4.1}Sensoren}{8}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Transformationen}{8}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Darstellungen}{8}{subsection.4.3}
+\contentsline {section}{\numberline {5}Messlauf}{11}{section.5}
+\contentsline {subsection}{\numberline {5.1}Klassen\IeC {\"u}bersicht}{11}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Klassendokumentation}{11}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Sequenzdiagramme}{11}{subsection.5.3}
+\contentsline {section}{\numberline {6}Hilfe / Einstellungen}{12}{section.6}
+\contentsline {subsection}{\numberline {6.1}Ziel}{12}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Klassen\IeC {\"u}bersicht}{12}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Klassendokumentation}{12}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Sequenzdiagramme}{12}{subsection.6.4}
+\contentsline {section}{\numberline {7}Glossar}{13}{section.7}
