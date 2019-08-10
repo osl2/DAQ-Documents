@@ -231,31 +231,31 @@ Falls das Softwareprodukt ein Musskriterium nicht wie im Pflichtenheft beschrieb
 Es fand ein Fallback statt. Die Messkonfigurationen werden nicht wie gewünscht graphisch durch ein Drag- and Drop Feld erstellt, sondern müssen textuell eingegeben werden. Dadurch verändert sich auch die Betrachtung, wie und ob die folgenden Kriterien überhaupt erfüllt werden können.
 
 \begin{description}
-\item{MK 1} Das Musskriterium "`Hinzufügen eines Bausteins aus dem Prototypen-Feld zu der Messkonfiguration"' ist TODO
-\item{MK 2} Das Musskriterium "`Anpassen von wichtigen funktionalen Bausteineigenschaften"' ist TODO
-\item{MK 3} Das Musskriterium "`Löschen eines Bausteins aus der Messkonfiguration"' ist erfüllt, da der Benutzer die Textuelle Repräsentation eines Bausteins aus der Messkonfiguration entfernen kann.
-\item{MK 4} Das Musskriterium "`Erstellen einer Verbindung"' ist umgesetzt. Der Benutzer kann ein Kanaltupel der Liste an Verbindungen hinzufügen und somit eine Verbindung der Messkonfiguration hinzu fügen. 
-\item{MK 5} Das Musskriterium "`Löschen einer Verbindung"' ist erfüllt. Der Benutzer kann eine Verbindung aus der Liste der Verbindungen löschen, in dem er das entsprechende Kanaltupel löscht.
-\item{SK 1} Das Sollkriterium "`Undo-Redo-Funktion"' ist nicht umgesetzt. Die Messkonfiguration wird textuell erstellt und der Editor unterstützt keine Undo-Redo-Funktion. 
-\item{WK 1} Das Wunschkriterium "`Hinzufügen, Bearbeiten und Löschen von ergänzender Informationen zu der Messkonfiguration durch den Benutzer"' ist nicht umgesetzt.
+\item[MK 1] Das Musskriterium "`Hinzufügen eines Bausteins aus dem Prototypen-Feld zu der Messkonfiguration"' ist TODO
+\item[MK 2] Das Musskriterium "`Anpassen von wichtigen funktionalen Bausteineigenschaften"' ist TODO
+\item[MK 3] Das Musskriterium "`Löschen eines Bausteins aus der Messkonfiguration"' ist erfüllt, da der Benutzer die Textuelle Repräsentation eines Bausteins aus der Messkonfiguration entfernen kann.
+\item[MK 4] Das Musskriterium "`Erstellen einer Verbindung"' ist umgesetzt. Der Benutzer kann ein Kanaltupel der Liste an Verbindungen hinzufügen und somit eine Verbindung der Messkonfiguration hinzu fügen. 
+\item[MK 5] Das Musskriterium "`Löschen einer Verbindung"' ist erfüllt. Der Benutzer kann eine Verbindung aus der Liste der Verbindungen löschen, in dem er das entsprechende Kanaltupel löscht.
+\item[SK 1] Das Sollkriterium "`Undo-Redo-Funktion"' ist nicht umgesetzt. Die Messkonfiguration wird textuell erstellt und der Editor unterstützt keine Undo-Redo-Funktion. 
+\item[WK 1] Das Wunschkriterium "`Hinzufügen, Bearbeiten und Löschen von ergänzender Informationen zu der Messkonfiguration durch den Benutzer"' ist nicht umgesetzt.
 \end{description}
 \subsection{Handhabung von Bausteinprototypen}
 
 \begin{description}
-	\item{SK 2} Der Benutzer ist in der Lage die Eigenschaften der Bausteinprototypen einzusehen. Jedoch ist die Ansicht auf das Anzeigen der \gls{allgemeinen Bausteinprototyp-Informationen} beschränkt. Der Grund hierfür ist die Anbindung von dem Model an die GUI. Dadurch ist es aktuell nur möglich mit den allgemeinen Bausteinprototyp-Informationen zu arbeiten. Dementsprechend ist das Anzeigen der speziellen Eigenschaften, der Bausteinprototypen, nicht möglich.
-	\item{SK 3} Das Kopieren der Bausteinprototypen ist möglich. Auch das Anpassen der allgemeinen Eigenschaften ist möglich. Jedoch können keine generischen Bausteinprototypen erstellt werden. Dafür wäre die Erstellung einer allgemeinen Vorläge nötig gewesen. Diese Erweiterung hätte dem Nutzer jedoch keine weitere Funktionalität geboten. Aus diesem Grund haben wir uns dazu entschieden die Funktion erst in einer eventuellen Erweiterung der Anwendung zu integrieren.
-	\item{WK 2} Die Verwendung von erweiternder Software, über eine Schnittstelle, ist nicht mehr vorgesehen. Externe Software kann weiterhin zur Erstellung von Yaml-Dateien genutzt werden. Die so entstandenen Yaml-Dateien können über die Lade-Funktion der Anwendung aufgerufen und anschließend verwendet werden.
-	\item{SK 4} Die Anwendung unterscheidet in ihrer jetzigen Form nicht zwischen Benutzerdefinierten- und System-Bausteinen. Deshalb ist es auch hier nur möglich die allgemeinen Eigenschaften der Bausteinprototypen zu ändern.
-	\item{SK 5}
+	\item[SK 2] Der Benutzer ist in der Lage die Eigenschaften der Bausteinprototypen einzusehen. Jedoch ist die Ansicht auf das Anzeigen der \gls{allgemeinen Bausteinprototyp-Informationen} beschränkt. Der Grund hierfür ist die Anbindung von dem Model an die GUI. Dadurch ist es aktuell nur möglich mit den allgemeinen Bausteinprototyp-Informationen zu arbeiten. Dementsprechend ist das Anzeigen der speziellen Eigenschaften, der Bausteinprototypen, nicht möglich.
+	\item[SK 3] Das Kopieren der Bausteinprototypen ist möglich. Auch das Anpassen der allgemeinen Eigenschaften ist möglich. Jedoch können keine generischen Bausteinprototypen erstellt werden. Dafür wäre die Erstellung einer allgemeinen Vorläge nötig gewesen. Diese Erweiterung hätte dem Nutzer jedoch keine weitere Funktionalität geboten. Aus diesem Grund haben wir uns dazu entschieden die Funktion erst in einer eventuellen Erweiterung der Anwendung zu integrieren.
+	\item[WK 2] Die Verwendung von erweiternder Software, über eine Schnittstelle, ist nicht mehr vorgesehen. Externe Software kann weiterhin zur Erstellung von Yaml-Dateien genutzt werden. Die so entstandenen Yaml-Dateien können über die Lade-Funktion der Anwendung aufgerufen und anschließend verwendet werden.
+	\item[SK 4] Die Anwendung unterscheidet in ihrer jetzigen Form nicht zwischen Benutzerdefinierten- und System-Bausteinen. Deshalb ist es auch hier nur möglich die allgemeinen Eigenschaften der Bausteinprototypen zu ändern.
+	\item[SK 5]
 \end{description}
 		
 \subsection{Gewährleisten von Persistenz}
 
 \begin{description}
-\item{MK 6} Die verwendeten Bausteine und ihre Anordnung, also die Messkonfiguration, kann in einer Datei gespeichert werden.
-\item{MK 7} Messkonfigurationen können aus Dateien geladen werden.
-\item{SK 6}
-\item{SK 7}
+\item[MK 6] Das Kriterium ist erfüllt. Die verwendeten Bausteine und ihre Anordnung, also die Messkonfiguration, kann in einer Datei gespeichert werden.
+\item[MK 7] Das Kriterium ist erfüllt. Messkonfigurationen können aus Dateien geladen werden.
+\item[SK 6] Das Kriterium ist nicht erfüllt, da keine neuen Prototypen in der Anwendung erstellt werden können. (Siehe SK 3)
+\item[SK 7] Bausteine werden aus Dateien geladen, die jedoch nur außerhalb der Anwendung erstellt werden können.
 \end{description}
 
 \subsection {Bereitstellung vorgefertigter Teile}
