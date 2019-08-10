@@ -258,6 +258,53 @@ In aller Regel lassen sich abstrakte Entwurfsinhalte während der Implementierun
 
 \subsection{Model}
 
+\subsubsection{Ersetzen des Entwurfsmuster Erbauer durch eine Zuständigkeitskette}
+Das Paket "`Model.BuildingBlockBuilder"' im Entwurf wurde durch das Paket "`model.block"' ersetzt. Das dort verwendete Entwurfsmuster Erbauer erfüllte nicht die notwendige Anforderung, dass der Benutzter leicht eigene Versionen von Bausteinen in die Anwendung einfügen konnte. Darum wurde der Erbauer durch eine Zuständigkeitskette ersetzt. Hier gibt es keine Methode für jeden Baustein im Director, sondern es gibt nur eine Anzahl von Bearbeitern, die einen Block eines Types erstellen. Wenn also der Benutzter eine eigene Transformation erstellen will, kann er die .yaml Datei einer bereits vorhandenen Transformation kopieren und einige Parameter (außer Typ und subtyp) verändern. Die resultierende Transformation wird dann von der Anwendung als eine erkannt und kann dann auch dort verwendet werden.
+Dadurch entfallen alle folgenden Klassen des Entwurfs:
+
+\begin{description}
+\item{} Builder
+\item{} TransformationBuilder
+\item{} RepresentationBuilder
+\item{} XYRepresentationBuilder
+\item{} TableRepresentationBuilder
+\item{} SensorBuilder
+\item{} VirtualSensorBuilder
+\item{} PhysicalSensorBuilder
+\item{} SnakeYamlParser
+\item{} java.util.hashmap
+\end{description}
+
+sowie all diese öffentlichen Methoden in der Director Klasse:
+
+\begin{description}
+\item{} createSensorFromYaml
+\item{} constructTransformation
+\item{} constructXYRepresentation
+\item{} constructNTimeRepresentation
+\item{} constructDS18B20TemperatureSensor
+\item{} constructBMPx80PressureSensor
+\item{} constructINA219CurrentAndVoltageSensor
+\item{} constructMMA8451Accelerometer
+\item{} constructTransformation
+
+\end{description}
+
+Statt dessen wurden folgende Klassen hinzugefügt:
+\begin{description}
+\item{} GeneralBlockKvProcessor
+\item{} KvProcessor
+\item{} SensorKvProcessor
+\item{} PhysicalSensorKvProcessor
+\item{} VirtualSensorKvProcessor
+\item{} RepresentationKvProcessor
+\item{} TableRepresentationKvProcessor
+\item{} XYRepresentationKvProcessor
+\item{} TransformationKvProcessor
+\end{description}
+
+und die Methode constructBuildingBlock zum Director und zu jedem Bearbeitern die Methode processKvPair hinzugefügt. Dabei unterscheiden sich die Methoden der einzelnen Bearbeitern zwar nicht im Namen, aber in ihrer Funktion. Jeder Bearbeiter leitet entweder die Anfrage weiter oder erstellt einen Blocktyp und gibt ihn zurück. 
+
 \subsection{GUI}
 
 \subsection{Controller}
