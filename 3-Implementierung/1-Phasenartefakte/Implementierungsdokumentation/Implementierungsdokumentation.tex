@@ -381,11 +381,12 @@ Dadurch entfällt das komplette Button-Paket.
 
 \subsubsection{Configuration-Paket}
 
-Durch die Entscheidung Konfigurationen schriftlich aufzubauen und keinen Drag-and-Drop-Editor zu benutzen entfallen die visuellen Representationen der Bausteine, der Verbindung, der Ein- und Ausgänge, sowie die zugehörigen Handler. Damit erfüllt das Configuration-Paket in der Implementierungsversion keine Funktionalität.
+Durch die Entscheidung Konfigurationen schriftlich aufzubauen und keinen Drag-and-Drop-Editor zu benutzen entfallen die visuellen Repräsentationen der Bausteine, der Verbindung, der Ein- und Ausgänge, sowie die zugehörigen Handler. Damit erfüllt das Configuration-Paket in der Implementierungsversion keine Funktionalität. Für eine Weiterentwickling der Anwendung mit einem Editor, welcher Drag-and-Drop unterstützt ist das Paket wieder eine zentrale Instanz der Anwendung. 
 
 \subsubsection{BlockProperties-Paket}
 
-
+Durch die Verwendung des Swing-Framework entfallen ebenfalls in diesem Paket die Handler-Interfaces, da das Framework diese Funktionalität in Klassen und Methoden liefert. Daher entfallen in der Implementierung die Interfaces BuildingBlockPropertiesHandler, TransBlockPropertiesHandler und ReprBlockPropertiesHandler.
+Für die Darstellung der Block-Eigenschaften sind die im Entwurf genannten Klassen implementiert. Durch die Darstellung der Eigenschaften als JFrame- Fenster werden die Klassen jedoch um die nötigen Attribute und Methoden ergänzt, um diese Funktionalität zu bieten.
 
 \subsubsection{Exception-Paket}
 
