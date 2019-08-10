@@ -231,9 +231,9 @@ Falls das Softwareprodukt ein Musskriterium nicht wie im Pflichtenheft beschrieb
 Es fand ein Fallback statt. Die Messkonfigurationen werden nicht wie gewünscht graphisch durch ein Drag- and Drop Feld erstellt, sondern müssen textuell eingegeben werden. Dadurch verändert sich auch die Betrachtung, wie und ob die folgenden Kriterien überhaupt erfüllt werden können.
 
 \begin{description}
-\item[MK 1] Das Musskriterium "`Hinzufügen eines Bausteins aus dem Prototypen-Feld zu der Messkonfiguration"' ist TODO
-\item[MK 2] Das Musskriterium "`Anpassen von wichtigen funktionalen Bausteineigenschaften"' ist TODO
-\item[MK 3] Das Musskriterium "`Löschen eines Bausteins aus der Messkonfiguration"' ist erfüllt, da der Benutzer die Textuelle Repräsentation eines Bausteins aus der Messkonfiguration entfernen kann.
+\item[MK 1] Das Musskriterium "`Hinzufügen eines Bausteins aus dem Prototypen-Feld zu der Messkonfiguration"' ist nicht erfüllt. Durch den Fallback zu einem textuellen Messkonfigurationsfeld ist ein direktes Platzieren nicht mehr möglich. Der Benutzer kann zwar anhand der Daten des Bausteinprototypen einen solchen im Konfigurationsfeld erstellen, aber ein direktes Platzieren einer Kopie ist nicht möglich. Die Priorität in der zweiten Hälfte der Implementierungsphase lag darin, eine funktionierende Minimalanwendung zu erstellen, so dass überhaupt ein Prototyp zur Veränderung und Speicherung eines Datenstroms erstellt wird. Die Entscheidung auf den Fallback zurück zu greifen, fiel in der zweiten Hälfte der Implementierungsphase. In der ersten Hälfte wurde viel Zeit damit verbracht ein geeignetes Gui-Framework für eine Drag- and Drop Anwendung zu suchen und sich darin einzuarbeiten. Die Einarbeitungszeit war dabei sehr Zeit fordernd, so dass sich das komplette Projekt verzögerte und drohte zu scheitern.
+\item[MK 2] Das Musskriterium "`Anpassen von wichtigen funktionalen Bausteineigenschaften"' ist teilweise erfüllt. Der Benutzer kann die Eigenschaften des Bausteins verändern, allerdings ist das Verändern der Position im Konfigurationsfeld nicht wirklich möglich. Der Benutzer kann zwar die Reihenfolge der Bausteine innerhalb der textuellen Konfiguration verändern, allerdings haben die Bausteine im Model keine Positionsattribute und es gibt auch kein Konfigurationsfeld mit Positionskoordinaten. Darum ist dieser Teil des Musskriteriums nicht erfüllt. 
+\item[MK 3] Das Musskriterium "`Löschen eines Bausteins aus der Messkonfiguration"' ist erfüllt, da der Benutzer die Textuelle Repräsentation eines Bausteins aus der Messkonfiguration entfernen kann und dieser, nach einem Neuladen, auch so im Model entfernt wird.
 \item[MK 4] Das Musskriterium "`Erstellen einer Verbindung"' ist umgesetzt. Der Benutzer kann ein Kanaltupel der Liste an Verbindungen hinzufügen und somit eine Verbindung der Messkonfiguration hinzu fügen. 
 \item[MK 5] Das Musskriterium "`Löschen einer Verbindung"' ist erfüllt. Der Benutzer kann eine Verbindung aus der Liste der Verbindungen löschen, in dem er das entsprechende Kanaltupel löscht.
 \item[SK 1] Das Sollkriterium "`Undo-Redo-Funktion"' ist nicht umgesetzt. Die Messkonfiguration wird textuell erstellt und der Editor unterstützt keine Undo-Redo-Funktion. 
@@ -289,6 +289,8 @@ In aller Regel lassen sich abstrakte Entwurfsinhalte während der Implementierun
 
 \subsubsection{Model Initialisierung}
 Der Modelmanager initialisiert das Model anhand eines Pfades zu den Bausteinprototypdateien. Die privaten Methoden des Entwurfs createNewMeasurementConfiguration, createTransformationPrototypesFromYaml, createRepresentationPrototypesFromYaml, fetchSensorPrototypesFromBackedn und pushNetworkConfigToBackend wurden an anderer Stelle oder gar nicht implementiert, da ihre Funktionalität an dieser Stelle oder überhaupt nicht gebraucht wurden.
+
+Wichtig für die Initialisierung ist auch die BuildingBlockDirectory Klasse, der alle erstellten Prototypen sowie die Bausteine der Messkonfiguration speichert. Außerdem implementiert diese Klasse auch eine Schnittstelle für die Gui. Die Methoden addConfigConnection und removeConfigConnection wurden nicht implementiert, da diese Funktion über den Controller realisiert wurde. Der BuildingblockDirectory dient für die Gui nur als Nachschlageort, um Daten und Objekte zu erhalten. Die Verwaltung der Messkonfiguration geschieht über den Controller und die Messkonfigurationsklasse. Hinzugefügt wurde die Methode subscribeUpdateEvents und deleteConfig.
 
 
 \subsubsection{Ersetzen des Entwurfsmuster Erbauer durch eine Zuständigkeitskette}
@@ -355,11 +357,19 @@ Das Entwurfspaket model.channellogic hat nun in der Implementierung den Namen mo
 
 \subsubsection{Model Kommunikation mit anderen Modulen}
 Unsere Annahmen im Entwurf, welches Modul was von wem braucht, waren nicht alle korrekt. Darum wurden Schnittstellen und Implementierungen von Schnittstellen um nötige Methoden erweitert und um unnötige Methoden reduziert.
+Das Entwurfspaket model.facadeControllerView heißt nun model.igui. Die Klassen sind alle erhalten. Die Entwurfsmethode pushShellForVisualization wurde durch die Methode pushData ersetzt, da nun nur Daten und keine Graphen an die GUI gepusht werden.
 
+Die Klasse MRunInfo aus dem Modul model wurde um einige Methoden erweitert um die nötigen Informationen im richtigen Format zum Backend und zum Cache zu liefern. Dazu gehören die Methoden: consumeChannelIdsOfSensorAtCache, consumeChannelIdsOfSensorAtBackend, addSensorIdAndItsChannelIds und getNumberOfChannelIds. 
+
+Die Klasse MRunReaction implementiert zwar alle Interface-Methoden des Entwurfs, allerdings wird bisher nur die Methode dispatchCompletePacketSet im Model benutzt um eine Welle von Daten im Model verarbeiten zu lassen. Die übrigen Methoden werden erst in der Qualitätssicherungsphase für die Bereitstellung eines robusteren Messlaufs benötigt.
 
 \subsubsection{Model Messlauf}
 
+Schon im Entwurf war es eine große Herausforderung einen Messlauf und eine dazu gehörige Messkonfiguration zu erstellen. Die Komplexität der Messkonfigurationsklasse hat sich in der Implementierung erhöht, da einige Funktionalitäten hinzukamen, die im Entwurf unscheinbar wirkten. Durch den Fallback zu einer textuellen Messkonfiguration wurden an diese Klasse zusammen mit der Messlauf Klasse noch mehr Veränderungen möglich um einen funktionierenden Prototypen zu erhalten.
 
+In Der Klasse MeasurementRun ist die private Entwurfsmethode checkSensorInChannelStates nicht implementiert, da ein Kanal überhaupt keinen Status mehr hat. Die anderen Entwurfsmethoden wurden alle implementiert. Zusätzlich wurde diese Klasse noch um die Methode pushData und saveData erweitert. Diese Methoden dienen dazu, Messdaten zu speichern oder zur Gui zu pushen. Schließlich gibt es noch die Methode getInChanMRun die für die Verwaltung von Ids und Kanälen benötigt wird und auch von anderen Model Klassen verwendet wird.
+
+Die komplexe Klasse MeasurementConfiguration implementier alle Entwurfsklassen außer checkForCycle und createModelFromYamlDom. Die erste Methode wird erst für die Qualitätssicherung benötigt. Die Funktionalität der zweiten Methode wurde durch die Metode loadConfig ersetzt. Zusätzlich wurde die Methode saveConfig implementiert, um auch eine Messkonfiguration speichern zu können. Die neue Methode getInitId, getInChan, OutChannel, getBlockListPosition dienen zur Verwaltung der Messkonfiguration und den Verbindungen zwischen Blöcken.
 
 \subsection{View}
 
