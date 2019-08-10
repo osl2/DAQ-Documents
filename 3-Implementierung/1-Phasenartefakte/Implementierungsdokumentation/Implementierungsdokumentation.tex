@@ -334,25 +334,76 @@ Statt dessen wurden folgende Klassen hinzugefügt:
 
 und die Methode constructBuildingBlock zum Director und zu jedem Bearbeitern die Methode processKvPair hinzugefügt. Dabei unterscheiden sich die Methoden der einzelnen Bearbeitern zwar nicht im Namen, aber in ihrer Funktion. Jeder Bearbeiter leitet entweder die Anfrage weiter oder erstellt einen Blocktyp und gibt ihn zurück. 
 
-\subsection{GUI}
-
+\subsection{View}
 
 
 \subsubsection{GUI-Paket}
 
-\subsubsection{Configuration-Paket}
+\begin{description}
+\item[MainWindow] Die zentrale Instanz des GUI-Paketes, die Klasse MainWindow wurde durch Methoden zum Starten der Anwendung erweitert und fungiert somit als Initialsierungs-Modul unserer Anwendung. Dadurch wurde die Klasse um Attribute erweitert, welche für das Starten der Anwendung notwendig sind. Durch die Entscheidung für Swing als Framework-Tool, erbt die Klasse von der Klasse JFrame. Dadurch muss die Klasse durch Methoden zur Erzeugung des Anwendungsfenster erweitert werden. Ebenfalls werden alle anderen GUI-Objekte in dieser Klasse zu dem Anwendungsfenster hinzugefügt. 
+\end{description}
 
-\subsubsection{BlockProperties-Paket}
+Erweitert wurde das GUI-Paket um die Klassen DataVisualisation, ConfigurationEditor und Editor.
 
-\subsubsection{Exception-Paket}
-
-\subsubsection{HelpAndOption-Paket}
+\begin{description}
+\item[ConfigurationEditor] Die Klasse ConfigurationEditor stellt das Textfeld zum Schreiben von Messkonfigurationen dar. Durch die Entscheidung gegen ein Drag-and-Drop Editor stellt diese Klasse nun die Instanz dar, mit welcher der Benutzer eine Messkonfiguration entwirft.
+\item[DataVisualisation] Die Klasse DataVisualisation stellt das Textfeld dar, in welcher Messdaten eines Messlaufs präsentiert werden.
+\item[Editor] Die Klasse Editor benutzt das Framework JHotDraw, um einen Drag-and-Drop- Editor zu erstellen. In der jetzigen Version der Anwendung wird dieser Editor nicht eingebunden und nicht benutzt und liefert ebenfalls nicht die gewünschte Funktionalität. Für eine Weiterentwicklung ist der Editor jedoch ein grundlegender Baustein, um die Anwendung benutzerfreundlicher zu machen.
+\end{description}
 
 \subsubsection{Menu-Paket}
 
+Das Menü-Paket wurde durch diverse Veränderungen am Entwurf, wie durch Bereitstellung von Framework- Klassen und Methoden vereinfacht, in dem mehrere Klassen zusammengefasst wurden.
+
+\begin{description}
+\item[PrototypeField] In unserer Anwendung umfasst die Klasse PrototypeField ebenfalls die Klassen SensorBlockField, TransformationBlockField und RepresentationBlockField. Die Einzelnen Menüs der Bausteine werden als JTabbedPane, also als Tab-Fenster in dem Übermenü PrototypeField und enthalten die am Anfang initialisierten Bausteine. Ebenfalls lassen sich hier über Drücken des "Bearbeiten"-Knopfes die Eigenschaften der Bausteine einsehen. 
+\end{description}
+
+Dadurch entfallen in unserer Implementierung die Klassen:
+
+\begin{description}
+\item[SensorBlockField] Enthalten in Klasse PrototypeField und somit entfällt eine separate Implementierung.
+\item[TransformationBlockField] Enthalten in Klasse PrototypeField und somit entfällt eine separate Implementierung.
+\item[RepresentationBlockField] Enthalten in Klasse PrototypeField und somit entfällt eine separate Implementierung.
+\item[FieldHandler] Eine seperate Implementierung von Handler-Klassen entfällt durch das Swing-Framework durch die Benutzung von vordefinierten Listener-Klassen.
+\end{description}
+
+Die Funktionalität der Buttons wurde in der Implementierung beibehalten, jedoch die Klassen zusammengefasst, da das Framework hierfür bereits Funktionalität vorgibt.
+
+\begin{description}
+\item[ButtonField] Die Klasse ButtonField umfasst zusammen mit der Klasse MeasurementButtonField in unserer Implementierung Teile des Button-Paket und die Funktionalität. Die Klassen Button und deren Unterklassen sind somit als
+JButton-Attribut in dem ButtonField enthalten. 
+\item[MeasurementButtonField] Die Klasse MeasurementButtonField enthält die anderen Teile des Button-Pakets, welche den Messlauf beeinflussen, d.h Pause, Resume, Reset und SaveMeasurementData. Ebenfalls sind diese Knöpfe als Attribut der MeasurementButtonKlasse wieder zu finden.
+\end{description}
+
+Dadurch entfällt das komplette Button-Paket.
+
+
+\subsubsection{Configuration-Paket}
+
+Durch die Entscheidung Konfigurationen schriftlich aufzubauen und keinen Drag-and-Drop-Editor zu benutzen entfallen die visuellen Representationen der Bausteine, der Verbindung, der Ein- und Ausgänge, sowie die zugehörigen Handler. Damit erfüllt das Configuration-Paket in der Implementierungsversion keine Funktionalität.
+
+\subsubsection{BlockProperties-Paket}
+
+
+
+\subsubsection{Exception-Paket}
+
+Das Exception-Paket wurde fast vollständig aus dem Entwurf übernommen. Einzelne Methoden entfallen durch das Framework, wie z.B closeAll() in Klasse ExceptionWindowManager oder close() in ExceptionWindow. 
+Ebenfalls wurde in der Klasse ConnectionExceptionWindow diie Methode changeWireColor() entfernt, da durch unsere Entscheidung das Projekt von visuellen Komponenten zu kapseln, die Verbindung nicht mehr zu einer Instanz der Klasse Wire zugeordnet werden kann.
+
+\subsubsection{HelpAndOption-Paket}
+
+Das HelpAndOption-Paket wurde insofern verändert, dass die Interfaces HelpWindowHandler und OptionsWindowHandler aufgrund der Framework-Entscheidung entfallen.
+Die Klassen HelpWindow und OptionsWindow wurden durch Attribute und Methoden zur Anpassen an das Framework erweitert, damit die Fenster als unabhängige Instanzen angezeigt werden. Das OptionWindow wurde durch weitere Optionen erweitert, d.h System-Optionen, Fenster-Optionen, Messlauf-Optionen und Raspberry-Pi-Optionen.
+
 \subsubsection{Model-Interface-Paket}
 
+Das Interface ViewDirectoryInterface wurde nach Entwurfsvorgaben implementiert. Einzelne Methoden finden in der jetztigen Version der Anwendung keine Anwendung, sind aber für eine mögliche Weiterentwicklung notwendig, um bestimmte Funktionalitäten zu bieten.
+
 \subsubsection{Controller-Interface-Paket}
+
+Das Contoller-Interface-Paket wurde nach Entwurfsvorgaben implementiert. Einzelne Methoden aller Interfaces finden in der jetztigen Version der Anwendung keine Anwendung, sind aber für eine mögliche Weiterentwicklung notwendig, um bestimmte Funktionalitäten zu bieten. Bei einer Weiterentwicklung um ein Konfiguration-Editor, welcher Drag-And-Drop unterstützt, werden die Interfaces IBlockAction und IConnectionAction eine wesentliche Rolle zur Verbindung der zwei Module spielen.
 
 \subsection{Controller}
 
@@ -361,6 +412,13 @@ und die Methode constructBuildingBlock zum Director und zu jedem Bearbeitern die
 \subsection{Cache}
 
 \subsection{File-Service}
+
+\begin{description}
+\item[CsvService] Die Klasse CsvService wurde in der Implementierung durch die Methoden zum Umbennen und Exportieren von CsvDateien erweitern. Die im Entwurf gewollte Funktionalität wird durch die Implementierung umgesetzt.
+\item[PngService] Die Funktionalität der Klasse PngService wurde wie im Entwurf beschrieben umgesetzt. Sie wird jedoch durch die Umorgansiation der Projektfunktionalität und Projektstruktur nicht verwendet.
+\item[YamlService] Die Klasse YamlService wurde nach der Entwurfsstruktur umgesetzt. Durch Anpassung an SnakeYaml wurden jedoch einige Parameter und Argumente verändert.
+
+\end{description}
 
 \section{Realer Implementierungsablauf}
 
