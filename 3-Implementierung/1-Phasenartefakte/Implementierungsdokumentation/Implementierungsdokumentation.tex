@@ -223,6 +223,10 @@
 	description = {Ein GUI Toolkit.}
 }
 
+\newglossaryentry{Presenter}{
+    name = {Presenter},
+    description = {Presenter bezieht sich auf die gleichnahmige Komponente in einem Model-View-Presenter.}
+}
 \subject{Implementierungsdokumentation}
 \title{Definition und Durchführung~von Messwertverarbeitung für~den~Physikunterricht auf~Basis~eines~Raspberry~Pis}
 \subtitle{Version 1.0.0}
@@ -309,6 +313,8 @@ Vor Fehlverhalten wird nicht gewarnt sondern nur reaktionär auf Fehler reagiert
 \end{description}
 
 \subsection{Abgrenzungskriterien}
+
+Alle Abgrenzungskriterien wurden eingehalten.
 
 \clearpage
 \section{Umsetzung des Entwurfs}
@@ -478,7 +484,17 @@ Das Contoller-Interface-Paket wurde nach Entwurfsvorgaben implementiert. Einzeln
 
 \subsection{Controller}
 
-Die Klasse \verb:CommandManager: ist wie im Entwurf vorgesehen implementiert.
+Die Rolle, die der Controller einnimmt, hat sich nicht geändert.
+
+\subsubsection{Anpassung an Model-View-Controller}
+In dem ursprünglichen Entwurf war der Controller nicht klar von einem \gls{Presenter} abgegrenzt. Aus diesem Grund wurden alle Aufrufe, von dem Model, über den Controller, zur GUI, entfernt. Dadurch erfüllt die vorgesehene Rolle nun eindeutig.
+
+\subsubsection{Command zum Speichern von Daten}
+Ursprünglich waren für das Speichern der Bausteine unterschiedliche Commands vorgesehen. Namentlich waren diese:
+
+    EditBlockPropertiesCommand, ModifyChannelConnectionCommand, RemoveBlockFromConfigCommand, ExportBlockPrototypeCommand, CloneBlockCommand
+
+Diese Commands wurden in \verb|SavaDataCommand| zusammengefasst. Durch das Zusammenfassen werden bei dem Speichern von Änderungen auch die Informationen mit übergeben, die sich nicht geändert haben. Wir haben uns für dieses Vorgehen entschieden, weil die Datenhaltung über einen zentralen Punkt abgehandelt werden kann.
 
 \subsection{Backend}
 
