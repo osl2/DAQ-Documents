@@ -209,7 +209,12 @@
 }
 
 \newglossaryentry{GEF}{
-	name = {Grafical Editing Framework},
+	name = {Graphical Editing Framework},
+	description = {Ein GUI Framework.}
+}
+
+\newglossaryentry{JHotDraw}{
+	name = {JHotDraw},
 	description = {Ein GUI Framework.}
 }
 
@@ -273,9 +278,11 @@ Es fand ein Fallback statt. Die Messkonfigurationen werden nicht wie gewünscht 
 \begin{description}
 \item[MK 8]
 \item[MK 9] 
-\item[MK 10] Darstellungsbausteine für einen Messablauf sind nicht vorhanden. Nach einer Neu-Auslegung des Projekts sind nur noch textbasierte Interaktionsmöglichkeiten, für den Benutzer, vorhanden. Der Grund hierfür waren zwei Technologiewechsel.
+\item[MK 10] Darstellungsbausteine für einen Messablauf sind nicht vorhanden. Nach einer Neu-Auslegung des Projekts sind nur noch textbasierte Interaktionsmöglichkeiten, für den Benutzer, vorhanden. Der Grund hierfür waren drei Technologiewechsel in der GUI.
 \begin{description}
-	item[1.] Der erste Wechsel erfolgte von \gls{SWT} auf \gls{GEF}.
+	\item[1.] Der erste Wechsel erfolgte von \gls{SWT} (SWT) auf \gls{GEF} (GEF). SWT bot uns keine Möglichkeit unkompliziert eine Drag-And-Drop Funktionalität zu integrieren. Wir hielten es daher für sinnvoll das, auf SWT basierende, GEF als Framework zu verwenden. Die Anwendung war als Eclipse-Erweiterung konzipiert. Wir stellten jedoch fest, dass die Verwendung von GEF einen zu hohen Zeitaufwand für die Einarbeitung zur Folge hätte.
+	\item[2.] Der zweite Wechsel erfolgte von GEF auf \gls{JHotDraw}.
+	\item[3.]
 \end{description}
 \item[SK 8] 
 \item[WK 3] 
