@@ -346,7 +346,7 @@ Nach der Hälfte der Implementierungszeit haben wir uns entschlossen die graphis
 
 Die Klasse BuidingBlock aus dem Paket model.core ist nun nicht mehr abstrakt. Sie hat außerdem die Methode processValue erhalten um die Benutzung unspezifizierter Bausteine zu erkennen. Außerdem sind die Klassen helpMessage und yamlRepresentation, die eine Assoziation zu der Klasse BuildingBlock haben nicht implementiert. Die yaml Repräsentation wird durch den Fileservice realisiert.
 
-Die Entwurfspakete model.sensorLogic, model.transformationLogic und model.representationLogicwurden zu den Implementierungpakten model.sensor, model.transformation und model.representation umbenannt. In den drei Paketen wurden alle Entwurfsklassen beibehalten. Allerdings haben die Klassen VirtualSensor, PhysicalSensor, TableRepresentation und XYRepresentation keine Funktion, außer um möglichen zukünftigen Bausteinen eine Grundlage zur erweiterten Kategorisierung zu bieten. Diese vier Klassen haben ihre explizite Methode processValue verloren, da sich diese von Implementierung der jeweiligen Oberklasse nicht unterscheidet. Außerdem sind die drei Klassen Sensor, Transformation und Representation in der Implementierung nicht mehr abstrakt. Alle Bausteinklassen haben außerdem einen Copy-Constructor erhalten um tiefe Kopien anlegen zu können.
+Die Entwurfspakete model.sensorLogic, model.transformationLogic und model.representationLogic wurden zu den Implementierungpakten model.sensor, model.transformation und model.representation umbenannt. In den drei Paketen wurden alle Entwurfsklassen beibehalten. Allerdings haben die Klassen VirtualSensor, PhysicalSensor, TableRepresentation und XYRepresentation keine Funktion, außer um möglichen zukünftigen Bausteinen eine Grundlage zur erweiterten Kategorisierung zu bieten. Diese vier Klassen haben ihre explizite Methode processValue verloren, da sich diese von Implementierung der jeweiligen Oberklasse nicht unterscheidet. Außerdem sind die drei Klassen Sensor, Transformation und Representation in der Implementierung nicht mehr abstrakt. Alle Bausteinklassen haben außerdem einen Copy-Constructor erhalten um tiefe Kopien anlegen zu können.
 
 Die Klasse Function aus dem Paket model.transformation hat ihre Methode applyFunction verloren und erstellt nun nur noch die benötigte Funktion aus den Daten der .yaml Datei. Die Funktionen der Methode applyFunction wurde in die Methode processValue der Klasse Transformation eingefügt, so dass der reinkommende Wert schneller verarbeitet und weiter gesendet werden kann.
 
@@ -374,41 +374,21 @@ Die komplexe Klasse MeasurementConfiguration implementier alle Entwurfsklassen a
 \subsection{View}
 
 
-\subsubsection{Auswirkungen des Fallback auf die GUI}
+\subsubsection{GUI-Paket}
 
-Aufgrund des Fallbacks führte die Konzentration auf die Grundfunktionalität zur Vereinfachung der GUI, um die wesentlichen und wichtigsten Grundfunktionen bereitzustellen. Daher wurde das GUI-Paket um die Klassen DataVisualisation, ConfigurationEditor und Editor erweitert.
+\begin{description}
+\item[MainWindow] Die zentrale Instanz des GUI-Paketes, die Klasse MainWindow wurde durch Methoden zum Starten der Anwendung erweitert und fungiert somit als Initialsierungs-Modul unserer Anwendung. Dadurch wurde die Klasse um Attribute erweitert, welche für das Starten der Anwendung notwendig sind. Durch die Entscheidung für Swing als Framework-Tool, erbt die Klasse von der Klasse JFrame. Dadurch muss die Klasse durch Methoden zur Erzeugung des Anwendungsfenster erweitert werden. Ebenfalls werden alle anderen GUI-Objekte in dieser Klasse zu dem Anwendungsfenster hinzugefügt. 
+\end{description}
+
+Erweitert wurde das GUI-Paket um die Klassen DataVisualisation, ConfigurationEditor und Editor.
 
 \begin{description}
 \item[ConfigurationEditor] Die Klasse ConfigurationEditor stellt das Textfeld zum Schreiben von Messkonfigurationen dar. Durch die Entscheidung gegen ein Drag-and-Drop Editor stellt diese Klasse nun die Instanz dar, mit welcher der Benutzer eine Messkonfiguration entwirft.
 \item[DataVisualisation] Die Klasse DataVisualisation stellt das Textfeld dar, in welcher Messdaten eines Messlaufs präsentiert werden.
 \item[Editor] Die Klasse Editor benutzt das Framework JHotDraw, um einen Drag-and-Drop- Editor zu erstellen. In der jetzigen Version der Anwendung wird dieser Editor nicht eingebunden und nicht benutzt und liefert ebenfalls nicht die gewünschte Funktionalität. Für eine Weiterentwicklung ist der Editor jedoch ein grundlegender Baustein, um die Anwendung benutzerfreundlicher zu machen.
-
-\item[Button-Paket] Durch die vereinfachte Funktionalität der Anwendung entfallen ebenfalls einige Buttons und ihre Funktionalität. Diese Buttons sind: NewConfiguration, UndoButton, RedoButton und SaveRepresentationButton.
-
-
-\item[Configuration-Paket]
-
-Durch die Entscheidung Konfigurationen schriftlich aufzubauen und keinen Drag-and-Drop-Editor zu benutzen entfallen die visuellen Repräsentationen der Bausteine, der Verbindung, der Ein- und Ausgänge, sowie die zugehörigen Handler. Damit erfüllt das Configuration-Paket in der Implementierungsversion keine Funktionalität. Für eine Weiterentwicklung der Anwendung mit einem Editor, welcher Drag-and-Drop unterstützt ist das Paket wieder eine zentrale Instanz der Anwendung. 
-
-\item[Controller-Interface-Paket]
-
-Das Contoller-Interface-Paket wurde nach Entwurfsvorgaben implementiert. Einzelne Methoden aller Interfaces finden in der jetztigen Version der Anwendung keine Anwendung, sind aber für eine mögliche Weiterentwicklung notwendig, um bestimmte Funktionalitäten zu bieten. Bei einer Weiterentwicklung um ein Konfiguration-Editor, welcher Drag-And-Drop unterstützt, werden die Interfaces IBlockAction und IConnectionAction eine wesentliche Rolle zur Verbindung der zwei Module spielen.
-
-\item[Model-Interface-Paket]
-
-Das Interface ViewDirectoryInterface wurde nach Entwurfsvorgaben implementiert. Einzelne Methoden finden in der jetzigen Version der Anwendung keine Anwendung, sind aber für eine mögliche Weiterentwicklung notwendig, um bestimmte Funktionalitäten zu bieten.
 \end{description}
 
-
-
-\subsubsection{Auswirkung der Framework-Entscheidung auf die GUI}
-
-Da wir uns nach der Auseinandersetzung mit sehr komplexen und zeitintensiv zu lernenden Frameworks erst sehr spät auf ein einfacheres Framework festgelegt haben, hatte das zur Folge, dass wir die Komplexität der Anwendung reduzieren müssen.
-Als Framework zur Erstellung graphischer Oberflächen haben wir uns auf Swing geeinigt. Durch die Swing Bibliotheken werden schon einige Klassen und Methoden geliefert, welche Methoden oder Klassen aus dem Entwurf ersetzten oder benötigte Funktonalitäten liefert.
-
-\begin{description}
-\item[MainWindow] Die zentrale Instanz des GUI-Paketes, die Klasse MainWindow wurde durch Methoden zum Starten der Anwendung erweitert und fungiert somit als Initialsierungs-Modul unserer Anwendung. Dadurch wurde die Klasse um Attribute erweitert, welche für das Starten der Anwendung notwendig sind. Durch die Entscheidung für Swing als Framework-Tool, erbt die Klasse von der Klasse JFrame. Dadurch muss die Klasse durch Methoden zur Erzeugung des Anwendungsfenster erweitert werden. Ebenfalls werden alle anderen GUI-Objekte in dieser Klasse zu dem Anwendungsfenster hinzugefügt. 
-\end{description}
+\subsubsection{Menu-Paket}
 
 Das Menü-Paket wurde durch diverse Veränderungen am Entwurf, wie durch Bereitstellung von Framework- Klassen und Methoden vereinfacht, in dem mehrere Klassen zusammengefasst wurden.
 
@@ -435,22 +415,33 @@ JButton-Attribut in dem ButtonField enthalten.
 
 Dadurch entfällt das komplette Button-Paket.
 
-\begin{description}
-\item[BlockProperties-Paket]
+
+\subsubsection{Configuration-Paket}
+
+Durch die Entscheidung Konfigurationen schriftlich aufzubauen und keinen Drag-and-Drop-Editor zu benutzen entfallen die visuellen Repräsentationen der Bausteine, der Verbindung, der Ein- und Ausgänge, sowie die zugehörigen Handler. Damit erfüllt das Configuration-Paket in der Implementierungsversion keine Funktionalität. Für eine Weiterentwickling der Anwendung mit einem Editor, welcher Drag-and-Drop unterstützt ist das Paket wieder eine zentrale Instanz der Anwendung. 
+
+\subsubsection{BlockProperties-Paket}
 
 Durch die Verwendung des Swing-Framework entfallen ebenfalls in diesem Paket die Handler-Interfaces, da das Framework diese Funktionalität in Klassen und Methoden liefert. Daher entfallen in der Implementierung die Interfaces BuildingBlockPropertiesHandler, TransBlockPropertiesHandler und ReprBlockPropertiesHandler.
 Für die Darstellung der Block-Eigenschaften sind die im Entwurf genannten Klassen implementiert. Durch die Darstellung der Eigenschaften als JFrame- Fenster werden die Klassen jedoch um die nötigen Attribute und Methoden ergänzt, um diese Funktionalität zu bieten.
 
-\item[Exception-Paket]
+\subsubsection{Exception-Paket}
 
 Das Exception-Paket wurde fast vollständig aus dem Entwurf übernommen. Einzelne Methoden entfallen durch das Framework, wie z.B closeAll() in Klasse ExceptionWindowManager oder close() in ExceptionWindow. 
 Ebenfalls wurde in der Klasse ConnectionExceptionWindow diie Methode changeWireColor() entfernt, da durch unsere Entscheidung das Projekt von visuellen Komponenten zu kapseln, die Verbindung nicht mehr zu einer Instanz der Klasse Wire zugeordnet werden kann.
 
-\item[HelpAndOption-Paket]
+\subsubsection{HelpAndOption-Paket}
 
 Das HelpAndOption-Paket wurde insofern verändert, dass die Interfaces HelpWindowHandler und OptionsWindowHandler aufgrund der Framework-Entscheidung entfallen.
 Die Klassen HelpWindow und OptionsWindow wurden durch Attribute und Methoden zur Anpassen an das Framework erweitert, damit die Fenster als unabhängige Instanzen angezeigt werden. Das OptionWindow wurde durch weitere Optionen erweitert, d.h System-Optionen, Fenster-Optionen, Messlauf-Optionen und Raspberry-Pi-Optionen.
-\end{description}
+
+\subsubsection{Model-Interface-Paket}
+
+Das Interface ViewDirectoryInterface wurde nach Entwurfsvorgaben implementiert. Einzelne Methoden finden in der jetztigen Version der Anwendung keine Anwendung, sind aber für eine mögliche Weiterentwicklung notwendig, um bestimmte Funktionalitäten zu bieten.
+
+\subsubsection{Controller-Interface-Paket}
+
+Das Contoller-Interface-Paket wurde nach Entwurfsvorgaben implementiert. Einzelne Methoden aller Interfaces finden in der jetztigen Version der Anwendung keine Anwendung, sind aber für eine mögliche Weiterentwicklung notwendig, um bestimmte Funktionalitäten zu bieten. Bei einer Weiterentwicklung um ein Konfiguration-Editor, welcher Drag-And-Drop unterstützt, werden die Interfaces IBlockAction und IConnectionAction eine wesentliche Rolle zur Verbindung der zwei Module spielen.
 
 \subsection{Controller}
 
