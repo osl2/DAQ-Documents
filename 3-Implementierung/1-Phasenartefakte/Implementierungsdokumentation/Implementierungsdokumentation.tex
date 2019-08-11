@@ -199,8 +199,18 @@
 }
 
 \newglossaryentry{allgemeinen Bausteinprototyp-Informationen}{
-	name = {todo},
-	description = {todo}
+	name = {allgemeinen Bausteinprototyp-Informationen},
+	description = {Dazu gehören folgende Eigenschaften: Name, Typ, Configurations ID, Initialisierungs ID, Nutzerinformationen (Hilfetext)}
+}
+
+\newglossaryentry{SWT}{
+	name = {Standard Widget Toolkit},
+	description = {Ein GUI Framework.}
+}
+
+\newglossaryentry{GEF}{
+	name = {Grafical Editing Framework},
+	description = {Ein GUI Framework.}
 }
 
 \subject{Implementierungsdokumentation}
@@ -260,11 +270,16 @@ Es fand ein Fallback statt. Die Messkonfigurationen werden nicht wie gewünscht 
 
 \subsection {Bereitstellung vorgefertigter Teile}
 
-\item{MK 8} 
-\item{MK 9} 
-\item{MK 10} Darstellungsbausteine für einen Messablauf sind nicht vorhanden. Nach einer Neu-Auslegung des Projekts sind nur noch textbasierte Interaktionsmöglichkeiten, für den Benutzer, vorhanden. Der Grund hierfür war der 
-\item{SK 8} 
-\item{WK 3} 
+\begin{description}
+\item[MK 8]
+\item[MK 9] 
+\item[MK 10] Darstellungsbausteine für einen Messablauf sind nicht vorhanden. Nach einer Neu-Auslegung des Projekts sind nur noch textbasierte Interaktionsmöglichkeiten, für den Benutzer, vorhanden. Der Grund hierfür waren zwei Technologiewechsel.
+\begin{description}
+	item[1.] Der erste Wechsel erfolgte von \gls{SWT} auf \gls{GEF}.
+\end{description}
+\item[SK 8] 
+\item[WK 3] 
+\end{description}
 
 \subsection{Handhabung von Messläufen}
 
