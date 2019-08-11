@@ -209,10 +209,24 @@
 }
 
 \newglossaryentry{GEF}{
-	name = {Grafical Editing Framework},
+	name = {Graphical Editing Framework},
 	description = {Ein GUI Framework.}
 }
 
+\newglossaryentry{Swing}{
+	name = {Swing},
+	description = {Ein GUI Toolkit.}
+}
+
+\newglossaryentry{AWT}{
+	name = {Abstract Window Toolkit},
+	description = {Ein GUI Toolkit.}
+}
+
+\newglossaryentry{Presenter}{
+    name = {Presenter},
+    description = {Presenter bezieht sich auf die gleichnahmige Komponente in einem Model-View-Presenter.}
+}
 \subject{Implementierungsdokumentation}
 \title{Definition und Durchführung~von Messwertverarbeitung für~den~Physikunterricht auf~Basis~eines~Raspberry~Pis}
 \subtitle{Version 1.0.0}
@@ -271,14 +285,18 @@ Es fand ein Fallback statt. Die Messkonfigurationen werden nicht wie gewünscht 
 \subsection {Bereitstellung vorgefertigter Teile}
 
 \begin{description}
-\item[MK 8]
-\item[MK 9] 
-\item[MK 10] Darstellungsbausteine für einen Messablauf sind nicht vorhanden. Nach einer Neu-Auslegung des Projekts sind nur noch textbasierte Interaktionsmöglichkeiten, für den Benutzer, vorhanden. Der Grund hierfür waren zwei Technologiewechsel.
+\item[MK 8] Die Bausteinprototypen für Sensoren werden direkt aus den Yaml Dateien, die sich in PhyPiDAQ befinden, erstellt.
+\item[MK 9] Generische Transformationen können erstellt werden. Die Funktion, die sie realisieren, kann in ihren Eigenschaften angepasst werden.
+\item[MK 10] Darstellungsbausteine für einen Messablauf sind nicht vorhanden. Nach einer Neu-Auslegung des Projekts sind nur noch textbasierte Interaktionsmöglichkeiten, für den Benutzer, vorhanden. Der Grund hierfür waren drei Technologiewechsel in der GUI.
 \begin{description}
-	\item[1.] Der erste Wechsel erfolgte von \gls{SWT} auf \gls{GEF}.
+
+	\item[1.] Der erste Wechsel erfolgte von \gls{SWT} (SWT) auf \gls{GEF} (GEF). SWT bot uns keine Möglichkeit unkompliziert eine Drag-And-Drop Funktionalität zu integrieren. Wir hielten es daher für sinnvoll das, auf SWT basierende, GEF als Framework zu verwenden. Die Anwendung war als Eclipse-Erweiterung konzipiert. Wir stellten jedoch fest, dass die Verwendung von GEF einen zu hohen Zeitaufwand für die Einarbeitung zur Folge hätte.
+	\item[2.] Der zweite Wechsel erfolgte von GEF auf \gls{JHotDraw}. Dieser Wechsel sollte die Komplexität der Technologie reduzieren. Eine Möglichkeit Drag-And-Drop zu verwenden war weiterhin geplant.
+	\item[3.] Der dritte Wechsel erfolgte von JHotDraw auf \gls{Swing} und \gls{AWT} (AWT). Dieser Wechsel ermöglichte eine Umsetzung einer textbasierten Darstellung von der Daten. Dementsprechend mussten die Möglichkeit der GUI beschränkt werden. Hätte diese Umstellung nicht stattgefunden wäre ein hohes Risiko bestanden, dass keine lauffähige Anwendung erstellt werden könnte.
+
 \end{description}
-\item[SK 8] 
-\item[WK 3] 
+\item[SK 8] Es liegen drei unterschiedliche Messkonfigurationen vor.
+\item[WK 3] Es sind keine Spiele, oder vergleichbares, vorhanden.
 \end{description}
 
 \subsection{Handhabung von Messläufen}
@@ -321,6 +339,8 @@ Vor Fehlverhalten wird nicht gewarnt sondern nur reaktionär auf Fehler reagiert
 \end{description}
 
 \subsection{Abgrenzungskriterien}
+
+Alle Abgrenzungskriterien wurden eingehalten.
 
 \clearpage
 \section{Umsetzung des Entwurfs}
@@ -490,7 +510,17 @@ Das Contoller-Interface-Paket wurde nach Entwurfsvorgaben implementiert. Einzeln
 
 \subsection{Controller}
 
-Die Klasse \verb:CommandManager: ist wie im Entwurf vorgesehen implementiert.
+Die Rolle, die der Controller einnimmt, hat sich nicht geändert.
+
+\subsubsection{Anpassung an Model-View-Controller}
+In dem ursprünglichen Entwurf war der Controller nicht klar von einem \gls{Presenter} abgegrenzt. Aus diesem Grund wurden alle Aufrufe, von dem Model, über den Controller, zur GUI, entfernt. Dadurch erfüllt die vorgesehene Rolle nun eindeutig.
+
+\subsubsection{Command zum Speichern von Daten}
+Ursprünglich waren für das Speichern der Bausteine unterschiedliche Commands vorgesehen. Namentlich waren diese:
+
+    EditBlockPropertiesCommand, ModifyChannelConnectionCommand, RemoveBlockFromConfigCommand, ExportBlockPrototypeCommand, CloneBlockCommand
+
+Diese Commands wurden in \verb|SavaDataCommand| zusammengefasst. Durch das Zusammenfassen werden bei dem Speichern von Änderungen auch die Informationen mit übergeben, die sich nicht geändert haben. Wir haben uns für dieses Vorgehen entschieden, weil die Datenhaltung über einen zentralen Punkt abgehandelt werden kann.
 
 \subsection{Backend}
 
@@ -541,9 +571,17 @@ Dieser Abschnitt führt auf, inwieweit der tatsächliche zeitliche Implementieru
 
 Von Abweichungen betroffene Softwareelemente werden nicht im Einzelnen aufgeführt, sondern es werden lediglich in Bezug auf die Abweichungsgründe die Gruppen der betroffenen Softwareelemente benannt.
 
+Dazu ist in \ref{reale} das entsprechende Gantt-Diagramm zu sehen. In der oberen Zeile lassen sich die Meilenstein, mit den geplanten Fristen, erkennen. In der Tabelle ist, mit dem jeweiligen Kürzel, der Fertigstellungs-Termin, der jeweiligen Komponente, bezeichnet. Wenn ein Meilenstein in Klammern steht bedeutet dies, dass das Ziel nicht innerhalb der Implementierungszeit erreicht werden konnte.
+
 \section{Anhang}
 
-\includepdf{Grafiken/Implementierungsplan.pdf}
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width = 14cm]{Grafiken/Realer_Ablauf_der_Implementierung.pdf}
+        \caption{Der reale Verlauf der Implementierung anhand eines Gantt-Diagramms}
+        \label{reale}
+    \end{center}
+\end{figure}
 
 \clearpage
 \section{Glossar}\label{glossar}
