@@ -275,7 +275,7 @@ Es fand ein Fallback statt. Die Messkonfigurationen werden nicht wie gewünscht 
 \item[MK 9] 
 \item[MK 10] Darstellungsbausteine für einen Messablauf sind nicht vorhanden. Nach einer Neu-Auslegung des Projekts sind nur noch textbasierte Interaktionsmöglichkeiten, für den Benutzer, vorhanden. Der Grund hierfür waren zwei Technologiewechsel.
 \begin{description}
-	item[1.] Der erste Wechsel erfolgte von \gls{SWT} auf \gls{GEF}.
+	\item[1.] Der erste Wechsel erfolgte von \gls{SWT} auf \gls{GEF}.
 \end{description}
 \item[SK 8] 
 \item[WK 3] 
@@ -283,7 +283,31 @@ Es fand ein Fallback statt. Die Messkonfigurationen werden nicht wie gewünscht 
 
 \subsection{Handhabung von Messläufen}
 
+Die Messläufe beziehen sich auf die aktuell geladene Messkonfiguration und können nicht  nur Messdaten vom Raspberry Pi beziehen, sondern auch in einem Demomodus simulierte Messdaten verwenden. Zum Test-Modus als auch zur zeitlichen Parametrisierung der Messläufe gibt es jeweils eine Registerkarte in den Einstellungen.  
+
+\begin{description}
+\item[MK 11] Der Start eines Messlaufs erfolgt über den letzten der drei Hauptbuttons am oberen Fensterrand. Ist ein Messlauf einmal gestartet, kann der Benutzer in einem gesonderten Feld weitere Buttons zur Steuerung der Messläufe benutzen.  
+
+Das Starten, Pausieren, Fortführen und Beenden funktioniert. Auf einen Beenden-Button wurde bewusst verzichtet, da der Pause-Button für den Benutzer den gleichen Effekt hat, und er so stets die Möglichkeit hat, den Messlauf doch noch einmal fortzuführen. Für den Fall, dass der Messlauf atypisches Verhalten aufzeigen sollte, oder falls Einstellungen geändert wurden, gibt es einen im Pflichtenheft nicht beschriebenen Reset-Button. 
+
+Dieses Kriterium kann als erfüllt angesehen werden.
+
+\item[MK12]
+Die Abtastrate der Sensoren kann der Benutzer zum Ende der Implementierungsphase lediglich (zusammen mit anderen Sensor-Metadaten) einsehen. Die Konfiguration der Python-Skripte gestaltete sich schwieriger als erwartet, so dass eine Vereinbarung getroffen wurde, dass auch der Einsatz von Pythonskripten mit fest eincodierter Abtastrate in Ordnung geht. Die Zeitpunkte, zu denen die (nachgelagerten) Bausteine in der Messkonfiguration eine Verarbeitung der Messdaten vornehmen, können aufgrund der Latenzen, die bei der Netzwerkübertragung auftreten können, als zeitlich entkoppelt betrachtet werden. Über die Einstellungen kann der Benutzer ein Zeitraster definieren. Messdaten, die innerhalb die im selben Zeitschlitz abgetastet wurden, werden von FreeJDaq zusammengeführt und einer Messkonfiguration als eine einzige Belegung der Sensor-Kanäle übergeben.
+\item[SK9]
+Die im Kriterium beschriebenen Checks finden erst beim Start eines Messlaufs statt. Backend und Model geben dann jedoch einigermaßen einigermaßen aussagekräftige Fehlermeldungen ab. 
+\item[SK10]
+Die verarbeiteten Messdaten können in einer Csv-Datei gespeichert werden. In den  Sensorblöcken ist jedoch keine Speicherfunktion implementiert. Sie werden dort lediglich geloggt werden. 
+\item[WK4]
+Die Sensorbausteine können nicht direkt Testdaten aufnehmen. Simulierte Messdaten können jedoch vom Backend eingespielt werden. 
+\end{description}
+
+
+
 \subsection {Benutzbarkeit der GUI}
+
+
+
 
 \begin{description}
 \item[SK 11] Die Funktionalität Aktionen per Drag-and-Drop durchzuführen ist in der aktuellen Version der Anwendung nicht implementiert. Die Gründe hierfür sind die lange Einarbeitungszeit in ein externes Editor-Programm, welches ermöglicht Objekte über Drag-and-Drop zu bewegen. Dies würde das Auswählen eines Editor-Programm beinhalten, die Einarbeitungszeit, die Implemtierung und Integration dieses Programm beinhalten. Durch ein zu spätes Festlegen auf ein Editor-Programm, \gls{JHotDraw} hat die Zeit für die Einarbeitung, Implementierung und Integrierung gefehlt. Deswegen haben wir uns aus Zeitgründen dagegen entschieden ein Editor-Programm zu implementieren. Leider entfällt dadurch eine grundlegende Funktionalität unserer Anwendung, welche bereits fest vorgesehen war und die Benutzung der Anwendung vereinfachen und verbessern würde. Als Weiterentwicklung hat dieses Kriterium eine hohe Priorität.
@@ -486,6 +510,9 @@ Anstelle einer echten SSH-Verbindung kann das Backend auch simuliert werden. Daz
 
 Die Simulation des Backends ist nur eingeschränkt funktionstüchtig, da die Verbindung mit einem echten Gerät in der Entwicklung eine deutlich höhere Priorität hatte.
 
+Im Backend wurde das Entwurfsmuster der abstrakten Fabrik zur Realisierung eines Demo-Modus benutzt. Die meisten Kommandos und Kommando-Hilfsmittel gibt es nun nicht nur zur Kommunikation mit dem Raspberry Pi, sondern auch zur "simulierten" Kommunikation unter Einsatz des lokalen Dateisystems. 
+
+
 \subsubsection{Nebenläufigkeit}
 
 Das Auslesen von Daten läuft parallelisiert ab. Dabei wird für jeden Sensor ein eigener \verb:Thread: aufgebaut. (Nicht, wie im Entwurf angedeutet, für jeden Kanal.)
@@ -494,8 +521,13 @@ Jeder dieser Threads verwendet eine Instanz der Klasse \verb:MeasurementRunnable
 
 \subsection{Cache}
 
-\subsection{File-Service}
+Sowohl Cache als auch File-Service wurden mit Unter-Packages versehen, so dass die beiden Module nun stärker strukturiert sind. Die Attributierung der Cache-Klassen bzgl. des Timings wurde während der Implementierung stark verändert. Im Entwurf war sie über das gesamte Cache-Modul verteilt. Nun ist sie auf die Cache-Klasse konzentriert. In der Cache-Klasse wurde also etwas mehr an Funktionalität gekapselt als ursprünglich vorgesehen. Auch finden sich viele private Methoden, die im Entwurf zur Deklararierung und Strukturierung rein klasseninterne Funktionalität enthalten waren, sind nur noch spärlich in der Implementierung enthalten. Auch die Struktur und Art der Einbindung von Hilfsklassen hab sich geändert, genauso wie die Platzierung der Run-Methode, die für den Cache-Thread benötigt wird. 
 
+Die wesentlichen Strukturen bzgl. der Check-and-Notify-Aktionen, die Weiterleitungsstruktur per Listener, sowie der Thread-Aspekt des Moduls wurden wie vorgesehen implementiert. 
+
+Die Cache-Klasse selbst ist der Kern des Cache-Moduls. Hier erwies sich Synchronisierung zu Beginn eines Messlaufs als die größte Herausforderung, und entsprechend gibt hierzu nun eine ganze Reihe von cache-internen Hilfsmethoden. 
+
+\subsection{File-Service}
 \begin{description}
 \item[CsvService] Die Klasse CsvService wurde in der Implementierung durch die Methoden zum Umbennen und Exportieren von CsvDateien erweitern. Die im Entwurf gewollte Funktionalität wird durch die Implementierung umgesetzt.
 \item[PngService] Die Funktionalität der Klasse PngService wurde wie im Entwurf beschrieben umgesetzt. Sie wird jedoch durch die Umorgansiation der Projektfunktionalität und Projektstruktur nicht verwendet.
