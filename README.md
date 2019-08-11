@@ -9,6 +9,10 @@ Dokumente, die zur Erstellung des Pflichtenhefts gedacht sind, sowie das Pflicht
 #### 2-Entwurf
 Dokumente, die zur Erstellung der Entwurfsdokumentation gedacht sind, sowie die Entwurfsdokumentation selbst.
 UML Diagramme sowie ein zusammenhängendes Klassendiagramm.
+#### 3-Implementierung
+Die Dokumentation zu den Fortschritten in der Implementierung.
+#### 4-Qualitaetssicherung
+Die Dokumentation der Qualitaetssicherungsphase. Insbesondere Bug-Reports und Testergebnisse.
 ### Innerhalb der Phasenspezifischen Ordner:
 #### 0-Ressourcen
 Dokumente, aus denen Aufgaben entstehen können (Bsp.: Offizielle Aufgabenstellungen, Protokolle von Teamtreffen)
