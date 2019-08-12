@@ -244,6 +244,8 @@
 \clearpage
 \section{Ziel der Implementierungsdokumentation} \label{einleitung}
 
+Im sogenannten Wasserfallmodell folgte nach der Anforderungsanalyse und dem Entwurf nun die Implementierung der Softwarewaremodule als dritte Entwicklungsphase. Dieses Dokument soll den Entwicklungsstand am Ende dieser Phase sowie den Verlauf der Phase wiedergeben. Hierbei werden das erstellten Pflichtenheft und die zuvor erstellten UML-Diagrammen herangezogen, und der Stand der Entwicklung wird zu den Inhalten dieser Artefakte in Bezug gesetzt.
+
 \clearpage
 \section{Ausarbeitungsstand der Abnahmekriterien} \label{Ausarbeitungsstand}
 
@@ -311,11 +313,11 @@ Das Starten, Pausieren, Fortführen und Beenden funktioniert. Auf einen Beenden-
 Dieses Kriterium kann als erfüllt angesehen werden.
 
 \item[MK12]
-Die Abtastrate der Sensoren kann der Benutzer zum Ende der Implementierungsphase lediglich (zusammen mit anderen Sensor-Metadaten) einsehen. Die Konfiguration der Python-Skripte gestaltete sich schwieriger als erwartet, so dass eine Vereinbarung getroffen wurde, dass auch der Einsatz von Pythonskripten mit fest eincodierter Abtastrate in Ordnung geht. Die Zeitpunkte, zu denen die (nachgelagerten) Bausteine in der Messkonfiguration eine Verarbeitung der Messdaten vornehmen, können aufgrund der Latenzen, die bei der Netzwerkübertragung auftreten können, als zeitlich entkoppelt betrachtet werden. Über die Einstellungen kann der Benutzer ein Zeitraster definieren. Messdaten, die innerhalb die im selben Zeitschlitz abgetastet wurden, werden von FreeJDaq zusammengeführt und einer Messkonfiguration als eine einzige Belegung der Sensor-Kanäle übergeben.
+Die Abtastrate der Sensoren kann der Benutzer zum Ende der Implementierungsphase lediglich (zusammen mit anderen Sensor-Metadaten) einsehen. Die Konfiguration der Python-Skripte gestaltete sich schwieriger als erwartet, so dass eine Vereinbarung getroffen wurde, dass auch der Einsatz von Pythonskripten mit fest eincodierter Abtastrate in Ordnung geht. Die Zeitpunkte, zu denen die (nachgelagerten) Bausteine in der Messkonfiguration eine Verarbeitung der Messdaten vornehmen, können aufgrund der Latenzen, die bei der Netzwerkübertragung auftreten können, als zeitlich entkoppelt betrachtet werden. Über die Einstellungen kann der Benutzer ein Zeitraster definieren. Messdaten, die im selben Zeitschlitz abgetastet wurden, werden von FreeJDaq zusammengeführt und einer Messkonfiguration als eine einzige Belegung der Sensor-Kanäle übergeben.
 \item[SK9]
-Die im Kriterium beschriebenen Checks finden erst beim Start eines Messlaufs statt. Backend und Model geben dann jedoch einigermaßen einigermaßen aussagekräftige Fehlermeldungen ab. 
+Die im Kriterium beschriebenen Checks finden erst beim Start eines Messlaufs statt. Backend und Model geben dann jedoch einigermaßen aussagekräftige Fehlermeldungen ab. 
 \item[SK10]
-Die verarbeiteten Messdaten können in einer Csv-Datei gespeichert werden. In den  Sensorblöcken ist jedoch keine Speicherfunktion implementiert. Sie werden dort lediglich geloggt werden. 
+Die verarbeiteten Messdaten können in einer Csv-Datei gespeichert werden. In den  Sensorblöcken ist jedoch keine Speicherfunktion implementiert. Sie können dort lediglich geloggt werden. 
 \item[WK4]
 Die Sensorbausteine können nicht direkt Testdaten aufnehmen. Simulierte Messdaten können jedoch vom Backend eingespielt werden. 
 \end{description}
@@ -538,10 +540,9 @@ Nach außen ist der Zugriff auf das Backend über die Schnittstellen \verb:IAcce
 
 Anstelle einer echten SSH-Verbindung kann das Backend auch simuliert werden. Dazu wurden die Klassen \verb:ComToFile: und \verb:FileCommandFactory: eingeführt. Es können damit unter anderem Messdaten aus einer zuvor erstellten Datei ausgelesen werden.
 
+Die abstrakte Fabrik aus dem Entwurf, die nach wie vor auch zur Realisierung weiterer Anbindungsarten verwendet werden kann, wurde also zur simulierten Kommunikation unter Einsatz des lokalen Dateisystems erweitert. Hierbei wurde jedoch nicht jedes Kommando dupliziert, sondern lediglich die Austauschbarkeit des Kommunikationshilfsmittel genutzt. 
+
 Die Simulation des Backends ist nur eingeschränkt funktionstüchtig, da die Verbindung mit einem echten Gerät in der Entwicklung eine deutlich höhere Priorität hatte.
-
-Im Backend wurde das Entwurfsmuster der abstrakten Fabrik zur Realisierung eines Demo-Modus benutzt. Die meisten Kommandos und Kommando-Hilfsmittel gibt es nun nicht nur zur Kommunikation mit dem Raspberry Pi, sondern auch zur "simulierten" Kommunikation unter Einsatz des lokalen Dateisystems. 
-
 
 \subsubsection{Nebenläufigkeit}
 
@@ -551,11 +552,15 @@ Jeder dieser Threads verwendet eine Instanz der Klasse \verb:MeasurementRunnable
 
 \subsection{Cache}
 
-Sowohl Cache als auch File-Service wurden mit Unter-Packages versehen, so dass die beiden Module nun stärker strukturiert sind. Die Attributierung der Cache-Klassen bzgl. des Timings wurde während der Implementierung stark verändert. Im Entwurf war sie über das gesamte Cache-Modul verteilt. Nun ist sie auf die Cache-Klasse konzentriert. In der Cache-Klasse wurde also etwas mehr an Funktionalität gekapselt als ursprünglich vorgesehen. Auch finden sich viele private Methoden, die im Entwurf zur Deklararierung und Strukturierung rein klasseninterne Funktionalität enthalten waren, sind nur noch spärlich in der Implementierung enthalten. Auch die Struktur und Art der Einbindung von Hilfsklassen hab sich geändert, genauso wie die Platzierung der Run-Methode, die für den Cache-Thread benötigt wird. 
+Um Übersichtlichkeit und Handhabbarkeit zu verbessern, wurde im Cache-Modul, so wie auch im Backend-Modul, der Paketstruktur ein Subpackage hinzugefügt. 
+
+Die Attributierung der Cache-Klassen bzgl. des Timings wurde während der Implementierung stark verändert. Im Entwurf war sie über das gesamte Cache-Modul verteilt. Nun ist sie auf die Cache-Klasse konzentriert. In der Cache-Klasse wurde also etwas mehr an Funktionalität gekapselt als ursprünglich vorgesehen. 
+
+Private Methoden, die im Entwurf zur Deklaration und Strukturierung klasseninterne Funktionalität enthalten waren, sind nur noch zum Teil in der Implementierung enthalten. An Ihrer Stelle wurden neue Utility-Methoden hinzugefügt. Auch die Struktur und Art der Einbindung von Hilfsklassen hat sich geändert, genauso wie die Platzierung der Run-Methode, die für den Cache-Thread benötigt wird. 
 
 Die wesentlichen Strukturen bzgl. der Check-and-Notify-Aktionen, die Weiterleitungsstruktur per Listener, sowie der Thread-Aspekt des Moduls wurden wie vorgesehen implementiert. 
 
-Die Cache-Klasse selbst ist der Kern des Cache-Moduls. Hier erwies sich Synchronisierung zu Beginn eines Messlaufs als die größte Herausforderung, und entsprechend gibt hierzu nun eine ganze Reihe von cache-internen Hilfsmethoden. 
+Die Cache-Klasse selbst ist der Kern des Cache-Moduls. Hier erwies sich die Synchronisierung zu Beginn eines Messlaufs als die größte Herausforderung, und entsprechend gibt hierzu nun eine ganze Reihe von cache-internen Hilfsmethoden. 
 
 \subsection{File-Service}
 \begin{description}
@@ -567,17 +572,17 @@ Die Cache-Klasse selbst ist der Kern des Cache-Moduls. Hier erwies sich Synchron
 
 \section{Realer Implementierungsablauf}
 
-Dieser Abschnitt führt auf, inwieweit der tatsächliche zeitliche Implementierungsablauf vom geplanten Ablauf abgewichen ist, und beschreibt die Ursachen und Gründe für diese Abweichungen. Abhängigkeiten zwischen den Implementierungsschritten und kritische Pfade stehen hierbei besonders im Fokus.
+Dieser Abschnitt führt auf, inwieweit der tatsächliche zeitliche Implementierungsablauf vom geplanten Ablauf abgewichen ist, entsprechend der bereits genannten Gründe für diese Abweichungen. Die Darstellung soll Abhängigkeiten zwischen den Implementierungsschritten und kritische Pfade wiedergeben.
 
 Von Abweichungen betroffene Softwareelemente werden nicht im Einzelnen aufgeführt, sondern es werden lediglich in Bezug auf die Abweichungsgründe die Gruppen der betroffenen Softwareelemente benannt.
 
-Dazu ist in \ref{reale} das entsprechende Gantt-Diagramm zu sehen. In der oberen Zeile lassen sich die Meilenstein, mit den geplanten Fristen, erkennen. In der Tabelle ist, mit dem jeweiligen Kürzel, der Fertigstellungs-Termin, der jeweiligen Komponente, bezeichnet. Wenn ein Meilenstein in Klammern steht bedeutet dies, dass das Ziel nicht innerhalb der Implementierungszeit erreicht werden konnte.
+Dazu ist in Abbildung \ref{reale} das entsprechende Gantt-Diagramm zu sehen. In der oberen Zeile lassen sich die Meilenstein, mit den geplanten Fristen, erkennen. In der Tabelle wird  der Fertigstellungstermin der jeweiligen Komponente mit dem jeweiligen Kürzel bezeichnet. Wenn ein Meilenstein in Klammern steht, bedeutet dies, dass das Ziel nicht innerhalb der Implementierungszeit erreicht werden konnte.
 
-\section{Anhang}
+\clearpage
 
 \begin{figure}[htbp]
     \begin{center}
-        \includegraphics[width = 14cm]{Grafiken/Realer_Ablauf_der_Implementierung.pdf}
+        \includegraphics[height = 24cm]{Grafiken/Realer_Ablauf_der_Implementierung.pdf}
         \caption{Der reale Verlauf der Implementierung anhand eines Gantt-Diagramms}
         \label{reale}
     \end{center}
