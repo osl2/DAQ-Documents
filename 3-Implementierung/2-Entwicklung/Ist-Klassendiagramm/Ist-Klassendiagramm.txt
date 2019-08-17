@@ -1,0 +1,384 @@
+@startuml
+'----------------Backend-------------------------
+enum MeasurementState [[java:edu.kit.freejdaq.backend.MeasurementState]] {
+	INITIAL
+	RUNNING
+	PAUSED
+	HOLDING
+}
+interface IAccessToMeasurementRun [[java:edu.kit.freejdaq.backend.IAccessToMeasurementRun]] {
+	boolean start(IMRunInfo mRunInfo, IMRunListener reaction)
+	boolean pause()
+	boolean resume()
+	boolean reset()
+	boolean hold()
+	boolean unhold()
+}
+class PickupPointForBackendAgents [[java:edu.kit.freejdaq.backend.PickupPointForBackendAgents]] {
+	-{static}PickupPointForBackendAgents instance
+	-PickupPointForBackendAgents(IAccessToSensorInfo sensorInfo, IAccessToMeasurementRun mRun)
+	+{static}PickupPointForBackendAgents getPickPointForAgentsBasedOnSsh(InitDataForSsh initData)
+	+{static}PickupPointForBackendAgents getPickPointForAgentsBasedOnPiMock(InitDataForMock initData)
+	+IAccessToMeasurementRun getAccessToMRun()
+	+IAccessToSensorInfo getAccessToSensorInfo()
+}
+class IAccessToSensorInfo [[java:edu.kit.freejdaq.phyPiDAQBackend.IAccessToSensorInfo]] {
+}
+PickupPointForBackendAgents --> "1" IAccessToSensorInfo : sensorInfo
+class IAccessToMeasurementRun [[java:edu.kit.freejdaq.backend.IAccessToMeasurementRun]] {
+}
+PickupPointForBackendAgents --> "1" IAccessToMeasurementRun : mRun
+class MRunAgent [[java:edu.kit.freejdaq.backend.MRunAgent]] {
+	-CommandFactory cmdFactory
+	-List<MeasurementRunnable> runnables
+	+MRunAgent(CommandFactory cmdFactory)
+	+boolean start(IMRunInfo mRunInfo, IMRunListener reaction)
+	+boolean pause()
+	+boolean resume()
+	+boolean reset()
+	+boolean hold()
+	+boolean unhold()
+}
+class MeasurementState [[java:edu.kit.freejdaq.phyPiDAQBackend.MeasurementState]] {
+}
+MRunAgent --> "1" MeasurementState : measurementState
+interface IAccessToMeasurementRun [[java:edu.kit.freejdaq.backend.IAccessToMeasurementRun]] {
+}
+IAccessToMeasurementRun <|.. MRunAgent
+class InitDataForMock [[java:edu.kit.freejdaq.backend.InitDataForMock]] {
+	+InitDataForMock(String pathToRemoteDir, String pathToLocalDir)
+}
+class InitDataForSsh [[java:edu.kit.freejdaq.phyPiDAQBackend.InitDataForSsh]] {
+}
+InitDataForSsh <|-- InitDataForMock
+interface IAccessToSensorInfo [[java:edu.kit.freejdaq.backend.IAccessToSensorInfo]] {
+	String[] fetchIdsOfAvailableSensors(int timeout)
+	boolean copySensorFileFromPi(String sensorId)
+	boolean copySensorFileToPi(String sensorId)
+}
+interface IMStreamListener [[java:edu.kit.freejdaq.backend.IMStreamListener]] {
+	void receiveMDataSet(String channelId, long timeStamp, double value)
+	void connectionTerminated()
+}
+class InitDataForSsh [[java:edu.kit.freejdaq.backend.InitDataForSsh]] {
+	-String ipAddress
+	-int port
+	-String username
+	-String password
+	-String pathToRemoteDir
+	-String pathToLocalDir
+	+InitDataForSsh(String ipAddress, String username, String password, int port, String pathToRemoteDir, String pathToLocalDir)
+	+String getIpAddress()
+	+int getPort()
+	+String getUsername()
+	+String getPassword()
+	+String getPathToRemoteDir()
+	+String getPathToLocalDir()
+}
+class SensorInfoAgent [[java:edu.kit.freejdaq.backend.SensorInfoAgent]] {
+	-CommandFactory cmdFactory
+	+SensorInfoAgent(CommandFactory cmdFactory)
+	+String[] fetchIdsOfAvailableSensors(int timeout)
+	+boolean copySensorFileFromPi(String sensorId)
+	+boolean copySensorFileToPi(String sensorId)
+}
+interface IAccessToSensorInfo [[java:edu.kit.freejdaq.phyPiDAQBackend.IAccessToSensorInfo]] {
+}
+IAccessToSensorInfo <|.. SensorInfoAgent
+
+'----------------Cache-------------------------
+
+class MeansForAction [[java:edu.kit.freejdaq.cache.MeansForAction]] {
+	-long startTimestampOfFirstAllCompleteInterval
+	+MeansForAction(Cache cache, long startTimestampOfFirstAllCompleteInterval, IMRunListener mRunListener)
+	+Cache getCache()
+	+long getStartTimestampOfFirstAllCompleteInterval()
+	+IMRunListener getmRunListener()
+}
+class Cache [[java:edu.kit.freejdaq.cache.Cache]] {
+}
+MeansForAction --> "1" Cache : cache
+class IMRunListener [[java:edu.kit.freejdaq.cache.IMRunListener]] {
+}
+MeansForAction --> "1" IMRunListener : mRunListener
+enum CacheState [[java:edu.kit.freejdaq.cache.CacheState]] {
+	EMPTY_BUFFER_EXISTS
+	EARLIEST_AVAILABLE_SETS_DIVERGE
+	COMPL_SET_DETERMINBALE
+	NO_INIT_SYNC_YET
+}
+class BufferForOneSensorInChannel [[java:edu.kit.freejdaq.cache.BufferForOneSensorInChannel]] {
+	-String sensorInChannelId
+	-Queue<TimestampValuePair> buffer
+	+BufferForOneSensorInChannel(String sensorInChannelId)
+	+String getInChannelId()
+	+void addPacket(TimestampValuePair packet)
+	+Collection<MSet> getMSetsDuringTimespan(long from, long to)
+	+void removeDataBeforeTimepoint(long to)
+	+TimestampValuePair peekTimeValuePair()
+	+boolean isEmpty()
+}
+class ChannelConnectionState [[java:edu.kit.freejdaq.cache.ChannelConnectionState]] {
+	-String sensorInChannelId
+	-boolean connected
+	+ChannelConnectionState(String sensorInChannelId)
+	+String getSensorInChannelId()
+	+void setConnected(boolean connected)
+	+boolean isConnected()
+}
+interface IMRunInfo [[java:edu.kit.freejdaq.cache.IMRunInfo]] {
+	void addSensorIdAndItsChannelIds(String sensorId, List<String> channelIds)
+	String[] getSensorIds()
+	String[] consumeChannelIdsOfSensorAtBackend(String sensorId)
+	String[] consumeChannelIdsOfSensorAtCache(String sensorId)
+	double[] getErrorCodes(String inChannelId)
+	long getPeriod()
+	long getTimeoutOption()
+}
+class CacheTimerTask [[java:edu.kit.freejdaq.cache.CacheTimerTask]] {
+	-List<CheckAndNotifyAction> actions
+	+CacheTimerTask(List<CheckAndNotifyAction> actions)
+	+void setMRunListener(IMRunListener mRunListener)
+	+void run()
+}
+class IMRunListener [[java:edu.kit.freejdaq.cache.IMRunListener]] {
+}
+CacheTimerTask --> "1" IMRunListener : mRunListener
+class TimerTask [[java:edu.kit.freejdaq.cache.TimerTask]] {
+}
+TimerTask <|-- CacheTimerTask
+class EnhancedValuePair [[java:edu.kit.freejdaq.cache.EnhancedValuePair]] {
+}
+interface IMRunListener [[java:edu.kit.freejdaq.cache.IMRunListener]] {
+	void justWaiting()
+	void indicateError(String inChannelId, double errorCode)
+	void indicateTimeout()
+	void indicateConnectionTerminated()
+	void dispatchCompletePacketSet(MSet[] completePacketSet)
+}
+class MSet [[java:edu.kit.freejdaq.cache.MSet]] {
+	-String sensorInChannelId
+	-double value
+	-long timestamp
+	+MSet(String sensorInChannelId, double value, long timeStamp)
+	+String getChannelId()
+	+double getValue()
+	+long getTimestamp()
+	+String toString()
+	+int compareTo(MSet mSet)
+	+{static}MSet extractMSetFromArrayById(MSet[] mSets, String id)
+	+int hashCode()
+	+boolean equals(Object obj)
+	+{static}boolean doublesAreEqual(double d1, double d2)
+}
+interface "Comparable<MSet>" as Comparable_MSet_ {
+}
+Comparable_MSet_ <|.. MSet
+class Cache [[java:edu.kit.freejdaq.cache.Cache]] {
+	-long period
+	-boolean firstSynchronousMSetFound
+	-long latestForwardPiTimestamp
+	-long greatestTimestampAddedLocalTimestamp
+	-long toleranceInMillis
+	+Cache(String[] inChannelIds, long period, long toleranceInMillis)
+	+void receiveMSet(String channelId, double value, long timeStamp)
+	+void receiveMSet(MSet mSet)
+	+boolean isFirstSynchronousMSetFound()
+	+ComplSetDeterminationResult determineComplSetOfMsets()
+	-ComplSetDeterminationResult determineFirstComplSet()
+	-ComplSetDeterminationResult determineNextComplSet()
+	-void addBufferForOneSensorInChannel(String sensorId)
+	-BufferForOneSensorInChannel getBufferOfSensorInChannel(String sensorId)
+	-boolean allBuffersNotEmpty()
+	-Collection<MSet> peekEarliestMSetsAtAllInChannels()
+	+List<MSet> orderedListOfMSetsOutOfTimespan(long from, long to)
+	+Collection<MSet> completeSetOutOfTimespanByMeanValues(long from, long to)
+	+{static}MSet calculateMeanMSet(Collection<MSet> mSets, String channelId)
+	+MSet[] getErrorsForOneChannel(ErrorCodesForInChannel codesToCheck)
+	+void removeDataBefore(long to)
+	-{static}MSet latestMSetFromCollection(Collection<MSet> mSets)
+}
+class BufferForOneSensorInChannel [[java:edu.kit.freejdaq.cache.BufferForOneSensorInChannel]] {
+}
+Cache --> "*" BufferForOneSensorInChannel : buffersForChannels
+class MStreamListener [[java:edu.kit.freejdaq.cache.MStreamListener]] {
+	-ConnectionTerminatedAction connectionTerminatedAction
+	-TimeoutAction timeOutAction
+	+MStreamListener(Cache cache)
+	+void setTimeOutAction(TimeoutAction timeOutAction)
+	+void setConnectionTerminatedAction(ConnectionTerminatedAction conTermAction)
+	+void receiveMDataSet(String channelId, long timeStamp, double value)
+	+void connectionTerminated()
+}
+class Cache [[java:edu.kit.freejdaq.cache.Cache]] {
+}
+MStreamListener --> "1" Cache : cache
+interface IMStreamListener [[java:edu.kit.freejdaq.phyPiDAQBackend.IMStreamListener]] {
+}
+IMStreamListener <|.. MStreamListener
+class ErrorCodesForInChannel [[java:edu.kit.freejdaq.cache.ErrorCodesForInChannel]] {
+	-String sensorIdInChannel
+	-double[] errorCodes
+	+ErrorCodesForInChannel(String sensorIdInChannel, double[] errorCodes)
+	+String getSensorIdInChannel()
+	+double[] getErrorCodes()
+}
+class MRunTiming [[java:edu.kit.freejdaq.cache.MRunTiming]] {
+	-List<CheckAndNotifyAction> actions
+	-long period
+	-Timer timer
+	-Collection<String> channelIds
+	+MRunTiming(IMRunInfo initData)
+	+IMStreamListener getMStreamListener()
+	+void addMRunListener(IMRunListener listener)
+	+void removeMRunListener(IMRunListener listener)
+	+void startRepeatedTimer()
+	+void stopRepeatedTimer()
+	-List<CheckAndNotifyAction> createCheckAndNotifyActions(IMRunInfo initData, Cache cache)
+	+{static}Collection<String> extractChannelIdsOutOfMRunInfo(IMRunInfo initData)
+}
+class MStreamListener [[java:edu.kit.freejdaq.cache.MStreamListener]] {
+}
+MRunTiming --> "1" MStreamListener : mStreamListener
+class IMRunListener [[java:edu.kit.freejdaq.cache.IMRunListener]] {
+}
+MRunTiming --> "1" IMRunListener : mRunListener
+class CacheTimerTask [[java:edu.kit.freejdaq.cache.CacheTimerTask]] {
+}
+MRunTiming --> "1" CacheTimerTask : cacheTimerTask
+class TimestampValuePair [[java:edu.kit.freejdaq.cache.TimestampValuePair]] {
+	-double value
+	-long timeStamp
+	+TimestampValuePair(double value, long timeStamp)
+	+double getValue()
+	+long getTimeStamp()
+}
+class ComplSetDeterminationResult [[java:edu.kit.freejdaq.cache.ComplSetDeterminationResult]] {
+	+ComplSetDeterminationResult(MSet[] resultData, CacheState cacheState)
+	+MSet[] getResultData()
+	+CacheState getCacheState()
+	+int hashCode()
+	+boolean equals(Object obj)
+}
+class MSet [[java:edu.kit.freejdaq.cache.MSet]] {
+}
+ComplSetDeterminationResult --> "*" MSet : resultData
+class CacheState [[java:edu.kit.freejdaq.cache.CacheState]] {
+}
+ComplSetDeterminationResult --> "1" CacheState : cacheState
+
+'----------------Cache-------------------------
+
+class ConfigurationEditor [[java:edu.kit.freejdaq.gui.ConfigurationEditor]] {
+	-{static}long serialVersionUID
+	-{static}JTextArea textArea
+	-{static}JScrollPane scrollPane
+	+ConfigurationEditor()
+	+void changedUpdate(DocumentEvent event)
+	+void insertUpdate(DocumentEvent event)
+	+void removeUpdate(DocumentEvent event)
+	+String getText()
+	+void setText(String text)
+}
+class JPanel [[java:javax.swing.JPanel]] {
+}
+JPanel <|-- ConfigurationEditor
+interface DocumentListener [[java:javax.swing.event.DocumentListener]] {
+}
+DocumentListener <|.. ConfigurationEditor
+class MainWindow [[java:edu.kit.freejdaq.gui.MainWindow]] {
+	-{static}long serialVersionUID
+	-ImageIcon icon
+	-String pathToInit
+	+{static}JFrame shownWindow
+	-{static}int windowSizeX
+	-{static}int windowSizeY
+	-{static}MainWindow instance
+	-{static}ButtonField buttonField
+	-{static}MeasurementButtonField mButtonField
+	-{static}ConfigurationEditor editor
+	-{static}JTextArea dataWindow
+	-{static}MenuBar menuBar
+	-{static}PickupPointForBackendAgents sshAgents
+	-{static}Settings settings
+	-{static}String SETTINGS_FILE_NAME
+	-{static}ModelManager MODELMANAGER
+	-{static}IAccessToMeasurementRun runAgent
+	+{static}String[] getResourcesNames(String path)
+	+{static}Settings getSettings()
+	+{static}void setSettings(Settings instance)
+	-{static}void loadSettingsFromFile()
+	-{static}void saveSettingsToFile()
+	-MainWindow()
+	+{static}void main(String[] args)
+	-{static}void startMainWindow()
+	+{static}MainWindow getInstance()
+	-{static}void initializeModelManager(String path)
+	+{static}IAccessToMeasurementRun getMRunAgent()
+	+{static}ModelManager getModelManager()
+}
+class JFrame [[java:javax.swing.JFrame]] {
+}
+JFrame <|-- MainWindow
+class Settings [[java:edu.kit.freejdaq.gui.Settings]] {
+	-boolean remoteMocked
+	-String pathRemoteRaspi
+	-String ipAddressRaspi
+	-String usernameRaspi
+	-String passwordRaspi
+	-int sshPortRaspi
+	-String pathRemoteMocked
+	-String pathLocal
+	-long mrunPeriod
+	-int mRunTimeout
+	+String getRemoteMockedAsString()
+	+void setRemoteMockedAsString(String remoteMocked)
+	+boolean isRemoteMocked()
+	+void setRemoteMocked(boolean remoteMocked)
+	+String getPathRemoteRaspi()
+	+void setPathRemoteRaspi(String pathRemoteRaspi)
+	+String getIpAddressRaspi()
+	+void setIpAddressRaspi(String ipAddressRaspi)
+	+String getUsernameRaspi()
+	+void setUsernameRaspi(String usernameRaspi)
+	+String getPasswordRaspi()
+	+void setPasswordRaspi(String passwordRaspi)
+	+int getSshPortRaspi()
+	+void setSshPortRaspi(int sshPortRaspi)
+	+String getPathRemoteMocked()
+	+void setPathRemoteMocked(String pathRemoteMocked)
+	+String getPathLocal()
+	+void setPathLocal(String pathLocal)
+	+long getmrunPeriod()
+	+void setmrunPeriod(long mrunPeriod)
+	+void setMRunPeriodAsText(String periodStr)
+	+String getMRunPeriodAsText()
+	+int getmRunTimeout()
+	+void setmRunTimeout(int mRunTimeout)
+	+void setMRunTimeoutAsText(String timeoutStr)
+	+String getMRunTimeoutAsText()
+	+String getSshPortAsString()
+	+void setSshPortAsString(String portStr)
+}
+class DataVisualisation [[java:edu.kit.freejdaq.gui.DataVisualisation]] {
+	-{static}long serialVersionUID
+	+{static}JTextArea textArea
+	+String getText()
+	+void setText(String text)
+	+void pushData(ArrayList<String> data)
+}
+class JPanel [[java:javax.swing.JPanel]] {
+}
+JPanel <|-- DataVisualisation
+interface MeasurementDataInterface [[java:edu.kit.freejdaq.model.MeasurementDataInterface]] {
+}
+MeasurementDataInterface <|.. DataVisualisation
+class Editor [[java:edu.kit.freejdaq.gui.Editor]] {
+	-{static}long serialVersionUID
+	+void run()
+}
+class JPanel [[java:javax.swing.JPanel]] {
+}
+JPanel <|-- Editor
+
+@enduml
