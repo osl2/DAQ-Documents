@@ -552,19 +552,48 @@ Die komplexe Klasse MeasurementConfiguration (Abbildung \ref{messconfig}) implem
 
 \subsubsection{GUI-Paket}
 
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[height = 12cm]{Grafiken/MainWindow.png}
+        \caption{reale Implementierung der Klasse MainWindow}
+        \label{main}
+    \end{center}
+\end{figure}
+
+
 \begin{description}
 \item[MainWindow] Die zentrale Instanz des GUI-Paketes, die Klasse MainWindow wurde durch Methoden zum Starten der Anwendung erweitert und fungiert somit als Initialsierungs-Modul unserer Anwendung. Dadurch wurde die Klasse um Attribute erweitert, welche für das Starten der Anwendung notwendig sind. Durch die Entscheidung für Swing als Framework-Tool, erbt die Klasse von der Klasse JFrame. Dadurch muss die Klasse durch Methoden zur Erzeugung des Anwendungsfenster erweitert werden. Ebenfalls werden alle anderen GUI-Objekte in dieser Klasse zu dem Anwendungsfenster hinzugefügt. 
 \end{description}
 
 Erweitert wurde das GUI-Paket um die Klassen DataVisualisation, ConfigurationEditor und Editor.
 
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[height = 8cm]{Grafiken/ConfigurationEditor.png}
+        \caption{Implementierung des ConfigurationEditor}
+        \label{configEditor}
+    \end{center}
+\end{figure}
+
+
 \begin{description}
 \item[ConfigurationEditor] Die Klasse ConfigurationEditor stellt das Textfeld zum Schreiben von Messkonfigurationen dar. Durch die Entscheidung gegen ein Drag-and-Drop Editor stellt diese Klasse nun die Instanz dar, mit welcher der Benutzer eine Messkonfiguration entwirft.
 \item[DataVisualisation] Die Klasse DataVisualisation stellt das Textfeld dar, in welcher Messdaten eines Messlaufs präsentiert werden.
 \item[Editor] Die Klasse Editor benutzt das Framework JHotDraw, um einen Drag-and-Drop- Editor zu erstellen. In der jetzigen Version der Anwendung wird dieser Editor nicht eingebunden und nicht benutzt und liefert ebenfalls nicht die gewünschte Funktionalität. Für eine Weiterentwicklung ist der Editor jedoch ein grundlegender Baustein, um die Anwendung benutzerfreundlicher zu machen.
+
 \end{description}
 
+
 \subsubsection{Menu-Paket}
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[height = 10cm]{Grafiken/PrototypeField.png}
+        \caption{Implementierung der Klasse PrototypeField}
+        \label{prot}
+    \end{center}
+\end{figure}
+
 
 Das Menü-Paket wurde durch diverse Veränderungen am Entwurf, wie durch Bereitstellung von Framework- Klassen und Methoden vereinfacht, in dem mehrere Klassen zusammengefasst wurden.
 
@@ -582,6 +611,15 @@ Dadurch entfallen in unserer Implementierung die Klassen:
 \end{description}
 
 Die Funktionalität der Buttons wurde in der Implementierung beibehalten, jedoch die Klassen zusammengefasst, da das Framework hierfür bereits Funktionalität vorgibt.
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[height = 8cm]{Grafiken/ButtonField.png}
+        \caption{Implementierung des Pakets Button}
+        \label{reale}
+    \end{center}
+\end{figure}
+
 
 \begin{description}
 \item[ButtonField] Die Klasse ButtonField umfasst zusammen mit der Klasse MeasurementButtonField in unserer Implementierung Teile des Button-Paket und die Funktionalität. Die Klassen Button und deren Unterklassen sind somit als
@@ -607,6 +645,24 @@ Das Exception-Paket wurde fast vollständig aus dem Entwurf übernommen. Einzeln
 Ebenfalls wurde in der Klasse ConnectionExceptionWindow diie Methode changeWireColor() entfernt, da durch unsere Entscheidung das Projekt von visuellen Komponenten zu kapseln, die Verbindung nicht mehr zu einer Instanz der Klasse Wire zugeordnet werden kann.
 
 \subsubsection{HelpAndOption-Paket}
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[height = 8cm]{Grafiken/OptionsWindow.png}
+        \caption{Implementierung der Klasse OptionsWindow}
+        \label{option}
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[height = 8cm]{Grafiken/HelpWindow.png}
+        \caption{Implementierung der Klasse HelpWindow}
+        \label{help}
+    \end{center}
+\end{figure}
+
 
 Das HelpAndOption-Paket wurde insofern verändert, dass die Interfaces HelpWindowHandler und OptionsWindowHandler aufgrund der Framework-Entscheidung entfallen.
 Die Klassen HelpWindow und OptionsWindow wurden durch Attribute und Methoden zur Anpassen an das Framework erweitert, damit die Fenster als unabhängige Instanzen angezeigt werden. Das OptionWindow wurde durch weitere Optionen erweitert, d.h System-Optionen, Fenster-Optionen, Messlauf-Optionen und Raspberry-Pi-Optionen.
