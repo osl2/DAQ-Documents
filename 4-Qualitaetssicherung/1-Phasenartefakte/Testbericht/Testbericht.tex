@@ -227,6 +227,19 @@
     name = {Presenter},
     description = {Presenter bezieht sich auf die gleichnahmige Komponente in einem Model-View-Presenter.}
 }
+
+\newglossaryentry{JaCoCo}{
+    name = {JaCoCo},
+    description = {JaCoCo ist eine freie Code-Überdeckungs Bibliothek für Java. Hier verwendete Version: 0.8.4}
+}
+
+
+\newglossaryentry{EclEmma}{
+    name = {EclEmma},
+    description = {EclEmma ist ein Plug-In für Eclipse für Code-Überdeckungsanalysen. Es basiert auf JaCoCo. Die hier verwendete Version ist 3.1.2}
+}
+
+
 \subject{Testbericht der Qualitätssicherungsphase}
 \title{Definition und Durchführung~von Messwertverarbeitung für~den~Physikunterricht auf~Basis~eines~Raspberry~Pis}
 \subtitle{Version 0.0.1}
@@ -244,12 +257,20 @@
 \clearpage
 \section{Ziel des Testberichts} \label{einleitung}
 
+Das Ziel des Testberichtes ist es dem Leser einen Überblick über die verwendeten Testverfahren zu geben und die während der Qualitätssicherungsphase entdeckten Fehler zu dokumentieren. Die Qualitätssicherungsphase hat das Ziel, möglichst viele Fehler aufzudecken, diese zu korregieren und zu dokumentieren. Zusätzlich soll das unbemerkte Wiederauftreten bereits gefundener Fehler durch Regressionstests verhindert werden. Dabei werden die Funktionalitäten und deren Qualitäten getestet.
+
+
 \subsection{Bedingungsüberdeckung}
-Wir haben mehrfache Bedingungsüberdeckung.
+Wir streben eine mehrfache Bedingungsüberdeckung an. Dadurch werden Zweig- ,Anweisungs- , einfache und minimal-mehrfache Bedingungsüberdeckung subsumiert. Eine einfache Bedingungsüberdeckung ist subsumiert nicht einmal die Anweisungsüberdeckung und ist somit ungeeignet. Eine minimal-mehrfache Bedingungsüberdeckung wäre ein guter Kompromiss zwischen Aufwand und Nutzen, allerdings verwendet unser Plug-In \gls{EclEmma} für \gls{JaCoCo} standardmäßig mehrfache Bedingungsüberdeckung. Außerdem ist die Anzahl an Bedingungen in unserer Anwendung noch überschaubar.
+Eine Pfadüberdeckung streben wir nicht an, da dessen Aufwand mit 2 hoch k skaliert, wobei k die Anzahl an Anweisungen ist. 
 
 \clearpage
 \section{Planung der Qualitätssicherungsphase} \label{planung}
+Die Qualitätssicherungsphase wird in drei Meilensteine aufgeteilt, siehe dazu Abbildung \ref{sollplan}. Der erste Meilenstein wird erfüllt, wenn das Modul Model der Anwendung eine hohe Testüberdeckung erreicht. Dabei sollen alle Tests automatisch mit J-Unit ablaufen. Das Model ist die Basis, die alle anderen Module benutzen und auch diese verbindet. Deshalb ist die erste Priorität eine getestetes Modul, um komplexe Folgefehler für die anderen Module zu verhindern. 
 
+Im zweiten Meilenstein werden alle anderen Module, außer der GUI, getestet. Auch hier erfolgt das Testen über automatische J-Unit Tests.
+
+Die GUI ist ein Sonderfall beim Testen, da diese nur sehr begrenzt mit automatischen Tests getestet werden kann. Deshalb wird diese im dritten Meilenstein getestet. Der Dritte Meilenstein umfasst die GUI und auch das Testen der gesamten Anwendung. Die GUI wird hauptsächlich über Klickstrecken getestet. Die gesamte Anwendung wird durch Testszenarien aus dem Pflichtenheft geprüft. Weiter werden Qualitätsanforderungen der Anwendung durch verschiedene Tests geprüft. Schließlich wird die Leistung und auch die Hardware für die Anwendung getestet. 
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -262,6 +283,8 @@ Wir haben mehrfache Bedingungsüberdeckung.
 
 \clearpage
 \section{Gefundene Fehler und deren Regressionstests} \label{regression}
+
+Dieses Kapitel umfasst die Regressionstests für gefundene und behobene Fehler. Die Tests sind nach Modul und Klassen strukturiert. Jeder Regressionstest verweist auf ein Issue der verwendeten Bugtracking-Software (hier GitHub).
 
 \subsection{Model}
 \subsubsection{Measurement Configuration}
