@@ -291,8 +291,94 @@ Dieses Kapitel umfasst die Regressionstests für gefundene und behobene Fehler. 
 
 \begin{description}
  
-\item []\textbf{Fehler Nr.35 in der Methode getInitId} 
 
+\item []\textbf{Issue Nr.7 in der Methode getInChan} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Unbehandelte NullPointer Exception bei Eingabe einer ungültigen Id.
+\item []\textbf{Fehlerursache:} Prüfen nach NullPointer Exception fehlt.
+\item []\textbf{Fehlerbehebung:} Eine Null Prüfung wurde implementiert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.8 in der Methode getOutChan} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Unbehandelte NullPointer Exception bei Eingabe einer ungültigen Id.
+\item []\textbf{Fehlerursache:} Prüfen nach NullPointer Exception fehlt.
+\item []\textbf{Fehlerbehebung:} Eine Null Prüfung wurde implementiert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.9 in der Methode addConnection} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Unbehandelte NullPointer Exception bei Eingabe einer ungültigen Id.
+\item []\textbf{Fehlerursache:} Prüfen nach NullPointer Exception fehlt.
+\item []\textbf{Fehlerbehebung:} Eine Null Prüfung wurde implementiert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.10 in der Methode removeConnection } 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Unbehandelte NullPointer Exception bei Eingabe einer ungültigen Id.
+\item []\textbf{Fehlerursache:} Prüfen nach NullPointer Exception fehlt.
+\item []\textbf{Fehlerbehebung:} Eine Null Prüfung wurde implementiert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.11 in der Methode createInChannelList } 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Auftreten einer Index Out Of Bounds Exception.
+\item []\textbf{Fehlerursache:} Eine Prüfung, ob der Index groß genug ist, fehlt.
+\item []\textbf{Fehlerbehebung:} Der Fehler wird abgefangen durch einen Vergleich der Anzahl der InChannel zwischen yaml-File und Prototypblock.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.12 in der Methode getOutChanPosi } 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} NullPointer Exception beim Laden einer Messkonfiguration mit ungültigen Block Id.
+\item []\textbf{Fehlerursache:} Prüfen nach NullPointer Exception fehlt.
+\item []\textbf{Fehlerbehebung:} Es wird nach Null geprüft. Dann ergab sich eine Folgefehler, der sich in der Methode  createLoadedConnections als eine Index Out Of Bounds Exception äußerte. Durch das Implementieren einer Methode checkBlockInitId, die prüft, ob eine geladene Id auch gültig ist, wurde der Folgefehler behoben.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+
+\item []\textbf{Issue Nr.13 in der Methode createInChannelList } 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} NullPointer Exception bei ungültiger Messkonfiguration mit einer fehlenden BlockChannelliste.
+\item []\textbf{Fehlerursache:} Prüfen nach NullPointer Exception fehlt.
+\item []\textbf{Fehlerbehebung:} Eine Prüfung nach Null wurde hinzugefügt.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+
+\item []\textbf{Issue Nr.18 in der Methode removeBlock} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Der Versuch einen nicht existierenden Block zu entfernen, resultiert in eines Index Out Of Bounds Exception.
+\item []\textbf{Fehlerursache:} Der Index wurde nicht geprüft.
+\item []\textbf{Fehlerbehebung:} Eine Prüfung des Indexes wurde hinzugefügt. Außerdem wurde der Rückgabewert der Methode von void zu boolean geändert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.19 in der Methode removeBlock} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Der Versuch eine Konfiguration ohne eine Liste von Block Ids zu laden, führt zu einer Null Pointer Exception.
+\item []\textbf{Fehlerursache:} Es wurde nicht nach Null geprüft.
+\item []\textbf{Fehlerbehebung:} Die betreffende Zeile wurde in einen schon existierenden Null-Check verschoben.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+
+
+
+\item []\textbf{Fehler Nr.35 in der Methode getInitId} 
 
 \begin{itemize}
 \item []\textbf{Fehlersymptom:} Die Methode funktionierte nicht richtig und gab immer NULL zurück.
@@ -300,6 +386,8 @@ Dieses Kapitel umfasst die Regressionstests für gefundene und behobene Fehler. 
 \item []\textbf{Fehlerbehebung:} Die KonfigurationsId wird nun über die Blockliste der Messkonfiguration geholt.
 \item []\textbf{Verantwortlicher:} David Gawron
 \end{itemize}
+
+
 
 \end{description}
 
