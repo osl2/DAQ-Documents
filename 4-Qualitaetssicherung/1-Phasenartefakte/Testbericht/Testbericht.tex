@@ -266,6 +266,7 @@ Eine Pfadüberdeckung streben wir nicht an, da dessen Aufwand mit 2 hoch k skali
 
 \clearpage
 \section{Planung der Qualitätssicherungsphase} \label{planung}
+
 Die Qualitätssicherungsphase wird in drei Meilensteine aufgeteilt, siehe dazu Abbildung \ref{sollplan}. Der erste Meilenstein wird erfüllt, wenn das Modul Model der Anwendung eine hohe Testüberdeckung erreicht. Dabei sollen alle Tests automatisch mit J-Unit ablaufen. Das Model ist die Basis, die alle anderen Module benutzen und auch diese verbindet. Deshalb ist die erste Priorität eine getestetes Modul, um komplexe Folgefehler für die anderen Module zu verhindern. 
 
 Im zweiten Meilenstein werden alle anderen Module, außer der GUI, getestet. Auch hier erfolgt das Testen über automatische J-Unit Tests.
@@ -279,6 +280,9 @@ Die GUI ist ein Sonderfall beim Testen, da diese nur sehr begrenzt mit automatis
 		\label{sollplan}
 	\end{center}
 \end{figure}
+
+
+TODO: Wie ist der Plan am Ende der Phase aufgegangen?
 
 
 \clearpage
@@ -424,6 +428,9 @@ Dieses Kapitel umfasst die Regressionstests für gefundene und behobene Fehler. 
 
 \subsection{\textbf{T010} Starten der Anwendung und Hilfe}
 
+DISCLAIMER: Der Testfall wurde so nicht wirklich durchgeführt, da der Pfad zur Textdatei noch nicht richtig funktioniert. Siehe Issue Nr. 15 in Git-Hub. Der Testfall wurde so angelegt, wie er später aussehen könnte. Er dient lediglich dazu, frühzeitig Feedback zu erhalten.
+
+
 \begin{tabular}{| p{4cm} | p{10cm} |}
 	\hline
 	\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
@@ -434,7 +441,7 @@ Dieses Kapitel umfasst die Regressionstests für gefundene und behobene Fehler. 
 	
 	\textbf{Testfallverweis}
 	& 
-	z.B. Pfad zur Testdatei und Name des Tests dort
+	hat ein Testfall vom Pflichtenheft eine JUnit-Test-Datei mit ein oder mehreren Tests?
 	\\ \hline
 	
 	\textbf{(optional) Subunittests}
@@ -443,36 +450,45 @@ Dieses Kapitel umfasst die Regressionstests für gefundene und behobene Fehler. 
 	
 	\textbf{Verantwortlicher Tester}
 	& 
-	to do
+	David
 	\\ \hline
 	
 	
 	\textbf{Vorbedingung}
 	& 
-	to do
+	Die Anwendung ist als fat-Jar-Datei auf dem Rechner vorhanden. Es läuft keine Instanz dieser Anwendung.
 	\\ \hline
 	
-	\textbf{Nachbedingung}
+	\textbf{ Testziel}
 	& 
-	to do
+	Zu Testen ist das Verhalten des Anwendung, wenn sie gestartet wird. Außerdem soll die Hilfe-Funktion der Anwendung getestet werden.
 	\\ \hline
-	\textbf{Beschreibung und Testziel}
+	
+	
+	\textbf{Beschreibung}
 	& 
-	ggfs. nicht durchführbar weil
+	Die Anwendung öffnet sich bei dem Öffnen der fat-Jar-Datei. Dabei öffnet sich das Hauptfenster, in dem keine Messkonfiguration zu sehen ist. Drückt man den Knopf für die Hilfe, öffnet sich das Hilfefenster mit Informationen über die Benutzung der Anwendung.
 	\\ \hline
 	
 	\textbf{Erwartetes Ergebnis}
 	& 
-	to do
+	Das Hauptfenster und das Hilfefenster öffnen sich wie gewollt.
 	\\ \hline
 			
 	\textbf{Verhalten im Fehlerfall}
 	& 
-	to do
+	Eine Fehlermeldung wird angezeigt, falls beim Pfad zur Textdatei für das Hilfefenster keine Datei gefunden wurde.
 	\\ \hline
+	
+	\textbf{Nachbedingung}
+	& 
+	Das Hauptfenster der Anwendung ist geöffnet. Es wird von dem geöffneten Hilfe-Fenster teilweise überdeckt.
+	\\ \hline
+	
+	
 	\textbf{Getestete Anforderungen}
 	& 
-	to do
+	\textbf{F010} erreiche GUI nach Start, \textbf{F140} leere Darstellung nach Anwendungsstart, \textbf{F480} Hilfe zu Anwendung, \textbf{F490} Texte der Anwendung auf Deutsch
 	\\ \hline
 	
 	
