@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{pdfpages}				% PDF einbinden
 
+
 % Hurenkinder und Schusterjungen verhindern
 \clubpenalty10000
 \widowpenalty10000
@@ -289,6 +290,93 @@ TODO: Wie ist der Plan am Ende der Phase aufgegangen?
 \section{Gefundene Fehler und deren Regressionstests} \label{regression}
 
 Dieses Kapitel umfasst die Regressionstests für gefundene und behobene Fehler. Die Tests sind nach Modul und Klassen strukturiert. Jeder Regressionstest verweist auf ein Issue der verwendeten Bugtracking-Software (hier GitHub).
+
+\subsection{Übersicht aller Issues}
+In der Tabelle wird angezeigt, wo ein Issue aufgetreten ist, und was für eine Kategorie es hat. Das Issue wird dabei durch seine Nummer repräsentiert. Zu den roten Issues gibt es keine Regressionstests, das diese nicht behoben wurden.
+
+\begin{tabular}{| p{3cm} | p{2,2cm} | p{2,2cm}  |p{2,2cm} |p{2,2cm} |p{2,2cm}|}
+	\hline
+	\textbf{Art des Issue vs Fundort} & \textbf{Null Pointer} & \textbf{Index out Of Bounds} & \textbf{Path related} & \textbf{fehlerhafte Funktion} & \textbf{Sonstige} \\ \hline
+	\textbf{Backend}
+	& 
+	
+	&
+	
+	&
+	
+	&
+	
+	&
+	34, 36
+	\\ \hline
+	
+	\textbf{Cache}
+	& 
+	
+	&
+		
+	&
+	&
+	&
+	\\ \hline
+	
+	\textbf{Controller}
+	& 
+	
+	&
+
+	&
+	&
+	&
+	\\ \hline
+	\textbf{Gui}
+	& 
+	
+	&
+	&
+	
+	
+	&
+	15
+	&
+	\\ \hline
+	
+	\textbf{Model}
+	& 
+	7, 8, 9, 10, 12, 13, 19, 27
+	&
+	11, 18
+	&	
+	
+	&
+	21, 35
+	&
+	33, 53
+	\\ \hline
+	
+	\textbf{Fileservice und Main}
+	& 
+	47
+	&
+	
+	&
+	57
+	&
+	50
+	&
+		
+	\\ \hline
+
+	\textbf{Gesamtzahl}
+	& 
+	&
+	&
+	&
+	&
+	\\ \hline
+	
+\end{tabular}
+
 
 \subsection{Model}
 \subsubsection{Measurement Configuration}
