@@ -292,8 +292,9 @@ TODO: Wie ist der Plan am Ende der Phase aufgegangen?
 Dieses Kapitel umfasst die Regressionstests für gefundene und behobene Fehler. Die Tests sind nach Modul und Klassen strukturiert. Jeder Regressionstest verweist auf ein Issue der verwendeten Bugtracking-Software (hier GitHub).
 
 \subsection{Übersicht aller Issues}
-In der Tabelle wird angezeigt, wo ein Issue aufgetreten ist, und was für eine Kategorie es hat. Das Issue wird dabei durch seine Nummer repräsentiert. Zu den roten Issues gibt es keine Regressionstests, das diese nicht behoben wurden.
+In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist, und was für eine Kategorie es hat. Das Issue wird dabei durch seine Nummer repräsentiert. Zu den roten Issues gibt es keine Regressionstests, das diese nicht behoben wurden.
 
+\begin{table}[h]
 \begin{tabular}{| p{3cm} | p{2,2cm} | p{2,2cm}  |p{2,2cm} |p{2,2cm} |p{2,2cm}|}
 	\hline
 	\textbf{Art des Issue vs Fundort} & \textbf{Null Pointer} & \textbf{Index out Of Bounds} & \textbf{Path related} & \textbf{fehlerhafte Funktion} & \textbf{Sonstige} \\ \hline
@@ -376,7 +377,9 @@ In der Tabelle wird angezeigt, wo ein Issue aufgetreten ist, und was für eine K
 	\\ \hline
 	
 \end{tabular}
-
+\caption{Übersicht über alle Issues.}
+\label{issueOverView}
+\end{table}
 
 \subsection{Model}
 \subsubsection{Measurement Configuration}
@@ -518,7 +521,7 @@ In der Tabelle wird angezeigt, wo ein Issue aufgetreten ist, und was für eine K
 
 DISCLAIMER: Der Testfall wurde so nicht wirklich durchgeführt, da der Pfad zur Textdatei noch nicht richtig funktioniert. Siehe Issue Nr. 15 in Git-Hub. Der Testfall wurde so angelegt, wie er später aussehen könnte. Er dient lediglich dazu, frühzeitig Feedback zu erhalten.
 
-
+\begin{table}[h]
 \begin{tabular}{| p{4cm} | p{10cm} |}
 	\hline
 	\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
@@ -582,7 +585,9 @@ DISCLAIMER: Der Testfall wurde so nicht wirklich durchgeführt, da der Pfad zur 
 	
 	
 \end{tabular}
-
+\caption{Testfall T10 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
+\label{testfallT10}
+\end{table}
 
 
 
