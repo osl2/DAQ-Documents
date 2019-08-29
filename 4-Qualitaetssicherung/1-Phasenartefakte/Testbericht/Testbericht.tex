@@ -500,6 +500,66 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 
 \subsection{Testen der GUI durch Klickstrecken}
 
+\subsubsection{Erstellen, Speichern und Laden einer Messkonfiguration}
+
+In dieser Klickstrecke wird die Anwendung anhand ihrer Funktion rund um das Erstellen, Speichern und Laden einer Messkonfiguration getestet. Als Vorbedingung ist hier die geöffnete Anwendung mit einer leeren Messkonfiguration gegeben. Die Klickstrecke und deren Ergebnisse sind in Tabelle \ref{klickConfig} zu sehen. Dabei besteht Konfiguration A aus einem BMP180 Sensor-Baustein, einer textuellen Repräsentation für einen Kanal und der korrekten Verbindung dazwischen. Konfiguration B besteht aus dem selben Bausteinen wie Konfiguration A, aber die Verbindung fehlt.  
+
+\begin{table}[h]
+\begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+	\hline
+	\textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergbenis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+	\textbf{1}
+	& 
+	Erstelle Konfiguration A $\rightarrow$ klicke auf Check-Knopf $\rightarrow$ klicke auf Ok $\rightarrow$ klicke auf Speichern-Knopf $\rightarrow$ wähle Namen und Pfad aus und klicke auf Speichern 
+	&
+	Die Datei mit dem entsprechenden Namen ist am entsprechenden Ort zu finden. Die Datei enthält die Konfiguration A.
+	& 
+	to do
+	\\ \hline
+	
+	\textbf{2}
+	& 
+	Erstelle Konfiguration B $\rightarrow$ klicke auf Check-Knopf
+	&
+	Eine Meldung öffnet sich, dass die Konfiguration nicht gültig ist.
+	& 
+	Das Ergebnis stimmt nicht überein, da ein Check-Knopf (noch) nicht existiert.
+	\\ \hline
+	
+	\textbf{3}
+	& 
+	klicke auf Speichern-Knopf $\rightarrow$ klicke auf Abbrechen
+	&
+	Das Hauptfenster ist geöffnet und es hat sich nichts verändert.
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+	
+	\textbf{4}
+	& 
+	
+	&
+	
+	& 
+	
+	\\ \hline
+	
+	\textbf{5}
+	& 
+	
+	&
+	
+	& 
+	
+	\\ \hline
+	
+		
+	
+	
+\end{tabular}
+\caption{Klickstrecke um das Erstellen, Laden und Speichern einer Messkonfiguration mit der Gui zu testen.}
+\label{klickConfig}
+\end{table}
 
 \subsection{Monkey Testing}
 
