@@ -1040,33 +1040,28 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT40} zu sehen. D
         
         \textbf{Erwartetes Ergebnis}
         & 
-        Die Anwendung ist geöffnet, die Konfiguration ist im Konfigurationsfeld zu sehen. Außerdem ist ein Fenster geöffnet, mit der Meldung, dass die Konfiguration erfolgreich gespeichert wurde.	Die unfertige Konfiguration ist als Datei am entsprechenden Ort als Datei gespeichert. 
-        \\ \hline
-        
-        \textbf{Verhalten im Fehlerfall}
-        & 
-        Die Anwendung gibt nur bei Benutzung des Check-Knopfes an, ob die Konfiguration gültig ist.
+        FreeJDAQ zeigt eine Fehlermeldung an, die auf die fehlerhafte Konfiguration hinweist. Anschließend wird der Ladevorgang der Konfiguration abgebrochen.
         \\ \hline
         
         \textbf{Nachbedingung}
         & 
-        Das Hauptfenster der Anwendung ist geöffnet. Es wird von dem geöffneten Hilfe-Fenster teilweise überdeckt.
+        FreeJDAQ ist geöffnet und es ist keine Konfiguration geladen. FreeJDAQ wird von dem geöffneten Warnungs-Fenster teilweise überdeckt.
         \\ \hline
         
         
         \textbf{Getestete Anforderungen}
         & 
-        \textbf{F180} füge Sensor hinzu, \textbf{F210} füge Transformation hinzu, \textbf{F250} speichere Messkonfiguration
+        \textbf{F430} überprüfe Format bei Laden
         \\ \hline
         \textbf{fehlende zu testete Anforderungen}
         & 
-        \textbf{F190} prüfe ob Sensor angeschlossen, \textbf{F290} Einstellungen Messkonfiguration 
+        Keine
         \\ \hline
         
         
     \end{tabular}
-    \caption{Testfall T30 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
-    \label{testfallT30}
+    \caption{Testfall T200 aus dem Plfichtenheft: Laden einer ungültigen Datei als Messkonfiguration}
+    \label{testfallT200}
 \end{table}
 
 \subsection{\textbf{T210} Starten einer ungültigen Messkonfiguration}
