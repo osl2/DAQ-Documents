@@ -1000,6 +1000,74 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT40} zu sehen. D
 
 \subsection{\textbf{T200} Laden einer ungültigen Datei als Messkonfiguration}
 
+\begin{table}[h]
+    \begin{tabular}{| p{4cm} | p{10cm} |}
+        \hline
+        \textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+        \textbf{Testfallnummer (Pflichtenheft)}
+        & 
+        T30
+        \\ \hline
+        \textbf{Verantwortlicher Tester}
+        & 
+        David
+        \\ \hline
+        \textbf{Vorbedingung}
+        & 
+        Die Anwendung ist geöffnet, das Konfigurationsfeld ist leer.
+        \\ \hline
+        \textbf{ Testziel}
+        & 
+        Zu Testen ist das Verhalten des Anwendung, wenn eine Konfiguration über den Editor teilweise erstellt wird, und als Zwischenergebnis gespeichert wird.
+        \\ \hline
+        
+        \textbf{Klickstrecke}
+        & 
+        erstelle Konfiguration (siehe Beschreibung) $\rightarrow$ klicke auf Speichern-Knopf $\rightarrow$ wähle Pfad und Namen aus und klicke auf speichern
+        \\ \hline
+        
+        \textbf{ Beschreibung}
+        & 
+        Der Benutzer erstellt eine Konfiguration textuell über den Editor. Dabei gibt er die Blöcke als Liste von BlockIds an. Hier enthält die Liste zwei Sensoren(BMP180, MMA8451) und eine Transformation(Transformation-Add-2-Channel). Zu den drei Bausteinen erstellt der Benutzer eine jeweilige List ihrer Channel. Die Liste aller Verbindungen bleibt hier leer.
+        \\ \hline
+        
+        \textbf{Abweichungen vom Pflichtenheft}
+        & 
+        Der Ablauf dieses Testfalles unterscheidet sich massiv von dem Testfall aus dem Pflichtenheft. Die Anwendung unterstützt kein Drag-and-Drop. Deshalb kann auch kein Baustein im Konfigurationsfeld als Icon sichtbar werden. Hier erfolgt die Erstellung der Konfiguration ausschließlich textuell über den Editor. Außerdem prüft die Anwendung nicht, ob der entsprechende Sensor angeschlossen ist, wenn ein Sensorbaustein hinzugefügt wird. Weiter überprüft die Anwendung nicht explizit beim Speichern, ob die Messkonfiguration gültig oder vollständig ist. Dies geschieht entweder über den Check-Knopf oder beim Laden der Konfiguration. Es könne keine expliziten Einstellung für nur eine Messkonfiguration eingestellt und mit ihr gespeichert werden. 
+        
+        \\ \hline
+        
+        \textbf{Erwartetes Ergebnis}
+        & 
+        Die Anwendung ist geöffnet, die Konfiguration ist im Konfigurationsfeld zu sehen. Außerdem ist ein Fenster geöffnet, mit der Meldung, dass die Konfiguration erfolgreich gespeichert wurde.	Die unfertige Konfiguration ist als Datei am entsprechenden Ort als Datei gespeichert. 
+        \\ \hline
+        
+        \textbf{Verhalten im Fehlerfall}
+        & 
+        Die Anwendung gibt nur bei Benutzung des Check-Knopfes an, ob die Konfiguration gültig ist.
+        \\ \hline
+        
+        \textbf{Nachbedingung}
+        & 
+        Das Hauptfenster der Anwendung ist geöffnet. Es wird von dem geöffneten Hilfe-Fenster teilweise überdeckt.
+        \\ \hline
+        
+        
+        \textbf{Getestete Anforderungen}
+        & 
+        \textbf{F180} füge Sensor hinzu, \textbf{F210} füge Transformation hinzu, \textbf{F250} speichere Messkonfiguration
+        \\ \hline
+        \textbf{fehlende zu testete Anforderungen}
+        & 
+        \textbf{F190} prüfe ob Sensor angeschlossen, \textbf{F290} Einstellungen Messkonfiguration 
+        \\ \hline
+        
+        
+    \end{tabular}
+    \caption{Testfall T30 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
+    \label{testfallT30}
+\end{table}
+
 \subsection{\textbf{T210} Starten einer ungültigen Messkonfiguration}
 
 \subsection{\textbf{T220} Entfernen eines Sensors bei laufender Messung}
