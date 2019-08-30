@@ -1006,11 +1006,11 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT40} zu sehen. D
         \textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
         \textbf{Testfallnummer (Pflichtenheft)}
         & 
-        T30
+        T200
         \\ \hline
         \textbf{Verantwortlicher Tester}
         & 
-        David
+        Leon
         \\ \hline
         \textbf{Vorbedingung}
         & 
@@ -1018,22 +1018,23 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT40} zu sehen. D
         \\ \hline
         \textbf{ Testziel}
         & 
-        Zu Testen ist das Verhalten des Anwendung, wenn eine Konfiguration über den Editor teilweise erstellt wird, und als Zwischenergebnis gespeichert wird.
+        Zu Testen ist das Verhalten der Anwendung beim Laden von ungültigen
+        Messkonfigurationsdateien.
         \\ \hline
         
         \textbf{Klickstrecke}
         & 
-        erstelle Konfiguration (siehe Beschreibung) $\rightarrow$ klicke auf Speichern-Knopf $\rightarrow$ wähle Pfad und Namen aus und klicke auf speichern
+        Klicke ''Lade Konfiguration'' $\rightarrow$ Wähle im Datei-Management-System die bereits existierende, fehlerhafte, Konfiguration aus $\rightarrow$ Klicke auf ''Öffnen''
         \\ \hline
         
         \textbf{ Beschreibung}
         & 
-        Der Benutzer erstellt eine Konfiguration textuell über den Editor. Dabei gibt er die Blöcke als Liste von BlockIds an. Hier enthält die Liste zwei Sensoren(BMP180, MMA8451) und eine Transformation(Transformation-Add-2-Channel). Zu den drei Bausteinen erstellt der Benutzer eine jeweilige List ihrer Channel. Die Liste aller Verbindungen bleibt hier leer.
+        Der Benutzer versucht eine Konfiguration über den vorgesehenen Weg zu laden. Nachdem die Konfigurationsauswahl getroffen wurde überprüft FreeJDAQ das Format der Konfiguration.
         \\ \hline
         
         \textbf{Abweichungen vom Pflichtenheft}
         & 
-        Der Ablauf dieses Testfalles unterscheidet sich massiv von dem Testfall aus dem Pflichtenheft. Die Anwendung unterstützt kein Drag-and-Drop. Deshalb kann auch kein Baustein im Konfigurationsfeld als Icon sichtbar werden. Hier erfolgt die Erstellung der Konfiguration ausschließlich textuell über den Editor. Außerdem prüft die Anwendung nicht, ob der entsprechende Sensor angeschlossen ist, wenn ein Sensorbaustein hinzugefügt wird. Weiter überprüft die Anwendung nicht explizit beim Speichern, ob die Messkonfiguration gültig oder vollständig ist. Dies geschieht entweder über den Check-Knopf oder beim Laden der Konfiguration. Es könne keine expliziten Einstellung für nur eine Messkonfiguration eingestellt und mit ihr gespeichert werden. 
+        Keine
         
         \\ \hline
         
