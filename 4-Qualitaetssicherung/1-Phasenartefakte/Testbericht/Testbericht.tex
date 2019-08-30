@@ -344,7 +344,7 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	
 	\textbf{Model}
 	& 
-	7, 8, 9, 10, 12, 13, 19, 27
+	7, 8, 9, 10, 12, 13, 19, 27, 51, 59, 60
 	&
 	11, 18
 	&	
@@ -482,9 +482,56 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 \item []\textbf{Verantwortlicher:} David Gawron
 \end{itemize}
 
+\end{description}
 
+\subsubsection{Sensor}
+
+\begin{description}
+
+\item []\textbf{Issue Nr.51 in der Methode constructBuildingBlocks} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Die Methode liefert bei Übergabe von null oder einer leeren Map eine NullPointerException.
+\item []\textbf{Fehlerursache:} Fehlende Überprüfung der Übergabewerte auf die notwendigen Argumente
+\item []\textbf{Fehlerbehebung:} constructBuildingBlock() überprüft, ob die Map null oder leer ist.
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\item []\textbf{Issue Nr.59 in der Methode processKvPair} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Die Methode liefert bei falschen Übergabewerten eine NullPointerException.
+\item []\textbf{Fehlerursache:} Fehlende Überprüfung der Übergabewerte auf die notwendigen Argumente
+\item []\textbf{Fehlerbehebung:} processKvPair() überprüft, ob die Map der Bausteine die notwendigen Argumente zum Aufbauen des Bausteins enthält. 
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\item []\textbf{Issue Nr.60 in der Methode initialiseModel} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Die Methode überprüft Bausteine nicht auf null und kann somit eine NullPointerException liefern.
+\item []\textbf{Fehlerursache:} Fehlende Überprüfung der Bausteine auf die null.
+\item []\textbf{Fehlerbehebung:} Die Methode überprüft, ob die Bausteine null sind.
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
 
 \end{description}
+
+\subsubsection{BuildingBlockDirectory}
+
+\begin{description}
+
+\item []\textbf{Issue Nr.21 in der Methode addConfigBlock} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Konfigurationsbausteine konnten mehrfach mit dem gleichen Key zu der Liste hinzugefügt werden. Alte Einträge mit dem gleichen Key wurden überschrieben.
+\item []\textbf{Fehlerursache:} Standart-Funktion einer HashMap.
+\item []\textbf{Fehlerbehebung:} Konfigurationsbausteine können nicht mehrfach mit dem gleichen Key hinzugefügt werden. Alte Einträge werden nicht mehr überschrieben.
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\end{description}
+
 
 
 
@@ -492,6 +539,39 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 \subsection{Backend}
 \subsection{Controller}
 \subsection{Fileservice und Main}
+
+\begin{description}
+
+
+\item []\textbf{Issue Nr.47 in der Methode readOutAllYamll} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Bei einem Fehler beim Lesen des Inhalt einer Yaml-Datei wird null zurückgegeben.
+\item []\textbf{Fehlerursache:} Implementierung der Methode.
+\item []\textbf{Fehlerbehebung:} Bei einem Fehler beim Lesen wird eine leere Map zurückgegeben.
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\item []\textbf{Issue Nr.50 in der Methode testWriteIntoYaml} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Die Methode löschte eine durch den Test erzeugte Methode bei einem erfolgreichen Durchlauf nicht, was zur Folge hatte, dass beim nächsten Test der Test fehl schlug.
+\item []\textbf{Fehlerursache:} Unbekannt.
+\item []\textbf{Fehlerbehebung:} Die Methode löscht vor dem Test die Datei aus dem Verzeichniss.
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\item []\textbf{Issue Nr.57 in der Methode readFromYaml} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Falls ein angegebener Pfad nicht existiert wird eine Exception von SnakeYaml übergeben.
+\item []\textbf{Fehlerursache:} Übergebener Pfad existiert nicht, aber wird nicht abgefangen.
+\item []\textbf{Fehlerbehebung:} Vor dem Lesen wird überprüft, ob eine Ressource in dem Verzeichnis mit dem Pfad existiert.
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\end{description}
+
 \subsection{GUI}
 
 \clearpage
