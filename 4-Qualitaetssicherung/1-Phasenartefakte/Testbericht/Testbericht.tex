@@ -710,7 +710,7 @@ In dieser Klickstrecke wird die Anwendung anhand ihrer Funktion rund um das Erst
 	&
 	Eine Meldung öffnet sich, dass die Konfiguration nicht gültig ist.
 	& 
-	Das Ergebnis stimmt nicht überein, da ein Check-Knopf (noch) nicht existiert.
+	 TODO Das Ergebnis stimmt nicht überein, da ein Check-Knopf (noch) nicht existiert.
 	\\ \hline
 	
 	\textbf{3}
@@ -724,22 +724,29 @@ In dieser Klickstrecke wird die Anwendung anhand ihrer Funktion rund um das Erst
 	
 	\textbf{4}
 	& 
-	
+	klicke auf Laden-Knopf $\rightarrow$ klicke auf Abbrechen
 	&
-	
+	Das Hauptfenster ist geöffnet und es hat sich nichts verändert.
 	& 
-	
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
 	\\ \hline
 	
 	\textbf{5}
 	& 
-	
+	klicke auf Laden-Knopf $\rightarrow$ klicke auf laden, wobei Konfiguration A aus Nr. 1 ausgewählt ist
 	&
-	
+	Eine Fenster öffnet sich und zeigt an, dass die Konfiguration erfolgreich geladen wurde.
 	& 
-	
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
 	\\ \hline
-	
+	\textbf{6}
+	& 
+	klicke auf Laden-Knopf $\rightarrow$ klicke auf laden, wobei Konfiguration B aus Nr. 2 ausgewählt ist
+	&
+	Eine Fenster öffnet sich und zeigt an, dass die Konfiguration nicht gültig, und somit nicht startbar ist.
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
 		
 	
 	
@@ -761,7 +768,7 @@ In dieser Klickstrecke wird die Anwendung anhand ihrer Funktion rund um das Erst
 \subsection{Testen der Qualität der Funktionalitäten}
 
 
-\clearpage
+
 \section{Durchführen der Testfälle aus dem Pflichtenheft} \label{testszenarien}
 
 \subsection{\textbf{T010} Starten der Anwendung und Hilfe}
@@ -841,10 +848,154 @@ DISCLAIMER: Der Testfall wurde so nicht wirklich durchgeführt, da der Pfad zur 
 
 \subsection{\textbf{T020} Starten der Demo}
 
+
+
 \subsection{\textbf{T030} Lehrer erstellt und speichert eine Messkonfiguration}
+Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT30} zu sehen. Der Testfall aus dem Pflichtenheft schlägt fehl, weil viele Features nicht oder nur teilweise implementiert sind.
+
+
+\begin{table}[h]
+\begin{tabular}{| p{4cm} | p{10cm} |}
+	\hline
+	\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+	\textbf{Testfallnummer (Pflichtenheft)}
+	& 
+	T30
+	\\ \hline
+	\textbf{Verantwortlicher Tester}
+	& 
+	David
+	\\ \hline
+	\textbf{Vorbedingung}
+	& 
+	Die Anwendung ist geöffnet, das Konfigurationsfeld ist leer.
+	\\ \hline
+	\textbf{ Testziel}
+	& 
+	Zu Testen ist das Verhalten des Anwendung, wenn eine Konfiguration über den Editor teilweise erstellt wird, und als Zwischenergebnis gespeichert wird.
+	\\ \hline
+	
+	\textbf{Klickstrecke}
+	& 
+	erstelle Konfiguration (siehe Beschreibung) $\rightarrow$ klicke auf Speichern-Knopf $\rightarrow$ wähle Pfad und Namen aus und klicke auf speichern
+	\\ \hline
+	
+	\textbf{ Beschreibung}
+	& 
+	Der Benutzer erstellt eine Konfiguration textuell über den Editor. Dabei gibt er die Blöcke als Liste von BlockIds an. Hier enthält die Liste zwei Sensoren(BMP180, MMA8451) und eine Transformation(Transformation-Add-2-Channel). Zu den drei Bausteinen erstellt der Benutzer eine jeweilige List ihrer Channel. Die Liste aller Verbindungen bleibt hier leer.
+	\\ \hline
+	
+	\textbf{Abweichungen vom Pflichtenheft}
+	& 
+	Der Ablauf dieses Testfalles unterscheidet sich massiv von dem Testfall aus dem Pflichtenheft. Die Anwendung unterstützt kein Drag-and-Drop. Deshalb kann auch kein Baustein im Konfigurationsfeld als Icon sichtbar werden. Hier erfolgt die Erstellung der Konfiguration ausschließlich textuell über den Editor. Außerdem prüft die Anwendung nicht, ob der entsprechende Sensor angeschlossen ist, wenn ein Sensorbaustein hinzugefügt wird. Weiter überprüft die Anwendung nicht explizit beim Speichern, ob die Messkonfiguration gültig oder vollständig ist. Dies geschieht entweder über den Check-Knopf oder beim Laden der Konfiguration. Es könne keine expliziten Einstellung für nur eine Messkonfiguration eingestellt und mit ihr gespeichert werden. 
+
+	\\ \hline
+	
+	\textbf{Erwartetes Ergebnis}
+	& 
+	Die Anwendung ist geöffnet, die Konfiguration ist im Konfigurationsfeld zu sehen. Außerdem ist ein Fenster geöffnet, mit der Meldung, dass die Konfiguration erfolgreich gespeichert wurde.	Die unfertige Konfiguration ist als Datei am entsprechenden Ort als Datei gespeichert. 
+	\\ \hline
+			
+	\textbf{Verhalten im Fehlerfall}
+	& 
+	Die Anwendung gibt nur bei Benutzung des Check-Knopfes an, ob die Konfiguration gültig ist.
+	\\ \hline
+	
+	\textbf{Nachbedingung}
+	& 
+	Das Hauptfenster der Anwendung ist geöffnet. Es wird von dem geöffneten Hilfe-Fenster teilweise überdeckt.
+	\\ \hline
+	
+	
+	\textbf{Getestete Anforderungen}
+	& 
+	\textbf{F180} füge Sensor hinzu, \textbf{F210} füge Transformation hinzu, \textbf{F250} speichere Messkonfiguration
+	\\ \hline
+	\textbf{fehlende zu testete Anforderungen}
+	& 
+	\textbf{F190} prüfe ob Sensor angeschlossen, \textbf{F290} Einstellungen Messkonfiguration 
+	\\ \hline
+	
+	
+\end{tabular}
+\caption{Testfall T30 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
+\label{testfallT30}
+\end{table}
+
+
 
 \subsection{\textbf{T040} Schüler bearbeitet Aufgabe}
 
+Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT40} zu sehen. Dabei wird bei dem Informieren über die Bausteine das Untermenü aller Bausteine beliebig genutzt. Eine explizite Klickstrecke wird nicht angegeben, da eine solche über alle Bausteine viel Schreibarbeit und wenig Erkenntnis bringt
+
+
+\begin{table}[h]
+\begin{tabular}{| p{4cm} | p{10cm} |}
+	\hline
+	\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+	\textbf{Testfallnummer (Pflichtenheft)}
+	& 
+	T40
+	\\ \hline
+	\textbf{Verantwortlicher Tester}
+	& 
+	David
+	\\ \hline
+	\textbf{Vorbedingung}
+	& 
+	Die Anwendung ist geöffnet, das Konfigurationsfeld ist leer.
+	\\ \hline
+	\textbf{ Testziel}
+	& 
+	Zu Testen ist das Laden einer unvollständigen Konfiguration, deren Vervollständigung und das speichern der kompletten Konfiguration.
+	\\ \hline
+	
+	\textbf{Klickstrecke}
+	& 
+	klicke auf Laden-Knopf $\rightarrow$ wähle richtige Datei aus und klicke auf laden $\rightarrow$ klicke auf OK $\rightarrow$ klicke auf Bausteine in der Systemleiste und informiere dich $\rightarrow$ klicke auf X $\rightarrow$ klicke auf Hilfe und informiere dich klicke auf X $\rightarrow$ vervollständige Konfiguration und klicke auf Check-Knopf $\rightarrow$ klicke Meldung(Konfiguration gültig) weg $\rightarrow$ klicke auf speichern und führe den Dialog korrekt aus
+	\\ \hline
+	
+	\textbf{ Beschreibung}
+	& 
+	Die ungültige Konfiguration wird geladen. Die Angebotenen Bausteine sind im Untermenü der Bausteine zu finden. Der Benutzer bearbeitet die Konfiguration, in dem er der Liste eine textuelle Repräsentation mit drei Kanälen hinzufügt. Außerdem erstellt er die Liste der Verbindungen. Eine Verbindung ist dabei ein Tupel zweier Kanäle. Ist der Benutzer der Meinung, dass die Konfiguration fertig ist, kann er den Check-Knopf benutzten, um zu prüfen, ob die Konfiguration gültig ist. Die Konfiguration kann jederzeit gespeichert und geladen werden.
+	\\ \hline
+	
+	\textbf{Abweichungen vom Pflichtenheft}
+	& 
+	Die Anwendung prüft nicht beim Laden der Konfiguration, ob für die benutzten Sensorbausteine entsprechende Sensoren angeschlossen sind. Außerdem kann die Anwendung die graphische Darstellung der Konfiguration nicht aktualisieren, dass es keine solche gibt.
+
+	\\ \hline
+	
+	\textbf{Erwartetes Ergebnis}
+	& 
+	Die vollständige Konfiguration ist als Datei am entsprechenden Pfad zu finden.
+	\\ \hline
+			
+	\textbf{Verhalten im Fehlerfall}
+	& 
+	Beim Laden gibt die Anwendung an, dass die Konfiguration ungültig ist und bearbeitet werden sollte. Außerdem gibt sie bei Benutzung des Check-Knopfes an, ob die Konfiguration gültig ist.
+	\\ \hline
+	
+	\textbf{Nachbedingung}
+	& 
+	Das Hauptfenster der Anwendung ist geöffnet. Die vollständige Konfiguration ist im Feld zu sehen.  Sie ist auch als Datei gespeichert.
+	\\ \hline
+	
+	
+	\textbf{Getestete Anforderungen}
+	& 
+	\textbf{F230} füge Darstellung hinzu, \textbf{F470} Hilfe zu Bausteinen
+	\\ \hline
+	\textbf{fehlende zu testete Anforderungen}
+	& 
+	
+	\\ \hline
+	
+	
+\end{tabular}
+\caption{Testfall T40 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
+\label{testfallT40}
+\end{table}
 \subsection{\textbf{T050} Schüler startet Messung und speichert Ergebnisse}
 
 \subsection{\textbf{T200} Laden einer ungültigen Datei als Messkonfiguration}
