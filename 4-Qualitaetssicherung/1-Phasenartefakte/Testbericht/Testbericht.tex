@@ -644,7 +644,7 @@ In dieser Klickstrecke werden die Funktionen des Systemleistenmenüs getestet un
 	\begin{table}[h]
 \begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
 	\hline
-	\textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergbenis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+	\textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergebnis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
 
 	\textbf{6}
 	& 
@@ -694,7 +694,7 @@ In dieser Klickstrecke wird die Anwendung anhand ihrer Funktion rund um das Erst
 \begin{table}[h]
 \begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
 	\hline
-	\textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergbenis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+	\textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergebnis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
 	\textbf{1}
 	& 
 	Erstelle Konfiguration A $\rightarrow$ klicke auf Check-Knopf $\rightarrow$ klicke auf Ok $\rightarrow$ klicke auf Speichern-Knopf $\rightarrow$ wähle Namen und Pfad aus und klicke auf Speichern 
@@ -751,8 +751,68 @@ In dieser Klickstrecke wird die Anwendung anhand ihrer Funktion rund um das Erst
 	
 	
 \end{tabular}
+
 \caption{Klickstrecke um das Erstellen, Laden und Speichern einer Messkonfiguration mit der Gui zu testen.}
 \label{klickConfig}
+\end{table}
+
+\subsubsection{Kontrolle des Messlaufs}
+
+Durch diese Klickstrecke (Tabelle \ref{klickMesslauf}) wird überprüft, ob das Starten, Pausieren, Fortsetzen und Beenden eines Messlaufs und das Speichern von Messdaten korrekt funktioniert. Vorbedingung: die Messkonfiguration ist bereits geladen (siehe vorherige Klickstrecke)
+
+\begin{table}[h]
+\begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+	\hline
+	\textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergebnis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+	\textbf{1}
+	& 
+	klicke ``Run Configuration''
+	&
+	Auslesen und Anzeigen der Messdaten (Messlauf) beginnt
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+	
+	\textbf{2}
+	& 
+	klicke ``Pause''
+	&
+	Es werden keine neuen Daten verarbeitet und angezeigt.
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+	
+	\textbf{3}
+	& 
+	klicke ``Resume''
+	&
+	Der Messlauf wird fortgesetzt.
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+	
+	\textbf{4}
+	& 
+	klicke ``Pause'' $\rightarrow$ ``Save Measurement Data'' $\rightarrow$ wähle Zielpfad aus $\rightarrow$ klicke ``Save''
+	&
+	bisher gemessene Daten werden in einer Datei gespeichert
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+	
+	\textbf{5}
+	& 
+	klicke ``Reset''
+	&
+	Der Messlauf wird auf den ursprünglichen Zustand zurückgesetzt.
+	& 
+	Die angezeigten Messdaten werden nicht aus dem Anzeigefeld entfernt.
+	\\ \hline
+	
+\end{tabular}
+
+\caption{Kontrolle des Messlaufs}
+\label{klickMesslauf}
 \end{table}
 
 \subsection{Monkey Testing}
@@ -996,13 +1056,156 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT40} zu sehen. D
 \caption{Testfall T40 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
 \label{testfallT40}
 \end{table}
+
 \subsection{\textbf{T050} Schüler startet Messung und speichert Ergebnisse}
+
+Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT050} zu sehen.
+
+\begin{table}[h]
+\begin{tabular}{| p{4cm} | p{10cm} |}
+	\hline
+	\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+	\textbf{Testfallnummer (Pflichtenheft)}
+	& 
+	T050
+	\\ \hline
+	\textbf{Verantwortlicher Tester}
+	& 
+	Jan
+	\\ \hline
+	\textbf{Vorbedingung}
+	& 
+	Die Anwendung ist gestartet und es ist die in T040 erstelle Messkonfiguration geladen worden.
+	\\ \hline
+	\textbf{ Testziel}
+	& 
+	Teste die Anwendung aus Sicht eines Schülers, der Messung starten und deren Ergebnisse speichern soll.
+	\\ \hline
+	
+	\textbf{Klickstrecke}
+	& 
+	klicke auf ``Run Configuration'' $\rightarrow$ warte, bis Daten angezeigt werden $\rightarrow$ klicke auf ``Pause'' $\rightarrow$ klicke auf ``Save Measurement Data'' $\rightarrow$ definiere, wo die Daten gespeichert werden sollen $\rightarrow$ klicke auf ``Save''
+	\\ \hline
+	
+	\textbf{ Beschreibung}
+	& 
+	Der Messlauf, der durch die bereits vorbereitete Konfiguration definiert ist, wird gestartet. Nachdem einige Daten erfolgreich ausgelesen wurden, wird der Messlauf angehalten und die Daten gespeichert.
+	\\ \hline
+	
+	\textbf{Abweichungen vom Pflichtenheft}
+	& 
+	Da die Daten in der umgesetzten Anwendung nicht grafisch dargestellt werden können, kann auch keine grafische Darstellung gespeichert werden.
+
+	\\ \hline
+	
+	\textbf{Erwartetes Ergebnis}
+	& 
+	Die ausgelesenen Daten sind in einer Datei am angegebenen Pfad gespeichert.
+	\\ \hline
+			
+	\textbf{Verhalten im Fehlerfall}
+	& 
+	Falls die Zieldatei bereits existiert, werden die Daten nicht gespeichert.
+	\\ \hline
+	
+	\textbf{Nachbedingung}
+	& 
+	Das Hauptfenster der Anwendung ist geöffnet. Die Konfiguration ist weiterhin geladen. Der Messlauf ist im pausierten Zustand. Die bislang ausgelesenen Daten sind in einer Datei gespeichert.
+	\\ \hline
+	
+	
+	\textbf{Getestete Anforderungen}
+	& 
+	\textbf{F130, F300} Messung starten, \textbf{F150, F320} Messdaten werden angezeigt, \textbf{F370} Messung pausieren, \textbf{400} Messdaten speichern
+	\\ \hline
+	\textbf{fehlende zu testete Anforderungen}
+	& 
+	\textbf{F410} da kein Graph erzeugt wird, kann auch kein Graph gespeichert werden
+	
+	\\ \hline
+	
+	
+\end{tabular}
+\caption{Testfall T050 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
+\label{testfallT050}
+\end{table}
 
 \subsection{\textbf{T200} Laden einer ungültigen Datei als Messkonfiguration}
 
 \subsection{\textbf{T210} Starten einer ungültigen Messkonfiguration}
 
 \subsection{\textbf{T220} Entfernen eines Sensors bei laufender Messung}
+
+Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT220} zu sehen.
+
+\begin{table}[h]
+\begin{tabular}{| p{4cm} | p{10cm} |}
+	\hline
+	\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+	\textbf{Testfallnummer (Pflichtenheft)}
+	& 
+	T220
+	\\ \hline
+	\textbf{Verantwortlicher Tester}
+	& 
+	Jan
+	\\ \hline
+	\textbf{Vorbedingung}
+	& 
+	Die Anwendung ist geöffnet. Alle verwendeten Sensoren sind angeschlossen und betriebsbereit. Eine gültige Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung wurde geladen.
+	\\ \hline
+	\textbf{ Testziel}
+	& 
+	Teste das Verhalten der Anwendung, wenn ein Sensor ausfällt und dessen Datenstrom abbricht.
+	\\ \hline
+	
+	\textbf{Klickstrecke}
+	& 
+	klicke auf ``Run Configuration'' $\rightarrow$ trenne Verbindung zum Sensor
+	\\ \hline
+	
+	\textbf{ Beschreibung}
+	& 
+	Der Benutzer startet die Messung. Die Verbindung zu einem Sensor wird getrennt.
+	\\ \hline
+	
+	\textbf{Abweichungen vom Pflichtenheft}
+	& 
+	
+
+	\\ \hline
+	
+	\textbf{Erwartetes Ergebnis}
+	& 
+	Die Anwendung erkennt, dass ein Sensor keine Daten mehr sendet. Die Messung stoppt. Eine aussagekräftige Fehlermeldung wird ausgegeben.
+	\\ \hline
+			
+	\textbf{Verhalten im Fehlerfall}
+	& 
+	Der Messlauf bricht ab, ohne eine Fehlermeldung anzuzeigen.
+	\\ \hline
+	
+	\textbf{Nachbedingung}
+	& 
+	Das Hauptfenster der Anwendung ist geöffnet. Die Konfiguration ist weiterhin geladen. Der Messlauf ist im pausierten Zustand. Die bislang ausgelesenen Daten sind in einer Datei gespeichert.
+	\\ \hline
+	
+	
+	\textbf{Getestete Anforderungen}
+	& 
+	\textbf{F450}
+	\\ \hline
+	\textbf{fehlende zu testete Anforderungen}
+	& 
+	
+	
+	\\ \hline
+	
+	
+\end{tabular}
+\caption{Testfall T220 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
+\label{testfallT220}
+\end{table}
 
 \clearpage
 \section{Hardware Tests und sonstige Tests} \label{sonstiges}

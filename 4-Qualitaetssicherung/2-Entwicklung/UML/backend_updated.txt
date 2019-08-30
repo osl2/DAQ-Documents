@@ -1,0 +1,31 @@
+@startuml
+
+class ComToPi <<abstract>> {
+	+ fetchSensorIds() : String[]
+}
+
+ComToPi <|-- SshToPi
+ComToPi <|-- ComToFile
+
+class SshToPi {
+	
+}
+
+class ComToFile {
+	
+}
+
+class MRunAgent {
+	
+}
+
+MRunAgent --> MeasurementState : measurementState
+
+enum MeasurementState {
+	INITIAL,
+	RUNNING,
+	PAUSED,
+	HOLDING
+}
+
+@enduml
