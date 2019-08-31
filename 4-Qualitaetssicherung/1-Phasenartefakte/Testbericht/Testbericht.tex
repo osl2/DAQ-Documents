@@ -292,7 +292,7 @@ TODO: Wie ist der Plan am Ende der Phase aufgegangen?
 Dieses Kapitel umfasst die Regressionstests für gefundene und behobene Fehler. Die Tests sind nach Modul und Klassen strukturiert. Jeder Regressionstest verweist auf ein Issue der verwendeten Bugtracking-Software (hier GitHub).
 
 \subsection{Übersicht aller Issues}
-In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist, und was für eine Kategorie es hat. Das Issue wird dabei durch seine Nummer repräsentiert. Zu den roten Issues gibt es keine Regressionstests, das diese nicht behoben wurden.
+In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist, und was für eine Kategorie es hat. Das Issue wird dabei durch seine Nummer repräsentiert. Zu den roten Issues gibt es keine Regressionstests, das diese nicht behoben wurden. Bei den Issues in Klammern handelt es sich um keine eigentlichen Fehler, sondern um Verbesserungen, Löschen von Ungenutztem, Fragen usw... .
 
 \begin{table}[h]
 \begin{tabular}{| p{3cm} | p{2,2cm} | p{2,2cm}  |p{2,2cm} |p{2,2cm} |p{2,2cm}|}
@@ -308,12 +308,12 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&
 	
 	&
-	36
+	29, 34, 36, (38)
 	\\ \hline
 	
 	\textbf{Cache}
 	& 
-	
+	22
 	&
 		
 	&
@@ -329,16 +329,17 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&
 	&
 	&
+	(37)
 	\\ \hline
 	\textbf{Gui}
 	& 
 	27
 	&
 	&
-	
+	25
 	
 	&
-	15
+	15, 58, 62
 	&
 	\\ \hline
 	
@@ -350,9 +351,9 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&	
 	
 	&
-	21, 35
+	14, 21, 23, 35
 	&
-	33, 53
+	(32),(33), (39), 53
 	\\ \hline
 	
 	\textbf{Fileservice und Main}
@@ -363,17 +364,22 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&
 	57
 	&
-	50
+	50, 54
 	&
-		
+	(30),(31),(41),(42),(45),(56)	
 	\\ \hline
 
 	\textbf{Gesamtzahl}
-	& 
 	&
+	13
 	&
+	2
 	&
+	2
 	&
+	9
+	&
+	4 + (11)
 	\\ \hline
 	
 \end{tabular}
