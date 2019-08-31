@@ -758,32 +758,6 @@ In dieser Klickstrecke werden die Funktionen des Systemleistenmenüs getestet un
 	Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
 	\\ \hline
 
-	\textbf{7}
-	& 
-	
-	&
-	
-	& 
-	
-	\\ \hline
-
-	\textbf{8}
-	& 
-	
-	&
-	
-	& 
-	
-	\\ \hline
-
-	\textbf{9}
-	& 
-	
-	&
-	
-	& 
-	
-	\\ \hline
 	
 \end{tabular}
 \caption{Testen der Systemmenüs und dessen Funktionen.}
@@ -953,48 +927,50 @@ DISCLAIMER: Der Testfall wurde so nicht wirklich durchgeführt, da der Pfad zur 
 	
 	\textbf{Testfallverweis}
 	& 
-	hat ein Testfall vom Pflichtenheft eine JUnit-Test-Datei mit ein oder mehreren Tests?
+	Zur Testen dieses Szenarios werden ausschließlich Klickstrecken benutzt. JUnit Tests sind zur Überprüfung von Gui-Verhalten ungeeignet und werden deswegen nicht benutzt.
 	\\ \hline
 	
-	\textbf{(optional) Subunittests}
-	& 
-	\\ \hline
 	
 	\textbf{Verantwortlicher Tester}
 	& 
-	David
+	Linus
 	\\ \hline
 	
 	
 	\textbf{Vorbedingung}
 	& 
-	Die Anwendung ist als fat-Jar-Datei auf dem Rechner vorhanden. Es läuft keine Instanz dieser Anwendung.
+	Die Anwendung ist als fat-Jar-Datei auf dem Rechner vorhanden. Es läuft keine Instanz dieser Anwendung. Die Anwendung wurde zuvor auf dem Rechner ausgeführt.
 	\\ \hline
 	
 	\textbf{ Testziel}
 	& 
 	Zu Testen ist das Verhalten des Anwendung, wenn sie gestartet wird. Außerdem soll die Hilfe-Funktion der Anwendung getestet werden.
 	\\ \hline
+
+	\textbf{Klickstrecke}
+	& 
+	Doppelklick auf Fat-jar. Einzelklick auf Hilfe-Systemmenü.
+	\\ \hline
 	
 	
 	\textbf{Beschreibung}
 	& 
-	Die Anwendung öffnet sich bei dem Öffnen der fat-Jar-Datei. Dabei öffnet sich das Hauptfenster, in dem keine Messkonfiguration zu sehen ist. Drückt man den Knopf für die Hilfe, öffnet sich das Hilfefenster mit Informationen über die Benutzung der Anwendung.
+	Die Anwendung öffnet sich bei dem Öffnen der Fat-Jar-Datei. Dabei öffnet sich das Hauptfenster, in dem keine Messkonfiguration zu sehen ist. Während des Startvorganges werden Bausteine und Benutzereigenschaften geladen. Drückt man den Knopf für die Hilfe, öffnet sich das Hilfefenster mit Informationen über die Benutzung der Anwendung, kurze Tutorials und Informationen über die Entwicklung.
 	\\ \hline
 	
 	\textbf{Erwartetes Ergebnis}
 	& 
-	Das Hauptfenster und das Hilfefenster öffnen sich wie gewollt.
+	Das Hauptfenster und das Hilfefenster öffnen sich wie gewollt. Das Hilfefenster steht nach Öffnen im Vordergrund der Anwendung. 
 	\\ \hline
 			
 	\textbf{Verhalten im Fehlerfall}
 	& 
-	Eine Fehlermeldung wird angezeigt, falls beim Pfad zur Textdatei für das Hilfefenster keine Datei gefunden wurde.
+	Eine Fehlermeldung wird angezeigt, falls beim Pfad zur Textdatei für das Hilfefenster keine Datei gefunden wurde. Falls in den Einstellungen falsche Pfade zur Initialisierung angegeben werden erscheinen ebenfalls aussagekräftige Fehlermeldungen.
 	\\ \hline
 	
 	\textbf{Nachbedingung}
 	& 
-	Das Hauptfenster der Anwendung ist geöffnet. Es wird von dem geöffneten Hilfe-Fenster teilweise überdeckt.
+	Das Hauptfenster der Anwendung ist geöffnet. Es wird von dem geöffneten Hilfe-Fenster teilweise überdeckt. Das Hauptfenster ist leer, Bausteine und Eigenschaften wurden automatisch geladen. Der Hilfstext wird im Hilfe-Fenster angezeigt.
 	\\ \hline
 	
 	
