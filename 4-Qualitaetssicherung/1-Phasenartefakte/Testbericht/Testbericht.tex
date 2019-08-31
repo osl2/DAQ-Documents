@@ -479,7 +479,14 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 \item []\textbf{Verantwortlicher:} David Gawron
 \end{itemize}
 
+\item []\textbf{Issue Nr.23 in der Methode loadConfig} 
 
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Der Versuch eine Konfiguration mit einem Splitter mit vertauschten Verbindungstupel führt zu einem ungewollten Fehlschlag des Ladens.
+\item []\textbf{Fehlerursache:} Die private Methode createInChannelList, die von loadConfig benutzt wird, funktionierte nicht korrekt.
+\item []\textbf{Fehlerbehebung:} Die private Methode createInChannelList wurde reimplementiert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
 
 
 \item []\textbf{Fehler Nr.35 in der Methode getInitId} 
