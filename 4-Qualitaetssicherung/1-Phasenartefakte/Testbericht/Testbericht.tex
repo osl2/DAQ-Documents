@@ -1262,7 +1262,7 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT200} zu sehen.
         
         \textbf{Klickstrecke}
         & 
-        Klicke ''Lade Konfiguration'' $\rightarrow$ Wähle im Datei-Management-System die bereits existierende, fehlerhafte, Konfiguration aus $\rightarrow$ Klicke auf ''Öffnen''
+        Klicke ''Lade Konfiguration'' $\rightarrow$ Wähle im Datei-Management-System die bereits existierende, fehlerhafte, Konfiguration aus $\rightarrow$ Klicke auf ''Öffnen''.
         \\ \hline
         
         \textbf{ Beschreibung}
@@ -1289,9 +1289,9 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT200} zu sehen.
         
         \textbf{Getestete Anforderungen}
         & 
-        \textbf{F430} überprüfe Format bei Laden
+        \textbf{F430} überprüfe Format beim Laden der Konfiguration.
         \\ \hline
-        \textbf{fehlende zu testete Anforderungen}
+        \textbf{Fehlende zu testete Anforderungen}
         & 
         Keine
         \\ \hline
@@ -1312,7 +1312,7 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT210} zu sehen.
         \textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
         \textbf{Testfallnummer (Pflichtenheft)}
         & 
-        T200
+        T210
         \\ \hline
         \textbf{Verantwortlicher Tester}
         & 
@@ -1320,17 +1320,16 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT210} zu sehen.
         \\ \hline
         \textbf{Vorbedingung}
         & 
-        Die Anwendung ist geöffnet, das Konfigurationsfeld ist leer.
+        Die Anwendung ist geöffnet. Das Konfigurationsfeld ist leer.
         \\ \hline
         \textbf{ Testziel}
         & 
-        Zu Testen ist das Verhalten der Anwendung beim Laden von ungültigen
-        Messkonfigurationsdateien.
+        Zu Testen ist das Verhalten der Anwendung beim Ausführen einer ungültigen Konfiguration.
         \\ \hline
         
         \textbf{Klickstrecke}
         & 
-        Klicke ''Lade Konfiguration'' $\rightarrow$ Wähle im Datei-Management-System die bereits existierende, fehlerhafte, Konfiguration aus $\rightarrow$ Klicke auf ''Öffnen''
+        Klicke in das Konfigurationsfeld um das Bearbeiten der Konfiguration zu beginnen. $\rightarrow$ Erstelle eine ungültige Konfiguration (Konkret: Füge ''Test'' ein). $\rightarrow$ Klicke ''Starte Messlauf''.
         \\ \hline
         
         \textbf{ Beschreibung}
@@ -1346,7 +1345,7 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT210} zu sehen.
         
         \textbf{Erwartetes Ergebnis}
         & 
-        FreeJDAQ zeigt eine Fehlermeldung an, die auf die fehlerhafte Konfiguration hinweist. Anschließend wird der Ladevorgang der Konfiguration abgebrochen.
+        FreeJDAQ zeigt eine Fehlermeldung an, die auf die fehlerhafte Konfiguration hinweist. Anschließend wird das Starten des Messlaufes abgebrochen.
         \\ \hline
         
         \textbf{Nachbedingung}
@@ -1357,7 +1356,7 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT210} zu sehen.
         
         \textbf{Getestete Anforderungen}
         & 
-        \textbf{F430} überprüfe Format bei Laden
+        \textbf{F310} überprüfe Messkonfiguration beim Start des Messlaufes.
         \\ \hline
         \textbf{fehlende zu testete Anforderungen}
         & 
