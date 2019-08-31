@@ -1187,8 +1187,135 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT050} zu sehen.
 
 \subsection{\textbf{T200} Laden einer ungültigen Datei als Messkonfiguration}
 
+\begin{table}[h]
+    \begin{tabular}{| p{4cm} | p{10cm} |}
+        \hline
+        \textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+        \textbf{Testfallnummer (Pflichtenheft)}
+        & 
+        T200
+        \\ \hline
+        \textbf{Verantwortlicher Tester}
+        & 
+        Leon
+        \\ \hline
+        \textbf{Vorbedingung}
+        & 
+        Die Anwendung ist geöffnet, das Konfigurationsfeld ist leer.
+        \\ \hline
+        \textbf{ Testziel}
+        & 
+        Zu Testen ist das Verhalten der Anwendung beim Laden von ungültigen
+        Messkonfigurationsdateien.
+        \\ \hline
+        
+        \textbf{Klickstrecke}
+        & 
+        Klicke ''Lade Konfiguration'' $\rightarrow$ Wähle im Datei-Management-System die bereits existierende, fehlerhafte, Konfiguration aus $\rightarrow$ Klicke auf ''Öffnen''
+        \\ \hline
+        
+        \textbf{ Beschreibung}
+        & 
+        Der Benutzer versucht eine Konfiguration über den vorgesehenen Weg zu laden. Nachdem die Konfigurationsauswahl getroffen wurde überprüft FreeJDAQ das Format der Konfiguration.
+        \\ \hline
+        
+        \textbf{Abweichungen vom Pflichtenheft}
+        & 
+        Keine
+        
+        \\ \hline
+        
+        \textbf{Erwartetes Ergebnis}
+        & 
+        FreeJDAQ zeigt eine Fehlermeldung an, die auf die fehlerhafte Konfiguration hinweist. Anschließend wird der Ladevorgang der Konfiguration abgebrochen.
+        \\ \hline
+        
+        \textbf{Nachbedingung}
+        & 
+        FreeJDAQ ist geöffnet und es ist keine Konfiguration geladen. FreeJDAQ wird von dem geöffneten Warnungs-Fenster teilweise überdeckt.
+        \\ \hline
+        
+        
+        \textbf{Getestete Anforderungen}
+        & 
+        \textbf{F430} überprüfe Format bei Laden
+        \\ \hline
+        \textbf{fehlende zu testete Anforderungen}
+        & 
+        Keine
+        \\ \hline
+        
+        
+    \end{tabular}
+    \caption{Testfall T200 aus dem Plfichtenheft: Laden einer ungültigen Datei als Messkonfiguration}
+    \label{testfallT200}
+\end{table}
+
 \subsection{\textbf{T210} Starten einer ungültigen Messkonfiguration}
 
+\begin{table}[h]
+    \begin{tabular}{| p{4cm} | p{10cm} |}
+        \hline
+        \textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+        \textbf{Testfallnummer (Pflichtenheft)}
+        & 
+        T200
+        \\ \hline
+        \textbf{Verantwortlicher Tester}
+        & 
+        Leon
+        \\ \hline
+        \textbf{Vorbedingung}
+        & 
+        Die Anwendung ist geöffnet, das Konfigurationsfeld ist leer.
+        \\ \hline
+        \textbf{ Testziel}
+        & 
+        Zu Testen ist das Verhalten der Anwendung beim Laden von ungültigen
+        Messkonfigurationsdateien.
+        \\ \hline
+        
+        \textbf{Klickstrecke}
+        & 
+        Klicke ''Lade Konfiguration'' $\rightarrow$ Wähle im Datei-Management-System die bereits existierende, fehlerhafte, Konfiguration aus $\rightarrow$ Klicke auf ''Öffnen''
+        \\ \hline
+        
+        \textbf{ Beschreibung}
+        & 
+        Der Benutzer versucht eine Konfiguration über den vorgesehenen Weg zu laden. Nachdem die Konfigurationsauswahl getroffen wurde überprüft FreeJDAQ das Format der Konfiguration.
+        \\ \hline
+        
+        \textbf{Abweichungen vom Pflichtenheft}
+        & 
+        Keine
+        
+        \\ \hline
+        
+        \textbf{Erwartetes Ergebnis}
+        & 
+        FreeJDAQ zeigt eine Fehlermeldung an, die auf die fehlerhafte Konfiguration hinweist. Anschließend wird der Ladevorgang der Konfiguration abgebrochen.
+        \\ \hline
+        
+        \textbf{Nachbedingung}
+        & 
+        FreeJDAQ ist geöffnet und es ist keine Konfiguration geladen. FreeJDAQ wird von dem geöffneten Warnungs-Fenster teilweise überdeckt.
+        \\ \hline
+        
+        
+        \textbf{Getestete Anforderungen}
+        & 
+        \textbf{F430} überprüfe Format bei Laden
+        \\ \hline
+        \textbf{fehlende zu testete Anforderungen}
+        & 
+        Keine
+        \\ \hline
+        
+        
+    \end{tabular}
+    \caption{Testfall T210 aus dem Plfichtenheft: Starten einer ungültigen Messkonfiguration}
+    \label{testfallT210}
+\end{table}
 \subsection{\textbf{T220} Entfernen eines Sensors bei laufender Messung}
 
 Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT220} zu sehen.
