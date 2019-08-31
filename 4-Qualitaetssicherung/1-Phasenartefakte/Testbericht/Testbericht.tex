@@ -397,6 +397,8 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 \label{issueOverView}
 \end{table}
 
+Falls ein Problem hauptsächlich mit der Gui zu tun hat und ein automatischer Regressionstest nur schwer oder gar nicht realisierbar ist, wird für ein entsprechendes Issue eine Klickstrecke mit erwartetem Ergebnis geschrieben.
+
 \clearpage
 \subsection{Model}
 \subsubsection{Measurement Configuration}
@@ -674,6 +676,19 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 \item []\textbf{Verantwortlicher:} Jan Küblbeck
 \end{itemize}
 
+
+
+\item []\textbf{Issue Nr.66 in der Gui} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Lädt man eine gültige Konfiguration, macht sie ungültig und checkt sie dann ohne Erfolg, bleibt die alte, gültige Konfiguration im Model geladen und startbar, obwohl in der Gui die ungültige zu sehen ist.
+\item []\textbf{Fehlerursache:} Die Methode deleteMeasurementConfiguration in der MeasurementConfiguration funktionierte nicht richtig.
+\item []\textbf{Fehlerbehebung:} Die Methode wurde entsprechend angepasst.
+\item []\textbf{Klickstrecke:} Anwendung wird geöffnet $\rightarrow$ lade gültige Konfiguration $\rightarrow$ mache sie ungültig $\rightarrow$ drücke den Check-Knopf $\rightarrow$ klicke OK $\rightarrow$ klicke run
+\item []\textbf{erwartetes Ergebnis:} Die Messung wird nicht gestartet und es werden keine Daten angezeigt.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
 \end{description}
 
 
@@ -790,7 +805,7 @@ In dieser Klickstrecke werden die Funktionen des Systemleistenmenüs getestet un
 \label{klickMenu}
 \end{table} 
 
-\subsubsection{Erstellen, Speichern und Laden einer Messkonfiguration}
+\subsubsection{Erstellen, Speichern, Checken und Laden einer Messkonfiguration}
 
 In dieser Klickstrecke wird die Anwendung anhand ihrer Funktion rund um das Erstellen, Speichern und Laden einer Messkonfiguration getestet. Als Vorbedingung ist hier die geöffnete Anwendung mit einer leeren Messkonfiguration gegeben. Die Klickstrecke und deren Ergebnisse sind in Tabelle \ref{klickConfig} zu sehen. Dabei besteht Konfiguration A aus einem BMP180 Sensor-Baustein, einer textuellen Repräsentation für einen Kanal und der korrekten Verbindung dazwischen. Konfiguration B besteht aus dem selben Bausteinen wie Konfiguration A, aber die Verbindung fehlt.  
 
@@ -804,7 +819,7 @@ In dieser Klickstrecke wird die Anwendung anhand ihrer Funktion rund um das Erst
 	&
 	Die Datei mit dem entsprechenden Namen ist am entsprechenden Ort zu finden. Die Datei enthält die Konfiguration A.
 	& 
-	to do
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein. 
 	\\ \hline
 	
 	\textbf{2}
@@ -813,7 +828,7 @@ In dieser Klickstrecke wird die Anwendung anhand ihrer Funktion rund um das Erst
 	&
 	Eine Meldung öffnet sich, dass die Konfiguration nicht gültig ist.
 	& 
-	 TODO Das Ergebnis stimmt nicht überein, da ein Check-Knopf (noch) nicht existiert.
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein. 
 	\\ \hline
 	
 	\textbf{3}
@@ -855,7 +870,7 @@ In dieser Klickstrecke wird die Anwendung anhand ihrer Funktion rund um das Erst
 	
 \end{tabular}
 
-\caption{Klickstrecke um das Erstellen, Laden und Speichern einer Messkonfiguration mit der Gui zu testen.}
+\caption{Klickstrecke um das Erstellen, Checken, Laden und Speichern einer Messkonfiguration mit der Gui zu testen.}
 \label{klickConfig}
 \end{table}
 
@@ -923,6 +938,11 @@ Durch diese Klickstrecke (Tabelle \ref{klickMesslauf}) wird überprüft, ob das 
 \textit{Monkey Testing} bedeutet die Durchführung von zufälligen oder pseudozufälligen Eingaben mit dem Ziel, Fehler in einer Anwendung zu provozieren.
 
 Auch in dieser Qualitätssicherungsphase wurde einfaches Monkey Testing durchgeführt. Dabei wurden mehrere Fehler gefunden und im Issue-Tracker dokumentiert.
+
+
+
+
+
 
 \clearpage
 \section{Testen der Qualität} \label{quali}
