@@ -579,8 +579,18 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 
 \clearpage
 \subsection{Fileservice und Main}
-
 \begin{description}
+
+\item []\textbf{Issue Nr.54 in der Methode saveIntoYaml} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Beim Speichern einer Konfiguration als .yaml-Datei, werden einzelne ungewollte Anführungszeichen hinuzugefügt.
+\item []\textbf{Fehlerursache:} SnakeYaml hat wohl Schwierigkeiten bei unseren Einstellungen mit eckigen Klammern umzugehen. Daraus resultieren die einzelnen Anführungszeichen.
+\item []\textbf{Fehlerbehebung:} Es wurde eine private Methode im FileService angelegt, die die neu gespeicherte Datei erneut öffnet und alle einzelnen Anführungszeichen entfernt.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+
 
 \item []\textbf{Issue Nr.47 in der Methode readOutAllYamll} 
 
