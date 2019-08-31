@@ -277,13 +277,23 @@ Die GUI ist ein Sonderfall beim Testen, da diese nur sehr begrenzt mit automatis
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width = 8cm]{Grafiken/sollplan.png}
-		\caption{Der Sollpan für die Qualtätssicherungsphase.}
+		\caption{Der Sollplan für die Qualtätssicherungsphase.}
 		\label{sollplan}
 	\end{center}
 \end{figure}
 
 
-TODO: Wie ist der Plan am Ende der Phase aufgegangen?
+In Abbildung \ref{istplan} ist der tatsächliche Verlauf der Qualitätssicherungsphase abgebildet. Man sieht sofort, dass sich der Schwerpunkt der Arbeiten auf den 31.8. verschoben hat. Dies liegt daran, dass das Testen und Beheben von Fehlern der anderen Module auch weiterhin im dritten Meilenstein stark präsent war. Weiter sieht man, dass die planmäßige Testabdeckung am Ende des zweiten geplanten Meilenstein nicht erfüllt war. 
+
+TODO Meilenstein Drei Testabdeckung
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8cm]{Grafiken/istplan.png}
+		\caption{Der Istplan für die Qualtätssicherungsphase.}
+		\label{istplan}
+	\end{center}
+\end{figure}
 
 
 \clearpage
@@ -292,7 +302,7 @@ TODO: Wie ist der Plan am Ende der Phase aufgegangen?
 Dieses Kapitel umfasst die Regressionstests für gefundene und behobene Fehler. Die Tests sind nach Modul und Klassen strukturiert. Jeder Regressionstest verweist auf ein Issue der verwendeten Bugtracking-Software (hier GitHub).
 
 \subsection{Übersicht aller Issues}
-In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist, und was für eine Kategorie es hat. Das Issue wird dabei durch seine Nummer repräsentiert. Zu den roten Issues gibt es keine Regressionstests, das diese nicht behoben wurden.
+In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist, und was für eine Kategorie es hat. Das Issue wird dabei durch seine Nummer repräsentiert. Zu den roten Issues gibt es keine Regressionstests, das diese nicht behoben wurden. Bei den Issues in Klammern handelt es sich um keine eigentlichen Fehler, sondern um Verbesserungen, Löschen von Ungenutztem, Fragen usw... .
 
 \begin{table}[h]
 \begin{tabular}{| p{3cm} | p{2,2cm} | p{2,2cm}  |p{2,2cm} |p{2,2cm} |p{2,2cm}|}
@@ -308,12 +318,12 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&
 	
 	&
-	34, 36
+	29, 34, 36, (38)
 	\\ \hline
 	
 	\textbf{Cache}
 	& 
-	
+	22
 	&
 		
 	&
@@ -329,30 +339,31 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&
 	&
 	&
+	(37)
 	\\ \hline
 	\textbf{Gui}
 	& 
-	
+	27
 	&
 	&
-	
+	25
 	
 	&
-	15
+	15, 58, 62
 	&
 	\\ \hline
 	
 	\textbf{Model}
 	& 
-	7, 8, 9, 10, 12, 13, 19, 27, 51, 59, 60
+	7, 8, 9, 10, 12, 13, 19, 51, 59, 60
 	&
 	11, 18
 	&	
 	
 	&
-	21, 35
+	14, 21, 23, 35
 	&
-	33, 53
+	(32),(33), (39), 53
 	\\ \hline
 	
 	\textbf{Fileservice und Main}
@@ -363,17 +374,22 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&
 	57
 	&
-	50
+	50, 54
 	&
-		
+	(30),(31),(41),(42),(45),(56)	
 	\\ \hline
 
 	\textbf{Gesamtzahl}
-	& 
 	&
+	13
 	&
+	2
 	&
+	2
 	&
+	9
+	&
+	4 + (11)
 	\\ \hline
 	
 \end{tabular}
@@ -381,6 +397,7 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 \label{issueOverView}
 \end{table}
 
+\clearpage
 \subsection{Model}
 \subsubsection{Measurement Configuration}
 
@@ -479,7 +496,14 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 \item []\textbf{Verantwortlicher:} David Gawron
 \end{itemize}
 
+\item []\textbf{Issue Nr.23 in der Methode loadConfig} 
 
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Der Versuch eine Konfiguration mit einem Splitter mit vertauschten Verbindungstupel führt zu einem ungewollten Fehlschlag des Ladens.
+\item []\textbf{Fehlerursache:} Die private Methode createInChannelList, die von loadConfig benutzt wird, funktionierte nicht korrekt.
+\item []\textbf{Fehlerbehebung:} Die private Methode createInChannelList wurde reimplementiert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
 
 
 \item []\textbf{Fehler Nr.35 in der Methode getInitId} 
@@ -542,14 +566,46 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 \end{description}
 
 
-
-
+\clearpage
 \subsection{Cache}
+
+
+
+\clearpage
 \subsection{Backend}
-\subsection{Controller}
-\subsection{Fileservice und Main}
 
 \begin{description}
+
+\item []\textbf{Issue Nr.36 in der Klasse PickupPointForBackendAgents} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Es war nicht möglich, gleichzeitig eine simulierte und eine tatsächliche Backend-Verbindung aufzubauen.
+\item []\textbf{Fehlerursache:} Durch PickupPointForBackendAgents wurde immer nur entweder eine echte oder eine simulierte Verbindung initialisiert.
+\item []\textbf{Fehlerbehebung:} Durch separate Methoden können nun eine echte und eine simulierte Verbindung separat verwendet werden.
+\item []\textbf{Verantwortlicher:} Jan Küblbeck
+\end{itemize}
+
+\end{description}
+
+
+\clearpage
+\subsection{Controller}
+
+
+
+\clearpage
+\subsection{Fileservice und Main}
+\begin{description}
+
+\item []\textbf{Issue Nr.54 in der Methode saveIntoYaml} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Beim Speichern einer Konfiguration als .yaml-Datei, werden einzelne ungewollte Anführungszeichen hinuzugefügt.
+\item []\textbf{Fehlerursache:} SnakeYaml hat wohl Schwierigkeiten bei unseren Einstellungen mit eckigen Klammern umzugehen. Daraus resultieren die einzelnen Anführungszeichen.
+\item []\textbf{Fehlerbehebung:} Es wurde eine private Methode im FileService angelegt, die die neu gespeicherte Datei erneut öffnet und alle einzelnen Anführungszeichen entfernt.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
 
 
 \item []\textbf{Issue Nr.47 in der Methode readOutAllYamll} 
@@ -581,7 +637,23 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 
 \end{description}
 
+
+\clearpage
 \subsection{GUI}
+
+\begin{description}
+
+\item []\textbf{Issue Nr.27 in der Methode pushData} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} NullPointerException tritt auf, wenn ein Messlauf begonnen wird ohne zuvor die GUI zu starten.
+\item []\textbf{Fehlerursache:} Es wurde in der Klasse DataVisualisation auf ein Textfeld zugegriffen, welches nicht initialisiert wurde.
+\item []\textbf{Fehlerbehebung:} Das Textfeld wird nun zuerst auf null überprüft.
+\item []\textbf{Verantwortlicher:} Jan Küblbeck
+\end{itemize}
+
+\end{description}
+
 
 \clearpage
 \section{Testen der GUI} \label{gui}
@@ -1141,8 +1213,135 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT050} zu sehen.
 
 \subsection{\textbf{T200} Laden einer ungültigen Datei als Messkonfiguration}
 
+\begin{table}[h]
+    \begin{tabular}{| p{4cm} | p{10cm} |}
+        \hline
+        \textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+        \textbf{Testfallnummer (Pflichtenheft)}
+        & 
+        T200
+        \\ \hline
+        \textbf{Verantwortlicher Tester}
+        & 
+        Leon
+        \\ \hline
+        \textbf{Vorbedingung}
+        & 
+        Die Anwendung ist geöffnet, das Konfigurationsfeld ist leer.
+        \\ \hline
+        \textbf{ Testziel}
+        & 
+        Zu Testen ist das Verhalten der Anwendung beim Laden von ungültigen
+        Messkonfigurationsdateien.
+        \\ \hline
+        
+        \textbf{Klickstrecke}
+        & 
+        Klicke ''Lade Konfiguration'' $\rightarrow$ Wähle im Datei-Management-System die bereits existierende, fehlerhafte, Konfiguration aus $\rightarrow$ Klicke auf ''Öffnen''
+        \\ \hline
+        
+        \textbf{ Beschreibung}
+        & 
+        Der Benutzer versucht eine Konfiguration über den vorgesehenen Weg zu laden. Nachdem die Konfigurationsauswahl getroffen wurde überprüft FreeJDAQ das Format der Konfiguration.
+        \\ \hline
+        
+        \textbf{Abweichungen vom Pflichtenheft}
+        & 
+        Keine
+        
+        \\ \hline
+        
+        \textbf{Erwartetes Ergebnis}
+        & 
+        FreeJDAQ zeigt eine Fehlermeldung an, die auf die fehlerhafte Konfiguration hinweist. Anschließend wird der Ladevorgang der Konfiguration abgebrochen.
+        \\ \hline
+        
+        \textbf{Nachbedingung}
+        & 
+        FreeJDAQ ist geöffnet und es ist keine Konfiguration geladen. FreeJDAQ wird von dem geöffneten Warnungs-Fenster teilweise überdeckt.
+        \\ \hline
+        
+        
+        \textbf{Getestete Anforderungen}
+        & 
+        \textbf{F430} überprüfe Format bei Laden
+        \\ \hline
+        \textbf{fehlende zu testete Anforderungen}
+        & 
+        Keine
+        \\ \hline
+        
+        
+    \end{tabular}
+    \caption{Testfall T200 aus dem Plfichtenheft: Laden einer ungültigen Datei als Messkonfiguration}
+    \label{testfallT200}
+\end{table}
+
 \subsection{\textbf{T210} Starten einer ungültigen Messkonfiguration}
 
+\begin{table}[h]
+    \begin{tabular}{| p{4cm} | p{10cm} |}
+        \hline
+        \textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+        \textbf{Testfallnummer (Pflichtenheft)}
+        & 
+        T200
+        \\ \hline
+        \textbf{Verantwortlicher Tester}
+        & 
+        Leon
+        \\ \hline
+        \textbf{Vorbedingung}
+        & 
+        Die Anwendung ist geöffnet, das Konfigurationsfeld ist leer.
+        \\ \hline
+        \textbf{ Testziel}
+        & 
+        Zu Testen ist das Verhalten der Anwendung beim Laden von ungültigen
+        Messkonfigurationsdateien.
+        \\ \hline
+        
+        \textbf{Klickstrecke}
+        & 
+        Klicke ''Lade Konfiguration'' $\rightarrow$ Wähle im Datei-Management-System die bereits existierende, fehlerhafte, Konfiguration aus $\rightarrow$ Klicke auf ''Öffnen''
+        \\ \hline
+        
+        \textbf{ Beschreibung}
+        & 
+        Der Benutzer versucht eine Konfiguration über den vorgesehenen Weg zu laden. Nachdem die Konfigurationsauswahl getroffen wurde überprüft FreeJDAQ das Format der Konfiguration.
+        \\ \hline
+        
+        \textbf{Abweichungen vom Pflichtenheft}
+        & 
+        Keine
+        
+        \\ \hline
+        
+        \textbf{Erwartetes Ergebnis}
+        & 
+        FreeJDAQ zeigt eine Fehlermeldung an, die auf die fehlerhafte Konfiguration hinweist. Anschließend wird der Ladevorgang der Konfiguration abgebrochen.
+        \\ \hline
+        
+        \textbf{Nachbedingung}
+        & 
+        FreeJDAQ ist geöffnet und es ist keine Konfiguration geladen. FreeJDAQ wird von dem geöffneten Warnungs-Fenster teilweise überdeckt.
+        \\ \hline
+        
+        
+        \textbf{Getestete Anforderungen}
+        & 
+        \textbf{F430} überprüfe Format bei Laden
+        \\ \hline
+        \textbf{fehlende zu testete Anforderungen}
+        & 
+        Keine
+        \\ \hline
+        
+        
+    \end{tabular}
+    \caption{Testfall T210 aus dem Plfichtenheft: Starten einer ungültigen Messkonfiguration}
+    \label{testfallT210}
+\end{table}
 \subsection{\textbf{T220} Entfernen eines Sensors bei laufender Messung}
 
 Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT220} zu sehen.
