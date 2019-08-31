@@ -318,12 +318,12 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&
 	
 	&
-	29, 34, 36, (38)
+	(29), (34), 36, (38)
 	\\ \hline
 	
 	\textbf{Cache}
 	& 
-	22
+	22, 65
 	&
 		
 	&
@@ -569,6 +569,19 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 \clearpage
 \subsection{Cache}
 
+\begin{description}
+
+\item []\textbf{Issue Nr.65 in der Klasse Cache} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} NullPointerException, wenn ein Messlauf mit inkorrekter Messkonfiguration gestartet wird.
+\item []\textbf{Fehlerursache:} Keine Überprüfung auf null in der Methode latestMSetFromCollection(...).
+\item []\textbf{Fehlerbehebung:} Methode gibt nun anstatt null eine leer initialisierte Instanz von MSet zurück.
+\item []\textbf{Verantwortlicher:} Jan Küblbeck
+\end{itemize}
+
+\end{description}
+
 
 
 \clearpage
@@ -649,6 +662,15 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 \item []\textbf{Fehlersymptom:} NullPointerException tritt auf, wenn ein Messlauf begonnen wird ohne zuvor die GUI zu starten.
 \item []\textbf{Fehlerursache:} Es wurde in der Klasse DataVisualisation auf ein Textfeld zugegriffen, welches nicht initialisiert wurde.
 \item []\textbf{Fehlerbehebung:} Das Textfeld wird nun zuerst auf null überprüft.
+\item []\textbf{Verantwortlicher:} Jan Küblbeck
+\end{itemize}
+
+\item []\textbf{Issue Nr.62 in der Klasse MeasurementButtonField} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Durch das klicken des ``Reset''-Knopfs wurden die angezeigten Daten des vorhergegangenen Messlaufs nicht aus der Anwendung entfernt.
+\item []\textbf{Fehlerursache:} Fehlender Code in der Klasse MeasurementButtonField.
+\item []\textbf{Fehlerbehebung:} Code hinzugefügt, um die Daten zu entfernen.
 \item []\textbf{Verantwortlicher:} Jan Küblbeck
 \end{itemize}
 
