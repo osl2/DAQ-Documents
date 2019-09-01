@@ -910,14 +910,74 @@ Durch diese Klickstrecke (Tabelle \ref{klickMesslauf}) wird überprüft, ob das 
 \label{klickMesslauf}
 \end{table}
 
+
+\subsubsection{Anpassen der Einstellungen}
+
+Durch diese Klickstrecke soll das Ändern von Einstellungen überprüft werden.
+
+\begin{table}[h]
+    \begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+        \hline
+        \textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergbenis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+        \textbf{1}
+        & 
+        Anwendung wird geöffnet $\rightarrow$ Systemmenü "Bausteine" wird gedrückt.
+        &
+        "Prototyp-Bausteine" - Fenster wird geöffnet. Bereits vorhandene Bausteine werden angezeigt.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{2}
+        & 
+        Im Bausteinprototyp-Bereich Sensor wird bei einem Sensor auf ''Bearbeiten'' geklickt.
+        &
+        Es öffnet sich ein neues Fenster in dem alle Eigenschaften des Sensors angezeigt und bearbeitet werden können.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{3}
+        & 
+        Systemmenü "Bausteine" wird gedrückt $\rightarrow$ Sensoren-Untermenü wird geöffnet $\rightarrow$ Transformation-Untermenü wird geöffnet $\rightarrow$ Repräsentation-Untermenü wird geöffnet.
+        &
+        Beim Öffnen der Untermenüs werden die einzelnen Bausteine der unterschiedlichen Typen angezeigt.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        
+        
+        \textbf{4}
+        & 
+        Klicke auf "Bearbeiten" Knopf unter den Namen der Bausteine $\rightarrow$ Bearbeiten der Baustein-Informationen durch 
+        Editieren des Textfeldes der Wert- Spalte.
+        &
+        Beim Drücken des Knopfes öffnet sich das "Eigenschaften" Fenster mit Baustein-Spezifischen Informationen über den 				Baustein. Eigenschaften lassen sich bearbeiten und der dadurch neu entstandene Baustein soll gespeichert oder weiterverwendet werden können.
+        & 
+        Es öffnet sich das "Einstellungen" Fenster im Hintergrund hinter dem "Prototyp-Bausteine" Fenster. Es werden nicht alle 			Eigenschaften, welche in der Tabelle dargestellt werden sollen dargestellt. Das Wert-Textfeld lässt sich editieren. Das				Editieren des Textfeld erfüllt jedoch keine Funktionalität und lässt keine weiteren Funktionalitäten zu.
+        \\ \hline
+        
+        \textbf{5}
+        & 
+        Systemmenü "Einstellungen" wird gedrückt.
+        &
+        Es öffnet sich das "Einstellungen" Fenster im Vordergrund der Anwendung, bestehend aus mehreren Untermenüs zu 				verschiedenen Einstellungsmöglichkeiten.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        (Weitere Klickstrecken zum "Einstellungen" Menü im Unterpunkt 4.1.todo)
+        \\ \hline
+        
+    \end{tabular}
+\caption{Änderungen von Bausteineinstellungen}
+\label{BausteinEinstellungKlickStrecke}
+\end{table} 
+
 \subsection{Monkey Testing}
 
 \textit{Monkey Testing} bedeutet die Durchführung von zufälligen oder pseudozufälligen Eingaben mit dem Ziel, Fehler in einer Anwendung zu provozieren.
 
 Auch in dieser Qualitätssicherungsphase wurde Monkey Testing durchgeführt. Dabei wurden mehrere Fehler gefunden und im Issue-Tracker dokumentiert.
-
-
-
 
 
 
