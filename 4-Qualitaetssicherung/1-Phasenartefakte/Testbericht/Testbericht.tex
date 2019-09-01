@@ -911,7 +911,7 @@ Durch diese Klickstrecke (Tabelle \ref{klickMesslauf}) wird überprüft, ob das 
 
 \textit{Monkey Testing} bedeutet die Durchführung von zufälligen oder pseudozufälligen Eingaben mit dem Ziel, Fehler in einer Anwendung zu provozieren.
 
-Auch in dieser Qualitätssicherungsphase wurde einfaches Monkey Testing durchgeführt. Dabei wurden mehrere Fehler gefunden und im Issue-Tracker dokumentiert.
+Auch in dieser Qualitätssicherungsphase wurde Monkey Testing durchgeführt. Dabei wurden mehrere Fehler gefunden und im Issue-Tracker dokumentiert.
 
 
 
@@ -942,12 +942,12 @@ DISCLAIMER: Der Testfall wurde so nicht wirklich durchgeführt, da der Pfad zur 
 	\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
 	\textbf{Testfallnummer (Pflichtenheft)}
 	& 
-	T10
+	T010
 	\\ \hline
 	
 	\textbf{Testfallverweis}
 	& 
-	Zur Testen dieses Szenarios werden ausschließlich Klickstrecken benutzt. JUnit Tests sind zur Überprüfung von Gui-Verhalten ungeeignet und werden deswegen nicht benutzt.
+	Zum Testen dieses Szenarios werden ausschließlich Klickstrecken benutzt. JUnit Tests sind zur Überprüfung von Gui-Verhalten ungeeignet und werden deswegen nicht benutzt.
 	\\ \hline
 	
 	
@@ -1002,8 +1002,8 @@ DISCLAIMER: Der Testfall wurde so nicht wirklich durchgeführt, da der Pfad zur 
 	
 	
 \end{tabular}
-\caption{Testfall T10 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
-\label{testfallT10}
+\caption{Testfall T010 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
+\label{testfallT010}
 \end{table}
 
 
@@ -1011,10 +1011,11 @@ DISCLAIMER: Der Testfall wurde so nicht wirklich durchgeführt, da der Pfad zur 
 
 \subsection{\textbf{T020} Starten der Demo}
 
+Der Demomodus funktioniert anders als im Pflichtenheft vorgesehen. Es muss dazu in den Einstellungen der Anwendung der Demomodus eingestellt werden. Außerdem muss der Pfad angegeben werden, wo die Dateien mit Demo-Messdaten zu finden sind.  Dann kann einfach eine gewöhnliche Konfiguration geladen (siehe Klickstrecke 4.1.2) und eine Messung gestartet werden (siehe Klickstrecke 4.1.3), als wäre der \gls{RasPi} angeschlossen.
 
 
 \subsection{\textbf{T030} Lehrer erstellt und speichert eine Messkonfiguration}
-Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT30} zu sehen. Der Testfall aus dem Pflichtenheft schlägt fehl, weil viele Features nicht oder nur teilweise implementiert sind.
+Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT030} zu sehen. Der Testfall aus dem Pflichtenheft schlägt fehl, weil viele Features nicht oder nur teilweise implementiert sind.
 
 
 \begin{table}[h]
