@@ -973,6 +973,63 @@ Durch diese Klickstrecke soll das Ändern von Einstellungen überprüft werden.
 \label{BausteinEinstellungKlickStrecke}
 \end{table} 
 
+
+\begin{table}[h]
+    \begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+        \hline
+        \textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergbenis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+        \textbf{1}
+        & 
+        Anwendung wird geöffnet $\rightarrow$ Systemmenü "Einstellungen" wird gedrückt.
+        &
+        Das Fenster mit den Systemeinstellungen wird, im Vordergrund, geöffnet.
+        & 
+        Das Fenster wird geöffnet. Es erscheint nicht notwendigerweiße an der selben Position, wie die Anwendung.
+        \\ \hline
+        
+        \textbf{2}
+        & 
+        Klicke: ''Fester'' $\rightarrow$ ''System'' $\rightarrow$ ''Messlauf'' $\rightarrow$ ''RasPI'' $\rightarrow$ ''Test Modus''
+        &
+        Das Fenster ändert sich und zeigt die entsprechenden Informatione an.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{3}
+        & 
+        Klicken in ''TestModus'' $\rightarrow$ Ändere auf ''Ja''.
+        &
+        Der neu Wert wird in dem Feld angezeigt.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        
+        
+        \textbf{4}
+        & 
+        Klicke auf ''Einstellungen speichern''.
+        &
+        Der neue Wert wird für das System übernommen. Somit befindet sich die Anwendung nun im Test Modus.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{5}
+        & 
+        Systemmenü "Einstellungen" wird gedrückt.
+        &
+        Es öffnet sich das "Einstellungen" Fenster im Vordergrund der Anwendung, bestehend aus mehreren Untermenüs zu 				verschiedenen Einstellungsmöglichkeiten.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        (Weitere Klickstrecken zum "Einstellungen" Menü im Unterpunkt 4.1.todo)
+        \\ \hline
+        
+    \end{tabular}
+    \caption{Änderungen von Bausteineinstellungen}
+    \label{BausteinEinstellungKlickStrecke}
+\end{table} 
 \subsection{Monkey Testing}
 
 \textit{Monkey Testing} bedeutet die Durchführung von zufälligen oder pseudozufälligen Eingaben mit dem Ziel, Fehler in einer Anwendung zu provozieren.
