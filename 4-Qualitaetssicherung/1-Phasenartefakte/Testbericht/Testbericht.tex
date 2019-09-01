@@ -1509,12 +1509,26 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT220} zu sehen.
 
 
 \subsection{Leistung und Speicherverbrauch}
-
+Ein expliziter Test zu Leistung und Speicherverbrauch wurde nicht durchgeführt. Der Speicherverbrauch wächst allerdings mit der Dauer des Messlaufs und es kann womöglich bei Überschreiten des maximalen zugewiesenen Speichers für Java, ein Fehler durch nicht genug verfügbaren Arbeitsspeicherplatz kommen.
 
 \subsection{Hardware Test der Sensoren}
-
+Es wurden die Sensoren MMA8451 und den Bmpx80 getestet. Der analog-digital-Wandler wurde in einer frühen Phase getestet.
+Bei allen dreien wurden Daten erfolgreich geladen. Die beiden anderen zu testenden Sensoren wurden nicht unmittelbar aufgefunden. Darum wurde ein Testen dieser Sensoren nicht durchgeführt, da wir den Fokus auf die Funktionalität richten.
 
 \subsection{Testen auf verschiedenen Systemen}
+
+Ein expliziter Test für Windows und Linux wurde nicht durchgeführt. Implizit, wurden beide Betriebssysteme beim Durchführen der Phase mit getestet. Auch hier wurde der Fokus auf die Funktionalität und dem Beheben von Fehlern gelegt.
+
+\subsection{Entfernte Klassen}
+Gründe für das Löschen waren: Klasse wurde nicht benutzt, Funktionalität wurde in andere Klassen gemergt oder die Funktionalität der Klasse wurde durch eine andere Klasse ersetzt. Diese Übersicht wurde allerdings nur spärlich benutzt. Die wirkliche Anzahl an gelöschten Dateien liegt wahrscheinlich höher.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8cm]{Grafiken/deletedFiles.png}
+		\caption{Eine Übersicht über entfernte Klassen.}
+		\label{deletedFiles}
+	\end{center}
+\end{figure}
 
 \clearpage
 \section{Glossar}\label{glossar}
