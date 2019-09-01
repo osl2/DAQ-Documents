@@ -283,9 +283,10 @@ Die GUI ist ein Sonderfall beim Testen, da diese nur sehr begrenzt mit automatis
 \end{figure}
 
 
-In Abbildung \ref{istplan} ist der tatsächliche Verlauf der Qualitätssicherungsphase abgebildet. Man sieht sofort, dass sich der Schwerpunkt der Arbeiten auf den 31.8. verschoben hat. Dies liegt daran, dass das Testen und Beheben von Fehlern der anderen Module auch weiterhin im dritten Meilenstein stark präsent war. Weiter sieht man, dass die planmäßige Testabdeckung am Ende des zweiten geplanten Meilenstein nicht erfüllt war. 
+In Abbildung \ref{istplan} ist der tatsächliche Verlauf der Qualitätssicherungsphase abgebildet. Man sieht sofort, dass sich der Schwerpunkt der Arbeiten auf den 31.8. verschoben hat. Dies liegt daran, dass das Testen und Beheben von Fehlern der anderen Module auch weiterhin im dritten Meilenstein stark präsent war. Weiter sieht man, dass die planmäßige Testabdeckung am Ende des zweiten geplanten Meilenstein nicht erfüllt war.  
 
-TODO Meilenstein Drei Testabdeckung
+Tatsächlich wurde nur im Backend die gewollte Abdeckung erreicht. Im Cache, Model, GUI und Fileservice, betragen die Abweichungen 10, 11, 1 und 16 \%. Im Controller hingegen sind es 42 \%. Dies liegt um Teil daran, dass einige noch Methoden während der Laufzeit fast nie genutzt werden. Außerdem gibt es sicherlich noch einige Zeilen an Code, die nie benutzt werden. Weiter wurde zur Erstellung der Abdeckungsstatistik kein angeschlossener Pi benutzt. Schließlich wurde auch nicht jede Klickstrecke und jeder Testfall noch einmal in die Statistik aufgenommen. Außerdem wurde beim Backend auch die Statistik eines anderen Teammitglieds benutzt, der diese Tests mit dem Pi durchgeführt hat. 
+
 
 \begin{figure}[htbp]
 	\begin{center}
