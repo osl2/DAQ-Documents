@@ -243,7 +243,7 @@
 
 \subject{Testbericht der Qualitätssicherungsphase}
 \title{Definition und Durchführung~von Messwertverarbeitung für~den~Physikunterricht auf~Basis~eines~Raspberry~Pis}
-\subtitle{Version 0.5.0}
+\subtitle{Version 0.9.0}
 \author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
 \date{\today}
 
@@ -258,7 +258,7 @@
 \clearpage
 \section{Ziel des Testberichts} \label{einleitung}
 
-Das Ziel des Testberichtes ist es dem Leser einen Überblick über die verwendeten Testverfahren zu geben und die während der Qualitätssicherungsphase entdeckten Fehler zu dokumentieren. Die Qualitätssicherungsphase hat das Ziel, möglichst viele Fehler aufzudecken, diese zu korregieren und zu dokumentieren. Zusätzlich soll das unbemerkte Wiederauftreten bereits gefundener Fehler durch Regressionstests verhindert werden. Dabei werden die Funktionalitäten und deren Qualitäten getestet.
+Das Ziel des Testberichtes ist es dem Leser einen Überblick über die verwendeten Testverfahren zu geben und die, während der Qualitätssicherungsphase entdeckten, Fehler zu dokumentieren. Die Qualitätssicherungsphase hat das Ziel, möglichst viele Fehler aufzudecken, diese zu korregieren und zu dokumentieren. Zusätzlich soll das unbemerkte Wiederauftreten bereits gefundener Fehler durch Regressionstests verhindert werden. Dabei werden die Funktionalitäten und deren Qualitäten getestet.
 
 
 \subsection{Bedingungsüberdeckung}
@@ -283,9 +283,10 @@ Die GUI ist ein Sonderfall beim Testen, da diese nur sehr begrenzt mit automatis
 \end{figure}
 
 
-In Abbildung \ref{istplan} ist der tatsächliche Verlauf der Qualitätssicherungsphase abgebildet. Man sieht sofort, dass sich der Schwerpunkt der Arbeiten auf den 31.8. verschoben hat. Dies liegt daran, dass das Testen und Beheben von Fehlern der anderen Module auch weiterhin im dritten Meilenstein stark präsent war. Weiter sieht man, dass die planmäßige Testabdeckung am Ende des zweiten geplanten Meilenstein nicht erfüllt war. 
+In Abbildung \ref{istplan} ist der tatsächliche Verlauf der Qualitätssicherungsphase abgebildet. Man sieht sofort, dass sich der Schwerpunkt der Arbeiten auf den 31.8. verschoben hat. Dies liegt daran, dass das Testen und Beheben von Fehlern der anderen Module auch weiterhin im dritten Meilenstein stark präsent war. Weiter sieht man, dass die planmäßige Testabdeckung am Ende des zweiten geplanten Meilenstein nicht erfüllt war.  
 
-TODO Meilenstein Drei Testabdeckung
+Tatsächlich wurde nur im Backend die gewollte Abdeckung erreicht. Im Cache, Model, GUI und Fileservice, betragen die Abweichungen 10, 11, 1 und 16 \%. Im Controller hingegen sind es 42 \%. Dies liegt um Teil daran, dass einige noch Methoden während der Laufzeit fast nie genutzt werden. Außerdem gibt es sicherlich noch einige Zeilen an Code, die nie benutzt werden. Weiter wurde zur Erstellung der Abdeckungsstatistik kein angeschlossener Pi benutzt. Schließlich wurde auch nicht jede Klickstrecke und jeder Testfall noch einmal in die Statistik aufgenommen. Außerdem wurde beim Backend auch die Statistik eines anderen Teammitglieds benutzt, der diese Tests mit dem Pi durchgeführt hat. 
+
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -310,7 +311,7 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	\textbf{Art des Issue vs Fundort} & \textbf{Null Pointer} & \textbf{Index out Of Bounds} & \textbf{Path related} & \textbf{fehlerhafte Funktion} & \textbf{Sonstige} \\ \hline
 	\textbf{Backend}
 	& 
-	
+	\textcolor[rgb]{1,0,0}{55}
 	&
 	
 	&
@@ -318,7 +319,7 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&
 	
 	&
-	(29), (34), 36, (38)
+	\textcolor[rgb]{1,0,0}{(17)}, 29, 34, 36, (38)
 	\\ \hline
 	
 	\textbf{Cache}
@@ -328,6 +329,7 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 		
 	&
 	&
+	67
 	&
 	\\ \hline
 	
@@ -339,7 +341,7 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&
 	&
 	&
-	(37)
+	(37), \textcolor[rgb]{1,0,0}{(46)},(48), (49)
 	\\ \hline
 	\textbf{Gui}
 	& 
@@ -351,6 +353,7 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&
 	15, 58, 62
 	&
+	\textcolor[rgb]{1,0,0}{28}, (40),\textcolor[rgb]{1,0,0}{(43) },\textcolor[rgb]{1,0,0}{(44)}, (52), (64), \textcolor[rgb]{1,0,0}{(69)}
 	\\ \hline
 	
 	\textbf{Model}
@@ -361,7 +364,7 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&	
 	
 	&
-	14, 21, 23, 35
+	14, \textcolor[rgb]{1,0,0}{20}, 21, 23, \textcolor[rgb]{1,0,0}{26}, 35, \textcolor[rgb]{1,0,0}{61}, 66
 	&
 	(32),(33), (39), 53
 	\\ \hline
@@ -374,22 +377,22 @@ In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist,
 	&
 	57
 	&
-	50, 54
+	50, 54, \textcolor[rgb]{1,0,0}{68}
 	&
-	(30),(31),(41),(42),(45),(56)	
+	(30), (31), (41), (42), (45), (56)	
 	\\ \hline
 
 	\textbf{Gesamtzahl}
 	&
-	13
+	16 / 17
 	&
 	2
 	&
 	2
 	&
-	9
+	11 / 15
 	&
-	4 + (11)
+	4 / 5 + (16) / (21) 
 	\\ \hline
 	
 \end{tabular}
@@ -605,8 +608,7 @@ Falls ein Problem hauptsächlich mit der Gui zu tun hat und ein automatischer Re
 
 \clearpage
 \subsection{Controller}
-
-
+Im Controller sind keine Fehler aufgetreten. Es wurden lediglich unbenutze Befehle entfernt.
 
 \clearpage
 \subsection{Fileservice und Main}
@@ -975,14 +977,135 @@ Durch diese Klickstrecke (Tabelle \ref{klickMesslauf}) wird überprüft, ob das 
 \label{klickMesslauf}
 \end{table}
 
+
+\subsubsection{Anpassen der Einstellungen}
+
+Durch diese Klickstrecke soll das Ändern von Einstellungen überprüft werden.
+
+\begin{table}[h]
+    \begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+        \hline
+        \textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergbenis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+        \textbf{1}
+        & 
+        Anwendung wird geöffnet $\rightarrow$ Systemmenü "Bausteine" wird gedrückt.
+        &
+        "Prototyp-Bausteine" - Fenster wird geöffnet. Bereits vorhandene Bausteine werden angezeigt.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{2}
+        & 
+        Im Bausteinprototyp-Bereich Sensor wird bei einem Sensor auf ''Bearbeiten'' geklickt.
+        &
+        Es öffnet sich ein neues Fenster in dem alle Eigenschaften des Sensors angezeigt und bearbeitet werden können.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{3}
+        & 
+        Klicke auf eine Zelle in der Spalte ''Bausteineigenschaften''.
+        &
+        Diese Spalte bleibt unverändert und kann nicht ausgewählt werden.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        
+        
+        \textbf{4}
+        & 
+        Klicke auf ''Wert'' von ''Name'' und trage neuen Wert ein.
+        &
+        Der neue Wert wird in der Zelle angezeigt.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{5}
+        & 
+        Bestätige Eingabe mit Enter.
+        &
+        Der neue Wert wird übernommen und fortan in der Zelle angezeigt. Der Wert wird im Model übernommen und für alle weiteren Berechnungen verwendet.
+        & 
+        Nach dem Bestätigen der Eingabe springt der Wert der Zelle wieder auf den alten Wert zurück. Im Model kommen keine Änderungen an.
+        \\ \hline
+        
+        \textbf{6}
+        & 
+        Klicke auf ''X''.
+        &
+        Das Einstellungsfenster schließt sich.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+    \end{tabular}
+\caption{Änderungen von Bausteineinstellungen}
+\label{BausteinEinstellungKlickStrecke}
+\end{table} 
+
+
+\begin{table}[h]
+    \begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+        \hline
+        \textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergbenis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+        \textbf{1}
+        & 
+        Anwendung wird geöffnet $\rightarrow$ Systemmenü "Einstellungen" wird gedrückt.
+        &
+        Das Fenster mit den Systemeinstellungen wird, im Vordergrund, geöffnet.
+        & 
+        Das Fenster wird geöffnet. Es erscheint nicht notwendigerweiße an der selben Position, wie die Anwendung.
+        \\ \hline
+        
+        \textbf{2}
+        & 
+        Klicke: ''Fester'' $\rightarrow$ ''System'' $\rightarrow$ ''Messlauf'' $\rightarrow$ ''RasPI'' $\rightarrow$ ''Test Modus''
+        &
+        Das Fenster ändert sich und zeigt die entsprechenden Informatione an.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{3}
+        & 
+        Klicken in ''TestModus'' $\rightarrow$ Ändere auf ''Ja''.
+        &
+        Der neu Wert wird in dem Feld angezeigt.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        
+        \textbf{4}
+        & 
+        Klicke auf ''Einstellungen speichern''.
+        &
+        Der neue Wert wird für das System übernommen. Somit befindet sich die Anwendung nun im Test Modus.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{5}
+        & 
+        Klicke auf ''X''.
+        &
+        Das Einstellungsfenster schließt sich.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+    \end{tabular}
+    \caption{Änderungen von Systemeinstellungen}
+    \label{SystemEinstellungKlickStrecke}
+\end{table} 
 \subsection{Monkey Testing}
 
 \textit{Monkey Testing} bedeutet die Durchführung von zufälligen oder pseudozufälligen Eingaben mit dem Ziel, Fehler in einer Anwendung zu provozieren.
 
 Auch in dieser Qualitätssicherungsphase wurde Monkey Testing durchgeführt. Dabei wurden mehrere Fehler gefunden und im Issue-Tracker dokumentiert.
-
-
-
 
 
 
@@ -992,11 +1115,10 @@ Auch in dieser Qualitätssicherungsphase wurde Monkey Testing durchgeführt. Dab
 
 
 \subsection{Hallway Usability Testing}
-
+Von der Verwendung von Hallway-Tests wurde abgesehen.
 
 \subsection{Testen der Qualität der Funktionalitäten}
-
-
+Die Qualität der Funktionalitäten wurde nicht zusätzlich getestet. Aus den vorhandenen Testfällen lassen sich Qualitätsmerkmale, wie beispielsweise die Bearbeitungszeit von einzelnen Szenarien, herleiten.
 
 \section{Durchführen der Testfälle aus dem Pflichtenheft} \label{testszenarien}
 
@@ -1408,7 +1530,7 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT200} zu sehen.
         
         \textbf{Klickstrecke}
         & 
-        Klicke ''Lade Konfiguration'' $\rightarrow$ Wähle im Datei-Management-System die bereits existierende, fehlerhafte, Konfiguration aus $\rightarrow$ Klicke auf ''Öffnen''
+        Klicke ''Lade Konfiguration'' $\rightarrow$ Wähle im Datei-Management-System die bereits existierende, fehlerhafte, Konfiguration aus $\rightarrow$ Klicke auf ''Öffnen''.
         \\ \hline
         
         \textbf{ Beschreibung}
@@ -1435,9 +1557,9 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT200} zu sehen.
         
         \textbf{Getestete Anforderungen}
         & 
-        \textbf{F430} überprüfe Format bei Laden
+        \textbf{F430} überprüfe Format beim Laden der Konfiguration.
         \\ \hline
-        \textbf{fehlende zu testete Anforderungen}
+        \textbf{Fehlende zu testete Anforderungen}
         & 
         Keine
         \\ \hline
@@ -1458,7 +1580,7 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT210} zu sehen.
         \textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
         \textbf{Testfallnummer (Pflichtenheft)}
         & 
-        T200
+        T210
         \\ \hline
         \textbf{Verantwortlicher Tester}
         & 
@@ -1466,17 +1588,16 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT210} zu sehen.
         \\ \hline
         \textbf{Vorbedingung}
         & 
-        Die Anwendung ist geöffnet, das Konfigurationsfeld ist leer.
+        Die Anwendung ist geöffnet. Das Konfigurationsfeld ist leer.
         \\ \hline
         \textbf{ Testziel}
         & 
-        Zu Testen ist das Verhalten der Anwendung beim Laden von ungültigen
-        Messkonfigurationsdateien.
+        Zu Testen ist das Verhalten der Anwendung beim Ausführen einer ungültigen Konfiguration.
         \\ \hline
         
         \textbf{Klickstrecke}
         & 
-        Klicke ''Lade Konfiguration'' $\rightarrow$ Wähle im Datei-Management-System die bereits existierende, fehlerhafte, Konfiguration aus $\rightarrow$ Klicke auf ''Öffnen''
+        Klicke in das Konfigurationsfeld um das Bearbeiten der Konfiguration zu beginnen. $\rightarrow$ Erstelle eine ungültige Konfiguration (Konkret: Füge ''Test'' ein). $\rightarrow$ Klicke ''Starte Messlauf''.
         \\ \hline
         
         \textbf{ Beschreibung}
@@ -1492,7 +1613,7 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT210} zu sehen.
         
         \textbf{Erwartetes Ergebnis}
         & 
-        FreeJDAQ zeigt eine Fehlermeldung an, die auf die fehlerhafte Konfiguration hinweist. Anschließend wird der Ladevorgang der Konfiguration abgebrochen.
+        FreeJDAQ zeigt eine Fehlermeldung an, die auf die fehlerhafte Konfiguration hinweist. Anschließend wird das Starten des Messlaufes abgebrochen.
         \\ \hline
         
         \textbf{Nachbedingung}
@@ -1503,7 +1624,7 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT210} zu sehen.
         
         \textbf{Getestete Anforderungen}
         & 
-        \textbf{F430} überprüfe Format bei Laden
+        \textbf{F310} überprüfe Messkonfiguration beim Start des Messlaufes.
         \\ \hline
         \textbf{fehlende zu testete Anforderungen}
         & 
@@ -1593,12 +1714,26 @@ Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT220} zu sehen.
 
 
 \subsection{Leistung und Speicherverbrauch}
-
+Ein expliziter Test zu Leistung und Speicherverbrauch wurde nicht durchgeführt. Der Speicherverbrauch wächst allerdings mit der Dauer des Messlaufs und es kann womöglich bei Überschreiten des maximalen zugewiesenen Speichers für Java, ein Fehler durch nicht genug verfügbaren Arbeitsspeicherplatz kommen.
 
 \subsection{Hardware Test der Sensoren}
-
+Es wurden die Sensoren MMA8451 und den Bmpx80 getestet. Der analog-digital-Wandler wurde in einer frühen Phase getestet.
+Bei allen dreien wurden Daten erfolgreich geladen. Die beiden anderen zu testenden Sensoren wurden nicht unmittelbar aufgefunden. Darum wurde ein Testen dieser Sensoren nicht durchgeführt, da wir den Fokus auf die Funktionalität richten.
 
 \subsection{Testen auf verschiedenen Systemen}
+
+Ein expliziter Test für Windows und Linux wurde nicht durchgeführt. Implizit, wurden beide Betriebssysteme beim Durchführen der Phase mit getestet. Auch hier wurde der Fokus auf die Funktionalität und dem Beheben von Fehlern gelegt.
+
+\subsection{Entfernte Klassen}
+Eine Übersicht ist in Abbildung \ref{deletedFiles} zu finden. Gründe für das Löschen waren: Klasse wurde nicht benutzt, Funktionalität wurde in andere Klassen gemergt oder die Funktionalität der Klasse wurde durch eine andere Klasse ersetzt. Diese Übersicht wurde allerdings nur spärlich benutzt. Die wirkliche Anzahl an gelöschten Dateien liegt wahrscheinlich höher.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/deletedFiles.png}
+		\caption{Eine Übersicht über entfernte Klassen.}
+		\label{deletedFiles}
+	\end{center}
+\end{figure}
 
 \clearpage
 \section{Glossar}\label{glossar}
