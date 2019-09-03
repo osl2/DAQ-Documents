@@ -1,0 +1,20 @@
+Montag, 16.9, 10Uhr, Raum 348 - Interne Abnahme
+
+Interne Abnahme:
+Welche Features wurden noch hinzugefügt,
+Welche Issues
+Welche Feinschliffe
+Welche Sprache
+- Statistiken darüber
+-> Benutzerhandbücher für die Benutzung, Starten, Testdateien/konfigs,
+-> Fehlerfall/Fehlermeldung Beschreibung
+-> Limitierung der Anwendung
+- max 2 DinA4 Seiten
+
+
+
+-> Drehbuch für die Abschluss Präsentation
+- Skelett, wann was stattfinden soll.
+- Proben was wir machen werden
+
+-> Namensänderung der Bausteine
