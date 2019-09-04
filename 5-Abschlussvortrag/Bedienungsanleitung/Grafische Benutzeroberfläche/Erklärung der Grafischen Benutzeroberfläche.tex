@@ -1,0 +1,1536 @@
+\documentclass[parskip=full]{scrartcl}
+
+\usepackage[utf8]{inputenc}			% Umlaute, Sonderzeichen
+\usepackage[ngerman]{babel}			% deutsche Sprache
+\usepackage{enumitem}				% Listen
+\usepackage{graphicx}				% Grafiken
+\usepackage{hyperref}				% Hyperlinks
+\usepackage[nonumberlist]{glossaries}		% Glossar
+\usepackage{amsmath}
+\usepackage{pdfpages}				% PDF einbinden
+
+
+% Hurenkinder und Schusterjungen verhindern
+\clubpenalty10000
+\widowpenalty10000
+\displaywidowpenalty=10000
+
+\DeclareRobustCommand{\glossfirstformat}[1]{\textit{#1}}	% der erste Verweis im Dokument auf ...
+\renewcommand*{\glsdisplayfirst}[4]{\glossfirstformat{#1#4}}	% ... einen Glossarbegriff wird kursiv markiert
+
+% Kriterien sollen nicht kursiv erscheinen
+\makeatletter
+\renewcommand{\@begintheorem}[2]{\trivlist
+	\item[\hskip \labelsep{\bfseries #1\ #2}]}
+\makeatother
+
+
+\makenoidxglossaries
+
+\newglossaryentry{EclEmma}{
+    name = {EclEmma},
+    description = {EclEmma ist ein Plug-In für Eclipse für Code-Überdeckungsanalysen. Es basiert auf JaCoCo. Die hier verwendete Version ist 3.1.2}
+}
+
+
+\subject{Beschreibung der Grafischen Benutzeroberfläche}
+\title{Definition und Durchführung~von Messwertverarbeitung für~den~Physikunterricht auf~Basis~eines~Raspberry~Pis}
+\subtitle{Version 1.0.0}
+\author{David Gawron \and Stefan Geretschläger \and Leon Huck \and Jan Küblbeck \and Linus Ruhnke}
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+
+\clearpage
+\tableofcontents 					% generate pdf twice to update
+
+\clearpage
+\section{Ziel des Testberichts} \label{einleitung}
+
+Das Ziel des Testberichtes ist es dem Leser einen Überblick über die verwendeten Testverfahren zu geben und die, während der Qualitätssicherungsphase entdeckten, Fehler zu dokumentieren. Die Qualitätssicherungsphase hat das Ziel, möglichst viele Fehler aufzudecken, diese zu korregieren und zu dokumentieren. Zusätzlich soll das unbemerkte Wiederauftreten bereits gefundener Fehler durch Regressionstests verhindert werden. Dabei werden die Funktionalitäten und deren Qualitäten getestet.
+
+
+\subsection{Bedingungsüberdeckung}
+Wir streben eine mehrfache Bedingungsüberdeckung an. Dadurch werden Zweig- ,Anweisungs- , einfache und minimal-mehrfache Bedingungsüberdeckung subsumiert. Eine einfache Bedingungsüberdeckung ist subsumiert nicht einmal die Anweisungsüberdeckung und ist somit ungeeignet. Eine minimal-mehrfache Bedingungsüberdeckung wäre ein guter Kompromiss zwischen Aufwand und Nutzen, allerdings verwendet unser Plug-In \gls{EclEmma} für \gls{JaCoCo} standardmäßig mehrfache Bedingungsüberdeckung. Außerdem ist die Anzahl an Bedingungen in unserer Anwendung noch überschaubar.
+Eine Pfadüberdeckung streben wir nicht an, da dessen Aufwand mit 2 hoch k skaliert, wobei k die Anzahl an Anweisungen ist. 
+
+\clearpage
+\section{Planung der Qualitätssicherungsphase} \label{planung}
+
+Die Qualitätssicherungsphase wird in drei Meilensteine aufgeteilt, siehe dazu Abbildung \ref{sollplan}. Der erste Meilenstein wird erfüllt, wenn das Modul Model der Anwendung eine hohe Testüberdeckung erreicht. Dabei sollen alle Tests automatisch mit J-Unit ablaufen. Das Model ist die Basis, die alle anderen Module benutzen und auch diese verbindet. Deshalb ist die erste Priorität eine getestetes Modul, um komplexe Folgefehler für die anderen Module zu verhindern. 
+
+Im zweiten Meilenstein werden alle anderen Module, außer der GUI, getestet. Auch hier erfolgt das Testen über automatische J-Unit Tests.
+
+Die GUI ist ein Sonderfall beim Testen, da diese nur sehr begrenzt mit automatischen Tests getestet werden kann. Deshalb wird diese im dritten Meilenstein getestet. Der Dritte Meilenstein umfasst die GUI und auch das Testen der gesamten Anwendung. Die GUI wird hauptsächlich über Klickstrecken getestet. Die gesamte Anwendung wird durch Testszenarien aus dem Pflichtenheft geprüft. Weiter werden Qualitätsanforderungen der Anwendung durch verschiedene Tests geprüft. Schließlich wird die Leistung und auch die Hardware für die Anwendung getestet. 
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8cm]{Grafiken/sollplan.png}
+		\caption{Der Sollplan für die Qualtätssicherungsphase.}
+		\label{sollplan}
+	\end{center}
+\end{figure}
+
+
+In Abbildung \ref{istplan} ist der tatsächliche Verlauf der Qualitätssicherungsphase abgebildet. Man sieht sofort, dass sich der Schwerpunkt der Arbeiten auf den 31.8. verschoben hat. Dies liegt daran, dass das Testen und Beheben von Fehlern der anderen Module auch weiterhin im dritten Meilenstein stark präsent war. Weiter sieht man, dass die planmäßige Testabdeckung am Ende des zweiten geplanten Meilenstein nicht erfüllt war.  
+
+Tatsächlich wurde nur im Backend die gewollte Abdeckung erreicht. Im Cache, Model, GUI und Fileservice, betragen die Abweichungen 10, 11, 1 und 16 \%. Im Controller hingegen sind es 42 \%. Dies liegt um Teil daran, dass einige noch Methoden während der Laufzeit fast nie genutzt werden. Außerdem gibt es sicherlich noch einige Zeilen an Code, die nie benutzt werden. Weiter wurde zur Erstellung der Abdeckungsstatistik kein angeschlossener Pi benutzt. Schließlich wurde auch nicht jede Klickstrecke und jeder Testfall noch einmal in die Statistik aufgenommen. Außerdem wurde beim Backend auch die Statistik eines anderen Teammitglieds benutzt, der diese Tests mit dem Pi durchgeführt hat. 
+
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8cm]{Grafiken/istplan.png}
+		\caption{Der Istplan für die Qualtätssicherungsphase.}
+		\label{istplan}
+	\end{center}
+\end{figure}
+
+
+\clearpage
+\section{Gefundene Fehler und deren Regressionstests} \label{regression}
+
+Dieses Kapitel umfasst die Regressionstests für gefundene und behobene Fehler. Die Tests sind nach Modul und Klassen strukturiert. Jeder Regressionstest verweist auf ein Issue der verwendeten Bugtracking-Software (hier GitHub).
+
+\subsection{Übersicht aller Issues}
+In der Tabelle \ref{issueOverView} wird angezeigt, wo ein Issue aufgetreten ist, und was für eine Kategorie es hat. Das Issue wird dabei durch seine Nummer repräsentiert. Zu den roten Issues gibt es keine Regressionstests, das diese nicht behoben wurden. Bei den Issues in Klammern handelt es sich um keine eigentlichen Fehler, sondern um Verbesserungen, Löschen von Ungenutztem, Fragen usw... .
+
+\begin{table}[h]
+\begin{tabular}{| p{3cm} | p{2,2cm} | p{2,2cm}  |p{2,2cm} |p{2,2cm} |p{2,2cm}|}
+	\hline
+	\textbf{Art des Issue vs Fundort} & \textbf{Null Pointer} & \textbf{Index out Of Bounds} & \textbf{Path related} & \textbf{fehlerhafte Funktion} & \textbf{Sonstige} \\ \hline
+	\textbf{Backend}
+	& 
+	\textcolor[rgb]{1,0,0}{55}
+	&
+	
+	&
+	
+	&
+	
+	&
+	\textcolor[rgb]{1,0,0}{(17)}, 29, 34, 36, (38)
+	\\ \hline
+	
+	\textbf{Cache}
+	& 
+	22, 65
+	&
+		
+	&
+	&
+	67
+	&
+	\\ \hline
+	
+	\textbf{Controller}
+	& 
+	
+	&
+
+	&
+	&
+	&
+	(37), \textcolor[rgb]{1,0,0}{(46)},(48), (49)
+	\\ \hline
+	\textbf{Gui}
+	& 
+	27
+	&
+	&
+	25
+	
+	&
+	15, 58, 62
+	&
+	\textcolor[rgb]{1,0,0}{28}, (40),\textcolor[rgb]{1,0,0}{(43) },\textcolor[rgb]{1,0,0}{(44)}, (52), (64), \textcolor[rgb]{1,0,0}{(69)}
+	\\ \hline
+	
+	\textbf{Model}
+	& 
+	7, 8, 9, 10, 12, 13, 19, 51, 59, 60
+	&
+	11, 18
+	&	
+	
+	&
+	14, \textcolor[rgb]{1,0,0}{20}, 21, 23, \textcolor[rgb]{1,0,0}{26}, 35, \textcolor[rgb]{1,0,0}{61}, 66
+	&
+	(32),(33), (39), 53
+	\\ \hline
+	
+	\textbf{Fileservice und Main}
+	& 
+	47
+	&
+	
+	&
+	57
+	&
+	50, 54, \textcolor[rgb]{1,0,0}{68}
+	&
+	(30), (31), (41), (42), (45), (56)	
+	\\ \hline
+
+	\textbf{Gesamtzahl}
+	&
+	16 / 17
+	&
+	2
+	&
+	2
+	&
+	11 / 15
+	&
+	4 / 5 + (16) / (21) 
+	\\ \hline
+	
+\end{tabular}
+\caption{Übersicht über alle Issues.}
+\label{issueOverView}
+\end{table}
+
+Falls ein Problem hauptsächlich mit der Gui zu tun hat und ein automatischer Regressionstest nur schwer oder gar nicht realisierbar ist, wird für ein entsprechendes Issue eine Klickstrecke mit erwartetem Ergebnis geschrieben.
+
+\clearpage
+\subsection{Model}
+\subsubsection{Measurement Configuration}
+
+\begin{description}
+ 
+
+\item []\textbf{Issue Nr.7 in der Methode getInChan} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Unbehandelte NullPointer Exception bei Eingabe einer ungültigen Id.
+\item []\textbf{Fehlerursache:} Prüfen nach NullPointer Exception fehlt.
+\item []\textbf{Fehlerbehebung:} Eine Null Prüfung wurde implementiert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.8 in der Methode getOutChan} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Unbehandelte NullPointer Exception bei Eingabe einer ungültigen Id.
+\item []\textbf{Fehlerursache:} Prüfen nach NullPointer Exception fehlt.
+\item []\textbf{Fehlerbehebung:} Eine Null Prüfung wurde implementiert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.9 in der Methode addConnection} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Unbehandelte NullPointer Exception bei Eingabe einer ungültigen Id.
+\item []\textbf{Fehlerursache:} Prüfen nach NullPointer Exception fehlt.
+\item []\textbf{Fehlerbehebung:} Eine Null Prüfung wurde implementiert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.10 in der Methode removeConnection } 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Unbehandelte NullPointer Exception bei Eingabe einer ungültigen Id.
+\item []\textbf{Fehlerursache:} Prüfen nach NullPointer Exception fehlt.
+\item []\textbf{Fehlerbehebung:} Eine Null Prüfung wurde implementiert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.11 in der Methode createInChannelList } 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Auftreten einer Index Out Of Bounds Exception.
+\item []\textbf{Fehlerursache:} Eine Prüfung, ob der Index groß genug ist, fehlt.
+\item []\textbf{Fehlerbehebung:} Der Fehler wird abgefangen durch einen Vergleich der Anzahl der InChannel zwischen yaml-File und Prototypblock.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.12 in der Methode getOutChanPosi } 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} NullPointer Exception beim Laden einer Messkonfiguration mit ungültigen Block Id.
+\item []\textbf{Fehlerursache:} Prüfen nach NullPointer Exception fehlt.
+\item []\textbf{Fehlerbehebung:} Es wird nach Null geprüft. Dann ergab sich eine Folgefehler, der sich in der Methode  createLoadedConnections als eine Index Out Of Bounds Exception äußerte. Durch das Implementieren einer Methode checkBlockInitId, die prüft, ob eine geladene Id auch gültig ist, wurde der Folgefehler behoben.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+
+\item []\textbf{Issue Nr.13 in der Methode createInChannelList } 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} NullPointer Exception bei ungültiger Messkonfiguration mit einer fehlenden BlockChannelliste.
+\item []\textbf{Fehlerursache:} Prüfen nach NullPointer Exception fehlt.
+\item []\textbf{Fehlerbehebung:} Eine Prüfung nach Null wurde hinzugefügt.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+
+\item []\textbf{Issue Nr.14 in der Methode loadConfig} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Fehlerhaftes Verhalten beim Laden der fehlerhaften Messkonfiguration 4, die einen Block mit sich selber verbindet.
+\item []\textbf{Fehlerursache:} Überprüfen der Verbindung fehlt.
+\item []\textbf{Fehlerbehebung:} Die Überprüfung der Verbindung wurde implementiert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.18 in der Methode removeBlock} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Der Versuch einen nicht existierenden Block zu entfernen, resultiert in eines Index Out Of Bounds Exception.
+\item []\textbf{Fehlerursache:} Der Index wurde nicht geprüft.
+\item []\textbf{Fehlerbehebung:} Eine Prüfung des Indexes wurde hinzugefügt. Außerdem wurde der Rückgabewert der Methode von void zu boolean geändert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.19 in der Methode removeBlock} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Der Versuch eine Konfiguration ohne eine Liste von Block Ids zu laden, führt zu einer Null Pointer Exception.
+\item []\textbf{Fehlerursache:} Es wurde nicht nach Null geprüft.
+\item []\textbf{Fehlerbehebung:} Die betreffende Zeile wurde in einen schon existierenden Null-Check verschoben.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\item []\textbf{Issue Nr.23 in der Methode loadConfig} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Der Versuch eine Konfiguration mit einem Splitter mit vertauschten Verbindungstupel führt zu einem ungewollten Fehlschlag des Ladens.
+\item []\textbf{Fehlerursache:} Die private Methode createInChannelList, die von loadConfig benutzt wird, funktionierte nicht korrekt.
+\item []\textbf{Fehlerbehebung:} Die private Methode createInChannelList wurde reimplementiert.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+
+\item []\textbf{Fehler Nr.35 in der Methode getInitId} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Die Methode funktionierte nicht richtig und gab immer NULL zurück.
+\item []\textbf{Fehlerursache:} Der Zugriff auf die Blöcke in der Hasmap der Konfigurationsblöcke schlägt fehl.
+\item []\textbf{Fehlerbehebung:} Die KonfigurationsId wird nun über die Blockliste der Messkonfiguration geholt.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\end{description}
+
+\subsubsection{Sensor}
+
+\begin{description}
+
+\item []\textbf{Issue Nr.51 in der Methode constructBuildingBlocks} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Die Methode liefert bei Übergabe von null oder einer leeren Map eine NullPointerException.
+\item []\textbf{Fehlerursache:} Fehlende Überprüfung der Übergabewerte auf die notwendigen Argumente
+\item []\textbf{Fehlerbehebung:} constructBuildingBlock() überprüft, ob die Map null oder leer ist.
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\item []\textbf{Issue Nr.59 in der Methode processKvPair} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Die Methode liefert bei falschen Übergabewerten eine NullPointerException.
+\item []\textbf{Fehlerursache:} Fehlende Überprüfung der Übergabewerte auf die notwendigen Argumente
+\item []\textbf{Fehlerbehebung:} processKvPair() überprüft, ob die Map der Bausteine die notwendigen Argumente zum Aufbauen des Bausteins enthält. 
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\item []\textbf{Issue Nr.60 in der Methode initialiseModel} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Die Methode überprüft Bausteine nicht auf null und kann somit eine NullPointerException liefern.
+\item []\textbf{Fehlerursache:} Fehlende Überprüfung der Bausteine auf die null.
+\item []\textbf{Fehlerbehebung:} Die Methode überprüft, ob die Bausteine null sind.
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\end{description}
+
+\subsubsection{BuildingBlockDirectory}
+
+\begin{description}
+
+\item []\textbf{Issue Nr.21 in der Methode addConfigBlock} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Konfigurationsbausteine konnten mehrfach mit dem gleichen Key zu der Liste hinzugefügt werden. Alte Einträge mit dem gleichen Key wurden überschrieben.
+\item []\textbf{Fehlerursache:} Standart-Funktion einer HashMap.
+\item []\textbf{Fehlerbehebung:} Konfigurationsbausteine können nicht mehrfach mit dem gleichen Key hinzugefügt werden. Alte Einträge werden nicht mehr überschrieben.
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\end{description}
+
+
+\clearpage
+\subsection{Cache}
+
+\begin{description}
+
+\item []\textbf{Issue Nr.65 in der Klasse Cache} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} NullPointerException, wenn ein Messlauf mit inkorrekter Messkonfiguration gestartet wird.
+\item []\textbf{Fehlerursache:} Keine Überprüfung auf null in der Methode latestMSetFromCollection(...).
+\item []\textbf{Fehlerbehebung:} Methode gibt nun anstatt null eine leer initialisierte Instanz von MSet zurück.
+\item []\textbf{Verantwortlicher:} Jan Küblbeck
+\end{itemize}
+
+\end{description}
+
+
+
+\clearpage
+\subsection{Backend}
+
+\begin{description}
+
+\item []\textbf{Issue Nr.36 in der Klasse PickupPointForBackendAgents} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Es war nicht möglich, gleichzeitig eine simulierte und eine tatsächliche Backend-Verbindung aufzubauen.
+\item []\textbf{Fehlerursache:} Durch PickupPointForBackendAgents wurde immer nur entweder eine echte oder eine simulierte Verbindung initialisiert.
+\item []\textbf{Fehlerbehebung:} Durch separate Methoden können nun eine echte und eine simulierte Verbindung separat verwendet werden.
+\item []\textbf{Verantwortlicher:} Jan Küblbeck
+\end{itemize}
+
+\end{description}
+
+
+\clearpage
+\subsection{Controller}
+Im Controller sind keine Fehler aufgetreten. Es wurden lediglich unbenutze Befehle entfernt.
+
+\clearpage
+\subsection{Fileservice und Main}
+\begin{description}
+
+\item []\textbf{Issue Nr.54 in der Methode saveIntoYaml} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Beim Speichern einer Konfiguration als .yaml-Datei, werden einzelne ungewollte Anführungszeichen hinuzugefügt.
+\item []\textbf{Fehlerursache:} SnakeYaml hat wohl Schwierigkeiten bei unseren Einstellungen mit eckigen Klammern umzugehen. Daraus resultieren die einzelnen Anführungszeichen.
+\item []\textbf{Fehlerbehebung:} Es wurde eine private Methode im FileService angelegt, die die neu gespeicherte Datei erneut öffnet und alle einzelnen Anführungszeichen entfernt.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+
+
+\item []\textbf{Issue Nr.47 in der Methode readOutAllYamll} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Bei einem Fehler beim Lesen des Inhalt einer Yaml-Datei wird null zurückgegeben.
+\item []\textbf{Fehlerursache:} Implementierung der Methode.
+\item []\textbf{Fehlerbehebung:} Bei einem Fehler beim Lesen wird eine leere Map zurückgegeben.
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\item []\textbf{Issue Nr.50 in der Methode testWriteIntoYaml} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Die Methode löschte eine durch den Test erzeugte Methode bei einem erfolgreichen Durchlauf nicht, was zur Folge hatte, dass beim nächsten Test der Test fehl schlug.
+\item []\textbf{Fehlerursache:} Unbekannt.
+\item []\textbf{Fehlerbehebung:} Die Methode löscht vor dem Test die Datei aus dem Verzeichniss.
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\item []\textbf{Issue Nr.57 in der Methode readFromYaml} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Falls ein angegebener Pfad nicht existiert wird eine Exception von SnakeYaml übergeben.
+\item []\textbf{Fehlerursache:} Übergebener Pfad existiert nicht, aber wird nicht abgefangen.
+\item []\textbf{Fehlerbehebung:} Vor dem Lesen wird überprüft, ob eine Ressource in dem Verzeichnis mit dem Pfad existiert.
+\item []\textbf{Verantwortlicher:} Linus Ruhnke
+\end{itemize}
+
+\end{description}
+
+
+\clearpage
+\subsection{GUI}
+
+\begin{description}
+
+\item []\textbf{Issue Nr.27 in der Methode pushData} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} NullPointerException tritt auf, wenn ein Messlauf begonnen wird ohne zuvor die GUI zu starten.
+\item []\textbf{Fehlerursache:} Es wurde in der Klasse DataVisualisation auf ein Textfeld zugegriffen, welches nicht initialisiert wurde.
+\item []\textbf{Fehlerbehebung:} Das Textfeld wird nun zuerst auf null überprüft.
+\item []\textbf{Verantwortlicher:} Jan Küblbeck
+\end{itemize}
+
+\item []\textbf{Issue Nr.62 in der Klasse MeasurementButtonField} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Durch das klicken des ``Reset''-Knopfs wurden die angezeigten Daten des vorhergegangenen Messlaufs nicht aus der Anwendung entfernt.
+\item []\textbf{Fehlerursache:} Fehlender Code in der Klasse MeasurementButtonField.
+\item []\textbf{Fehlerbehebung:} Code hinzugefügt, um die Daten zu entfernen.
+\item []\textbf{Verantwortlicher:} Jan Küblbeck
+\end{itemize}
+
+
+
+\item []\textbf{Issue Nr.66 in der Gui} 
+
+\begin{itemize}
+\item []\textbf{Fehlersymptom:} Lädt man eine gültige Konfiguration, macht sie ungültig und checkt sie dann ohne Erfolg, bleibt die alte, gültige Konfiguration im Model geladen und startbar, obwohl in der Gui die ungültige zu sehen ist.
+\item []\textbf{Fehlerursache:} Die Methode deleteMeasurementConfiguration in der MeasurementConfiguration funktionierte nicht richtig.
+\item []\textbf{Fehlerbehebung:} Die Methode wurde entsprechend angepasst.
+\item []\textbf{Klickstrecke:} Anwendung wird geöffnet $\rightarrow$ lade gültige Konfiguration $\rightarrow$ mache sie ungültig $\rightarrow$ drücke den Check-Knopf $\rightarrow$ klicke OK $\rightarrow$ klicke run
+\item []\textbf{erwartetes Ergebnis:} Die Messung wird nicht gestartet und es werden keine Daten angezeigt.
+\item []\textbf{Verantwortlicher:} David Gawron
+\end{itemize}
+
+\end{description}
+
+
+\clearpage
+\section{Testen der GUI} \label{gui}
+
+
+\subsection{Testen der GUI durch Klickstrecken}
+
+\subsubsection{Öffnen der Systemmenüs und dessen Funktionen}
+
+In dieser Klickstrecke werden die Funktionen des Systemleistenmenüs getestet unter der Vorbedinung, dass die Anwendung geöffnet ist. In Klickstrecke Nr.1 werden mehrere Bausteine bei der Initialisierung der Anwendung geladen und bei Klickstrecke Nr.2 sind keine Bausteine bei dem angegeben Pfad initialisiert worden. 
+
+\begin{table}[h]
+\begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+	\hline
+	\textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergbenis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+	\textbf{1}
+	& 
+	Anwendung wird geöffnet $\rightarrow$ Systemmenü "Bausteine" wird gedrückt.
+	&
+	"Prototyp-Bausteine" - Fenster wird geöffnet. Geladene Bausteine werden im dem Fenster angezeigt.
+	& 
+	Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+	\\ \hline
+	
+	\textbf{2}
+	& 
+	Anwendung wird geöffnet $\rightarrow$ Systemmenü "Bausteine" wird gedrückt.
+	&
+	"Prototyp-Bausteine" - Fenster wird geöffnet. Es werden keine Bausteine im Fenster angezeigt
+	& 
+	Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+	\\ \hline
+	
+	\textbf{3}
+	& 
+	Systemmenü "Bausteine" wird gedrückt $\rightarrow$ Sensoren-Untermenü wird geöffnet $\rightarrow$ Transformation-Untermenü wird geöffnet $\rightarrow$ Repräsentation-Untermenü wird geöffnet.
+	&
+	Beim Öffnen der Untermenüs werden die einzelnen Bausteine der unterschiedlichen Typen angezeigt.
+	& 
+	Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+	\\ \hline
+
+
+
+	\textbf{4}
+	& 
+	Klicke auf "Bearbeiten" Knopf unter den Namen der Bausteine $\rightarrow$ Bearbeiten der Baustein-Informationen durch 
+	Editieren des Textfeldes der Wert- Spalte.
+	&
+	Beim Drücken des Knopfes öffnet sich das "Eigenschaften" Fenster mit Baustein-Spezifischen Informationen über den 				Baustein. Eigenschaften lassen sich bearbeiten und der dadurch neu entstandene Baustein soll gespeichert oder weiterverwendet werden können.
+	& 
+	Es öffnet sich das "Einstellungen" Fenster im Hintergrund hinter dem "Prototyp-Bausteine" Fenster. Es werden nicht alle 			Eigenschaften, welche in der Tabelle dargestellt werden sollen dargestellt. Das Wert-Textfeld lässt sich editieren. Das				Editieren des Textfeld erfüllt jedoch keine Funktionalität und lässt keine weiteren Funktionalitäten zu.
+	\\ \hline
+	
+	\textbf{5}
+	& 
+	Systemmenü "Einstellungen" wird gedrückt.
+	&
+	Es öffnet sich das "Einstellungen" Fenster im Vordergrund der Anwendung, bestehend aus mehreren Untermenüs zu 				verschiedenen Einstellungsmöglichkeiten.
+	& 
+	Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+	(Weitere Klickstrecken zum "Einstellungen" Menü im Unterpunkt 4.1.todo)
+	\\ \hline
+
+	\end{tabular}
+	\end{table} 
+
+
+	\begin{table}[h]
+\begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+	\hline
+	\textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergebnis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+
+	\textbf{6}
+	& 
+	Systemmenü "Hilfe" wird gedrückt.
+	&
+	Es öffnet sich das "Hilfe" Fenster im Vordergrund der Anwendung. In diesem Fenster sind Informationen über die 				Anwendung, wie auch über die Entwicklung zu finden. Zu den wichtigesten Funktionen der Anwendung gibt es ebenfalls 			kleinere Tutorials.
+	& 
+	Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+	\\ \hline
+
+	
+\end{tabular}
+\caption{Testen der Systemmenüs und dessen Funktionen.}
+\label{klickMenu}
+\end{table} 
+
+\subsubsection{Anzeigen und Editieren der Prototypeigenschaften}
+
+Die Klickstrecke dieses Abschnitts umfasst den lesenden und den schreibenden Zugriff auf die Eigenschaften der Sensor-, Transformations- und Repräsentationsbausteine, die das Produkt bereits mitbringt. Vorbedingung ist das erfolgreiche Laden der Anwendung. Eine Konnektivität zum Raspberry Pi ist derzeit nicht erforderlich. (Eventuell ist sie nach einem Feature-Enhancement erforderlich, das die Yaml-Hol-Funktion des Backends in die Hauptkomponenten einbindet.)
+
+Eine ganze Reihe von Eigenschaften wird durch das Model unterstützt und entsprechend im Eigenschaften-Dialogfenster dargestellt. Es gibt jedoch auch einige wünschenswerte Eigenschaften, die nach wie vor noch nicht dargestellt werden können. Dazu gehört beispielsweise die von einem Transformationsprototypen bereitgestellte Funktion. 
+
+Das Verändern der Prototyp-Eigenschaften konnte nicht erfolgreich getestet werden. Ein Feature-Enhancement für die interne Abnahme wäre hier evtl. überlegenswert. 
+
+\begin{table}[h]
+	\begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+		\hline
+		\textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergebnis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+		\textbf{1}
+		& 
+		Klicke auf "Bausteine"
+		&
+		Das Dialogfenster "Prototyp-Bausteine" wird geöffnet. Die Registerkarte "Sensoren" ist aktiviert.
+		& 
+		Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein. 
+		\\ \hline
+		
+		\textbf{2}
+		& 
+		Klick auf den zum Sensor MMA8451 gehörenden Button "Bearbeiten"
+		&
+		Ein weitere Dialog-Fenster "Eigenschaften" öffnet sich.
+		Dieses enthält eine zweispaltige Tabelle. In der linken Spalte werden die Namen aller Blockeigenschaften angezeigt, in der rechten spalte die zugehörigen Werte. 
+		& 
+		Die Namen aller Blockeigenschaften werden alle angezeigt, sowie 6 von 10 der zugehörigen Werte. 
+		\\ \hline
+		
+		\textbf{3}
+		& 
+		Klick in eine Tabellenzelle, die einen Eigenschaftsnamen
+		enthält (z. B. "Initialisierungs ID").
+		&
+		Die Zelle ist nicht editierbar, d. h. es ist keine Einfügemarke zu sehen.
+		& 
+		Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+		\\ \hline
+		
+		\textbf{4}
+		& 
+		Doppelklick in eine Tabellenzelle, die einen Wert enthält
+		enthält (z. B. der Wert "MMA8451" zur oben genannten Eigenschaft)
+		&
+		Eine Einfügemarke wird sichtbar. Die Zelle ist editierbar
+		& 
+		Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+		\\ \hline
+		
+		\textbf{5}
+		& 
+		Verändern der Zeichenkette "MMA8451", beispielsweise zu "MMA8452" und Klicken in eine andere Zelle, die einen Wert
+		enthält. 
+		&
+		Der neue Wert soll erhalten bleiben. (Idealerweise auch beim
+		Schließen des Eigenschaften-Fensters und darüber hinaus auch
+		persistent.)
+		& 
+		Der alte Wert "MMA8451" wird wieder sichtbar. Der Benutzer sieht sofort, dass die Anwendung keine Veränderung des Wertes vorgenommen hat.
+		\\ \hline	
+	\end{tabular}
+	
+	\caption{Anzeigen und Editieren der Prototyp-Eigenschaften}
+	\label{Prototypeigenschaften}
+\end{table}
+
+\subsubsection{Erstellen, Speichern, Checken und Laden einer Messkonfiguration}
+
+In dieser Klickstrecke wird die Anwendung anhand ihrer Funktion rund um das Erstellen, Speichern und Laden einer Messkonfiguration getestet. Als Vorbedingung ist hier die geöffnete Anwendung mit einer leeren Messkonfiguration gegeben. Die Klickstrecke und deren Ergebnisse sind in Tabelle \ref{klickConfig} zu sehen. Dabei besteht Konfiguration A aus einem BMP180 Sensor-Baustein, einer textuellen Repräsentation für einen Kanal und der korrekten Verbindung dazwischen. Konfiguration B besteht aus dem selben Bausteinen wie Konfiguration A, aber die Verbindung fehlt.  
+
+\begin{table}[h]
+\begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+	\hline
+	\textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergebnis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+	\textbf{1}
+	& 
+	Erstelle Konfiguration A $\rightarrow$ klicke auf Check-Knopf $\rightarrow$ klicke auf Ok $\rightarrow$ klicke auf Speichern-Knopf $\rightarrow$ wähle Namen und Pfad aus und klicke auf Speichern 
+	&
+	Die Datei mit dem entsprechenden Namen ist am entsprechenden Ort zu finden. Die Datei enthält die Konfiguration A.
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein. 
+	\\ \hline
+	
+	\textbf{2}
+	& 
+	Erstelle Konfiguration B $\rightarrow$ klicke auf Check-Knopf
+	&
+	Eine Meldung öffnet sich, dass die Konfiguration nicht gültig ist.
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein. 
+	\\ \hline
+	
+	\textbf{3}
+	& 
+	klicke auf Speichern-Knopf $\rightarrow$ klicke auf Abbrechen
+	&
+	Das Hauptfenster ist geöffnet und es hat sich nichts verändert.
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+	
+	\textbf{4}
+	& 
+	klicke auf Laden-Knopf $\rightarrow$ klicke auf Abbrechen
+	&
+	Das Hauptfenster ist geöffnet und es hat sich nichts verändert.
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+	
+	\textbf{5}
+	& 
+	klicke auf Laden-Knopf $\rightarrow$ klicke auf laden, wobei Konfiguration A aus Nr. 1 ausgewählt ist
+	&
+	Eine Fenster öffnet sich und zeigt an, dass die Konfiguration erfolgreich geladen wurde.
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+	\textbf{6}
+	& 
+	klicke auf Laden-Knopf $\rightarrow$ klicke auf laden, wobei Konfiguration B aus Nr. 2 ausgewählt ist
+	&
+	Eine Fenster öffnet sich und zeigt an, dass die Konfiguration nicht gültig, und somit nicht startbar ist.
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+		
+	
+	
+\end{tabular}
+
+\caption{Klickstrecke um das Erstellen, Checken, Laden und Speichern einer Messkonfiguration mit der Gui zu testen.}
+\label{klickConfig}
+\end{table}
+
+\subsubsection{Kontrolle des Messlaufs}
+
+Durch diese Klickstrecke (Tabelle \ref{klickMesslauf}) wird überprüft, ob das Starten, Pausieren, Fortsetzen und Beenden eines Messlaufs und das Speichern von Messdaten korrekt funktioniert. Vorbedingung ist, dass eine korrekte Messkonfiguration bereits geladen ist (siehe vorherige Klickstrecke)
+
+\begin{table}[h]
+\begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+	\hline
+	\textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergebnis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+	\textbf{1}
+	& 
+	klicke ``Run Configuration''
+	&
+	Auslesen und Anzeigen der Messdaten (Messlauf) beginnt
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+	
+	\textbf{2}
+	& 
+	klicke ``Pause''
+	&
+	Es werden keine neuen Daten verarbeitet und angezeigt.
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+	
+	\textbf{3}
+	& 
+	klicke ``Resume''
+	&
+	Der Messlauf wird fortgesetzt.
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+	
+	\textbf{4}
+	& 
+	klicke ``Pause'' $\rightarrow$ ``Save Measurement Data'' $\rightarrow$ wähle Zielpfad aus $\rightarrow$ klicke ``Save''
+	&
+	bisher gemessene Daten werden in einer Datei gespeichert
+	& 
+	Das tatsächliche Ergebnis stimmt mit dem erwarteten Ergebnis überein.
+	\\ \hline
+	
+	\textbf{5}
+	& 
+	klicke ``Reset''
+	&
+	Der Messlauf wird auf den ursprünglichen Zustand zurückgesetzt.
+	& 
+	Die angezeigten Messdaten werden nicht aus dem Anzeigefeld entfernt.
+	\\ \hline
+	
+\end{tabular}
+
+\caption{Kontrolle des Messlaufs}
+\label{klickMesslauf}
+\end{table}
+
+
+\subsubsection{Anpassen der Einstellungen}
+
+Durch diese Klickstrecke soll das Ändern von Einstellungen überprüft werden.
+
+\begin{table}[h]
+    \begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+        \hline
+        \textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergbenis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+        \textbf{1}
+        & 
+        Anwendung wird geöffnet $\rightarrow$ Systemmenü "Bausteine" wird gedrückt.
+        &
+        "Prototyp-Bausteine" - Fenster wird geöffnet. Bereits vorhandene Bausteine werden angezeigt.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{2}
+        & 
+        Im Bausteinprototyp-Bereich Sensor wird bei einem Sensor auf ''Bearbeiten'' geklickt.
+        &
+        Es öffnet sich ein neues Fenster in dem alle Eigenschaften des Sensors angezeigt und bearbeitet werden können.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{3}
+        & 
+        Klicke auf eine Zelle in der Spalte ''Bausteineigenschaften''.
+        &
+        Diese Spalte bleibt unverändert und kann nicht ausgewählt werden.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        
+        
+        \textbf{4}
+        & 
+        Klicke auf ''Wert'' von ''Name'' und trage neuen Wert ein.
+        &
+        Der neue Wert wird in der Zelle angezeigt.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{5}
+        & 
+        Bestätige Eingabe mit Enter.
+        &
+        Der neue Wert wird übernommen und fortan in der Zelle angezeigt. Der Wert wird im Model übernommen und für alle weiteren Berechnungen verwendet.
+        & 
+        Nach dem Bestätigen der Eingabe springt der Wert der Zelle wieder auf den alten Wert zurück. Im Model kommen keine Änderungen an.
+        \\ \hline
+        
+        \textbf{6}
+        & 
+        Klicke auf ''X''.
+        &
+        Das Einstellungsfenster schließt sich.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+    \end{tabular}
+\caption{Änderungen von Bausteineinstellungen}
+\label{BausteinEinstellungKlickStrecke}
+\end{table} 
+
+
+\begin{table}[h]
+    \begin{tabular}{| p{0,5cm} | p{6,5cm} | p{3,5cm} | p{3,5cm} |}
+        \hline
+        \textbf{Nr.} & \textbf{Aktions- und Klickstrecke} & \textbf{Erwartetes Ergbenis}  & \textbf{ Bewertung tatsächliches Ergebnis} \\ \hline
+        \textbf{1}
+        & 
+        Anwendung wird geöffnet $\rightarrow$ Systemmenü "Einstellungen" wird gedrückt.
+        &
+        Das Fenster mit den Systemeinstellungen wird, im Vordergrund, geöffnet.
+        & 
+        Das Fenster wird geöffnet. Es erscheint nicht notwendigerweiße an der selben Position, wie die Anwendung.
+        \\ \hline
+        
+        \textbf{2}
+        & 
+        Klicke: ''Fester'' $\rightarrow$ ''System'' $\rightarrow$ ''Messlauf'' $\rightarrow$ ''RasPI'' $\rightarrow$ ''Test Modus''
+        &
+        Das Fenster ändert sich und zeigt die entsprechenden Informatione an.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{3}
+        & 
+        Klicken in ''TestModus'' $\rightarrow$ Ändere auf ''Ja''.
+        &
+        Der neu Wert wird in dem Feld angezeigt.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        
+        \textbf{4}
+        & 
+        Klicke auf ''Einstellungen speichern''.
+        &
+        Der neue Wert wird für das System übernommen. Somit befindet sich die Anwendung nun im Test Modus.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+        \textbf{5}
+        & 
+        Klicke auf ''X''.
+        &
+        Das Einstellungsfenster schließt sich.
+        & 
+        Das erwartete Ergebnis stimmt mit dem dem tatsächlichen Ergebnis überein.
+        \\ \hline
+        
+    \end{tabular}
+    \caption{Änderungen von Systemeinstellungen}
+    \label{SystemEinstellungKlickStrecke}
+\end{table} 
+\subsection{Monkey Testing}
+
+\textit{Monkey Testing} bedeutet die Durchführung von zufälligen oder pseudozufälligen Eingaben mit dem Ziel, Fehler in einer Anwendung zu provozieren.
+
+Auch in dieser Qualitätssicherungsphase wurde Monkey Testing durchgeführt. Dabei wurden mehrere Fehler gefunden und im Issue-Tracker dokumentiert.
+
+
+
+\clearpage
+\section{Testen der Qualität} \label{quali}
+
+
+
+\subsection{Hallway Usability Testing}
+Von der Verwendung von Hallway-Tests wurde abgesehen.
+
+\subsection{Testen der Qualität der Funktionalitäten}
+Die Qualität der Funktionalitäten wurde nicht zusätzlich getestet. Aus den vorhandenen Testfällen lassen sich Qualitätsmerkmale, wie beispielsweise die Bearbeitungszeit von einzelnen Szenarien, herleiten.
+
+\section{Durchführen der Testfälle aus dem Pflichtenheft} \label{testszenarien}
+
+\subsection{\textbf{T010} Starten der Anwendung und Hilfe}
+
+DISCLAIMER: Der Testfall wurde so nicht wirklich durchgeführt, da der Pfad zur Textdatei noch nicht richtig funktioniert. Siehe Issue Nr. 15 in Git-Hub. Der Testfall wurde so angelegt, wie er später aussehen könnte. Er dient lediglich dazu, frühzeitig Feedback zu erhalten.
+
+\begin{table}[h]
+\begin{tabular}{| p{4cm} | p{10cm} |}
+	\hline
+	\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+	\textbf{Testfallnummer (Pflichtenheft)}
+	& 
+	T010
+	\\ \hline
+	
+	\textbf{Testfallverweis}
+	& 
+	Zum Testen dieses Szenarios werden ausschließlich Klickstrecken benutzt. JUnit Tests sind zur Überprüfung von Gui-Verhalten ungeeignet und werden deswegen nicht benutzt.
+	\\ \hline
+	
+	
+	\textbf{Verantwortlicher Tester}
+	& 
+	Linus
+	\\ \hline
+	
+	
+	\textbf{Vorbedingung}
+	& 
+	Die Anwendung ist als fat-Jar-Datei auf dem Rechner vorhanden. Es läuft keine Instanz dieser Anwendung. Die Anwendung wurde zuvor auf dem Rechner ausgeführt.
+	\\ \hline
+	
+	\textbf{ Testziel}
+	& 
+	Zu Testen ist das Verhalten des Anwendung, wenn sie gestartet wird. Außerdem soll die Hilfe-Funktion der Anwendung getestet werden.
+	\\ \hline
+
+	\textbf{Klickstrecke}
+	& 
+	Doppelklick auf Fat-jar. Einzelklick auf Hilfe-Systemmenü.
+	\\ \hline
+	
+	
+	\textbf{Beschreibung}
+	& 
+	Die Anwendung öffnet sich bei dem Öffnen der Fat-Jar-Datei. Dabei öffnet sich das Hauptfenster, in dem keine Messkonfiguration zu sehen ist. Während des Startvorganges werden Bausteine und Benutzereigenschaften geladen. Drückt man den Knopf für die Hilfe, öffnet sich das Hilfefenster mit Informationen über die Benutzung der Anwendung, kurze Tutorials und Informationen über die Entwicklung.
+	\\ \hline
+	
+	\textbf{Erwartetes Ergebnis}
+	& 
+	Das Hauptfenster und das Hilfefenster öffnen sich wie gewollt. Das Hilfefenster steht nach Öffnen im Vordergrund der Anwendung. 
+	\\ \hline
+			
+	\textbf{Verhalten im Fehlerfall}
+	& 
+	Eine Fehlermeldung wird angezeigt, falls beim Pfad zur Textdatei für das Hilfefenster keine Datei gefunden wurde. Falls in den Einstellungen falsche Pfade zur Initialisierung angegeben werden erscheinen ebenfalls aussagekräftige Fehlermeldungen.
+	\\ \hline
+	
+	\textbf{Nachbedingung}
+	& 
+	Das Hauptfenster der Anwendung ist geöffnet. Es wird von dem geöffneten Hilfe-Fenster teilweise überdeckt. Das Hauptfenster ist leer, Bausteine und Eigenschaften wurden automatisch geladen. Der Hilfstext wird im Hilfe-Fenster angezeigt.
+	\\ \hline
+	
+	
+	\textbf{Getestete Anforderungen}
+	& 
+	\textbf{F010} erreiche GUI nach Start, \textbf{F140} leere Darstellung nach Anwendungsstart, \textbf{F480} Hilfe zu Anwendung, \textbf{F490} Texte der Anwendung auf Deutsch
+	\\ \hline
+	
+	
+	
+\end{tabular}
+\caption{Testfall T010 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
+\label{testfallT010}
+\end{table}
+
+
+
+
+\subsection{\textbf{T020} Starten der Demo}
+
+Der Demomodus funktioniert anders als im Pflichtenheft vorgesehen. Es muss dazu in den Einstellungen der Anwendung der Demomodus eingestellt werden. Außerdem muss der Pfad angegeben werden, wo die Dateien mit Demo-Messdaten zu finden sind.  Dann kann einfach eine gewöhnliche Konfiguration geladen (siehe Klickstrecke 4.1.3) und eine Messung gestartet werden (siehe Klickstrecke 4.1.4), als wäre der \gls{RasPi} angeschlossen.
+
+\begin{table}[h]
+	\begin{tabular}{| p{4cm} | p{10cm} |}
+		\hline
+		\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+		\textbf{Testfallnummer (Pflichtenheft)}
+		& 
+		T020
+		\\ \hline
+		
+		\textbf{Testfallverweis}
+		& 
+		Zum Testen dieses Szenarios werden ausschließlich Klickstrecken benutzt. JUnit Tests sind zur Überprüfung von Gui-Verhalten ungeeignet und werden deswegen nicht benutzt.
+		\\ \hline
+		
+		
+		\textbf{Verantwortlicher Tester}
+		& 
+		Stefan
+		\\ \hline
+		
+		
+		\textbf{Vorbedingung}
+		& 
+		Die Anwendung ist als fat-Jar-Datei auf dem Rechner vorhanden. Es läuft keine Instanz dieser Anwendung. Die Anwendung wurde zuvor auf dem Rechner ausgeführt.
+		\\ \hline
+		
+		\textbf{ Testziel}
+		& 
+		Es soll eine mitgelieferte, sicher funktionsfähige Messkonfiguration geladen und ausgeführt werden. Um dem Benutzer ein vollständiges Szenario für die Anwendung vorzuführen. Der Anschluss eines Raspberry Pis ist hierfür bewusst nicht notwendig. 
+		
+		\\ \hline
+		
+		\textbf{Klickstrecke}
+		& 
+		1. Entpacken des "fat-jars", um im übernächsten Schritt auf die darin enthaltenen Messkonfigurationen per File-Open-Dialog zugreifen zu können. 2. Doppelklick auf den Fat-jar zum Öffnen der Anwendung. 3. Klick auf den Button "Load Configuration". Navigation nächstenzum Ordner "configurationExamples", hierin Auswahl einer mitgelieferten Messkonfiguration, z. B. "testConfig3".
+		4. Klick auf den Button "Run Configuration". 5. Klick auf 
+		den Button "Pause".
+		\\ \hline
+		
+		
+		\textbf{Beschreibung}
+		& 
+		Nach dem dritten Schritt kann der Benutzer Einsicht in eine Beispiel-Messkonfiguration nehmen. Im vierten Schritt
+		kann der Benutzer sofort einen Messlauf beobachten, der simulierte Sensor-Messdaten verwendet.
+		\\ \hline
+		
+		\textbf{Erwartetes Ergebnis}
+		& 
+		Die beispielhafte Messkonfiguration wird sichtbar, die mitgelieferten
+		simulierten Messdaten werden verarbeitet und Ergebnisse
+		der Verarbeitung werden angezeigt.
+		\\ \hline
+		
+		\textbf{Verhalten im Fehlerfall}
+		& 
+		Es sollte nahezu kein Fehlerfall eintreten können,
+		da die Einstellungen, einschließlich der Pfade, automatisch richtig gesetzt sind, und da die 
+		Beispiel-Messkonfiguration natürlich fehlerfrei ist.
+		\\ \hline
+		
+		\textbf{Nachbedingung}
+		& 
+		Die verwendete Messkonfiguration bleibt weiterhin 
+		sichtbar, kann bearbeitet und für weitere Messläufe verwendet werden. 
+		\\ \hline
+		
+		
+		\textbf{Getestete Anforderungen}
+		& 
+		\textbf{F30} Nutzung der Dateiverwaltung \textbf{F130} Messung starten \textbf{F150, F320} Messdaten werden angezeigt.
+		\\ \hline
+		
+		
+		
+	\end{tabular}
+	\caption{Testfall T020 aus dem Pflichtenheft: Starten der Demo.}
+	\label{testfallT020}
+\end{table}
+
+\subsection{\textbf{T030} Lehrer erstellt und speichert eine Messkonfiguration}
+Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT030} zu sehen. Der Testfall aus dem Pflichtenheft schlägt fehl, weil viele Features nicht oder nur teilweise implementiert sind.
+
+
+\begin{table}[h]
+\begin{tabular}{| p{4cm} | p{10cm} |}
+	\hline
+	\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+	\textbf{Testfallnummer (Pflichtenheft)}
+	& 
+	T30
+	\\ \hline
+	\textbf{Verantwortlicher Tester}
+	& 
+	David
+	\\ \hline
+	\textbf{Vorbedingung}
+	& 
+	Die Anwendung ist geöffnet, das Konfigurationsfeld ist leer.
+	\\ \hline
+	\textbf{ Testziel}
+	& 
+	Zu Testen ist das Verhalten des Anwendung, wenn eine Konfiguration über den Editor teilweise erstellt wird, und als Zwischenergebnis gespeichert wird.
+	\\ \hline
+	
+	\textbf{Klickstrecke}
+	& 
+	erstelle Konfiguration (siehe Beschreibung) $\rightarrow$ klicke auf Speichern-Knopf $\rightarrow$ wähle Pfad und Namen aus und klicke auf speichern
+	\\ \hline
+	
+	\textbf{ Beschreibung}
+	& 
+	Der Benutzer erstellt eine Konfiguration textuell über den Editor. Dabei gibt er die Blöcke als Liste von BlockIds an. Hier enthält die Liste zwei Sensoren(BMP180, MMA8451) und eine Transformation(Transformation-Add-2-Channel). Zu den drei Bausteinen erstellt der Benutzer eine jeweilige List ihrer Channel. Die Liste aller Verbindungen bleibt hier leer.
+	\\ \hline
+	
+	\textbf{Abweichungen vom Pflichtenheft}
+	& 
+	Der Ablauf dieses Testfalles unterscheidet sich massiv von dem Testfall aus dem Pflichtenheft. Die Anwendung unterstützt kein Drag-and-Drop. Deshalb kann auch kein Baustein im Konfigurationsfeld als Icon sichtbar werden. Hier erfolgt die Erstellung der Konfiguration ausschließlich textuell über den Editor. Außerdem prüft die Anwendung nicht, ob der entsprechende Sensor angeschlossen ist, wenn ein Sensorbaustein hinzugefügt wird. Weiter überprüft die Anwendung nicht explizit beim Speichern, ob die Messkonfiguration gültig oder vollständig ist. Dies geschieht entweder über den Check-Knopf oder beim Laden der Konfiguration. Es könne keine expliziten Einstellung für nur eine Messkonfiguration eingestellt und mit ihr gespeichert werden. 
+
+	\\ \hline
+	
+	\textbf{Erwartetes Ergebnis}
+	& 
+	Die Anwendung ist geöffnet, die Konfiguration ist im Konfigurationsfeld zu sehen. Außerdem ist ein Fenster geöffnet, mit der Meldung, dass die Konfiguration erfolgreich gespeichert wurde.	Die unfertige Konfiguration ist als Datei am entsprechenden Ort als Datei gespeichert. 
+	\\ \hline
+			
+	\textbf{Verhalten im Fehlerfall}
+	& 
+	Die Anwendung gibt nur bei Benutzung des Check-Knopfes an, ob die Konfiguration gültig ist.
+	\\ \hline
+	
+	\textbf{Nachbedingung}
+	& 
+	Das Hauptfenster der Anwendung ist geöffnet. Es wird von dem geöffneten Hilfe-Fenster teilweise überdeckt.
+	\\ \hline
+	
+	
+	\textbf{Getestete Anforderungen}
+	& 
+	\textbf{F180} füge Sensor hinzu, \textbf{F210} füge Transformation hinzu, \textbf{F250} speichere Messkonfiguration
+	\\ \hline
+	\textbf{fehlende zu testete Anforderungen}
+	& 
+	\textbf{F190} prüfe ob Sensor angeschlossen, \textbf{F290} Einstellungen Messkonfiguration 
+	\\ \hline
+	
+	
+\end{tabular}
+\caption{Testfall T030 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
+\label{testfallT030}
+\end{table}
+
+
+
+\subsection{\textbf{T040} Schüler bearbeitet Aufgabe}
+
+Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT040} zu sehen. Dabei wird bei dem Informieren über die Bausteine das Untermenü aller Bausteine beliebig genutzt. Eine explizite Klickstrecke wird nicht angegeben, da eine solche über alle Bausteine viel Schreibarbeit und wenig Erkenntnis bringt
+
+
+\begin{table}[h]
+\begin{tabular}{| p{4cm} | p{10cm} |}
+	\hline
+	\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+	\textbf{Testfallnummer (Pflichtenheft)}
+	& 
+	T40
+	\\ \hline
+	\textbf{Verantwortlicher Tester}
+	& 
+	David
+	\\ \hline
+	\textbf{Vorbedingung}
+	& 
+	Die Anwendung ist geöffnet, das Konfigurationsfeld ist leer.
+	\\ \hline
+	\textbf{ Testziel}
+	& 
+	Zu Testen ist das Laden einer unvollständigen Konfiguration, deren Vervollständigung und das speichern der kompletten Konfiguration.
+	\\ \hline
+	
+	\textbf{Klickstrecke}
+	& 
+	klicke auf Laden-Knopf $\rightarrow$ wähle richtige Datei aus und klicke auf laden $\rightarrow$ klicke auf OK $\rightarrow$ klicke auf Bausteine in der Systemleiste und informiere dich $\rightarrow$ klicke auf X $\rightarrow$ klicke auf Hilfe und informiere dich klicke auf X $\rightarrow$ vervollständige Konfiguration und klicke auf Check-Knopf $\rightarrow$ klicke Meldung(Konfiguration gültig) weg $\rightarrow$ klicke auf speichern und führe den Dialog korrekt aus
+	\\ \hline
+	
+	\textbf{ Beschreibung}
+	& 
+	Die ungültige Konfiguration wird geladen. Die Angebotenen Bausteine sind im Untermenü der Bausteine zu finden. Der Benutzer bearbeitet die Konfiguration, in dem er der Liste eine textuelle Repräsentation mit drei Kanälen hinzufügt. Außerdem erstellt er die Liste der Verbindungen. Eine Verbindung ist dabei ein Tupel zweier Kanäle. Ist der Benutzer der Meinung, dass die Konfiguration fertig ist, kann er den Check-Knopf benutzten, um zu prüfen, ob die Konfiguration gültig ist. Die Konfiguration kann jederzeit gespeichert und geladen werden.
+	\\ \hline
+	
+	\textbf{Abweichungen vom Pflichtenheft}
+	& 
+	Die Anwendung prüft nicht beim Laden der Konfiguration, ob für die benutzten Sensorbausteine entsprechende Sensoren angeschlossen sind. Außerdem kann die Anwendung die graphische Darstellung der Konfiguration nicht aktualisieren, dass es keine solche gibt.
+
+	\\ \hline
+	
+	\textbf{Erwartetes Ergebnis}
+	& 
+	Die vollständige Konfiguration ist als Datei am entsprechenden Pfad zu finden.
+	\\ \hline
+			
+	\textbf{Verhalten im Fehlerfall}
+	& 
+	Beim Laden gibt die Anwendung an, dass die Konfiguration ungültig ist und bearbeitet werden sollte. Außerdem gibt sie bei Benutzung des Check-Knopfes an, ob die Konfiguration gültig ist.
+	\\ \hline
+	
+	\textbf{Nachbedingung}
+	& 
+	Das Hauptfenster der Anwendung ist geöffnet. Die vollständige Konfiguration ist im Feld zu sehen.  Sie ist auch als Datei gespeichert.
+	\\ \hline
+	
+	
+	\textbf{Getestete Anforderungen}
+	& 
+	\textbf{F230} füge Darstellung hinzu, \textbf{F470} Hilfe zu Bausteinen
+	\\ \hline
+	\textbf{fehlende zu testete Anforderungen}
+	& 
+	
+	\\ \hline
+	
+	
+\end{tabular}
+\caption{Testfall T040 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
+\label{testfallT040}
+\end{table}
+
+\subsection{\textbf{T050} Schüler startet Messung und speichert Ergebnisse}
+
+Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT050} zu sehen.
+
+\begin{table}[h]
+\begin{tabular}{| p{4cm} | p{10cm} |}
+	\hline
+	\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+	\textbf{Testfallnummer (Pflichtenheft)}
+	& 
+	T050
+	\\ \hline
+	\textbf{Verantwortlicher Tester}
+	& 
+	Jan
+	\\ \hline
+	\textbf{Vorbedingung}
+	& 
+	Die Anwendung ist gestartet und es ist die in T040 erstelle Messkonfiguration geladen worden.
+	\\ \hline
+	\textbf{ Testziel}
+	& 
+	Teste die Anwendung aus Sicht eines Schülers, der Messung starten und deren Ergebnisse speichern soll.
+	\\ \hline
+	
+	\textbf{Klickstrecke}
+	& 
+	klicke auf ``Run Configuration'' $\rightarrow$ warte, bis Daten angezeigt werden $\rightarrow$ klicke auf ``Pause'' $\rightarrow$ klicke auf ``Save Measurement Data'' $\rightarrow$ definiere, wo die Daten gespeichert werden sollen $\rightarrow$ klicke auf ``Save''
+	\\ \hline
+	
+	\textbf{ Beschreibung}
+	& 
+	Der Messlauf, der durch die bereits vorbereitete Konfiguration definiert ist, wird gestartet. Nachdem einige Daten erfolgreich ausgelesen wurden, wird der Messlauf angehalten und die Daten gespeichert.
+	\\ \hline
+	
+	\textbf{Abweichungen vom Pflichtenheft}
+	& 
+	Da die Daten in der umgesetzten Anwendung nicht grafisch dargestellt werden können, kann auch keine grafische Darstellung gespeichert werden.
+
+	\\ \hline
+	
+	\textbf{Erwartetes Ergebnis}
+	& 
+	Die ausgelesenen Daten sind in einer Datei am angegebenen Pfad gespeichert.
+	\\ \hline
+			
+	\textbf{Verhalten im Fehlerfall}
+	& 
+	Falls die Zieldatei bereits existiert, werden die Daten nicht gespeichert.
+	\\ \hline
+	
+	\textbf{Nachbedingung}
+	& 
+	Das Hauptfenster der Anwendung ist geöffnet. Die Konfiguration ist weiterhin geladen. Der Messlauf ist im pausierten Zustand. Die bislang ausgelesenen Daten sind in einer Datei gespeichert.
+	\\ \hline
+	
+	
+	\textbf{Getestete Anforderungen}
+	& 
+	\textbf{F130, F300} Messung starten, \textbf{F150, F320} Messdaten werden angezeigt, \textbf{F370} Messung pausieren, \textbf{400} Messdaten speichern
+	\\ \hline
+	\textbf{fehlende zu testete Anforderungen}
+	& 
+	\textbf{F410} da kein Graph erzeugt wird, kann auch kein Graph gespeichert werden
+	
+	\\ \hline
+	
+	
+\end{tabular}
+\caption{Testfall T050 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
+\label{testfallT050}
+\end{table}
+
+\subsection{\textbf{T200} Laden einer ungültigen Datei als Messkonfiguration}
+
+Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT200} zu sehen.
+
+\begin{table}[h]
+    \begin{tabular}{| p{4cm} | p{10cm} |}
+        \hline
+        \textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+        \textbf{Testfallnummer (Pflichtenheft)}
+        & 
+        T200
+        \\ \hline
+        \textbf{Verantwortlicher Tester}
+        & 
+        Leon
+        \\ \hline
+        \textbf{Vorbedingung}
+        & 
+        Die Anwendung ist geöffnet, das Konfigurationsfeld ist leer.
+        \\ \hline
+        \textbf{ Testziel}
+        & 
+        Zu Testen ist das Verhalten der Anwendung beim Laden von ungültigen
+        Messkonfigurationsdateien.
+        \\ \hline
+        
+        \textbf{Klickstrecke}
+        & 
+        Klicke ''Lade Konfiguration'' $\rightarrow$ Wähle im Datei-Management-System die bereits existierende, fehlerhafte, Konfiguration aus $\rightarrow$ Klicke auf ''Öffnen''.
+        \\ \hline
+        
+        \textbf{ Beschreibung}
+        & 
+        Der Benutzer versucht eine Konfiguration über den vorgesehenen Weg zu laden. Nachdem die Konfigurationsauswahl getroffen wurde überprüft FreeJDAQ das Format der Konfiguration.
+        \\ \hline
+        
+        \textbf{Abweichungen vom Pflichtenheft}
+        & 
+        Keine
+        
+        \\ \hline
+        
+        \textbf{Erwartetes Ergebnis}
+        & 
+        FreeJDAQ zeigt eine Fehlermeldung an, die auf die fehlerhafte Konfiguration hinweist. Anschließend wird der Ladevorgang der Konfiguration abgebrochen.
+        \\ \hline
+        
+        \textbf{Nachbedingung}
+        & 
+        FreeJDAQ ist geöffnet und es ist keine Konfiguration geladen. FreeJDAQ wird von dem geöffneten Warnungs-Fenster teilweise überdeckt.
+        \\ \hline
+        
+        
+        \textbf{Getestete Anforderungen}
+        & 
+        \textbf{F430} überprüfe Format beim Laden der Konfiguration.
+        \\ \hline
+        \textbf{Fehlende zu testete Anforderungen}
+        & 
+        Keine
+        \\ \hline
+        
+        
+    \end{tabular}
+    \caption{Testfall T200 aus dem Plfichtenheft: Laden einer ungültigen Datei als Messkonfiguration}
+    \label{testfallT200}
+\end{table}
+
+\subsection{\textbf{T210} Starten einer ungültigen Messkonfiguration}
+
+Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT210} zu sehen.
+
+\begin{table}[h]
+    \begin{tabular}{| p{4cm} | p{10cm} |}
+        \hline
+        \textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+        \textbf{Testfallnummer (Pflichtenheft)}
+        & 
+        T210
+        \\ \hline
+        \textbf{Verantwortlicher Tester}
+        & 
+        Leon
+        \\ \hline
+        \textbf{Vorbedingung}
+        & 
+        Die Anwendung ist geöffnet. Das Konfigurationsfeld ist leer.
+        \\ \hline
+        \textbf{ Testziel}
+        & 
+        Zu Testen ist das Verhalten der Anwendung beim Ausführen einer ungültigen Konfiguration.
+        \\ \hline
+        
+        \textbf{Klickstrecke}
+        & 
+        Klicke in das Konfigurationsfeld um das Bearbeiten der Konfiguration zu beginnen. $\rightarrow$ Erstelle eine ungültige Konfiguration (Konkret: Füge ''Test'' ein). $\rightarrow$ Klicke ''Starte Messlauf''.
+        \\ \hline
+        
+        \textbf{ Beschreibung}
+        & 
+        Der Benutzer versucht eine Konfiguration über den vorgesehenen Weg zu laden. Nachdem die Konfigurationsauswahl getroffen wurde überprüft FreeJDAQ das Format der Konfiguration.
+        \\ \hline
+        
+        \textbf{Abweichungen vom Pflichtenheft}
+        & 
+        Keine
+        
+        \\ \hline
+        
+        \textbf{Erwartetes Ergebnis}
+        & 
+        FreeJDAQ zeigt eine Fehlermeldung an, die auf die fehlerhafte Konfiguration hinweist. Anschließend wird das Starten des Messlaufes abgebrochen.
+        \\ \hline
+        
+        \textbf{Nachbedingung}
+        & 
+        FreeJDAQ ist geöffnet und es ist keine Konfiguration geladen. FreeJDAQ wird von dem geöffneten Warnungs-Fenster teilweise überdeckt.
+        \\ \hline
+        
+        
+        \textbf{Getestete Anforderungen}
+        & 
+        \textbf{F310} überprüfe Messkonfiguration beim Start des Messlaufes.
+        \\ \hline
+        \textbf{fehlende zu testete Anforderungen}
+        & 
+        Keine
+        \\ \hline
+        
+        
+    \end{tabular}
+    \caption{Testfall T210 aus dem Plfichtenheft: Starten einer ungültigen Messkonfiguration}
+    \label{testfallT210}
+\end{table}
+\subsection{\textbf{T220} Entfernen eines Sensors bei laufender Messung}
+
+Die Durchführung dieses Testfalles ist in Tabelle \ref{testfallT220} zu sehen.
+
+\begin{table}[h]
+\begin{tabular}{| p{4cm} | p{10cm} |}
+	\hline
+	\textbf{Strukturelement} & \textbf{Beschreibung} \\ \hline
+	\textbf{Testfallnummer (Pflichtenheft)}
+	& 
+	T220
+	\\ \hline
+	\textbf{Verantwortlicher Tester}
+	& 
+	Jan
+	\\ \hline
+	\textbf{Vorbedingung}
+	& 
+	Die Anwendung ist geöffnet. Alle verwendeten Sensoren sind angeschlossen und betriebsbereit. Eine gültige Messkonfiguration aus zwei Sensoren, einer Transformation und einer Darstellung wurde geladen.
+	\\ \hline
+	\textbf{ Testziel}
+	& 
+	Teste das Verhalten der Anwendung, wenn ein Sensor ausfällt und dessen Datenstrom abbricht.
+	\\ \hline
+	
+	\textbf{Klickstrecke}
+	& 
+	klicke auf ``Run Configuration'' $\rightarrow$ trenne Verbindung zum Sensor
+	\\ \hline
+	
+	\textbf{ Beschreibung}
+	& 
+	Der Benutzer startet die Messung. Die Verbindung zu einem Sensor wird getrennt.
+	\\ \hline
+	
+	\textbf{Abweichungen vom Pflichtenheft}
+	& 
+	
+
+	\\ \hline
+	
+	\textbf{Erwartetes Ergebnis}
+	& 
+	Die Anwendung erkennt, dass ein Sensor keine Daten mehr sendet. Die Messung stoppt. Eine aussagekräftige Fehlermeldung wird ausgegeben.
+	\\ \hline
+			
+	\textbf{Verhalten im Fehlerfall}
+	& 
+	Der Messlauf bricht ab, ohne eine Fehlermeldung anzuzeigen.
+	\\ \hline
+	
+	\textbf{Nachbedingung}
+	& 
+	Das Hauptfenster der Anwendung ist geöffnet. Die Konfiguration ist weiterhin geladen. Der Messlauf ist im pausierten Zustand. Die bislang ausgelesenen Daten sind in einer Datei gespeichert.
+	\\ \hline
+	
+	
+	\textbf{Getestete Anforderungen}
+	& 
+	\textbf{F450}
+	\\ \hline
+	\textbf{fehlende zu testete Anforderungen}
+	& 
+	
+	
+	\\ \hline
+	
+	
+\end{tabular}
+\caption{Testfall T220 aus dem Plfichtenheft: Öffnen der Anwendung und Hilfe.}
+\label{testfallT220}
+\end{table}
+
+\clearpage
+\section{Hardware Tests und sonstige Tests} \label{sonstiges}
+
+
+\subsection{Leistung und Speicherverbrauch}
+Ein expliziter Test zu Leistung und Speicherverbrauch wurde nicht durchgeführt. Der Speicherverbrauch wächst allerdings mit der Dauer des Messlaufs und es kann womöglich bei Überschreiten des maximalen zugewiesenen Speichers für Java, ein Fehler durch nicht genug verfügbaren Arbeitsspeicherplatz kommen.
+
+\subsection{Hardware Test der Sensoren}
+Es wurden die Sensoren MMA8451 und den Bmpx80 getestet. Der analog-digital-Wandler wurde in einer frühen Phase getestet.
+Bei allen dreien wurden Daten erfolgreich geladen. Die beiden anderen zu testenden Sensoren wurden nicht unmittelbar aufgefunden. Darum wurde ein Testen dieser Sensoren nicht durchgeführt, da wir den Fokus auf die Funktionalität richten.
+
+\subsection{Testen auf verschiedenen Systemen}
+
+Ein expliziter Test für Windows und Linux wurde nicht durchgeführt. Implizit, wurden beide Betriebssysteme beim Durchführen der Phase mit getestet. Auch hier wurde der Fokus auf die Funktionalität und dem Beheben von Fehlern gelegt.
+
+\subsection{Entfernte Klassen}
+Eine Übersicht ist in Abbildung \ref{deletedFiles} zu finden. Gründe für das Löschen waren: Klasse wurde nicht benutzt, Funktionalität wurde in andere Klassen gemergt oder die Funktionalität der Klasse wurde durch eine andere Klasse ersetzt. Diese Übersicht wurde allerdings nur spärlich benutzt. Die wirkliche Anzahl an gelöschten Dateien liegt wahrscheinlich höher.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/deletedFiles.png}
+		\caption{Eine Übersicht über entfernte Klassen.}
+		\label{deletedFiles}
+	\end{center}
+\end{figure}
+
+\clearpage
+\section{Glossar}\label{glossar}
+
+\renewcommand*{\glossarysection}[2][]{}	% prevents double glossary section heading
+\printnoidxglossaries				% generate pdf twice when adding new entries
+
+\end{document}\grid
