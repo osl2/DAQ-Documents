@@ -1,7 +1,0 @@
-Konfigurationssprache: Linus
-Bedienoberfläche: Leon
-Raspi: Jan
-Fehlermeldungen: Linus
-Limitierung der Anwendung: (später)
-Kurzeinleitung: Stefan
-
