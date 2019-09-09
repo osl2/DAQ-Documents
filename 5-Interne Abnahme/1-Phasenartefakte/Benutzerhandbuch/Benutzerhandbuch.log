@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.9)  9 SEP 2019 12:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.9)  9 SEP 2019 12:52
 entering extended mode
 **./Benutzerhandbuch.tex
 (Benutzerhandbuch.tex
@@ -1051,6 +1051,11 @@ File: Grafiken/Uebersicht_GUI_Mit_Nummern.png Graphic file (type png)
 Package pdftex.def Info: Grafiken/Uebersicht_GUI_Mit_Nummern.png  used on input
  line 37.
 (pdftex.def)             Requested size: 284.52756pt x 220.635pt.
+<Grafiken/1-Bausteine.png, id=44, 47.42719pt x 14.30344pt>
+File: Grafiken/1-Bausteine.png Graphic file (type png)
+<use Grafiken/1-Bausteine.png>
+Package pdftex.def Info: Grafiken/1-Bausteine.png  used on input line 46.
+(pdftex.def)             Requested size: 56.9055pt x 17.16228pt.
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 47.
 Package babel Info: Redefining ngerman shorthand "~
@@ -1062,13 +1067,13 @@ Package babel Info: Redefining ngerman shorthand "~
  [2
 
  <./Grafiken/Uebersicht_GUI_Mit_Nummern.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 50.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 54.
 
 ("C:\Users\Tricuper\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 50.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 54.
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 87.
 Package babel Info: Redefining ngerman shorthand "~
@@ -1077,144 +1082,147 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 87.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 87.
- [3]
-<Grafiken/1-Bausteine.png, id=67, 47.42719pt x 14.30344pt>
-File: Grafiken/1-Bausteine.png Graphic file (type png)
-<use Grafiken/1-Bausteine.png>
-Package pdftex.def Info: Grafiken/1-Bausteine.png  used on input line 92.
-(pdftex.def)             Requested size: 56.9055pt x 17.16228pt.
-<Grafiken/2-Einstellungen.png, id=68, 69.25874pt x 17.31468pt>
+ [3 <./Grafiken/1-Bausteine.png>]
+<Grafiken/2-Einstellungen.png, id=66, 69.25874pt x 17.31468pt>
 File: Grafiken/2-Einstellungen.png Graphic file (type png)
 <use Grafiken/2-Einstellungen.png>
-Package pdftex.def Info: Grafiken/2-Einstellungen.png  used on input line 96.
-(pdftex.def)             Requested size: 56.9055pt x 14.22638pt.
-<Grafiken/3-Hilfe.png, id=69, 32.37094pt x 19.57312pt>
+Package pdftex.def Info: Grafiken/2-Einstellungen.png  used on input line 104.
+(pdftex.def)             Requested size: 71.13188pt x 17.78304pt.
+<Grafiken/3-Hilfe.png, id=67, 32.37094pt x 19.57312pt>
 File: Grafiken/3-Hilfe.png Graphic file (type png)
 <use Grafiken/3-Hilfe.png>
-Package pdftex.def Info: Grafiken/3-Hilfe.png  used on input line 100.
-(pdftex.def)             Requested size: 56.9055pt x 34.41173pt.
-<Grafiken/4-Konfiguration_speichern.png, id=70, 130.98938pt x 23.33719pt>
+Package pdftex.def Info: Grafiken/3-Hilfe.png  used on input line 108.
+(pdftex.def)             Requested size: 28.45274pt x 17.20467pt.
+<Grafiken/4-Konfiguration_speichern.png, id=68, 130.98938pt x 23.33719pt>
 File: Grafiken/4-Konfiguration_speichern.png Graphic file (type png)
 <use Grafiken/4-Konfiguration_speichern.png>
 Package pdftex.def Info: Grafiken/4-Konfiguration_speichern.png  used on input 
-line 104.
-(pdftex.def)             Requested size: 56.9055pt x 10.13805pt.
-<Grafiken/5-Konfiguration_laden.png, id=71, 113.67468pt x 23.33719pt>
+line 112.
+(pdftex.def)             Requested size: 113.81102pt x 20.27718pt.
+<Grafiken/5-Konfiguration_laden.png, id=69, 113.67468pt x 23.33719pt>
 File: Grafiken/5-Konfiguration_laden.png Graphic file (type png)
 <use Grafiken/5-Konfiguration_laden.png>
 Package pdftex.def Info: Grafiken/5-Konfiguration_laden.png  used on input line
- 108.
-(pdftex.def)             Requested size: 56.9055pt x 11.68279pt.
-<Grafiken/6-Konfiguration_starten.png, id=72, 117.43875pt x 22.58438pt>
+ 116.
+(pdftex.def)             Requested size: 113.81102pt x 23.36559pt.
+<Grafiken/6-Konfiguration_starten.png, id=70, 117.43875pt x 22.58438pt>
 File: Grafiken/6-Konfiguration_starten.png Graphic file (type png)
 <use Grafiken/6-Konfiguration_starten.png>
 Package pdftex.def Info: Grafiken/6-Konfiguration_starten.png  used on input li
-ne 112.
-(pdftex.def)             Requested size: 56.9055pt x 10.9434pt.
-<Grafiken/7-Check.png, id=73, 54.9553pt x 24.84282pt>
+ne 120.
+(pdftex.def)             Requested size: 113.81102pt x 21.88681pt.
+<Grafiken/7-Check.png, id=71, 54.9553pt x 24.84282pt>
 File: Grafiken/7-Check.png Graphic file (type png)
 <use Grafiken/7-Check.png>
-Package pdftex.def Info: Grafiken/7-Check.png  used on input line 116.
+Package pdftex.def Info: Grafiken/7-Check.png  used on input line 124.
 (pdftex.def)             Requested size: 56.9055pt x 25.7252pt.
-<Grafiken/8-Editor.png, id=74, 543.53062pt x 232.61906pt>
+<Grafiken/8-Editor.png, id=72, 543.53062pt x 232.61906pt>
 File: Grafiken/8-Editor.png Graphic file (type png)
 <use Grafiken/8-Editor.png>
-Package pdftex.def Info: Grafiken/8-Editor.png  used on input line 120.
+Package pdftex.def Info: Grafiken/8-Editor.png  used on input line 128.
 (pdftex.def)             Requested size: 56.9055pt x 24.35295pt.
-<Grafiken/9-Pause.png, id=75, 55.70813pt x 22.58438pt>
+<Grafiken/9-Pause.png, id=73, 55.70813pt x 22.58438pt>
 File: Grafiken/9-Pause.png Graphic file (type png)
 <use Grafiken/9-Pause.png>
-Package pdftex.def Info: Grafiken/9-Pause.png  used on input line 124.
+Package pdftex.def Info: Grafiken/9-Pause.png  used on input line 132.
 (pdftex.def)             Requested size: 56.9055pt x 23.06985pt.
-<Grafiken/10-Fortfahren.png, id=76, 72.27pt x 21.83156pt>
+<Grafiken/10-Fortfahren.png, id=74, 72.27pt x 21.83156pt>
 File: Grafiken/10-Fortfahren.png Graphic file (type png)
 <use Grafiken/10-Fortfahren.png>
-Package pdftex.def Info: Grafiken/10-Fortfahren.png  used on input line 128.
+Package pdftex.def Info: Grafiken/10-Fortfahren.png  used on input line 136.
 (pdftex.def)             Requested size: 56.9055pt x 17.1901pt.
-<Grafiken/11-Reset.png, id=77, 53.44969pt x 21.83156pt>
+<Grafiken/11-Reset.png, id=75, 53.44969pt x 21.83156pt>
 File: Grafiken/11-Reset.png Graphic file (type png)
 <use Grafiken/11-Reset.png>
-Package pdftex.def Info: Grafiken/11-Reset.png  used on input line 132.
+Package pdftex.def Info: Grafiken/11-Reset.png  used on input line 140.
 (pdftex.def)             Requested size: 56.9055pt x 23.24294pt.
-<Grafiken/12-Messdaten_speichern.png, id=78, 121.20282pt x 23.33719pt>
+<Grafiken/12-Messdaten_speichern.png, id=76, 121.20282pt x 23.33719pt>
 File: Grafiken/12-Messdaten_speichern.png Graphic file (type png)
 <use Grafiken/12-Messdaten_speichern.png>
 Package pdftex.def Info: Grafiken/12-Messdaten_speichern.png  used on input lin
-e 136.
-(pdftex.def)             Requested size: 56.9055pt x 10.95706pt.
-<Grafiken/13-Diagramm_anzeigen.png, id=79, 116.68594pt x 24.84282pt>
+e 144.
+(pdftex.def)             Requested size: 113.81102pt x 21.91486pt.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 145.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 145.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 145.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 145.
+ [4 <./Grafiken/2-Einstellungen.png> <./Grafiken/3-Hilfe.png> <./Grafiken/4-Kon
+figuration_speichern.png> <./Grafiken/5-Konfiguration_laden.png> <./Grafiken/6-
+Konfiguration_starten.png> <./Grafiken/7-Check.png> <./Grafiken/8-Editor.png> <
+./Grafiken/9-Pause.png> <./Grafiken/10-Fortfahren.png>]
+<Grafiken/13-Diagramm_anzeigen.png, id=95, 116.68594pt x 24.84282pt>
 File: Grafiken/13-Diagramm_anzeigen.png Graphic file (type png)
 <use Grafiken/13-Diagramm_anzeigen.png>
 Package pdftex.def Info: Grafiken/13-Diagramm_anzeigen.png  used on input line 
-140.
-(pdftex.def)             Requested size: 56.9055pt x 12.11545pt.
-<Grafiken/14-Datenanzeige.png, id=80, 549.55313pt x 292.09125pt>
+148.
+(pdftex.def)             Requested size: 113.81102pt x 24.23167pt.
+<Grafiken/14-Datenanzeige.png, id=96, 549.55313pt x 292.09125pt>
 File: Grafiken/14-Datenanzeige.png Graphic file (type png)
 <use Grafiken/14-Datenanzeige.png>
-Package pdftex.def Info: Grafiken/14-Datenanzeige.png  used on input line 144.
+Package pdftex.def Info: Grafiken/14-Datenanzeige.png  used on input line 152.
 (pdftex.def)             Requested size: 56.9055pt x 30.24484pt.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 145.
+(babel)             in language  on input line 155.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 145.
+(babel)             in language  on input line 155.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 145.
+(babel)             in language  on input line 172.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 145.
- [4 <./Grafiken/1-Bausteine.png> <./Grafiken/2-Einstellungen.png> <./Grafiken/3
--Hilfe.png> <./Grafiken/4-Konfiguration_speichern.png> <./Grafiken/5-Konfigurat
-ion_laden.png> <./Grafiken/6-Konfiguration_starten.png> <./Grafiken/7-Check.png
-> <./Grafiken/8-Editor.png> <./Grafiken/9-Pause.png> <./Grafiken/10-Fortfahren.
-png> <./Grafiken/11-Reset.png> <./Grafiken/12-Messdaten_speichern.png>]
+(babel)             in language  on input line 172.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 147.
+(babel)             in language  on input line 174.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 147.
+(babel)             in language  on input line 174.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 164.
+(babel)             in language  on input line 182.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 164.
+(babel)             in language  on input line 182.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 166.
+(babel)             in language  on input line 182.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 166.
+(babel)             in language  on input line 182.
+ [5 <./Grafiken/11-Reset.png> <./Grafiken/12-Messdaten_speichern.png> <./Grafik
+en/13-Diagramm_anzeigen.png> <./Grafiken/14-Datenanzeige.png>]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 168.
+(babel)             in language  on input line 191.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 168.
+(babel)             in language  on input line 191.
 
 
 Package glossaries Warning: Empty glossary for \printnoidxglossary[type={main}]
 . Rerun may be required (or you may have forgotten to use commands like \gls) o
-n input line 171.
+n input line 194.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 173.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 196.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 173.
+(babel)             in language  on input line 196.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 173.
+(babel)             in language  on input line 196.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 173.
+(babel)             in language  on input line 196.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 173.
-[5 <./Grafiken/13-Diagramm_anzeigen.png> <./Grafiken/14-Datenanzeige.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 173.
-
-(Benutzerhandbuch.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 173.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 173.
+(babel)             in language  on input line 196.
+[6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 196.
+ (Benutzerhandbuch.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 196.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 196.
 Package rerunfilecheck Info: File `Benutzerhandbuch.out' has not changed.
 (rerunfilecheck)             Checksum: EDAA82E7A2AD70E432879BF08B184470;385.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 173.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 196.
  ) 
 Here is how much of TeX's memory you used:
- 16298 strings out of 493305
- 280931 string characters out of 3128498
+ 16300 strings out of 493305
+ 280952 string characters out of 3128498
  508262 words of memory out of 3000000
- 19567 multiletter control sequences out of 15000+200000
+ 19568 multiletter control sequences out of 15000+200000
  7657 words of font info for 28 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,7n,51p,9097b,461s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,7n,51p,9097b,526s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/Tricuper/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
 nts/cm/cmbx10.pfb><C:/Users/Tricuper/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Tricuper/AppData/Local/Programs/MiK
@@ -1223,9 +1231,9 @@ al/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Tricu
 per/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.p
 fb><C:/Users/Tricuper/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsf
 onts/cm/cmsy10.pfb>
-Output written on Benutzerhandbuch.pdf (5 pages, 154949 bytes).
+Output written on Benutzerhandbuch.pdf (6 pages, 160257 bytes).
 PDF statistics:
- 133 PDF objects out of 1000 (max. 8388607)
- 27 named destinations out of 1000 (max. 500000)
+ 137 PDF objects out of 1000 (max. 8388607)
+ 28 named destinations out of 1000 (max. 500000)
  124 words of extra memory for PDF output out of 10000 (max. 10000000)
 
