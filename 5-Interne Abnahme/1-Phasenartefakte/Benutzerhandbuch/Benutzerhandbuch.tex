@@ -42,30 +42,56 @@
 
 \begin{enumerate}
     \item Bausteine
+    Öffnet ein Fenster, in dem alle verfügbaren Bausteine angezeigt werden. In diesem Fenster können Bausteineigenschaften bearbeitet werden.
     
     \item Einstellungen
+    Öffnet ein Fenster, in dem Einstellungen für FreeJDAQ eingesehen werden können. Manche der Einstellungen können angepasst und über den Knopf ''System Einstellungen speichern'' gespeichert werden. Diese beinhalten:
+    \begin{itemize}
+        \item Fenster-Einstellungen
+        \item System-Einstellungen
+        \item Messlauf
+        \item RasPI
+        \item Test Modus
+    \end{itemize}
     
     \item Hilfe
-    
+    Öffnet ein Fenster, in dem eine Beschreibung der für das Arbeiten mit FreeJDAQ enthalten ist. Hier können folgende Informationen gefunden werden:
+    \begin{itemize}
+        \item Systemvorraussetzungen
+        \item Softwareanforderungen
+        \item Tutorials
+    \end{itemize}
+
     \item Konfiguration speichern
+    Öffnet ein Fenster um die aktuelle Konfiguration zu speichern. Der Speicherort und der Name der Konfiguration können, in diesem Fenster, festgelegt werden.
     
     \item Konfiguration laden
+    Öffnet ein Fenster zum laden einer Konfiguration.
     
     \item Konfiguration starten
+    Startet die aktuell verwendete Konfiguration.
     
     \item Check
+    Überprüft die aktuell verwendete Konfiguration auf Lauffähigkeit. Im Fehlerfall wird dem Benutzer eine aussagekräftige Fehlermeldung mitgeteilt.
     
     \item Editor für Konfigurationen
+    In diesem Feld können Konfigurationen geschrieben werden. Eine Beschreibung der Sprache, zum schreiben einer Konfiguration, kann in der Hilfe gefunden werden.
     
     \item Pause
+    Pausiert einen Messlauf nachdem er gestartet wurde.
     
     \item Fortfahren
+    Setzt einen pausierten Messlauf fort.
     
     \item Reset
+    Setzt einen pausierten Messlauf in den Anfangszustand zurück.
     
     \item Messdaten speichern
+    Speichert die Daten, die während des Messlaufs bestimmt wurden, am gewünschten Speicherort.
     
     \item Diagramm anzeigen
+    Erstellt ein Diagramm aus den Daten, die während des Messlaufs bestimmt wurden.
+    
 \end{enumerate}
 
 \begin{flushleft}
@@ -128,56 +154,17 @@
 
 
 Im Folgenden Abschnitt wird erklärt, wie man eine Messkonfiguration erstellt und welche syntaktischen Regeln dabei eingehalten werden müssen.  
-
-Eine Messkonfiguration besteht aus 3 zusammenhängenden Teilen., den Bausteinen, den Ein- und Ausgängen der Bausteine und den Verbindungen zwischen Aus- und Eingängen.  
-
-\subsection{Bausteine}
-
-Bausteine bezeichnen einen Knoten für die Datenverarbeitung. Ein Baustein kann 
-Sensor, Transformation oder Transformation sein. werden der Messkonfiguration über ihren Namen hinzugefügt. Der Name lässt sich über das Systemmenü „Bausteine“ herausfinden.   
-Das Format, in welchem die Bausteine besteht aus der Deklaration für die Bausteine benötigt das Schlüsselwort „blocks:“ Und die Bausteine werden wie folgend deklariert: 
-
-\begin{itemize}
-
-\item[ ] \textbf{blocks: [Baustein1, Baustein2, Baustein3]}
-
-\end{itemize}
-
-\subsection{Ein- und Ausgänge}
-
-Ein- und Ausgänge repräsentieren Schnittstellen für die Verbindung von 2  
-Bausteinen. Die Anzahl der Ein- und Ausgänge der Bausteine ist vordefiniert und kann unter „Bausteine -> Bearbeiten“ eingesehen werden. Daher muss die Anzahl der Ein- und Ausgänge in der Messkonfiguration dieser Anzahl entsprechen. Die Namen sind frei wählbar, aber einen eindeutigen und aussagekräftigen vereinfacht das Schreiben der Konfiguration.  
-Das Format, in welchem die Ein- und Ausgänge deklariert werden besteht aus dem einem Schlüsselwort und der nachfolgenden Deklaration der Ein- und Ausgänge für jeden Baustein individuell. Das Schlüsselwort ist frei wählbar, jedoch muss die Reihenfolge der Deklaration der Reihenfolge der Baustein-Deklaration entsprechen:  
-
-\begin{itemize}
-
-\item[ ] \textbf{channelListBlock1: [B1out1, B1out2]}
-\item[ ] \textbf{channelListBlock2: [T1in, T1out]}
-\item[ ] \textbf{channelListBlock3: [R1in1, R1in2]} 
-
-\end{itemize}
-
-\subsection{Verbindungen}
-
-Über Verbindungen zwischen Ein- und Ausgängen der Bausteine wird ein Datenflussmodel erzeugt, über welches die Messdaten laufen.  Eine Verbindung besteht immer zwischen einem Ausgang und einem Eingang, also einem Tupel aus Ausgang und Eingang.   
-Das Schlüsselwort für die Verbindungen ist „configuration:“ und die Verbindungen werden wie folgend deklariert:  
-
-\begin{itemize}
-
-\item[ ] \textbf{configuration: [[B1out1, R1in1], [B1out2, T1in], [T1out, R1in2]]}
-
-\end{itemize}
-
-Ein Beispiel für eine solche Konfiguration ist die folgende, welche so in dem Konfigurationsfeld anzeigt werden sollte:
-
-\begin{figure}[htbp]
-    \begin{center}
-        \includegraphics[width = 10cm]{Grafiken/KonfigBsp.png}
-        \caption{Beispiel Konfiguration im Konfigurationsfeld}
-        \label{KonfigBsp}
-    \end{center}
-\end{figure}
-
+schen Aus- und Eingängen.  
+ Messkonfiguration über ihren Namen hinzugefügt. Der Name lässt sich über das Systemmenü „Bausteine“ herausfinden.   
+gin{itemize}
+tbf{blocks: [Baustein1, Baustein2, Baustein3]}
+nd Ausgänge repräsentieren Schnittstellen für die Verbindung von 2  
+t und kann unter „Bausteine -> Bearbeiten“ eingesehen werden. Daher muss die Anzahl der Ein- und Ausgänge in der Messkonfiguration dieser Anzahl entsprechen. Die Namen sind frei wählbar, aber einen eindeutigen und aussagekräftigen vereinfacht das Schreiben der Konfiguration.  
+ ] \textbf{channelListBlock1: [B1out1, B1out2]}
+item[ ] \textbf{channelListBlock3: [R1in1, R1in2]} 
+ Verbindungen zwischen Ein- und Ausgängen der Bausteine wird ein Datenflussmodel erzeugt, über welches die Messdaten laufen.  Eine Verbindung besteht immer zwischen einem Ausgang und einem Eingang, also einem Tupel aus Ausgang und Eingang.   
+spiel für eine solche Konfiguration ist die folgende, welche so in dem Konfigurationsfeld anzeigt werden sollte:
+ption{Beispiel Konfiguration im Konfigurationsfeld}
 
 
 \section{Umgang mit dem Raspberry Pi}
