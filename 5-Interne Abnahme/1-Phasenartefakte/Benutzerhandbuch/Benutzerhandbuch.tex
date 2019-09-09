@@ -169,7 +169,30 @@ spiel für eine solche Konfiguration ist die folgende, welche so in dem Konfigur
 ption{Beispiel Konfiguration im Konfigurationsfeld}
 
 
+\clearpage
 \section{Umgang mit dem Raspberry Pi}
+
+Folgende Vorbedingungen müssen erfüllt sein:
+
+\begin{itemize}
+
+\item PhyPiDAQ muss auf dem Raspberry Pi installiert sein. (Anleitung)
+
+\item Die gewünschten Sensoren müssen korrekt mit dem Raspberry Pi verbunden sein. Das Vorgehen wird im Handbuch der Sensoren erklärt.
+
+\item Der Raspberry Pi muss so konfiguriert sein, dass eine SSH-Verbindung aufgebaut werden kann, und muss mit dem Endgerät an ein Netzwerk angeschlossen sein.
+
+\end{itemize}
+
+Dann müssen die folgenden Eigenschaften in FreeJDAQ eingestellt werden:
+
+\begin{itemize}
+
+\item IP-Addresse des Raspberry Pi
+\item Benutzername und Passwort für die SSH-Verbindung (Standard: \verb:pi: und \verb:raspberry:)
+\item Unterordner \textit{examples} des Installationspfads von PhyPiDAQ auf dem Raspberry Pi (z.B. \verb:git/PhyPiDAQ/examples/:)
+
+\end{itemize}
 
 \section{Fehlermeldungen}
 
