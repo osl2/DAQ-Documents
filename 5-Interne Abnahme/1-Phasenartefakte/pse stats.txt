@@ -1,4 +1,4 @@
-982 commits gesamt: code und dokumente
+﻿982 commits gesamt: code und dokumente
 
 
 mit https://docwordcounter.com/wordcountprocess
@@ -23,3 +23,7 @@ util: 39
 gesamt: 3716
 
 test: 1539
+
+Issues:
+Insgesamt: 64
+Closed: 51
