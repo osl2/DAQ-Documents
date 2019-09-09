@@ -23,3 +23,6 @@ util: 39
 gesamt: 3716
 
 test: 1539
+
+
+anzahl tests: 107, davon 98 lauffähig, davon 20 skipped
