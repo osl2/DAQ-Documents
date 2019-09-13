@@ -55,7 +55,7 @@
 einem Raspberry Pi}
 \author{David Gawron, Stefan Geretschlaeger, Leon Huck,
 Jan Kublbeck, Linus Ruhnke }
-\date{23.09.2019}
+\date{\today}
 
 \begin{document}
 
@@ -74,6 +74,11 @@ Jan Kublbeck, Linus Ruhnke }
 
 \begin{frame}{Einleitung}
 \frametitle{Abgrenzungen}
+ Was unser Produkt nicht enthält:
+        \begin{itemize}
+            \item Direkte Ansprache der Sensoren. (PhyPiDAQ)
+            \item Visuelle Repraesentation der Messkonfiguration
+        \end{itemize}
 \end{frame}
 
 \section{Softwaretechnik}
@@ -107,14 +112,14 @@ Jan Kublbeck, Linus Ruhnke }
     ymin=0,
     legend pos=north west,
     xticklabel style={rotate=30},
-    symbolic x coords={GUI,Model,Controller,Backend,Cache,FileService},xticklabels={GUI,Model,Controller,Backend,Cache,FileService},
+    symbolic x coords={GUI,Controller,FileService,Cache,Model,Backend},xticklabels={GUI,Controller,FileService,Cache,Model,Backend},
     ]
     
     \addplot coordinates
-    {(GUI,100) (Model,100) (Controller,100) (Backend,100) (Cache,100) (FileService,100)};
+    {(GUI,1) (Controller,7) (FileService,12) (Cache,3) (Model,66) (Backend,18)};
     \end{axis}
     \end{tikzpicture}
-    Insgesamt ? Testcases
+    Insgesamt 107 Testcases
 \end{frame}
 
 \begin{frame}{Statistiken}
@@ -170,20 +175,8 @@ Jan Kublbeck, Linus Ruhnke }
 
 \begin{frame}{Statistiken}
 \frametitle{GitHub - DAQDocuments}
-\begin{figure}[htbp]
-    	\begin{center}
-       	 \includegraphics[width = 12cm]{Grafiken/CommitsDAQDocuments.png}
-    	\end{center}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Statistiken}
-\frametitle{GitHub - DAQDocuments}
-\begin{figure}[htbp]
-    	\begin{center}
-       	 \includegraphics[width = 10cm]{Grafiken/DependencyGraphDAQDocuments.png}
-    	\end{center}
-\end{figure}
+\center
+\includegraphics[width = 12cm]{Grafiken/CommitsDAQDocuments.png}
 \end{frame}
 
 \begin{frame}{Statistiken}
@@ -200,7 +193,7 @@ Jan Kublbeck, Linus Ruhnke }
     nodes near coords,
     ymin=0,
     legend pos=north west,
-    xticklabel style={rotate=20},
+    xticklabel style={rotate=15},
     symbolic x coords={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung},xticklabels={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung},
     ]
     
@@ -208,7 +201,7 @@ Jan Kublbeck, Linus Ruhnke }
     {(Pflichtenheft,7600) (Entwurf,8000) (Implementierung,4900) (Qualitätssicherung,5900)};
     \end{axis}
     \end{tikzpicture}
-    Insgesamt 26400 Wörter
+    Insgesamt 26400 Wörter über 975 Commits
 \end{frame}
 
 \section{Tools}
@@ -234,11 +227,16 @@ Jan Kublbeck, Linus Ruhnke }
                 \end{block}
 		   \begin{block}{Yaml-Editor}
 		   \center
-		   \includegraphics[width=\textwidth]{Grafiken/SnakeYamlIcon.png}
+		   \includegraphics[width=\textwidth / 2]{Grafiken/SnakeYamlIcon.png}
                 \end{block}
+		\begin{block}{SSH}
+		   \center
+		   \includegraphics[width=\textwidth / 4]{Grafiken/SSHJIcon.png}
+                \end{block}
+		
             \end{column}
                 \begin{column}{0.3\textwidth}
-                    \begin{block}{Continuous Integration}
+                    \begin{block}{Build Management}
                         \includegraphics[width=(\textwidth)]{Grafiken/MavenIcon.png}
                     \end{block}
                     \begin{block}{Statische Codeanalyse}
