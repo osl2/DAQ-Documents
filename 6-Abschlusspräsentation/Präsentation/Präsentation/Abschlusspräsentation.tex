@@ -67,11 +67,9 @@ Jan Kublbeck, Linus Ruhnke }
 
 \begin{frame}{Einleitung}
 \frametitle{Problemstellung}
-	\begin{figure}[htbp]
-    	\begin{center}
-       	 \includegraphics[width = 5cm]{Grafiken/FreeJDAQ.png}
-    	\end{center}
-	\end{figure}
+		 \center
+       	 \includegraphics[width=\textwidth / 2]{Grafiken/FreeJDAQ.png} \\
+		\textbf{Free} \textbf{J}ava \textbf{D}ata \textbf{A}c\textbf{q}uisition
 \end{frame}
 
 \begin{frame}{Einleitung}
@@ -108,15 +106,15 @@ Jan Kublbeck, Linus Ruhnke }
     nodes near coords,
     ymin=0,
     legend pos=north west,
-    xticklabel style={rotate=45},
+    xticklabel style={rotate=30},
     symbolic x coords={GUI,Model,Controller,Backend,Cache,FileService},xticklabels={GUI,Model,Controller,Backend,Cache,FileService},
     ]
     
     \addplot coordinates
-    {(GUI,17) (Model,64) (Controller,100) (Backend,74) (Cache,36) (FileService,16)};
+    {(GUI,100) (Model,100) (Controller,100) (Backend,100) (Cache,100) (FileService,100)};
     \end{axis}
     \end{tikzpicture}
-    Insgesamt 215 Testcases
+    Insgesamt ? Testcases
 \end{frame}
 
 \begin{frame}{Statistiken}
@@ -128,12 +126,12 @@ Jan Kublbeck, Linus Ruhnke }
     enlarge x limits=0.2,
     width=0.95\textwidth,
     height=0.8\textheight,
-    ylabel={Prozentl},
+    ylabel={Prozent},
     xtick=data,
     nodes near coords,
     ymin=0,
     legend pos=north west,
-    xticklabel style={rotate=45},
+    xticklabel style={rotate=30},
     symbolic x coords={Controller,FileService,GUI,Cache,Model,Backend},xticklabels={Controller,FileService,GUI,Cache,Model,Backend},
     ]
     
@@ -145,16 +143,33 @@ Jan Kublbeck, Linus Ruhnke }
 \end{frame}
 
 \begin{frame}{Statistiken}
-\frametitle{GitHub- FreeJDaq}
-\begin{figure}[htbp]
-    	\begin{center}
-       	 \includegraphics[width = 9cm]{Grafiken/Commits.png}
-    	\end{center}
-\end{figure}
+\frametitle{GitHub - FreeJDaq - Commits}
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+    ybar,
+    enlarge x limits=0.2,
+    width=0.95\textwidth,
+    height=0.8\textheight,
+    ylabel={Anzahl der Commits},
+    xtick=data,
+    nodes near coords,
+    ymin=0,
+    legend pos=north west,
+    xticklabel style={rotate=45},
+    symbolic x coords={1.7,8.7,15.7,22.7,29.7,5.8,12.8,19.8,26.8},xticklabels={1.7,8.7,15.7,22.7,29.7,5.8,12.8,19.8,26.8},
+    ]
+    
+    \addplot coordinates
+    {(1.7,6) (8.7,114) (15.7,123) (22.7,111) (29.7,205) (5.8,49) (12.8,72) (19.8,112) (26.8,29)};
+    \end{axis}
+    \end{tikzpicture}
+    Insgesamt 824 Commits, 51/64 Issues closed
 \end{frame}
 
+
 \begin{frame}{Statistiken}
-\frametitle{GitHub- DAQDocuments}
+\frametitle{GitHub - DAQDocuments}
 \begin{figure}[htbp]
     	\begin{center}
        	 \includegraphics[width = 12cm]{Grafiken/CommitsDAQDocuments.png}
@@ -163,12 +178,37 @@ Jan Kublbeck, Linus Ruhnke }
 \end{frame}
 
 \begin{frame}{Statistiken}
-\frametitle{GitHub- DAQDocuments}
+\frametitle{GitHub - DAQDocuments}
 \begin{figure}[htbp]
     	\begin{center}
        	 \includegraphics[width = 10cm]{Grafiken/DependencyGraphDAQDocuments.png}
     	\end{center}
 \end{figure}
+\end{frame}
+
+\begin{frame}{Statistiken}
+\frametitle{GitHub - DAQDocuments}
+  \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+    ybar,
+    enlarge x limits=0.2,
+    width=0.95\textwidth,
+    height=0.8\textheight,
+    ylabel={Wörter},
+    xtick=data,
+    nodes near coords,
+    ymin=0,
+    legend pos=north west,
+    xticklabel style={rotate=20},
+    symbolic x coords={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung},xticklabels={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung},
+    ]
+    
+    \addplot coordinates
+    {(Pflichtenheft,7600) (Entwurf,8000) (Implementierung,4900) (Qualitätssicherung,5900)};
+    \end{axis}
+    \end{tikzpicture}
+    Insgesamt 26400 Wörter
 \end{frame}
 
 \section{Tools}
