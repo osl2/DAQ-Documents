@@ -29,8 +29,8 @@
 %Todo: Braucht dieses Dokument ein Inhaltsverzeichniss?
 \tableofcontents 					% generate pdf twice to update
 
-\section{Einleitung}
-%Todo: Braucht dieses Dokument eine Einleitung?
+ \clearpage
+
 \section{Beschreibung der graphischen Benutzeroberfläche}
 
 \begin{figure}[htbp]
@@ -139,7 +139,7 @@
     
 \end{enumerate}
 
-
+\clearpage
 
 \section{Beschreibung der Messkonfigurationssprache}
 
@@ -196,7 +196,6 @@ Ein Beispiel für eine solche Konfiguration ist die folgende, welche so in dem K
 \end{figure}
 
 
-\clearpage
 \section{Umgang mit dem Raspberry Pi}
 
 Folgende Vorbedingungen müssen erfüllt sein:
@@ -239,6 +238,16 @@ Bei Fehlern oder falscher Bedienung der Anwendung werden dem Benutzer Fehlermeld
 \end{itemize}
 
 \section{Limitierung der Anwendung}
+
+\begin{itemize}
+
+\item Bei Änderung der Einstellungen der Anwendung muss die Anwendung neu gestartet werden. Sie lässt sich aufgrund der Komplexität des Stoppen der JVM und Starten dieser nicht einfach Neustarten und muss deswegen vom Benutzer geschlossen und geöffnet werden.
+
+\item Die Anwendung wurde nicht getestet, wenn sie alleinig auf dem Raspberry Pi läuft und nicht auf Computer. Daher kann es bei der Verwendung zu Problemen, mit der Verbindung, Graphischen Oberfläche oder Kapazitätenverbrauch kommen.
+
+\item Die Anwendung wurde nur auf Computer mit Windows 10 und Linux getestet.
+
+\end{itemize}
 
 
 
