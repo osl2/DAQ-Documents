@@ -206,7 +206,7 @@ Folgende Vorbedingungen müssen erfüllt sein:
 
 \item Die gewünschten Sensoren müssen korrekt mit dem Raspberry Pi verbunden sein. Das Vorgehen wird im Handbuch der Sensoren erklärt.
 
-\item Der Raspberry Pi muss so konfiguriert sein, dass eine SSH-Verbindung aufgebaut werden kann, und muss mit dem Endgerät an ein Netzwerk angeschlossen sein.
+\item Der Raspberry Pi muss so konfiguriert sein, dass eine SSH-Verbindung aufgebaut werden kann, und muss mit dem Endgerät an ein gemeinsames Netzwerk angeschlossen sein (WLAN). 
 
 \end{itemize}
 
@@ -215,10 +215,13 @@ Dann müssen die folgenden Eigenschaften in FreeJDAQ eingestellt werden:
 \begin{itemize}
 
 \item IP-Addresse des Raspberry Pi
-\item Benutzername und Passwort für die SSH-Verbindung (Standard: \verb:pi: und \verb:raspberry:)
+\item Benutzername und Passwort (Standard: \verb:pi: und \verb:pi=4atan1:) sowie Port (Standard: \verb:22:) für die SSH-Verbindung
 \item Unterordner \textit{examples} des Installationspfads von PhyPiDAQ auf dem Raspberry Pi (z.B. \verb:git/PhyPiDAQ/examples/:)
+\item Der  Test-Modus bzw. Demo-Modus muss ausgeschaltet sein. (Einstellung auf ,,Nein'')
 
 \end{itemize}
+
+Sind alle Einstellungen korrekt, so können Messläufe ganz gewöhnlich ausgeführt werden.
 
 \section{Fehlermeldungen}
 
@@ -248,8 +251,6 @@ Bei Fehlern oder falscher Bedienung der Anwendung werden dem Benutzer Fehlermeld
 \item Die Anwendung wurde nur auf Computer mit Windows 10 und Linux getestet.
 
 \end{itemize}
-
-
 
 \printnoidxglossaries				% generate pdf twice when adding new entries
 
