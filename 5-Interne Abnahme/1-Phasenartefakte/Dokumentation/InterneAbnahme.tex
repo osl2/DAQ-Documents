@@ -261,8 +261,12 @@ In diesem Dokument werden Änderungen, Feinschliffe oder Lösungen zu bestehende
 
 \section{Visualisierung der Messdaten}
 
-Da eine Visualisierung der Messdaten bereits in der Pflichtenheft- Phase ein wichtiger Teil unserer Anwendung war, um dem Benutzer eine bessere Visualisierung der Messdaten als in Textform zu bieten, haben wir uns entschieden dieses Feature noch nachträglich einzubauen. Implementiert wurde diese Funktionalität in der Klasse ChartVisualisation und zur Visualisierung haben wir die Bibliothek JFreeChart benutzt. Diese Bibliothek erlaubt uns die bereits vordefinierten Funktionalitäten zu nutzen. Die Bibliothek würde ebenfalls andere Darstellungsformen unterstützen, wir haben uns aber entschieden nur eine graphische Visualisierung mit 2 Achsen zu verwenden. Durch eine längere Verarbeitungsdauer der Messdaten werden diese leider nicht in annähernd Echtzeit angezeigt, sondern mit ein paar Millisekunden bis Sekunden Verspätung. Bei Messintervallen von mehreren Sekunden ist diese Verzögerung nicht wirklich bemerkbar. Bei Messintervallen von wenigen Sekunden bis Millisekunden ist eine Verzögerung jedoch bemerkbar.
-JFreeChart läuft unter der Lizenz: "GNU Lesser General Public License v2.1" und kann daher für unser Open-Source Projekt verwendet werden.
+Da eine Visualisierung der Messdaten bereits in der Pflichtenheft- Phase ein wichtiger Teil unserer Anwendung war, um dem Benutzer eine bessere Visualisierung der Messdaten als in Textform zu bieten, haben wir uns entschieden dieses Feature noch nachträglich einzubauen. Implementiert wurde diese Funktionalität in der Klasse \verb:ChartVisualisation: und zur Visualisierung haben wir die Bibliothek JFreeChart\footnote{\url{http://www.jfree.org/jfreechart/}} benutzt. Diese Bibliothek erlaubt uns die bereits vordefinierten Funktionalitäten zu nutzen, unter anderem auch das Speichern eines Diagramms als Bilddatei. Die Bibliothek würde ebenfalls andere Darstellungsformen unterstützen, wir haben uns aber entschieden nur eine graphische Visualisierung mit 2 Achsen zu verwenden.
+
+Durch einen neu hinzugefügten Knopf in der Benutzeroberfläche wird ein neues Fenster geöffnet, in welchem das Diagramm angezeigt wird. Während des Messlaufs werden dort die Messdaten visuell dargestellt.
+Durch eine längere Verarbeitungsdauer der Messdaten werden diese leider nicht in annähernd Echtzeit angezeigt, sondern mit ein paar Millisekunden bis Sekunden Verspätung. Bei Messintervallen von mehreren Sekunden ist diese Verzögerung nicht wirklich bemerkbar. Bei Messintervallen von wenigen Sekunden bis Millisekunden ist eine Verzögerung jedoch bemerkbar.
+
+JFreeChart ist unter der \textit{GNU Lesser General Public License v2.1} lizenziert und kann daher für unser Open-Source Projekt verwendet werden.
 
 \section{Ändern der Bausteineigenschaften}
 
