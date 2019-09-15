@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.9)  15 SEP 2019 20:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.9)  15 SEP 2019 20:20
 entering extended mode
 **./Abschlusspräsentation.tex
 (Abschlusspräsentation.tex
@@ -1570,7 +1570,7 @@ enefit from \pgfplotsset{compat=1.16} (current compat level: 1.4).
 ex/config/pdftex.map}
 
 ]
-<Grafiken/FreeJDAQ.png, id=101, 693.59125pt x 362.35374pt>
+<Grafiken/FreeJDAQ.png, id=111, 693.59125pt x 362.35374pt>
 File: Grafiken/FreeJDAQ.png Graphic file (type png)
 <use Grafiken/FreeJDAQ.png>
 Package pdftex.def Info: Grafiken/FreeJDAQ.png  used on input line 73.
@@ -1601,7 +1601,7 @@ LaTeX Font Info:    Font shape `T1/aess/m/it' in size <6> not available
 ] [4
 
 ]
-<Grafiken/Klassendiagramm.png, id=171, 587.19376pt x 361.85187pt>
+<Grafiken/Klassendiagramm.png, id=184, 587.19376pt x 361.85187pt>
 File: Grafiken/Klassendiagramm.png Graphic file (type png)
 <use Grafiken/Klassendiagramm.png>
 Package pdftex.def Info: Grafiken/Klassendiagramm.png  used on input line 97.
@@ -1612,81 +1612,74 @@ Package pdftex.def Info: Grafiken/Klassendiagramm.png  used on input line 97.
 
 ] [7
 
-] [8
+]
+Overfull \vbox (2.55995pt too high) detected at line 173
+ []
+
+[8
 
 ] [9
 
-]
-<Grafiken/CommitsDAQDocuments.png, id=284, 398.48875pt x 92.84688pt>
-File: Grafiken/CommitsDAQDocuments.png Graphic file (type png)
-<use Grafiken/CommitsDAQDocuments.png>
-Package pdftex.def Info: Grafiken/CommitsDAQDocuments.png  used on input line 1
-99.
-(pdftex.def)             Requested size: 341.43306pt x 79.5563pt.
-
-Overfull \hbox (34.14319pt too wide) in paragraph at lines 199--199
- [] 
- []
-
-[10
-
- <./Grafiken/CommitsDAQDocuments.png>] [11
+] [10
 
 ]
-<Grafiken/PlantUmlIcon.png, id=333, 120.95187pt x 85.31876pt>
+<Grafiken/PlantUmlIcon.png, id=328, 120.95187pt x 85.31876pt>
 File: Grafiken/PlantUmlIcon.png Graphic file (type png)
 <use Grafiken/PlantUmlIcon.png>
-Package pdftex.def Info: Grafiken/PlantUmlIcon.png  used on input line 269.
+Package pdftex.def Info: Grafiken/PlantUmlIcon.png  used on input line 261.
 (pdftex.def)             Requested size: 46.09395pt x 32.51389pt.
-<Grafiken/JUnitIcon.png, id=334, 146.04562pt x 93.85063pt>
+<Grafiken/JUnitIcon.png, id=329, 147.04938pt x 56.21pt>
 File: Grafiken/JUnitIcon.png Graphic file (type png)
 <use Grafiken/JUnitIcon.png>
-Package pdftex.def Info: Grafiken/JUnitIcon.png  used on input line 269.
-(pdftex.def)             Requested size: 30.7293pt x 19.74643pt.
-<Grafiken/EclipseIcon.png, id=335, 99.37125pt x 95.85812pt>
+Package pdftex.def Info: Grafiken/JUnitIcon.png  used on input line 261.
+(pdftex.def)             Requested size: 30.7293pt x 11.74611pt.
+<Grafiken/EclipseIcon.png, id=330, 99.37125pt x 95.85812pt>
 File: Grafiken/EclipseIcon.png Graphic file (type png)
 <use Grafiken/EclipseIcon.png>
-Package pdftex.def Info: Grafiken/EclipseIcon.png  used on input line 269.
+Package pdftex.def Info: Grafiken/EclipseIcon.png  used on input line 261.
 (pdftex.def)             Requested size: 23.04697pt x 22.23119pt.
-<Grafiken/SnakeYamlIcon.png, id=336, 253.44687pt x 45.16875pt>
+<Grafiken/SnakeYamlIcon.png, id=331, 253.44687pt x 45.16875pt>
 File: Grafiken/SnakeYamlIcon.png Graphic file (type png)
 <use Grafiken/SnakeYamlIcon.png>
-Package pdftex.def Info: Grafiken/SnakeYamlIcon.png  used on input line 269.
+Package pdftex.def Info: Grafiken/SnakeYamlIcon.png  used on input line 261.
 (pdftex.def)             Requested size: 46.09395pt x 8.2141pt.
-<Grafiken/SSHJIcon.png, id=337, 50.68938pt x 26.0975pt>
+<Grafiken/SSHJIcon.png, id=332, 50.68938pt x 26.0975pt>
 File: Grafiken/SSHJIcon.png Graphic file (type png)
 <use Grafiken/SSHJIcon.png>
-Package pdftex.def Info: Grafiken/SSHJIcon.png  used on input line 269.
+Package pdftex.def Info: Grafiken/SSHJIcon.png  used on input line 261.
 (pdftex.def)             Requested size: 23.04697pt x 11.86601pt.
-<Grafiken/MavenIcon.png, id=338, 95.35625pt x 49.18375pt>
+<Grafiken/MavenIcon.png, id=333, 95.35625pt x 49.18375pt>
 File: Grafiken/MavenIcon.png Graphic file (type png)
 <use Grafiken/MavenIcon.png>
-Package pdftex.def Info: Grafiken/MavenIcon.png  used on input line 269.
+Package pdftex.def Info: Grafiken/MavenIcon.png  used on input line 261.
 (pdftex.def)             Requested size: 92.1879pt x 47.5513pt.
-<Grafiken/JacocoIcon.png, id=339, 111.91812pt x 110.91437pt>
+<Grafiken/JacocoIcon.png, id=334, 111.91812pt x 110.91437pt>
 File: Grafiken/JacocoIcon.png Graphic file (type png)
 <use Grafiken/JacocoIcon.png>
-Package pdftex.def Info: Grafiken/JacocoIcon.png  used on input line 269.
+Package pdftex.def Info: Grafiken/JacocoIcon.png  used on input line 261.
 (pdftex.def)             Requested size: 23.04697pt x 22.83913pt.
-<Grafiken/EclEmmaIcon.png, id=340, 66.74937pt x 60.225pt>
+<Grafiken/EclEmmaIcon.png, id=335, 66.74937pt x 60.225pt>
 File: Grafiken/EclEmmaIcon.png Graphic file (type png)
 <use Grafiken/EclEmmaIcon.png>
-Package pdftex.def Info: Grafiken/EclEmmaIcon.png  used on input line 269.
+Package pdftex.def Info: Grafiken/EclEmmaIcon.png  used on input line 261.
 (pdftex.def)             Requested size: 46.09395pt x 41.5902pt.
-<Grafiken/SonarlintIcon.png, id=341, 98.3675pt x 36.135pt>
+<Grafiken/SonarlintIcon.png, id=336, 98.3675pt x 36.135pt>
 File: Grafiken/SonarlintIcon.png Graphic file (type png)
 <use Grafiken/SonarlintIcon.png>
-Package pdftex.def Info: Grafiken/SonarlintIcon.png  used on input line 269.
+Package pdftex.def Info: Grafiken/SonarlintIcon.png  used on input line 261.
 (pdftex.def)             Requested size: 46.09395pt x 16.93216pt.
- [12
+ [11
 
  <./Grafiken/PlantUmlIcon.png> <./Grafiken/JUnitIcon.png> <./Grafiken/EclipseIc
 on.png> <./Grafiken/SnakeYamlIcon.png> <./Grafiken/SSHJIcon.png> <./Grafiken/Ma
 venIcon.png> <./Grafiken/JacocoIcon.png> <./Grafiken/EclEmmaIcon.png> <./Grafik
-en/SonarlintIcon.png>]
-[13
+en/SonarlintIcon.png>] [12
+
+] [13
 
 ] [14
+
+] [15
 
 ]
 \tf@nav=\write6
@@ -1698,31 +1691,34 @@ en/SonarlintIcon.png>]
 \tf@snm=\write8
 \openout8 = `Abschlusspräsentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 291.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 291.
- (Abschlusspräsentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 291.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 291.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 310.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 310.
+
+(Abschlusspräsentation.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 310.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 310.
 Package rerunfilecheck Info: File `Abschlusspräsentation.out' has not changed.
 
-(rerunfilecheck)             Checksum: 386672A1076C8817207A4100FDF9C99B;233.
+(rerunfilecheck)             Checksum: 36A6CCDCB8B71F98725D2AD0E986932E;317.
  ) 
 Here is how much of TeX's memory you used:
- 32260 strings out of 493305
- 779612 string characters out of 3128498
+ 32284 strings out of 493305
+ 779778 string characters out of 3128498
  997479 words of memory out of 3000000
- 35109 multiletter control sequences out of 15000+200000
- 30093 words of font info for 59 fonts, out of 3000000 for 9000
+ 35124 multiletter control sequences out of 15000+200000
+ 33045 words of font info for 65 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,20n,102p,791b,2282s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/Tricuper/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
 nts/cm/cmmi10.pfb><C:/Users/Tricuper/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/cm/cmss10.pfb><C:/Users/Tricuper/AppData/Local/Programs/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/Tricuper/AppData/
-Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Abschlusspräsentation.pdf (14 pages, 361096 bytes).
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmss17.pfb><C:/Users/Tricuper/AppData/Lo
+cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/T
+ricuper/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10
+.pfb>
+Output written on Abschlusspräsentation.pdf (15 pages, 359925 bytes).
 PDF statistics:
- 441 PDF objects out of 1000 (max. 8388607)
- 34 named destinations out of 1000 (max. 500000)
- 185 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 455 PDF objects out of 1000 (max. 8388607)
+ 38 named destinations out of 1000 (max. 500000)
+ 196 words of extra memory for PDF output out of 10000 (max. 10000000)
 
