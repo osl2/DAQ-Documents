@@ -162,14 +162,14 @@ Jan Kublbeck, Linus Ruhnke }
     ymin=0,
     legend pos=north west,
     xticklabel style={rotate=45},
-    symbolic x coords={1.7,8.7,15.7,22.7,29.7,5.8,12.8,19.8,26.8},xticklabels={1.7,8.7,15.7,22.7,29.7,5.8,12.8,19.8,26.8},
+    symbolic x coords={1.7,8.7,15.7,22.7,29.7,5.8,12.8,19.8,26.8,1.9},xticklabels={1.7 (I),8.7,15.7,22.7,29.7,5.8 (Q),12.8,19.8,26.8,1.9 (IA)},
     ]
     
     \addplot coordinates
-    {(1.7,6) (8.7,114) (15.7,123) (22.7,111) (29.7,205) (5.8,49) (12.8,72) (19.8,112) (26.8,29)};
+    {(1.7,6) (8.7,114) (15.7,123) (22.7,111) (29.7,205) (5.8,49) (12.8,72) (19.8,112) (26.8,29) (1.9,21)};
     \end{axis}
     \end{tikzpicture}
-    Insgesamt 824 Commits, 51/64 Issues closed
+    Insgesamt 842 Commits, 54/64 Issues closed
 \end{frame}
 
  \begin{frame}{Lines of Code}
@@ -181,22 +181,14 @@ Jan Kublbeck, Linus Ruhnke }
                     Datei & Anzahl Zeilen \\
                     \hline
                     Java & 5552 \\
-                    JavaScript & todo \\
-                    XML & todo \\
-                    Properties & todo \\
-                    CSS & todo \\ \Xhline{0.8pt}
+			Main & 4013 \\
+			Test & 1539 \\ \Xhline{0.8pt}
                     Gesamt (inklusive Kommentar- und Leerzeilen) & 12776 \\ \hline
                 \end{tabular}
             \end{center}
         \end{table}
+	Verteilt über 122 Mainklassen und 23 Testklassen
     \end{frame}
-
-
-\begin{frame}{Statistiken}
-\frametitle{GitHub - DAQDocuments}
-\center
-\includegraphics[width = 12cm]{Grafiken/CommitsDAQDocuments.png}
-\end{frame}
 
 \begin{frame}{Statistiken}
 \frametitle{GitHub - DAQDocuments}
@@ -213,14 +205,14 @@ Jan Kublbeck, Linus Ruhnke }
     ymin=0,
     legend pos=north west,
     xticklabel style={rotate=15},
-    symbolic x coords={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung},xticklabels={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung},
+    symbolic x coords={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung, Interne Abnahme},xticklabels={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung, Interne Abnahme},
     ]
     
     \addplot coordinates
-    {(Pflichtenheft,7600) (Entwurf,8000) (Implementierung,4900) (Qualitätssicherung,5900)};
+    {(Pflichtenheft,7600) (Entwurf,8000) (Implementierung,4900) (Qualitätssicherung,5900) (Interne Abnahme,1404)};
     \end{axis}
     \end{tikzpicture}
-    Insgesamt ca. 26400 Wörter über 975 Commits
+    Insgesamt ca. 27800 Wörter über 994 Commits
 \end{frame}
 
 \section{Tools}
@@ -282,9 +274,30 @@ Jan Kublbeck, Linus Ruhnke }
 \begin{frame}
 \frametitle{Was haben wir gelernt}
 \begin{itemize}
-\item Phasen planen  $\rightarrow$ Meilensteine, Deadlines setzen und Zuständigkeiten zuteilen
-\item Meilensteine überprüfen und ggf. Ressourcen verschieben
-\item Vor der Implementierung die nötigen Tools aussuchen und in diese einlesen
+\item Phasen planen  $\rightarrow$ Meilensteine, Deadlines setzen und Zuständigkeiten zuteilen.
+\item Arbeitsverteilung gleichmäßig über den Zeitraum verteilen.
+\item Meilensteine überprüfen und ggf. Ressourcen verschieben.
+\item Vor der Implementierung die nötigen Tools aussuchen und in diese einarbeiten.
+\end{itemize}
+\end{frame}
+
+
+\appendix
+\begin{frame}[plain]
+\frametitle{Quellen}
+\begin{itemize}
+\item https://github.com/osl2/DAQ-Documents
+\item https://github.com/osl2/PhyPiDAQ
+\item https://github.com/GuenterQuast/PhyPiDAQ
+\item http://plantuml.com/de/
+\item https://junit.org/junit5/
+\item https://www.eclipse.org/ide/
+\item https://bitbucket.org/asomov/snakeyaml/src
+\item https://github.com/hierynomus/sshj
+\item https://maven.apache.org/
+\item https://www.eclemma.org/
+\item https://www.eclemma.org/jacoco/
+\item https://www.sonarlint.org/
 \end{itemize}
 \end{frame}
 
