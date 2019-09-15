@@ -1,0 +1,29 @@
+﻿982 commits gesamt: code und dokumente
+
+
+mit https://docwordcounter.com/wordcountprocess
+pflichtenheft ca 7600 wörter 
+entwurfsdokument ca 8000 wörter
+implementierung ca 4900 wörter
+quali ca 5900 wörter
+
+gesamt: 26400 wörter plusMinus 400
+
+
+LOC mit CodeMR (eclipse plugin)
+
+backend: 480
+cache: 419
+controller: 219
+fileservice 96
+gui: 1162
+model: 1301
+util: 39
+
+gesamt: 3716
+
+test: 1539
+
+Issues:
+Insgesamt: 64
+Closed: 51
