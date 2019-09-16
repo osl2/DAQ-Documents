@@ -1,6 +1,6 @@
 \beamer@sectionintoc {1}{Einleitung}{2}{0}{1}
-\beamer@sectionintoc {2}{Softwaretechnik}{7}{0}{2}
-\beamer@sectionintoc {3}{Statistiken}{9}{0}{3}
-\beamer@sectionintoc {4}{Tools}{14}{0}{4}
-\beamer@sectionintoc {5}{Lernefahrung}{15}{0}{5}
-\beamer@sectionintoc {6}{Livedemo}{17}{0}{6}
+\beamer@sectionintoc {2}{Softwaretechnik}{8}{0}{2}
+\beamer@sectionintoc {3}{Statistiken}{10}{0}{3}
+\beamer@sectionintoc {4}{Tools}{15}{0}{4}
+\beamer@sectionintoc {5}{Lernefahrung}{16}{0}{5}
+\beamer@sectionintoc {6}{Livedemo}{18}{0}{6}
