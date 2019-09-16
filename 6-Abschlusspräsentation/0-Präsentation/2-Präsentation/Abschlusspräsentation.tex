@@ -3,29 +3,29 @@
 % Choose how your presentation looks.
 \mode<presentation>
 {
-\usetheme{Darmstadt}      % or try Darmstadt, Madrid, Warsaw, ...
-\usecolortheme{wolverine} % or try albatross, beaver, crane, ...
-\usefonttheme{structurebold}  % or try serif, structurebold, ...
-\setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{caption}[numbered]
-
-%Customerize Prasentation
-\definecolor{Grau}{HTML}{CCCCCC}
-\definecolor{GrauDark}{HTML}{777777} % auf weißem hintergrund
-\definecolor{Orange}{HTML}{EA5B10}
-\setbeamercolor{palette primary}{bg=Grau}
-\setbeamercolor{palette primary}{fg=Orange}
-\setbeamercolor{normal text}{fg=GrauDark}
-\setbeamercolor{structure}{fg=Orange} % farbe der items
-\setbeamertemplate{itemize item}[circle]
-\setbeamercolor{mini frame}{fg=Orange}
-\setbeamercolor{section in head/foot}{bg=Grau}
-\setbeamercolor{section in head/foot}{fg=Orange}
-\setbeamercolor{subsection in head/foot}{bg=white}
-\setbeamercolor{subsection in head/foot}{fg=GrauDark}
-\setbeamercolor{headline}{bg=Grau}
-\setbeamercolor{block body}{bg=white}
-\setbeamercolor{frametitle}{bg=white}
+    \usetheme{Darmstadt}      % or try Darmstadt, Madrid, Warsaw, ...
+    \usecolortheme{wolverine} % or try albatross, beaver, crane, ...
+    \usefonttheme{structurebold}  % or try serif, structurebold, ...
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{caption}[numbered]
+    
+    %Customerize Prasentation
+    \definecolor{Grau}{HTML}{CCCCCC}
+    \definecolor{GrauDark}{HTML}{777777} % auf weißem hintergrund
+    \definecolor{Orange}{HTML}{EA5B10}
+    \setbeamercolor{palette primary}{bg=Grau}
+    \setbeamercolor{palette primary}{fg=Orange}
+    \setbeamercolor{normal text}{fg=GrauDark}
+    \setbeamercolor{structure}{fg=Orange} % farbe der items
+    \setbeamertemplate{itemize item}[circle]
+    \setbeamercolor{mini frame}{fg=Orange}
+    \setbeamercolor{section in head/foot}{bg=Grau}
+    \setbeamercolor{section in head/foot}{fg=Orange}
+    \setbeamercolor{subsection in head/foot}{bg=white}
+    \setbeamercolor{subsection in head/foot}{fg=GrauDark}
+    \setbeamercolor{headline}{bg=Grau}
+    \setbeamercolor{block body}{bg=white}
+    \setbeamercolor{frametitle}{bg=white}
 }
 
 \usepackage[utf8]{inputenc}
@@ -40,143 +40,149 @@
 \pgfplotsset{compat=1.4}
 
 \newenvironment<>{varblock}[2][.9\textwidth]{%
-  \setlength{\textwidth}{#1}
-  \begin{actionenv}#3%
-    \def\insertblocktitle{#2}%
-    \par%
-    \usebeamertemplate{block begin}}
-  {\par%
-    \usebeamertemplate{block end}%
-  \end{actionenv}}
+    \setlength{\textwidth}{#1}
+    \begin{actionenv}#3%
+        \def\insertblocktitle{#2}%
+        \par%
+        \usebeamertemplate{block begin}}
+    {\par%
+        \usebeamertemplate{block end}%
+\end{actionenv}}
 
 
 \title{FreeJDAQ}
 \subtitle{Visuelle Programmiersprache zur Datenerfassung auf
-einem Raspberry Pi}
+    einem Raspberry Pi}
 \author{David Gawron, Stefan Geretschlaeger, Leon Huck, \\ 
-Jan Kublbeck, Linus Ruhnke }
+    Jan Kublbeck, Linus Ruhnke }
 \date{\today}
 
 \begin{document}
+    
+    \begin{frame}
+        \titlepage
+    \end{frame}
+    
+    \section{Einleitung}
+    
+    \begin{frame}{Einleitung}
+        \frametitle{Projektvorstellung}
+        \center
+        \includegraphics[width=\textwidth / 2]{Grafiken/FreeJDAQ.png} \\
+        \textbf{Free} \textbf{J}ava \textbf{D}ata \textbf{A}c\textbf{q}uisition
+    \end{frame}
+    
+    \begin{frame}{Einleitung}
+        \frametitle{Projektvorstellung}
+        \center
+        \includegraphics[width=\textwidth]{Grafiken/Ziel_Der_Anwendung.png} \\
+    \end{frame}
 
-\begin{frame}
-\titlepage
-\end{frame}
-
-\section{Einleitung}
-
-\begin{frame}{Einleitung}
-\frametitle{Projektvorstellung}
-		 \center
-       	 \includegraphics[width=\textwidth]{Grafiken/Ziel_Der_Anwendung.png} \\
-		\textbf{Free} \textbf{J}ava \textbf{D}ata \textbf{A}c\textbf{q}uisition
-\end{frame}
-
-\begin{frame}{Einleitung}
-\frametitle{Abgrenzungen}
- Was unser Produkt nicht enthält:
+    \begin{frame}{Einleitung}
+        \frametitle{Abgrenzungen}
+        Was unser Produkt nicht enthält:
         \begin{itemize}
             \item Direkte Ansprache der Sensoren. (PhyPiDAQ)
             \item Visuelle Repraesentation der Messkonfiguration
         \end{itemize}
-\end{frame}
-
-\section{Softwaretechnik}
-
-\begin{frame}{Softwaretechnik}
-\frametitle{Grundaufbau}
-\begin{center}
-       	 \includegraphics[width = 5cm]{Grafiken/DeploymentDiagram.png}
-    	\end{center}
-\end{frame}
-
-\begin{frame}{Softwaretechnik}
-\frametitle{Paketdiagramm}
-\begin{figure}[htbp]
-    	\begin{center}
-       	 \includegraphics[width = 10cm]{Grafiken/Klassendiagramm.png}
-    	\end{center}
-	\end{figure}
-\end{frame}
-
-\section{Statistiken}
-
-     \begin{frame}{Unit-Tests}
-    \centering
-    \begin{tikzpicture}
-    \begin{axis}[
-    ybar,
-    enlarge x limits=0.2,
-    width=0.95\textwidth,
-    height=0.8\textheight,
-    ylabel={Anzahl},
-    xtick=data,
-    nodes near coords,
-    ymin=0,
-    legend pos=north west,
-    xticklabel style={rotate=30},
-    symbolic x coords={GUI,Controller,FileService,Cache,Model,Backend},xticklabels={GUI,Controller,FileService,Cache,Model,Backend},
-    ]
+    \end{frame}
     
-    \addplot coordinates
-    {(GUI,1) (Controller,7) (FileService,12) (Cache,3) (Model,66) (Backend,18)};
-    \end{axis}
-    \end{tikzpicture}
-    Insgesamt 107 Testcases, zzgl. 33 GUI - Klickstrecken
-\end{frame}
-
-\begin{frame}{Statistiken}
-\frametitle{Testabdeckung}
-  \centering
-    \begin{tikzpicture}
-    \begin{axis}[
-    ybar,
-    enlarge x limits=0.2,
-    width=0.95\textwidth,
-    height=0.8\textheight,
-    ylabel={Prozent},
-    xtick=data,
-    nodes near coords,
-    ymin=0,
-    legend pos=north west,
-    xticklabel style={rotate=30},
-    symbolic x coords={Controller,FileService,GUI,Cache,Model,Backend},xticklabels={Controller,FileService,GUI,Cache,Model,Backend},
-    ]
+    \section{Softwaretechnik}
     
-    \addplot coordinates
-    {(Controller,53) (FileService,79) (GUI,84) (Cache,84) (Model,85) (Backend,96)};
-    \end{axis}
-    \end{tikzpicture}
-    Insgesamt 80 Prozent
-\end{frame}
-
-\begin{frame}{Statistiken}
-\frametitle{GitHub - FreeJDaq - Commits}
-    \centering
-    \begin{tikzpicture}
-    \begin{axis}[
-    ybar,
-    enlarge x limits=0.2,
-    width=0.95\textwidth,
-    height=0.8\textheight,
-    ylabel={Anzahl der Commits},
-    xtick=data,
-    nodes near coords,
-    ymin=0,
-    legend pos=north west,
-    xticklabel style={rotate=45},
-    symbolic x coords={1.7,8.7,15.7,22.7,29.7,5.8,12.8,19.8,26.8,1.9},xticklabels={1.7 (I),8.7,15.7,22.7,29.7,5.8 (Q),12.8,19.8,26.8,1.9 (IA)},
-    ]
+    \begin{frame}{Softwaretechnik}
+        \frametitle{Grundaufbau}
+        \begin{center}
+            \includegraphics[width = 5cm]{Grafiken/DeploymentDiagram.png}
+        \end{center}
+    \end{frame}
     
-    \addplot coordinates
-    {(1.7,6) (8.7,114) (15.7,123) (22.7,111) (29.7,205) (5.8,49) (12.8,72) (19.8,112) (26.8,29) (1.9,21)};
-    \end{axis}
-    \end{tikzpicture}
-    Insgesamt 842 Commits, 54/64 Issues closed, (15.09, 18:00 Uhr)
-\end{frame}
-
- \begin{frame}{Lines of Code}
-\frametitle{GitHub - FreeJDaq - Lines of Code}
+    \begin{frame}{Softwaretechnik}
+        \frametitle{Paketdiagramm}
+        \begin{figure}[htbp]
+            \begin{center}
+                \includegraphics[width = 10cm]{Grafiken/Klassendiagramm.png}
+            \end{center}
+        \end{figure}
+    \end{frame}
+    
+    \section{Statistiken}
+    
+    \begin{frame}{Unit-Tests}
+        \centering
+        \begin{tikzpicture}
+        \begin{axis}[
+        ybar,
+        enlarge x limits=0.2,
+        width=0.95\textwidth,
+        height=0.8\textheight,
+        ylabel={Anzahl},
+        xtick=data,
+        nodes near coords,
+        ymin=0,
+        legend pos=north west,
+        xticklabel style={rotate=30},
+        symbolic x coords={GUI,Controller,FileService,Cache,Model,Backend},xticklabels={GUI,Controller,FileService,Cache,Model,Backend},
+        ]
+        
+        \addplot coordinates
+        {(GUI,1) (Controller,7) (FileService,12) (Cache,3) (Model,66) (Backend,18)};
+        \end{axis}
+        \end{tikzpicture}
+        Insgesamt 107 Testcases, zzgl. 33 GUI - Klickstrecken
+    \end{frame}
+    
+    \begin{frame}{Statistiken}
+        \frametitle{Testabdeckung}
+        \centering
+        \begin{tikzpicture}
+        \begin{axis}[
+        ybar,
+        enlarge x limits=0.2,
+        width=0.95\textwidth,
+        height=0.8\textheight,
+        ylabel={Prozent},
+        xtick=data,
+        nodes near coords,
+        ymin=0,
+        legend pos=north west,
+        xticklabel style={rotate=30},
+        symbolic x coords={Controller,FileService,GUI,Cache,Model,Backend},xticklabels={Controller,FileService,GUI,Cache,Model,Backend},
+        ]
+        
+        \addplot coordinates
+        {(Controller,53) (FileService,79) (GUI,84) (Cache,84) (Model,85) (Backend,96)};
+        \end{axis}
+        \end{tikzpicture}
+        Insgesamt 80 Prozent
+    \end{frame}
+    
+    \begin{frame}{Statistiken}
+        \frametitle{GitHub - FreeJDaq - Commits}
+        \centering
+        \begin{tikzpicture}
+        \begin{axis}[
+        ybar,
+        enlarge x limits=0.2,
+        width=0.95\textwidth,
+        height=0.8\textheight,
+        ylabel={Anzahl der Commits},
+        xtick=data,
+        nodes near coords,
+        ymin=0,
+        legend pos=north west,
+        xticklabel style={rotate=45},
+        symbolic x coords={1.7,8.7,15.7,22.7,29.7,5.8,12.8,19.8,26.8,1.9},xticklabels={1.7 (I),8.7,15.7,22.7,29.7,5.8 (Q),12.8,19.8,26.8,1.9 (IA)},
+        ]
+        
+        \addplot coordinates
+        {(1.7,6) (8.7,114) (15.7,123) (22.7,111) (29.7,205) (5.8,49) (12.8,72) (19.8,112) (26.8,29) (1.9,21)};
+        \end{axis}
+        \end{tikzpicture}
+        Insgesamt 842 Commits, 54/64 Issues closed, (15.09, 18:00 Uhr)
+    \end{frame}
+    
+    \begin{frame}{Lines of Code}
+        \frametitle{GitHub - FreeJDaq - Lines of Code}
         \begin{table}[t]
             \begin{center}
                 \begin{tabular}{ | l | c | }
@@ -184,46 +190,46 @@ Jan Kublbeck, Linus Ruhnke }
                     Datei & Anzahl Zeilen \\
                     \hline
                     Java & 5552 \\
-			Main & 4013 \\
-			Test & 1539 \\ \Xhline{0.8pt}
+                    Main & 4013 \\
+                    Test & 1539 \\ \Xhline{0.8pt}
                     Gesamt (inklusive Kommentar- und Leerzeilen) & 12776 \\ \hline
                 \end{tabular}
             \end{center}
         \end{table}
-	Verteilt über 122 Mainklassen und 23 Testklassen
+        Verteilt über 122 Mainklassen und 23 Testklassen
     \end{frame}
-
-\begin{frame}{Statistiken}
-\frametitle{GitHub - DAQDocuments}
-  \centering
-    \begin{tikzpicture}
-    \begin{axis}[
-    ybar,
-    enlarge x limits=0.2,
-    width=0.95\textwidth,
-    height=0.8\textheight,
-    ylabel={Wörter},
-    xtick=data,
-    nodes near coords,
-    ymin=0,
-    legend pos=north west,
-    xticklabel style={rotate=15},
-    symbolic x coords={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung, Interne Abnahme},xticklabels={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung, Interne Abnahme},
-    ]
     
-    \addplot coordinates
-    {(Pflichtenheft,7600) (Entwurf,8000) (Implementierung,4900) (Qualitätssicherung,5900) (Interne Abnahme,1404)};
-    \end{axis}
-    \end{tikzpicture}
-    Insgesamt ca. 27800 Wörter über 994 Commits (15.09, 18:00 Uhr)
-\end{frame}
-
-\section{Tools}
-
-\begin{frame}{Tools}
-\frametitle{Allgemein}
-
- \begin{columns}
+    \begin{frame}{Statistiken}
+        \frametitle{GitHub - DAQDocuments}
+        \centering
+        \begin{tikzpicture}
+        \begin{axis}[
+        ybar,
+        enlarge x limits=0.2,
+        width=0.95\textwidth,
+        height=0.8\textheight,
+        ylabel={Wörter},
+        xtick=data,
+        nodes near coords,
+        ymin=0,
+        legend pos=north west,
+        xticklabel style={rotate=15},
+        symbolic x coords={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung, Interne Abnahme},xticklabels={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung, Interne Abnahme},
+        ]
+        
+        \addplot coordinates
+        {(Pflichtenheft,7600) (Entwurf,8000) (Implementierung,4900) (Qualitätssicherung,5900) (Interne Abnahme,1404)};
+        \end{axis}
+        \end{tikzpicture}
+        Insgesamt ca. 27800 Wörter über 994 Commits (15.09, 18:00 Uhr)
+    \end{frame}
+    
+    \section{Tools}
+    
+    \begin{frame}{Tools}
+        \frametitle{Allgemein}
+        
+        \begin{columns}
             \begin{column}{0.3\textwidth}
                 \begin{block}{UML}
                     \center
@@ -239,75 +245,75 @@ Jan Kublbeck, Linus Ruhnke }
                     \center
                     \includegraphics[width=\textwidth / 4]{Grafiken/EclipseIcon.png}
                 \end{block}
-		   \begin{block}{Yaml-Editor}
-		   \center
-		   \includegraphics[width=\textwidth / 2]{Grafiken/SnakeYamlIcon.png}
+                \begin{block}{Yaml-Editor}
+                    \center
+                    \includegraphics[width=\textwidth / 2]{Grafiken/SnakeYamlIcon.png}
                 \end{block}
-		\begin{block}{SSH}
-		   \center
-		   \includegraphics[width=\textwidth / 4]{Grafiken/SSHJIcon.png}
+                \begin{block}{SSH}
+                    \center
+                    \includegraphics[width=\textwidth / 4]{Grafiken/SSHJIcon.png}
                 \end{block}
-		
+                
             \end{column}
-                \begin{column}{0.3\textwidth}
-                    \begin{block}{Build Management}
-                        \includegraphics[width=(\textwidth)]{Grafiken/MavenIcon.png}
-                    \end{block}
-                    \begin{block}{Statische Codeanalyse}
-                        \center
-                        \includegraphics[width=(\textwidth / 4)]{Grafiken/JacocoIcon.png}
-                        \includegraphics[width=(\textwidth / 2)]{Grafiken/EclEmmaIcon.png}
-       	 	     \includegraphics[width=(\textwidth / 2)]{Grafiken/SonarlintIcon.png}
-                    \end{block}
-                \end{column}
+            \begin{column}{0.3\textwidth}
+                \begin{block}{Build Management}
+                    \includegraphics[width=(\textwidth)]{Grafiken/MavenIcon.png}
+                \end{block}
+                \begin{block}{Statische Codeanalyse}
+                    \center
+                    \includegraphics[width=(\textwidth / 4)]{Grafiken/JacocoIcon.png}
+                    \includegraphics[width=(\textwidth / 2)]{Grafiken/EclEmmaIcon.png}
+                    \includegraphics[width=(\textwidth / 2)]{Grafiken/SonarlintIcon.png}
+                \end{block}
+            \end{column}
         \end{columns}
     \end{frame}
-
-\section{Lernefahrung}
-
-\begin{frame}
-\frametitle{Probleme}
-\begin{itemize}
-\item Teamkommunikation in den ersten Phasen 
-\item Nacharbeiten von Fehlern oder Vervollständigung
-\item Technologiewahl $\rightarrow$ Technologiewechsel
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Was haben wir gelernt}
-\begin{itemize}
-\item Phasen planen  $\rightarrow$ Meilensteine, Deadlines setzen und Zuständigkeiten zuteilen.
-\item Arbeitsverteilung gleichmäßig über den Zeitraum verteilen.
-\item Meilensteine überprüfen und ggf. Ressourcen verschieben.
-\item Vor der Implementierung die nötigen Tools aussuchen und in diese einarbeiten.
-\end{itemize}
-\end{frame}
-
-\section{Livedemo}
-\begin{frame}[plain]
-\center
-{\huge Livedemo}
-\end{frame}
-
-
-\appendix
-\begin{frame}[plain]
-\frametitle{Quellen}
-\begin{itemize}
-\item https://github.com/osl2/DAQ-Documents
-\item https://github.com/osl2/PhyPiDAQ
-\item https://github.com/GuenterQuast/PhyPiDAQ
-\item http://plantuml.com/de/
-\item https://junit.org/junit5/
-\item https://www.eclipse.org/ide/
-\item https://bitbucket.org/asomov/snakeyaml/src
-\item https://github.com/hierynomus/sshj
-\item https://maven.apache.org/
-\item https://www.eclemma.org/
-\item https://www.eclemma.org/jacoco/
-\item https://www.sonarlint.org/
-\end{itemize}
-\end{frame}
-
+    
+    \section{Lernefahrung}
+    
+    \begin{frame}
+        \frametitle{Probleme}
+        \begin{itemize}
+            \item Teamkommunikation in den ersten Phasen 
+            \item Nacharbeiten von Fehlern oder Vervollständigung
+            \item Technologiewahl $\rightarrow$ Technologiewechsel
+        \end{itemize}
+    \end{frame}
+    
+    \begin{frame}
+        \frametitle{Was haben wir gelernt}
+        \begin{itemize}
+            \item Phasen planen  $\rightarrow$ Meilensteine, Deadlines setzen und Zuständigkeiten zuteilen.
+            \item Arbeitsverteilung gleichmäßig über den Zeitraum verteilen.
+            \item Meilensteine überprüfen und ggf. Ressourcen verschieben.
+            \item Vor der Implementierung die nötigen Tools aussuchen und in diese einarbeiten.
+        \end{itemize}
+    \end{frame}
+    
+    \section{Livedemo}
+    \begin{frame}[plain]
+        \center
+        {\huge Livedemo}
+    \end{frame}
+    
+    
+    \appendix
+    \begin{frame}[plain]
+        \frametitle{Quellen}
+        \begin{itemize}
+            \item https://github.com/osl2/DAQ-Documents
+            \item https://github.com/osl2/PhyPiDAQ
+            \item https://github.com/GuenterQuast/PhyPiDAQ
+            \item http://plantuml.com/de/
+            \item https://junit.org/junit5/
+            \item https://www.eclipse.org/ide/
+            \item https://bitbucket.org/asomov/snakeyaml/src
+            \item https://github.com/hierynomus/sshj
+            \item https://maven.apache.org/
+            \item https://www.eclemma.org/
+            \item https://www.eclemma.org/jacoco/
+            \item https://www.sonarlint.org/
+        \end{itemize}
+    \end{frame}
+    
 \end{document}
