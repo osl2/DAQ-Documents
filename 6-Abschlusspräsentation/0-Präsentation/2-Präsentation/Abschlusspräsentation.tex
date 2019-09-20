@@ -75,7 +75,7 @@
     \begin{frame}{Einleitung}
         \frametitle{Projektvorstellung}
         \center
-        \includegraphics[width=\textwidth / 2]{Grafiken/FreeJDAQ.png} \\
+        \includegraphics[width=5cm]{Grafiken/FreeJDAQ.png} \\
         \textbf{Free} \textbf{J}ava \textbf{D}ata \textbf{A}c\textbf{q}uisition
     \end{frame}
     
@@ -109,6 +109,8 @@
         \begin{itemize}
             \item Direkte Ansprache der Sensoren (PhyPiDAQ)
             \item Visuelle Repräsentation der Messkonfiguration
+	     \item Abfangen von Fehlern beim Anschließen der Messtechnik
+	     \item Erklärungen auf physikalischer Ebene
         \end{itemize}
     \end{frame}
     
@@ -117,7 +119,7 @@
     \begin{frame}{Softwaretechnik}
         \frametitle{Grundaufbau}
         \begin{center}
-            \includegraphics[width = 5cm]{Grafiken/DeploymentDiagram.png}
+            \includegraphics[width = 7cm,angle=90,origin=c]{Grafiken/DeploymentDiagram.png}
         \end{center}
     \end{frame}
     
@@ -131,6 +133,52 @@
     \end{frame}
     
     \section{Statistiken}
+    
+
+    
+    \begin{frame}{Statistiken}
+        \frametitle{GitHub - FreeJDaq - Commits}
+        \centering
+        \begin{tikzpicture}
+        \begin{axis}[
+        ybar,
+        enlarge x limits=0.2,
+        width=0.95\textwidth,
+        height=0.8\textheight,
+        ylabel={Anzahl der Commits},
+        xtick=data,
+        nodes near coords,
+        ymin=0,
+        legend pos=north west,
+        xticklabel style={rotate=45},
+        symbolic x coords={1.7,8.7,15.7,22.7,29.7,5.8,12.8,19.8,26.8,1.9},xticklabels={1.7 (I),8.7,15.7,22.7,29.7,5.8 (Q),12.8,19.8,26.8,1.9 (IA)},
+        ]
+        
+        \addplot coordinates
+        {(1.7,6) (8.7,114) (15.7,123) (22.7,111) (29.7,205) (5.8,49) (12.8,72) (19.8,112) (26.8,29) (1.9,21)};
+        \end{axis}
+        \end{tikzpicture}
+        Insgesamt 842 Commits, 54/64 Issues closed, (15.09, 18:00 Uhr)
+    \end{frame}
+    
+    \begin{frame}{Lines of Code}
+        \frametitle{GitHub - FreeJDaq - Lines of Code}
+        \begin{table}[t]
+            \begin{center}
+                \begin{tabular}{ | l | c | }
+                    \hline
+                    Datei & Anzahl Zeilen \\
+                    \hline
+                    Anwendung & 4013 \\
+                    Test & 1539 \\ \Xhline{0.8pt}
+ 			Java & 5552 \\ \Xhline{0.8pt}
+                    Gesamt (inklusive Kommentar- und Leerzeilen) & 12776 \\ \hline
+                \end{tabular}
+            \end{center}
+        \end{table}
+	\center
+        Verteilt über 122 Mainklassen und 23 Testklassen
+    \end{frame}
     
     \begin{frame}{Unit-Tests}
         \centering
@@ -178,75 +226,8 @@
         {(Controller,53) (FileService,79) (GUI,84) (Cache,84) (Model,85) (Backend,96)};
         \end{axis}
         \end{tikzpicture}
-        Insgesamt 80 Prozent
-    \end{frame}
-    
-    \begin{frame}{Statistiken}
-        \frametitle{GitHub - FreeJDaq - Commits}
-        \centering
-        \begin{tikzpicture}
-        \begin{axis}[
-        ybar,
-        enlarge x limits=0.2,
-        width=0.95\textwidth,
-        height=0.8\textheight,
-        ylabel={Anzahl der Commits},
-        xtick=data,
-        nodes near coords,
-        ymin=0,
-        legend pos=north west,
-        xticklabel style={rotate=45},
-        symbolic x coords={1.7,8.7,15.7,22.7,29.7,5.8,12.8,19.8,26.8,1.9},xticklabels={1.7 (I),8.7,15.7,22.7,29.7,5.8 (Q),12.8,19.8,26.8,1.9 (IA)},
-        ]
-        
-        \addplot coordinates
-        {(1.7,6) (8.7,114) (15.7,123) (22.7,111) (29.7,205) (5.8,49) (12.8,72) (19.8,112) (26.8,29) (1.9,21)};
-        \end{axis}
-        \end{tikzpicture}
-        Insgesamt 842 Commits, 54/64 Issues closed, (15.09, 18:00 Uhr)
-    \end{frame}
-    
-    \begin{frame}{Lines of Code}
-        \frametitle{GitHub - FreeJDaq - Lines of Code}
-        \begin{table}[t]
-            \begin{center}
-                \begin{tabular}{ | l | c | }
-                    \hline
-                    Datei & Anzahl Zeilen \\
-                    \hline
-                    Java & 5552 \\
-                    Main & 4013 \\
-                    Test & 1539 \\ \Xhline{0.8pt}
-                    Gesamt (inklusive Kommentar- und Leerzeilen) & 12776 \\ \hline
-                \end{tabular}
-            \end{center}
-        \end{table}
-        Verteilt über 122 Mainklassen und 23 Testklassen
-    \end{frame}
-    
-    \begin{frame}{Statistiken}
-        \frametitle{GitHub - DAQDocuments}
-        \centering
-        \begin{tikzpicture}
-        \begin{axis}[
-        ybar,
-        enlarge x limits=0.2,
-        width=0.95\textwidth,
-        height=0.8\textheight,
-        ylabel={Wörter},
-        xtick=data,
-        nodes near coords,
-        ymin=0,
-        legend pos=north west,
-        xticklabel style={rotate=15},
-        symbolic x coords={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung, Interne Abnahme},xticklabels={Pflichtenheft, Entwurf, Implementierung, Qualitätssicherung, Interne Abnahme},
-        ]
-        
-        \addplot coordinates
-        {(Pflichtenheft,7600) (Entwurf,8000) (Implementierung,4900) (Qualitätssicherung,5900) (Interne Abnahme,1404)};
-        \end{axis}
-        \end{tikzpicture}
-        Insgesamt ca. 27800 Wörter über 994 Commits (15.09, 18:00 Uhr)
+        Insgesamt 80 Prozent Bedingungsüberdeckung.
+       %Zweig-, Anwendungs-, einfache und mehrfache minimale Bedinungsüberdeckung
     \end{frame}
     
     \section{Tools}
@@ -313,6 +294,8 @@
             %Software-Entwicklung spezifisch
             \item Vor der Implementierung die nötigen Tools aussuchen und in diese einarbeiten
         \end{itemize}
+	 \center
+	 \includegraphics[width=8cm]{Grafiken/FreeJDAQCommits.png}
     \end{frame}
     
     \section{Livedemo}
@@ -320,7 +303,16 @@
         \center
         {\huge Livedemo}
     \end{frame}
-    
+
+	
+    \appendix
+    \begin{frame}[plain]
+	\center
+	\huge{Vielen Dank für Ihre Aufmerksamkeit \\}
+
+        \includegraphics[width=5cm]{Grafiken/FreeJDAQ.png} \\
+        \textbf{Free} \textbf{J}ava \textbf{D}ata \textbf{A}c\textbf{q}uisition
+    \end{frame}
     
     \appendix
     \begin{frame}[plain]
