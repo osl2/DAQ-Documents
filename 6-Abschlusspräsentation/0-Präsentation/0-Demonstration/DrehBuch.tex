@@ -28,28 +28,35 @@ In diesem Dokument werden die einzelnen Aktionen während der Live Demonstration
 
 \section{Live Demonstration}
 
-\begin{itemize}
+\begin{table}[t]
+\begin{center}
+\begin{tabular}{ | p{7cm} | p{7cm} | p{1cm} | }
+\hline
+\textbf{Aktion des Präsentierenden} & \textbf{Aktion des Unterstützenden} & \textbf{Zeit} \\
+\hline
+Erklärung der Verbindung zwischen FreeJDAQ und Raspberry Pi & Öffnen der Anwendung & 5s \\ \hline
+Erklärung des Messaufbaus & Hochheben der einzelnen Elemente & 5s\\ \hline
+Erklärung der graphischen Oberfläche & Öffnen des Bausteinmenüs und Eigenschaften &  20s \\ \hline
+Erklärung der Konfigurationssprache und der spezifischen Konfiguration & Laden der ersten Konfiguration 			                     (demoConfig18B20.yaml) & 30s \\ \hline
+Erklärung der textuellen Ausgabe & Starten der Anwendung & 5s \\  \hline
+Erklärung der graphischen Ausgabe & - & 5s \\ \hline
+Beschreibung der Messwertveränderung & Veränderung der Temperatur durch Anfassen des Sensors mit der Hand & 20s \\ \hline
+Erklärung der weiteren Funktionen der Anwendung & Speichern des Messbildes und der Messdaten & 10s \\ \hline
+&& \textbf{ca. 2min}  \\ \hline 
+Erklärung zur zweiten Messkonfiguration & Laden der zweiten Messkonfiguration (demoConfigMMA8451.yaml) & 20s\\ \hline
+Erklärung der textuellen Ausgabe & Starten der Anwendung & 10s \\  \hline
+Beschreibung der Veränderungen während des Messlaufs & Bewegen des Beschleunigungssensor & 30s \\ \hline
+&& \textbf{ca. 1min} \\ \hline
+Erklärung zur dritten Messkonfiguration & Laden der zweiten Messkonfiguration (demoConfigAdderCombined.yaml) & 20s \\ \hline
+Erklärung zu Transformationen & - & 20 s\\ \hline
+Erklärung der textuellen Ausgabe & Starten der Anwendung & 10 s\\  \hline
+Erklärung der graphischen Ausgabe & - & 10 s\\ \hline
+&& \textbf{ca. 1min} \\ \hline
+Beschreibung der Erweiterbarkeitsmöglichkeiten und weitere Funktionalitäten & - &\\ \hline
 
-\item Die Anwendung wird durch Doppelklick auf die Fat-Jar geöffnet.
-\item Nach Öffnen der Anwendung werden die einzelnen Elemente der Graphischen Oberfläche gezeigt und erklärt.
-\item[1.] Das Konfigurationsfeld
-\item[2.] Das Bausteinmenü und die Bausteineigenschaften
-\item[3.] Optionen
-\item[4.] Hilfe
-\item[5.] Messdatenfenster und Visualisierung
-\item[6.] Buttons
-\item Eine Messkonfiguration wird durch Auswählen einer Konfigurationsdatei geöffnet.
-\item Die einzelnen Teile der Messkonfiguration werden kurz beschrieben und erklärt.
-\item Die Messkonfiguration wird gecheckt und es wird eine Erklärung zum "Check" gegeben.
-\item Der Messlauf wird gestartet.
-\item Die Messkonfiguration wird pausiert und fortgesetzt.
-\item Die visuelle Darstellung wird gezeigt.
-\item Die Messdaten werden gespeichert.
-\item Eine Transformation in der Messkonfiguration wird verändert 
-\item Der Messlauf wird erneut gestartet.
-\item Die Unterschiede in den Messdaten werden erklärt.
-
-\end{itemize}
+                \end{tabular}
+            \end{center}
+        \end{table}
 
 
 \renewcommand*{\glossarysection}[2][]{}	% prevents double glossary section heading
