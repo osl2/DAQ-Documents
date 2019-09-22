@@ -13,6 +13,10 @@ UML Diagramme sowie ein zusammenhängendes Klassendiagramm.
 Die Dokumentation zu den Fortschritten in der Implementierung.
 #### 4-Qualitaetssicherung
 Die Dokumentation der Qualitaetssicherungsphase. Insbesondere Bug-Reports und Testergebnisse.
+#### 5-Interne Abnahme
+Dokumentation und Benutzerhandbuch
+#### 6-Interne Abnahme
+Präsentation der Internen Abnahme
 ### Innerhalb der Phasenspezifischen Ordner:
 #### 0-Ressourcen
 Dokumente, aus denen Aufgaben entstehen können (Bsp.: Offizielle Aufgabenstellungen, Protokolle von Teamtreffen)
