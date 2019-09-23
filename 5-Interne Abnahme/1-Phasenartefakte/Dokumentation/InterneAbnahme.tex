@@ -257,11 +257,11 @@
 
 \clearpage
 \section{Einleitung} \label{einleitung}
-In diesem Dokument werden Änderungen, Feinschliffe oder Lösungen zu bestehenden Issues, welche an der Anwendung nach dem Ende der Implementierungsphase \\ vorgenommen dokumentiert.
+In diesem Dokument werden Änderungen, Feinschliffe oder Lösungen zu bestehenden Issues, welche an der Anwendung nach, dem Ende der Implementierungsphase \\ vorgenommen wurden, dokumentiert.
 
 \section{Visualisierung der Messdaten}
 
-Da eine Visualisierung der Messdaten bereits in der Pflichtenheft- Phase ein wichtiger Teil unserer Anwendung war, um dem Benutzer eine bessere Visualisierung der Messdaten als in Textform zu bieten, haben wir uns entschieden dieses Feature noch nachträglich einzubauen. Implementiert wurde diese Funktionalität in der Klasse \verb:ChartVisualisation: und zur Visualisierung haben wir die Bibliothek JFreeChart\footnote{\url{http://www.jfree.org/jfreechart/}} benutzt. Diese Bibliothek erlaubt uns die bereits vordefinierten Funktionalitäten zu nutzen, unter anderem auch das Speichern eines Diagramms als Bilddatei. Die Bibliothek würde ebenfalls andere Darstellungsformen unterstützen, wir haben uns aber entschieden nur eine graphische Visualisierung mit 2 Achsen zu verwenden.
+Da eine Visualisierung der Messdaten bereits in der Pflichtenheft-Phase ein wichtiger Teil unserer Anwendung war, um dem Benutzer eine bessere Visualisierung der Messdaten als in Textform zu bieten, haben wir uns entschieden dieses Feature noch nachträglich einzubauen. Implementiert wurde diese Funktionalität in der Klasse \verb:ChartVisualisation: und zur Visualisierung haben wir die Bibliothek JFreeChart\footnote{\url{http://www.jfree.org/jfreechart/}} benutzt. Diese Bibliothek erlaubt uns die bereits vordefinierten Funktionalitäten zu nutzen, unter anderem auch das Speichern eines Diagramms als Bilddatei. Die Bibliothek würde ebenfalls andere Darstellungsformen unterstützen, wir haben uns aber entschieden nur eine graphische Visualisierung mit 2 Achsen zu verwenden.
 
 Durch einen neu hinzugefügten Knopf in der Benutzeroberfläche wird ein neues Fenster geöffnet, in welchem das Diagramm angezeigt wird. Während des Messlaufs werden dort die Messdaten visuell dargestellt.
 Durch eine längere Verarbeitungsdauer der Messdaten werden diese leider nicht in annähernd Echtzeit angezeigt, sondern mit ein paar Millisekunden bis Sekunden Verspätung. Bei Messintervallen von mehreren Sekunden ist diese Verzögerung nicht wirklich bemerkbar. Bei Messintervallen von wenigen Sekunden bis Millisekunden ist eine Verzögerung jedoch bemerkbar.
@@ -269,7 +269,7 @@ Durch eine längere Verarbeitungsdauer der Messdaten werden diese leider nicht i
 JFreeChart ist unter der \textit{GNU Lesser General Public License v2.1} lizenziert und kann daher für unser Open-Source Projekt verwendet werden.
 
 \section{Ändern der Bausteineigenschaften}
-Nach Beendigung der Qualitätssicherungs-Phase bestand noch nicht die Möglichkeit die Eigenschaften von Bausteinen zu ändern. Wir haben beschlossen, dass dieses Feature zu wichtig ist, als das es weggelassen werden könnte. Deshalb gibt es jetzt die Möglichkeit bei jedem Sensor die Eigenschaften durch entsprechende Knöpfe, in der GUI, zu bearbeiten.
+Nach Beendigung der Qualitätssicherungs-Phase bestand noch nicht die Möglichkeit die Eigenschaften von Bausteinen zu ändern. Wir haben beschlossen, dass dieses Feature zu wichtig ist, als das es weggelassen werden könnte. Deshalb gibt es jetzt die Möglichkeit bei jedem Sensor die Eigenschaften, durch entsprechende Knöpfe, in der GUI, zu bearbeiten.
 \section{Kleinere Änderungen}
 \subsection{Fehlermeldungen}
 
@@ -280,7 +280,7 @@ Ebenfalls wurden die Titel in Kategorien von Fehlermeldungen aufgeteilt. Informa
 \subsection{Code - Qualität}
 
 Bei Durchsicht des Codes wurden auskommentierte Methoden, Zeilen oder veraltete Kommentare entfernt. 
-Ebenfalls wurden in einigen Klassen Einrückungen korregiert und in Fällen von zu viele Leerzeilen diese ebenfalls entfernt.
+Ebenfalls wurden in einigen Klassen Einrückungen korrigiert und in Fällen von zu viele Leerzeilen diese ebenfalls entfernt.
 
 
 \renewcommand*{\glossarysection}[2][]{}	% prevents double glossary section heading
