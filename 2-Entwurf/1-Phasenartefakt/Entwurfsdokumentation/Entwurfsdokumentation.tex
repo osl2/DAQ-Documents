@@ -227,7 +227,7 @@ Durch diesen grundlegenden Aufbau wird die Software in vier unabhängige Kompone
 Diese Kapitel gibt einen Einblick über den Aufbau und die Funktionalität der Pakete und Klassen unseres Entwurfes. Aufgeteilt haben wir das Kapitel in die 4 Teilbereiche Backend, Model, Controller und View. Diese Unterkapitel sind jeweils wieder nach Entwurfspaketen unterteilt, welche eine bestimmte Funktionalität darstellen. In diesen Paketen werden alle enthaltenen Klassen beschrieben und ihre Funktion erläutert.
 
 
-\subsection{Backend}
+\subsection{Backend und Cache}
 
 Das Back-End ist verantwortlich für den Datenaustausch mit dem Raspberry Pi. Dieser soll zur Erfüllung der folgenden Aufgaben dienen:
 
@@ -264,6 +264,8 @@ Jeder Sensor bzw. Kanal eines Sensors hat eine eigene Instanz von SshCommandMRun
 Der Cache sorgt in äquidistanten Zeitschlitzen dafür, dass die zusammengehörenden Messdaten aller Sensorkanäle einer Messkonfiguration gebündelt an eine Instanz, die IMRunListener implementiert, weitergeleitet werden. 
 
 Des Weiteren kann der Cache adäquat reagieren, falls im ein oder anderen Messdatenstrom ErrorCodes auftauchen, und diese Information weiterleiten. Auch bei Verbindungsabbrüchen oder im Falle eines Time-Outs wird die Instanz von IMRunListener benachrichtigt. 
+
+Die Spezifikation der zu Backend und Cache gehörenden Klassen und Interfaces ist in den entsprechenden Modulen des globalen Klassendiagramm enthalten. 
 
 \clearpage
 \subsection{Model}
@@ -1375,8 +1377,6 @@ Falls der Benutzer einen Konfigurationsbaustein entfernt, welcher bereits mit we
 \clearpage
 \section{Sequenzdiagramme}
 
-
-
 \subsection{Block hinzufügen komplett}
 
 \begin{figure}[htbp]
@@ -1436,6 +1436,58 @@ Im dritten Teil soll die UnDo-Action des zweiten Teiles rückgängig gemacht wer
 In den Abbildung \ref{SeqAddConP1}  und \ref{SeqAddConP2} ist das Szenario "`Füge Verbindung hinzu"' zu sehen. Als Ausgangspunkt registriert der AddWireDragAndDropHandler der GUI, dass eine Verbindung zwischen zwei ChannelDecoratern im Konfigurationsfeld hinzu gefügt wurde.
 
 Die GUI benachrichtigt den Controller über das Interface IConnectionAction, dass eine Verbindung platziert wurde. Der Controller erstellt einen entsprechenden Command und lässt die Änderung am Model durchführen. Dazu greift er über die Schnittstelle IModelInformation auf die Messkonfiguration im Model zu, um eine Verbindung zu setzten. Die Messkonfiguration setzt dann die Verbindung in der Messkonfiguration und updatet danach den BuildingBlockDirectory entsprechend. Dann wird dem Konfigurationsfeld GUI über die Schnittstelle UpdateInterface signalisiert, dass die Messkonfiguration verändert wurde. Dieses prüft nach, was sich im BuildingBlockDirectory verändert hat und holt sich dann das Update. Sobald das Update im Konfigurationsfeld der GUI angekommen ist, wird der Wire im Konfigurationsfeld zwischen den beiden ChannelDecoratern gesetzt.
+
+\subsection{Backend und Cache}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 8.5cm]{Grafiken/1-InitialisierungBackend_Rotated.png}
+		\caption{Initialisierung des Backends}
+		\label{InitBackend}
+	\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 15cm]{Grafiken/2-FetchSensorInfos_Rotated.png}
+		\caption{Holen der Sensor-Metadaten}
+		\label{FetchSensorInfos}
+	\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/3-MRunGesamteVorbereitung_Rotated.png}
+		\caption{Gesamte Messlauf-Initialisierung}
+		\label{MRunInitComplete}
+	\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 14cm]{Grafiken/4-MRunCacheInit_Rotated.png}
+		\caption{Initialisierung des Caches}
+		\label{MRunInitCache}
+	\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 9.5cm]{Grafiken/5-MRunThreadingBackend_Rotated.png}
+		\caption{Thread-Handling im Backend während eines Messlaufs}
+		\label{ThreadingBackend}
+	\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width = 12cm]{Grafiken/6-MRunThreadingCache_Rotated.png}
+		\caption{Thread-Handling im Cache während eines Messlaufs}
+		\label{ThreadingCache}
+	\end{center}
+\end{figure}
+
+In den Abbildungen 56 und 57 werden die Initialisierung des Backends und das Holen der Sensor-Metadaten vom Raspberry Pi spezifiziert. Abbildungen 58 behandelt die messlaufspezifische Initialisierung von Backend und Cache zu Beginn eines Messlaufs. Abbildung 59 geht hierbei auf die Details ein, die das Cache-Modul betreffen. Die Abbildungen 60 und 61 spezifizieren das Threading in Backend und Cache während eines Messlaufs.
 
 
 \clearpage
